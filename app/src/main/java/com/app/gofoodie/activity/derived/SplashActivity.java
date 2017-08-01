@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
  */
 public class SplashActivity extends BaseAppCompatActivity implements Runnable {
 
-    private final String TAG = "SplashActivity";
+    public final String TAG = "SplashActivity";
 
     /**
      * Class private data objects.

@@ -9,6 +9,8 @@ import android.view.View;
  */
 public class BaseAppCompatActivity extends AppCompatActivity {
 
+    public final String TAG = "BaseAppCompatActivity";
+
     /**
      * @method showFullScreen
      * @desc Method to show full screen by hiding title, navigation and status bar.

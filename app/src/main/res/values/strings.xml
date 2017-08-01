@@ -1,6 +1,12 @@
 <resources>
+
+    <!-- Title and Menu strings -->
     <string name="app_name">GoFoodie</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- UI Messages and Warnings -->
+    <string name="test">Test</string>
+
 </resources>
