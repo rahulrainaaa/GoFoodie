@@ -26,7 +26,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
      * Class Enum data.
      */
     private enum mFragmentType {
-        PROFILE, CART, DASHBOARD, WALLET, COMBOS
+        PROFILE, CART, DASHBOARD, WALLET, COMBOS, PREFERENCES, ADDRESS, LOGIN, ORDERS
     }
 
     /**
