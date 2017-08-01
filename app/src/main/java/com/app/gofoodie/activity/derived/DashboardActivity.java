@@ -30,6 +30,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        hideNavigationBar();
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
@@ -37,7 +38,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
 
     /**
      * @param item
-     * @return
+     * @return boolean
      * @method onNavigationItemSelected
      * @desc {@link BottomNavigationView.OnNavigationItemSelectedListener} event callback method.
      */
@@ -45,17 +46,25 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.navigation_home:
-
-                mTextMessage.setText(R.string.title_home);
-                return true;
             case R.id.navigation_dashboard:
 
-                mTextMessage.setText(R.string.title_dashboard);
+                mTextMessage.setText(R.string.navigation_dashboard);
                 return true;
-            case R.id.navigation_notifications:
+            case R.id.navigation_combos:
 
-                mTextMessage.setText(R.string.title_notifications);
+                mTextMessage.setText(R.string.navigation_combos);
+                return true;
+            case R.id.navigation_wallet:
+
+                mTextMessage.setText(R.string.navigation_wallet);
+                return true;
+            case R.id.navigation_cart:
+
+                mTextMessage.setText(R.string.navigation_cart);
+                return true;
+            case R.id.navigation_profile:
+
+                mTextMessage.setText(R.string.navigation_profile);
                 return true;
         }
         return false;

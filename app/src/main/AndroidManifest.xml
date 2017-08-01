@@ -14,14 +14,19 @@
 
         <activity
             android:name=".activity.derived.DashboardActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".activity.derived.SplashActivity">
+        <activity
+            android:name=".activity.derived.SplashActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
     </application>

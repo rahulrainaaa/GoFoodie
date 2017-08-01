@@ -2,9 +2,12 @@
 
     <!-- Title and Menu strings -->
     <string name="app_name">GoFoodie</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="navigation_dashboard">Dashboard</string>
+    <string name="navigation_combos">Combos</string>
+    <string name="navigation_wallet">Wallet</string>
+    <string name="navigation_cart">Cart</string>
+    <string name="navigation_profile">Profile</string>
+
 
     <!-- UI Messages and Warnings -->
     <string name="test">Test</string>
