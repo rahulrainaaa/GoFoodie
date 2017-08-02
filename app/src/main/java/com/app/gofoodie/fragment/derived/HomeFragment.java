@@ -11,10 +11,10 @@ import com.app.gofoodie.R;
 import com.app.gofoodie.fragment.base.BaseFragment;
 
 /**
- * @class ProfileFragment
- * @desc {@link BaseFragment} Fragment class to handle My-Profile UI screen.
+ * @class HomeFragment
+ * @desc {@link BaseFragment} Fragment class to handle Home UI screen.
  */
-public class DashboardFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment {
 
     @Nullable
     @Override

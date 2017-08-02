@@ -11,10 +11,10 @@ import com.app.gofoodie.R;
 import com.app.gofoodie.fragment.base.BaseFragment;
 
 /**
- * @class ProfileFragment
- * @desc {@link BaseFragment} Fragment class to handle Profile UI screen.
+ * @class CartFragment
+ * @desc {@link BaseFragment} Fragment class to handle Cart UI screen.
  */
-public class ProfileFragment extends BaseFragment {
+public class CartFragment extends BaseFragment {
 
     @Nullable
     @Override
