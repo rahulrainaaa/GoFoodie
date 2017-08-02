@@ -25,10 +25,4 @@ public class WalletFragment extends BaseFragment {
         //super.onCreateView(inflater, container, savedInstanceState);
         return view;
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Toast.makeText(getActivity(), "fragment view destroyed.", Toast.LENGTH_SHORT).show();
-    }
 }

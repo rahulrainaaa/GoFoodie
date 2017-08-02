@@ -38,9 +38,8 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
         super.onResume();
         showFullScreen();
         mImgSplashLogo = (ImageView) findViewById(R.id.img_splash_logo);
-        Picasso.with(this).load(R.drawable.gficon).into(mImgSplashLogo);
         mHandler = new Handler();
-        mHandler.postDelayed(this, 2000);
+        //mHandler.postDelayed(this, 2000);
     }
 
     @Override

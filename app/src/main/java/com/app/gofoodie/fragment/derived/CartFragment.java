@@ -22,13 +22,7 @@ public class CartFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.activity_splash, container, false);
         Toast.makeText(getActivity(), "fragment-onCreateView()-method called.", Toast.LENGTH_SHORT).show();
-        //super.onCreateView(inflater, container, savedInstanceState);
         return view;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Toast.makeText(getActivity(), "fragment view destroyed.", Toast.LENGTH_SHORT).show();
-    }
 }
