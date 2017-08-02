@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.activity.utils.DashboardInterruptListener;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.fragment.derived.ProfileFragment;
 
@@ -18,16 +19,9 @@ import com.app.gofoodie.fragment.derived.ProfileFragment;
  * @class DashboardActivity
  * @desc {@link BaseAppCompatActivity} Activity class to handle the main navigating screen (Dashboard Screen).
  */
-public class DashboardActivity extends BaseAppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class DashboardActivity extends BaseAppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, DashboardInterruptListener {
 
     public final String TAG = "DashboardActivity";
-
-    /**
-     * Class Enum data.
-     */
-    private enum mFragmentType {
-        PROFILE, CART, DASHBOARD, WALLET, COMBOS, PREFERENCES, ADDRESS, LOGIN, ORDERS
-    }
 
     /**
      * Class private data members
@@ -137,4 +131,11 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     }
 
 
+    @Override
+    public boolean interruptLoadFragment(FRAGMENT_TYPE fragmentType) {
+
+
+
+        return false;
+    }
 }

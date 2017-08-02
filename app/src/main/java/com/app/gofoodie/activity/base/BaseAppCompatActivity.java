@@ -7,7 +7,7 @@ import android.view.View;
  * @class BaseAppCompatActivity
  * @desc {@link AppCompatActivity} Base class for application customization.
  */
-public class BaseAppCompatActivity extends AppCompatActivity {
+public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
     public final String TAG = "BaseAppCompatActivity";
 
