@@ -7,7 +7,6 @@ import android.widget.ImageView;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
-import com.squareup.picasso.Picasso;
 
 /**
  * @class SplashActivity
@@ -39,7 +38,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
         showFullScreen();
         mImgSplashLogo = (ImageView) findViewById(R.id.img_splash_logo);
         mHandler = new Handler();
-        //mHandler.postDelayed(this, 2000);
+        mHandler.postDelayed(this, 2000);
     }
 
     @Override

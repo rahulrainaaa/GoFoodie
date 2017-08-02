@@ -39,10 +39,15 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        hideNavigationBar();
         doViewMapping();
         mFragmentManager = getFragmentManager();
         mNavigationPanel.setOnNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideNavigationBar();
     }
 
     /**
@@ -133,7 +138,6 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
 
     @Override
     public boolean interruptLoadFragment(FRAGMENT_TYPE fragmentType) {
-
 
 
         return false;
