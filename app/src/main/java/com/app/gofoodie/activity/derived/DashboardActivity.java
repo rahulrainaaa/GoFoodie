@@ -52,6 +52,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     protected void onResume() {
         super.onResume();
         //hideNavigationBar();
+        loadFragment();
     }
 
     /**

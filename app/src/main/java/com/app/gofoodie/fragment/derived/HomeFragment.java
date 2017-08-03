@@ -20,7 +20,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.frag_login, container, false);
+        View view = inflater.inflate(R.layout.frag_home, container, false);
         Toast.makeText(getActivity(), "Home Fragment.", Toast.LENGTH_SHORT).show();
         return view;
     }

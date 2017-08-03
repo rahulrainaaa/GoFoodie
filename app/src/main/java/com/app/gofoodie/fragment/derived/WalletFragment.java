@@ -20,7 +20,7 @@ public class WalletFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.frag_login, container, false);
+        View view = inflater.inflate(R.layout.frag_wallet, container, false);
         Toast.makeText(getActivity(), "Wallet Fragment", Toast.LENGTH_SHORT).show();
         return view;
     }

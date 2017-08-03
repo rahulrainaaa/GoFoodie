@@ -4,6 +4,7 @@ import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.fragment.derived.CartFragment;
 import com.app.gofoodie.fragment.derived.CombosFragment;
 import com.app.gofoodie.fragment.derived.EmptyListFragment;
+import com.app.gofoodie.fragment.derived.HomeFragment;
 import com.app.gofoodie.fragment.derived.ProfileFragment;
 import com.app.gofoodie.fragment.derived.WalletFragment;
 
@@ -24,7 +25,7 @@ public class DashboardFragmentHandler {
         // Check for the match case for fragmentType.
         if (DashboardInterruptListener.FRAGMENT_TYPE.DASHBOARD == fragmentType) {
 
-            return new ProfileFragment();
+            return new HomeFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.COMBOS == fragmentType) {
 
             return new CombosFragment();
