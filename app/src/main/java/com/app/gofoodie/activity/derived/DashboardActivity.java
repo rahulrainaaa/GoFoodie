@@ -7,13 +7,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.activity.utils.DashboardFragmentHandler;
 import com.app.gofoodie.activity.utils.DashboardInterruptListener;
 import com.app.gofoodie.fragment.base.BaseFragment;
-import com.app.gofoodie.fragment.derived.ProfileFragment;
 
 /**
  * @class DashboardActivity
@@ -31,16 +30,20 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     private FragmentTransaction mFragmentTransaction = null;
     private FragmentManager mFragmentManager = null;
     private BottomNavigationView mNavigationPanel = null;
+    private DashboardFragmentHandler mDashboardFragmentHandler = null;
+    private FRAGMENT_TYPE mFragmentType = FRAGMENT_TYPE.DASHBOARD;
 
     /**
      * {@link BaseAppCompatActivity} callback methods.
      */
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
         doViewMapping();
+        mDashboardFragmentHandler = new DashboardFragmentHandler();
         mFragmentManager = getFragmentManager();
         mNavigationPanel.setOnNavigationItemSelectedListener(this);
     }
@@ -95,47 +98,70 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         mFragmentLayout = (LinearLayout) findViewById(R.id.dashboard_fragment);
     }
 
+    /**
+     * @method navigationDashboard
+     * @desc Method call on click on Profile in Dashboard/Home navigation panel.
+     */
     private void navigationDashboard() {
 
+        mFragmentType = FRAGMENT_TYPE.DASHBOARD;
         loadFragment();
-        Toast.makeText(this, "dashboard clicked", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * @method navigationCombos
+     * @desc Method call on click on Profile in Combos navigation panel.
+     */
     private void navigationCombos() {
 
+        mFragmentType = FRAGMENT_TYPE.COMBOS;
         loadFragment();
-        Toast.makeText(this, "combos clicked", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * @method navigationWallet
+     * @desc Method call on click on Profile in Wallet navigation panel.
+     */
     private void navigationWallet() {
 
+        mFragmentType = FRAGMENT_TYPE.WALLET;
         loadFragment();
-        Toast.makeText(this, "wallet clicked", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * @method navigationCart
+     * @desc Method call on click on Profile in Cart navigation panel.
+     */
     private void navigationCart() {
 
+        mFragmentType = FRAGMENT_TYPE.CART;
         loadFragment();
-        Toast.makeText(this, "cart clicked", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * @method navigationProfile
+     * @desc Method call on click on Profile in Dashboard navigation panel.
+     */
     private void navigationProfile() {
 
+        mFragmentType = FRAGMENT_TYPE.PROFILE;
         loadFragment();
-        Toast.makeText(this, "profile clicked", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * @method loadFragment
+     * @desc Method to load the set marked Fragment in mFragmentType ENUM.
+     */
     private void loadFragment() {
 
-        mFragmentTransaction = mFragmentManager.beginTransaction();          // Begin with fragment transaction.
-        if (!mFragmentTransaction.isEmpty()) {                               // Remove older fragment if any.
+        mFragmentTransaction = mFragmentManager.beginTransaction();                 // Begin with fragment transaction.
+        if (!mFragmentTransaction.isEmpty()) {                                      // Remove older fragment if any.
             mFragmentTransaction.remove(mFragment);
         }
-        mFragment = new ProfileFragment();                                   // Get a new Fragment for dashboard.
-        mFragmentTransaction.replace(R.id.dashboard_fragment, mFragment);    // Replace with new fragment in the container.
+        mFragment = mDashboardFragmentHandler.getFragmentClass(mFragmentType);      // Get a new Fragment for dashboard.
+        mFragmentTransaction.replace(R.id.dashboard_fragment, mFragment);           // Replace with new fragment in the container.
         mFragmentTransaction.commit();
     }
-
 
     /**
      * {@link DashboardInterruptListener} interface callback methods.
@@ -143,13 +169,15 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     @Override
     public boolean interruptLoadFragment(FRAGMENT_TYPE fragmentType) {
 
-
-        return false;
+        this.mFragmentType = fragmentType;
+        loadFragment();
+        return true;
     }
 
     @Override
     public boolean reloadCurrentFragment() {
 
-        return false;
+        loadFragment();
+        return true;
     }
 }

@@ -1,7 +1,11 @@
 package com.app.gofoodie.activity.utils;
 
 import com.app.gofoodie.fragment.base.BaseFragment;
+import com.app.gofoodie.fragment.derived.CartFragment;
+import com.app.gofoodie.fragment.derived.CombosFragment;
+import com.app.gofoodie.fragment.derived.EmptyListFragment;
 import com.app.gofoodie.fragment.derived.ProfileFragment;
+import com.app.gofoodie.fragment.derived.WalletFragment;
 
 /**
  * @class DashboardFragmentHandler
@@ -15,24 +19,28 @@ public class DashboardFragmentHandler {
      * @method getFragment
      * @desc Method to get the decide and get the fragment class.
      */
-    public Class<? extends BaseFragment> getFragmentClass(DashboardInterruptListener.FRAGMENT_TYPE fragmentType) {
+    public BaseFragment getFragmentClass(DashboardInterruptListener.FRAGMENT_TYPE fragmentType) {
 
         // Check for the match case for fragmentType.
         if (DashboardInterruptListener.FRAGMENT_TYPE.DASHBOARD == fragmentType) {
 
-            return ProfileFragment.class;
+            return new ProfileFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.COMBOS == fragmentType) {
 
+            return new CombosFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.WALLET == fragmentType) {
 
+            return new WalletFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.CART == fragmentType) {
 
+            return new CartFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.PROFILE == fragmentType) {
 
+            return new ProfileFragment();
         }
 
         // Return a default fragment in case no match found (in else case).
-        return ProfileFragment.class;
+        return new EmptyListFragment();
     }
 
 }

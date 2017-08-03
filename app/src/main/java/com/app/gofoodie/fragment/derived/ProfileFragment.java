@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.fragment.base.BaseFragment;
@@ -19,7 +20,8 @@ public class ProfileFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.frag_login_screen, container, false);
+        View view = inflater.inflate(R.layout.frag_profile, container, false);
+        Toast.makeText(getActivity(), "Profile Fragment", Toast.LENGTH_SHORT).show();
         return view;
     }
 }
