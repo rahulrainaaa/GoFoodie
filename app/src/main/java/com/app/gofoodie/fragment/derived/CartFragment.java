@@ -20,7 +20,7 @@ public class CartFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_splash, container, false);
+        View view = inflater.inflate(R.layout.frag_login_screen, container, false);
         Toast.makeText(getActivity(), "fragment-onCreateView()-method called.", Toast.LENGTH_SHORT).show();
         return view;
     }

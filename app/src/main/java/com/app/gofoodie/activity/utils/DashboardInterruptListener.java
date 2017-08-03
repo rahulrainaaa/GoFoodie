@@ -21,4 +21,11 @@ public interface DashboardInterruptListener {
      */
     public boolean interruptLoadFragment(FRAGMENT_TYPE fragmentType);
 
+    /**
+     * @return boolean
+     * @method reloadCurrentFragment
+     * @desc Method to reload the current fragment into the main screen. Also reset the older values of the reloading screen.
+     */
+    public boolean reloadCurrentFragment();
+
 }

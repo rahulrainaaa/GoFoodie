@@ -43,9 +43,9 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
 
     @Override
     protected void onPause() {
-        super.onPause();
-
         mHandler.removeCallbacks(this);
+        finish();
+        super.onPause();
     }
 
     /**

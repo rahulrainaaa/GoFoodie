@@ -39,4 +39,11 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        System.gc();
+        System.gc();
+    }
+
 }
