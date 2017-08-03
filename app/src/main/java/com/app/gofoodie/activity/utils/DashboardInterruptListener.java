@@ -11,7 +11,14 @@ public interface DashboardInterruptListener {
      * Fragment Enumeration
      */
     public enum FRAGMENT_TYPE {
-        DASHBOARD, WALLET, COMBOS, CART, PROFILE
+        DASHBOARD, WALLET, COMBOS, CART, PROFILE, LOGIN
+    }
+
+    /**
+     * Signal Code Enumeration
+     */
+    public enum SIGNAL_CODE {
+        HIDE_NAGIVATION_BAR
     }
 
     /**
@@ -27,5 +34,13 @@ public interface DashboardInterruptListener {
      * @desc Method to reload the current fragment into the main screen. Also reset the older values of the reloading screen.
      */
     public boolean reloadCurrentFragment();
+
+    /**
+     * @param signal
+     * @return boolean
+     * @method signalMessage signal code
+     * @desc Callback method to notify received signal with signal code.
+     */
+    public boolean signalMessage(SIGNAL_CODE signal);
 
 }

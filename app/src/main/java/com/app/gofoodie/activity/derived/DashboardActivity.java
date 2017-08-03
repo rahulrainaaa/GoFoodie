@@ -51,7 +51,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     @Override
     protected void onResume() {
         super.onResume();
-        //hideNavigationBar();
+        hideNavigationBar();
         loadFragment();
     }
 
@@ -180,5 +180,15 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
 
         loadFragment();
         return true;
+    }
+
+    @Override
+    public boolean signalMessage(SIGNAL_CODE signalCode) {
+
+        if (SIGNAL_CODE.HIDE_NAGIVATION_BAR == signalCode) {
+
+            return true;
+        }
+            return true;
     }
 }

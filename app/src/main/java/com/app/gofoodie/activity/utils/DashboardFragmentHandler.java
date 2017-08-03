@@ -5,7 +5,7 @@ import com.app.gofoodie.fragment.derived.CartFragment;
 import com.app.gofoodie.fragment.derived.CombosFragment;
 import com.app.gofoodie.fragment.derived.EmptyListFragment;
 import com.app.gofoodie.fragment.derived.HomeFragment;
-import com.app.gofoodie.fragment.derived.ProfileFragment;
+import com.app.gofoodie.fragment.derived.LoginFragment;
 import com.app.gofoodie.fragment.derived.WalletFragment;
 
 /**
@@ -37,12 +37,17 @@ public class DashboardFragmentHandler {
             return new CartFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.PROFILE == fragmentType) {
 
-            return new ProfileFragment();
+            return new LoginFragment();
+        } else if (DashboardInterruptListener.FRAGMENT_TYPE.LOGIN == fragmentType) {
+
+            return new LoginFragment();
         }
 
         // Return a default fragment in case no match found (in else case).
         return new EmptyListFragment();
     }
+
+
 
 }
 
