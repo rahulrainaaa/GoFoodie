@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#F6333A</color>
     <color name="colorPrimaryDark">#F6333A</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#F6333A</color>
 
     <color name="colorRed">#F6333A</color>
     <color name="colorFbBlue">#3D66AE</color>

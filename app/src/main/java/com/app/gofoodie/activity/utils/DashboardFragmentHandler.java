@@ -1,11 +1,11 @@
 package com.app.gofoodie.activity.utils;
 
 import com.app.gofoodie.fragment.base.BaseFragment;
-import com.app.gofoodie.fragment.derived.CartFragment;
 import com.app.gofoodie.fragment.derived.CombosFragment;
 import com.app.gofoodie.fragment.derived.EmptyListFragment;
 import com.app.gofoodie.fragment.derived.HomeFragment;
 import com.app.gofoodie.fragment.derived.LoginFragment;
+import com.app.gofoodie.fragment.derived.NewRegisterFragment;
 import com.app.gofoodie.fragment.derived.WalletFragment;
 
 /**
@@ -34,7 +34,7 @@ public class DashboardFragmentHandler {
             return new WalletFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.CART == fragmentType) {
 
-            return new CartFragment();
+            return new NewRegisterFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.PROFILE == fragmentType) {
 
             return new LoginFragment();
@@ -46,7 +46,6 @@ public class DashboardFragmentHandler {
         // Return a default fragment in case no match found (in else case).
         return new EmptyListFragment();
     }
-
 
 
 }
