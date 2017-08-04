@@ -20,8 +20,8 @@ public class ForgotPasswordFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.frag_register_new_user, container, false);
-        Toast.makeText(getActivity(), "Request new User Fragment.", Toast.LENGTH_SHORT).show();
+        View view = inflater.inflate(R.layout.frag_forgot_password, container, false);
+        Toast.makeText(getActivity(), "Request forgot password Fragment.", Toast.LENGTH_SHORT).show();
         return view;
     }
 }
