@@ -26,8 +26,10 @@
         android:textColorHint="@color/colorWhite"
         android:textSize="15sp"
         app:met_baseColor="@android:color/white"
+        app:met_errorColor="@color/colorRed"
         app:met_floatingLabel="highlight"
         app:met_primaryColor="@color/colorWhite"
+        app:met_textColorHint="@color/colorWhite"
         app:met_underlineColor="@color/colorRed" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -41,8 +43,10 @@
         android:textColorHint="@color/colorWhite"
         android:textSize="15sp"
         app:met_baseColor="@android:color/white"
+        app:met_errorColor="@color/colorRed"
         app:met_floatingLabel="highlight"
         app:met_primaryColor="@color/colorWhite"
+        app:met_textColorHint="@color/colorWhite"
         app:met_underlineColor="@color/colorRed" />
 
     <Button
