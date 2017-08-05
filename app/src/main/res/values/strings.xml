@@ -11,5 +11,6 @@
 
     <!-- UI Messages and Warnings -->
     <string name="test">Test</string>
+    <string name="forgot_password_quote">Please provide your registered email address, we will send you the password to your registered email address.</string>
 
 </resources>
