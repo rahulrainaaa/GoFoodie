@@ -16,6 +16,12 @@ import com.app.gofoodie.fragment.base.BaseFragment;
  */
 public class ForgotPasswordFragment extends BaseFragment {
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Toast.makeText(getActivity(), "Android example code", Toast.LENGTH_SHORT).show();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
