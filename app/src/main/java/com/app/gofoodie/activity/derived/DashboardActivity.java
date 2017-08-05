@@ -31,7 +31,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     private FragmentManager mFragmentManager = null;
     private BottomNavigationView mNavigationPanel = null;
     private DashboardFragmentHandler mDashboardFragmentHandler = null;
-    private FRAGMENT_TYPE mFragmentType = FRAGMENT_TYPE.DASHBOARD;
+    private FRAGMENT_TYPE mFragmentType = FRAGMENT_TYPE.DASHBOARD;      // Default first Dashboard.
 
     /**
      * {@link BaseAppCompatActivity} callback methods.
@@ -53,7 +53,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         super.onResume();
         hideNavigationBar();
         if (mFragment == null) {
-            loadFragment();
+
         }
     }
 

@@ -102,6 +102,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:hint="Address*"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="23sp"
+            app:met_baseColor="@android:color/white"
+            app:met_errorColor="@color/colorRed"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorWhite"
+            app:met_textColorHint="@color/colorWhite"
+            app:met_underlineColor="@color/colorRed" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:hint="Password*"
             android:inputType="textPassword"
             android:textColorHint="@color/colorWhite"

@@ -17,5 +17,8 @@
     <string name="change_password_quote">
             Keep changing your password timely to ensure your account security.
     </string>
+    <string name="location_preference_quote">
+            We will save your location preference, so that you can browse uninterrupted.
+    </string>
 
 </resources>

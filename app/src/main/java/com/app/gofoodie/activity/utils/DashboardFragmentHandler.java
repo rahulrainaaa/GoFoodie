@@ -5,6 +5,7 @@ import com.app.gofoodie.fragment.derived.ChangePasswordFragment;
 import com.app.gofoodie.fragment.derived.EmptyListFragment;
 import com.app.gofoodie.fragment.derived.ForgotPasswordFragment;
 import com.app.gofoodie.fragment.derived.HomeFragment;
+import com.app.gofoodie.fragment.derived.LocationPreferenceFragment;
 import com.app.gofoodie.fragment.derived.LoginFragment;
 import com.app.gofoodie.fragment.derived.NewRegisterFragment;
 
@@ -25,7 +26,7 @@ public class DashboardFragmentHandler {
         // Check for the match case for fragmentType.
         if (DashboardInterruptListener.FRAGMENT_TYPE.DASHBOARD == fragmentType) {
 
-            return new HomeFragment();
+            return new LocationPreferenceFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.COMBOS == fragmentType) {
 
             return new ChangePasswordFragment();
