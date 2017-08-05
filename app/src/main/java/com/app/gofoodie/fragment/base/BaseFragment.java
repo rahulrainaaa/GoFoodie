@@ -12,57 +12,13 @@ import com.app.gofoodie.activity.utils.DashboardInterruptListener;
 public abstract class BaseFragment extends Fragment {
 
     /**
-     * Private class data member objects.
-     */
-    private DashboardActivity mDashboardActivity = null;
-    private DashboardInterruptListener mDashboardInterruptListener = null;
-
-    /**
-     * @constructor BaseFragment
-     */
-    private BaseFragment() {
-
-        this.mDashboardActivity = initDashboardActivity();
-        this.mDashboardInterruptListener = initDashboardInterruptListener();
-    }
-
-    /**
-     * @return DashboardActivity object
-     * @method initDashboardActivity
-     * @desc Method to init the {@link DashboardActivity} activity instance.
-     */
-    private DashboardActivity initDashboardActivity() {
-
-        if (getActivity() instanceof DashboardActivity) {
-            return ((DashboardActivity) getActivity());
-        }
-        return null;
-    }
-
-    /**
-     * @return DashboardInterruptListener object
-     * @method initDashboardInterruptListener
-     * @desc Method to init the {@link DashboardInterruptListener} activity instance.
-     */
-    private DashboardInterruptListener initDashboardInterruptListener() {
-
-        if (getActivity() instanceof DashboardInterruptListener) {
-            return ((DashboardInterruptListener) getActivity());
-        }
-        return null;
-    }
-
-    /**
      * @return DashboardActivity object
      * @method getDashboardActivity
      * @desc Method to get the {@link DashboardActivity} activity instance.
      */
-    private DashboardActivity getDashboardActivity() {
+    protected DashboardActivity getDashboardActivity() {
 
-        if (getActivity() instanceof DashboardActivity) {
-            return ((DashboardActivity) getActivity());
-        }
-        return null;
+        return ((DashboardActivity) getActivity());
     }
 
     /**
@@ -70,11 +26,8 @@ public abstract class BaseFragment extends Fragment {
      * @method getDashboardInterruptListener
      * @desc Method to get the {@link DashboardInterruptListener} activity instance.
      */
-    private DashboardInterruptListener getDashboardInterruptListener() {
+    protected DashboardInterruptListener getDashboardInterruptListener() {
 
-        if (getActivity() instanceof DashboardInterruptListener) {
-            return ((DashboardInterruptListener) getActivity());
-        }
-        return null;
+        return ((DashboardInterruptListener) getActivity());
     }
 }

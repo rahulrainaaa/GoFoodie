@@ -52,7 +52,9 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     protected void onResume() {
         super.onResume();
         hideNavigationBar();
-        loadFragment();
+        if (mFragment == null) {
+            loadFragment();
+        }
     }
 
     /**
@@ -189,6 +191,6 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
 
             return true;
         }
-            return true;
+        return true;
     }
 }
