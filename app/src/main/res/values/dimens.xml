@@ -3,7 +3,13 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="signup_edittext_textsize">14sp</dimen>
+
+    <dimen name="signup_edittext_textsize_normal">14sp</dimen>
+    <dimen name="signup_edittext_padding_normal">7dp</dimen>
+
     <dimen name="signup_edittext_padding">7dp</dimen>
+
+    <dimen name="signup_edittext_textsize_xlarge">20sp</dimen>
+    <dimen name="signup_edittext_padding_xlarge">8dp</dimen>
 
 </resources>
