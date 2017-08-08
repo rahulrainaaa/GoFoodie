@@ -14,7 +14,7 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
  */
 public class SplashActivity extends BaseAppCompatActivity implements Runnable {
 
-    public final String TAG = "SplashActivity";
+    public static final String TAG = "SplashActivity";
 
     /**
      * Class private data objects.

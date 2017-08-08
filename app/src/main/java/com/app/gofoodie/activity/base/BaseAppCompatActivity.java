@@ -41,7 +41,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     protected void finalize() throws Throwable {
         super.finalize();
         System.gc();
-        System.gc();
     }
 
 }

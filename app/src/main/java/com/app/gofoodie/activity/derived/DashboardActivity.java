@@ -20,7 +20,7 @@ import com.app.gofoodie.fragment.base.BaseFragment;
  */
 public class DashboardActivity extends BaseAppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, DashboardInterruptListener {
 
-    public final String TAG = "DashboardActivity";
+    public static final String TAG = "DashboardActivity";
 
     /**
      * Class private data members
@@ -37,7 +37,6 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
      * {@link BaseAppCompatActivity} callback methods.
      */
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
@@ -53,7 +52,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         super.onResume();
         hideNavigationBar();
         if (mFragment == null) {
-
+            loadFragmentOnStart();
         }
     }
 
@@ -149,6 +148,15 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
 
         mFragmentType = FRAGMENT_TYPE.PROFILE;
         loadFragment();
+    }
+
+    /**
+     * @method loadFragmentOnStart
+     * @desc Method will decide and load fragment on start.
+     */
+    private void loadFragmentOnStart() {
+
+
     }
 
     /**
