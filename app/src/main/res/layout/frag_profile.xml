@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="none">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -49,25 +50,12 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/bg_blue_btn"
-            android:gravity="center"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text="LOGIN"
-            android:textAllCaps="false"
-            android:textColor="@color/colorWhite" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/dialog_holo_light_frame"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -75,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_btn_outline"
+                android:drawableRight="@drawable/ic_navigate_next_black_24dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -86,6 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_btn_outline"
+                android:drawableRight="@drawable/ic_navigate_next_black_24dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -96,6 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_btn_outline"
+                android:drawableRight="@drawable/ic_navigate_next_black_24dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -106,6 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_btn_outline"
+                android:drawableRight="@drawable/ic_navigate_next_black_24dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -116,6 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_btn_outline"
+                android:drawableRight="@drawable/ic_navigate_next_black_24dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -123,36 +116,15 @@
                 android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/btn_privacy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_btn_outline"
+                android:drawableRight="@drawable/ic_navigate_next_black_24dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:text="Privacy Policy"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btn_terms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/profile_btn_outline"
-                android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="Terms n Conditions"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/helpnsupport"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/profile_btn_outline"
-                android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="Help and Support"
+                android:text="About Us
+"
                 android:textAllCaps="false" />
 
             <Button
@@ -160,11 +132,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_btn_outline"
+                android:drawableRight="@drawable/ic_navigate_next_black_24dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text="Logout"
                 android:textAllCaps="false" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c1c1c1" />
 
         </LinearLayout>
     </LinearLayout>
