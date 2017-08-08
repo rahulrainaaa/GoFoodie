@@ -5,14 +5,20 @@ import com.app.gofoodie.model.base.BaseModel;
 import com.google.gson.Gson;
 
 /**
- * @class ModelUtils
+ * @class ModelParser
  * @desc Class to map JSON to Schema and vice-versa.
  */
-class ModelUtils {
+class ModelParser {
 
+    /**
+     * Class private data members.
+     */
     private Gson mGson = null;
 
-    private ModelUtils() {
+    /**
+     * @constructor ModelParser
+     */
+    private ModelParser() {
         mGson = new Gson();
     }
 
