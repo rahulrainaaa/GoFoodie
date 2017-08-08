@@ -20,7 +20,7 @@ public class EmptyListFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.frag_login, container, false);
+        View view = inflater.inflate(R.layout.frag_empty_list, container, false);
         Toast.makeText(getActivity(), "Empty Fragment", Toast.LENGTH_SHORT).show();
         return view;
     }

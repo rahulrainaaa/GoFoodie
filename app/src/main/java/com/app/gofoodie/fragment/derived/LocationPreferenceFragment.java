@@ -32,6 +32,7 @@ public class LocationPreferenceFragment extends BaseFragment {
             list.add("list item: " + i);
         }
 
+
         View view = inflater.inflate(R.layout.frag_location_preferences, container, false);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, list);

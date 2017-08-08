@@ -11,7 +11,9 @@ public interface DashboardInterruptListener {
      * Fragment Enumeration
      */
     public enum FRAGMENT_TYPE {
-        DASHBOARD, WALLET, COMBOS, CART, PROFILE, LOGIN
+        DASHBOARD, WALLET, COMBOS, CART, PROFILE, LOGIN,
+        NETWORK_ERROR, CHANGE_PASSWORD, FORGOT_PASSWORD,
+        REGISTER_NEW_USER, EMPTY_LIST, LOCATION_PREFERENCES
     }
 
     /**

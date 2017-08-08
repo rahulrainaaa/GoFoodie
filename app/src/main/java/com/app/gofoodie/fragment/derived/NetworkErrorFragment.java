@@ -20,7 +20,7 @@ public class NetworkErrorFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.frag_login, container, false);
+        View view = inflater.inflate(R.layout.frag_network_failure, container, false);
         Toast.makeText(getActivity(), "Network Error Fragment", Toast.LENGTH_SHORT).show();
         return view;
     }
