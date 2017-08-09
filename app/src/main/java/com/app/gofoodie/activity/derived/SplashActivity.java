@@ -54,7 +54,6 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
     @Override
     public void run() {
 
-        // Toast.makeText(this, "Runnable splash toast...", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, DashboardActivity.class));
         finish();
     }
