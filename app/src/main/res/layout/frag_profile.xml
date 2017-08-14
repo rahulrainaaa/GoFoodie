@@ -115,7 +115,7 @@
                 android:text="Change Password"
                 android:textAllCaps="false" />
 
-             <Button
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_btn_outline"
@@ -126,7 +126,7 @@
                 android:text="About Us"
                 android:textAllCaps="false" />
 
-             <Button
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_btn_outline"
@@ -136,8 +136,6 @@
                 android:paddingRight="15dp"
                 android:text="Logout"
                 android:textAllCaps="false" />
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
