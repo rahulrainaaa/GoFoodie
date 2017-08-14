@@ -6,10 +6,9 @@ import com.app.gofoodie.fragment.derived.ChangePasswordFragment;
 import com.app.gofoodie.fragment.derived.CombosFragment;
 import com.app.gofoodie.fragment.derived.EmptyListFragment;
 import com.app.gofoodie.fragment.derived.ForgotPasswordFragment;
-import com.app.gofoodie.fragment.derived.HomeFragment;
-import com.app.gofoodie.fragment.derived.LocationPreferenceFragment;
 import com.app.gofoodie.fragment.derived.LoginFragment;
 import com.app.gofoodie.fragment.derived.ProfileFragment;
+import com.app.gofoodie.fragment.derived.RestaurantListFragment;
 import com.app.gofoodie.fragment.derived.WalletFragment;
 
 /**
@@ -29,7 +28,7 @@ public class DashboardFragmentHandler {
         // Check for the match case for fragmentType.
         if (DashboardInterruptListener.FRAGMENT_TYPE.DASHBOARD == fragmentType) {
 
-            return new HomeFragment();
+            return new RestaurantListFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.COMBOS == fragmentType) {
 
             return new CombosFragment();
@@ -54,9 +53,9 @@ public class DashboardFragmentHandler {
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.CHANGE_PASSWORD == fragmentType) {
 
             return new ChangePasswordFragment();
-        } else if (DashboardInterruptListener.FRAGMENT_TYPE.LOCATION_PREFERENCES == fragmentType) {
+        } else if (DashboardInterruptListener.FRAGMENT_TYPE.RESTAURANT_LIST == fragmentType) {
 
-            return new LocationPreferenceFragment();
+            return new RestaurantListFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.EMPTY_LIST == fragmentType) {
 
             return new EmptyListFragment();
