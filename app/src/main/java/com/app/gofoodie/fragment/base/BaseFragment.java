@@ -11,6 +11,10 @@ import com.app.gofoodie.activity.utils.DashboardInterruptListener;
  */
 public abstract class BaseFragment extends Fragment {
 
+    public static BaseFragment PREVIOUS_FRAGMENT = null;
+
+    public abstract void exitWork();
+
     /**
      * @return DashboardActivity object
      * @method getDashboardActivity
