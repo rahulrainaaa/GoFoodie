@@ -1,6 +1,5 @@
 package com.app.gofoodie.fragment.derived;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
@@ -10,14 +9,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.derived.DashboardActivity;
-import com.app.gofoodie.activity.derived.LocationActivity;
+import com.app.gofoodie.adapter.listviewadapter.RestaurantListViewAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -34,7 +32,7 @@ public class RestaurantListFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.frag_restaurant_list, container, false);
+        View view = inflater.inflate(R.layout.frag_restaurant_list_main, container, false);
         Toast.makeText(getActivity(), "Restaurant List fragment", Toast.LENGTH_SHORT).show();
         setHasOptionsMenu(true);
         mListView = (ListView) view.findViewById(R.id.listview_restaurants);
@@ -42,9 +40,10 @@ public class RestaurantListFragment extends BaseFragment {
         for (int i = 0; i < 30; i++) {
             list.add("Restaurant: " + i);
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_checked, list);
+        RestaurantListViewAdapter adapter = new RestaurantListViewAdapter(getActivity(), R.layout.item_listview_restaurant, list);
         mListView.setAdapter(adapter);
-        getDashboardActivity().startActivity(new Intent(getActivity(), LocationActivity.class));
+
+//        getDashboardActivity().startActivity(new Intent(getActivity(), LocationActivity.class));
         return view;
     }
 

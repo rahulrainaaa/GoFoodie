@@ -24,5 +24,6 @@
     <string name="location_preference_quote">
             We will save your location preference, so that you can browse uninterrupted.
     </string>
+    <string name="title_activity_abc">ABC</string>
 
 </resources>

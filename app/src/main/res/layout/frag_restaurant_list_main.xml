@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_a"
+    android:fitsSystemWindows="true">
+
+    <ListView
+        android:id="@+id/listview_restaurants"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="7dp"
+        android:paddingBottom="7dp"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:paddingTop="7dp"
+        android:scrollbars="none" />
+
+</LinearLayout>

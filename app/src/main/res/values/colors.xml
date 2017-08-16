@@ -8,5 +8,9 @@
     <color name="colorBlue">#1E88E5</color>
     <color name="colorFbBlue">#3D66AE</color>
     <color name="colorWhite">#ffffff</color>
-    <color name="yellow">#E3B64A</color>
+    <color name="colorLight">#b3b3b3</color>
+    <color name="yellow">#ecbb47</color>
+    <color name="selectedCellYellow">#F9E899</color>
+
+    <color name="colorTextName">#4e4e4e</color>
 </resources>
