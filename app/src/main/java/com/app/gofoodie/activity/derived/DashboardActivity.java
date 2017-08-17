@@ -164,7 +164,9 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     private void loadFragment() {
 
         if (mFragment != null) {
-            //mFragment.exitWork();
+            if (mFragment.exitWork()) {
+                return;
+            }
         }
         mFragmentTransaction = mFragmentManager.beginTransaction();                 // Begin with fragment transaction.
         if (!mFragmentTransaction.isEmpty()) {                                      // Remove older fragment if any.
@@ -179,7 +181,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
      * {@link DashboardInterruptListener} interface callback methods.
      */
     @Override
-    public boolean interruptLoadFragment(FRAGMENT_TYPE fragmentType) {
+    public boolean signalLoadFragment(FRAGMENT_TYPE fragmentType) {
 
         this.mFragmentType = fragmentType;
         loadFragment();

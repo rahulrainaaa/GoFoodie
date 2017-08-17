@@ -8,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.custom.GoFoodieJsonArrayRequest;
@@ -68,7 +69,7 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
-     * Counter for tracking number of network hits.
+     * Counter for monitoring number of network hits.
      */
     public static int OBJECTS_CREATED = 0;
     public static int OBJECTS_RELEASED = 0;
@@ -82,7 +83,8 @@ public class NetworkHandler implements Response.ErrorListener {
     private String mUrl = null;
     private RESPONSE_TYPE mResponseType = RESPONSE_TYPE.JSON_OBJECT;    // default response type = JSONObject
     private int mRequestCode = -1;
-    private JSONObject mJsonRequest = null;
+    private JsonRequest<?> mHttpJsonRequest = null;
+    private JSONObject mJsonRequestBody = null;
     private NetworkCallbackListener mNetworkCallbackListener = null;
 
     /**
@@ -96,17 +98,17 @@ public class NetworkHandler implements Response.ErrorListener {
     /**
      * @param requestCode             user specific code to determine the request among multiple.
      * @param networkCallbackListener instance for network response callback using {@link NetworkCallbackListener}.
-     * @param jsonRequest             API request packet.
+     * @param jsonRequestBody         API request packet.
      * @param url                     API url.
      * @param responseType            JSONObject or JSONArray.
      * @method httpCreate
      * @desc Method to initialize the class data members and create network handler.
      */
-    public void httpCreate(int requestCode, NetworkCallbackListener networkCallbackListener, JSONObject jsonRequest, String url, RESPONSE_TYPE responseType) {
+    public void httpCreate(int requestCode, NetworkCallbackListener networkCallbackListener, JSONObject jsonRequestBody, String url, RESPONSE_TYPE responseType) {
 
         this.mUrl = url;
         this.mRequestCode = requestCode;
-        this.mJsonRequest = jsonRequest;
+        this.mJsonRequestBody = jsonRequestBody;
         this.mNetworkCallbackListener = networkCallbackListener;
         this.mResponseType = responseType;
     }
@@ -153,31 +155,31 @@ public class NetworkHandler implements Response.ErrorListener {
             return;
         }
 
-        HTTP_TOTAL_SENT++;
-
-        RequestQueue requestQueue = VolleyRequestQueue;             // Application Volley Request Queue.
+        HTTP_TOTAL_SENT++;                                          // Handler counter monitor.
 
         if (mResponseType == RESPONSE_TYPE.JSON_OBJECT) {           // if JSONObject response.
 
-            GoFoodieJsonObjectRequest goFoodieJsonObjectRequest = new GoFoodieJsonObjectRequest(method, mUrl, mJsonRequest.toString(), new JsonObjectResponse(), this);
+            GoFoodieJsonObjectRequest goFoodieJsonObjectRequest = new GoFoodieJsonObjectRequest(method, mUrl, mJsonRequestBody.toString(), new JsonObjectResponse(), this);
 
             goFoodieJsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
                     30000,
                     DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-            requestQueue.add(goFoodieJsonObjectRequest);
+            VolleyRequestQueue.add(goFoodieJsonObjectRequest);
+            mHttpJsonRequest = goFoodieJsonObjectRequest;
 
         } else if (mResponseType == RESPONSE_TYPE.JSON_ARRAY) {    // if JSONArray response.
 
-            GoFoodieJsonArrayRequest goFoodieJsonArrayRequest = new GoFoodieJsonArrayRequest(method, mUrl, mJsonRequest.toString(), new JsonArrayResponse(), this);
+            GoFoodieJsonArrayRequest goFoodieJsonArrayRequest = new GoFoodieJsonArrayRequest(method, mUrl, mJsonRequestBody.toString(), new JsonArrayResponse(), this);
 
             goFoodieJsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
                     30000,
                     DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-            requestQueue.add(goFoodieJsonArrayRequest);
+            VolleyRequestQueue.add(goFoodieJsonArrayRequest);
+            mHttpJsonRequest = goFoodieJsonArrayRequest;
         }
     }
 
@@ -250,6 +252,15 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
+     * @method cancelHttpRequest
+     * @desc Method to cancel the HTTP request. But don't destroy the object.
+     */
+    public void cancelHttpRequest() {
+
+        mHttpJsonRequest.cancel();
+    }
+
+    /**
      * @throws Throwable
      * @destructor
      */
@@ -258,7 +269,7 @@ public class NetworkHandler implements Response.ErrorListener {
 
         OBJECTS_RELEASED++;
         mUrl = null;
-        mJsonRequest = null;
+        mJsonRequestBody = null;
         mNetworkCallbackListener = null;
         super.finalize();
     }

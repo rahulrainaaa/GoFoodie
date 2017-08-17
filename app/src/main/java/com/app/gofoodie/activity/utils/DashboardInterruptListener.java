@@ -26,10 +26,10 @@ public interface DashboardInterruptListener {
 
     /**
      * @return
-     * @method interruptLoadFragment
+     * @method signalLoadFragment
      * @desc Callback method to load the fragment, depending upon the parameters provided.
      */
-    public boolean interruptLoadFragment(FRAGMENT_TYPE fragmentType);
+    public boolean signalLoadFragment(FRAGMENT_TYPE fragmentType);
 
     /**
      * @return boolean

@@ -19,10 +19,10 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
 
     /**
      * @param status boolean set/reset flag.
-     * @method setFlagSaveBeforeExit
+     * @method setExitFlag
      * @desc Method to set/reset the flag for Fragment.
      */
-    protected void setFlagSaveBeforeExit(boolean status) {
+    protected void setExitFlag(boolean status) {
 
         this.mFlagSaveBeforeExit = status;
     }
