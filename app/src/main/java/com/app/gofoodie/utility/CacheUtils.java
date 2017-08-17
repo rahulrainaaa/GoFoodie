@@ -62,7 +62,7 @@ class CacheUtils {
      * @param context
      * @param prefName
      * @return SharedPreferences
-     * @desc Private method to init and get {@link SharedPreferences}.
+     * @desc Private method to init, save pref-detail and get {@link SharedPreferences}.
      */
     private SharedPreferences initPref(Context context, PREF_NAME prefName) {
 

@@ -31,7 +31,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     private FragmentManager mFragmentManager = null;
     private BottomNavigationView mNavigationPanel = null;
     private DashboardFragmentHandler mDashboardFragmentHandler = null;
-    private FRAGMENT_TYPE mFragmentType = FRAGMENT_TYPE.DASHBOARD;      // Default first Dashboard.
+    private FRAGMENT_TYPE mFragmentType = FRAGMENT_TYPE.DASHBOARD;      // Default fragment - Dashboard.
 
     /**
      * {@link BaseAppCompatActivity} callback methods.
@@ -154,7 +154,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
      */
     private void loadFragmentOnStart() {
 
-
+        loadFragment();
     }
 
     /**
@@ -163,11 +163,14 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
      */
     private void loadFragment() {
 
+        // Check if fragment has unsaved work before unloading.
         if (mFragment != null) {
             if (mFragment.exitWork()) {
                 return;
             }
         }
+
+        // Now begin the fragment transaction.
         mFragmentTransaction = mFragmentManager.beginTransaction();                 // Begin with fragment transaction.
         if (!mFragmentTransaction.isEmpty()) {                                      // Remove older fragment if any.
             mFragmentTransaction.remove(mFragment);
@@ -202,6 +205,6 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
 
             return true;
         }
-        return true;
+        return false;
     }
 }

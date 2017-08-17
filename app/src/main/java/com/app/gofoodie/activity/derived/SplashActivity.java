@@ -29,7 +29,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        getProgressDialog().show();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
         showFullScreen();
         mImgSplashLogo = (ImageView) findViewById(R.id.img_splash_logo);
         mHandler = new Handler();
-        mHandler.postDelayed(this, 2000);
+        mHandler.postDelayed(this, 3000);
     }
 
     @Override

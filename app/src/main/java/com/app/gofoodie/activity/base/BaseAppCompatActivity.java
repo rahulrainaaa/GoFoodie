@@ -1,7 +1,11 @@
 package com.app.gofoodie.activity.base;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.app.gofoodie.customview.GoFoodieProgressDialog;
 
 /**
  * @class BaseAppCompatActivity
@@ -10,6 +14,33 @@ import android.view.View;
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
     public final String TAG = "BaseAppCompatActivity";
+
+    private GoFoodieProgressDialog mGoFoodieProgressDialog = null;
+
+    /**
+     * {@link AppCompatActivity} override callback method(s).
+     */
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mGoFoodieProgressDialog = new GoFoodieProgressDialog(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mGoFoodieProgressDialog.dismiss();
+    }
+
+    /**
+     * @return GoFoodieProgressDialog
+     * @method getProgressDialog
+     * @desc Method to get the progress dialog for the activity.
+     */
+    public GoFoodieProgressDialog getProgressDialog() {
+
+        return this.mGoFoodieProgressDialog;
+    }
 
     /**
      * @method showFullScreen
