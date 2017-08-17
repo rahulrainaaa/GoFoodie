@@ -24,4 +24,9 @@ public class NewRegisterFragment extends BaseFragment {
         Toast.makeText(getActivity(), "Request new User Fragment.", Toast.LENGTH_SHORT).show();
         return view;
     }
+
+    @Override
+    public void fragQuitCallback() {
+
+    }
 }

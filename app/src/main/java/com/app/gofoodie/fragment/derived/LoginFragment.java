@@ -35,6 +35,11 @@ public class LoginFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void fragQuitCallback() {
+
+    }
+
     /**
      * @method doViewMapping
      * @desc Method to do mapping of all xml view to class objects.

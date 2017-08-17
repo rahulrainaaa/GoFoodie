@@ -24,4 +24,9 @@ public class WalletFragment extends BaseFragment {
         Toast.makeText(getActivity(), "Wallet Fragment", Toast.LENGTH_SHORT).show();
         return view;
     }
+
+    @Override
+    public void fragQuitCallback() {
+
+    }
 }

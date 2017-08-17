@@ -24,4 +24,9 @@ public class ChangePasswordFragment extends BaseFragment {
         Toast.makeText(getActivity(), "Request change password Fragment.", Toast.LENGTH_SHORT).show();
         return view;
     }
+
+    @Override
+    public void fragQuitCallback() {
+
+    }
 }

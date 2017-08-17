@@ -24,4 +24,9 @@ public class HomeFragment extends BaseFragment {
         Toast.makeText(getActivity(), "Home Fragment.", Toast.LENGTH_SHORT).show();
         return view;
     }
+
+    @Override
+    public void fragQuitCallback() {
+
+    }
 }

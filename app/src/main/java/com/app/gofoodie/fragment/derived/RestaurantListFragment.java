@@ -71,5 +71,10 @@ public class RestaurantListFragment extends BaseFragment {
         });
     }
 
+    @Override
+    public void fragQuitCallback() {
+
+    }
+
 
 }

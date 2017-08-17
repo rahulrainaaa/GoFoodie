@@ -24,4 +24,9 @@ public class NetworkErrorFragment extends BaseFragment {
         Toast.makeText(getActivity(), "Network Error Fragment", Toast.LENGTH_SHORT).show();
         return view;
     }
+
+    @Override
+    public void fragQuitCallback() {
+
+    }
 }

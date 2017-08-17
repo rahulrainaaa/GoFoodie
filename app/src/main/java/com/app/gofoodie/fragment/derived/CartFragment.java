@@ -25,4 +25,8 @@ public class CartFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void fragQuitCallback() {
+        
+    }
 }

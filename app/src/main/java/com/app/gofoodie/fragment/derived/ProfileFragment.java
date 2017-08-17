@@ -24,4 +24,9 @@ public class ProfileFragment extends BaseFragment {
         Toast.makeText(getActivity(), "Profile Fragment", Toast.LENGTH_SHORT).show();
         return view;
     }
+
+    @Override
+    public void fragQuitCallback() {
+
+    }
 }

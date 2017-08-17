@@ -22,4 +22,9 @@ public class ForgotPasswordFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.frag_forgot_password, container, false);
         return view;
     }
+
+    @Override
+    public void fragQuitCallback() {
+
+    }
 }

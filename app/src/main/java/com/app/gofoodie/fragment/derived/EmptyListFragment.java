@@ -24,4 +24,9 @@ public class EmptyListFragment extends BaseFragment {
         Toast.makeText(getActivity(), "Empty Fragment", Toast.LENGTH_SHORT).show();
         return view;
     }
+
+    @Override
+    public void fragQuitCallback() {
+
+    }
 }

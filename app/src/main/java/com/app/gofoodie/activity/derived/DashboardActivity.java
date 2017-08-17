@@ -45,15 +45,13 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         mDashboardFragmentHandler = new DashboardFragmentHandler();
         mFragmentManager = getFragmentManager();
         mNavigationPanel.setOnNavigationItemSelectedListener(this);
+        loadFragmentOnStart();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         hideNavigationBar();
-        if (mFragment == null) {
-            loadFragmentOnStart();
-        }
     }
 
     /**
@@ -165,6 +163,9 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
      */
     private void loadFragment() {
 
+        if (mFragment != null) {
+            //mFragment.exitWork();
+        }
         mFragmentTransaction = mFragmentManager.beginTransaction();                 // Begin with fragment transaction.
         if (!mFragmentTransaction.isEmpty()) {                                      // Remove older fragment if any.
             mFragmentTransaction.remove(mFragment);

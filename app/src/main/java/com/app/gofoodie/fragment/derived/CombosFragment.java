@@ -25,4 +25,9 @@ public class CombosFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void fragQuitCallback() {
+
+    }
+
 }
