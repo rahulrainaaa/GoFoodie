@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.app.gofoodie.R;
 
@@ -17,20 +18,21 @@ public class RestaurantListViewAdapter extends ArrayAdapter<String> {
 
     public static final String TAG = "RestaurantListViewAdapter";
 
-    private Activity mActivty = null;
+    private Activity mActivity = null;
     private ArrayList<String> mListData = null;
     private int mLayoutResourceId;
 
     private static class Holder {
 
-        public ImageView img = null;
+        public ImageView imgRestaurant = null;
+        public TextView txtRestaurantName = null;
         public int tag = -1;
     }
 
     public RestaurantListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<String> list) {
 
         super(activity, resource, list);
-        this.mActivty = activity;
+        this.mActivity = activity;
         this.mListData = list;
         this.mLayoutResourceId = resource;
     }
@@ -43,14 +45,14 @@ public class RestaurantListViewAdapter extends ArrayAdapter<String> {
         Holder holder = null;
         if (convertView == null) {
 
-            cell = mActivty.getLayoutInflater().inflate(mLayoutResourceId, null);
+            cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
             holder = new Holder();
-            holder.img = (ImageView) cell.findViewById(R.id.image_restaurant);
+            holder.imgRestaurant = (ImageView) cell.findViewById(R.id.image_restaurant);
             cell.setTag(holder);
         } else {
             holder = (Holder) cell.getTag();
         }
-        ImageView imageView = holder.img;
+
 
         return cell;
     }

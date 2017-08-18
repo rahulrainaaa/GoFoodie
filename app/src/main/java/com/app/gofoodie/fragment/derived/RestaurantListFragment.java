@@ -26,7 +26,7 @@ import java.util.ArrayList;
  */
 public class RestaurantListFragment extends BaseFragment {
 
-    private ListView mListView = null;
+    private ListView restaurantListView = null;
 
     @Nullable
     @Override
@@ -35,13 +35,13 @@ public class RestaurantListFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.frag_restaurant_list_main, container, false);
         Toast.makeText(getActivity(), "Restaurant List fragment", Toast.LENGTH_SHORT).show();
         setHasOptionsMenu(true);
-        mListView = (ListView) view.findViewById(R.id.listview_restaurants);
+        restaurantListView = (ListView) view.findViewById(R.id.listview_restaurants);
         ArrayList list = new ArrayList();
         for (int i = 0; i < 30; i++) {
             list.add("Restaurant: " + i);
         }
         RestaurantListViewAdapter adapter = new RestaurantListViewAdapter(getActivity(), R.layout.item_listview_restaurant, list);
-        mListView.setAdapter(adapter);
+        restaurantListView.setAdapter(adapter);
 
 //        getDashboardActivity().startActivity(new Intent(getActivity(), LocationActivity.class));
         return view;
