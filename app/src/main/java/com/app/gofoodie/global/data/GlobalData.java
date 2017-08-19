@@ -8,4 +8,5 @@ package com.app.gofoodie.global.data;
 public class GlobalData {
 
 
+
 }
