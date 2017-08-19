@@ -21,5 +21,6 @@ public class GoFoodieApplication extends Application {
 
         // Init Network Handler for Application.
         NetworkHandler.initRequestQueue(getApplicationContext());
+
     }
 }

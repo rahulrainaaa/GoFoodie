@@ -6,10 +6,10 @@ import com.app.gofoodie.fragment.derived.ChangePasswordFragment;
 import com.app.gofoodie.fragment.derived.CombosFragment;
 import com.app.gofoodie.fragment.derived.EmptyListFragment;
 import com.app.gofoodie.fragment.derived.ForgotPasswordFragment;
+import com.app.gofoodie.fragment.derived.HomeFragment;
 import com.app.gofoodie.fragment.derived.LoginFragment;
 import com.app.gofoodie.fragment.derived.ProfileFragment;
 import com.app.gofoodie.fragment.derived.RestaurantListFragment;
-import com.app.gofoodie.fragment.derived.WalletFragment;
 
 /**
  * @class DashboardFragmentHandler
@@ -28,13 +28,13 @@ public class DashboardFragmentHandler {
         // Check for the match case for fragmentType.
         if (DashboardInterruptListener.FRAGMENT_TYPE.DASHBOARD == fragmentType) {
 
-            return new RestaurantListFragment();
+            return new HomeFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.COMBOS == fragmentType) {
 
             return new CombosFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.WALLET == fragmentType) {
 
-            return new WalletFragment();
+            return new RestaurantListFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.CART == fragmentType) {
 
             return new CartFragment();

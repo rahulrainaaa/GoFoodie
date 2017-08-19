@@ -6,4 +6,6 @@ package com.app.gofoodie.global.data;
  * @desc Class to hold all the data within application lifetime & global scope.
  */
 public class GlobalData {
+
+
 }
