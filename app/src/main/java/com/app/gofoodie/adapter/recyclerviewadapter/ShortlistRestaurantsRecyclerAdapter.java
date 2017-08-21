@@ -83,7 +83,7 @@ public class ShortlistRestaurantsRecyclerAdapter extends RecyclerView.Adapter<Sh
 
         // Load image into imageView. (LazyLoading).
         try {
-            Picasso.with(mActivity).load("https://i.stack.imgur.com/5Z9P1.jpg").into(holder.imgRestaurant);
+          //  Picasso.with(mActivity).load("https://i.stack.imgur.com/5Z9P1.jpg").into(holder.imgRestaurant);
             holder.txtRestaurantName.setText("" + data);
         } catch (Exception e) {
             e.printStackTrace();

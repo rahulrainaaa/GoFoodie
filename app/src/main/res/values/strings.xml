@@ -1,5 +1,7 @@
 <resources>
 
+    <string name="text_empty"></string>
+
     <!-- Navigation items -->
     <string name="app_name">GoFoodie</string>
     <string name="navigation_dashboard">Dashboard</string>

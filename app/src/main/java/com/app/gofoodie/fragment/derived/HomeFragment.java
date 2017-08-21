@@ -55,7 +55,6 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener {
         mFlipperBanner.setInAnimation(getActivity(), android.R.animator.fade_in);
         mFlipperBanner.setOutAnimation(getActivity(), android.R.animator.fade_out);
 
-
         for (int i = 0; i < 20; i++) {
             mListShortlistRestaurant.add("Restaurant " + i);
         }
