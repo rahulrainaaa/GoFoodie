@@ -10,12 +10,6 @@ public class Constants {
     public static final String TAG = "Constants";
 
     /**
-     * SharedPreferences constants.
-     */
-    public static final String PREF_LOGIN = "PREF_LOGIN";
-
-
-    /**
      * Dashboard Screen
      */
     public static String[] BANNER_IMAGES = new String[]{

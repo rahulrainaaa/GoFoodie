@@ -53,7 +53,6 @@ public class TransactionListViewAdapter extends ArrayAdapter<String> {
             holder = (Holder) cell.getTag();
         }
 
-
         return cell;
     }
 }

@@ -7,13 +7,13 @@ import android.content.SharedPreferences;
  * @class CacheUtils
  * @desc Utility class to get and save values to cache.
  */
-class CacheUtils {
+public class CacheUtils {
 
     /**
      * {@link SharedPreferences} Enumerated naming.
      */
     public static enum PREF_NAME {
-        PREF_LOGIN
+        PREF_LOGIN, PREF_CUSTOMER_PROFILE, PREF_FILTER
     }
 
     /**
@@ -25,7 +25,7 @@ class CacheUtils {
 
     private static final CacheUtils ourInstance = new CacheUtils();
 
-    static CacheUtils getInstance() {
+    public static CacheUtils getInstance() {
         return ourInstance;
     }
 
@@ -66,10 +66,15 @@ class CacheUtils {
      */
     private SharedPreferences initPref(Context context, PREF_NAME prefName) {
 
-
         if (prefName == PREF_NAME.PREF_LOGIN) {
 
-            return context.getSharedPreferences("PREF_NAME", 0);
+            return context.getSharedPreferences("PREF_LOGIN", 0);
+        } else if (prefName == PREF_NAME.PREF_CUSTOMER_PROFILE) {
+
+            return context.getSharedPreferences("PREF_CUSTOMER_PROFILE", 0);
+        } else if (prefName == PREF_NAME.PREF_FILTER) {
+
+            return context.getSharedPreferences("PREF_FILTER", 0);
         } else {
 
             return null;

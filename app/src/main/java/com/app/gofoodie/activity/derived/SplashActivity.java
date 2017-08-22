@@ -29,6 +29,8 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+//        com.app.gofoodie.utility.CacheUtils.getInstance().getPref()
     }
 
     @Override
