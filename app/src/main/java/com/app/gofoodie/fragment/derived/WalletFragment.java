@@ -37,6 +37,9 @@ public class WalletFragment extends BaseFragment {
 
         mListView = (ListView) view.findViewById(R.id.list_view);
         ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            list.add("item-" + i);
+        }
         TransactionListViewAdapter adapter = new TransactionListViewAdapter(getActivity(), R.layout.item_listview_transactions, list);
         mListView.setAdapter(adapter);
 
