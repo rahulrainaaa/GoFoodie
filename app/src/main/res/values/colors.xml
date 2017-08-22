@@ -11,6 +11,7 @@
     <color name="colorLight">#b3b3b3</color>
     <color name="yellow">#ecbb47</color>
     <color name="selectedCellYellow">#F9E899</color>
+    <color name="colorGreen">#59993c</color>
 
     <color name="colorTextName">#4e4e4e</color>
 </resources>

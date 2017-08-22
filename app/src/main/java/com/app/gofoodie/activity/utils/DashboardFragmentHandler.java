@@ -1,6 +1,7 @@
 package com.app.gofoodie.activity.utils;
 
 import com.app.gofoodie.fragment.base.BaseFragment;
+import com.app.gofoodie.fragment.derived.CartFragment;
 import com.app.gofoodie.fragment.derived.ChangePasswordFragment;
 import com.app.gofoodie.fragment.derived.CombosFragment;
 import com.app.gofoodie.fragment.derived.EmptyListFragment;
@@ -37,7 +38,7 @@ public class DashboardFragmentHandler {
             return new WalletFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.CART == fragmentType) {
 
-            return new RestaurantListFragment();
+            return new CartFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.PROFILE == fragmentType) {
 
             return new ProfileFragment();
