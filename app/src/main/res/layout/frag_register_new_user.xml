@@ -16,6 +16,7 @@
         android:orientation="vertical">
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="First Name*"
@@ -30,6 +31,7 @@
             app:met_underlineColor="@color/colorRed" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -45,6 +47,7 @@
             app:met_underlineColor="@color/colorRed" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -60,6 +63,7 @@
             app:met_underlineColor="@color/colorRed" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_alt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -75,6 +79,7 @@
             app:met_underlineColor="@color/colorRed" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -90,6 +95,7 @@
             app:met_underlineColor="@color/colorRed" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_alt_mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -105,6 +111,7 @@
             app:met_underlineColor="@color/colorRed" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -120,6 +127,23 @@
             app:met_underlineColor="@color/colorRed" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:hint="Address*"
+            android:paddingLeft="@dimen/signup_edittext_padding_normal"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="@dimen/signup_edittext_textsize_normal"
+            app:met_baseColor="@android:color/white"
+            app:met_errorColor="@color/colorRed"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorWhite"
+            app:met_textColorHint="@color/colorWhite"
+            app:met_underlineColor="@color/colorRed" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -136,6 +160,7 @@
             app:met_underlineColor="@color/colorRed" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_conform_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -152,6 +177,7 @@
             app:met_underlineColor="@color/colorRed" />
 
         <CheckBox
+            android:id="@+id/chk_agree_terms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
@@ -162,6 +188,7 @@
             android:textColor="@color/colorWhite" />
 
         <Button
+            android:id="@+id/btn_register_new"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"

@@ -5,6 +5,8 @@ import android.app.Fragment;
 import com.app.gofoodie.activity.derived.DashboardActivity;
 import com.app.gofoodie.activity.utils.DashboardInterruptListener;
 
+import java.util.Stack;
+
 /**
  * @class BaseFragment
  * @desc Base class for all the Fragment classes for application customization.
@@ -13,7 +15,10 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
 
     public static final String TAG = "BaseFragment";
 
-    public static Class<? extends BaseFragment> PREV_FRAG = null;
+    private boolean flagPushIntoStack = true;       // If this has to push into stack (Forward flow).
+    private static Stack<DashboardInterruptListener.FRAGMENT_TYPE> FRAG_STACK = new Stack<>();
+
+    public static DashboardInterruptListener.FRAGMENT_TYPE CURRENT_FRAG = null;
 
     private boolean mFlagSaveBeforeExit = false;        //false = nothing; true = something to save.
 
@@ -69,6 +74,13 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
     @Override
     public void onDetach() {
         super.onDetach();
-        PREV_FRAG = getClass();
+
+        /**
+         * Forward flowing process will be pushed into stack.
+         * Backward flow will be popped. It will never be pushed into stack.
+         */
+        if (flagPushIntoStack) {
+            FRAG_STACK.push(CURRENT_FRAG);
+        }
     }
 }

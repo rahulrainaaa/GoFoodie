@@ -176,6 +176,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
             mFragmentTransaction.remove(mFragment);
         }
         mFragment = mDashboardFragmentHandler.getFragmentClass(mFragmentType);      // Get a new Fragment for dashboard.
+        mFragment.CURRENT_FRAG = mFragmentType;
         mFragmentTransaction.replace(R.id.dashboard_fragment, mFragment);           // Replace with new fragment in the container.
         mFragmentTransaction.commit();
     }

@@ -71,6 +71,7 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/img_btn_subscibe"
                 android:layout_width="29dp"
                 android:layout_height="29dp"
                 android:background="@drawable/border_circle_white"

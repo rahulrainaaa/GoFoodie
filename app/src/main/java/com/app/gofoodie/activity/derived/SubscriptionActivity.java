@@ -1,16 +1,16 @@
 package com.app.gofoodie.activity.derived;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 
 import java.util.ArrayList;
 
-public class SubscriptionActivity extends AppCompatActivity {
+public class SubscriptionActivity extends BaseAppCompatActivity {
 
     private Spinner mSpSubscriptionPlan = null;
     private TextView mTextDescription = null;

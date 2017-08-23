@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.activity.utils.DashboardInterruptListener;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
@@ -87,6 +88,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 break;
             case R.id.btn_sign_up:
 
+                getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_USER);
                 break;
             case R.id.btn_facebook:
 
@@ -96,6 +98,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 break;
             case R.id.btn_forgot_password:
 
+                getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.FORGOT_PASSWORD);
                 break;
         }
 
@@ -128,7 +131,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         networkHandler.httpCreate(1, this, jsonHttpLoginRequest, Network.URL_LOGIN, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executePost();
 
-
     }
 
     /**
@@ -144,15 +146,21 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         // Validate Username
         if (strUsername.isEmpty()) {
+
+            isValid = false;
             mEtMobileEmail.setError("Cannot be empty");
         } else {
+
             isValid = true;
         }
 
         // Validate Password
         if (strPassword.isEmpty()) {
+
+            isValid = false;
             mEtPassword.setError("Cannot be empty");
         } else {
+
             isValid = true;
         }
 
@@ -188,7 +196,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
      */
     private void loginResponseHandling(JSONObject raw) {
 
-        
+
     }
 
 }
