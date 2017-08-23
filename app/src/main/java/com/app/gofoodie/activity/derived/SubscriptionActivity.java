@@ -25,7 +25,7 @@ public class SubscriptionActivity extends AppCompatActivity {
         mSpSubscriptionPlan = (Spinner) findViewById(R.id.sp_subscription_plan);
         mTextDescription = (TextView) findViewById(R.id.text_view_description);
 
-        mList.add("Select Subscription");
+        mList.add("-Select Subscription-");
         mList.add("Regular");
         mList.add("Premium");
         mList.add("Executive");

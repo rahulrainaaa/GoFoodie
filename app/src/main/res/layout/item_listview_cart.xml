@@ -26,36 +26,51 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="9dp"
             android:layout_marginRight="6dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:weightSum="8">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:drawableLeft="@drawable/veg"
-                android:enabled="false"
-                android:gravity="left|center"
-                android:paddingLeft="1dp"
-                android:text="  Combo Plan"
-                android:textColor="@color/colorTextName"
-                android:textSize="13dp" />
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/veg" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:enabled="false"
+                    android:gravity="left|center"
+                    android:paddingLeft="1dp"
+                    android:text="  Combo Plan"
+                    android:textColor="@color/colorTextName"
+                    android:textSize="13dp" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="19dp"
                 android:background="@drawable/grad_separator_line" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_height="0dp"
+                android:layout_weight="4"
                 android:gravity="right|center"
                 android:orientation="horizontal"
                 android:paddingRight="20dp"
@@ -68,7 +83,6 @@
                     android:gravity="center|left"
                     android:paddingLeft="3dp"
                     android:text="AED 200"
-                    android:textColor="@color/colorPrimary"
                     android:textSize="15dp" />
 
                 <LinearLayout
