@@ -8,7 +8,6 @@ import com.app.gofoodie.fragment.derived.EmptyListFragment;
 import com.app.gofoodie.fragment.derived.ForgotPasswordFragment;
 import com.app.gofoodie.fragment.derived.HomeFragment;
 import com.app.gofoodie.fragment.derived.LoginFragment;
-import com.app.gofoodie.fragment.derived.ProfileFragment;
 import com.app.gofoodie.fragment.derived.RestaurantListFragment;
 import com.app.gofoodie.fragment.derived.WalletFragment;
 
@@ -41,7 +40,7 @@ public class DashboardFragmentHandler {
             return new CartFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.PROFILE == fragmentType) {
 
-            return new ProfileFragment();
+            return new LoginFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.LOGIN == fragmentType) {
 
             return new LoginFragment();

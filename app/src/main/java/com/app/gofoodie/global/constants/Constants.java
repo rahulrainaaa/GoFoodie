@@ -14,10 +14,10 @@ public class Constants {
      */
     public static String[] BANNER_IMAGES = new String[]{
 
-            "https://forevermyangel.com/wp-content/uploads/2017/08/banner1.png",
-            "https://forevermyangel.com/wp-content/uploads/2017/08/banner2.png",
-            "https://forevermyangel.com/wp-content/uploads/2017/08/banner3.png",
-            "https://forevermyangel.com/wp-content/uploads/2017/08/banner4.png"
+            "http://gofoodie.drushtiindia.com/homeassets/images/Banner1.png",
+            "http://gofoodie.drushtiindia.com/homeassets/images/Banner2.png",
+            "http://gofoodie.drushtiindia.com/homeassets/images/Banner3.png",
+            "http://gofoodie.drushtiindia.com/homeassets/images/Banner4.png"
     };
 
 }

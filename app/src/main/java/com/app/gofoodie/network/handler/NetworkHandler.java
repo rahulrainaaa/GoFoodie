@@ -131,7 +131,6 @@ public class NetworkHandler implements Response.ErrorListener {
         execute(Request.Method.POST);
     }
 
-
     /**
      * @method executeGet
      * @desc Method to execute network API call with GET Method via Volley.

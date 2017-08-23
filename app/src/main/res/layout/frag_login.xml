@@ -53,6 +53,7 @@
         app:met_underlineColor="@color/colorRed" />
 
     <Button
+        android:id="@+id/btn_forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -63,6 +64,7 @@
         android:textSize="12sp" />
 
     <Button
+        android:id="@+id/btn_sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -88,12 +90,14 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/btn_facebook"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/fb_icon" />
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/btn_google"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="30dp"
@@ -116,6 +120,7 @@
             android:textSize="12sp" />
 
         <Button
+            android:id="@+id/btn_sign_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
