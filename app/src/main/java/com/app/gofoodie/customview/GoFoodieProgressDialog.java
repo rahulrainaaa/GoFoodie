@@ -75,7 +75,10 @@ public class GoFoodieProgressDialog {
         if (!isCreated) {
             createFirstTime();
         }
-        mAlertDialog.show();
+
+        if (isShowing) {
+            mAlertDialog.show();
+        }
         isShowing = true;
     }
 

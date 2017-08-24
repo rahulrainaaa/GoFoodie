@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
+import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.custom.GoFoodieJsonArrayRequest;
 import com.app.gofoodie.network.custom.GoFoodieJsonObjectRequest;
@@ -81,11 +82,12 @@ public class NetworkHandler implements Response.ErrorListener {
      * Class private data members.
      */
     private String mUrl = null;
-    private RESPONSE_TYPE mResponseType = RESPONSE_TYPE.JSON_OBJECT;    // default response type = JSONObject
     private int mRequestCode = -1;
-    private JsonRequest<?> mHttpJsonRequest = null;
     private JSONObject mJsonRequestBody = null;
+    private JsonRequest<?> mHttpJsonRequest = null;
+    private BaseAppCompatActivity mBaseAppCompatActivity = null;
     private NetworkCallbackListener mNetworkCallbackListener = null;
+    private RESPONSE_TYPE mResponseType = RESPONSE_TYPE.JSON_OBJECT;    // default response type = JSONObject
 
     /**
      * @constructor NetworkHandler
@@ -97,6 +99,7 @@ public class NetworkHandler implements Response.ErrorListener {
 
     /**
      * @param requestCode             user specific code to determine the request among multiple.
+     * @param appCompatActivity       {@link BaseAppCompatActivity} reference.
      * @param networkCallbackListener instance for network response callback using {@link NetworkCallbackListener}.
      * @param jsonRequestBody         API request packet.
      * @param url                     API url.
@@ -104,11 +107,12 @@ public class NetworkHandler implements Response.ErrorListener {
      * @method httpCreate
      * @desc Method to initialize the class data members and create network handler.
      */
-    public void httpCreate(int requestCode, NetworkCallbackListener networkCallbackListener, JSONObject jsonRequestBody, String url, RESPONSE_TYPE responseType) {
+    public void httpCreate(int requestCode, BaseAppCompatActivity appCompatActivity, NetworkCallbackListener networkCallbackListener, JSONObject jsonRequestBody, String url, RESPONSE_TYPE responseType) {
 
         this.mUrl = url;
         this.mRequestCode = requestCode;
         this.mJsonRequestBody = jsonRequestBody;
+        this.mBaseAppCompatActivity = mBaseAppCompatActivity;
         this.mNetworkCallbackListener = networkCallbackListener;
         this.mResponseType = responseType;
     }
@@ -155,6 +159,7 @@ public class NetworkHandler implements Response.ErrorListener {
         }
 
         HTTP_TOTAL_SENT++;                                          // Handler counter monitor.
+        setProcessingDialogVisibility(true);
 
         if (mResponseType == RESPONSE_TYPE.JSON_OBJECT) {           // if JSONObject response.
 
@@ -195,6 +200,7 @@ public class NetworkHandler implements Response.ErrorListener {
         public void onResponse(JSONObject response) {
 
             HTTP_SUCCESS++;
+            setProcessingDialogVisibility(false);
 
             if (NetworkHandler.this.mNetworkCallbackListener != null) {
                 mNetworkCallbackListener.networkSuccessResponse(NetworkHandler.this.mRequestCode, response, null);
@@ -215,6 +221,7 @@ public class NetworkHandler implements Response.ErrorListener {
         public void onResponse(JSONArray response) {
 
             HTTP_SUCCESS++;
+            setProcessingDialogVisibility(false);
 
             if (NetworkHandler.this.mNetworkCallbackListener != null) {
                 try {
@@ -233,6 +240,7 @@ public class NetworkHandler implements Response.ErrorListener {
     public void onErrorResponse(VolleyError error) {
 
         HTTP_FAILED++;
+        setProcessingDialogVisibility(false);
 
         String responseMessage = null;
         if (error.getCause() == null) {
@@ -257,6 +265,7 @@ public class NetworkHandler implements Response.ErrorListener {
     public void cancelHttpRequest() {
 
         mHttpJsonRequest.cancel();
+        setProcessingDialogVisibility(false);
     }
 
     /**
@@ -273,5 +282,24 @@ public class NetworkHandler implements Response.ErrorListener {
         super.finalize();
     }
 
+    /**
+     * @param status
+     * @method setProcessingDialogVisibility
+     * @desc Method to set the visibility {@link com.app.gofoodie.customview.GoFoodieProgressDialog}.
+     */
+    public void setProcessingDialogVisibility(boolean status) {
+
+        // Check if instance is present.
+        if (mBaseAppCompatActivity == null) {
+            return;
+        }
+
+        // Set the visibility on the basis of status.
+        if (status) {
+            mBaseAppCompatActivity.getProgressDialog().show();
+        } else {
+            mBaseAppCompatActivity.getProgressDialog().hide();
+        }
+    }
 
 }

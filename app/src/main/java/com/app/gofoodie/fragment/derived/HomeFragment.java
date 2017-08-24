@@ -15,6 +15,10 @@ import com.app.gofoodie.adapter.recyclerviewadapter.ShortlistRestaurantsRecycler
 import com.app.gofoodie.adapter.viewflipperadapter.HomeImageViewFlipperAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Constants;
+import com.app.gofoodie.network.handler.NetworkHandler;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -66,6 +70,17 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener {
         mShortlistRestaurantRVAdapter = new ShortlistRestaurantsRecyclerAdapter(getActivity(), R.layout.item_rv_shortlist_restaurant, null, mListShortlistRestaurant);
         mRVShortlistRestaurant.setAdapter(mShortlistRestaurantRVAdapter);
         mShortlistRestaurantRVAdapter.notifyDataSetChanged();
+
+        JSONObject jsonHomeDashboardRequest = new JSONObject();
+        try {
+            jsonHomeDashboardRequest.put("", "");
+        } catch (JSONException excJson) {
+            excJson.printStackTrace();
+        }
+
+        NetworkHandler networkHandler = new NetworkHandler();
+        networkHandler.httpCreate(1, null, jsonHomeDashboardRequest, "URL", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.executePost();
 
         return view;
     }
