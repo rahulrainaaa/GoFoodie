@@ -9,13 +9,17 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.adapter.gridViewAdapter.FeaturedRestaurantGridAdapter;
 import com.app.gofoodie.adapter.recyclerviewadapter.ShortlistRestaurantsRecyclerAdapter;
 import com.app.gofoodie.adapter.viewflipperadapter.HomeImageViewFlipperAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.app.gofoodie.utility.ListViewUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +44,13 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener {
     private RecyclerView mRVShortlistRestaurant = null;
     private ShortlistRestaurantsRecyclerAdapter mShortlistRestaurantRVAdapter = null;
     private ArrayList<String> mListShortlistRestaurant = new ArrayList<>();
+
+    /**
+     * Data members for Features restaurants {@link android.widget.GridView}.
+     */
+    private GridView mFeaturedRestaurantsGrid = null;
+    private FeaturedRestaurantGridAdapter mFeaturedRestaurantAdapter = null;
+    private ArrayList<String> mFeaturedRestaurantList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -71,6 +82,15 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener {
         mRVShortlistRestaurant.setAdapter(mShortlistRestaurantRVAdapter);
         mShortlistRestaurantRVAdapter.notifyDataSetChanged();
 
+        // GridView - Featured Restaurants Handling Code.
+        mFeaturedRestaurantsGrid = (GridView) view.findViewById(R.id.grid_view_banner);
+        for (int i = 0; i < 80; i++) {
+            mFeaturedRestaurantList.add("REst " + i);
+        }
+        mFeaturedRestaurantAdapter = new FeaturedRestaurantGridAdapter(getDashboardActivity(), android.R.layout.simple_list_item_1, mFeaturedRestaurantList);
+        mFeaturedRestaurantsGrid.setAdapter(mFeaturedRestaurantAdapter);
+        ListViewUtils.setGridViewHeightBasedOnChildren(mFeaturedRestaurantsGrid);
+
         JSONObject jsonHomeDashboardRequest = new JSONObject();
         try {
             jsonHomeDashboardRequest.put("", "");
@@ -79,7 +99,7 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener {
         }
 
         NetworkHandler networkHandler = new NetworkHandler();
-        networkHandler.httpCreate(1, null, jsonHomeDashboardRequest, "URL", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.httpCreate(1, getDashboardActivity(), null, jsonHomeDashboardRequest, "URL", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executePost();
 
         return view;
@@ -100,4 +120,5 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener {
 
         return false;
     }
+
 }

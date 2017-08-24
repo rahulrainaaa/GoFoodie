@@ -32,6 +32,8 @@
     <!-- UI validation error messages -->
     <string name="cannot_be_empty">Cannot be empty</string>
     <string name="confirm_password_not_match">Confirm Password not matched</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_demo">DemoAct</string>
 
 
 </resources>

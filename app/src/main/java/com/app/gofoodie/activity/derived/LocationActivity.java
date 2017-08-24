@@ -64,7 +64,7 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
         try {
             jsonCountryRequest.put("", "");
             NetworkHandler networkHandler = new NetworkHandler();
-            networkHandler.httpCreate(1, null, jsonCountryRequest, "URL", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+            networkHandler.httpCreate(1, this, null, jsonCountryRequest, "URL", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
             networkHandler.executePost();
         } catch (JSONException excJson) {
             excJson.printStackTrace();

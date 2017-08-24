@@ -91,7 +91,7 @@ public class ChangePasswordFragment extends BaseFragment implements View.OnClick
         }
 
         NetworkHandler networkHandler = new NetworkHandler();
-        networkHandler.httpCreate(1, this, jsonChangePasswordRequest, Network.URL_CHANGE_PASSWORD, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.httpCreate(1, getDashboardActivity(), this, jsonChangePasswordRequest, Network.URL_CHANGE_PASSWORD, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executePost();
         getDashboardActivity().getProgressDialog().show();
     }

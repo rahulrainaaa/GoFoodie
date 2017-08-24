@@ -128,7 +128,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         }
 
         NetworkHandler networkHandler = new NetworkHandler();
-        networkHandler.httpCreate(1, this, jsonHttpLoginRequest, Network.URL_LOGIN, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.httpCreate(1, getDashboardActivity(), this, jsonHttpLoginRequest, Network.URL_LOGIN, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executePost();
         getDashboardActivity().getProgressDialog().show();
         getDashboardActivity().getProgressDialog().setMessage("Connecting...");

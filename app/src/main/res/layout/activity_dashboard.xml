@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.app.gofoodie.activity.derived.DashboardActivity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.app.gofoodie.activity.derived.DashboardActivity"
+    tools:showIn="@layout/activity_dashboard_parent">
 
     <FrameLayout
         android:id="@+id/content"

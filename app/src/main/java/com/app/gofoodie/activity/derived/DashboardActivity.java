@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
@@ -39,7 +40,9 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_dashboard_parent);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         doViewMapping();
         mDashboardFragmentHandler = new DashboardFragmentHandler();
@@ -51,7 +54,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     @Override
     protected void onResume() {
         super.onResume();
-        hideNavigationBar();
+        //hideNavigationBar();
     }
 
     /**
