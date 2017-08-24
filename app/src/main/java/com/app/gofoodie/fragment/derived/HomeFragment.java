@@ -9,7 +9,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
-import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.adapter.recyclerviewadapter.ShortlistRestaurantsRecyclerAdapter;
@@ -58,6 +57,7 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener {
         for (int i = 0; i < 20; i++) {
             mListShortlistRestaurant.add("Restaurant " + i);
         }
+
         // RecyclerView - Shortlisted Restaurants Handling Code.
         LinearLayoutManager categoryLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRVShortlistRestaurant = (RecyclerView) view.findViewById(R.id.rv_shortlist_restaurants);
@@ -67,7 +67,6 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener {
         mRVShortlistRestaurant.setAdapter(mShortlistRestaurantRVAdapter);
         mShortlistRestaurantRVAdapter.notifyDataSetChanged();
 
-        Toast.makeText(getActivity(), "Home Fragment.", Toast.LENGTH_SHORT).show();
         return view;
     }
 

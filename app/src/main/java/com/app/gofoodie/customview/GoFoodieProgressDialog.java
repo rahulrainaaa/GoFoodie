@@ -84,6 +84,7 @@ public class GoFoodieProgressDialog {
      * @desc Method to hide the progress dialog from the activity, but keep it for next use.
      */
     public void hide() {
+        setMessage("");
         if (mAlertDialog != null) {
             mAlertDialog.hide();
         }

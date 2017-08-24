@@ -44,7 +44,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         View view = inflater.inflate(R.layout.frag_login, container, false);
         doViewMapping(view);
         Toast.makeText(getActivity(), "Login Fragment", Toast.LENGTH_SHORT).show();
-        //getDashboardActivity().getProgressDialog().show();
+
+
         return view;
     }
 
@@ -101,7 +102,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.FORGOT_PASSWORD);
                 break;
         }
-
     }
 
     /**
@@ -130,6 +130,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, jsonHttpLoginRequest, Network.URL_LOGIN, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executePost();
+        getDashboardActivity().getProgressDialog().show();
+        getDashboardActivity().getProgressDialog().setMessage("Connecting...");
 
     }
 
