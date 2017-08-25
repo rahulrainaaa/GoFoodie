@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="7dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ToggleButton
+            android:id="@+id/tglBtn_sunday"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_circle_week_button"
+            android:checked="true"
+            android:fontFamily="sans-serif-light"
+            android:tag="1"
+            android:textColor="@color/colorGreen"
+            android:textOff="S"
+            android:textOn="S"
+            android:textSize="16sp" />
+
+        <ToggleButton
+            android:id="@+id/tglBtn_monday"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_circle_week_button"
+            android:checked="true"
+            android:fontFamily="sans-serif-light"
+            android:tag="2"
+            android:textColor="@color/colorGreen"
+            android:textOff="M"
+            android:textOn="M"
+            android:textSize="16sp" />
+
+        <ToggleButton
+            android:id="@+id/tglBtn_tuesday"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_circle_week_button"
+            android:checked="true"
+            android:fontFamily="sans-serif-light"
+            android:tag="3"
+            android:textColor="@color/colorGreen"
+            android:textOff="T"
+            android:textOn="T"
+            android:textSize="16sp" />
+
+        <ToggleButton
+            android:id="@+id/tglBtn_wednesday"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_circle_week_button"
+            android:checked="true"
+            android:fontFamily="sans-serif-light"
+            android:tag="4"
+            android:textColor="@color/colorGreen"
+            android:textOff="W"
+            android:textOn="W"
+            android:textSize="16sp" />
+
+        <ToggleButton
+            android:id="@+id/tglBtn_thursday"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_circle_week_button"
+            android:checked="true"
+            android:fontFamily="sans-serif-light"
+            android:tag="5"
+            android:textColor="@color/colorGreen"
+            android:textOff="T"
+            android:textOn="T"
+            android:textSize="16sp" />
+
+        <ToggleButton
+            android:id="@+id/tglBtn_friday"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_circle_week_button"
+            android:checked="false"
+            android:fontFamily="sans-serif-light"
+            android:tag="6"
+            android:textColor="@color/colorRed"
+            android:textOff="F"
+            android:textOn="F"
+            android:textSize="16sp" />
+
+        <ToggleButton
+            android:id="@+id/tglBtn_saturday"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/border_circle_week_button"
+            android:checked="false"
+            android:fontFamily="sans-serif-light"
+            android:tag="7"
+            android:textColor="@color/colorRed"
+            android:textOff="S"
+            android:textOn="S"
+            android:textSize="16sp" />
+    </LinearLayout>
+</HorizontalScrollView>
