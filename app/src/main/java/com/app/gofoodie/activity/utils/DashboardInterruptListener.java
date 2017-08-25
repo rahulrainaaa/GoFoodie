@@ -14,7 +14,7 @@ public interface DashboardInterruptListener {
         DASHBOARD, WALLET, COMBOS, CART, PROFILE, LOGIN,
         NETWORK_ERROR, CHANGE_PASSWORD, FORGOT_PASSWORD,
         REGISTER_NEW_USER, EMPTY_LIST,
-        RESTAURANT_LIST
+        RESTAURANT_LIST, MY_ORDERS
     }
 
     /**

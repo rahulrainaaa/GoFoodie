@@ -38,6 +38,7 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements View.
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, mList);
         mSpSubscriptionPlan.setAdapter(mAdapter);
 
+
         mBtnSubscription.setOnClickListener(this);
 
     }

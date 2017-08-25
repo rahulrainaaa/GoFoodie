@@ -7,6 +7,7 @@ import com.app.gofoodie.fragment.derived.EmptyListFragment;
 import com.app.gofoodie.fragment.derived.ForgotPasswordFragment;
 import com.app.gofoodie.fragment.derived.HomeFragment;
 import com.app.gofoodie.fragment.derived.LoginFragment;
+import com.app.gofoodie.fragment.derived.MyOrdersFragment;
 import com.app.gofoodie.fragment.derived.NewRegisterFragment;
 import com.app.gofoodie.fragment.derived.RestaurantListFragment;
 import com.app.gofoodie.fragment.derived.WalletFragment;
@@ -28,7 +29,7 @@ public class DashboardFragmentHandler {
         // Check for the match case for fragmentType.
         if (DashboardInterruptListener.FRAGMENT_TYPE.DASHBOARD == fragmentType) {
 
-            return new HomeFragment();
+            return new MyOrdersFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.COMBOS == fragmentType) {
 
             return new RestaurantListFragment();
@@ -59,6 +60,9 @@ public class DashboardFragmentHandler {
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.EMPTY_LIST == fragmentType) {
 
             return new EmptyListFragment();
+        } else if (DashboardInterruptListener.FRAGMENT_TYPE.MY_ORDERS == fragmentType) {
+
+            return new MyOrdersFragment();
         }
 
         // Return a default fragment in case no match found (in else case).
