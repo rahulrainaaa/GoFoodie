@@ -5,10 +5,10 @@ import com.app.gofoodie.fragment.derived.CartFragment;
 import com.app.gofoodie.fragment.derived.ChangePasswordFragment;
 import com.app.gofoodie.fragment.derived.EmptyListFragment;
 import com.app.gofoodie.fragment.derived.ForgotPasswordFragment;
-import com.app.gofoodie.fragment.derived.HomeFragment;
 import com.app.gofoodie.fragment.derived.LoginFragment;
 import com.app.gofoodie.fragment.derived.MyOrdersFragment;
 import com.app.gofoodie.fragment.derived.NewRegisterFragment;
+import com.app.gofoodie.fragment.derived.ProfileFragment;
 import com.app.gofoodie.fragment.derived.RestaurantListFragment;
 import com.app.gofoodie.fragment.derived.WalletFragment;
 
@@ -41,7 +41,7 @@ public class DashboardFragmentHandler {
             return new CartFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.PROFILE == fragmentType) {
 
-            return new LoginFragment();
+            return new ProfileFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.LOGIN == fragmentType) {
 
             return new LoginFragment();

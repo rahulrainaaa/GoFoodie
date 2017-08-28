@@ -5,10 +5,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.adapter.listviewadapter.MyOrdersListViewAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class MyOrdersFragment extends BaseFragment {
 
     ListView mListViewOrders = null;
     private ArrayList<String> mOrderList = new ArrayList<String>();
-    private ArrayAdapter<String> mAdapter = null;
+    private MyOrdersListViewAdapter mAdapter = null;
 
     @Nullable
     @Override
@@ -37,7 +37,7 @@ public class MyOrdersFragment extends BaseFragment {
             mOrderList.add("My Order " + i);
         }
 
-        mAdapter = new ArrayAdapter<String>(getDashboardActivity(), android.R.layout.simple_list_item_1, mOrderList);
+        mAdapter = new MyOrdersListViewAdapter(getDashboardActivity(), R.layout.item_listview_my_orders, mOrderList);
         mListViewOrders.setAdapter(mAdapter);
         return view;
 
