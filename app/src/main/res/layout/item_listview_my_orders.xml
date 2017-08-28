@@ -77,8 +77,8 @@
             android:paddingBottom="2dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 app:srcCompat="@drawable/icon_rate" />
 
             <LinearLayout
@@ -89,8 +89,8 @@
                 android:background="@drawable/grad_separator_line_vertical" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 app:srcCompat="@drawable/icon_description" />
 
             <LinearLayout
@@ -101,8 +101,8 @@
                 android:background="@drawable/grad_separator_line_vertical" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 app:srcCompat="@drawable/icon_respond" />
 
         </LinearLayout>
