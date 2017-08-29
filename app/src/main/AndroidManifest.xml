@@ -36,6 +36,10 @@
             android:name=".activity.derived.SubscriptionActivity"
             android:icon="@drawable/launncher_icon"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.derived.EditComboActivity"
+            android:label="@string/title_activity_edit_combo"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

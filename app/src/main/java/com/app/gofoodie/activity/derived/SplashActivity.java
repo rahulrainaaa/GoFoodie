@@ -56,6 +56,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
     public void run() {
 
         startActivity(new Intent(this, DashboardActivity.class));
+        startActivity(new Intent(this, EditComboActivity.class));
         finish();
     }
 }

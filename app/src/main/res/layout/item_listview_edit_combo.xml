@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingLeft="7dp"
+    android:paddingRight="7dp"
+    android:paddingTop="10dp"
+    android:weightSum="13">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:fontFamily="sans-serif-light"
+        android:gravity="left"
+        android:text="Combo Item Name"
+        android:textSize="14dp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="8"
+        android:fontFamily="sans-serif"
+        android:gravity="right"
+        android:text="Combo Item Name"
+        android:textSize="13dp"
+        android:textStyle="normal" />
+
+
+</LinearLayout>

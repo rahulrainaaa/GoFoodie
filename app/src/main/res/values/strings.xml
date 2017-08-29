@@ -34,6 +34,7 @@
     <string name="confirm_password_not_match">Confirm Password not matched</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_demo">DemoAct</string>
+    <string name="title_activity_edit_combo">EditCombo</string>
 
 
 </resources>
