@@ -8,10 +8,6 @@ import android.widget.Spinner;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
-import com.app.gofoodie.network.handler.NetworkHandler;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -19,7 +15,7 @@ import java.util.ArrayList;
  * @class LocationActivity
  * @desc {@link BaseAppCompatActivity} class for handling Location preferences.
  */
-public class LocationActivity extends BaseAppCompatActivity implements AdapterView.OnItemClickListener {
+public class LocationActivity extends BaseAppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     /**
      * Class private data members.
@@ -39,9 +35,9 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_location);
 
         for (int i = 0; i < 20; i++) {
-            mCountryAdapter.add("Country: " + i);
-            mCityAdapter.add("City: " + i);
-            mAreaAdapter.add("Area: " + i);
+            mCountryList.add("Country: " + i);
+            mCityList.add("City: " + i);
+            mAreaList.add("Area: " + i);
         }
 
         mCountryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, mCountryList);
@@ -56,27 +52,26 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
         mSpCity.setAdapter(mCityAdapter);
         mSpArea.setAdapter(mAreaAdapter);
 
-        mSpCountry.setOnItemClickListener(this);
-        mSpCity.setOnItemClickListener(this);
-        mSpArea.setOnItemClickListener(this);
+        mSpCountry.setOnItemSelectedListener(this);
+        mSpCity.setOnItemSelectedListener(this);
+        mSpArea.setOnItemSelectedListener(this);
 
-        JSONObject jsonCountryRequest = new JSONObject();
-        try {
-            jsonCountryRequest.put("", "");
-            NetworkHandler networkHandler = new NetworkHandler();
-            networkHandler.httpCreate(1, this, null, jsonCountryRequest, "URL", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-            networkHandler.executePost();
-        } catch (JSONException excJson) {
-            excJson.printStackTrace();
-        }
+//
+//        JSONObject jsonCountryRequest = new JSONObject();
+//        try {
+//            jsonCountryRequest.put("", "");
+//            NetworkHandler networkHandler = new NetworkHandler();
+//            networkHandler.httpCreate(1, this, null, jsonCountryRequest, "URL", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+//            networkHandler.executePost();
+//        } catch (JSONException excJson) {
+//            excJson.printStackTrace();
+//        }
 
     }
 
-    /**
-     * {@link android.widget.AdapterView.OnItemClickListener} spinner item select callback method.
-     */
+
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
         switch (view.getId()) {
 
@@ -96,6 +91,12 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
                 break;
         }
     }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
 
     /**
      * @param countryId - country primary key in cloud database.
@@ -123,4 +124,5 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     private void areaSelected(int areaId) {
 
     }
+
 }
