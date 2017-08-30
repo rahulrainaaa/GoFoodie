@@ -21,7 +21,7 @@ import com.app.gofoodie.fragment.base.BaseFragment;
  */
 public class DashboardActivity extends BaseAppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, DashboardInterruptListener {
 
-    public static final String TAG = "DashboardActivity";
+    public final String TAG = "DashboardActivity";
 
     /**
      * Class private data members

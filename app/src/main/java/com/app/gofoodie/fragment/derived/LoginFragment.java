@@ -1,20 +1,28 @@
 package com.app.gofoodie.fragment.derived;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.utils.DashboardInterruptListener;
+import com.app.gofoodie.activity.utils.FacebookLoginHandler;
+import com.app.gofoodie.activity.utils.FacebookLoginListener;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONArray;
@@ -25,7 +33,7 @@ import org.json.JSONObject;
  * @class LoginFragment
  * @desc {@link BaseFragment} Fragment class to handle Login UI screen.
  */
-public class LoginFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener {
+public class LoginFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener, FacebookLoginListener {
 
     public final String TAG = "LoginFragment";
 
@@ -35,18 +43,33 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     private MaterialEditText mEtMobileEmail = null;
     private MaterialEditText mEtPassword = null;
     private Button mBtnSignin, mBtnForgot, mBtnSignup;
-    private ImageButton mImgBtnFacebook, mImgBtnGoogle;
+    private LoginButton mLoginButton = null;
+    private CallbackManager callbackManager = null;
+    private FacebookLoginHandler mFacebookLoginHandler = null;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
+        FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
         View view = inflater.inflate(R.layout.frag_login, container, false);
         doViewMapping(view);
         Toast.makeText(getActivity(), "Login Fragment", Toast.LENGTH_SHORT).show();
 
+        /**
+         * Facebook button and login code.
+         */
+        callbackManager = CallbackManager.Factory.create();
+        mFacebookLoginHandler = new FacebookLoginHandler(getActivity(), this);
+        mLoginButton = (LoginButton) view.findViewById(R.id.facebook_login_button);
+        mLoginButton.setReadPermissions("email");
+        mLoginButton.registerCallback(callbackManager, mFacebookLoginHandler);
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -65,14 +88,10 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         mBtnSignin = (Button) view.findViewById(R.id.btn_sign_in);
         mBtnForgot = (Button) view.findViewById(R.id.btn_forgot_password);
         mBtnSignup = (Button) view.findViewById(R.id.btn_sign_up);
-        mImgBtnFacebook = (ImageButton) view.findViewById(R.id.btn_facebook);
-        mImgBtnGoogle = (ImageButton) view.findViewById(R.id.btn_google);
 
         mBtnSignin.setOnClickListener(this);
         mBtnForgot.setOnClickListener(this);
         mBtnSignup.setOnClickListener(this);
-        mImgBtnFacebook.setOnClickListener(this);
-        mImgBtnGoogle.setOnClickListener(this);
 
     }
 
@@ -90,12 +109,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             case R.id.btn_sign_up:
 
                 getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_USER);
-                break;
-            case R.id.btn_facebook:
-
-                break;
-            case R.id.btn_google:
-
                 break;
             case R.id.btn_forgot_password:
 
@@ -201,4 +214,32 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
     }
 
+    /**
+     * {@link FacebookLoginListener} listener callback methods.
+     */
+    @Override
+    public void onFacebookLogin(LoginResult loginResult) {
+
+    }
+
+    @Override
+    public void onFacebookGraphAPIInformation(JSONObject object, GraphResponse response) {
+
+    }
+
+    @Override
+    public void onFacebookError(FacebookException e) {
+
+        if (e == null) {
+
+            /**
+             * Facebook login cancelled.
+             */
+        } else {
+
+            /**
+             * {@link FacebookException} caught while login.
+             */
+        }
+    }
 }
