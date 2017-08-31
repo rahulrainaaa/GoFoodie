@@ -1,5 +1,7 @@
-package com.app.gofoodie.model.utils;
+package com.app.gofoodie.model.handler;
 
+
+import android.util.Log;
 
 import com.app.gofoodie.model.base.BaseModel;
 import com.google.gson.Gson;
@@ -8,7 +10,9 @@ import com.google.gson.Gson;
  * @class ModelParser
  * @desc Class to map JSON to Schema and vice-versa.
  */
-class ModelParser {
+public class ModelParser {
+
+    public final String TAG = "ModelParser";
 
     /**
      * Class private data members.
@@ -18,7 +22,7 @@ class ModelParser {
     /**
      * @constructor ModelParser
      */
-    private ModelParser() {
+    public ModelParser() {
         mGson = new Gson();
     }
 
@@ -31,13 +35,14 @@ class ModelParser {
      */
     public BaseModel getModel(String jsonString, Class<? extends BaseModel> className, ModelParsingListener listener) {
 
-        BaseModel model = null;
-        String statusMessage = "";
+        BaseModel model;
+        String statusMessage;
         try {
             model = mGson.fromJson(jsonString, className);
             statusMessage = className.getName();
         } catch (Exception exception) {
             statusMessage = exception.getLocalizedMessage();
+            Log.d(TAG, "" + exception.getMessage());
             model = null;
         }
         if (listener != null) {

@@ -198,7 +198,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         }
 
         NetworkHandler networkHandler = new NetworkHandler();
-        networkHandler.httpCreate(1, getDashboardActivity(), this, jsonNewUserRegisterRequest, Network.URL_NEW_REGISTERATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT)
+        networkHandler.httpCreate(1, getDashboardActivity(), this, jsonNewUserRegisterRequest, Network.URL_NEW_REGISTRATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT)
         ;
         networkHandler.executePost();
         getDashboardActivity().getProgressDialog().show();

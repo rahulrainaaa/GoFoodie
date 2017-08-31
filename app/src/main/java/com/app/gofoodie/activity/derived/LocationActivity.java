@@ -5,17 +5,32 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.model.areaResponse.AreaResponse;
+import com.app.gofoodie.model.cityResponse.CityResponse;
+import com.app.gofoodie.model.countryResponse.CountryResponse;
+import com.app.gofoodie.model.countryResponse.Datum;
+import com.app.gofoodie.model.handler.ModelParser;
+import com.app.gofoodie.network.callback.NetworkCallbackListener;
+import com.app.gofoodie.network.handler.NetworkHandler;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * @class LocationActivity
  * @desc {@link BaseAppCompatActivity} class for handling Location preferences.
  */
-public class LocationActivity extends BaseAppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class LocationActivity extends BaseAppCompatActivity implements AdapterView.OnItemSelectedListener, NetworkCallbackListener {
+
+    public final String TAG = "LocationActivity";
 
     /**
      * Class private data members.
@@ -26,6 +41,10 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     private ArrayList<String> mCityList = new ArrayList<>();
     private ArrayList<String> mAreaList = new ArrayList<>();
 
+    public CountryResponse mCountryListResponse = null;
+    public CityResponse mCityResponse = null;
+    public AreaResponse mAreaResponse = null;
+
     /**
      * {@link BaseAppCompatActivity} override methods.
      */
@@ -33,12 +52,6 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
-
-        for (int i = 0; i < 20; i++) {
-            mCountryList.add("Country: " + i);
-            mCityList.add("City: " + i);
-            mAreaList.add("Area: " + i);
-        }
 
         mCountryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, mCountryList);
         mCityAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, mCityList);
@@ -56,38 +69,29 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
         mSpCity.setOnItemSelectedListener(this);
         mSpArea.setOnItemSelectedListener(this);
 
-//
-//        JSONObject jsonCountryRequest = new JSONObject();
-//        try {
-//            jsonCountryRequest.put("", "");
-//            NetworkHandler networkHandler = new NetworkHandler();
-//            networkHandler.httpCreate(1, this, null, jsonCountryRequest, "URL", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-//            networkHandler.executePost();
-//        } catch (JSONException excJson) {
-//            excJson.printStackTrace();
-//        }
-
+        NetworkHandler networkHandler = new NetworkHandler();
+        networkHandler.httpCreate(1, this, this, new JSONObject(), Network.URL_GET_COUNTRIES, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.executeGet();
     }
 
-
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
-        switch (view.getId()) {
+        switch (adapterView.getId()) {
 
             case R.id.sp_locpref_country:
 
-                countrySelected(1);
+                countrySelected(position);
                 break;
 
             case R.id.sp_locpref_city:
 
-                citySelected(1);
+                citySelected(position);
                 break;
 
             case R.id.sp_locpref_area:
 
-                areaSelected(1);
+                areaSelected(position);
                 break;
         }
     }
@@ -99,30 +103,156 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
 
 
     /**
-     * @param countryId - country primary key in cloud database.
+     * @param position
      * @method countrySelected
-     * @desc Method to be callec on country select in spinner.
+     * @desc Method to be called on country select in spinner.
      */
-    private void countrySelected(int countryId) {
+    private void countrySelected(int position) {
 
+        Datum datum = mCountryListResponse.getData().get(position);
+        String url = Network.URL_GET_CITY + "" + datum.getCountryId().trim();
+        Toast.makeText(this, datum.getCountryId() + " " + datum.getCountryName(), Toast.LENGTH_SHORT).show();
+        NetworkHandler networkHandler = new NetworkHandler();
+        networkHandler.httpCreate(2, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.executeGet();
     }
 
     /**
-     * @param cityId
+     * @param position
      * @method citySelected
      * @desc Method to be called on city selected.
      */
-    private void citySelected(int cityId) {
+    private void citySelected(int position) {
 
+        com.app.gofoodie.model.cityResponse.Datum datum = mCityResponse.getData().get(position);
+        String url = Network.URL_GET_AREA + "" + datum.getCityId().trim();
+        Toast.makeText(this, datum.getCityId() + " " + datum.getCityName(), Toast.LENGTH_SHORT).show();
+        NetworkHandler networkHandler = new NetworkHandler();
+        networkHandler.httpCreate(3, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.executeGet();
     }
 
     /**
-     * @param areaId
+     * @param position
      * @method areaSelected
      * @desc Method to be called in case of area selected.
      */
-    private void areaSelected(int areaId) {
-
+    private void areaSelected(int position) {
+        com.app.gofoodie.model.areaResponse.Datum datum = mAreaResponse.getData().get(position);
+        Toast.makeText(this, datum.getAreaId() + " " + datum.getAreaName(), Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * {@link NetworkHandler} Network response callback methods.
+     */
+    @Override
+    public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+        ModelParser modelParser = new ModelParser();
+        if (requestCode == 1) {
+
+            // List of country.
+            mCountryListResponse = (CountryResponse) modelParser.getModel(rawObject.toString(), CountryResponse.class, null);
+            showCountry(mCountryListResponse);
+
+        } else if (requestCode == 2) {
+
+            mCityResponse = (CityResponse) modelParser.getModel(rawObject.toString(), CityResponse.class, null);
+            showCity(mCityResponse);
+            // List of city.
+
+        } else if (requestCode == 3) {
+
+            mAreaResponse = (AreaResponse) modelParser.getModel(rawObject.toString(), AreaResponse.class, null);
+            // List of area.
+
+        }
+    }
+
+    @Override
+    public void networkFailResponse(int requestCode, String message) {
+
+        switch (requestCode) {
+            case 1:
+
+                Toast.makeText(this, "Unable to fetch country list.", Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+
+                Toast.makeText(this, "Unable to fetch City list.", Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+
+                Toast.makeText(this, "Unable to fetch Location Area list.", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        Toast.makeText(this, "" + message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * @param countryList
+     * @method showCountry
+     */
+    private void showCountry(CountryResponse countryList) {
+
+        mCountryList.clear();
+
+        if (countryList.getStatusCode() != 200) {
+            Toast.makeText(this, countryList.getStatusMessage(), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Iterator<Datum> listIterator = countryList.getData().iterator();
+
+        while (listIterator.hasNext()) {
+
+            mCountryList.add("" + listIterator.next().getCountryName());
+        }
+        mCountryAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * @param cityResponse
+     * @method showCity
+     */
+    private void showCity(CityResponse cityResponse) {
+
+        mCityList.clear();
+
+        if (cityResponse.getStatusCode() != 200) {
+            Toast.makeText(this, cityResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Iterator<com.app.gofoodie.model.cityResponse.Datum> listIterator = cityResponse.getData().iterator();
+
+        while (listIterator.hasNext()) {
+
+            mCityList.add("" + listIterator.next().getCityName());
+
+        }
+        mCityAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * @param areaResponse
+     * @method showArea
+     */
+    private void showArea(AreaResponse areaResponse) {
+
+        mAreaList.clear();
+
+        if (areaResponse.getStatusCode() != 200) {
+            Toast.makeText(this, areaResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Iterator<com.app.gofoodie.model.areaResponse.Datum> listIterator = areaResponse.getData().iterator();
+
+        while (listIterator.hasNext()) {
+
+            mAreaList.add("" + listIterator.next().getAreaName());
+        }
+        mAreaAdapter.notifyDataSetChanged();
+    }
 }
