@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public interface FacebookLoginListener {
 
     /**
-     * @param loginResult
+     * @param loginResult Facebook login result.
      * @method onFacebookLogin
      * @desc Callback, when application facebook successfully login happens.
      */
@@ -21,7 +21,7 @@ public interface FacebookLoginListener {
 
     /**
      * @param object   {@link org.json.JSONArray} parameters asked from Graph API.
-     * @param response
+     * @param response Facebook Graph API response.
      * @method onFacebookGraphAPIInformation
      * @desc Callback, when the facebook user detail is fetched completely.
      */

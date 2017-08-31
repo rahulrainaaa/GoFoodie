@@ -3,7 +3,6 @@ package com.app.gofoodie.activity.utils;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookCallback;
@@ -27,6 +26,7 @@ public class FacebookLoginHandler implements FacebookCallback<LoginResult>, Grap
      */
     private Activity mActivity = null;
     private FacebookLoginListener mListener = null;
+    private LoginResult mLoginResult = null;
 
     /**
      * @param activity
@@ -45,24 +45,26 @@ public class FacebookLoginHandler implements FacebookCallback<LoginResult>, Grap
     @Override
     public void onSuccess(LoginResult loginResult) {
 
-        Log.d(TAG, "Success: " + loginResult.toString());
-        Toast.makeText(mActivity, "Success: " + loginResult.getAccessToken().getUserId(), Toast.LENGTH_SHORT).show();
-        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), this);
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id, first_name, last_name, email, gender,  location");
-        request.setParameters(parameters);
-        request.executeAsync();
+        this.mLoginResult = loginResult;
+        Log.d(TAG, "Facebook Login Success: " + loginResult.toString());
+        triggerGraphAPI();
     }
 
     @Override
     public void onCancel() {
 
+        if (mListener != null) {
+            mListener.onFacebookError(null);
+        }
         Log.d(TAG, "Facebook onCancel");
     }
 
     @Override
     public void onError(FacebookException error) {
 
+        if (mListener != null) {
+            mListener.onFacebookError(error);
+        }
         Log.d(TAG, "FacebookException:" + error.toString());
     }
 
@@ -72,7 +74,23 @@ public class FacebookLoginHandler implements FacebookCallback<LoginResult>, Grap
     @Override
     public void onCompleted(JSONObject object, GraphResponse response) {
 
+        if (mListener != null) {
+            mListener.onFacebookGraphAPIInformation(object, response);
+        }
         Log.d(TAG, object.toString());
-        Log.d(TAG, response.toString());
+//        LoginManager.getInstance().logOut();
+    }
+
+    /**
+     * @desc Getting facebook user data using Graph API.
+     * @method triggerGraphAPI
+     */
+    public void triggerGraphAPI() {
+
+        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), this);
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id, first_name, last_name, email, gender,  location");
+        request.setParameters(parameters);
+        request.executeAsync();
     }
 }

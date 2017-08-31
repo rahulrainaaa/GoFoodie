@@ -2,7 +2,9 @@ package com.app.gofoodie.fragment.derived;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +21,16 @@ import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONArray;
@@ -33,9 +41,11 @@ import org.json.JSONObject;
  * @class LoginFragment
  * @desc {@link BaseFragment} Fragment class to handle Login UI screen.
  */
-public class LoginFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener, FacebookLoginListener {
+public class LoginFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener, FacebookLoginListener, GoogleApiClient.OnConnectionFailedListener {
 
     public final String TAG = "LoginFragment";
+    private final int FACEBOOK_LOGIN = 12121;   // Facebook Intent Request code.
+    private final int GOOGLE_SIGN_IN = 34343;   // Google Intent request code
 
     /**
      * Class private data members.
@@ -44,13 +54,15 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     private MaterialEditText mEtPassword = null;
     private Button mBtnSignin, mBtnForgot, mBtnSignup;
     private LoginButton mLoginButton = null;
+    private SignInButton mSignInButtion = null;
     private CallbackManager callbackManager = null;
     private FacebookLoginHandler mFacebookLoginHandler = null;
+    private GoogleApiClient mGoogleApiClient = null;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
+
         View view = inflater.inflate(R.layout.frag_login, container, false);
         doViewMapping(view);
         Toast.makeText(getActivity(), "Login Fragment", Toast.LENGTH_SHORT).show();
@@ -64,12 +76,65 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         mLoginButton.setReadPermissions("email");
         mLoginButton.registerCallback(callbackManager, mFacebookLoginHandler);
 
+        /**
+         * Google button and login code.
+         */
+        SignInButton signInButton = (SignInButton) view.findViewById(R.id.google_login_button);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
+        signInButton.setOnClickListener(this);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .enableAutoManage(getFragmentActivity(), this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
         return view;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GOOGLE_SIGN_IN) {
+
+            // Google SignIn intent result.
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        } else {
+            // Facebook login intent result.
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    /**
+     * @param result
+     * @method handleSignInResult
+     * @desc Method to handle the result after google login.
+     */
+    private void handleSignInResult(GoogleSignInResult result) {
+
+        Log.d(TAG, "Google SignIn Result: " + result.isSuccess());
+        if (result.isSuccess()) {
+
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+            Toast.makeText(getActivity(), "" + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
+
+        } else {
+            // Signed out, show unauthenticated UI.
+
+        }
+    }
+
+    /**
+     * {@link com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener} callback method(s).
+     */
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 
     @Override
@@ -106,6 +171,10 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
                 SignIn();
                 break;
+            case R.id.google_login_button:
+
+                googleSignIn();
+                break;
             case R.id.btn_sign_up:
 
                 getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_USER);
@@ -115,6 +184,15 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.FORGOT_PASSWORD);
                 break;
         }
+    }
+
+    /**
+     * @method googleSignIn
+     * @desc Method to be called for google signing in.
+     */
+    private void googleSignIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, GOOGLE_SIGN_IN);
     }
 
     /**
@@ -220,11 +298,13 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void onFacebookLogin(LoginResult loginResult) {
 
+        Toast.makeText(getActivity(), "Login as facebook.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onFacebookGraphAPIInformation(JSONObject object, GraphResponse response) {
 
+        Toast.makeText(getActivity(), "Graph API: " + object.toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -235,11 +315,14 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             /**
              * Facebook login cancelled.
              */
+            Toast.makeText(getActivity(), "Facebook Error while login.", Toast.LENGTH_SHORT).show();
         } else {
 
             /**
              * {@link FacebookException} caught while login.
              */
+            Toast.makeText(getActivity(), "FacebookException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
 }

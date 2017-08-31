@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 26
@@ -38,6 +39,7 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.17.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.google.android.gms:play-services-auth:9.0.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.android.support:cardview-v7:26.+'

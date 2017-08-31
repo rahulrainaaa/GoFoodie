@@ -1,6 +1,7 @@
 package com.app.gofoodie.fragment.base;
 
 import android.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
 import com.app.gofoodie.activity.derived.DashboardActivity;
 import com.app.gofoodie.activity.utils.DashboardInterruptListener;
@@ -56,6 +57,16 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
     protected DashboardActivity getDashboardActivity() {
 
         return ((DashboardActivity) getActivity());
+    }
+
+    /**
+     * @return AppCompatActivity
+     * @method getFragmentActivity
+     * @desc Method to get the instance of {@link AppCompatActivity} of parent activity, from fragment.
+     */
+    public AppCompatActivity getFragmentActivity() {
+
+        return (AppCompatActivity) getActivity();
     }
 
     /**

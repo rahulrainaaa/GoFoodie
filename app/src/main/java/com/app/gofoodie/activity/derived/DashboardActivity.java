@@ -2,6 +2,7 @@ package com.app.gofoodie.activity.derived;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -55,6 +56,15 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     protected void onResume() {
         super.onResume();
         //hideNavigationBar();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (mFragment != null) {
+            
+            mFragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     /**
