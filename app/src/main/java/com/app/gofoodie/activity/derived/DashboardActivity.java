@@ -62,7 +62,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (mFragment != null) {
-            
+
             mFragment.onActivityResult(requestCode, resultCode, data);
         }
     }
