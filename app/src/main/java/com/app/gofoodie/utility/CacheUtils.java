@@ -13,16 +13,14 @@ public class CacheUtils {
      * {@link SharedPreferences} Enumerated naming.
      */
     public static enum PREF_NAME {
-        PREF_LOGIN, PREF_CUSTOMER_PROFILE, PREF_FILTER
+        PREF_LOGIN, PREF_CUSTOMER_PROFILE, PREF_FILTER, PREF_AREA_LOCATION
     }
 
     /**
      * Class private data members.
      */
     private SharedPreferences mPreferences = null;
-    private Context mContext = null;
-    private PREF_NAME mPref = null;
-
+    
     private static final CacheUtils ourInstance = new CacheUtils();
 
     public static CacheUtils getInstance() {
@@ -42,8 +40,6 @@ public class CacheUtils {
     public SharedPreferences getPref(Context context, PREF_NAME prefName) {
 
         this.mPreferences = initPref(context, prefName);
-        this.mContext = context;
-        this.mPref = prefName;
         return this.mPreferences;
 
     }
@@ -75,6 +71,9 @@ public class CacheUtils {
         } else if (prefName == PREF_NAME.PREF_FILTER) {
 
             return context.getSharedPreferences("PREF_FILTER", 0);
+        } else if (prefName == PREF_NAME.PREF_AREA_LOCATION) {
+
+            return context.getSharedPreferences("PREF_AREA_LOCATION", 0);
         } else {
 
             return null;

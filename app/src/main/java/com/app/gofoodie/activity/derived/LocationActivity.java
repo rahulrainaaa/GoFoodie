@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.model.areaResponse.AreaResponse;
 import com.app.gofoodie.model.cityResponse.CityResponse;
@@ -17,6 +18,7 @@ import com.app.gofoodie.model.countryResponse.Datum;
 import com.app.gofoodie.model.handler.ModelParser;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.app.gofoodie.utility.CacheUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -45,6 +47,8 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     public CityResponse mCityResponse = null;
     public AreaResponse mAreaResponse = null;
 
+    private com.app.gofoodie.model.areaResponse.Datum mAreaLocationDatum = null;
+
     /**
      * {@link BaseAppCompatActivity} override methods.
      */
@@ -72,6 +76,23 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), Network.URL_GET_COUNTRIES, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
+
+        findViewById(R.id.save_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (LocationActivity.this.mAreaLocationDatum == null) {
+
+                    Toast.makeText(LocationActivity.this, "Please select an Area", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                CacheUtils.getInstance().getPref(LocationActivity.this, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().putString(Constants.PREF_AREA_LOCATION.NAME.name(), "" + mAreaLocationDatum.getAreaName()).commit();
+                CacheUtils.getInstance().getPref(LocationActivity.this, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().putString(Constants.PREF_AREA_LOCATION.ID.name(), "" + mAreaLocationDatum.getAreaId()).commit();
+                Toast.makeText(LocationActivity.this, "Location Saved", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
     }
 
     @Override
@@ -81,11 +102,17 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
 
             case R.id.sp_locpref_country:
 
+                mCityList.clear();
+                mCityAdapter.notifyDataSetChanged();
+                mAreaList.clear();
+                mAreaAdapter.notifyDataSetChanged();
                 countrySelected(position);
                 break;
 
             case R.id.sp_locpref_city:
 
+                mAreaList.clear();
+                mAreaAdapter.notifyDataSetChanged();
                 citySelected(position);
                 break;
 
@@ -109,9 +136,9 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
      */
     private void countrySelected(int position) {
 
+        mAreaLocationDatum = null;
         Datum datum = mCountryListResponse.getData().get(position);
         String url = Network.URL_GET_CITY + "" + datum.getCountryId().trim();
-        Toast.makeText(this, datum.getCountryId() + " " + datum.getCountryName(), Toast.LENGTH_SHORT).show();
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(2, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
@@ -124,9 +151,9 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
      */
     private void citySelected(int position) {
 
+        mAreaLocationDatum = null;
         com.app.gofoodie.model.cityResponse.Datum datum = mCityResponse.getData().get(position);
         String url = Network.URL_GET_AREA + "" + datum.getCityId().trim();
-        Toast.makeText(this, datum.getCityId() + " " + datum.getCityName(), Toast.LENGTH_SHORT).show();
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(3, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
@@ -138,8 +165,8 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
      * @desc Method to be called in case of area selected.
      */
     private void areaSelected(int position) {
-        com.app.gofoodie.model.areaResponse.Datum datum = mAreaResponse.getData().get(position);
-        Toast.makeText(this, datum.getAreaId() + " " + datum.getAreaName(), Toast.LENGTH_SHORT).show();
+
+        mAreaLocationDatum = mAreaResponse.getData().get(position);
     }
 
     /**
@@ -164,6 +191,7 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
         } else if (requestCode == 3) {
 
             mAreaResponse = (AreaResponse) modelParser.getModel(rawObject.toString(), AreaResponse.class, null);
+            showArea(mAreaResponse);
             // List of area.
 
         }

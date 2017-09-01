@@ -25,4 +25,6 @@ public class Network {
 
     public static final String URL_GET_AREA = "http://gofoodie.drushtiindia.com/API/Location/Area/";
 
+    public static final String URL_GET_RESTAURANT = "http://gofoodie.drushtiindia.com/API/Restaurantlist/";
+
 }

@@ -20,4 +20,16 @@ public class Constants {
             "http://gofoodie.drushtiindia.com/homeassets/images/Banner4.png"
     };
 
+    public static enum PREF_AREA_LOCATION {
+        ID("id", 1), NAME("name", 2);
+
+        private int id;
+        private String value;
+
+        private PREF_AREA_LOCATION(String value, int id) {
+            this.value = value;
+            this.id = id;
+        }
+    }
+
 }

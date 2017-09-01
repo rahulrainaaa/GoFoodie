@@ -1,5 +1,6 @@
 package com.app.gofoodie.fragment.derived;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
@@ -15,8 +16,17 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.derived.DashboardActivity;
+import com.app.gofoodie.activity.derived.LocationActivity;
 import com.app.gofoodie.adapter.listviewadapter.RestaurantListViewAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
+import com.app.gofoodie.global.constants.Constants;
+import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.network.callback.NetworkCallbackListener;
+import com.app.gofoodie.network.handler.NetworkHandler;
+import com.app.gofoodie.utility.CacheUtils;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -24,7 +34,7 @@ import java.util.ArrayList;
  * @class RestaurantListFragment
  * @desc {@link BaseFragment} Fragment class to show list if restaurants of selected location UI screen.
  */
-public class RestaurantListFragment extends BaseFragment {
+public class RestaurantListFragment extends BaseFragment implements NetworkCallbackListener {
 
     private ListView restaurantListView = null;
 
@@ -47,6 +57,24 @@ public class RestaurantListFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        String location_id = CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_AREA_LOCATION).getString(Constants.PREF_AREA_LOCATION.ID.name(), "");
+        String location_name = CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_AREA_LOCATION).getString(Constants.PREF_AREA_LOCATION.NAME.name(), "");
+
+        if (location_id.trim().isEmpty()) {
+
+            Toast.makeText(getActivity(), "Pick your location.", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), LocationActivity.class));
+        }
+
+        String url = Network.URL_GET_RESTAURANT + location_id;
+        NetworkHandler networkHandler = new NetworkHandler();
+        networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.executeGet();
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -76,5 +104,34 @@ public class RestaurantListFragment extends BaseFragment {
 
     }
 
+    /**
+     * {@link NetworkCallbackListener} network response callback method.
+     */
+    @Override
+    public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
+        switch (requestCode) {
+            case 1:
+
+                Toast.makeText(getActivity(), "" + rawObject.toString(), Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+
+                break;
+        }
+    }
+
+    @Override
+    public void networkFailResponse(int requestCode, String message) {
+
+        switch (requestCode) {
+            case 1:
+
+                Toast.makeText(getActivity(), "" + message, Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+
+                break;
+        }
+    }
 }
