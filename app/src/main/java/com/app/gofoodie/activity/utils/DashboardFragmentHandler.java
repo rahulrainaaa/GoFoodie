@@ -41,6 +41,7 @@ public class DashboardFragmentHandler {
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.PROFILE == fragmentType) {
 
             return new LoginFragment();
+//            return new ProfileFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.LOGIN == fragmentType) {
 
             return new LoginFragment();

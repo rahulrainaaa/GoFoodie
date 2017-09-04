@@ -40,6 +40,8 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_demo">DemoAct</string>
     <string name="title_activity_edit_combo">EditCombo</string>
+    <string name="title_activity_restaurant_profile">RestaurantProfileActivity</string>
+    <string name="title_activity_combo_plan_description">ComboPlanDescriptionActivity</string>
 
 
 </resources>
