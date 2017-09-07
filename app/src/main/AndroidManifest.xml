@@ -62,7 +62,9 @@
             android:name=".activity.derived.ShortlistedRestaurantsActivity"
             android:label="@string/title_activity_shortlisted_restaurants"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.derived.RatingActivity"></activity>
+        <activity
+            android:name=".activity.derived.RatingActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
