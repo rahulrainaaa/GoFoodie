@@ -60,6 +60,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
         startActivity(new Intent(this, EditComboActivity.class));
         startActivity(new Intent(this, LocationActivity.class));
         startActivity(new Intent(this, RestaurantProfileActivity.class));
+        startActivity(new Intent(this, MealPreferenceActivity.class));
         finish();
     }
 }

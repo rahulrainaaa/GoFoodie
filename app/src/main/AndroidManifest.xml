@@ -54,7 +54,8 @@
             android:name=".activity.derived.ComboPlanDescriptionActivity"
             android:label="@string/title_activity_combo_plan_description"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.derived.MealPreferenceActivity"></activity>
     </application>
 
 </manifest>
