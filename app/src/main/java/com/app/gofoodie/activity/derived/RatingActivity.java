@@ -35,7 +35,7 @@ public class RatingActivity extends AppCompatActivity {
     public void showDialog() {
         View view = getLayoutInflater().inflate(R.layout.dialog_combo_details, null);
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Combo Plan Detail");
+        alertDialog.setTitle("Combo Plan Name");
         alertDialog.setView(view);
         alertDialog.setCancelable(false);
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
