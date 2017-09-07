@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
-import android.widget.Toast;
 
 import com.app.gofoodie.model.category.Category;
 
@@ -48,7 +47,8 @@ public class CheckedListViewAdapter extends ArrayAdapter<Category> implements Vi
 
         CheckedTextView ctv = (CheckedTextView) view;
         ctv.setChecked(!ctv.isChecked());
-        Toast.makeText(mActivity, "position: " + (int) view.getTag(), Toast.LENGTH_SHORT).show();
+        int position = (int) ctv.getTag();
+        mList.get(position).checked = ctv.isChecked();
     }
 
 }

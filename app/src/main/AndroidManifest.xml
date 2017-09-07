@@ -55,7 +55,13 @@
             android:label="@string/title_activity_combo_plan_description"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.derived.MealPreferenceActivity"></activity>
+        <activity
+            android:name=".activity.derived.MealPreferenceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.derived.ShortlistedRestaurantsActivity"
+            android:label="@string/title_activity_shortlisted_restaurants"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
