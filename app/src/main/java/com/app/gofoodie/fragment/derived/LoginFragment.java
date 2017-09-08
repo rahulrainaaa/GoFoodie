@@ -201,21 +201,44 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
      */
     public void SignIn() {
 
-        String strUsername = mEtMobileEmail.getText().toString().trim();
+        String strEmailMobile = mEtMobileEmail.getText().toString().trim();
         String strPassword = mEtPassword.getText().toString().trim();
 
-        if (!validateCredentials(strUsername, strPassword)) {
+        int validationCode = validateCredentials(strEmailMobile, strPassword);
+        if (validationCode == 0) {
+
             return;
+        } else if (validationCode == 1) {       // Email Log In.
+
+            loginRequest("", strEmailMobile, "", "", strPassword);
+        } else if (validationCode == 2) {       // Mobile Log In.
+
+            loginRequest("", "", strEmailMobile, "", strPassword);
         }
+    }
+
+    /**
+     * @param username
+     * @param email
+     * @param mobile
+     * @param social_login
+     * @param password
+     * @method loginRequest
+     * @desc Method to create Login request packet and send it over http for response.
+     */
+    private void loginRequest(String username, String email, String mobile, String social_login, String password) {
 
         JSONObject jsonHttpLoginRequest = new JSONObject();
         try {
-            jsonHttpLoginRequest.put("username", "cust2@email.com");
-            jsonHttpLoginRequest.put("password", "newpassword");
-            jsonHttpLoginRequest.put("social_login", "false");
+            jsonHttpLoginRequest.put("username", username);
+            jsonHttpLoginRequest.put("password", password);
+            jsonHttpLoginRequest.put("social_login", social_login);
+            jsonHttpLoginRequest.put("mobile", mobile);
+            jsonHttpLoginRequest.put("email", email);
 
         } catch (JSONException excJson) {
             Toast.makeText(getActivity(), "EXCEPTION: " + excJson.getMessage(), Toast.LENGTH_SHORT).show();
+            return;
         }
 
         NetworkHandler networkHandler = new NetworkHandler();
@@ -228,17 +251,17 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
     /**
      * @param strPassword
-     * @param strUsername
-     * @return boolean true = valid, false = invalid.
+     * @param strEmailMobile
+     * @return int 0 = invalid, 1 = email-login, 2 = mobile-login (Only manual login considered here).
      * @method validateCredentials
      * @desc Method to check for credential validations and raise the error message appropriately.
      */
-    private boolean validateCredentials(String strUsername, String strPassword) {
+    private int validateCredentials(String strEmailMobile, String strPassword) {
 
         boolean isValid = false;
-
+        int validationCode = 0;
         // Validate Username
-        if (strUsername.isEmpty()) {
+        if (strEmailMobile.isEmpty()) {
 
             isValid = false;
             mEtMobileEmail.setError("Cannot be empty");
@@ -257,7 +280,17 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             isValid = true;
         }
 
-        return isValid;
+//        Pattern pattern = Pattern.compile("");
+//        if ((isValid) && ()) {
+//            // check id mobile or email.
+//        } else if ((isValid) && ()) {
+//
+//        }
+
+        if (isValid) {
+            validationCode = 1;
+        }
+        return validationCode;
     }
 
     /**
