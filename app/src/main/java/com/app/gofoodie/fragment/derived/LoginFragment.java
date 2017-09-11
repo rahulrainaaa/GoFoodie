@@ -16,9 +16,13 @@ import com.app.gofoodie.activity.utils.DashboardInterruptListener;
 import com.app.gofoodie.activity.utils.FacebookLoginHandler;
 import com.app.gofoodie.activity.utils.FacebookLoginListener;
 import com.app.gofoodie.fragment.base.BaseFragment;
+import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.model.handler.ModelParser;
+import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.app.gofoodie.utility.CacheUtils;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookException;
 import com.facebook.GraphResponse;
@@ -204,36 +208,26 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         String strEmailMobile = mEtMobileEmail.getText().toString().trim();
         String strPassword = mEtPassword.getText().toString().trim();
 
-        int validationCode = validateCredentials(strEmailMobile, strPassword);
-        if (validationCode == 0) {
+        if (validateCredentials(strEmailMobile, strPassword)) {
 
-            return;
-        } else if (validationCode == 1) {       // Email Log In.
-
-            loginRequest("", strEmailMobile, "", "", strPassword);
-        } else if (validationCode == 2) {       // Mobile Log In.
-
-            loginRequest("", "", strEmailMobile, "", strPassword);
+            loginRequest(strEmailMobile, "no", strPassword);
         }
     }
 
     /**
-     * @param username
      * @param email
-     * @param mobile
      * @param social_login
      * @param password
      * @method loginRequest
      * @desc Method to create Login request packet and send it over http for response.
      */
-    private void loginRequest(String username, String email, String mobile, String social_login, String password) {
+
+    private void loginRequest(String email, String social_login, String password) {
 
         JSONObject jsonHttpLoginRequest = new JSONObject();
         try {
-            jsonHttpLoginRequest.put("username", username);
             jsonHttpLoginRequest.put("password", password);
             jsonHttpLoginRequest.put("social_login", social_login);
-            jsonHttpLoginRequest.put("mobile", mobile);
             jsonHttpLoginRequest.put("email", email);
 
         } catch (JSONException excJson) {
@@ -252,14 +246,14 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     /**
      * @param strPassword
      * @param strEmailMobile
-     * @return int 0 = invalid, 1 = email-login, 2 = mobile-login (Only manual login considered here).
+     * @return boolean true = validation success/ false = validation failed.
      * @method validateCredentials
      * @desc Method to check for credential validations and raise the error message appropriately.
      */
-    private int validateCredentials(String strEmailMobile, String strPassword) {
+    private boolean validateCredentials(String strEmailMobile, String strPassword) {
 
         boolean isValid = false;
-        int validationCode = 0;
+
         // Validate Username
         if (strEmailMobile.isEmpty()) {
 
@@ -277,20 +271,10 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             mEtPassword.setError("Cannot be empty");
         } else {
 
-            isValid = true;
+            isValid = true && isValid;
         }
 
-//        Pattern pattern = Pattern.compile("");
-//        if ((isValid) && ()) {
-//            // check id mobile or email.
-//        } else if ((isValid) && ()) {
-//
-//        }
-
-        if (isValid) {
-            validationCode = 1;
-        }
-        return validationCode;
+        return isValid;
     }
 
     /**
@@ -303,6 +287,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         Toast.makeText(getActivity(), "Network Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {
 
+            loginResponseHandling(rawObject);
         }
     }
 
@@ -322,8 +307,12 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
      */
     private void loginResponseHandling(JSONObject raw) {
 
-
+        ModelParser modelParser = new ModelParser();
+        Login loginModel = (Login) modelParser.getModel(raw.toString(), Login.class, null);
+        CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_LOGIN).edit().putString(Constants.PREF_LOGIN.key.name(), raw.toString()).commit();
+        
     }
+
 
     /**
      * {@link FacebookLoginListener} listener callback methods.
@@ -357,5 +346,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             Toast.makeText(getActivity(), "FacebookException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
 
 }

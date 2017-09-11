@@ -20,6 +20,9 @@ public class Constants {
             "http://gofoodie.drushtiindia.com/homeassets/images/Banner4.png"
     };
 
+    /**
+     * KEY for saving the Area location in preference.
+     */
     public static enum PREF_AREA_LOCATION {
         ID("id", 1), NAME("name", 2);
 
@@ -29,6 +32,19 @@ public class Constants {
         private PREF_AREA_LOCATION(String value, int id) {
             this.value = value;
             this.id = id;
+        }
+    }
+
+    /**
+     * KEY for saving the Login data in preference.
+     */
+    public static enum PREF_LOGIN {
+        key("data");
+
+        private String data;
+
+        private PREF_LOGIN(String data) {
+            this.data = data;
         }
     }
 

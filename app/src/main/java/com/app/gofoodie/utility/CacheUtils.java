@@ -20,7 +20,7 @@ public class CacheUtils {
      * Class private data members.
      */
     private SharedPreferences mPreferences = null;
-    
+
     private static final CacheUtils ourInstance = new CacheUtils();
 
     public static CacheUtils getInstance() {
