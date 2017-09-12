@@ -16,13 +16,14 @@ import com.app.gofoodie.activity.utils.DashboardInterruptListener;
 import com.app.gofoodie.activity.utils.FacebookLoginHandler;
 import com.app.gofoodie.activity.utils.FacebookLoginListener;
 import com.app.gofoodie.fragment.base.BaseFragment;
-import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.model.handler.ModelParser;
 import com.app.gofoodie.model.login.Login;
+import com.app.gofoodie.model.profile.Profile;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.CacheUtils;
+import com.app.gofoodie.utility.SessionUtils;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookException;
 import com.facebook.GraphResponse;
@@ -288,6 +289,9 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         if (requestCode == 1) {
 
             loginResponseHandling(rawObject);
+        } else if (requestCode == 2) {
+
+            userProfileResponse(rawObject);
         }
     }
 
@@ -296,9 +300,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         getDashboardActivity().getProgressDialog().hide();
         Toast.makeText(getActivity(), "Network Fail: " + message, Toast.LENGTH_SHORT).show();
-        if (requestCode == 1) {
 
-        }
     }
 
     /**
@@ -309,10 +311,57 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         ModelParser modelParser = new ModelParser();
         Login loginModel = (Login) modelParser.getModel(raw.toString(), Login.class, null);
-        CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_LOGIN).edit().putString(Constants.PREF_LOGIN.key.name(), raw.toString()).commit();
-        
+        CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_LOGIN).edit().putString(CacheUtils.PREF_KEY, raw.toString()).commit();
+
+        switch (loginModel.statusCode) {
+
+            case 200:
+
+                getCustomerProfile(loginModel.data.loginId, loginModel.data.token);
+                break;
+            case 400:
+
+                break;
+            case 402:
+
+                break;
+        }
     }
 
+    /**
+     * @param loginId String
+     * @param token   String
+     * @method getCustomerProfile
+     * @desc Get Customer Profile data as per loginId and token.
+     */
+    private void getCustomerProfile(String loginId, String token) {
+
+        JSONObject profileJsonRequest = new JSONObject();
+        try {
+
+            profileJsonRequest.put("login_id", loginId);
+            profileJsonRequest.put("token", token);
+            NetworkHandler networkHandler = new NetworkHandler();
+            networkHandler.httpCreate(2, getDashboardActivity(), this, profileJsonRequest, Network.URL_GET_CUST_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+            networkHandler.executePost();
+        } catch (JSONException excJson) {
+            excJson.printStackTrace();
+            Toast.makeText(getActivity(), "EXCEPTION: " + excJson.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * @param raw
+     * @method userProfileResponse
+     * @desc Method to process user profile data response.
+     */
+    private void userProfileResponse(JSONObject raw) {
+
+        ModelParser modelParser = new ModelParser();
+        Profile profile = (Profile) modelParser.getModel(raw.toString(), Profile.class, null);
+        CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_CUSTOMER_PROFILE).edit().putString(CacheUtils.PREF_KEY, raw.toString()).commit();
+        SessionUtils.getInstance().loadSession(getActivity());
+    }
 
     /**
      * {@link FacebookLoginListener} listener callback methods.

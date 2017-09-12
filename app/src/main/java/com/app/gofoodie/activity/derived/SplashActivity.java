@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.utility.SessionUtils;
 
 /**
  * @class SplashActivity
@@ -37,6 +38,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
     @Override
     protected void onResume() {
         super.onResume();
+        SessionUtils.getInstance().loadSession(this);
         showFullScreen();
         mImgSplashLogo = (ImageView) findViewById(R.id.img_splash_logo);
         mHandler = new Handler();

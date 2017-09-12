@@ -16,6 +16,8 @@ public class CacheUtils {
         PREF_LOGIN, PREF_CUSTOMER_PROFILE, PREF_FILTER, PREF_AREA_LOCATION
     }
 
+    public static final String PREF_KEY = "PREF_KEY";
+
     /**
      * Class private data members.
      */
@@ -41,7 +43,6 @@ public class CacheUtils {
 
         this.mPreferences = initPref(context, prefName);
         return this.mPreferences;
-
     }
 
     /**

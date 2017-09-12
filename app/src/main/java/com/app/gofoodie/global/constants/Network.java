@@ -27,4 +27,6 @@ public class Network {
 
     public static final String URL_GET_RESTAURANT = "http://gofoodie.drushtiindia.com/API/Restaurantlist/";
 
+    public static final String URL_GET_CUST_PROFILE = "http://gofoodie.drushtiindia.com/API/GetProfile/";
+
 }

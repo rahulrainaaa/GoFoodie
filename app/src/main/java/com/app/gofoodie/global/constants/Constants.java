@@ -35,17 +35,5 @@ public class Constants {
         }
     }
 
-    /**
-     * KEY for saving the Login data in preference.
-     */
-    public static enum PREF_LOGIN {
-        key("data");
-
-        private String data;
-
-        private PREF_LOGIN(String data) {
-            this.data = data;
-        }
-    }
 
 }
