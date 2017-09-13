@@ -15,6 +15,7 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.activity.utils.DashboardFragmentHandler;
 import com.app.gofoodie.activity.utils.DashboardInterruptListener;
 import com.app.gofoodie.fragment.base.BaseFragment;
+import com.app.gofoodie.utility.SessionUtils;
 
 /**
  * @class DashboardActivity
@@ -157,7 +158,14 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
      */
     private void navigationProfile() {
 
-        mFragmentType = FRAGMENT_TYPE.PROFILE;
+        // Load fragment based on - if session exist or not.
+        if (SessionUtils.getInstance().isSessionExist()) {
+
+            mFragmentType = FRAGMENT_TYPE.PROFILE;
+        } else {
+
+            mFragmentType = FRAGMENT_TYPE.LOGIN;
+        }
         loadFragment();
     }
 

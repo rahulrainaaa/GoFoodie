@@ -23,7 +23,7 @@ public class Constants {
     /**
      * KEY for saving the Area location in preference.
      */
-    public static enum PREF_AREA_LOCATION {
+    public enum PREF_AREA_LOCATION {
         ID("id", 1), NAME("name", 2);
 
         private int id;

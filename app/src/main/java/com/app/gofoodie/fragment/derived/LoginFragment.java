@@ -259,7 +259,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         if (strEmailMobile.isEmpty()) {
 
             isValid = false;
-            mEtMobileEmail.setError("Cannot be empty");
+            mEtMobileEmail.setError(getActivity().getString(R.string.cannot_be_empty));
         } else {
 
             isValid = true;
@@ -269,7 +269,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         if (strPassword.isEmpty()) {
 
             isValid = false;
-            mEtPassword.setError("Cannot be empty");
+            mEtPassword.setError(getActivity().getString(R.string.cannot_be_empty));
         } else {
 
             isValid = true && isValid;
@@ -361,6 +361,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         Profile profile = (Profile) modelParser.getModel(raw.toString(), Profile.class, null);
         CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_CUSTOMER_PROFILE).edit().putString(CacheUtils.PREF_KEY, raw.toString()).commit();
         SessionUtils.getInstance().loadSession(getActivity());
+        getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.PROFILE);
     }
 
     /**

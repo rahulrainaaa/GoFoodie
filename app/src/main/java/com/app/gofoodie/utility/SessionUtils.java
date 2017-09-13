@@ -35,7 +35,7 @@ public class SessionUtils {
      */
     public boolean isSessionExist() {
 
-        return false;
+        return GlobalData.isSession;
     }
 
     /**

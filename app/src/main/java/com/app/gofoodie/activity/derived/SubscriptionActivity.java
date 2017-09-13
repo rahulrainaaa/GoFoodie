@@ -26,11 +26,11 @@ public class SubscriptionActivity extends BaseAppCompatActivity {
         mList.add("Regular");
         mList.add("Premium");
         mList.add("Executive");
-        mList.add("Executive");
-        mList.add("Executive");
-        mList.add("Executive");
-        mList.add("Executive");
-        mList.add("Executive");
+        mList.add("Recharge Plan 1");
+        mList.add("Recharge Plan 2");
+        mList.add("Recharge Plan 3");
+        mList.add("Recharge Plan 4");
+        mList.add("Recharge Plan 5");
 
         mAdapter = new RechargePlanListViewAdapter(this, R.layout.item_list_recharge_plan, mList);
         mListView.setAdapter(mAdapter);

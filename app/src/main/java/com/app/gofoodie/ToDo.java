@@ -5,8 +5,7 @@ public class ToDo {
 
     /**
      *
-     * Create Model class for HTTP response packets.
-     *
+     * 1. Register Page and Login Check API hitting.
      *
      *
      *
