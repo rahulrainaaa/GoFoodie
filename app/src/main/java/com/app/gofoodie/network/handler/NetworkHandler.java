@@ -112,7 +112,7 @@ public class NetworkHandler implements Response.ErrorListener {
         this.mUrl = url;
         this.mRequestCode = requestCode;
         this.mJsonRequestBody = jsonRequestBody;
-        this.mBaseAppCompatActivity = mBaseAppCompatActivity;
+        this.mBaseAppCompatActivity = appCompatActivity;
         this.mNetworkCallbackListener = networkCallbackListener;
         this.mResponseType = responseType;
     }

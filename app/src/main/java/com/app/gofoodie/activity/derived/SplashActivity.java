@@ -58,10 +58,10 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
     public void run() {
 
         startActivity(new Intent(this, DashboardActivity.class));
-//        startActivity(new Intent(this, EditComboActivity.class));
-//        startActivity(new Intent(this, LocationActivity.class));
-//        startActivity(new Intent(this, RestaurantProfileActivity.class));
-//        startActivity(new Intent(this, MealPreferenceActivity.class));
+        startActivity(new Intent(this, EditComboActivity.class));
+        startActivity(new Intent(this, LocationActivity.class));
+        startActivity(new Intent(this, RestaurantProfileActivity.class));
+        startActivity(new Intent(this, MealPreferenceActivity.class));
 //        startActivity(new Intent(this, ShortlistedRestaurantsActivity.class));
 //        startActivity(new Intent(this, RatingActivity.class));
 //        startActivity(new Intent(this, SubscriptionActivity.class));

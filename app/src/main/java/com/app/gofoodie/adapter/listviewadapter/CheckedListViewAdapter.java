@@ -8,17 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 
-import com.app.gofoodie.model.category.Category;
+import com.app.gofoodie.model.cuisine.Datum;
 
 import java.util.ArrayList;
 
-public class CheckedListViewAdapter extends ArrayAdapter<Category> implements View.OnClickListener {
+public class CheckedListViewAdapter extends ArrayAdapter<Datum> implements View.OnClickListener {
 
     private Activity mActivity = null;
-    private ArrayList<Category> mList = null;
+    private ArrayList<Datum> mList = null;
     private CheckedTextView mCheckTextView = null;
 
-    public CheckedListViewAdapter(@NonNull Activity activity, ArrayList<Category> list) {
+    public CheckedListViewAdapter(@NonNull Activity activity, ArrayList<Datum> list) {
         super(activity, android.R.layout.simple_list_item_checked, list);
         this.mActivity = activity;
         this.mList = list;
@@ -36,7 +36,7 @@ public class CheckedListViewAdapter extends ArrayAdapter<Category> implements Vi
         }
 
         this.mCheckTextView.setTag(position);
-        this.mCheckTextView.setText(mList.get(position).name);
+        this.mCheckTextView.setText(mList.get(position).cateName);
         this.mCheckTextView.setChecked(mList.get(position).checked);
 
         return this.mCheckTextView;

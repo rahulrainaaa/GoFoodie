@@ -15,6 +15,8 @@ public class Network {
 
     public static final String URL_NEW_REGISTRATION = "http://gofoodie.drushtiindia.com/API/Registration/";
 
+    public static final String URL_GET_CUST_PROFILE = "http://gofoodie.drushtiindia.com/API/GetProfile/";
+
     /**
      * GET REST Web APIs.
      */
@@ -27,6 +29,7 @@ public class Network {
 
     public static final String URL_GET_RESTAURANT = "http://gofoodie.drushtiindia.com/API/Restaurantlist/";
 
-    public static final String URL_GET_CUST_PROFILE = "http://gofoodie.drushtiindia.com/API/GetProfile/";
+    public static final String URL_GET_CUISINE = "http://gofoodie.drushtiindia.com/API/Cuisine";
+
 
 }

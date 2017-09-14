@@ -13,10 +13,12 @@ public class CacheUtils {
      * {@link SharedPreferences} Enumerated naming.
      */
     public static enum PREF_NAME {
-        PREF_LOGIN, PREF_CUSTOMER_PROFILE, PREF_FILTER, PREF_AREA_LOCATION
+        PREF_LOGIN, PREF_CUSTOMER_PROFILE, PREF_MEAL, PREF_AREA_LOCATION
     }
 
     public static final String PREF_KEY = "PREF_KEY";
+    public static final String PREF_MEAL_CUZ = "PREF_MEAL_CUZ";
+    public static final String PREF_MEAL_TYPE = "PREF_MEAL_TYPE";
 
     /**
      * Class private data members.
@@ -69,9 +71,9 @@ public class CacheUtils {
         } else if (prefName == PREF_NAME.PREF_CUSTOMER_PROFILE) {
 
             return context.getSharedPreferences("PREF_CUSTOMER_PROFILE", 0);
-        } else if (prefName == PREF_NAME.PREF_FILTER) {
+        } else if (prefName == PREF_NAME.PREF_MEAL) {
 
-            return context.getSharedPreferences("PREF_FILTER", 0);
+            return context.getSharedPreferences("PREF_MEAL", 0);
         } else if (prefName == PREF_NAME.PREF_AREA_LOCATION) {
 
             return context.getSharedPreferences("PREF_AREA_LOCATION", 0);
