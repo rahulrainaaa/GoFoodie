@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
@@ -15,6 +16,7 @@ import com.app.gofoodie.fragment.base.BaseFragment;
  * @desc {@link BaseFragment} Fragment class to handle Profile UI screen.
  */
 public class ProfileFragment extends BaseFragment {
+
 
     @Nullable
     @Override
@@ -27,6 +29,16 @@ public class ProfileFragment extends BaseFragment {
 
     @Override
     public void fragQuitCallback() {
+
+    }
+
+    /**
+     * @param button
+     * @method onClickPreferences
+     * @desc onClick callback method on clicking preferences.
+     */
+    public void onClickPreferences(Button button) {
+
 
     }
 }
