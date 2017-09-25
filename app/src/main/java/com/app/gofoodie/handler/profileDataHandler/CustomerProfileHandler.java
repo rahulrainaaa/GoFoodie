@@ -2,8 +2,10 @@ package com.app.gofoodie.handler.profileDataHandler;
 
 import android.content.Context;
 
+import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.model.base.BaseModel;
 import com.app.gofoodie.model.login.Login;
+import com.app.gofoodie.utility.SessionUtils;
 
 import java.util.Date;
 
@@ -70,7 +72,13 @@ public class CustomerProfileHandler {
      */
     public Login checkLoginSession() {
 
-        return null;
+        if (SessionUtils.getInstance().isSessionExist()) {
+
+            return GlobalData.login;
+        } else {
+
+            return null;
+        }
     }
 
 }

@@ -12,14 +12,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.fragment.base.BaseFragment;
+import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.handler.socialHandler.FacebookLoginHandler;
 import com.app.gofoodie.handler.socialHandler.FacebookLoginListener;
-import com.app.gofoodie.fragment.base.BaseFragment;
-import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.model.handler.ModelParser;
 import com.app.gofoodie.model.login.Login;
-import com.app.gofoodie.model.profile.Profile;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.CacheUtils;
@@ -358,7 +358,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     private void userProfileResponse(JSONObject raw) {
 
         ModelParser modelParser = new ModelParser();
-        Profile profile = (Profile) modelParser.getModel(raw.toString(), Profile.class, null);
+        Customer profile = (Customer) modelParser.getModel(raw.toString(), Customer.class, null);
         CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_CUSTOMER_PROFILE).edit().putString(CacheUtils.PREF_KEY, raw.toString()).commit();
         SessionUtils.getInstance().loadSession(getActivity());
         getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.PROFILE);

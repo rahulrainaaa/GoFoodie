@@ -3,7 +3,6 @@ package com.app.gofoodie.activity.derived;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceActivity;
 import android.widget.ImageView;
 
 import com.app.gofoodie.R;
@@ -66,7 +65,6 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
 //        startActivity(new Intent(this, ShortlistedRestaurantsActivity.class));
 //        startActivity(new Intent(this, RatingActivity.class));
 //        startActivity(new Intent(this, SubscriptionActivity.class));
-        startActivity(new Intent(this, PreferenceActivity.class));
         finish();
     }
 }

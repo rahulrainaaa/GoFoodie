@@ -1,14 +1,14 @@
 package com.app.gofoodie.utility;
 
-import android.app.Activity;
-import android.content.Context;
+        import android.app.Activity;
+        import android.content.Context;
 
-import com.app.gofoodie.global.data.GlobalData;
-import com.app.gofoodie.model.handler.ModelParser;
-import com.app.gofoodie.model.login.Login;
-import com.app.gofoodie.model.profile.Profile;
+        import com.app.gofoodie.global.data.GlobalData;
+        import com.app.gofoodie.model.customer.Customer;
+        import com.app.gofoodie.model.handler.ModelParser;
+        import com.app.gofoodie.model.login.Login;
 
-import org.json.JSONObject;
+        import org.json.JSONObject;
 
 /**
  * @class SessionUtils
@@ -48,7 +48,7 @@ public class SessionUtils {
         CacheUtils.getInstance().getPref(activity, CacheUtils.PREF_NAME.PREF_CUSTOMER_PROFILE).edit().remove(CacheUtils.PREF_KEY).commit();
         CacheUtils.getInstance().getPref(activity, CacheUtils.PREF_NAME.PREF_LOGIN).edit().remove(CacheUtils.PREF_KEY).commit();
         GlobalData.login = null;
-        GlobalData.profile = null;
+        GlobalData.customer = null;
         GlobalData.isSession = false;
     }
 
@@ -79,17 +79,16 @@ public class SessionUtils {
 
         if (strLogin.isEmpty() || strProfile.isEmpty()) {
             GlobalData.login = null;
-            GlobalData.profile = null;
+            GlobalData.customer = null;
             GlobalData.isSession = false;
             return;
         }
 
         ModelParser modelParser = new ModelParser();
-        GlobalData.profile = (Profile) modelParser.getModel(strProfile, Profile.class, null);
+        GlobalData.customer = (Customer) modelParser.getModel(strProfile, Customer.class, null);
         GlobalData.login = (Login) modelParser.getModel(strLogin, Login.class, null);
         GlobalData.isSession = true;
 
     }
-
 
 }

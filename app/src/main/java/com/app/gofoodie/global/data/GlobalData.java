@@ -1,8 +1,8 @@
 package com.app.gofoodie.global.data;
 
 
+import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.model.login.Login;
-import com.app.gofoodie.model.profile.Profile;
 
 /**
  * @class GlobalData
@@ -14,7 +14,7 @@ public class GlobalData {
      * Session and user profile related data here.
      */
     public static Login login = null;
-    public static Profile profile = null;
+    public static Customer customer = null;
     public static boolean isSession = false;
 
 
