@@ -18,7 +18,7 @@ import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.handler.socialHandler.FacebookLoginHandler;
 import com.app.gofoodie.handler.socialHandler.FacebookLoginListener;
 import com.app.gofoodie.model.customer.Customer;
-import com.app.gofoodie.model.handler.ModelParser;
+import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;

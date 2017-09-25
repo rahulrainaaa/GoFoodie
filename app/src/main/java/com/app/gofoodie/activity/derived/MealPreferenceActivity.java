@@ -12,9 +12,9 @@ import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.listviewadapter.CheckedListViewAdapter;
 import com.app.gofoodie.global.constants.Network;
-import com.app.gofoodie.model.cuisine.Cuisine;
-import com.app.gofoodie.model.cuisine.Datum;
-import com.app.gofoodie.model.handler.ModelParser;
+import com.app.gofoodie.model.category.Category;
+import com.app.gofoodie.model.category.Datum;
+import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.CacheUtils;
@@ -133,12 +133,12 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
     /**
      * @param json response.
      * @method listResponseHandler
-     * @desc Method to update Cuisine list as per the list got from API.
+     * @desc Method to update Category list as per the list got from API.
      */
     private void listResponseHandler(JSONObject json) {
 
         ModelParser modelParser = new ModelParser();
-        Cuisine cuisine = (Cuisine) modelParser.getModel(json.toString(), Cuisine.class, null);
+        Category cuisine = (Category) modelParser.getModel(json.toString(), Category.class, null);
 
         // Check if the http response is non-success (!=200).
         if (cuisine.statusCode != 200) {
@@ -152,7 +152,7 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
         mListView.setAdapter(mAdapter);
         if (mList.size() == 0) {
 
-            Toast.makeText(this, "Cuisine list is empty.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Category list is empty.", Toast.LENGTH_SHORT).show();
         }
     }
 }

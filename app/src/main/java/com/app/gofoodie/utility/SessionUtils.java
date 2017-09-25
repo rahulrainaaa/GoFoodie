@@ -5,7 +5,7 @@ package com.app.gofoodie.utility;
 
         import com.app.gofoodie.global.data.GlobalData;
         import com.app.gofoodie.model.customer.Customer;
-        import com.app.gofoodie.model.handler.ModelParser;
+        import com.app.gofoodie.handler.modelHandler.ModelParser;
         import com.app.gofoodie.model.login.Login;
 
         import org.json.JSONObject;

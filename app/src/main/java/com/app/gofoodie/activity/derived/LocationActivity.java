@@ -15,7 +15,7 @@ import com.app.gofoodie.model.areaResponse.AreaResponse;
 import com.app.gofoodie.model.cityResponse.CityResponse;
 import com.app.gofoodie.model.countryResponse.CountryResponse;
 import com.app.gofoodie.model.countryResponse.Datum;
-import com.app.gofoodie.model.handler.ModelParser;
+import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.CacheUtils;

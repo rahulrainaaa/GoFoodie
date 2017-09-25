@@ -1,16 +1,15 @@
 
-package com.app.gofoodie.model.cuisine;
+package com.app.gofoodie.model.category;
 
 import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
 
 import com.app.gofoodie.model.base.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Cuisine extends BaseModel implements Parcelable
+public class Category extends BaseModel implements Parcelable
 {
 
     @SerializedName("data")
@@ -22,22 +21,22 @@ public class Cuisine extends BaseModel implements Parcelable
     @SerializedName("statusMessage")
     @Expose
     public String statusMessage;
-    public final static Creator<Cuisine> CREATOR = new Creator<Cuisine>() {
+    public final static Creator<Category> CREATOR = new Creator<Category>() {
 
 
         @SuppressWarnings({
             "unchecked"
         })
-        public Cuisine createFromParcel(Parcel in) {
-            Cuisine instance = new Cuisine();
+        public Category createFromParcel(Parcel in) {
+            Category instance = new Category();
             in.readList(instance.data, (Datum.class.getClassLoader()));
             instance.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
             instance.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
             return instance;
         }
 
-        public Cuisine[] newArray(int size) {
-            return (new Cuisine[size]);
+        public Category[] newArray(int size) {
+            return (new Category[size]);
         }
 
     }

@@ -1,5 +1,5 @@
 
-package com.app.gofoodie.model.cuisine;
+package com.app.gofoodie.model.category;
 
 import android.os.Parcel;
 import android.os.Parcelable;

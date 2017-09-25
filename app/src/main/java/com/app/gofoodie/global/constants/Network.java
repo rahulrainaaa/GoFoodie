@@ -29,7 +29,7 @@ public class Network {
 
     public static final String URL_GET_RESTAURANT = "http://gofoodie.drushtiindia.com/API/Restaurantlist/";
 
-    public static final String URL_GET_CUISINE = "http://gofoodie.drushtiindia.com/API/Cuisine";
+    public static final String URL_GET_CUISINE = "http://gofoodie.drushtiindia.com/API/Category";
 
 
 }

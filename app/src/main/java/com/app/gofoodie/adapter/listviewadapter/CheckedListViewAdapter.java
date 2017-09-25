@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 
-import com.app.gofoodie.model.cuisine.Datum;
+import com.app.gofoodie.model.category.Datum;
 
 import java.util.ArrayList;
 

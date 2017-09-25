@@ -1,4 +1,4 @@
-package com.app.gofoodie.model.handler;
+package com.app.gofoodie.handler.modelHandler;
 
 import com.app.gofoodie.model.base.BaseModel;
 
