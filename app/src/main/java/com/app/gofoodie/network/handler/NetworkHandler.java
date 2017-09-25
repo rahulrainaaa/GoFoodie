@@ -24,6 +24,8 @@ import org.json.JSONObject;
  */
 public class NetworkHandler implements Response.ErrorListener {
 
+    public static final String TAG = "NetworkHandler";
+
     /**
      * Enumerated Response type from {@link NetworkHandler}.
      */
