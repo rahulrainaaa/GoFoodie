@@ -12,8 +12,8 @@ import android.widget.LinearLayout;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
-import com.app.gofoodie.activity.utils.DashboardFragmentHandler;
-import com.app.gofoodie.activity.utils.DashboardInterruptListener;
+import com.app.gofoodie.handler.dashboardHandler.DashboardFragmentHandler;
+import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.utility.SessionUtils;
 

@@ -12,9 +12,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
-import com.app.gofoodie.activity.utils.DashboardInterruptListener;
-import com.app.gofoodie.activity.utils.FacebookLoginHandler;
-import com.app.gofoodie.activity.utils.FacebookLoginListener;
+import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
+import com.app.gofoodie.handler.socialHandler.FacebookLoginHandler;
+import com.app.gofoodie.handler.socialHandler.FacebookLoginListener;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.model.handler.ModelParser;

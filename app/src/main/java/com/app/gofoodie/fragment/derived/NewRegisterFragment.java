@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.derived.LocationActivity;
-import com.app.gofoodie.activity.utils.DashboardInterruptListener;
+import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;

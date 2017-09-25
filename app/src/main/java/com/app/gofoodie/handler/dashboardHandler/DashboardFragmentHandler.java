@@ -1,4 +1,4 @@
-package com.app.gofoodie.activity.utils;
+package com.app.gofoodie.handler.dashboardHandler;
 
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.fragment.derived.CartFragment;

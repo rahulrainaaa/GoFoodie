@@ -4,7 +4,7 @@ import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.app.gofoodie.activity.derived.DashboardActivity;
-import com.app.gofoodie.activity.utils.DashboardInterruptListener;
+import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 
 import java.util.Stack;
 

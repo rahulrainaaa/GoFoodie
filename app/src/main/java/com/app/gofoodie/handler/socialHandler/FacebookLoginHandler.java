@@ -1,4 +1,4 @@
-package com.app.gofoodie.activity.utils;
+package com.app.gofoodie.handler.socialHandler;
 
 import android.app.Activity;
 import android.os.Bundle;

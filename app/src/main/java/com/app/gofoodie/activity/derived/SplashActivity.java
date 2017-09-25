@@ -3,6 +3,7 @@ package com.app.gofoodie.activity.derived;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceActivity;
 import android.widget.ImageView;
 
 import com.app.gofoodie.R;
