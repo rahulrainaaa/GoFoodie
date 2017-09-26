@@ -314,6 +314,18 @@ public class gfdb {
         foreign key (customer_id) references  CustomerDetail (customer_id));
 
 
+        create table RestaurantBranchCategories (
+        branch_category_id int primary key auto_increment,
+        branch_id int,
+        cate_id int,
+        foreign key (branch_id) references RestaurantBranchLocation (branch_id),
+        foreign key (cate_id) references Category (cate_id));
+
+        create table Cuisine (
+        cuisine_id int primary key auto_increment,
+        cuisine_name varchar(50),
+        cate_id int,
+        foreign key (cate_id) references Category(cate_id));
 
         CREATE View  CustomerFullDetail AS
         SELECT
