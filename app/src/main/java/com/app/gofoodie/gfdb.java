@@ -316,7 +316,6 @@ public class gfdb {
         vacation_flag Enum('true', 'false'),
         foreign key (customer_id) references  CustomerDetail (customer_id));
 
-
         create table RestaurantBranchCategories (
         branch_category_id int primary key auto_increment,
         branch_id int,
