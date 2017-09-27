@@ -169,6 +169,7 @@ public class gfdb {
         create table ComboOrders (
         order_id int(64) not null auto_increment primary key,
         combo_id int(64),
+        order_set_id int,
         customer_id int(64),
         restaurant_id int(64),
         branch_id int(64),
@@ -187,6 +188,7 @@ public class gfdb {
         logistic_price decimal(20,3),
         other_tax decimal(20,3) ,
         table_version int(64) default 1,
+        foreign key (order_set_id) references OrderSet(order_set_id),
         foreign key (branch_id) references RestaurantBranchLocation(branch_id),
         foreign key (restaurant_id) references RestaurantDetail(restaurant_id),
         foreign key (customer_id) references CustomerDetail(customer_id),
@@ -311,6 +313,7 @@ public class gfdb {
         start_date varchar(20),
         end_date varchar(20),
         ordering_date varchar(20),
+        vacation_flag Enum('true', 'false'),
         foreign key (customer_id) references  CustomerDetail (customer_id));
 
 
@@ -326,6 +329,26 @@ public class gfdb {
         cuisine_name varchar(50),
         cate_id int,
         foreign key (cate_id) references Category(cate_id));
+
+        create table Vacation (
+        vacation_id int primary key auto_increment,
+        customer_id int,w
+        order_set_id int,
+        from_date varchar(20),
+        to_date varchar(20),
+        mode Enum ('long', 'short', 'emergency'),
+        approval_status Enum ('pending', 'refunded') default 'pending',
+        foreign key (customer_id) references CustomerDetail (customer_id),
+        foreign key (order_set_id) references OrderSet (order_set_id));
+
+
+
+
+
+
+
+
+
 
         CREATE View  CustomerFullDetail AS
         SELECT
