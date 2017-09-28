@@ -19,18 +19,14 @@ public class Login extends BaseModel implements Parcelable {
     @SerializedName("statusMessage")
     @Expose
     public String statusMessage;
-    public final static Parcelable.Creator<Login> CREATOR = new Creator<Login>() {
+    public final static Creator<Login> CREATOR = new Creator<Login>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
         public Login createFromParcel(Parcel in) {
-            Login instance = new Login();
-            instance.data = ((Data) in.readValue((Data.class.getClassLoader())));
-            instance.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
-            instance.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
-            return instance;
+            return new Login(in);
         }
 
         public Login[] newArray(int size) {
@@ -38,6 +34,15 @@ public class Login extends BaseModel implements Parcelable {
         }
 
     };
+
+    protected Login(Parcel in) {
+        this.data = ((Data) in.readValue((Data.class.getClassLoader())));
+        this.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
+    }
+
+    public Login() {
+    }
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(data);

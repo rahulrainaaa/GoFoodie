@@ -41,8 +41,8 @@ public class Featured extends BaseModel implements Parcelable {
     };
 
     protected Featured(Parcel in) {
-        in.readList(this.featuredRestaurants, (com.app.gofoodie.model.featured.FeaturedRestaurant.class.getClassLoader()));
-        in.readList(this.featuredCombos, (com.app.gofoodie.model.featured.FeaturedCombo.class.getClassLoader()));
+        in.readList(this.featuredRestaurants, (FeaturedRestaurant.class.getClassLoader()));
+        in.readList(this.featuredCombos, (FeaturedCombo.class.getClassLoader()));
         this.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
     }

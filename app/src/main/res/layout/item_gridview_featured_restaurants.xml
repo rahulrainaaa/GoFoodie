@@ -20,44 +20,38 @@
             android:scaleType="fitXY"
             app:srcCompat="@drawable/img_default_combo" />
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="2dp"
             android:gravity="center"
-            android:orientation="vertical"
-            android:paddingLeft="10dp">
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/img_nonveg"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/nonveg"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/img_veg"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/veg" />
+
+            <TextView
+                android:id="@+id/restaurant_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginRight="5dp"
-                    android:src="@drawable/nonveg"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:src="@drawable/veg" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:gravity="left|center"
-                    android:paddingLeft="3dp"
-                    android:text="Restaurant Name"
-                    android:textColor="@color/colorTextName"
-                    android:textSize="13dp" />
-
-
-            </LinearLayout>
+                android:enabled="false"
+                android:gravity="left|center"
+                android:paddingLeft="3dp"
+                android:text="Restaurant Name"
+                android:textColor="@color/colorTextName"
+                android:textSize="13dp" />
 
 
         </LinearLayout>

@@ -26,7 +26,7 @@ public class ListViewUtils {
             totalHeight += view.getMeasuredHeight();
         }
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = (totalHeight + (listView.getVerticalSpacing() * (listAdapter.getCount() - 1))) / 2;
+        params.height = 200 + (totalHeight + (listView.getVerticalSpacing() * (listAdapter.getCount() - 1))) / 2;
         listView.setLayoutParams(params);
 
     }

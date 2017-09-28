@@ -135,7 +135,7 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
 
         //Parse the json response into model.
         ModelParser modelParser = new ModelParser();
-//        mFeatured = (Featured) modelParser.getModel(json.toString(), Featured.class, null);
+        mFeatured = (Featured) modelParser.getModel(json.toString(), Featured.class, null);
 
         // populate Featured Combos.
         mListFeaturedCombos = (ArrayList<FeaturedCombo>) mFeatured.featuredCombos;
@@ -148,7 +148,7 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
 
         // populate Featured Restaurants.
         mListFeaturedRestaurant = (ArrayList<FeaturedRestaurant>) mFeatured.featuredRestaurants;
-        mFeaturedRestaurantAdapter = new FeaturedRestaurantGridAdapter(getDashboardActivity(), android.R.layout.simple_list_item_1, mListFeaturedRestaurant);
+        mFeaturedRestaurantAdapter = new FeaturedRestaurantGridAdapter(getDashboardActivity(), R.layout.item_gridview_featured_restaurants, mListFeaturedRestaurant);
         mFeaturedRestaurantsGrid.setAdapter(mFeaturedRestaurantAdapter);
         ListViewUtils.setGridViewHeightBasedOnChildren(mFeaturedRestaurantsGrid);
 

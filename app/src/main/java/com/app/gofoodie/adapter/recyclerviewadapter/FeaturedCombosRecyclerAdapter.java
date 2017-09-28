@@ -14,6 +14,7 @@ import com.app.gofoodie.R;
 import com.app.gofoodie.customview.RoundedImageView;
 import com.app.gofoodie.model.featured.FeaturedCombo;
 import com.app.gofoodie.utility.DisplayUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -83,8 +84,8 @@ public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<Featured
 
         // Load image into imageView. (LazyLoading).
         try {
-            //  Picasso.with(mActivity).load("https://i.stack.imgur.com/5Z9P1.jpg").into(holder.imgRestaurant);
-            holder.txtRestaurantName.setText("FC-" + position);
+            Picasso.with(mActivity).load(data.image).into(holder.imgRestaurant);
+            holder.txtRestaurantName.setText(data.comboName);
         } catch (Exception e) {
             e.printStackTrace();
         }
