@@ -134,8 +134,8 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
     private void handleDashboardResponse(JSONObject json) {
 
         //Parse the json response into model.
-        ModelParser parser = new ModelParser();
-        mFeatured = (Featured) parser.getModel(json.toString(), Featured.class, null);
+        ModelParser modelParser = new ModelParser();
+//        mFeatured = (Featured) modelParser.getModel(json.toString(), Featured.class, null);
 
         // populate Featured Combos.
         mListFeaturedCombos = (ArrayList<FeaturedCombo>) mFeatured.featuredCombos;
@@ -144,7 +144,7 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
         mRVShortlistRestaurant.setLayoutManager(categoryLayoutManager);
         mShortlistRestaurantRVAdapter = new FeaturedCombosRecyclerAdapter(getActivity(), R.layout.item_rv_shortlist_restaurant, null, mListFeaturedCombos);
         mRVShortlistRestaurant.setAdapter(mShortlistRestaurantRVAdapter);
-//        mShortlistRestaurantRVAdapter.notifyDataSetChanged();
+        mShortlistRestaurantRVAdapter.notifyDataSetChanged();
 
         // populate Featured Restaurants.
         mListFeaturedRestaurant = (ArrayList<FeaturedRestaurant>) mFeatured.featuredRestaurants;
