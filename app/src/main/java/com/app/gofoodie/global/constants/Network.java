@@ -21,6 +21,8 @@ public class Network {
      * GET REST Web APIs.
      */
 
+    public static final String URL_GET_DASHBOARD = "http://gofoodie.drushtiindia.com/API/Featured/";
+
     public static final String URL_GET_COUNTRIES = "http://gofoodie.drushtiindia.com/API/Location/Country/";
 
     public static final String URL_GET_CITY = "http://gofoodie.drushtiindia.com/API/Location/City/";

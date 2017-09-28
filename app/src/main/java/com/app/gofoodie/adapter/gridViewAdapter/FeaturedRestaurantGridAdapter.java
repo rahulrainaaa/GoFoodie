@@ -11,13 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.app.gofoodie.model.featured.FeaturedRestaurant;
+
 import java.util.ArrayList;
 
 /**
  * @class FeaturedRestaurantGridAdapter
  * @desc Adapter class for showing Featured Restaurant Grid View on Dashboard Home Fragment UI.
  */
-public class FeaturedRestaurantGridAdapter extends ArrayAdapter<String> {
+public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaurant> {
 
     public static final String TAG = "ComboPlanGridAdapter";
 
@@ -25,11 +27,11 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<String> {
      * Adapter Class private data members.
      */
     private Activity mActivity = null;
-    private ArrayList<String> mComboList = null;
+    private ArrayList<FeaturedRestaurant> mComboList = null;
     private int mLayoutResource;
     public LayoutInflater mInflater = null;
 
-    public FeaturedRestaurantGridAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<String> list) {
+    public FeaturedRestaurantGridAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<FeaturedRestaurant> list) {
         super(activity, resource, list);
         this.mActivity = activity;
         this.mComboList = list;

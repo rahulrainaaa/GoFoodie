@@ -12,17 +12,17 @@ import android.widget.TextView;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.customview.RoundedImageView;
+import com.app.gofoodie.model.featured.FeaturedCombo;
 import com.app.gofoodie.utility.DisplayUtils;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 
 /**
- * @class ShortlistRestaurantsRecyclerAdapter
+ * @class FeaturedCombosRecyclerAdapter
  * @desc {@link RecyclerView.Adapter} adapter class for shortlisted restaurants - recycler view on home dashboard fragment.
  */
-public class ShortlistRestaurantsRecyclerAdapter extends RecyclerView.Adapter<ShortlistRestaurantsRecyclerAdapter.ItemHolder> {
+public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<FeaturedCombosRecyclerAdapter.ItemHolder> {
 
     /**
      * @class ItemHolder
@@ -44,7 +44,7 @@ public class ShortlistRestaurantsRecyclerAdapter extends RecyclerView.Adapter<Sh
     /**
      * private class Data members.
      */
-    private List<String> mList = null;
+    private List<FeaturedCombo> mList = null;
     private Activity mActivity = null;
     private int lastPosition;
     private View.OnClickListener onClickListener = null;
@@ -54,7 +54,7 @@ public class ShortlistRestaurantsRecyclerAdapter extends RecyclerView.Adapter<Sh
      * @constructor CategoryRecyclerAdapter
      * @desc Constructor method for this class.
      */
-    public ShortlistRestaurantsRecyclerAdapter(Activity activity, int layoutResourceId, View.OnClickListener onClickListener, List<String> categories) {
+    public FeaturedCombosRecyclerAdapter(Activity activity, int layoutResourceId, View.OnClickListener onClickListener, List<FeaturedCombo> categories) {
         this.mActivity = activity;
         this.mList = categories;
         this.onClickListener = onClickListener;
@@ -79,12 +79,12 @@ public class ShortlistRestaurantsRecyclerAdapter extends RecyclerView.Adapter<Sh
     @Override
     public void onBindViewHolder(final ItemHolder holder, int position) {
 
-        String data = mList.get(position);
+        FeaturedCombo data = mList.get(position);
 
         // Load image into imageView. (LazyLoading).
         try {
-          //  Picasso.with(mActivity).load("https://i.stack.imgur.com/5Z9P1.jpg").into(holder.imgRestaurant);
-            holder.txtRestaurantName.setText("" + data);
+            //  Picasso.with(mActivity).load("https://i.stack.imgur.com/5Z9P1.jpg").into(holder.imgRestaurant);
+            holder.txtRestaurantName.setText("FC-" + position);
         } catch (Exception e) {
             e.printStackTrace();
         }

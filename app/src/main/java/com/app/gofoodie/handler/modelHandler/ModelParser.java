@@ -4,6 +4,7 @@ package com.app.gofoodie.handler.modelHandler;
 import android.util.Log;
 
 import com.app.gofoodie.model.base.BaseModel;
+import com.app.gofoodie.model.featured.Featured;
 import com.google.gson.Gson;
 
 /**
@@ -50,4 +51,6 @@ public class ModelParser {
         }
         return mGson.fromJson(jsonString, className);
     }
+
+
 }

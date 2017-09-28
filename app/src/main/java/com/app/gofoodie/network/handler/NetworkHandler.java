@@ -120,15 +120,6 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
-     * @method stopExecute
-     * @desc Method to remove callback and stop the network api call execution.
-     */
-    public void stopExecute() {
-
-        mNetworkCallbackListener = null;
-    }
-
-    /**
      * @method executeGet
      * @desc Method to execute POST request with the available JSON data.
      */
@@ -261,13 +252,18 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
-     * @method cancelHttpRequest
-     * @desc Method to cancel the HTTP request. But don't destroy the object.
+     * @method cancel
+     * @desc Method to cancel the HTTP request. But don't destroy the object. Also send the callback about cancelled.
      */
-    public void cancelHttpRequest() {
+    public void cancel() {
 
         mHttpJsonRequest.cancel();
         setProcessingDialogVisibility(false);
+        if (mNetworkCallbackListener == null) {
+            return;
+        }
+        mNetworkCallbackListener.networkFailResponse(mRequestCode, "Request Cancelled");
+        mNetworkCallbackListener = null;
     }
 
     /**

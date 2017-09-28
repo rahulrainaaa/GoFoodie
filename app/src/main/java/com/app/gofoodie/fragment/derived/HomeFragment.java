@@ -9,19 +9,25 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.adapter.gridViewAdapter.FeaturedRestaurantGridAdapter;
-import com.app.gofoodie.adapter.recyclerviewadapter.ShortlistRestaurantsRecyclerAdapter;
+import com.app.gofoodie.adapter.recyclerviewadapter.FeaturedCombosRecyclerAdapter;
 import com.app.gofoodie.adapter.viewflipperadapter.HomeImageViewFlipperAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Constants;
+import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.model.featured.Featured;
+import com.app.gofoodie.model.featured.FeaturedCombo;
+import com.app.gofoodie.model.featured.FeaturedRestaurant;
+import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.ListViewUtils;
 
-import org.json.JSONException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -30,7 +36,10 @@ import java.util.ArrayList;
  * @class HomeFragment
  * @desc {@link BaseFragment} Fragment class to handle Home UI screen.
  */
-public class HomeFragment extends BaseFragment implements View.OnTouchListener {
+public class HomeFragment extends BaseFragment implements View.OnTouchListener, NetworkCallbackListener {
+
+    public static final String TAG = "";
+    private Featured mFeatured = null;
 
     /**
      * Data members for Banner slide show {@link android.widget.AdapterViewFlipper}.
@@ -42,21 +51,23 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener {
      * Data members for Shortlisted Restaurants {@link RecyclerView}.
      */
     private RecyclerView mRVShortlistRestaurant = null;
-    private ShortlistRestaurantsRecyclerAdapter mShortlistRestaurantRVAdapter = null;
-    private ArrayList<String> mListShortlistRestaurant = new ArrayList<>();
+    private FeaturedCombosRecyclerAdapter mShortlistRestaurantRVAdapter = null;
+    private ArrayList<FeaturedCombo> mListFeaturedCombos = new ArrayList<>();
 
     /**
      * Data members for Features restaurants {@link android.widget.GridView}.
      */
     private GridView mFeaturedRestaurantsGrid = null;
     private FeaturedRestaurantGridAdapter mFeaturedRestaurantAdapter = null;
-    private ArrayList<String> mFeaturedRestaurantList = new ArrayList<>();
+    private ArrayList<FeaturedRestaurant> mListFeaturedRestaurant = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.frag_home, container, false);
+        mRVShortlistRestaurant = (RecyclerView) view.findViewById(R.id.rv_shortlist_restaurants);
+        mFeaturedRestaurantsGrid = (GridView) view.findViewById(R.id.grid_view_banner);
 
         // AdapterViewFlipper - Banner slide show Handling Code.
         mFlipperBanner = (AdapterViewFlipper) view.findViewById(R.id.banner_adapterviewflipper);
@@ -69,38 +80,10 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener {
         mFlipperBanner.setInAnimation(getActivity(), android.R.animator.fade_in);
         mFlipperBanner.setOutAnimation(getActivity(), android.R.animator.fade_out);
 
-        for (int i = 0; i < 20; i++) {
-            mListShortlistRestaurant.add("Restaurant " + i);
-        }
-
-        // RecyclerView - Shortlisted Restaurants Handling Code.
-        LinearLayoutManager categoryLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        mRVShortlistRestaurant = (RecyclerView) view.findViewById(R.id.rv_shortlist_restaurants);
-        mRVShortlistRestaurant.setHasFixedSize(true);
-        mRVShortlistRestaurant.setLayoutManager(categoryLayoutManager);
-        mShortlistRestaurantRVAdapter = new ShortlistRestaurantsRecyclerAdapter(getActivity(), R.layout.item_rv_shortlist_restaurant, null, mListShortlistRestaurant);
-        mRVShortlistRestaurant.setAdapter(mShortlistRestaurantRVAdapter);
-        mShortlistRestaurantRVAdapter.notifyDataSetChanged();
-
-        // GridView - Featured Restaurants Handling Code.
-        mFeaturedRestaurantsGrid = (GridView) view.findViewById(R.id.grid_view_banner);
-        for (int i = 0; i < 80; i++) {
-            mFeaturedRestaurantList.add("REst " + i);
-        }
-        mFeaturedRestaurantAdapter = new FeaturedRestaurantGridAdapter(getDashboardActivity(), android.R.layout.simple_list_item_1, mFeaturedRestaurantList);
-        mFeaturedRestaurantsGrid.setAdapter(mFeaturedRestaurantAdapter);
-        ListViewUtils.setGridViewHeightBasedOnChildren(mFeaturedRestaurantsGrid);
-
-        JSONObject jsonHomeDashboardRequest = new JSONObject();
-        try {
-            jsonHomeDashboardRequest.put("", "");
-        } catch (JSONException excJson) {
-            excJson.printStackTrace();
-        }
-
+        // Network Handler to get the dashboard home screen content.
         NetworkHandler networkHandler = new NetworkHandler();
-        networkHandler.httpCreate(1, getDashboardActivity(), null, jsonHomeDashboardRequest, "URL", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-        networkHandler.executePost();
+        networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), Network.URL_GET_DASHBOARD, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.executeGet();
 
         return view;
     }
@@ -119,6 +102,56 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener {
         }
 
         return false;
+    }
+
+    /**
+     * {@link NetworkCallbackListener} HTTP callback listener.
+     */
+    @Override
+    public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+        Toast.makeText(getActivity(), "success http", Toast.LENGTH_SHORT).show();
+        switch (requestCode) {
+
+            case 1:
+
+                handleDashboardResponse(rawObject);
+                break;
+        }
+    }
+
+    @Override
+    public void networkFailResponse(int requestCode, String message) {
+
+        Toast.makeText(getActivity(), "Http_fail: " + message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * @param json
+     * @desc Method to handle the dashboard response got from http.
+     * @method handleDashboardResponse
+     */
+    private void handleDashboardResponse(JSONObject json) {
+
+        //Parse the json response into model.
+        ModelParser parser = new ModelParser();
+        mFeatured = (Featured) parser.getModel(json.toString(), Featured.class, null);
+
+        // populate Featured Combos.
+        mListFeaturedCombos = (ArrayList<FeaturedCombo>) mFeatured.featuredCombos;
+        LinearLayoutManager categoryLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        mRVShortlistRestaurant.setHasFixedSize(true);
+        mRVShortlistRestaurant.setLayoutManager(categoryLayoutManager);
+        mShortlistRestaurantRVAdapter = new FeaturedCombosRecyclerAdapter(getActivity(), R.layout.item_rv_shortlist_restaurant, null, mListFeaturedCombos);
+        mRVShortlistRestaurant.setAdapter(mShortlistRestaurantRVAdapter);
+//        mShortlistRestaurantRVAdapter.notifyDataSetChanged();
+
+        // populate Featured Restaurants.
+        mListFeaturedRestaurant = (ArrayList<FeaturedRestaurant>) mFeatured.featuredRestaurants;
+        mFeaturedRestaurantAdapter = new FeaturedRestaurantGridAdapter(getDashboardActivity(), android.R.layout.simple_list_item_1, mListFeaturedRestaurant);
+        mFeaturedRestaurantsGrid.setAdapter(mFeaturedRestaurantAdapter);
+        ListViewUtils.setGridViewHeightBasedOnChildren(mFeaturedRestaurantsGrid);
+
     }
 
 }
