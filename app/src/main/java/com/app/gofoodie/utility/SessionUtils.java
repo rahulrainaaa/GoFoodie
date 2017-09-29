@@ -1,14 +1,13 @@
 package com.app.gofoodie.utility;
 
         import android.app.Activity;
-        import android.content.Context;
+import android.content.Context;
 
-        import com.app.gofoodie.global.data.GlobalData;
-        import com.app.gofoodie.model.customer.Customer;
-        import com.app.gofoodie.handler.modelHandler.ModelParser;
-        import com.app.gofoodie.model.login.Login;
+import com.app.gofoodie.global.data.GlobalData;
+import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.model.login.Login;
 
-        import org.json.JSONObject;
+import org.json.JSONObject;
 
 /**
  * @class SessionUtils
@@ -45,10 +44,8 @@ public class SessionUtils {
      */
     public void removeSession(Activity activity) {
 
-        CacheUtils.getInstance().getPref(activity, CacheUtils.PREF_NAME.PREF_CUSTOMER_PROFILE).edit().remove(CacheUtils.PREF_KEY).commit();
         CacheUtils.getInstance().getPref(activity, CacheUtils.PREF_NAME.PREF_LOGIN).edit().remove(CacheUtils.PREF_KEY).commit();
         GlobalData.login = null;
-        GlobalData.customer = null;
         GlobalData.isSession = false;
     }
 
@@ -62,7 +59,6 @@ public class SessionUtils {
      */
     public int saveSession(Context context, JSONObject login, JSONObject profile) {
 
-        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_CUSTOMER_PROFILE).edit().putString(CacheUtils.PREF_KEY, profile.toString()).commit();
         CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).edit().putString(CacheUtils.PREF_KEY, login.toString()).commit();
         return 1;
     }
@@ -74,18 +70,15 @@ public class SessionUtils {
      */
     public void loadSession(Activity activity) {
 
-        String strProfile = CacheUtils.getInstance().getPref(activity, CacheUtils.PREF_NAME.PREF_CUSTOMER_PROFILE).getString(CacheUtils.PREF_KEY, "");
         String strLogin = CacheUtils.getInstance().getPref(activity, CacheUtils.PREF_NAME.PREF_LOGIN).getString(CacheUtils.PREF_KEY, "");
 
-        if (strLogin.isEmpty() || strProfile.isEmpty()) {
+        if (strLogin.isEmpty()) {
             GlobalData.login = null;
-            GlobalData.customer = null;
             GlobalData.isSession = false;
             return;
         }
 
         ModelParser modelParser = new ModelParser();
-        GlobalData.customer = (Customer) modelParser.getModel(strProfile, Customer.class, null);
         GlobalData.login = (Login) modelParser.getModel(strLogin, Login.class, null);
         GlobalData.isSession = true;
 

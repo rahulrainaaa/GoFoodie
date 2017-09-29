@@ -360,7 +360,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         ModelParser modelParser = new ModelParser();
         Customer customer = (Customer) modelParser.getModel(raw.toString(), Customer.class, null);
-        CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_CUSTOMER_PROFILE).edit().putString(CacheUtils.PREF_KEY, raw.toString()).commit();
         SessionUtils.getInstance().loadSession(getActivity());
         getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.PROFILE);
     }
@@ -371,7 +370,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void onFacebookLogin(LoginResult loginResult) {
 
-        Toast.makeText(getActivity(), "Login as facebook.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Logged in facebook.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -396,29 +395,17 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
              */
             Toast.makeText(getActivity(), "FacebookException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
     }
 
     /**
-     * @param email
-     * @param name
-     * @param phone
-     * @param address
-     * @method socialUserRegister
-     * @desc Method to instant add/register new social user with minimum details.
+     * @method registerNewSocialUser
+     * @desc Method to get new social user email and navigate to NewUserRegister Fragment with data.
+     * @param email social user email id to be registered.
      */
-    private void socialUserRegister(String email, String name, String phone, String address) {
+    private void registerNewSocialUser(String email) {
 
-        try {
 
-            JSONObject jsonRequest = new JSONObject();
-
-            NetworkHandler networkHandler = new NetworkHandler();
-
-        } catch (Exception exc) {
-
-            exc.printStackTrace();
-            Log.e(TAG, "" + exc.getMessage());
-        }
 
     }
 
