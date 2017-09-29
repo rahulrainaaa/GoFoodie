@@ -29,11 +29,11 @@ import org.json.JSONObject;
 
 /**
  * @class NewRegisterFragment
- * @desc {@link BaseFragment} Fragment class to handle New Customer Registration UI screen.
+ * @desc {@link BaseFragment} Fragment class to handle New Social (Google/Facebook) Customer - Registration Fragment UI screen.
  */
-public class NewRegisterFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener {
+public class NewSocialRegisterFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener {
 
-    private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtCompanyName, mEtPassword, mEtCfmPassword, mLocationPref;
+    private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtCompanyName, mLocationPref;
     private Button mBtnRegister = null;
     private CheckBox mChkAcceptTerms = null;
     private String locationId = "0";
@@ -44,7 +44,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.frag_register_new_user, container, false);
+        View view = inflater.inflate(R.layout.frag_register_new_social, container, false);
 
         mEtFirstName = (MaterialEditText) view.findViewById(R.id.et_first_name);
         mEtLastName = (MaterialEditText) view.findViewById(R.id.et_last_name);
@@ -55,8 +55,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         mEtAddress = (MaterialEditText) view.findViewById(R.id.et_address);
         mLocationPref = (MaterialEditText) view.findViewById(R.id.et_location_pref);
         mEtCompanyName = (MaterialEditText) view.findViewById(R.id.et_location_pref);
-        mEtPassword = (MaterialEditText) view.findViewById(R.id.et_password);
-        mEtCfmPassword = (MaterialEditText) view.findViewById(R.id.et_conform_password);
         mChkAcceptTerms = (CheckBox) view.findViewById(R.id.chk_agree_terms);
         mBtnRegister = (Button) view.findViewById(R.id.btn_register_new);
 
@@ -87,7 +85,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
     }
 
     /**
-     * {@link android.view.View.OnClickListener} click event callback method.
+     * {@link View.OnClickListener} click event callback method.
      */
     @Override
     public void onClick(View view) {
@@ -115,8 +113,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         String strAltMobile = mEtAltMobile.getText().toString().trim();
         String strAddress = mEtAddress.getText().toString().trim();
         String strCompanyName = mEtCompanyName.getText().toString().trim();
-        String strPassword = mEtPassword.getText().toString().trim();
-        String strConfirmPassword = mEtCfmPassword.getText().toString().trim();
 
         boolean isValid = false;
 
@@ -175,24 +171,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             isValid = true && isValid;
         }
 
-        if (strPassword.isEmpty()) {
-
-            isValid = false;
-            mEtFirstName.setError(getString(R.string.cannot_be_empty));
-        } else {
-
-            isValid = true && isValid;
-        }
-
-        // Check for confirm password match.
-        if (!strConfirmPassword.equals(strPassword.trim())) {
-
-            isValid = false;
-            mEtFirstName.setError(getString(R.string.confirm_password_not_match));
-        } else {
-
-            isValid = true && isValid;
-        }
 
         // Check if accepted terms & conditions.
         if (!mChkAcceptTerms.isChecked()) {
@@ -224,7 +202,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             jsonNewUserRegisterRequest.put("name", strFirstName + " " + strLastName);
             jsonNewUserRegisterRequest.put("address", strAddress);
             jsonNewUserRegisterRequest.put("company_name", strCompanyName);
-            jsonNewUserRegisterRequest.put("social_login", "no");
+            jsonNewUserRegisterRequest.put("social_login", "yes");
             jsonNewUserRegisterRequest.put("mobile", strMobile);
             jsonNewUserRegisterRequest.put("mobile2", strAltMobile);
             jsonNewUserRegisterRequest.put("email", strEmail);
@@ -232,7 +210,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             jsonNewUserRegisterRequest.put("location", locationId);
             jsonNewUserRegisterRequest.put("geo_lat", "");
             jsonNewUserRegisterRequest.put("geo_lng", "");
-            jsonNewUserRegisterRequest.put("password", strPassword);
+            jsonNewUserRegisterRequest.put("password", ""); // No password in social_login = yes
             jsonNewUserRegisterRequest.put("username", "");
 
             NetworkHandler networkHandler = new NetworkHandler();
@@ -304,7 +282,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
     /**
      * @param login Email to login.
      * @method userLoginResponse
-     * @desc Method to call for Customer Login API.
+     * @desc Method to call for Social Customer Login API (social_login = yes).
      */
     private void userLoginResponse(Login login) {
 
@@ -312,10 +290,9 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         try {
 
             String email = mEtEmail.getText().toString();
-            String password = mEtPassword.toString();
             jsonRequets.put("email", email.trim());
-            jsonRequets.put("social_login", "");
-            jsonRequets.put("password", password.trim());
+            jsonRequets.put("social_login", "yes");
+            jsonRequets.put("password", "");    ///. No password if social_login = yes;
 
             NetworkHandler networkHandler = new NetworkHandler();
             networkHandler.httpCreate(2, getDashboardActivity(), this, jsonRequets, Network.URL_LOGIN, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);

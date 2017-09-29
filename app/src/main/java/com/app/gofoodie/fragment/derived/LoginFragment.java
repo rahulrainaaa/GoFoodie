@@ -65,7 +65,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     private FacebookLoginHandler mFacebookLoginHandler = null;
     private GoogleApiClient mGoogleApiClient = null;
 
-    private String newSocialEmail = "";             // to share with email.
+    private String mNewSocialEmail = "";             // to share with email.
     private boolean isSocialLoginAttempt = false;   // to check if the login is social.
 
     @Nullable
@@ -131,7 +131,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             Toast.makeText(getActivity(), "" + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
-
+            mNewSocialEmail = acct.getEmail();
+            loginRequest(acct.getEmail(), "yes", "");
         } else {
             // Signed out, show unauthenticated UI.
             Toast.makeText(getActivity(), "Failed Google Login.", Toast.LENGTH_SHORT).show();
@@ -145,6 +146,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+        Toast.makeText(getActivity(), "Google Login Failed.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -232,10 +234,10 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         if (social_login.toLowerCase().contains("yes")) {
             isSocialLoginAttempt = true;
-            newSocialEmail = "" + email;
+            mNewSocialEmail = "" + email;
         } else {
             isSocialLoginAttempt = false;
-            newSocialEmail = "";
+            mNewSocialEmail = "";
         }
         JSONObject jsonHttpLoginRequest = new JSONObject();
         try {
@@ -340,7 +342,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 Toast.makeText(getActivity(), loginModel.statusMessage.trim(), Toast.LENGTH_SHORT).show();
                 if (isSocialLoginAttempt) {
 
-                    registerNewSocialUser(newSocialEmail);
+                    registerNewSocialUser(mNewSocialEmail);
                 }
                 break;
         }
@@ -388,6 +390,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     public void onFacebookLogin(LoginResult loginResult) {
 
         Toast.makeText(getActivity(), "Logged in facebook.", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -422,8 +425,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
      */
     private void registerNewSocialUser(String email) {
 
-        GlobalData.newSocialEmail = newSocialEmail;
-        getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.PROFILE);
+        GlobalData.newSocialEmail = mNewSocialEmail;
+        getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_USER);
 
     }
 
