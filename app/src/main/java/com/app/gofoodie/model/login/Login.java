@@ -12,13 +12,13 @@ public class Login extends BaseModel implements Parcelable {
 
     @SerializedName("data")
     @Expose
-    public Data data;
+    private Data data;
     @SerializedName("statusCode")
     @Expose
-    public Integer statusCode;
+    private Integer statusCode;
     @SerializedName("statusMessage")
     @Expose
-    public String statusMessage;
+    private String statusMessage;
     public final static Creator<Login> CREATOR = new Creator<Login>() {
 
 
@@ -42,6 +42,30 @@ public class Login extends BaseModel implements Parcelable {
     }
 
     public Login() {
+    }
+
+    public Data getData() {
+        return data;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
+    }
+
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public String getStatusMessage() {
+        return statusMessage;
+    }
+
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
     }
 
     public void writeToParcel(Parcel dest, int flags) {

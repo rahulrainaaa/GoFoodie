@@ -17,7 +17,6 @@ import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.global.data.GlobalData;
-import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.CacheUtils;
@@ -232,13 +231,15 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
         Toast.makeText(getActivity(), "HTTP Success: " + rawObject, Toast.LENGTH_SHORT).show();
         getDashboardActivity().getProgressDialog().hide();
-        if (requestCode == 1) {     // New register response.
+        if (requestCode == 1) {             // New social register response.
 
-            userRegisterResponse(rawObject);
-        } else if (requestCode == 2) {      // Login response.
+            socialUserRegisterResponse(rawObject);
+        } else if (requestCode == 2) {      // Login social customer response.
 
-        } else if (requestCode == 3) {      // Customer Full Profile.
+            socialUserLoginResponse(rawObject);
+        } else if (requestCode == 3) {      // Customer Social Full Profile.
 
+            socialGetProfile(rawObject);
         }
     }
 
@@ -247,17 +248,14 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
         Toast.makeText(getActivity(), "HTTP Success: " + message, Toast.LENGTH_SHORT).show();
         getDashboardActivity().getProgressDialog().hide();
-        if (requestCode == 1) {
-
-        }
     }
 
     /**
      * @param json Http API response.
-     * @method userRegisterResponse
+     * @method socialUserRegisterResponse
      * @desc Method to register response.
      */
-    private void userRegisterResponse(JSONObject json) {
+    private void socialUserRegisterResponse(JSONObject json) {
 
         // Check if registered and navigate to login page.
         try {
@@ -267,6 +265,16 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
             if (statusCode == 200) {
 
+                // Now request for login.
+                String email = mEtEmail.getText().toString();
+                JSONObject jsonRequest = new JSONObject();
+                jsonRequest.put("email", email.trim());
+                jsonRequest.put("social_login", "yes");
+                jsonRequest.put("password", "");    ///. No password if social_login = yes;
+
+                NetworkHandler networkHandler = new NetworkHandler();
+                networkHandler.httpCreate(2, getDashboardActivity(), this, jsonRequest, Network.URL_LOGIN, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                networkHandler.executePost();
 
             } else {
                 Toast.makeText(getActivity(), statusCode + "#" + statusMessage, Toast.LENGTH_SHORT).show();
@@ -280,22 +288,19 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
     }
 
     /**
-     * @param login Email to login.
-     * @method userLoginResponse
-     * @desc Method to call for Social Customer Login API (social_login = yes).
+     * @param json JSONString response.
+     * @method socialUserLoginResponse
+     * @desc Method to handle Customer Login API (social_login = yes).
      */
-    private void userLoginResponse(Login login) {
+    private void socialUserLoginResponse(JSONObject json) {
 
-        JSONObject jsonRequets = new JSONObject();
+        JSONObject jsonRequest = new JSONObject();
         try {
-
-            String email = mEtEmail.getText().toString();
-            jsonRequets.put("email", email.trim());
-            jsonRequets.put("social_login", "yes");
-            jsonRequets.put("password", "");    ///. No password if social_login = yes;
+            jsonRequest.put("", "");
+            jsonRequest.put("", "");
 
             NetworkHandler networkHandler = new NetworkHandler();
-            networkHandler.httpCreate(2, getDashboardActivity(), this, jsonRequets, Network.URL_LOGIN, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+            networkHandler.httpCreate(3, getDashboardActivity(), this, jsonRequest, Network.URL_GET_CUST_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
             networkHandler.executePost();
 
         } catch (Exception exc) {
@@ -304,6 +309,16 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             exc.printStackTrace();
             Log.e(TAG, exc.getMessage());
         }
+    }
+
+    /**
+     * @param json Social Login http response packet.
+     * @method socialGetProfile
+     * @desc Method to get social profile wrt to the login response.
+     */
+    private void socialGetProfile(JSONObject json) {
+
+
     }
 
 }
