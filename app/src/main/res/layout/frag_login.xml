@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:hint="Mobile/Email"
+        android:hint="Email"
         android:paddingLeft="@dimen/signup_edittext_padding"
         android:text="kalyanigay@gmail.com"
         android:textColorHint="@color/colorWhite"

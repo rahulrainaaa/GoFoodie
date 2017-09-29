@@ -1,6 +1,6 @@
 package com.app.gofoodie.utility;
 
-        import android.app.Activity;
+import android.app.Activity;
 import android.content.Context;
 
 import com.app.gofoodie.global.data.GlobalData;

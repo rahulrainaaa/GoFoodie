@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.app.gofoodie.R;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.handler.socialHandler.FacebookLoginHandler;
@@ -59,10 +60,13 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     private MaterialEditText mEtPassword = null;
     private Button mBtnSignin, mBtnForgot, mBtnSignup;
     private LoginButton mLoginButton = null;
-    private SignInButton mSignInButtion = null;
+    private SignInButton mSignInButton = null;
     private CallbackManager callbackManager = null;
     private FacebookLoginHandler mFacebookLoginHandler = null;
     private GoogleApiClient mGoogleApiClient = null;
+
+    private String newSocialEmail = "";             // to share with email.
+    private boolean isSocialLoginAttempt = false;   // to check if the login is social.
 
     @Nullable
     @Override
@@ -107,7 +111,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
             // Google SignIn intent result.
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
+            handleGoogleSignInResult(result);
         } else {
             // Facebook login intent result.
             callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -116,10 +120,10 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
     /**
      * @param result
-     * @method handleSignInResult
-     * @desc Method to handle the result after google login.
+     * @method handleGoogleSignInResult
+     * @desc Method to handle the result after GOOGLE Sign In.
      */
-    private void handleSignInResult(GoogleSignInResult result) {
+    private void handleGoogleSignInResult(GoogleSignInResult result) {
 
         Log.d(TAG, "Google SignIn Result: " + result.isSuccess());
         if (result.isSuccess()) {
@@ -130,7 +134,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         } else {
             // Signed out, show unauthenticated UI.
-
+            Toast.makeText(getActivity(), "Failed Google Login.", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -226,6 +230,13 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
     private void loginRequest(String email, String social_login, String password) {
 
+        if (social_login.toLowerCase().contains("yes")) {
+            isSocialLoginAttempt = true;
+            newSocialEmail = "" + email;
+        } else {
+            isSocialLoginAttempt = false;
+            newSocialEmail = "";
+        }
         JSONObject jsonHttpLoginRequest = new JSONObject();
         try {
             jsonHttpLoginRequest.put("password", password);
@@ -287,10 +298,10 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         getDashboardActivity().getProgressDialog().hide();
         Toast.makeText(getActivity(), "Network Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
-        if (requestCode == 1) {
+        if (requestCode == 1) {     // Login Response.
 
             loginResponseHandling(rawObject);
-        } else if (requestCode == 2) {
+        } else if (requestCode == 2) {      // Customer Full Profile Response.
 
             userProfileResponse(rawObject);
         }
@@ -316,15 +327,21 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         switch (loginModel.statusCode) {
 
-            case 200:
+            case 200:       // Success Login.
 
                 getCustomerProfile(loginModel.data.loginId, loginModel.data.token);
                 break;
-            case 400:
+            case 400:       // Bad Request.
 
+                Toast.makeText(getActivity(), "Login failed. Try again.", Toast.LENGTH_SHORT).show();
                 break;
-            case 402:
+            case 406:       // Not Active or not registered.
 
+                Toast.makeText(getActivity(), loginModel.statusMessage.trim(), Toast.LENGTH_SHORT).show();
+                if (isSocialLoginAttempt) {
+
+                    registerNewSocialUser(newSocialEmail);
+                }
                 break;
         }
     }
@@ -354,12 +371,12 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     /**
      * @param raw
      * @method userProfileResponse
-     * @desc Method to process user profile data response.
+     * @desc Method to process user profile data response and finally proceed to profile activity.
      */
     private void userProfileResponse(JSONObject raw) {
 
         ModelParser modelParser = new ModelParser();
-        Customer customer = (Customer) modelParser.getModel(raw.toString(), Customer.class, null);
+        GlobalData.customer = (Customer) modelParser.getModel(raw.toString(), Customer.class, null);
         SessionUtils.getInstance().loadSession(getActivity());
         getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.PROFILE);
     }
@@ -399,13 +416,14 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     }
 
     /**
+     * @param email social user email id to be registered.
      * @method registerNewSocialUser
      * @desc Method to get new social user email and navigate to NewUserRegister Fragment with data.
-     * @param email social user email id to be registered.
      */
     private void registerNewSocialUser(String email) {
 
-
+        GlobalData.newSocialEmail = newSocialEmail;
+        getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.PROFILE);
 
     }
 
