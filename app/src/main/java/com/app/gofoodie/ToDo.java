@@ -9,7 +9,7 @@ public class ToDo {
      *
      * 2. Google Sign In crashing (Bug fix).
      *
-     * 3. Social Login in new Activity (For light weight and safe side handling).
+     * 3. New Social register - layout validations.
      *
      */
 

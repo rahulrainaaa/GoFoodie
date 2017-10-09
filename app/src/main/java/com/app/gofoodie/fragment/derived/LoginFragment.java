@@ -66,6 +66,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     private GoogleApiClient mGoogleApiClient = null;
 
     private String mNewSocialEmail = "";             // to share with email.
+    private String mSocialType = "";      // empty = manual, google = google signin & facebook = facebook Login (Lowercase String).
     private boolean isSocialLoginAttempt = false;   // to check if the login is social.
 
     @Nullable
@@ -126,6 +127,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     private void handleGoogleSignInResult(GoogleSignInResult result) {
 
         Log.d(TAG, "Google SignIn Result: " + result.isSuccess());
+        mSocialType = "google";
         if (result.isSuccess()) {
 
             // Signed in successfully, show authenticated UI.
@@ -218,6 +220,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         if (validateCredentials(strEmailMobile, strPassword)) {
 
+            mSocialType = "";   // manual type login (non social) = empty string.
             loginRequest(strEmailMobile, "no", strPassword);
         }
     }
@@ -254,7 +257,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         networkHandler.httpCreate(1, getDashboardActivity(), this, jsonHttpLoginRequest, Network.URL_LOGIN, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executePost();
         getDashboardActivity().getProgressDialog().show();
-        getDashboardActivity().getProgressDialog().setMessage("Connecting...");
+        getDashboardActivity().getProgressDialog().setMessage(getResources().getString(R.string.connecting));
 
     }
 
@@ -327,19 +330,19 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
         Login loginModel = (Login) modelParser.getModel(raw.toString(), Login.class, null);
         CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_LOGIN).edit().putString(CacheUtils.PREF_KEY, raw.toString()).commit();
 
-        switch (loginModel.statusCode) {
+        switch (loginModel.getStatusCode()) {
 
             case 200:       // Success Login.
 
-                getCustomerProfile(loginModel.data.loginId, loginModel.data.token);
+                getCustomerProfile(loginModel.getData().getLoginId(), loginModel.getData().getToken());
                 break;
             case 400:       // Bad Request.
 
-                Toast.makeText(getActivity(), "Login failed. Try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Invalid Credentials. Try Again.", Toast.LENGTH_SHORT).show();
                 break;
             case 406:       // Not Active or not registered.
 
-                Toast.makeText(getActivity(), loginModel.statusMessage.trim(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), loginModel.getStatusMessage().trim(), Toast.LENGTH_SHORT).show();
                 if (isSocialLoginAttempt) {
 
                     registerNewSocialUser(mNewSocialEmail);
@@ -390,13 +393,24 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     public void onFacebookLogin(LoginResult loginResult) {
 
         Toast.makeText(getActivity(), "Logged in facebook.", Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
     public void onFacebookGraphAPIInformation(JSONObject object, GraphResponse response) {
 
+        // Fetch the data from graph API and proceed for the social login.
         Toast.makeText(getActivity(), "Graph API: " + object.toString(), Toast.LENGTH_SHORT).show();
+
+        try {
+            mSocialType = "facebook";
+            String fbEmail = object.getString("email");
+            loginRequest(fbEmail, "yes", "");
+
+        } catch (JSONException jsonExc) {
+            Toast.makeText(getActivity(), "JSONException:" + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e(TAG, jsonExc.getMessage());
+            jsonExc.printStackTrace();
+        }
     }
 
     @Override
@@ -415,7 +429,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
              */
             Toast.makeText(getActivity(), "FacebookException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
     }
 
     /**
@@ -426,7 +439,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     private void registerNewSocialUser(String email) {
 
         GlobalData.newSocialEmail = mNewSocialEmail;
-        getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_USER);
+        getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_SOCIAL);
 
     }
 

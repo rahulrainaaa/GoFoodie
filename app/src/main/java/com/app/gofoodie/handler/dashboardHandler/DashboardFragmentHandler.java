@@ -9,6 +9,7 @@ import com.app.gofoodie.fragment.derived.HomeFragment;
 import com.app.gofoodie.fragment.derived.LoginFragment;
 import com.app.gofoodie.fragment.derived.MyOrdersFragment;
 import com.app.gofoodie.fragment.derived.NewRegisterFragment;
+import com.app.gofoodie.fragment.derived.NewSocialRegisterFragment;
 import com.app.gofoodie.fragment.derived.ProfileFragment;
 import com.app.gofoodie.fragment.derived.RestaurantListFragment;
 import com.app.gofoodie.fragment.derived.WalletFragment;
@@ -64,6 +65,9 @@ public class DashboardFragmentHandler {
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.MY_ORDERS == fragmentType) {
 
             return new MyOrdersFragment();
+        } else if (DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_SOCIAL == fragmentType) {
+
+            return new NewSocialRegisterFragment();
         }
 
         // Return a default fragment in case no match found (in else case).
