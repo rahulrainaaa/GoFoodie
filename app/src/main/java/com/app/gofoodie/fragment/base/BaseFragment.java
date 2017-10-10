@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.app.gofoodie.activity.derived.DashboardActivity;
 import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
+import com.app.gofoodie.model.login.Login;
+import com.app.gofoodie.utility.SessionUtils;
 
 import java.util.Stack;
 
@@ -93,5 +95,15 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
         if (flagPushIntoStack) {
             FRAG_STACK.push(CURRENT_FRAG);
         }
+    }
+
+    /**
+     * @return
+     * @method getSession
+     * @desc Method to fetch the current session within the fragment.
+     */
+    protected Login getSession() {
+
+        return SessionUtils.getInstance().getSession();
     }
 }

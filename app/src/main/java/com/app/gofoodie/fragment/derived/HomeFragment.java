@@ -65,6 +65,11 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
+        if (getSession() != null) {
+
+            Toast.makeText(getActivity(), "login_id: " + getSession().getData().getLoginId(), Toast.LENGTH_SHORT).show();
+        }
+
         View view = inflater.inflate(R.layout.frag_home, container, false);
         mRVShortlistRestaurant = (RecyclerView) view.findViewById(R.id.rv_shortlist_restaurants);
         mFeaturedRestaurantsGrid = (GridView) view.findViewById(R.id.grid_view_banner);

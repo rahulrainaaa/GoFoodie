@@ -2,7 +2,6 @@ package com.app.gofoodie.utility;
 
 import android.content.Context;
 
-import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.model.login.Login;
 
@@ -17,7 +16,12 @@ public class SessionUtils {
     public static final String TAG = "SessionUtils";
 
     private static final SessionUtils ourInstance = new SessionUtils();
+
+    /**
+     * Customer's application Login session details.
+     */
     private static boolean isSession = false;
+    private static Login login = null;
 
     public static SessionUtils getInstance() {
         return ourInstance;
@@ -45,7 +49,7 @@ public class SessionUtils {
     public void removeSession(Context context) {
 
         CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).edit().remove(CacheUtils.PREF_KEY).commit();
-        GlobalData.login = null;
+        login = null;
         isSession = false;
     }
 
@@ -73,15 +77,33 @@ public class SessionUtils {
         String strLogin = CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).getString(CacheUtils.PREF_KEY, "");
 
         if (strLogin.isEmpty()) {
-            GlobalData.login = null;
+            login = null;
             isSession = false;
+            removeSession(context);
             return;
+        } else {
+            ModelParser modelParser = new ModelParser();
+            login = (Login) modelParser.getModel(strLogin, Login.class, null);
+            isSession = true;
         }
 
-        ModelParser modelParser = new ModelParser();
-        GlobalData.login = (Login) modelParser.getModel(strLogin, Login.class, null);
-        isSession = true;
+        /// Check if the login session data is correct.
+        if (login.getStatusCode() != 200) {
 
+            login = null;
+            isSession = false;
+            removeSession(context);
+        }
+    }
+
+    /**
+     * @return
+     * @method getSession
+     * @desc Method to get the current session object {@link Login}
+     */
+    public Login getSession() {
+
+        return login;
     }
 
 }

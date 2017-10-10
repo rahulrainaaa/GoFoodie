@@ -3,9 +3,7 @@ package com.app.gofoodie.handler.profileDataHandler;
 import android.content.Context;
 
 import com.app.gofoodie.global.data.GlobalData;
-import com.app.gofoodie.model.base.BaseModel;
-import com.app.gofoodie.model.login.Login;
-import com.app.gofoodie.utility.SessionUtils;
+import com.app.gofoodie.model.customer.Customer;
 
 import java.util.Date;
 
@@ -40,9 +38,9 @@ public class CustomerProfileHandler {
      * @method getFullProfile
      * @desc Method to provide customer full profile detail OR get simply refresh in case if needed (refresh after 2 min).
      */
-    public BaseModel getFullProfile() {
+    public Customer getFullProfile() {
 
-        return null;
+        return GlobalData.customer;
     }
 
     /**
@@ -50,35 +48,9 @@ public class CustomerProfileHandler {
      * @method refreshProfile
      * @desc Method to fetch customer profile from WEB API.
      */
-    public BaseModel refreshProfile() {
+    public Customer refreshProfile() {
 
-        return null;
-    }
-
-    /**
-     * @return
-     * @method removeSession
-     * @desc Method to remove {@link com.app.gofoodie.model.login.Login} from cache in cae of invalid session.
-     */
-    public boolean removeSession() {
-
-        return true;
-    }
-
-    /**
-     * @return Login reference to {@link Login} object fetched from cache. If not present, return null Login reference.
-     * @method checkLoginSession
-     * @desc Method to check for the session login from the cache/Preferences.
-     */
-    public Login checkLoginSession() {
-
-        if (SessionUtils.getInstance().isSessionExist()) {
-
-            return GlobalData.login;
-        } else {
-
-            return null;
-        }
+        return new Customer();
     }
 
 }

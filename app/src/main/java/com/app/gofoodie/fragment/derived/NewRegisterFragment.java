@@ -47,6 +47,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
+        Toast.makeText(getDashboardActivity(), "New Register Fragment.", Toast.LENGTH_SHORT).show();
 
         View view = inflater.inflate(R.layout.frag_register_new_user, container, false);
 
@@ -78,11 +79,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         locationName = CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_AREA_LOCATION).getString(Constants.PREF_AREA_LOCATION.NAME.name(), "");
 
         mLocationPref.setText(locationName);
-        if (GlobalData.newSocialEmail.trim().isEmpty()) {
-
-            mEtEmail.setText(GlobalData.newSocialEmail);
-            mEtEmail.setEnabled(false);
-        }
     }
 
     @Override
@@ -266,6 +262,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             userLoginResponse(rawObject);
         } else if (requestCode == 3) {      // Customer Full Profile.
 
+            userProfileResponse(rawObject);
         }
     }
 

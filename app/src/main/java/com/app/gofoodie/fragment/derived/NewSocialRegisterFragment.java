@@ -46,6 +46,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
+        Toast.makeText(getActivity(), "New Social Register Fragment", Toast.LENGTH_SHORT).show();
 
         View view = inflater.inflate(R.layout.frag_register_new_social, container, false);
 

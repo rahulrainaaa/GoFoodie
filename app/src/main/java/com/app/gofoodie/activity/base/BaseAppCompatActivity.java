@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.app.gofoodie.customview.GoFoodieProgressDialog;
+import com.app.gofoodie.model.login.Login;
+import com.app.gofoodie.utility.SessionUtils;
 
 /**
  * @class BaseAppCompatActivity
@@ -74,6 +76,16 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         super.finalize();
         System.gc();
         Runtime.getRuntime().gc();
+    }
+
+    /**
+     * @return
+     * @method getSession
+     * @desc Method to fetch the current session within the activity.
+     */
+    protected Login getSession() {
+
+        return SessionUtils.getInstance().getSession();
     }
 
 }
