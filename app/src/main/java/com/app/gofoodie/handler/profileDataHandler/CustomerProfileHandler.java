@@ -2,7 +2,6 @@ package com.app.gofoodie.handler.profileDataHandler;
 
 import android.content.Context;
 
-import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.model.customer.Customer;
 
 import java.util.Date;
@@ -16,7 +15,12 @@ public class CustomerProfileHandler {
     /**
      * Class Private data members.
      */
-    private Context mContext = null;
+    public Context mContext = null;
+
+    /**
+     * {@link Customer} static object to hold the customer full data.
+     */
+    public static Customer CUSTOMER = null;
 
     /**
      * Class private static data member.
@@ -40,7 +44,7 @@ public class CustomerProfileHandler {
      */
     public Customer getFullProfile() {
 
-        return GlobalData.customer;
+        return CUSTOMER;
     }
 
     /**
@@ -52,5 +56,4 @@ public class CustomerProfileHandler {
 
         return new Customer();
     }
-
 }

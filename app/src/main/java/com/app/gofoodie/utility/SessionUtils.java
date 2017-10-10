@@ -21,7 +21,7 @@ public class SessionUtils {
      * Customer's application Login session details.
      */
     private static boolean isSession = false;
-    private static Login login = null;
+    private static Login LOGIN = null;
 
     public static SessionUtils getInstance() {
         return ourInstance;
@@ -49,7 +49,7 @@ public class SessionUtils {
     public void removeSession(Context context) {
 
         CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).edit().remove(CacheUtils.PREF_KEY).commit();
-        login = null;
+        LOGIN = null;
         isSession = false;
     }
 
@@ -77,20 +77,20 @@ public class SessionUtils {
         String strLogin = CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).getString(CacheUtils.PREF_KEY, "");
 
         if (strLogin.isEmpty()) {
-            login = null;
+            LOGIN = null;
             isSession = false;
             removeSession(context);
             return;
         } else {
             ModelParser modelParser = new ModelParser();
-            login = (Login) modelParser.getModel(strLogin, Login.class, null);
+            LOGIN = (Login) modelParser.getModel(strLogin, Login.class, null);
             isSession = true;
         }
 
-        /// Check if the login session data is correct.
-        if (login.getStatusCode() != 200) {
+        /// Check if the LOGIN session data is correct.
+        if (LOGIN.getStatusCode() != 200) {
 
-            login = null;
+            LOGIN = null;
             isSession = false;
             removeSession(context);
         }
@@ -103,7 +103,7 @@ public class SessionUtils {
      */
     public Login getSession() {
 
-        return login;
+        return LOGIN;
     }
 
 }

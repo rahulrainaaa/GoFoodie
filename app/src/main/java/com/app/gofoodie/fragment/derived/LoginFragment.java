@@ -17,6 +17,7 @@ import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.handler.socialHandler.FacebookLoginHandler;
 import com.app.gofoodie.handler.socialHandler.FacebookLoginListener;
 import com.app.gofoodie.model.customer.Customer;
@@ -381,7 +382,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     private void userProfileResponse(JSONObject raw) {
 
         ModelParser modelParser = new ModelParser();
-        GlobalData.customer = (Customer) modelParser.getModel(raw.toString(), Customer.class, null);
+        CustomerProfileHandler.CUSTOMER = (Customer) modelParser.getModel(raw.toString(), Customer.class, null);
         SessionUtils.getInstance().loadSession(getActivity());
         getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.PROFILE);
     }

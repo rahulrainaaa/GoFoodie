@@ -16,9 +16,9 @@ import com.app.gofoodie.activity.derived.LocationActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
-import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
@@ -349,7 +349,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
     private void userProfileResponse(JSONObject json) {
 
         ModelParser modelParser = new ModelParser();
-        GlobalData.customer = (Customer) modelParser.getModel(json.toString(), Customer.class, null);
+        CustomerProfileHandler.CUSTOMER = (Customer) modelParser.getModel(json.toString(), Customer.class, null);
 
         getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.PROFILE);
 
