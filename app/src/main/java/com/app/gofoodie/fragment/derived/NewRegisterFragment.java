@@ -17,10 +17,14 @@ import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.global.data.GlobalData;
+import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
+import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.CacheUtils;
+import com.app.gofoodie.utility.SessionUtils;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONArray;
@@ -259,6 +263,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             userRegisterResponse(rawObject);
         } else if (requestCode == 2) {      // Login response.
 
+            userLoginResponse(rawObject);
         } else if (requestCode == 3) {      // Customer Full Profile.
 
         }
@@ -289,6 +294,16 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
             if (statusCode == 200) {
 
+                String strPassword = mEtPassword.getText().toString();
+                String strEmail = mEtEmail.getText().toString();
+                JSONObject jsonRequest = new JSONObject();
+                jsonRequest.put("email", strEmail);
+                jsonRequest.put("social_login", "no");
+                jsonRequest.put("password", strPassword);
+
+                NetworkHandler networkHandler = new NetworkHandler();
+                networkHandler.httpCreate(2, getDashboardActivity(), this, jsonRequest, Network.URL_LOGIN, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                networkHandler.executePost();
 
             } else {
                 Toast.makeText(getActivity(), statusCode + "#" + statusMessage, Toast.LENGTH_SHORT).show();
@@ -302,23 +317,23 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
     }
 
     /**
-     * @param login Email to login.
+     * @param json Email to login.
      * @method userLoginResponse
      * @desc Method to call for Customer Login API.
      */
-    private void userLoginResponse(Login login) {
+    private void userLoginResponse(JSONObject json) {
 
-        JSONObject jsonRequets = new JSONObject();
+        ModelParser modelParser = new ModelParser();
+        Login login = (Login) modelParser.getModel(json.toString(), Login.class, null);
+        SessionUtils.getInstance().saveSession(getActivity(), json);
+        JSONObject jsonRequest = new JSONObject();
         try {
 
-            String email = mEtEmail.getText().toString();
-            String password = mEtPassword.toString();
-            jsonRequets.put("email", email.trim());
-            jsonRequets.put("social_login", "");
-            jsonRequets.put("password", password.trim());
+            jsonRequest.put("login_id", login.getData().getLoginId());
+            jsonRequest.put("token", login.getData().getToken());
 
             NetworkHandler networkHandler = new NetworkHandler();
-            networkHandler.httpCreate(2, getDashboardActivity(), this, jsonRequets, Network.URL_LOGIN, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+            networkHandler.httpCreate(3, getDashboardActivity(), this, jsonRequest, Network.URL_GET_CUST_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
             networkHandler.executePost();
 
         } catch (Exception exc) {
@@ -327,6 +342,20 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             exc.printStackTrace();
             Log.e(TAG, exc.getMessage());
         }
+    }
+
+    /**
+     * @param json
+     * @method userProfileResponse
+     * @desc Method to handle the user/customer full profile details.
+     */
+    private void userProfileResponse(JSONObject json) {
+
+        ModelParser modelParser = new ModelParser();
+        GlobalData.customer = (Customer) modelParser.getModel(json.toString(), Customer.class, null);
+
+        getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.PROFILE);
+
     }
 
 }

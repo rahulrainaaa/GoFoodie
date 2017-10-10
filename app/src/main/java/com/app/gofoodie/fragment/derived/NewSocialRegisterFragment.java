@@ -3,7 +3,6 @@ package com.app.gofoodie.fragment.derived;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,14 @@ import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.global.data.GlobalData;
+import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.model.customer.Customer;
+import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.CacheUtils;
+import com.app.gofoodie.utility.SessionUtils;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONArray;
@@ -298,17 +300,18 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
      */
     private void socialUserLoginResponse(JSONObject json) {
 
+        ModelParser modelParser = new ModelParser();
+        Login login = (Login) modelParser.getModel(json.toString(), Login.class, null);
+
+        SessionUtils.getInstance().saveSession(getActivity(), json);
+
         try {
 
-            int statusCode = json.getInt("statusCode");
-            String statusMessage = json.getString("statusMessage");
-            if (statusCode == 200) {        // Successfully login.
+            if (login.getStatusCode() == 200) {        // Successfully login.
 
-                String login_id = json.getJSONObject("data").getString("login_id");
-                String token = json.getJSONObject("data").getString("token");
                 JSONObject jsonRequest = new JSONObject();
-                jsonRequest.put("login_id", login_id);
-                jsonRequest.put("token", token);
+                jsonRequest.put("login_id", login.getData().getLoginId());
+                jsonRequest.put("token", login.getData().getToken());
 
                 NetworkHandler networkHandler = new NetworkHandler();
                 networkHandler.httpCreate(3, getDashboardActivity(), this, jsonRequest, Network.URL_GET_CUST_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
@@ -316,14 +319,13 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
             } else {     // Invalid Credentials.
 
-                Toast.makeText(getActivity(), "" + statusMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "" + login.getStatusMessage(), Toast.LENGTH_SHORT).show();
             }
 
         } catch (Exception exc) {
 
             Toast.makeText(getActivity(), "Exception: " + exc.getMessage(), Toast.LENGTH_SHORT).show();
             exc.printStackTrace();
-            Log.e(TAG, exc.getMessage());
         }
     }
 
@@ -335,8 +337,8 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
     private void socialGetProfile(JSONObject json) {
 
         ModelParser modelParser = new ModelParser();
-        Customer customer = (Customer) modelParser.getModel(json.toString(), Customer.class, null);
-
+        GlobalData.customer = (Customer) modelParser.getModel(json.toString(), Customer.class, null);
+        getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.PROFILE);
 
     }
 

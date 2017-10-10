@@ -23,7 +23,6 @@ import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
-import com.app.gofoodie.utility.CacheUtils;
 import com.app.gofoodie.utility.SessionUtils;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookException;
@@ -328,7 +327,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         ModelParser modelParser = new ModelParser();
         Login loginModel = (Login) modelParser.getModel(raw.toString(), Login.class, null);
-        CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_LOGIN).edit().putString(CacheUtils.PREF_KEY, raw.toString()).commit();
+
+        SessionUtils.getInstance().saveSession(getActivity(), raw);
 
         switch (loginModel.getStatusCode()) {
 

@@ -1,6 +1,5 @@
 package com.app.gofoodie.utility;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.app.gofoodie.global.data.GlobalData;
@@ -18,6 +17,7 @@ public class SessionUtils {
     public static final String TAG = "SessionUtils";
 
     private static final SessionUtils ourInstance = new SessionUtils();
+    private static boolean isSession = false;
 
     public static SessionUtils getInstance() {
         return ourInstance;
@@ -34,53 +34,53 @@ public class SessionUtils {
      */
     public boolean isSessionExist() {
 
-        return GlobalData.isSession;
+        return isSession;
     }
 
     /**
-     * @param activity
+     * @param context
      * @method removeSession
      * @desc Method to remover the existing session (Login and user profile details).
      */
-    public void removeSession(Activity activity) {
+    public void removeSession(Context context) {
 
-        CacheUtils.getInstance().getPref(activity, CacheUtils.PREF_NAME.PREF_LOGIN).edit().remove(CacheUtils.PREF_KEY).commit();
+        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).edit().remove(CacheUtils.PREF_KEY).commit();
         GlobalData.login = null;
-        GlobalData.isSession = false;
+        isSession = false;
     }
 
     /**
      * @param context
      * @param login
-     * @param profile
      * @return int 0 = failed to save, 1 = session saved successfully, 2 = session saved and override existing session.
      * @method saveSession
      * @desc Method to save given parameters as the session for the application.
      */
-    public int saveSession(Context context, JSONObject login, JSONObject profile) {
+    public int saveSession(Context context, JSONObject login) {
 
         CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).edit().putString(CacheUtils.PREF_KEY, login.toString()).commit();
+        loadSession(context);
         return 1;
     }
 
     /**
-     * @param activity
+     * @param context
      * @method loadSession
      * @desc Method to load the session from Preference to the globally accessible model class.
      */
-    public void loadSession(Activity activity) {
+    public void loadSession(Context context) {
 
-        String strLogin = CacheUtils.getInstance().getPref(activity, CacheUtils.PREF_NAME.PREF_LOGIN).getString(CacheUtils.PREF_KEY, "");
+        String strLogin = CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).getString(CacheUtils.PREF_KEY, "");
 
         if (strLogin.isEmpty()) {
             GlobalData.login = null;
-            GlobalData.isSession = false;
+            isSession = false;
             return;
         }
 
         ModelParser modelParser = new ModelParser();
         GlobalData.login = (Login) modelParser.getModel(strLogin, Login.class, null);
-        GlobalData.isSession = true;
+        isSession = true;
 
     }
 
