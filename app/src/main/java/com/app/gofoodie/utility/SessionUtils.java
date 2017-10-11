@@ -3,6 +3,7 @@ package com.app.gofoodie.utility;
 import android.content.Context;
 
 import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.login.Login;
 
 import org.json.JSONObject;
@@ -51,6 +52,7 @@ public class SessionUtils {
         CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).edit().remove(CacheUtils.PREF_KEY).commit();
         LOGIN = null;
         isSession = false;
+        CustomerProfileHandler.CUSTOMER = null;
     }
 
     /**

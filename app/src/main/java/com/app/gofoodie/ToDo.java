@@ -11,6 +11,8 @@ public class ToDo {
      *
      * 3. New Social register - layout validations.
      *
+     * 4. Logout - check for the social account.
+     *
      */
 
 }
