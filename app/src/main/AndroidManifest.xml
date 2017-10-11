@@ -65,6 +65,7 @@
         <activity
             android:name=".activity.derived.RatingActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.derived.UpdateProfileActivity"></activity>
     </application>
 
 </manifest>

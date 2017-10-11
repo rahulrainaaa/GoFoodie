@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.derived.LocationActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
-import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
@@ -23,7 +22,7 @@ import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
-import com.app.gofoodie.utility.CacheUtils;
+import com.app.gofoodie.utility.LocationUtils;
 import com.app.gofoodie.utility.SessionUtils;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -75,10 +74,10 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         super.onResume();
 
         // Load the user location preference into object and update UI.
-        locationId = CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_AREA_LOCATION).getString(Constants.PREF_AREA_LOCATION.ID.name(), "");
-        locationName = CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_AREA_LOCATION).getString(Constants.PREF_AREA_LOCATION.NAME.name(), "");
-
+        locationId = LocationUtils.getInstance().getLocationId(getActivity(), "");
+        locationName = LocationUtils.getInstance().getLocationName(getActivity(), "");
         mLocationPref.setText(locationName);
+
     }
 
     @Override

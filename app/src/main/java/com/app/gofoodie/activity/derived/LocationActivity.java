@@ -9,16 +9,15 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
-import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.model.areaResponse.AreaResponse;
 import com.app.gofoodie.model.cityResponse.CityResponse;
 import com.app.gofoodie.model.countryResponse.CountryResponse;
 import com.app.gofoodie.model.countryResponse.Datum;
-import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
-import com.app.gofoodie.utility.CacheUtils;
+import com.app.gofoodie.utility.LocationUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -87,8 +86,7 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
                     return;
                 }
 
-                CacheUtils.getInstance().getPref(LocationActivity.this, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().putString(Constants.PREF_AREA_LOCATION.NAME.name(), "" + mAreaLocationDatum.getAreaName()).commit();
-                CacheUtils.getInstance().getPref(LocationActivity.this, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().putString(Constants.PREF_AREA_LOCATION.ID.name(), "" + mAreaLocationDatum.getAreaId()).commit();
+                LocationUtils.getInstance().saveLocation(LocationActivity.this, mAreaLocationDatum.getAreaId(), mAreaLocationDatum.getAreaName());
                 Toast.makeText(LocationActivity.this, "Location Saved", Toast.LENGTH_SHORT).show();
                 finish();
             }

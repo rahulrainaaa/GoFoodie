@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mainscreen_b">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name*"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/signup_edittext_padding_normal"
+            android:singleLine="true"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="@dimen/signup_edittext_textsize_normal"
+            app:met_baseColor="@android:color/white"
+            app:met_errorColor="@color/colorRed"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorWhite"
+            app:met_textColorHint="@color/colorWhite"
+            app:met_underlineColor="@color/colorRed" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_alt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:hint="Alternate Email (Optional)"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="@dimen/signup_edittext_padding_normal"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="@dimen/signup_edittext_textsize_normal"
+            app:met_baseColor="@android:color/white"
+            app:met_errorColor="@color/colorRed"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorWhite"
+            app:met_textColorHint="@color/colorWhite"
+            app:met_underlineColor="@color/colorRed" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:hint="Mobile*"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/signup_edittext_padding_normal"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="@dimen/signup_edittext_textsize_normal"
+            app:met_baseColor="@android:color/white"
+            app:met_errorColor="@color/colorRed"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorWhite"
+            app:met_textColorHint="@color/colorWhite"
+            app:met_underlineColor="@color/colorRed" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_alt_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:hint="Alternate Mobile (Optional)"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/signup_edittext_padding_normal"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="@dimen/signup_edittext_textsize_normal"
+            app:met_baseColor="@android:color/white"
+            app:met_errorColor="@color/colorRed"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorWhite"
+            app:met_textColorHint="@color/colorWhite"
+            app:met_underlineColor="@color/colorRed" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:hint="Address*"
+            android:paddingLeft="@dimen/signup_edittext_padding_normal"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="@dimen/signup_edittext_textsize_normal"
+            app:met_baseColor="@android:color/white"
+            app:met_errorColor="@color/colorRed"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorWhite"
+            app:met_textColorHint="@color/colorWhite"
+            app:met_underlineColor="@color/colorRed" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_location_pref"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:editable="false"
+            android:hint="Location*"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/signup_edittext_padding_normal"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="@dimen/signup_edittext_textsize_normal"
+            app:met_baseColor="@android:color/white"
+            app:met_errorColor="@color/colorRed"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorWhite"
+            app:met_textColorHint="@color/colorWhite"
+            app:met_underlineColor="@color/colorRed" />
+
+        <Button
+            android:id="@+id/btn_update_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_login_btn"
+            android:paddingBottom="3dp"
+            android:paddingTop="3dp"
+            android:text="Update"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.app.gofoodie.customview.GoFoodieProgressDialog;
+import com.app.gofoodie.model.login.Data;
 import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.utility.SessionUtils;
 
@@ -86,6 +87,23 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     protected Login getSession() {
 
         return SessionUtils.getInstance().getSession();
+    }
+
+    /**
+     * @return Data from {@link Login}.{@link Data} reference.
+     * @method getSessionData
+     * @desc Method to get the Data from session.
+     */
+    protected Data getSessionData() {
+
+        Login login = SessionUtils.getInstance().getSession();
+        if (login == null) {
+
+            return null;
+        } else {
+
+            return login.getData();
+        }
     }
 
 }

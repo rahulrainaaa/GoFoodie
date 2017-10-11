@@ -17,6 +17,8 @@ public class Network {
 
     public static final String URL_GET_CUST_PROFILE = "http://gofoodie.drushtiindia.com/API/GetProfile/";
 
+    public static final String URL_UPDATE_PROFILE = "http://gofoodie.drushtiindia.com/API/EditProfile/";
+
     /**
      * GET REST Web APIs.
      */

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.derived.SplashActivity;
+import com.app.gofoodie.activity.derived.UpdateProfileActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.utility.SessionUtils;
 
@@ -92,6 +93,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     private void btnMyProfileClicked(View view) {
 
+        startActivity(new Intent(getActivity(), UpdateProfileActivity.class));
     }
 
     private void btnMyOrdersClicked(View view) {
