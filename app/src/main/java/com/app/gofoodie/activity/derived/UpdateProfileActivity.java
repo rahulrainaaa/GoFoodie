@@ -56,6 +56,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
         mButton = (Button) findViewById(R.id.btn_update_profile);
         mButton.setOnClickListener(this);
+        mEtLocation.setOnClickListener(this);
     }
 
     @Override
@@ -82,6 +83,11 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
                 btnUpdateProfileClicked(view);
                 break;
+
+            case R.id.et_location_pref:
+
+                startActivity(new Intent(this, LocationActivity.class));
+                break;
         }
 
     }
@@ -98,7 +104,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
         JSONObject jsonRequest = new JSONObject();
         try {
             jsonRequest.put("customer_id", customer.profile.customerId);
-            jsonRequest.put("token", getSessionData().getLoginId());
+            jsonRequest.put("token", getSessionData().getToken());
             jsonRequest.put("login_id", getSessionData().getLoginId());
             jsonRequest.put("name", customer.profile.name);
             jsonRequest.put("address", customer.profile.address);
@@ -114,6 +120,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             networkHandler.httpCreate(1, this, this, jsonRequest, Network.URL_UPDATE_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
             networkHandler.executePost();
             view.setEnabled(false);
+
 
         } catch (JSONException jsonExc) {
 

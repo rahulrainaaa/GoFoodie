@@ -7,13 +7,16 @@ import android.widget.ImageView;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
+import com.app.gofoodie.handler.profileDataHandler.ProfileUpdateListener;
+import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.utility.SessionUtils;
 
 /**
  * @class SplashActivity
  * @desc Activity Class to show Splash screen on the application start.
  */
-public class SplashActivity extends BaseAppCompatActivity implements Runnable {
+public class SplashActivity extends BaseAppCompatActivity implements Runnable, ProfileUpdateListener {
 
     public static final String TAG = "SplashActivity";
 
@@ -32,16 +35,25 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        SessionUtils.getInstance().loadSession(this);
+
+        if (SessionUtils.getInstance().isSessionExist()) {
+
+            CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
+            customerProfileHandler.refresh(this, null, this);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        SessionUtils.getInstance().loadSession(this);
+
         showFullScreen();
         mImgSplashLogo = (ImageView) findViewById(R.id.img_splash_logo);
         mHandler = new Handler();
-        mHandler.postDelayed(this, 3000);
+        if (!SessionUtils.getInstance().isSessionExist()) {
+            mHandler.postDelayed(this, 3000);
+        }
     }
 
     @Override
@@ -65,6 +77,16 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable {
 //        startActivity(new Intent(this, ShortlistedRestaurantsActivity.`class));
 //        startActivity(new Intent(this, RatingActivity.class));
 //        startActivity(new Intent(this, SubscriptionActivity.class));
+        finish();
+    }
+
+    /**
+     * {@link ProfileUpdateListener} profile update listener.
+     */
+    @Override
+    public void profileUpdatedCallback(Customer customer) {
+
+        startActivity(new Intent(this, DashboardActivity.class));
         finish();
     }
 }

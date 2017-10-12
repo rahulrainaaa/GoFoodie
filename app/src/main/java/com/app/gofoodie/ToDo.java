@@ -13,6 +13,8 @@ public class ToDo {
      *
      * 4. Logout - check for the social account.
      *
+     * 5. Set the manifest orientation.
+     *
      */
 
 }
