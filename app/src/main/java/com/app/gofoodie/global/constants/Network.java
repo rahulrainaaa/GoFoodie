@@ -35,5 +35,7 @@ public class Network {
 
     public static final String URL_GET_CUISINE = "http://gofoodie.drushtiindia.com/API/Category";
 
+    public static final String URL_GET_TRANSACTION = "http://gofoodie.drushtiindia.com/API/CustomerWallet";
+
 
 }

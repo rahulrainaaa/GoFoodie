@@ -11,25 +11,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.model.transaction.WalletTransaction;
 
 import java.util.ArrayList;
 
-public class TransactionListViewAdapter extends ArrayAdapter<String> {
+public class WalletTransactionListViewAdapter extends ArrayAdapter<WalletTransaction> {
 
     public static final String TAG = "RestaurantListViewAdapter";
 
     private Activity mActivity = null;
-    private ArrayList<String> mListData = null;
+    private ArrayList<WalletTransaction> mListData = null;
     private int mLayoutResourceId;
 
     private static class Holder {
 
         public ImageView imgRestaurant = null;
-        public TextView txtRestaurantName = null;
+        public TextView txtTransactionId = null;
+        public TextView txtDate = null;
+        public TextView txtReviews = null;
+        public TextView txtPrice = null;
         public int tag = -1;
     }
 
-    public TransactionListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<String> list) {
+    public WalletTransactionListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<WalletTransaction> list) {
 
         super(activity, resource, list);
         this.mActivity = activity;
@@ -47,7 +51,11 @@ public class TransactionListViewAdapter extends ArrayAdapter<String> {
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
             holder = new Holder();
-            holder.imgRestaurant = (ImageView) cell.findViewById(R.id.image_restaurant);
+            holder.imgRestaurant = (ImageView) cell.findViewById(R.id.image_alert);
+            holder.txtTransactionId = (TextView) cell.findViewById(R.id.transaction_id);
+            holder.txtDate = (TextView) cell.findViewById(R.id.text_view_date);
+            holder.txtReviews = (TextView) cell.findViewById(R.id.text_view_remark);
+            holder.txtPrice = (TextView) cell.findViewById(R.id.text_view_price);
             cell.setTag(holder);
         } else {
             holder = (Holder) cell.getTag();

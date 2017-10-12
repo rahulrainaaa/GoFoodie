@@ -25,7 +25,7 @@
             android:paddingTop="4dp">
 
             <TextView
-                android:id="@+id/text_view_order_id"
+                android:id="@+id/transaction_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
@@ -70,6 +70,7 @@
                 app:srcCompat="@drawable/icon_sent" />
 
             <TextView
+                android:id="@+id/text_view_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"

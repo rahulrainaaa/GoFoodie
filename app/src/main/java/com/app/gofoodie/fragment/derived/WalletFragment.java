@@ -9,11 +9,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.derived.SubscriptionActivity;
-import com.app.gofoodie.adapter.listviewadapter.TransactionListViewAdapter;
+import com.app.gofoodie.adapter.listviewadapter.PaymentTransactionListViewAdapter;
+import com.app.gofoodie.adapter.listviewadapter.WalletTransactionListViewAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
+import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.model.transaction.PaymentTransaction;
+import com.app.gofoodie.model.transaction.Transaction;
+import com.app.gofoodie.model.transaction.WalletTransaction;
+import com.app.gofoodie.network.callback.NetworkCallbackListener;
+import com.app.gofoodie.network.handler.NetworkHandler;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -21,10 +33,14 @@ import java.util.ArrayList;
  * @class WalletFragment
  * @desc {@link BaseFragment} Fragment class to handle Wallet UI screen.
  */
-public class WalletFragment extends BaseFragment implements View.OnClickListener, TabLayout.OnTabSelectedListener {
+public class WalletFragment extends BaseFragment implements View.OnClickListener, TabLayout.OnTabSelectedListener, NetworkCallbackListener {
 
+    /**
+     * Class private data members.
+     */
     private ListView mListView = null;
     private TabLayout mTabLayout = null;
+    private Transaction mTransaction = null;
 
     @Nullable
     @Override
@@ -41,10 +57,10 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         imgBtnSubscribe.setOnClickListener(this);
 
 
-        ArrayList<String> list = new ArrayList<>();
-
-        TransactionListViewAdapter adapter = new TransactionListViewAdapter(getActivity(), R.layout.item_listview_transactions, list);
-        mListView.setAdapter(adapter);
+        String url = Network.URL_GET_TRANSACTION + "?customerLoginId=" + getSession().getData().getCustomerId();
+        NetworkHandler networkHandler = new NetworkHandler();
+        networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.executeGet();
 
         return view;
     }
@@ -101,6 +117,9 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
      */
     private void showWalletTransactions() {
 
+        WalletTransactionListViewAdapter adapter = new WalletTransactionListViewAdapter(getActivity(), R.layout.item_listview_transactions, (ArrayList<WalletTransaction>) mTransaction.walletTransactions);
+        mListView.setAdapter(adapter);
+
     }
 
     /**
@@ -109,7 +128,40 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
      */
     private void showBankPaymentTransactions() {
 
+        PaymentTransactionListViewAdapter adapter = new PaymentTransactionListViewAdapter(getActivity(), R.layout.item_listview_transactions, (ArrayList<PaymentTransaction>) mTransaction.paymentTransactions);
+        mListView.setAdapter(adapter);
     }
 
+    /**
+     * {@link NetworkCallbackListener} http response callback method(s).
+     */
+    @Override
+    public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+        Toast.makeText(getActivity(), "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
+        if (requestCode == 1) {
+
+            parseModel(rawObject);
+        }
+    }
+
+    @Override
+    public void networkFailResponse(int requestCode, String message) {
+
+        Toast.makeText(getActivity(), "Http fail: " + message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * @param json
+     * @method parseModel
+     * @desc Method to parse the responsse into model class.
+     */
+    private void parseModel(JSONObject json) {
+
+        ModelParser parser = new ModelParser();
+        Transaction transaction = (Transaction) parser.getModel(json.toString(), Transaction.class, null);
+        mTransaction = transaction;
+        showWalletTransactions();
+    }
 
 }
