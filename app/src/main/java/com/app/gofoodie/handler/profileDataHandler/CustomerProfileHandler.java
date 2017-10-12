@@ -35,6 +35,7 @@ public class CustomerProfileHandler {
     public CustomerProfileHandler(Context context) {
 
         this.mContext = context;
+
     }
 
     /**

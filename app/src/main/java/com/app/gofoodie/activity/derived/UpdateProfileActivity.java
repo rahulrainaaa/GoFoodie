@@ -64,7 +64,10 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
         String location_name = LocationUtils.getInstance().getLocationName(this, "");
         mEtLocation.setText("" + location_name);
+        if (location_name.trim().isEmpty()) {
 
+            startActivity(new Intent(this, LocationActivity.class));
+        }
     }
 
     /**
@@ -90,25 +93,27 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
      */
     private void btnUpdateProfileClicked(View view) {
 
-        view.setEnabled(false);
+        Customer customer = CustomerProfileHandler.CUSTOMER;
+
         JSONObject jsonRequest = new JSONObject();
         try {
-            jsonRequest.put("customer_id", "");
+            jsonRequest.put("customer_id", customer.profile.customerId);
             jsonRequest.put("token", getSessionData().getLoginId());
             jsonRequest.put("login_id", getSessionData().getLoginId());
-            jsonRequest.put("name", "");
-            jsonRequest.put("address", "");
-            jsonRequest.put("location", "");
+            jsonRequest.put("name", customer.profile.name);
+            jsonRequest.put("address", customer.profile.address);
+            jsonRequest.put("location", LocationUtils.getInstance().getLocationId(this, ""));
             jsonRequest.put("geo_lat", "");
             jsonRequest.put("geo_lng", "");
-            jsonRequest.put("mobile", "");
-            jsonRequest.put("mobile2", "");
-            jsonRequest.put("email2", "");
-
+            jsonRequest.put("mobile", customer.profile.mobile1);
+            jsonRequest.put("mobile2", customer.profile.mobile2);
+            jsonRequest.put("email", customer.profile.email);
+            jsonRequest.put("email2", customer.profile.email2);
 
             NetworkHandler networkHandler = new NetworkHandler();
             networkHandler.httpCreate(1, this, this, jsonRequest, Network.URL_UPDATE_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-
+            networkHandler.executePost();
+            view.setEnabled(false);
 
         } catch (JSONException jsonExc) {
 
@@ -116,7 +121,6 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             Toast.makeText(this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
 
     /**
      * {@link NetworkCallbackListener} http response callback method(s).
@@ -148,7 +152,24 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
      */
     private void handleProfileUpdatedResponse(JSONObject json) {
 
+        try {
 
+            int statusCode = json.getInt("statusCode");
+            String statusMessage = json.getString("statusMessage");
+
+            if (statusCode == 200) {
+
+                Toast.makeText(this, "Profile Updated Successfully.", Toast.LENGTH_SHORT).show();
+            } else {
+
+                Toast.makeText(this, "Update failed. " + statusMessage, Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (JSONException jsonExc) {
+
+            jsonExc.printStackTrace();
+            Toast.makeText(this, "JSONException:" + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 

@@ -19,11 +19,10 @@ import com.app.gofoodie.activity.derived.DashboardActivity;
 import com.app.gofoodie.activity.derived.LocationActivity;
 import com.app.gofoodie.adapter.listviewadapter.RestaurantListViewAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
-import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
-import com.app.gofoodie.utility.CacheUtils;
+import com.app.gofoodie.utility.LocationUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -61,8 +60,8 @@ public class RestaurantListFragment extends BaseFragment implements NetworkCallb
     public void onResume() {
         super.onResume();
 
-        String location_id = CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_AREA_LOCATION).getString(Constants.PREF_AREA_LOCATION.ID.name(), "");
-        String location_name = CacheUtils.getInstance().getPref(getActivity(), CacheUtils.PREF_NAME.PREF_AREA_LOCATION).getString(Constants.PREF_AREA_LOCATION.NAME.name(), "");
+        String location_id = LocationUtils.getInstance().getLocationId(getActivity(), "");
+        String location_name = LocationUtils.getInstance().getLocationName(getActivity(), "");
 
         if (location_id.trim().isEmpty()) {
 
