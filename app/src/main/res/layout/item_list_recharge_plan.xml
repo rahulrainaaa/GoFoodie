@@ -18,11 +18,11 @@
             android:id="@+id/recharge_plan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
             android:layout_marginTop="2dp"
             android:text="Recharge Plan"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp"
-
             android:textStyle="italic" />
 
         <TextView
