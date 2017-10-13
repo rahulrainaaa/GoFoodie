@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTransaction> {
 
-    public static final String TAG = "RestaurantListViewAdapter";
+    public static final String TAG = "PaymentTransactionListViewAdapter";
 
     private Activity mActivity = null;
     private ArrayList<PaymentTransaction> mListData = null;
@@ -25,7 +25,7 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
 
     private static class Holder {
 
-        public ImageView imgRestaurant = null;
+        public ImageView imgType = null;
         public TextView txtTransactionId = null;
         public TextView txtDate = null;
         public TextView txtReviews = null;
@@ -45,13 +45,14 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
+        PaymentTransaction transaction = mListData.get(position);
         View cell = convertView;
         Holder holder = null;
         if (convertView == null) {
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
             holder = new Holder();
-            holder.imgRestaurant = (ImageView) cell.findViewById(R.id.image_alert);
+            holder.imgType = (ImageView) cell.findViewById(R.id.image_alert);
             holder.txtTransactionId = (TextView) cell.findViewById(R.id.transaction_id);
             holder.txtDate = (TextView) cell.findViewById(R.id.text_view_date);
             holder.txtReviews = (TextView) cell.findViewById(R.id.text_view_remark);
@@ -60,6 +61,14 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
         } else {
             holder = (Holder) cell.getTag();
         }
+
+//        holder.imgRestaurant
+        holder.txtTransactionId.setText(transaction.transactionId);
+        holder.txtDate.setText(transaction.datetime);
+//        holder.txtReviews.setText(transaction.);
+        holder.txtPrice.setText(transaction.paidAmount);
+
+        holder.imgType.setImageResource(R.drawable.icon_receive);
 
         return cell;
     }

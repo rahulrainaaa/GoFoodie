@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class WalletTransactionListViewAdapter extends ArrayAdapter<WalletTransaction> {
 
-    public static final String TAG = "RestaurantListViewAdapter";
+    public static final String TAG = "WalletTransactionListViewAdapter";
 
     private Activity mActivity = null;
     private ArrayList<WalletTransaction> mListData = null;
@@ -25,7 +25,7 @@ public class WalletTransactionListViewAdapter extends ArrayAdapter<WalletTransac
 
     private static class Holder {
 
-        public ImageView imgRestaurant = null;
+        public ImageView imgType = null;
         public TextView txtTransactionId = null;
         public TextView txtDate = null;
         public TextView txtReviews = null;
@@ -45,13 +45,14 @@ public class WalletTransactionListViewAdapter extends ArrayAdapter<WalletTransac
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
+        WalletTransaction transaction = mListData.get(position);
         View cell = convertView;
         Holder holder = null;
         if (convertView == null) {
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
             holder = new Holder();
-            holder.imgRestaurant = (ImageView) cell.findViewById(R.id.image_alert);
+            holder.imgType = (ImageView) cell.findViewById(R.id.image_alert);
             holder.txtTransactionId = (TextView) cell.findViewById(R.id.transaction_id);
             holder.txtDate = (TextView) cell.findViewById(R.id.text_view_date);
             holder.txtReviews = (TextView) cell.findViewById(R.id.text_view_remark);
@@ -59,6 +60,20 @@ public class WalletTransactionListViewAdapter extends ArrayAdapter<WalletTransac
             cell.setTag(holder);
         } else {
             holder = (Holder) cell.getTag();
+        }
+
+//        holder.imgRestaurant
+        holder.txtTransactionId.setText(transaction.walletTransactionId);
+        holder.txtDate.setText(transaction.datetime);
+        holder.txtReviews.setText(transaction.remarks);
+        holder.txtPrice.setText(transaction.amount);
+
+        if (transaction.type.contains("credit")) {
+
+            holder.imgType.setImageResource(R.drawable.icon_receive);
+        } else {
+
+            holder.imgType.setImageResource(R.drawable.icon_sent);
         }
 
         return cell;

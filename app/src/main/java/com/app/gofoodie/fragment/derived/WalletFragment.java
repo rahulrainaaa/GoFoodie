@@ -7,8 +7,10 @@ import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
@@ -18,6 +20,7 @@ import com.app.gofoodie.adapter.listviewadapter.WalletTransactionListViewAdapter
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.transaction.PaymentTransaction;
 import com.app.gofoodie.model.transaction.Transaction;
 import com.app.gofoodie.model.transaction.WalletTransaction;
@@ -27,7 +30,10 @@ import com.app.gofoodie.network.handler.NetworkHandler;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @class WalletFragment
@@ -39,6 +45,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
      * Class private data members.
      */
     private ListView mListView = null;
+    private TextView mTxtWalletAmount, mTxtValidUpto;
     private TabLayout mTabLayout = null;
     private Transaction mTransaction = null;
 
@@ -52,12 +59,32 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         ImageButton imgBtnSubscribe = (ImageButton) view.findViewById(R.id.img_btn_subscibe);
         mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         mListView = (ListView) view.findViewById(R.id.list_view);
-
+        mTxtWalletAmount = (TextView) view.findViewById(R.id.wallet_amount);
+        mTxtValidUpto = (TextView) view.findViewById(R.id.valid_upto);
         mTabLayout.setOnTabSelectedListener(this);
         imgBtnSubscribe.setOnClickListener(this);
 
+        mTxtWalletAmount.setText("AED " + CustomerProfileHandler.CUSTOMER.profile.amount);
+        mTxtValidUpto.setText("Subscription till: " + CustomerProfileHandler.CUSTOMER.profile.validUpto);
 
-        String url = Network.URL_GET_TRANSACTION + "?customerLoginId=" + getSession().getData().getCustomerId();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date expDate = format.parse(CustomerProfileHandler.CUSTOMER.profile.validUpto);
+            Date curDate = new Date();
+            if (curDate.before(expDate)) {
+
+                imgAlert.setVisibility(View.GONE);
+            } else {
+
+                imgAlert.setVisibility(View.VISIBLE);
+                imgAlert.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_blink));
+            }
+        } catch (ParseException e) {
+            Toast.makeText(getActivity(), "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+
+        String url = Network.URL_GET_TRANSACTION + "?customerLoginId=" + getSession().getData().getLoginId();
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
@@ -88,13 +115,12 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
 
-        int tag = (int) tab.getTag();
-        switch (tag) {
-            case 1:
+        switch (tab.getPosition()) {
+            case 0:
 
                 showWalletTransactions();
                 break;
-            case 2:
+            case 1:
 
                 showBankPaymentTransactions();
                 break;

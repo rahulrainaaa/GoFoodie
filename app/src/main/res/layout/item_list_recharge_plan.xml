@@ -15,6 +15,7 @@
 
 
         <TextView
+            android:id="@+id/recharge_plan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -25,6 +26,7 @@
             android:textStyle="italic" />
 
         <TextView
+            android:id="@+id/recharge_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
@@ -42,6 +44,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/recharge_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -49,6 +52,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/recharge_days"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

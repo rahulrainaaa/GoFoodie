@@ -38,28 +38,28 @@
             android:background="@color/colorPrimaryDark"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingBottom="7dp"
-            android:paddingTop="4dp">
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-thin"
-                android:gravity="center"
-                android:text="Wallet Balance"
-                android:textColor="@color/colorWhite"
-                android:textSize="17sp" />
+            android:paddingBottom="4dp"
+            android:paddingTop="3dp">
 
             <TextView
+                android:id="@+id/wallet_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
-                android:text="AED 20.34"
+                android:text="AED --"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/valid_upto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="center"
+                android:text="Subscription upto --"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp" />
         </LinearLayout>
 
         <LinearLayout
