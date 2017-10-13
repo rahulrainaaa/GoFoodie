@@ -1,5 +1,6 @@
 package com.app.gofoodie.activity.derived;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -88,6 +89,6 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
 
         Subscriptionplan plan = mRechargePlan.subscriptionplan.get(position);
         Toast.makeText(this, "Please do the payment", Toast.LENGTH_SHORT).show();
-
+        startActivity(new Intent(this, PaymentGatewayActivity.class));
     }
 }
