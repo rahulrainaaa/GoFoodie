@@ -12,6 +12,7 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.listviewadapter.RechargePlanListViewAdapter;
 import com.app.gofoodie.customview.WeekSelectDialog;
 import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.model.RechargePlan.RechargePlan;
 import com.app.gofoodie.model.RechargePlan.Subscriptionplan;
@@ -88,7 +89,9 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
         Subscriptionplan plan = mRechargePlan.subscriptionplan.get(position);
+        GlobalData.subscriptionplan = plan;
         Toast.makeText(this, "Please do the payment", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, PaymentGatewayActivity.class));
+        finish();
     }
 }

@@ -343,6 +343,7 @@ public class gfdb {
         create table TelrPayment (
         telr_id int primary key auto_increment,
         transaction_id int,
+        telr_trace varchar(50),
         telr_status varchar(50),
         telr_avs varchar(50),
         telr_code varchar(50),
@@ -359,6 +360,7 @@ public class gfdb {
         SELECT
         TelrPayment.telr_id,
         TelrPayment.transaction_id,
+        TelrPayment.telr_trace,
         TelrPayment.telr_status,
         TelrPayment.telr_avs,
         TelrPayment.telr_code,
