@@ -31,6 +31,9 @@ public class PaymentGatewayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_gateway);
+
+
+
     }
 
 
@@ -40,7 +43,6 @@ public class PaymentGatewayActivity extends AppCompatActivity {
         amount = editText.getText().toString();
 
         intent.putExtra(WebviewActivity.EXTRA_MESSAGE, getMobileRequest());
-
 
         intent.putExtra(WebviewActivity.SUCCESS_ACTIVTY_CLASS_NAME, PaymentGatewaySuccessActivity.class.getCanonicalName());
         intent.putExtra(WebviewActivity.FAILED_ACTIVTY_CLASS_NAME, PaymentGatewayFailActivity.class.getCanonicalName());

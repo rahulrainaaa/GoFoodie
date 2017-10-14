@@ -340,9 +340,44 @@ public class gfdb {
         foreign key (customer_id) references CustomerDetail (customer_id),
         foreign key (order_set_id) references OrderSet (order_set_id));
 
+        create table TelrPayment (
+        telr_id int primary key auto_increment,
+        transaction_id int,
+        telr_status varchar(50),
+        telr_avs varchar(50),
+        telr_code varchar(50),
+        telr_message varchar(50),
+        telr_ca_valid varchar(50),
+        telr_cardcode varchar(50),
+        telr_cardlast4 varchar(50),
+        telr_cvv varchar(50),
+        telr_tranref varchar(50),
+        foreign key (transaction_id) references PaymentTransactions(transaction_id));
 
 
-
+        CREATE VIEW TelrPaymentDetails AS
+        SELECT
+        TelrPayment.telr_id,
+        TelrPayment.transaction_id,
+        TelrPayment.telr_status,
+        TelrPayment.telr_avs,
+        TelrPayment.telr_code,
+        TelrPayment.telr_message,
+        TelrPayment.telr_ca_valid,
+        TelrPayment.telr_cardcode,
+        TelrPayment.telr_cardlast4,
+        TelrPayment.telr_cvv,
+        TelrPayment.telr_tranref,
+        PaymentTransactions.wallet_id,
+        PaymentTransactions.pg_transaction_id,
+        PaymentTransactions.pg_response,
+        PaymentTransactions.transaction_response,
+        PaymentTransactions.datetime,
+        PaymentTransactions.remarks,
+        PaymentTransactions.paid_amount,
+        PaymentTransactions.got_amount
+        FROM TelrPayment
+        JOIN PaymentTransactions on PaymentTransactions.transaction_id = TelrPayment.transaction_id;
 
 
 
