@@ -19,6 +19,8 @@ public class Network {
 
     public static final String URL_UPDATE_PROFILE = "http://gofoodie.drushtiindia.com/API/EditProfile/";
 
+    public static final String URL_APPLY_SUBS_PLAN = "http://gofoodie.drushtiindia.com/API/SubscriptionPlan/applyForPlan";
+
     /**
      * GET REST Web APIs.
      */

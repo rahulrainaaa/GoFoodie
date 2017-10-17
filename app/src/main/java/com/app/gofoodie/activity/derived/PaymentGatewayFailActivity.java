@@ -8,6 +8,12 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.global.data.GlobalData;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
+import com.app.gofoodie.model.RechargePlan.Subscriptionplan;
+import com.app.gofoodie.model.customer.Customer;
+import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.telr.mobile.sdk.activty.WebviewActivity;
@@ -67,6 +73,34 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
 
                 JSONObject jsonRequest = new JSONObject();
                 try {
+
+                    Login login = getSession();
+                    Customer customer = CustomerProfileHandler.CUSTOMER;
+                    Subscriptionplan subscriptionplan = GlobalData.subscriptionplan;
+
+                    int days = Integer.parseInt(subscriptionplan.validityDays);
+                    String planType = (days > 0) ? "subscription" : "recharge";
+                    String remarks = "" + planType + " for days = " + days + ", Amount = " + subscriptionplan.payAmount + ", Plan ID = " + subscriptionplan.planId;
+
+                    // Profile details.
+                    jsonRequest.put("login_id", login.getData().getLoginId());
+                    jsonRequest.put("customer_id", login.getData().getCustomerId());
+                    jsonRequest.put("token", login.getData().getToken());
+                    jsonRequest.put("wallet_id", customer.profile.walletId);
+
+                    // Payment Transaction information.
+                    jsonRequest.put("plan_type", planType);
+                    jsonRequest.put("pg_transaction_id", telrTrace);
+                    jsonRequest.put("pg_response", "fail");
+                    jsonRequest.put("transaction_response", "fail");
+                    jsonRequest.put("remarks", remarks);
+
+                    // Plan information.
+                    jsonRequest.put("plan_id", subscriptionplan.planId);
+                    jsonRequest.put("price", subscriptionplan.payAmount);
+                    jsonRequest.put("validity", subscriptionplan.validityDays);
+
+                    // Payment gateway response information.
                     jsonRequest.put("telr_trace", telrTrace);
                     jsonRequest.put("telr_status", telrStatus);
                     jsonRequest.put("telr_avs", telrAvs);
@@ -79,7 +113,7 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
                     jsonRequest.put("telr_tranref", telrTranref);
 
                     NetworkHandler networkHandler = new NetworkHandler();
-                    networkHandler.httpCreate(1, this, this, jsonRequest, "url", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                    networkHandler.httpCreate(1, this, this, jsonRequest, Network.URL_APPLY_SUBS_PLAN, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
                     networkHandler.executePost();
 
                 } catch (JSONException jsonExc) {
@@ -125,9 +159,10 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
     private void handleResponse(JSONObject json) {
 
         try {
+
             int statusCode = json.getInt("statusCode");
             String statusMessage = json.getString("statusMessage");
-
+            Toast.makeText(this, "" + statusMessage, Toast.LENGTH_SHORT).show();
         } catch (JSONException jsonExc) {
 
             jsonExc.printStackTrace();

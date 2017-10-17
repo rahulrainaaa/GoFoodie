@@ -4,9 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.global.data.GlobalData;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
+import com.app.gofoodie.model.RechargePlan.Subscriptionplan;
+import com.app.gofoodie.model.customer.Customer;
+import com.app.gofoodie.model.login.Login;
+import com.app.gofoodie.utility.SessionUtils;
 import com.telr.mobile.sdk.activty.WebviewActivity;
 import com.telr.mobile.sdk.entity.request.payment.Address;
 import com.telr.mobile.sdk.entity.request.payment.App;
@@ -18,29 +25,73 @@ import com.telr.mobile.sdk.entity.request.payment.Tran;
 import java.math.BigInteger;
 import java.util.Random;
 
+/**
+ * @class PaymentGatewayActivity
+ * @desc Activity Class for confirming and starting payment transaction via gateway.
+ */
 public class PaymentGatewayActivity extends AppCompatActivity {
 
-    private String amount = "350"; // Just for testing
+    public static final String TAG = "PaymentGatewayActivity";
 
-    public static final String KEY = "KmgLp~QSQs@347VG";           // TODO: Insert your Key here
-    public static final String STORE_ID = "18742";         // TODO: Insert your Store ID here
-    public static final boolean isSecurityEnabled = false;      // Mark false to test on simulator, True to test on actual device and Production
+    /**
+     * Payment Gateway related details, keys.
+     */
+    private static final String KEY = "KmgLp~QSQs@347VG";           // TODO: Insert your Key here
+    private static final String STORE_ID = "18742";         // TODO: Insert your Store ID here
+    private static final boolean isSecurityEnabled = false;      // Mark false to test on simulator, True to test on actual device and Production
 
+    /**
+     * Class data members.
+     */
+    private String amount;
 
+    /**
+     * Activity UI view object(s).
+     */
+    private TextView txtPlanName = null;
+    private TextView txtPlanDetail = null;
+    private TextView txtGetPrice = null;
+    private TextView txtDays = null;
+    private Button btnConform = null;
+
+    /**
+     * {@link AppCompatActivity} callback method(s).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_gateway);
 
+        txtPlanName = (TextView) findViewById(R.id.txt_plan_name);
+        txtPlanDetail = (TextView) findViewById(R.id.txt_details);
+        txtGetPrice = (TextView) findViewById(R.id.txt_get_price);
+        txtDays = (TextView) findViewById(R.id.txt_days);
+        btnConform = (Button) findViewById(R.id.btn_confirm);
 
+        Login login = SessionUtils.getInstance().getSession();
+        Customer customer = CustomerProfileHandler.CUSTOMER;
+        Subscriptionplan subscriptionplan = GlobalData.subscriptionplan;
+
+        amount = subscriptionplan.payAmount;
+        String days = subscriptionplan.validityDays;
+        String planName = subscriptionplan.name;
+        String planDetail = subscriptionplan.description;
+
+        txtPlanName.setText(planName);
+        txtPlanDetail.setText(planDetail);
+        txtGetPrice.setText("AED " + amount);
+        txtDays.setText("Valid upto " + days + " days");
 
     }
 
-
+    /**
+     * @param view
+     * @method sendMessage
+     * @desc Button Click event: Method to start the payment transaction via gateway.
+     */
     public void sendMessage(View view) {
         Intent intent = new Intent(this, WebviewActivity.class);
-        EditText editText = (EditText) findViewById(R.id.text_amount);
-        amount = editText.getText().toString();
+
 
         intent.putExtra(WebviewActivity.EXTRA_MESSAGE, getMobileRequest());
 

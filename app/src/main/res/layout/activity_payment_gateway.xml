@@ -1,28 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
+    android:gravity="center|top"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fill Amount:"
-        android:textSize="20dp"
-        />
-    <EditText
-        android:id="@+id/text_amount"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:text="350"
-        android:textColor="@color/colorAccent"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        />
-    <Button
+        android:id="@+id/txt_plan_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pay"
-        android:onClick="sendMessage"/>
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="Platinum Recharge Plan"
+        android:textColor="@color/colorPrimary"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/txt_get_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="AED 1500"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/grad_separator_line_red" />
+
+    <TextView
+        android:id="@+id/txt_days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="valid for 90 days"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txt_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border_red"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/desc_platinum_plan"
+        android:textSize="15sp" />
+
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_login_btn"
+        android:onClick="sendMessage"
+        android:text="Conform Payment"
+        android:textColor="@android:color/white"
+        android:textSize="15sp" />
 </LinearLayout>
