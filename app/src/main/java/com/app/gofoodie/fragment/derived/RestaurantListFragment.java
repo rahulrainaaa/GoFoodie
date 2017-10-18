@@ -35,8 +35,14 @@ import java.util.ArrayList;
  */
 public class RestaurantListFragment extends BaseFragment implements NetworkCallbackListener {
 
+    /**
+     * Class private data member(s).
+     */
     private ListView restaurantListView = null;
 
+    /**
+     * {@link BaseFragment} fragment callback method(s).
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

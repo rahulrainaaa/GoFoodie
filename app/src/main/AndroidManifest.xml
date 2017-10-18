@@ -67,7 +67,8 @@
         <activity android:name=".activity.derived.UpdateProfileActivity" />
         <activity android:name=".activity.derived.PaymentGatewayActivity" />
         <activity android:name=".activity.derived.PaymentGatewayFailActivity" />
-        <activity android:name=".activity.derived.PaymentGatewaySuccessActivity"></activity>
+        <activity android:name=".activity.derived.PaymentGatewaySuccessActivity" />
+        <activity android:name=".activity.derived.AddShortlistedRestaurants"></activity>
     </application>
 
 </manifest>

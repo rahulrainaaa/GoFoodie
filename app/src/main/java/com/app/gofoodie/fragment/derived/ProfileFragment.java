@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.activity.derived.ShortlistedRestaurantsActivity;
 import com.app.gofoodie.activity.derived.SplashActivity;
 import com.app.gofoodie.activity.derived.UpdateProfileActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
@@ -106,6 +107,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     private void btnShortlistRestaurantsClicked(View view) {
 
+        startActivity(new Intent(getActivity(), ShortlistedRestaurantsActivity.class));
     }
 
     private void btnChangePasswordClicked(View view) {
