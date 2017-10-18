@@ -383,7 +383,31 @@ public class gfdb {
 
 
 
-
+CREATE VIEW BranchFullDetails AS
+SELECT
+RestaurantBranchLocation.branch_id,
+RestaurantDetail.restaurant_id,
+CustomerShortlistedBranches.customer_id,
+AVG( RestaurantReviews.rating ) 'avg_rating',
+COUNT(RestaurantReviews.rating) 'count_rating',
+RestaurantDetail.name,
+RestaurantBranchLocation.branch_name,
+RestaurantBranchLocation.branch_email,
+RestaurantBranchLocation.description,
+RestaurantBranchLocation.profile_icon,
+RestaurantBranchLocation.tags,
+RestaurantBranchLocation.type,
+RestaurantBranchLocation.branch_address,
+RestaurantBranchLocation.branch_postal_code,
+RestaurantBranchLocation.geo_lat,
+RestaurantBranchLocation.geo_lng,
+RestaurantDetail.about_us
+FROM RestaurantBranchLocation
+JOIN RestaurantReviews ON RestaurantReviews.branch_id = RestaurantBranchLocation.branch_id
+JOIN CustomerShortlistedBranches ON CustomerShortlistedBranches.branch_id = RestaurantBranchLocation.branch_id
+JOIN RestaurantDetail ON RestaurantDetail.restaurant_id = RestaurantBranchLocation.restaurant_id
+GROUP BY RestaurantBranchLocation.branch_id
+HAVING CustomerShortlistedBranches.customer_id = 1;
 
 
         CREATE View  CustomerFullDetail AS

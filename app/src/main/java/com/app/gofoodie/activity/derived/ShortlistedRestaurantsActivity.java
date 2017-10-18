@@ -46,7 +46,6 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity {
         mListView.setAdapter(mAdapter);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
