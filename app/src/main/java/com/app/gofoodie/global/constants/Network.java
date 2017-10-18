@@ -25,6 +25,8 @@ public class Network {
      * GET REST Web APIs.
      */
 
+    public static final String URL_GET_SLR = "http://gofoodie.drushtiindia.com/API/Shortlisted?customerId=";
+
     public static final String URL_GET_DASHBOARD = "http://gofoodie.drushtiindia.com/API/Featured/";
 
     public static final String URL_GET_RECHARGE_PLANS = "http://gofoodie.drushtiindia.com/API/SubscriptionPlan/";

@@ -11,15 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.model.shortlisted.Shortlisted;
 
 import java.util.ArrayList;
 
-public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<String> {
+public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlisted> {
 
     public static final String TAG = "ShortlistedRestaurantListViewAdapter";
 
     private Activity mActivity = null;
-    private ArrayList<String> mListData = null;
+    private ArrayList<Shortlisted> mListData = null;
     private int mLayoutResourceId;
 
     private static class Holder {
@@ -29,7 +30,7 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<String> {
         public int tag = -1;
     }
 
-    public ShortlistedRestaurantListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<String> list) {
+    public ShortlistedRestaurantListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Shortlisted> list) {
 
         super(activity, resource, list);
         this.mActivity = activity;

@@ -6,10 +6,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.listviewadapter.ShortlistedRestaurantListViewAdapter;
+import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.model.shortlisted.Shortlisted;
+import com.app.gofoodie.model.shortlisted.ShortlistedRestaurants;
+import com.app.gofoodie.network.callback.NetworkCallbackListener;
+import com.app.gofoodie.network.handler.NetworkHandler;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -17,7 +27,7 @@ import java.util.ArrayList;
  * @class ShortlistedRestaurantsActivity
  * @desc Activity class for showing the shortlisted restaurants (branch) for a customer profile.
  */
-public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity {
+public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
     public static final String TAG = "ShortlistedRestaurantsActivity";
 
@@ -25,7 +35,7 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity {
      * Class private data member(s).
      */
     private ListView mListView = null;
-    private ArrayList<String> mList = new ArrayList<>();
+    private ArrayList<Shortlisted> mList = null;
     private ShortlistedRestaurantListViewAdapter mAdapter = null;
 
     /**
@@ -38,12 +48,10 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity {
 
         mListView = (ListView) findViewById(R.id.list_view);
 
-        for (int i = 0; i < 20; i++) {
-            mList.add("item-" + i);
-        }
-
-        mAdapter = new ShortlistedRestaurantListViewAdapter(this, R.layout.item_shortlisted_restaurants, mList);
-        mListView.setAdapter(mAdapter);
+        String url = Network.URL_GET_SLR + "1";// getSessionData().getCustomerId();
+        NetworkHandler networkHandler = new NetworkHandler();
+        networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.executeGet();
     }
 
     @Override
@@ -63,6 +71,44 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    /**
+     * {@link NetworkCallbackListener} http response callback listener.
+     */
+    @Override
+    public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+        Toast.makeText(this, "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
+        if (requestCode == 1) {         // Fetched all shortlisted restaurant(s).
+
+            handleShortlistRestaurantResponse(rawObject);
+        }
+    }
+
+    @Override
+    public void networkFailResponse(int requestCode, String message) {
+
+        Toast.makeText(this, "Http fail: " + message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * @param json
+     * @method handleShortlistRestaurantResponse
+     * @desc Method to handle the shortlisted restaurants response from API.
+     */
+    private void handleShortlistRestaurantResponse(JSONObject json) {
+
+        ModelParser parser = new ModelParser();
+        ShortlistedRestaurants shortlistedRestaurants = (ShortlistedRestaurants) parser.getModel(json.toString(), ShortlistedRestaurants.class, null);
+        if (shortlistedRestaurants.statusCode != 200) {
+            mList = (ArrayList<Shortlisted>) shortlistedRestaurants.shortlisted;
+            mAdapter = new ShortlistedRestaurantListViewAdapter(this, R.layout.item_shortlisted_restaurants, mList);
+            mListView.setAdapter(mAdapter);
+        } else {
+            Toast.makeText(this, "" + shortlistedRestaurants.statusMessage, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 }
