@@ -62,7 +62,7 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
             holder = (Holder) cell.getTag();
         }
 
-//        holder.imgRestaurant
+//        holder.imgIcon
         holder.txtTransactionId.setText(transaction.transactionId);
         holder.txtDate.setText(transaction.datetime);
 //        holder.txtReviews.setText(transaction.);

@@ -383,12 +383,12 @@ public class gfdb {
 
 
 
-CREATE VIEW BranchFullDetails AS
+CREATE VIEW CustomerShortlistedBranchesDetail AS
 SELECT
 RestaurantBranchLocation.branch_id,
 RestaurantDetail.restaurant_id,
 CustomerShortlistedBranches.customer_id,
-AVG( RestaurantReviews.rating ) 'avg_rating',
+COALESCE(AVG( RestaurantReviews.rating ), 0) 'avg_rating',
 COUNT(RestaurantReviews.rating) 'count_rating',
 RestaurantDetail.name,
 RestaurantBranchLocation.branch_name,
@@ -399,13 +399,13 @@ RestaurantBranchLocation.tags,
 RestaurantBranchLocation.type,
 RestaurantBranchLocation.branch_address,
 RestaurantBranchLocation.branch_postal_code,
-RestaurantBranchLocation.geo_lat,
-RestaurantBranchLocation.geo_lng,
-RestaurantDetail.about_us
+COALESCE(RestaurantBranchLocation.geo_lat, 0),
+COALESCE(RestaurantBranchLocation.geo_lng, 0),
+COALESCE(RestaurantDetail.about_us, '')
 FROM RestaurantBranchLocation
-JOIN RestaurantReviews ON RestaurantReviews.branch_id = RestaurantBranchLocation.branch_id
-JOIN CustomerShortlistedBranches ON CustomerShortlistedBranches.branch_id = RestaurantBranchLocation.branch_id
-JOIN RestaurantDetail ON RestaurantDetail.restaurant_id = RestaurantBranchLocation.restaurant_id
+LEFT JOIN RestaurantReviews ON RestaurantReviews.branch_id = RestaurantBranchLocation.branch_id
+LEFT JOIN CustomerShortlistedBranches ON CustomerShortlistedBranches.branch_id = RestaurantBranchLocation.branch_id
+LEFT JOIN RestaurantDetail ON RestaurantDetail.restaurant_id = RestaurantBranchLocation.restaurant_id
 GROUP BY RestaurantBranchLocation.branch_id
 HAVING CustomerShortlistedBranches.customer_id = 1;
 

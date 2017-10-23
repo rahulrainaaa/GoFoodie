@@ -62,7 +62,7 @@ public class WalletTransactionListViewAdapter extends ArrayAdapter<WalletTransac
             holder = (Holder) cell.getTag();
         }
 
-//        holder.imgRestaurant
+//        holder.imgIcon
         holder.txtTransactionId.setText(transaction.walletTransactionId);
         holder.txtDate.setText(transaction.datetime);
         holder.txtReviews.setText(transaction.remarks);

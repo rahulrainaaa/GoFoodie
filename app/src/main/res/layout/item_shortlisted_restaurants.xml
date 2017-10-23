@@ -15,13 +15,14 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/image_restaurant"
+            android:id="@+id/img_restaurant"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginBottom="1dp"
             android:layout_marginLeft="1dp"
             android:layout_marginTop="1dp"
             android:background="@drawable/img_frame"
+            android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_account_balance_black_24dp" />
 
         <LinearLayout
@@ -50,6 +51,7 @@
                     android:theme="@style/RatingBar" />
 
                 <TextView
+                    android:id="@+id/txt_rating_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
@@ -65,12 +67,14 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/img_nonveg"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginRight="5dp"
                         android:src="@drawable/nonveg" />
 
                     <ImageView
+                        android:id="@+id/img_veg"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/veg" />
@@ -80,6 +84,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/txt_branch_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -91,6 +96,7 @@
                 android:textSize="15dp" />
 
             <TextView
+                android:id="@+id/txt_branch_tags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -112,7 +118,7 @@
                 android:weightSum="10">
 
                 <ImageButton
-                    android:id="@+id/btn_move_to_wish"
+                    android:id="@+id/ibtn_view"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="5"
@@ -127,7 +133,7 @@
                     android:background="@drawable/grad_separator_line_vertical_light" />
 
                 <ImageButton
-                    android:id="@+id/btn_remove"
+                    android:id="@+id/ibtn_remove"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="5"

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,9 +26,9 @@ import java.util.ArrayList;
 
 /**
  * @class ShortlistedRestaurantsActivity
- * @desc Activity class for showing the shortlisted restaurants (branch) for a customer profile.
+ * @desc Activity class for showing the shortlisted restaurants (branch) to see and remove.
  */
-public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
+public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implements NetworkCallbackListener, View.OnClickListener {
 
     public static final String TAG = "ShortlistedRestaurantsActivity";
 
@@ -101,9 +102,9 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
 
         ModelParser parser = new ModelParser();
         ShortlistedRestaurants shortlistedRestaurants = (ShortlistedRestaurants) parser.getModel(json.toString(), ShortlistedRestaurants.class, null);
-        if (shortlistedRestaurants.statusCode != 200) {
+        if (shortlistedRestaurants.statusCode == 200) {
             mList = (ArrayList<Shortlisted>) shortlistedRestaurants.shortlisted;
-            mAdapter = new ShortlistedRestaurantListViewAdapter(this, R.layout.item_shortlisted_restaurants, mList);
+            mAdapter = new ShortlistedRestaurantListViewAdapter(this, R.layout.item_shortlisted_restaurants, mList, this, ShortlistedRestaurantListViewAdapter.CELL_TYPE.REMOVE);
             mListView.setAdapter(mAdapter);
         } else {
             Toast.makeText(this, "" + shortlistedRestaurants.statusMessage, Toast.LENGTH_SHORT).show();
@@ -111,4 +112,41 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
 
     }
 
+    /**
+     * {@link android.view.View.OnClickListener} click listener callback method(s).
+     */
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+
+            case R.id.ibtn_remove:
+
+                break;
+
+            case R.id.ibtn_view:
+
+                break;
+        }
+    }
+
+    /**
+     * @param view {@link android.widget.ImageButton} clicked reference.
+     * @method showProfile
+     * @desc Method to show the complete profile description.
+     */
+    private void showProfile(View view) {
+
+        Toast.makeText(this, "showProfile", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * @param views {@link android.widget.ImageButton} clicked reference.
+     * @method removeShortlistedRestaurant
+     * @desc Method to remove this particular restaurant
+     */
+    private void removeShortlistedRestaurant(View views) {
+
+        Toast.makeText(this, "removeShortlistedRestaurant", Toast.LENGTH_SHORT).show();
+    }
 }

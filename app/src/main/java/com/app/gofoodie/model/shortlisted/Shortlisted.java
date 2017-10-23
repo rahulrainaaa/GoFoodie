@@ -25,9 +25,9 @@ public class Shortlisted implements Parcelable
     @SerializedName("count_rating")
     @Expose
     public String countRating;
-    @SerializedName("name")
+    @SerializedName("restaurant_name")
     @Expose
-    public String name;
+    public String restaurantName;
     @SerializedName("branch_name")
     @Expose
     public String branchName;
@@ -52,12 +52,12 @@ public class Shortlisted implements Parcelable
     @SerializedName("branch_postal_code")
     @Expose
     public String branchPostalCode;
-    @SerializedName("geo_lat")
+    @SerializedName("branch_geo_lat")
     @Expose
-    public String geoLat;
-    @SerializedName("geo_lng")
+    public String branchGeoLat;
+    @SerializedName("branch_geo_lng")
     @Expose
-    public String geoLng;
+    public String branchGeoLng;
     @SerializedName("about_us")
     @Expose
     public String aboutUs;
@@ -84,7 +84,7 @@ public class Shortlisted implements Parcelable
         this.customerId = ((String) in.readValue((String.class.getClassLoader())));
         this.avgRating = ((String) in.readValue((String.class.getClassLoader())));
         this.countRating = ((String) in.readValue((String.class.getClassLoader())));
-        this.name = ((String) in.readValue((String.class.getClassLoader())));
+        this.restaurantName = ((String) in.readValue((String.class.getClassLoader())));
         this.branchName = ((String) in.readValue((String.class.getClassLoader())));
         this.branchEmail = ((String) in.readValue((String.class.getClassLoader())));
         this.description = ((String) in.readValue((String.class.getClassLoader())));
@@ -93,8 +93,8 @@ public class Shortlisted implements Parcelable
         this.type = ((String) in.readValue((String.class.getClassLoader())));
         this.branchAddress = ((String) in.readValue((String.class.getClassLoader())));
         this.branchPostalCode = ((String) in.readValue((String.class.getClassLoader())));
-        this.geoLat = ((String) in.readValue((String.class.getClassLoader())));
-        this.geoLng = ((String) in.readValue((String.class.getClassLoader())));
+        this.branchGeoLat = ((String) in.readValue((String.class.getClassLoader())));
+        this.branchGeoLng = ((String) in.readValue((String.class.getClassLoader())));
         this.aboutUs = ((String) in.readValue((String.class.getClassLoader())));
     }
 
@@ -107,7 +107,7 @@ public class Shortlisted implements Parcelable
         dest.writeValue(customerId);
         dest.writeValue(avgRating);
         dest.writeValue(countRating);
-        dest.writeValue(name);
+        dest.writeValue(restaurantName);
         dest.writeValue(branchName);
         dest.writeValue(branchEmail);
         dest.writeValue(description);
@@ -116,8 +116,8 @@ public class Shortlisted implements Parcelable
         dest.writeValue(type);
         dest.writeValue(branchAddress);
         dest.writeValue(branchPostalCode);
-        dest.writeValue(geoLat);
-        dest.writeValue(geoLng);
+        dest.writeValue(branchGeoLat);
+        dest.writeValue(branchGeoLng);
         dest.writeValue(aboutUs);
     }
 
