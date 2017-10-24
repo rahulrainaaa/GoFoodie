@@ -45,6 +45,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
         NetworkHandler.initRequestQueue(getApplicationContext());
         SessionUtils.getInstance().loadSession(this);
 
+        // Fetch profile if login session exists.
         if (SessionUtils.getInstance().isSessionExist()) {
 
             CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);

@@ -11,10 +11,12 @@ import android.widget.Toast;
 import com.app.gofoodie.R;
 import com.app.gofoodie.adapter.listviewadapter.ShortlistedRestaurantListViewAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
+import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.model.shortlisted.Shortlisted;
 import com.app.gofoodie.model.shortlisted.ShortlistedRestaurants;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
+import com.app.gofoodie.network.handler.NetworkHandler;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -48,6 +50,10 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
         setHasOptionsMenu(true);
         mListView = (ListView) view.findViewById(R.id.listview_restaurants);
 
+        String url = Network.URL_GET_SLR + "1";// getSessionData().getCustomerId();
+        NetworkHandler networkHandler = new NetworkHandler();
+        networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.executeGet();
         return view;
     }
 
@@ -105,7 +111,7 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
         ShortlistedRestaurants shortlistedRestaurants = (ShortlistedRestaurants) parser.getModel(json.toString(), ShortlistedRestaurants.class, null);
         if (shortlistedRestaurants.statusCode == 200) {
             mList = (ArrayList<Shortlisted>) shortlistedRestaurants.shortlisted;
-            mAdapter = new ShortlistedRestaurantListViewAdapter(getDashboardActivity(), R.layout.item_shortlisted_restaurants, mList, this, ShortlistedRestaurantListViewAdapter.CELL_TYPE.COMBO);
+            mAdapter = new ShortlistedRestaurantListViewAdapter(getDashboardActivity(), R.layout.item_see_shortlisted_restaurant, mList, this);
             mListView.setAdapter(mAdapter);
         } else {
             Toast.makeText(getActivity(), "" + shortlistedRestaurants.statusMessage, Toast.LENGTH_SHORT).show();
@@ -140,6 +146,7 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
      */
     private void showProfile(View view) {
 
+        Shortlisted shortlisted = (Shortlisted) view.getTag();
         Toast.makeText(getActivity(), "showProfile", Toast.LENGTH_SHORT).show();
     }
 
@@ -150,7 +157,8 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
      */
     private void viewComboPlans(View view) {
 
-        Toast.makeText(getActivity(), "removeShortlistedRestaurant", Toast.LENGTH_SHORT).show();
+        Shortlisted shortlisted = (Shortlisted) view.getTag();
+        Toast.makeText(getActivity(), "viewComboPlans", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -158,6 +166,5 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
     public void fragQuitCallback() {
 
     }
-
 
 }

@@ -104,7 +104,7 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
         ShortlistedRestaurants shortlistedRestaurants = (ShortlistedRestaurants) parser.getModel(json.toString(), ShortlistedRestaurants.class, null);
         if (shortlistedRestaurants.statusCode == 200) {
             mList = (ArrayList<Shortlisted>) shortlistedRestaurants.shortlisted;
-            mAdapter = new ShortlistedRestaurantListViewAdapter(this, R.layout.item_shortlisted_restaurants, mList, this, ShortlistedRestaurantListViewAdapter.CELL_TYPE.REMOVE);
+            mAdapter = new ShortlistedRestaurantListViewAdapter(this, R.layout.item_shortlisted_restaurants, mList, this);
             mListView.setAdapter(mAdapter);
         } else {
             Toast.makeText(this, "" + shortlistedRestaurants.statusMessage, Toast.LENGTH_SHORT).show();
@@ -122,10 +122,12 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
 
             case R.id.ibtn_remove:
 
+                removeShortlistedRestaurant(view);
                 break;
 
             case R.id.ibtn_view:
 
+                showProfile(view);
                 break;
         }
     }
@@ -141,11 +143,11 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
     }
 
     /**
-     * @param views {@link android.widget.ImageButton} clicked reference.
+     * @param view {@link android.widget.ImageButton} clicked reference.
      * @method removeShortlistedRestaurant
      * @desc Method to remove this particular restaurant
      */
-    private void removeShortlistedRestaurant(View views) {
+    private void removeShortlistedRestaurant(View view) {
 
         Toast.makeText(this, "removeShortlistedRestaurant", Toast.LENGTH_SHORT).show();
     }

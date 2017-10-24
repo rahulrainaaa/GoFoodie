@@ -68,6 +68,9 @@ public class DashboardFragmentHandler {
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_SOCIAL == fragmentType) {
 
             return new NewSocialRegisterFragment();
+        } else if (DashboardInterruptListener.FRAGMENT_TYPE.SHORTLISTED_RESTAURANTS == fragmentType) {
+
+            return new ShortlistedRestaurantListFragment();
         }
 
         // Return a default fragment in case no match found (in else case).

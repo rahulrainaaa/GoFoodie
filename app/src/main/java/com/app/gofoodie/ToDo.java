@@ -15,6 +15,8 @@ public class ToDo {
      *
      * 5. Set the manifest orientation.
      *
+     * 6. Set customer_id in shortlisted Fragment & Activity in place of hard coded value (1).
+     *
      */
 
 }

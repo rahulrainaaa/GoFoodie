@@ -27,10 +27,6 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
 
     public static final String TAG = "ShortlistedRestaurantListViewAdapter";
 
-    public static enum CELL_TYPE {
-        REMOVE, COMBO
-    }
-
     /**
      * Class private data member(s).
      */
@@ -38,7 +34,6 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
     private ArrayList<Shortlisted> mList = null;
     private int mLayoutResourceId;
     private View.OnClickListener mClickListener = null;
-    private CELL_TYPE mCellType = CELL_TYPE.REMOVE;
 
     /**
      * @class Holder
@@ -58,14 +53,21 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
         public int tag = -1;
     }
 
-    public ShortlistedRestaurantListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Shortlisted> list, View.OnClickListener listener, CELL_TYPE cellType) {
+    /**
+     * @param activity
+     * @param resource
+     * @param list
+     * @param listener
+     * @constructor ShortlistedRestaurantListViewAdapter
+     */
+    public ShortlistedRestaurantListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Shortlisted> list, View.OnClickListener listener) {
 
         super(activity, resource, list);
         this.mActivity = activity;
         this.mList = list;
         this.mLayoutResourceId = resource;
         this.mClickListener = listener;
-        this.mCellType = cellType;
+
     }
 
     @NonNull
@@ -93,14 +95,6 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
         } else {
 
             holder = (Holder) cell.getTag();
-        }
-
-        if (mCellType == CELL_TYPE.REMOVE) {
-
-            Picasso.with(mActivity).load(R.drawable.icon_remove).into(holder.iBtnCellType);
-        } else {
-
-            Picasso.with(mActivity).load(R.drawable.icon_show_combos).into(holder.iBtnCellType);
         }
 
         holder.iBtnView.setTag(shortlisted);
@@ -137,18 +131,8 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
         holder.txtName.setText(shortlisted.branchName);
         holder.txtTags.setText(shortlisted.tags);
         holder.txtCount.setText("(" + shortlisted.countRating + ")");
-        holder.iBtnCellType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mActivity, "iBtnCellType", Toast.LENGTH_SHORT).show();
-            }
-        });
-        holder.iBtnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mActivity, "iBtnView", Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.iBtnCellType.setOnClickListener(mClickListener);
+        holder.iBtnView.setOnClickListener(mClickListener);
 
         return cell;
     }
