@@ -1,5 +1,6 @@
 package com.app.gofoodie.fragment.derived;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.activity.derived.RestaurantProfileActivity;
 import com.app.gofoodie.adapter.listviewadapter.ShortlistedRestaurantListViewAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
@@ -147,7 +149,10 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
     private void showProfile(View view) {
 
         Shortlisted shortlisted = (Shortlisted) view.getTag();
-        Toast.makeText(getActivity(), "showProfile", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getActivity(), RestaurantProfileActivity.class);
+        intent.putExtra("data", shortlisted);
+        startActivity(intent);
     }
 
     /**

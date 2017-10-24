@@ -31,7 +31,7 @@
         android:background="@drawable/rest_profile_image" />
 
     <TextView
-        android:id="@+id/fab"
+        android:id="@+id/txt_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/grad_title_background"
