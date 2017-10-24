@@ -13,6 +13,7 @@ import com.app.gofoodie.activity.derived.ShortlistedRestaurantsActivity;
 import com.app.gofoodie.activity.derived.SplashActivity;
 import com.app.gofoodie.activity.derived.UpdateProfileActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
+import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.utility.SessionUtils;
 
 /**
@@ -112,6 +113,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     private void btnChangePasswordClicked(View view) {
 
+        getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.CHANGE_PASSWORD);
     }
 
     private void btnAboutUsClicked(View view) {

@@ -59,7 +59,7 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_meal_pref, menu);
+        inflater.inflate(R.menu.menu_shortlist_restaurant_frag, menu);
         return true;
     }
 
@@ -139,7 +139,9 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
      */
     private void showProfile(View view) {
 
-        Toast.makeText(this, "showProfile", Toast.LENGTH_SHORT).show();
+        Shortlisted shortlisted = (Shortlisted) view.getTag();
+        Intent intent = new Intent(this, RestaurantProfileActivity.class);
+        intent.putExtra("data", shortlisted);
     }
 
     /**
@@ -149,6 +151,7 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
      */
     private void removeShortlistedRestaurant(View view) {
 
+        Shortlisted shortlisted = (Shortlisted) view.getTag();
         Toast.makeText(this, "removeShortlistedRestaurant", Toast.LENGTH_SHORT).show();
     }
 }

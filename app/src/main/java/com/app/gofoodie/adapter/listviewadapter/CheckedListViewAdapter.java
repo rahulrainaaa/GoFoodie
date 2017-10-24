@@ -8,17 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 
-import com.app.gofoodie.model.category.Datum;
+import com.app.gofoodie.model.category.Category;
 
 import java.util.ArrayList;
 
-public class CheckedListViewAdapter extends ArrayAdapter<Datum> implements View.OnClickListener {
+public class CheckedListViewAdapter extends ArrayAdapter<Category> implements View.OnClickListener {
 
     private Activity mActivity = null;
-    private ArrayList<Datum> mList = null;
+    private ArrayList<Category> mList = null;
     private CheckedTextView mCheckTextView = null;
 
-    public CheckedListViewAdapter(@NonNull Activity activity, ArrayList<Datum> list) {
+    public CheckedListViewAdapter(@NonNull Activity activity, ArrayList<Category> list) {
         super(activity, android.R.layout.simple_list_item_checked, list);
         this.mActivity = activity;
         this.mList = list;
@@ -37,7 +37,7 @@ public class CheckedListViewAdapter extends ArrayAdapter<Datum> implements View.
 
         this.mCheckTextView.setTag(position);
         this.mCheckTextView.setText(mList.get(position).cateName);
-        this.mCheckTextView.setChecked(mList.get(position).checked);
+        this.mCheckTextView.setChecked(mList.get(position).isChecked);
 
         return this.mCheckTextView;
     }
@@ -48,7 +48,7 @@ public class CheckedListViewAdapter extends ArrayAdapter<Datum> implements View.
         CheckedTextView ctv = (CheckedTextView) view;
         ctv.setChecked(!ctv.isChecked());
         int position = (int) ctv.getTag();
-        mList.get(position).checked = ctv.isChecked();
+        mList.get(position).isChecked = ctv.isChecked();
     }
 
 }

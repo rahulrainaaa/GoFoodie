@@ -10,15 +10,18 @@ import android.content.SharedPreferences;
 public class CacheUtils {
 
     /**
-     * {@link SharedPreferences} Enumerated naming.
+     * {@link SharedPreferences} Preference naming.
      */
     public static enum PREF_NAME {
         PREF_LOGIN, PREF_MEAL, PREF_AREA_LOCATION
     }
 
+    /**
+     * Preference Key(s).
+     */
     public static final String PREF_KEY = "PREF_KEY";
-    public static final String PREF_MEAL_CUZ = "PREF_MEAL_CUZ";
-    public static final String PREF_MEAL_TYPE = "PREF_MEAL_TYPE";
+    public static final String PREF_MEAL_CUZ_KEY = "PREF_MEAL_CUZ_KEY";
+    public static final String PREF_MEAL_TYPE_KEY = "PREF_MEAL_TYPE_KEY";
 
     /**
      * Class private data members.

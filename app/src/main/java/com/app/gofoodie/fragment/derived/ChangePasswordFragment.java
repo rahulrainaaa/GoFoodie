@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.app.gofoodie.R;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -83,17 +84,19 @@ public class ChangePasswordFragment extends BaseFragment implements View.OnClick
 
         JSONObject jsonChangePasswordRequest = new JSONObject();
         try {
-            jsonChangePasswordRequest.put("", "");
-            jsonChangePasswordRequest.put("", "");
-            jsonChangePasswordRequest.put("", "");
-        } catch (JSONException excJson) {
-            Toast.makeText(getActivity(), "EXCEPTION: " + excJson.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+            jsonChangePasswordRequest.put("email", getSession().getData().getEmail());
+            jsonChangePasswordRequest.put("login_id", getSession().getData().getLoginId());
+            jsonChangePasswordRequest.put("newPwd", "" + strNewPassword);
+            jsonChangePasswordRequest.put("token", getSession().getData().getToken());
+            NetworkHandler networkHandler = new NetworkHandler();
+            networkHandler.httpCreate(1, getDashboardActivity(), this, jsonChangePasswordRequest, Network.URL_CHANGE_PASSWORD, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+            networkHandler.executePost();
+            getDashboardActivity().getProgressDialog().show();
+        } catch (JSONException jsonExc) {
 
-        NetworkHandler networkHandler = new NetworkHandler();
-        networkHandler.httpCreate(1, getDashboardActivity(), this, jsonChangePasswordRequest, Network.URL_CHANGE_PASSWORD, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-        networkHandler.executePost();
-        getDashboardActivity().getProgressDialog().show();
+            jsonExc.printStackTrace();
+            Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -128,5 +131,20 @@ public class ChangePasswordFragment extends BaseFragment implements View.OnClick
      */
     private void changePasswordResponseHandler(JSONObject raw) {
 
+        try {
+
+            int statusCode = raw.getInt("statusCode");
+            String statusMessage = raw.getString("statusMessage");
+            Toast.makeText(getActivity(), statusCode + " # " + statusMessage, Toast.LENGTH_SHORT).show();
+            if (statusCode == 200) {
+
+                getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.PROFILE);
+            } else {
+            }
+        } catch (JSONException jsonExc) {
+
+            jsonExc.printStackTrace();
+            Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -22,7 +22,7 @@
         android:stepSize="0.5" />
 
     <TextView
-        android:id="@+id/txt_review"
+        android:id="@+id/review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
@@ -31,7 +31,7 @@
         android:textSize="15dp" />
 
     <TextView
-        android:id="@+id/txt_name"
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"

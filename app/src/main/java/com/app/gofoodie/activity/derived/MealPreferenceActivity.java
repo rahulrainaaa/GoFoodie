@@ -14,7 +14,7 @@ import com.app.gofoodie.adapter.listviewadapter.CheckedListViewAdapter;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.model.category.Category;
-import com.app.gofoodie.model.category.Datum;
+import com.app.gofoodie.model.category.CategoryResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.CacheUtils;
@@ -25,16 +25,26 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * @class MealPreferenceActivity
+ * @desc Activity Class to handle the meal preferences related to cuizines and veg-nonveg-both.
+ */
 public class MealPreferenceActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
+    /**
+     * Class private data member(s).
+     */
     private ListView mListView = null;
-    private ArrayList<Datum> mList = new ArrayList<>();
+    private ArrayList<Category> mList = new ArrayList<>();
     private CheckedListViewAdapter mAdapter = null;
 
     private RadioGroup mRgpMealType = null;
     private String mStrMealType = "both";
     private StringBuilder mStrCuzType = new StringBuilder();
 
+    /**
+     * {@link BaseAppCompatActivity} activity callback method(s).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +73,7 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
 
         switch (item.getItemId()) {
 
-            case R.id.menu_item_save:
+            case R.id.menu_item_new:
 
                 savePreference();
                 break;
@@ -92,19 +102,19 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
                 break;
         }
 
-        Iterator<Datum> iterator = mList.iterator();
+        Iterator<Category> iterator = mList.iterator();
         while (iterator.hasNext()) {
 
-            Datum datum = iterator.next();
-            if (datum.checked) {
+            Category category = iterator.next();
+            if (category.isChecked) {
 
-                mStrCuzType.append("" + datum.cateId + ",");
+                mStrCuzType.append("" + category.cateId + ",");
             }
         }
 
         // Save the preference into the cache (offline).
-        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_CUZ, mStrCuzType.toString()).commit();
-        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_TYPE, mStrMealType.toString()).commit();
+        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_CUZ_KEY, mStrCuzType.toString()).commit();
+        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_TYPE_KEY, mStrMealType.toString()).commit();
 
         Toast.makeText(this, "Meal Preferences saved.", Toast.LENGTH_SHORT).show();
     }
@@ -138,16 +148,16 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
     private void listResponseHandler(JSONObject json) {
 
         ModelParser modelParser = new ModelParser();
-        Category cuisine = (Category) modelParser.getModel(json.toString(), Category.class, null);
+        CategoryResponse response = (CategoryResponse) modelParser.getModel(json.toString(), CategoryResponse.class, null);
 
         // Check if the http response is non-success (!=200).
-        if (cuisine.statusCode != 200) {
+        if (response.statusCode != 200) {
 
             Toast.makeText(this, "Unable to fetch data.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        mList = (ArrayList<Datum>) cuisine.data;
+        mList = (ArrayList<Category>) response.category;
         mAdapter = new CheckedListViewAdapter(this, mList);
         mListView.setAdapter(mAdapter);
         if (mList.size() == 0) {
