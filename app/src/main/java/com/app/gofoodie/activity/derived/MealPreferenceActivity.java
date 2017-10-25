@@ -116,6 +116,7 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
         CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_CUZ_KEY, mStrCuzType.toString()).commit();
         CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_TYPE_KEY, mStrMealType.toString()).commit();
 
+
         Toast.makeText(this, "Meal Preferences saved.", Toast.LENGTH_SHORT).show();
     }
 
