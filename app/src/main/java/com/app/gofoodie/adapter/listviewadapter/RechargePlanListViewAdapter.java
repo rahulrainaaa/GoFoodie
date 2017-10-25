@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.app.gofoodie.R;
-import com.app.gofoodie.model.RechargePlan.Subscriptionplan;
+import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
 
 import java.util.ArrayList;
 

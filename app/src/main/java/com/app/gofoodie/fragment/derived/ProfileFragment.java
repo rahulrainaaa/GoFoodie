@@ -103,6 +103,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void btnMyPreferencesClicked(View view) {
+        
 
     }
 

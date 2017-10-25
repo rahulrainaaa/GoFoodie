@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.app.gofoodie.R;
 import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
-import com.app.gofoodie.model.RechargePlan.Subscriptionplan;
+import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
 import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.utility.SessionUtils;

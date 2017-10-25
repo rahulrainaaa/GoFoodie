@@ -1,5 +1,5 @@
 
-package com.app.gofoodie.model.RechargePlan;
+package com.app.gofoodie.model.rechargePlan;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -38,7 +38,7 @@ public class RechargePlan extends BaseModel implements Parcelable {
     };
 
     protected RechargePlan(Parcel in) {
-        in.readList(this.subscriptionplan, (com.app.gofoodie.model.RechargePlan.Subscriptionplan.class.getClassLoader()));
+        in.readList(this.subscriptionplan, (com.app.gofoodie.model.rechargePlan.Subscriptionplan.class.getClassLoader()));
         this.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
     }

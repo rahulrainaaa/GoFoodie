@@ -10,12 +10,11 @@ import android.widget.Toast;
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.listviewadapter.RechargePlanListViewAdapter;
-import com.app.gofoodie.customview.WeekSelectDialog;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
-import com.app.gofoodie.model.RechargePlan.RechargePlan;
-import com.app.gofoodie.model.RechargePlan.Subscriptionplan;
+import com.app.gofoodie.model.rechargePlan.RechargePlan;
+import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 
@@ -38,9 +37,6 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
 
         mListView = (ListView) findViewById(R.id.list_view);
         mListView.setOnItemClickListener(this);
-
-        WeekSelectDialog weekSelectDialog = new WeekSelectDialog(this);
-        weekSelectDialog.show();
 
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), Network.URL_GET_RECHARGE_PLANS, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);

@@ -1,7 +1,7 @@
 package com.app.gofoodie.global.data;
 
 
-import com.app.gofoodie.model.RechargePlan.Subscriptionplan;
+import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
 
 /**
  * @class GlobalData

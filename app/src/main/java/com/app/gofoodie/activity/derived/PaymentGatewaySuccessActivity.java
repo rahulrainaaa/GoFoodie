@@ -11,7 +11,7 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
-import com.app.gofoodie.model.RechargePlan.Subscriptionplan;
+import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
 import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
