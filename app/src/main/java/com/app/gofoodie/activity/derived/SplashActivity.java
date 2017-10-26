@@ -94,7 +94,6 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
 
         startActivity(new Intent(this, DashboardActivity.class));
 
-        startActivity(new Intent(this, MealPreferenceActivity.class));
         finish();
     }
 }

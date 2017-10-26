@@ -32,8 +32,16 @@ public class WeekSelectDialog implements View.OnClickListener {
     private boolean tue = true;
     private boolean wed = true;
     private boolean thu = true;
-    private boolean fri = false;
-    private boolean sat = false;
+    private boolean fri = true;
+    private boolean sat = true;
+
+    private ToggleButton tglBtnSun = null;
+    private ToggleButton tglBtnMon = null;
+    private ToggleButton tglBtnTue = null;
+    private ToggleButton tglBtnWed = null;
+    private ToggleButton tglBtnThu = null;
+    private ToggleButton tglBtnFri = null;
+    private ToggleButton tglBtnSat = null;
 
     /**
      * @param activity
@@ -52,6 +60,30 @@ public class WeekSelectDialog implements View.OnClickListener {
     public void show() {
 
         View view = mActivity.getLayoutInflater().inflate(R.layout.dialog_week, null);
+
+        tglBtnSun = (ToggleButton) view.findViewById(R.id.tglBtn_sunday);
+        tglBtnMon = (ToggleButton) view.findViewById(R.id.tglBtn_monday);
+        tglBtnTue = (ToggleButton) view.findViewById(R.id.tglBtn_tuesday);
+        tglBtnWed = (ToggleButton) view.findViewById(R.id.tglBtn_wednesday);
+        tglBtnThu = (ToggleButton) view.findViewById(R.id.tglBtn_thursday);
+        tglBtnFri = (ToggleButton) view.findViewById(R.id.tglBtn_friday);
+        tglBtnSat = (ToggleButton) view.findViewById(R.id.tglBtn_saturday);
+
+        tglBtnSun.setChecked(sun);
+        tglBtnMon.setChecked(mon);
+        tglBtnTue.setChecked(tue);
+        tglBtnWed.setChecked(wed);
+        tglBtnThu.setChecked(thu);
+        tglBtnFri.setChecked(fri);
+        tglBtnSat.setChecked(sat);
+
+        checkChanged(tglBtnSun, tglBtnSun.isChecked(), 1);
+        checkChanged(tglBtnMon, tglBtnMon.isChecked(), 2);
+        checkChanged(tglBtnTue, tglBtnTue.isChecked(), 3);
+        checkChanged(tglBtnWed, tglBtnWed.isChecked(), 4);
+        checkChanged(tglBtnThu, tglBtnThu.isChecked(), 5);
+        checkChanged(tglBtnFri, tglBtnFri.isChecked(), 6);
+        checkChanged(tglBtnSat, tglBtnSat.isChecked(), 7);
 
         mAlertDialog = new AlertDialog.Builder(mActivity).create();
         mAlertDialog.setView(view);
@@ -319,6 +351,14 @@ public class WeekSelectDialog implements View.OnClickListener {
      */
     public boolean parseWeekPreference(String str) {
 
+        sun = false;
+        mon = false;
+        tue = false;
+        wed = false;
+        thu = false;
+        fri = false;
+        sat = false;
+
         String[] strArrWeekDays = str.split(",");
 
         for (int i = 0; i < strArrWeekDays.length; i++) {
@@ -326,57 +366,43 @@ public class WeekSelectDialog implements View.OnClickListener {
             if (strArrWeekDays[i].trim().equals("Sun")) {
 
                 sun = true;
-            } else {
-
-                sun = false;
+                continue;
             }
 
             if (strArrWeekDays[i].trim().equals("Mon")) {
 
                 mon = true;
-            } else {
-
-                mon = false;
+                continue;
             }
 
             if (strArrWeekDays[i].trim().equals("Tue")) {
 
                 tue = true;
-            } else {
-
-                tue = false;
+                continue;
             }
 
             if (strArrWeekDays[i].trim().equals("Wed")) {
 
                 wed = true;
-            } else {
-
-                wed = false;
+                continue;
             }
 
             if (strArrWeekDays[i].trim().equals("Thu")) {
 
                 thu = true;
-            } else {
-
-                thu = false;
+                continue;
             }
 
             if (strArrWeekDays[i].trim().equals("Fri")) {
 
                 fri = true;
-            } else {
-
-                fri = false;
+                continue;
             }
 
             if (strArrWeekDays[i].trim().equals("Sat")) {
 
                 sat = true;
-            } else {
-
-                sat = false;
+                continue;
             }
         }
         return true;

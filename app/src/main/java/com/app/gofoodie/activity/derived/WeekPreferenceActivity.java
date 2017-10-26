@@ -8,6 +8,9 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.customview.WeekSelectDialog;
 import com.app.gofoodie.customview.WeekSelectDialogInterface;
 import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
+import com.app.gofoodie.handler.profileDataHandler.ProfileUpdateListener;
+import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.SessionUtils;
@@ -43,9 +46,18 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
     protected void onResume() {
         super.onResume();
 
-        mWeekDialog = new WeekSelectDialog(this, this);
-        mWeekDialog.show();
+        showWeekDialog();
 
+    }
+
+    /**
+     * @method showWeekDialog
+     * @desc Method to show the Week Dialog over activity.
+     */
+    private void showWeekDialog() {
+        mWeekDialog = new WeekSelectDialog(this, this);
+        mWeekDialog.parseWeekPreference(CustomerProfileHandler.CUSTOMER.profile.daysYouWantTheCombo);
+        mWeekDialog.show();
     }
 
     /**
@@ -69,6 +81,7 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
     public void networkFailResponse(int requestCode, String message) {
 
         Toast.makeText(this, "http fail: " + message.trim(), Toast.LENGTH_SHORT).show();
+        showWeekDialog();
     }
 
     /**
@@ -89,6 +102,12 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
     private void handleWeekDialogSelected(WeekSelectDialog dialog) {
 
         JSONArray jsonArrayWorkingDays = dialog.getWorkingDays();
+        if (jsonArrayWorkingDays.length() < 5) {
+
+            Toast.makeText(this, "Select minimum 5 days.", Toast.LENGTH_SHORT).show();
+            showWeekDialog();
+            return;
+        }
         JSONObject jsonRequest = new JSONObject();
         try {
 
@@ -121,6 +140,20 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
             int statusCode = json.getInt("statusCode");
             String statusMessage = json.getString("statusMessage");
 
+            if (statusCode != 200) {
+
+                Toast.makeText(this, "" + statusMessage, Toast.LENGTH_SHORT).show();
+                showWeekDialog();
+                return;
+            }
+            CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
+            customerProfileHandler.refresh(this, this, new ProfileUpdateListener() {
+                @Override
+                public void profileUpdatedCallback(Customer customer) {
+                    finish();
+                    Toast.makeText(WeekPreferenceActivity.this, "Week Preference Updated", Toast.LENGTH_SHORT).show();
+                }
+            });
 
         } catch (Exception exc) {
             exc.printStackTrace();

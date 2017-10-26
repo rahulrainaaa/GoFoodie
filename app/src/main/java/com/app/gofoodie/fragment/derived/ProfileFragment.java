@@ -12,6 +12,7 @@ import com.app.gofoodie.R;
 import com.app.gofoodie.activity.derived.ShortlistedRestaurantsActivity;
 import com.app.gofoodie.activity.derived.SplashActivity;
 import com.app.gofoodie.activity.derived.UpdateProfileActivity;
+import com.app.gofoodie.activity.derived.WeekPreferenceActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.utility.SessionUtils;
@@ -88,11 +89,9 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         }
     }
 
-
     /**
      * Button(s) onClick Logic method(s).
      */
-
     private void btnMyProfileClicked(View view) {
 
         startActivity(new Intent(getActivity(), UpdateProfileActivity.class));
@@ -103,8 +102,8 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void btnMyPreferencesClicked(View view) {
-        
 
+        startActivity(new Intent(getActivity(), WeekPreferenceActivity.class));
     }
 
     private void btnShortlistRestaurantsClicked(View view) {
