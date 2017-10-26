@@ -66,6 +66,7 @@ public class WeekSelectDialog implements View.OnClickListener {
 
                     mDialogListener.weekDialogOkClicked(WeekSelectDialog.this);
                 }
+                dismiss();
 
             }
         });
@@ -175,31 +176,31 @@ public class WeekSelectDialog implements View.OnClickListener {
 
             if (sun) {
 
-                arr.put("sun");
+                arr.put("Sun");
             }
             if (mon) {
 
-                arr.put("mon");
+                arr.put("Mon");
             }
             if (tue) {
 
-                arr.put("tue");
+                arr.put("Tue");
             }
             if (wed) {
 
-                arr.put("wed");
+                arr.put("Wed");
             }
             if (thu) {
 
-                arr.put("thu");
+                arr.put("Thu");
             }
             if (fri) {
 
-                arr.put("fri");
+                arr.put("Fri");
             }
             if (sat) {
 
-                arr.put("sat");
+                arr.put("Sat");
             }
         } catch (Exception exc) {
 
@@ -221,31 +222,31 @@ public class WeekSelectDialog implements View.OnClickListener {
 
             if (!sun) {
 
-                arr.put("sun");
+                arr.put("Sun");
             }
             if (!mon) {
 
-                arr.put("mon");
+                arr.put("Mon");
             }
             if (!tue) {
 
-                arr.put("tue");
+                arr.put("Tue");
             }
             if (!wed) {
 
-                arr.put("wed");
+                arr.put("Wed");
             }
             if (!thu) {
 
-                arr.put("thu");
+                arr.put("Thu");
             }
             if (!fri) {
 
-                arr.put("fri");
+                arr.put("Fri");
             }
             if (!sat) {
 
-                arr.put("sat");
+                arr.put("Sat");
             }
         } catch (Exception exc) {
 
@@ -309,6 +310,76 @@ public class WeekSelectDialog implements View.OnClickListener {
     public boolean isSaturday() {
 
         return sat;
+    }
+
+    /**
+     * @return boolean true = successful parsed, false = unable to parse.
+     * @method parseWeekPreference
+     * @desc Method to parse week days separated by commas [,].
+     */
+    public boolean parseWeekPreference(String str) {
+
+        String[] strArrWeekDays = str.split(",");
+
+        for (int i = 0; i < strArrWeekDays.length; i++) {
+
+            if (strArrWeekDays[i].trim().equals("Sun")) {
+
+                sun = true;
+            } else {
+
+                sun = false;
+            }
+
+            if (strArrWeekDays[i].trim().equals("Mon")) {
+
+                mon = true;
+            } else {
+
+                mon = false;
+            }
+
+            if (strArrWeekDays[i].trim().equals("Tue")) {
+
+                tue = true;
+            } else {
+
+                tue = false;
+            }
+
+            if (strArrWeekDays[i].trim().equals("Wed")) {
+
+                wed = true;
+            } else {
+
+                wed = false;
+            }
+
+            if (strArrWeekDays[i].trim().equals("Thu")) {
+
+                thu = true;
+            } else {
+
+                thu = false;
+            }
+
+            if (strArrWeekDays[i].trim().equals("Fri")) {
+
+                fri = true;
+            } else {
+
+                fri = false;
+            }
+
+            if (strArrWeekDays[i].trim().equals("Sat")) {
+
+                sat = true;
+            } else {
+
+                sat = false;
+            }
+        }
+        return true;
     }
 
 }

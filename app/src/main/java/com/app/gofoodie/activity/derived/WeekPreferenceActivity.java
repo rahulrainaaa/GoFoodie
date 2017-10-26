@@ -7,9 +7,13 @@ import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.customview.WeekSelectDialog;
 import com.app.gofoodie.customview.WeekSelectDialogInterface;
+import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
+import com.app.gofoodie.network.handler.NetworkHandler;
+import com.app.gofoodie.utility.SessionUtils;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -54,12 +58,9 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
 
         switch (requestCode) {
 
-            case 1:                 // Get week preference.
+            case 1:                 // Set week preference response.
 
-                break;
-
-            case 2:                 // Set week preference.
-
+                handleWeekPrefUpdatedResponse(rawObject);
                 break;
         }
     }
@@ -70,13 +71,13 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
         Toast.makeText(this, "http fail: " + message.trim(), Toast.LENGTH_SHORT).show();
     }
 
-
     /**
      * {@link WeekSelectDialogInterface} week dialog listener callback method(s).
      */
     @Override
     public void weekDialogOkClicked(WeekSelectDialog dialog) {
 
+        handleWeekDialogSelected(dialog);
         Toast.makeText(this, "week dialog ok clicked.", Toast.LENGTH_SHORT).show();
     }
 
@@ -88,7 +89,43 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
     private void handleWeekDialogSelected(WeekSelectDialog dialog) {
 
         JSONArray jsonArrayWorkingDays = dialog.getWorkingDays();
+        JSONObject jsonRequest = new JSONObject();
+        try {
 
+            jsonRequest.put("customer_id", SessionUtils.getInstance().getSession().getData().getCustomerId());
+            jsonRequest.put("login_id", SessionUtils.getInstance().getSession().getData().getLoginId());
+            jsonRequest.put("weekDays", jsonArrayWorkingDays);
+            jsonRequest.put("token", SessionUtils.getInstance().getSession().getData().getToken());
+
+            String url = Network.URL_SET_WEEK_PREF;
+            NetworkHandler networkHandler = new NetworkHandler();
+            networkHandler.httpCreate(1, this, this, jsonRequest, url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+            networkHandler.executePost();
+
+        } catch (JSONException jsonExc) {
+
+            jsonExc.printStackTrace();
+            Toast.makeText(this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * @param json
+     * @method handleWeekPrefUpdatedResponse
+     * @desc Method handle week days updated http response.
+     */
+    private void handleWeekPrefUpdatedResponse(JSONObject json) {
+
+        try {
+
+            int statusCode = json.getInt("statusCode");
+            String statusMessage = json.getString("statusMessage");
+
+
+        } catch (Exception exc) {
+            exc.printStackTrace();
+            Toast.makeText(this, "Exception: " + exc.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

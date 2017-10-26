@@ -21,6 +21,7 @@ public class Network {
 
     public static final String URL_APPLY_SUBS_PLAN = "http://gofoodie.drushtiindia.com/API/SubscriptionPlan/applyForPlan";
 
+    public static final String URL_SET_WEEK_PREF = "http://gofoodie.drushtiindia.com/API/Preferences/setWeekPreference";
     /**
      * GET REST Web APIs.
      */
