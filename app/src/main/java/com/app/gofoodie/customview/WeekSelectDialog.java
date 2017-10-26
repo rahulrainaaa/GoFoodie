@@ -165,10 +165,10 @@ public class WeekSelectDialog implements View.OnClickListener {
 
     /**
      * @return JSONArray
-     * @method getDays
+     * @method getWorkingDays
      * @desc Method to get JSONArray of working days.
      */
-    public JSONArray getDays() {
+    public JSONArray getWorkingDays() {
 
         JSONArray arr = new JSONArray();
         try {
@@ -198,6 +198,52 @@ public class WeekSelectDialog implements View.OnClickListener {
                 arr.put("fri");
             }
             if (sat) {
+
+                arr.put("sat");
+            }
+        } catch (Exception exc) {
+
+            exc.printStackTrace();
+            Toast.makeText(mActivity, "JSONException: " + exc.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        return arr;
+    }
+
+    /**
+     * @return JSONArray
+     * @method getNonWorkingDays
+     * @desc Method to get JSONArray of non working days in a week (week days off).
+     */
+    public JSONArray getNonWorkingDays() {
+
+        JSONArray arr = new JSONArray();
+        try {
+
+            if (!sun) {
+
+                arr.put("sun");
+            }
+            if (!mon) {
+
+                arr.put("mon");
+            }
+            if (!tue) {
+
+                arr.put("tue");
+            }
+            if (!wed) {
+
+                arr.put("wed");
+            }
+            if (!thu) {
+
+                arr.put("thu");
+            }
+            if (!fri) {
+
+                arr.put("fri");
+            }
+            if (!sat) {
 
                 arr.put("sat");
             }

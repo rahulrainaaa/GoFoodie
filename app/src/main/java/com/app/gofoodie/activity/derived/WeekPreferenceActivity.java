@@ -79,4 +79,16 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
 
         Toast.makeText(this, "week dialog ok clicked.", Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     * @param dialog
+     * @method handleWeekDialogSelected
+     * @desc Method to handle the Week Dialog OK button click.
+     */
+    private void handleWeekDialogSelected(WeekSelectDialog dialog) {
+
+        JSONArray jsonArrayWorkingDays = dialog.getWorkingDays();
+
+    }
+
 }
