@@ -26,6 +26,8 @@ public class Network {
      * GET REST Web APIs.
      */
 
+    public static final String URL_GET_BRANCH_COMBOS = "http://gofoodie.drushtiindia.com/API/Combos?branchId=";
+
     public static final String URL_GET_WEEK_PREF = "http://gofoodie.drushtiindia.com/API/Preferences/getWeekPreference/";
 
     public static final String URL_GET_BRANCH_REV = "http://gofoodie.drushtiindia.com/API/Reviews?branch_id=";

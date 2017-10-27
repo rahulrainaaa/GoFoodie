@@ -50,11 +50,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.derived.ComboPlanDescriptionActivity"
-            android:label="@string/title_activity_combo_plan_description"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activity.derived.MealPreferenceActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -69,7 +64,8 @@
         <activity android:name=".activity.derived.PaymentGatewayFailActivity" />
         <activity android:name=".activity.derived.PaymentGatewaySuccessActivity" />
         <activity android:name=".activity.derived.AddShortlistedRestaurants" />
-        <activity android:name=".activity.derived.WeekPreferenceActivity"></activity>
+        <activity android:name=".activity.derived.WeekPreferenceActivity" />
+        <activity android:name=".activity.derived.ComboPlanActivity"></activity>
     </application>
 
 </manifest>

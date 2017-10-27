@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.activity.derived.ComboPlanActivity;
 import com.app.gofoodie.activity.derived.RestaurantProfileActivity;
 import com.app.gofoodie.adapter.listviewadapter.ShortlistedRestaurantListViewAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
@@ -164,6 +165,9 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
 
         Shortlisted shortlisted = (Shortlisted) view.getTag();
         Toast.makeText(getActivity(), "viewComboPlans", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), ComboPlanActivity.class);
+        intent.putExtra("branch_id", shortlisted.branchId);
+        startActivity(intent);
     }
 
 

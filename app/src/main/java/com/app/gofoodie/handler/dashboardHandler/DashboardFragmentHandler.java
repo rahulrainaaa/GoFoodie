@@ -32,7 +32,7 @@ public class DashboardFragmentHandler {
         if (DashboardInterruptListener.FRAGMENT_TYPE.DASHBOARD == fragmentType) {
 
             return new HomeFragment();
-        } else if (DashboardInterruptListener.FRAGMENT_TYPE.COMBOS == fragmentType) {
+        } else if (DashboardInterruptListener.FRAGMENT_TYPE.SHORTLISTED_RESTAURANTS == fragmentType) {
 
             return new ShortlistedRestaurantListFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.WALLET == fragmentType) {

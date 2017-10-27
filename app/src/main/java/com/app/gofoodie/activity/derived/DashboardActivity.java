@@ -132,7 +132,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
      */
     private void navigationCombos() {
 
-        mFragmentType = FRAGMENT_TYPE.COMBOS;
+        mFragmentType = FRAGMENT_TYPE.SHORTLISTED_RESTAURANTS;
         loadFragment();
     }
 

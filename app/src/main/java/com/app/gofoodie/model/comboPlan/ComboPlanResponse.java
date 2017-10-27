@@ -38,7 +38,7 @@ public class ComboPlanResponse extends BaseModel implements Parcelable {
     };
 
     protected ComboPlanResponse(Parcel in) {
-        in.readList(this.comboplan, (Comboplan.class.getClassLoader()));
+        in.readList(this.comboplan, (com.app.gofoodie.model.comboPlan.Comboplan.class.getClassLoader()));
         this.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
     }

@@ -45,7 +45,6 @@ public class AddShortlistedRestaurants extends AppCompatActivity implements Adap
 
         mListView = (ListView) findViewById(R.id.list_view);
         mAdapter = new RestaurantListViewAdapter(this, R.layout.item_shortlist_restaurant, mList, this);
-
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
     }

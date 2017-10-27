@@ -1,15 +1,15 @@
 
 package com.app.gofoodie.model.comboPlan;
 
-import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Comboplan implements Parcelable
-{
+import java.util.List;
+
+public class Comboplan implements Parcelable {
 
     @SerializedName("combo_id")
     @Expose
@@ -20,6 +20,9 @@ public class Comboplan implements Parcelable
     @SerializedName("branch_id")
     @Expose
     public String branchId;
+    @SerializedName("type")
+    @Expose
+    public String type;
     @SerializedName("branch_name")
     @Expose
     public String branchName;
@@ -34,7 +37,7 @@ public class Comboplan implements Parcelable
     public String cateName;
     @SerializedName("cuisine_name")
     @Expose
-    public Object cuisineName;
+    public String cuisineName;
     @SerializedName("description")
     @Expose
     public String description;
@@ -57,7 +60,7 @@ public class Comboplan implements Parcelable
 
 
         @SuppressWarnings({
-            "unchecked"
+                "unchecked"
         })
         public Comboplan createFromParcel(Parcel in) {
             return new Comboplan(in);
@@ -67,24 +70,24 @@ public class Comboplan implements Parcelable
             return (new Comboplan[size]);
         }
 
-    }
-    ;
+    };
 
     protected Comboplan(Parcel in) {
         this.comboId = ((String) in.readValue((String.class.getClassLoader())));
         this.cbId = ((String) in.readValue((String.class.getClassLoader())));
         this.branchId = ((String) in.readValue((String.class.getClassLoader())));
+        this.type = ((String) in.readValue((String.class.getClassLoader())));
         this.branchName = ((String) in.readValue((String.class.getClassLoader())));
         this.restaurantName = ((String) in.readValue((String.class.getClassLoader())));
         this.comboName = ((String) in.readValue((String.class.getClassLoader())));
         this.cateName = ((String) in.readValue((String.class.getClassLoader())));
-        this.cuisineName = ((Object) in.readValue((Object.class.getClassLoader())));
+        this.cuisineName = ((String) in.readValue((String.class.getClassLoader())));
         this.description = ((String) in.readValue((String.class.getClassLoader())));
         this.image = ((String) in.readValue((String.class.getClassLoader())));
         this.price = ((String) in.readValue((String.class.getClassLoader())));
         this.avgRating = ((String) in.readValue((String.class.getClassLoader())));
         this.countRating = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.comboItems, (ComboItem.class.getClassLoader()));
+        in.readList(this.comboItems, (com.app.gofoodie.model.comboPlan.ComboItem.class.getClassLoader()));
     }
 
     public Comboplan() {
@@ -94,6 +97,7 @@ public class Comboplan implements Parcelable
         dest.writeValue(comboId);
         dest.writeValue(cbId);
         dest.writeValue(branchId);
+        dest.writeValue(type);
         dest.writeValue(branchName);
         dest.writeValue(restaurantName);
         dest.writeValue(comboName);
@@ -108,7 +112,7 @@ public class Comboplan implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

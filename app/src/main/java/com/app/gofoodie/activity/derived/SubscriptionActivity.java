@@ -23,13 +23,25 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * @class SubscriptionActivity
+ * @desc Activity class to show Subscription/Recharge plan list.
+ */
 public class SubscriptionActivity extends BaseAppCompatActivity implements NetworkCallbackListener, AdapterView.OnItemClickListener {
 
+    public static final String TAG = "";
+
+    /**
+     * Class private data member(s).
+     */
     private ListView mListView = null;
     private RechargePlanListViewAdapter mAdapter = null;
     private ArrayList<String> mList = new ArrayList<>();
     private RechargePlan mRechargePlan = null;
 
+    /**
+     * {@link BaseAppCompatActivity} Activity callback method(s).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +53,6 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), Network.URL_GET_RECHARGE_PLANS, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
-
 
     }
 
@@ -55,7 +66,6 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
 
             fetchedPlans(rawObject);
         }
-
     }
 
     @Override

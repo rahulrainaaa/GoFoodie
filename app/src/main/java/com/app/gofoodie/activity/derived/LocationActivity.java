@@ -93,6 +93,9 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
         });
     }
 
+    /**
+     * {@link android.widget.AdapterView.OnItemSelectedListener} combo item selected listener callback method(s).
+     */
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
