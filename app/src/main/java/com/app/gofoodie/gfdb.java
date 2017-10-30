@@ -407,7 +407,7 @@ LEFT JOIN RestaurantReviews ON RestaurantReviews.branch_id = RestaurantBranchLoc
 LEFT JOIN CustomerShortlistedBranches ON CustomerShortlistedBranches.branch_id = RestaurantBranchLocation.branch_id
 LEFT JOIN RestaurantDetail ON RestaurantDetail.restaurant_id = RestaurantBranchLocation.restaurant_id
 GROUP BY RestaurantBranchLocation.branch_id
-HAVING CustomerShortlistedBranches.customer_id = 1;
+HAVING CustomerShortlistedBranches.customer_id = 36;
 
 
         CREATE View  CustomerFullDetail AS

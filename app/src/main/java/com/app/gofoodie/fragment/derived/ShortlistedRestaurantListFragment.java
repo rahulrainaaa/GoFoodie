@@ -53,7 +53,7 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
         setHasOptionsMenu(true);
         mListView = (ListView) view.findViewById(R.id.listview_restaurants);
 
-        String url = Network.URL_GET_SLR + "1";// getSessionData().getCustomerId();
+        String url = Network.URL_GET_SLR + "1"; //SessionUtils.getInstance().getSession().getData().getCustomerId();
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
@@ -165,6 +165,7 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
     private void viewComboPlans(View view) {
 
         Shortlisted shortlisted = (Shortlisted) view.getTag();
+
         Toast.makeText(getActivity(), "viewComboPlans", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getActivity(), ComboPlanActivity.class);
         intent.putExtra("branch_id", shortlisted.branchId);

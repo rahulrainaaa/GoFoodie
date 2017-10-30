@@ -49,7 +49,7 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
 
         mListView = (ListView) findViewById(R.id.list_view);
 
-        String url = Network.URL_GET_SLR + "1";// getSessionData().getCustomerId();
+        String url = Network.URL_GET_SLR + getSessionData().getCustomerId();
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
