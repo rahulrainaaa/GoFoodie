@@ -2,6 +2,7 @@ package com.app.gofoodie.activity.derived;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -84,6 +86,12 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
         if (requestCode == 1) {         // Fetched all shortlisted restaurant(s).
 
             handleShortlistRestaurantResponse(rawObject);
+        } else if (requestCode == 2) {
+
+            String url = Network.URL_GET_SLR + getSessionData().getCustomerId();
+            NetworkHandler networkHandler = new NetworkHandler();
+            networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+            networkHandler.executeGet();
         }
     }
 
@@ -143,6 +151,7 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
         Intent intent = new Intent(this, RestaurantProfileActivity.class);
         intent.putExtra("mode", RestaurantProfileActivity.MODE.SHORTLISTED);
         intent.putExtra("data", shortlisted);
+        startActivity(intent);
     }
 
     /**
@@ -152,7 +161,29 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
      */
     private void removeShortlistedRestaurant(View view) {
 
-        Shortlisted shortlisted = (Shortlisted) view.getTag();
-        Toast.makeText(this, "removeShortlistedRestaurant", Toast.LENGTH_SHORT).show();
+        final Shortlisted shortlisted = (Shortlisted) view.getTag();
+
+        Snackbar.make(view, "Remove Restaurant ?", Snackbar.LENGTH_LONG).setAction("Remove", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                try {
+
+                    JSONObject jsonRequest = new JSONObject();
+                    jsonRequest.put("customer_id", getSessionData().getCustomerId());
+                    jsonRequest.put("login_id", getSessionData().getLoginId());
+                    jsonRequest.put("branch_id", shortlisted.branchId);
+                    jsonRequest.put("token", getSessionData().getToken());
+                    NetworkHandler networkHandler = new NetworkHandler();
+                    networkHandler.httpCreate(2, ShortlistedRestaurantsActivity.this, ShortlistedRestaurantsActivity.this, jsonRequest, Network.URL_REM_SR, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                    networkHandler.executePost();
+                } catch (JSONException jsonExc) {
+
+                    jsonExc.printStackTrace();
+                    Toast.makeText(ShortlistedRestaurantsActivity.this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).show();
+
     }
 }

@@ -53,7 +53,7 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
         setHasOptionsMenu(true);
         mListView = (ListView) view.findViewById(R.id.listview_restaurants);
 
-        String url = Network.URL_GET_SLR + "1"; //SessionUtils.getInstance().getSession().getData().getCustomerId();
+        String url = Network.URL_GET_SLR + getSession().getData().getCustomerId();
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();

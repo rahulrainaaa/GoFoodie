@@ -10,6 +10,8 @@ public class Network {
      * POST REST Web APIs.
      */
 
+    public static final String URL_REM_SR = "http://gofoodie.drushtiindia.com/API/Shortlisted/removeRestaurant";
+
     public static final String URL_ADD_AS_SHORT_REST = "http://gofoodie.drushtiindia.com/API/Shortlisted/addRestaurant";
 
     public static final String URL_LOGIN = "http://gofoodie.drushtiindia.com/API/Login/";
