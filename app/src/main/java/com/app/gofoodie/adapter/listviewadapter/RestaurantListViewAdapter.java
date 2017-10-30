@@ -11,9 +11,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.model.restaurant.Restaurant;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -95,7 +97,7 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
 
         holder.iBtnView.setTag(restaurant);
         holder.iBtnCellType.setTag(restaurant);
-/*
+
         if (restaurant.type.toLowerCase().equals("both")) {
 
             holder.imgVeg.setVisibility(View.VISIBLE);
@@ -127,7 +129,7 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
         holder.txtName.setText(restaurant.branchName);
         holder.txtTags.setText(restaurant.tags);
         holder.txtCount.setText("(" + restaurant.countRating + ")");
-  */
+
         holder.iBtnCellType.setOnClickListener(mClickListener);
         holder.iBtnView.setOnClickListener(mClickListener);
 

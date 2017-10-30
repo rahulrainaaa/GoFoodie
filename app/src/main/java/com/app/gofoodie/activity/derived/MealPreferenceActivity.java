@@ -27,7 +27,7 @@ import java.util.Iterator;
 
 /**
  * @class MealPreferenceActivity
- * @desc Activity Class to handle the meal preferences related to cuizines and veg-nonveg-both.
+ * @desc Activity Class to handle the meal preferences related to cuisine and veg-nonveg-both.
  */
 public class MealPreferenceActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
@@ -40,7 +40,7 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
 
     private RadioGroup mRgpMealType = null;
     private String mStrMealType = "both";
-    private StringBuilder mStrCuzType = new StringBuilder();
+    private StringBuilder mStrCategoriesId = new StringBuilder();
 
     /**
      * {@link BaseAppCompatActivity} activity callback method(s).
@@ -101,23 +101,23 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
                 mStrMealType = "both";
                 break;
         }
-
         Iterator<Category> iterator = mList.iterator();
         while (iterator.hasNext()) {
 
             Category category = iterator.next();
             if (category.isChecked) {
 
-                mStrCuzType.append("" + category.cateId + ",");
+                mStrCategoriesId.append("" + category.cateId + ",");
             }
         }
+        mStrCategoriesId.deleteCharAt(mStrCategoriesId.length() - 1);
 
         // Save the preference into the cache (offline).
-        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_CUZ_KEY, mStrCuzType.toString()).commit();
+        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_CAT_KEY, mStrCategoriesId.toString()).commit();
         CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_TYPE_KEY, mStrMealType.toString()).commit();
 
-
         Toast.makeText(this, "Meal Preferences saved.", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     /**

@@ -59,13 +59,27 @@
         <activity
             android:name=".activity.derived.RatingActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.derived.UpdateProfileActivity" />
-        <activity android:name=".activity.derived.PaymentGatewayActivity" />
-        <activity android:name=".activity.derived.PaymentGatewayFailActivity" />
-        <activity android:name=".activity.derived.PaymentGatewaySuccessActivity" />
-        <activity android:name=".activity.derived.AddShortlistedRestaurants" />
-        <activity android:name=".activity.derived.WeekPreferenceActivity" />
-        <activity android:name=".activity.derived.ComboPlanActivity"></activity>
+        <activity
+            android:name=".activity.derived.UpdateProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.derived.PaymentGatewayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.derived.PaymentGatewayFailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.derived.PaymentGatewaySuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.derived.AddShortlistedRestaurants"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.derived.WeekPreferenceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.derived.ComboPlanActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
