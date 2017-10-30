@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.model.restaurant.Restaurant;
 import com.app.gofoodie.model.shortlisted.Shortlisted;
 
 /**
@@ -22,6 +23,8 @@ import com.app.gofoodie.model.shortlisted.Shortlisted;
 public class RestaurantProfileActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "RestaurantProfileActivity";
+
+    public static enum MODE {SHORTLISTED, REST_BRANCH}
 
     /**
      * Class private data member(s).
@@ -76,29 +79,14 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         Map.setOnClickListener(this);
         Review.setOnClickListener(this);
 
-        Shortlisted shortlisted = getIntent().getParcelableExtra("data");
 
-        Name.setText(shortlisted.branchName);
-        ReviewCount.setText("(" + shortlisted.countRating + ")");
-        Cuizine.setText(shortlisted.tags);
-        Address.setText(shortlisted.branchAddress);
-        Postal.setText(shortlisted.branchPostalCode);
-        Description.setText(shortlisted.description);
-        AboutUs.setText(shortlisted.aboutUs);
-        mRatingBar.setRating(Float.parseFloat(shortlisted.avgRating.trim()));
+        MODE mode = (MODE) getIntent().getSerializableExtra("mode");
+        if (mode == MODE.SHORTLISTED) {
 
-        if (shortlisted.type.trim().toLowerCase().equals("veg")) {
+            showShortlistedRestaurantProfile();
+        } else if (mode == MODE.REST_BRANCH) {
 
-            Veg.setVisibility(View.VISIBLE);
-            NonVeg.setVisibility(View.GONE);
-        } else if (shortlisted.type.toLowerCase().equals("both")) {
-
-            Veg.setVisibility(View.VISIBLE);
-            NonVeg.setVisibility(View.VISIBLE);
-        } else {
-
-            Veg.setVisibility(View.GONE);
-            NonVeg.setVisibility(View.VISIBLE);
+            showRestaurantBranchProfile();
         }
     }
 
@@ -128,6 +116,68 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
 
                 reviewClicked(view, shortlisted);
                 break;
+        }
+    }
+
+    /**
+     * @method showShortlistedRestaurantProfile
+     * @desc Method to show the Restaurant Branch profile of a Shortlisted Restaurant.
+     */
+    public void showShortlistedRestaurantProfile() {
+        Shortlisted shortlisted = getIntent().getParcelableExtra("data");
+
+        Name.setText(shortlisted.branchName);
+        ReviewCount.setText("(" + shortlisted.countRating + ")");
+        Cuizine.setText(shortlisted.tags);
+        Address.setText(shortlisted.branchAddress);
+        Postal.setText(shortlisted.branchPostalCode);
+        Description.setText(shortlisted.description);
+        AboutUs.setText(shortlisted.aboutUs);
+        mRatingBar.setRating(Float.parseFloat(shortlisted.avgRating.trim()));
+
+        if (shortlisted.type.trim().toLowerCase().equals("veg")) {
+
+            Veg.setVisibility(View.VISIBLE);
+            NonVeg.setVisibility(View.GONE);
+        } else if (shortlisted.type.toLowerCase().equals("both")) {
+
+            Veg.setVisibility(View.VISIBLE);
+            NonVeg.setVisibility(View.VISIBLE);
+        } else {
+
+            Veg.setVisibility(View.GONE);
+            NonVeg.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * @method showRestaurantBranchProfile
+     * @desc Method to show the Restaurant Branch profile of selected Restaurant (which is not shortlisted restaurant).
+     */
+    public void showRestaurantBranchProfile() {
+        Restaurant restaurant = getIntent().getParcelableExtra("data");
+
+        Name.setText(restaurant.branchName);
+        ReviewCount.setText("(" + restaurant.countRating + ")");
+        Cuizine.setText(restaurant.tags);
+        Address.setText(restaurant.branchAddress);
+        Postal.setText(restaurant.branchPostalCode);
+        Description.setText(restaurant.description);
+        AboutUs.setText(restaurant.aboutUs);
+        mRatingBar.setRating(Float.parseFloat(restaurant.avgRating.trim()));
+
+        if (restaurant.type.trim().toLowerCase().equals("veg")) {
+
+            Veg.setVisibility(View.VISIBLE);
+            NonVeg.setVisibility(View.GONE);
+        } else if (restaurant.type.toLowerCase().equals("both")) {
+
+            Veg.setVisibility(View.VISIBLE);
+            NonVeg.setVisibility(View.VISIBLE);
+        } else {
+
+            Veg.setVisibility(View.GONE);
+            NonVeg.setVisibility(View.VISIBLE);
         }
     }
 

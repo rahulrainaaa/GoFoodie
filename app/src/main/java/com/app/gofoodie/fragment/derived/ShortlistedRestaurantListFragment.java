@@ -153,6 +153,7 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
 
         Intent intent = new Intent(getActivity(), RestaurantProfileActivity.class);
         intent.putExtra("data", shortlisted);
+        intent.putExtra("mode", RestaurantProfileActivity.MODE.SHORTLISTED);
         startActivity(intent);
     }
 

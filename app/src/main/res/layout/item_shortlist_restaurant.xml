@@ -140,7 +140,7 @@
                     android:background="@color/colorWhite"
                     android:text="Remove"
                     android:textSize="10sp"
-                    app:srcCompat="@drawable/icon_remove" />
+                    app:srcCompat="@drawable/icon_add_rest" />
 
 
             </LinearLayout>

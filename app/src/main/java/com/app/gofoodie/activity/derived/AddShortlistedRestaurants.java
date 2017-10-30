@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.adapter.listviewadapter.RestaurantListViewAdapter;
+import com.app.gofoodie.model.restaurant.Restaurant;
 import com.app.gofoodie.model.shortlisted.Shortlisted;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class AddShortlistedRestaurants extends AppCompatActivity implements Adap
      */
     private ListView mListView = null;
     private RestaurantListViewAdapter mAdapter = null;
-    private ArrayList<Shortlisted> mList = null;
+    private ArrayList<Restaurant> mList = null;
 
     /**
      * {@link AddShortlistedRestaurants} activity callback method(s).
@@ -37,10 +38,10 @@ public class AddShortlistedRestaurants extends AppCompatActivity implements Adap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_shortlisted_restaurants);
 
-        mList = new ArrayList<Shortlisted>();
+        mList = new ArrayList<Restaurant>();
         for (int i = 0; i < 50; i++) {
 
-            new Shortlisted();
+            mList.add(new Restaurant());
         }
 
         mListView = (ListView) findViewById(R.id.list_view);
@@ -55,7 +56,7 @@ public class AddShortlistedRestaurants extends AppCompatActivity implements Adap
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-        Shortlisted item = mList.get(position);
+        Restaurant item = mList.get(position);
 
         Toast.makeText(this, position + " item selected", Toast.LENGTH_SHORT).show();
     }
@@ -87,9 +88,11 @@ public class AddShortlistedRestaurants extends AppCompatActivity implements Adap
      */
     private void showProfile(View view) {
 
-        Shortlisted shortlisted = (Shortlisted) view.getTag();
+        Restaurant restaurant = (Restaurant) view.getTag();
         Intent intent = new Intent(this, RestaurantProfileActivity.class);
-        intent.putExtra("data", shortlisted);
+        intent.putExtra("data", restaurant);
+        intent.putExtra("mode", RestaurantProfileActivity.MODE.REST_BRANCH);
+        startActivity(intent);
     }
 
     /**

@@ -11,15 +11,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.gofoodie.R;
-import com.app.gofoodie.model.shortlisted.Shortlisted;
-import com.squareup.picasso.Picasso;
+import com.app.gofoodie.model.restaurant.Restaurant;
 
 import java.util.ArrayList;
 
-public class RestaurantListViewAdapter extends ArrayAdapter<Shortlisted> {
+/**
+ * @class ArrayAdapter class to show the list of nearby restaurants to add as shortlisted restaurant(s).
+ */
+public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
 
     public static final String TAG = "RestaurantListViewAdapter";
 
@@ -27,7 +28,7 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Shortlisted> {
      * Class private data member(s).
      */
     private Activity mActivity = null;
-    private ArrayList<Shortlisted> mList = null;
+    private ArrayList<Restaurant> mList = null;
     private int mLayoutResourceId;
     private View.OnClickListener mClickListener = null;
 
@@ -56,21 +57,20 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Shortlisted> {
      * @param listener
      * @constructor ShortlistedRestaurantListViewAdapter
      */
-    public RestaurantListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Shortlisted> list, View.OnClickListener listener) {
+    public RestaurantListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Restaurant> list, View.OnClickListener listener) {
 
         super(activity, resource, list);
         this.mActivity = activity;
         this.mList = list;
         this.mLayoutResourceId = resource;
         this.mClickListener = listener;
-
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        Shortlisted shortlisted = mList.get(position);
+        Restaurant restaurant = mList.get(position);
         View cell = convertView;
         Holder holder = null;
         if (convertView == null) {
@@ -93,15 +93,15 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Shortlisted> {
             holder = (Holder) cell.getTag();
         }
 
-        holder.iBtnView.setTag(shortlisted);
-        holder.iBtnCellType.setTag(shortlisted);
-
-        if (shortlisted.type.toLowerCase().equals("both")) {
+        holder.iBtnView.setTag(restaurant);
+        holder.iBtnCellType.setTag(restaurant);
+/*
+        if (restaurant.type.toLowerCase().equals("both")) {
 
             holder.imgVeg.setVisibility(View.VISIBLE);
             holder.imgNonVeg.setVisibility(View.VISIBLE);
 
-        } else if (shortlisted.type.toLowerCase().equals("nonveg")) {
+        } else if (restaurant.type.toLowerCase().equals("nonveg")) {
 
             holder.imgVeg.setVisibility(View.GONE);
             holder.imgNonVeg.setVisibility(View.VISIBLE);
@@ -115,8 +115,8 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Shortlisted> {
 
         try {
 
-            Picasso.with(mActivity).load(shortlisted.profileIcon.trim()).into(holder.imgIcon);
-            holder.ratingBar.setRating(Float.parseFloat(shortlisted.avgRating.trim()));
+            Picasso.with(mActivity).load(restaurant.profileIcon.trim()).into(holder.imgIcon);
+            holder.ratingBar.setRating(Float.parseFloat(restaurant.avgRating.trim()));
 
         } catch (Exception exc) {
 
@@ -124,9 +124,10 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Shortlisted> {
             Toast.makeText(mActivity, "EXCEPTION: " + exc.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        holder.txtName.setText(shortlisted.branchName);
-        holder.txtTags.setText(shortlisted.tags);
-        holder.txtCount.setText("(" + shortlisted.countRating + ")");
+        holder.txtName.setText(restaurant.branchName);
+        holder.txtTags.setText(restaurant.tags);
+        holder.txtCount.setText("(" + restaurant.countRating + ")");
+  */
         holder.iBtnCellType.setOnClickListener(mClickListener);
         holder.iBtnView.setOnClickListener(mClickListener);
 

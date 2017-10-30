@@ -141,6 +141,7 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
 
         Shortlisted shortlisted = (Shortlisted) view.getTag();
         Intent intent = new Intent(this, RestaurantProfileActivity.class);
+        intent.putExtra("mode", RestaurantProfileActivity.MODE.SHORTLISTED);
         intent.putExtra("data", shortlisted);
     }
 
