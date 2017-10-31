@@ -18,6 +18,8 @@ public class ToDo {
      * 6. Set customer_id in shortlisted Fragment & Activity in place of hard coded value (1).
      *
      * 7. RatingActvity: update branch_id from the hard code value (1).
+     *
+     * 8. Null Check for restaurant(s).
      */
 
 }
