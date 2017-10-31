@@ -33,13 +33,15 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
     private Activity mActivity = null;
     private ArrayList<Comboplan> mComboList = null;
     private int mLayoutResource;
+    private View.OnClickListener mClickListener = null;
     public LayoutInflater mInflater = null;
 
-    public ComboPlanGridAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Comboplan> list) {
+    public ComboPlanGridAdapter(@NonNull Activity activity, View.OnClickListener clickListener, @LayoutRes int resource, ArrayList<Comboplan> list) {
         super(activity, resource, list);
         this.mActivity = activity;
         this.mComboList = list;
         this.mLayoutResource = resource;
+        this.mClickListener = clickListener;
         this.mInflater = activity.getLayoutInflater();
     }
 
@@ -79,11 +81,15 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
             holder.iBtnAddToCart = (ImageButton) view.findViewById(R.id.ibtn_cart);
             holder.txtTags = (TextView) view.findViewById(R.id.txt_tags);
             holder.txtPrice = (TextView) view.findViewById(R.id.txt_price);
+
+            holder.iBtnAddToCart.setOnClickListener(mClickListener);
             view.setTag(holder);
         } else {
 
             holder = (Holder) view.getTag();
         }
+
+        holder.iBtnAddToCart.setTag(comboplan);
 
         holder.txtComboName.setText(comboplan.comboName);
         holder.txtTags.setText(comboplan.cuisineName != null ? comboplan.cuisineName : "");

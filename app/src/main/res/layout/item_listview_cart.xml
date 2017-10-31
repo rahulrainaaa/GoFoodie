@@ -15,7 +15,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/image_restaurant"
+            android:id="@+id/img_combo"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginBottom="1dp"
@@ -31,21 +31,30 @@
             android:layout_marginRight="6dp"
             android:orientation="vertical"
             android:paddingTop="10dp"
-            android:weightSum="8">
+            android:weightSum="3">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3"
+                android:layout_weight="1"
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/ibtn_veg"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/veg" />
 
+                <ImageView
+                    android:id="@+id/ibtn_nonveg"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/nonveg" />
+
                 <TextView
+                    android:id="@+id/txt_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
@@ -54,62 +63,58 @@
                     android:text="  Combo Plan"
                     android:textColor="@color/colorTextName"
                     android:textSize="13dp" />
+
             </LinearLayout>
 
+
+            <TextView
+                android:id="@+id/txt_price"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:text="AED 200"
+                android:textSize="15dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="0dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="19dp"
+                android:layout_marginRight="0dp"
                 android:background="@drawable/grad_separator_line" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4"
-                android:gravity="right|center"
+                android:layout_weight="1"
+                android:gravity="center|left"
                 android:orientation="horizontal"
-                android:paddingRight="20dp"
                 android:weightSum="2">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <ImageButton
+                    android:id="@+id/ibtn_delete"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:paddingLeft="3dp"
-                    android:text="AED 200"
-                    android:textSize="15dp" />
+                    android:background="@color/colorWhite"
+                    android:text="Qty: 1"
+                    android:textSize="9sp"
+                    app:srcCompat="@drawable/icon_remove" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/btn_qty"
+                    android:textColor="#515151"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center|right"
-                    android:orientation="horizontal">
+                    android:background="@color/colorWhite"
+                    android:drawableRight="@drawable/icon_drop_down"
+                    android:text="Qty: 1"
+                    android:textSize="12sp" />
 
-                    <ImageButton
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/border_circle_button"
-                        app:srcCompat="@drawable/icon_remove_green" />
-
-                    <TextView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:gravity="center"
-                        android:text="1" />
-
-                    <ImageButton
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/border_circle_button"
-                        app:srcCompat="@drawable/icon_add_green" />
-
-                </LinearLayout>
 
             </LinearLayout>
 

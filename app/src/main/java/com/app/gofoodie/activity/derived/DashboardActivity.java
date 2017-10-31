@@ -72,6 +72,10 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         }
     }
 
+    public Toolbar getToolBar() {
+        return (Toolbar) findViewById(R.id.toolbar);
+    }
+
     /**
      * @param item
      * @return boolean
