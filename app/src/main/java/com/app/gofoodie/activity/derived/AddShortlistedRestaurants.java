@@ -1,10 +1,16 @@
 package com.app.gofoodie.activity.derived;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -58,7 +64,69 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
     protected void onResume() {
         super.onResume();
 
-        fetchRestaurants();
+        fetchRestaurants(null);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_add_shortlist, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.menu_item_search:
+
+                menuSearch();
+                break;
+            case R.id.menu_item_filter:
+
+                startActivity(new Intent(this, MealPreferenceActivity.class));
+                break;
+            case R.id.menu_item_location:
+
+                startActivity(new Intent(this, LocationActivity.class));
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * @method menuSearch
+     * @desc Method to handle on search menu item selected.
+     */
+    private void menuSearch() {
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Search");
+
+        final EditText input = new EditText(this);
+
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(input);
+
+        builder.setPositiveButton("Search", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String search = input.getText().toString();
+
+                fetchRestaurants(search.trim());
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     /**
@@ -96,7 +164,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
      * @method fetchRestaurants
      * @desc Method to fetch restaurants from API with filter/parameter applied.
      */
-    private void fetchRestaurants() {
+    private void fetchRestaurants(String search) {
 
         /**
          * Fetch the location preferences.
@@ -130,6 +198,11 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
         if (!meal_type_pref.trim().isEmpty()) {
 
             url = url + "&type=" + meal_type_pref;
+        }
+
+        if (search != null) {
+
+            url = url + "&keyword=" + search;
         }
 
         NetworkHandler networkHandler = new NetworkHandler();

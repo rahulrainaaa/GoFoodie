@@ -50,11 +50,13 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
         setContentView(R.layout.activity_shortlisted_restaurants);
 
         mListView = (ListView) findViewById(R.id.list_view);
+    }
 
-        String url = Network.URL_GET_SLR + getSessionData().getCustomerId();
-        NetworkHandler networkHandler = new NetworkHandler();
-        networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-        networkHandler.executeGet();
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        refreshList();
     }
 
     @Override
@@ -77,6 +79,17 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
     }
 
     /**
+     * @method refreshList
+     * @desc Method to refresh the list of shortlisted restaurant(s).
+     */
+    private void refreshList() {
+        String url = Network.URL_GET_SLR + getSession().getData().getCustomerId();
+        NetworkHandler networkHandler = new NetworkHandler();
+        networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.executeGet();
+    }
+
+    /**
      * {@link NetworkCallbackListener} http response callback listener.
      */
     @Override
@@ -88,10 +101,7 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
             handleShortlistRestaurantResponse(rawObject);
         } else if (requestCode == 2) {
 
-            String url = Network.URL_GET_SLR + getSessionData().getCustomerId();
-            NetworkHandler networkHandler = new NetworkHandler();
-            networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-            networkHandler.executeGet();
+            refreshList();
         }
     }
 

@@ -53,36 +53,27 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
         setHasOptionsMenu(true);
         mListView = (ListView) view.findViewById(R.id.listview_restaurants);
 
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        refreshList();
+    }
+
+    /**
+     * @nethod refreshList
+     * @desc Method to refresh the list of shortlisted restaurant(s).
+     */
+    public void refreshList() {
+
         String url = Network.URL_GET_SLR + getSession().getData().getCustomerId();
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
-        return view;
     }
-
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        menu.clear();
-//        inflater.inflate(R.menu.menu_frag_list, menu);
-//        MenuItem item = menu.findItem(R.id.menu_item_search);
-//        SearchView searchView = new SearchView(((DashboardActivity) getActivity()).getSupportActionBar().getThemedContext());
-//        MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-//        MenuItemCompat.setActionView(item, searchView);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                Toast.makeText(getActivity(), query + ": Searching...", Toast.LENGTH_SHORT).show();
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                return false;
-//            }
-//        });
-//    }
-
 
     /**
      * {@link NetworkCallbackListener} http response callback listener.

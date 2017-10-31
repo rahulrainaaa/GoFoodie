@@ -18,12 +18,20 @@ import java.util.ArrayList;
  * @class CartFragment
  * @desc {@link BaseFragment} Fragment class to handle Cart UI screen.
  */
-public class CartFragment extends BaseFragment {
+public class CartFragment extends BaseFragment implements View.OnClickListener {
 
+    public final String TAG = "CartFragment";
+
+    /**
+     * Class private data member(s).
+     */
     private ListView mListView = null;
     private CartListViewAdapter mAdapter = null;
     private ArrayList<String> mCartList = new ArrayList<String>();
 
+    /**
+     * {@link BaseFragment} Fragment callback method(s).
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -41,12 +49,21 @@ public class CartFragment extends BaseFragment {
         mAdapter = new CartListViewAdapter(getActivity(), R.layout.item_listview_cart, mCartList);
         mListView.setAdapter(mAdapter);
 
-
+        view.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void fragQuitCallback() {
+
+    }
+
+    /**
+     * {@link android.view.View.OnClickListener} click event listener callback method(s).
+     */
+    @Override
+    public void onClick(View view) {
+
 
     }
 }
