@@ -78,10 +78,10 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
     public void onBindViewHolder(final ItemHolder holder, int position) {
 
         CartOrder cartOrder = mList.get(position);
-        holder.ibtnEdit.setTag(cartOrder);
+        holder.ibtnEdit.setTag(position);
 
         holder.txtComboName.setText(cartOrder.comboName);
-        holder.txtDate.setText("Date: " + cartOrder.date);
+        holder.txtDate.setText("" + cartOrder.date);
         holder.txtPrice.setText("AED " + cartOrder.comboPrice);
 
         if (cartOrder.type.toLowerCase().trim().equals("nonveg")) {

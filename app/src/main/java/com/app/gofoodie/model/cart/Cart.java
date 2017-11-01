@@ -11,6 +11,9 @@ import com.google.gson.annotations.SerializedName;
 public class Cart implements Parcelable
 {
 
+    @SerializedName("cart_item_id")
+    @Expose
+    public String cartItemId;
     @SerializedName("restaurantName")
     @Expose
     public String restaurantName;
@@ -53,6 +56,7 @@ public class Cart implements Parcelable
     ;
 
     protected Cart(Parcel in) {
+        this.cartItemId = ((String) in.readValue((String.class.getClassLoader())));
         this.restaurantName = ((String) in.readValue((String.class.getClassLoader())));
         this.comboId = ((String) in.readValue((String.class.getClassLoader())));
         this.comboName = ((String) in.readValue((String.class.getClassLoader())));
@@ -67,6 +71,7 @@ public class Cart implements Parcelable
     }
 
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(cartItemId);
         dest.writeValue(restaurantName);
         dest.writeValue(comboId);
         dest.writeValue(comboName);

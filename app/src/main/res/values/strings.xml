@@ -17,6 +17,7 @@
 
     <!-- Menu -->
     <string name="menu_search">Search</string>
+    <string name="menu_pick_date">Pick Date</string>
     <string name="menu_proceed">Proceed</string>
     <string name="menu_new">New</string>
     <string name="menu_share">Share</string>

@@ -8,18 +8,24 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.listviewadapter.EditComboListViewAdapter;
+import com.app.gofoodie.global.data.GlobalData;
+import com.app.gofoodie.model.cart.Description;
+import com.app.gofoodie.model.cartOrder.CartOrder;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class EditComboActivity extends BaseAppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView mListView = null;
-    private ArrayList<String> mList = new ArrayList<>();
+    private ArrayList<Description> mList = new ArrayList<>();
     private EditComboListViewAdapter mAdapter = null;
+    private CartOrder mCartOrder = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +34,16 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        int position = getIntent().getIntExtra("position", -1);
+        if (position < 0) {
+
+            Toast.makeText(this, "'position' not passed with Intent.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mCartOrder = GlobalData.cartOrderArrayList.get(position);
+        mList = (ArrayList<Description>) mCartOrder.description;
         mListView = (ListView) findViewById(R.id.list_view);
 
-        for (int i = 0; i < 30; i++) {
-
-            mList.add("item " + i);
-        }
 
         mAdapter = new EditComboListViewAdapter(this, R.layout.item_listview_edit_combo, mList);
         mListView.setAdapter(mAdapter);
@@ -52,11 +62,11 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
         builderSingle.setTitle("Select Option:");
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice);
-        arrayAdapter.add("Coke");
-        arrayAdapter.add("Butter Milk");
-        arrayAdapter.add("Juice");
-        arrayAdapter.add("Lemonade");
-        arrayAdapter.add("Wine");
+        Iterator<String> iterator = mList.get(position).options.iterator();
+        while (iterator.hasNext()) {
+
+            arrayAdapter.add(iterator.next().trim());
+        }
 
         builderSingle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -69,16 +79,9 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String strName = arrayAdapter.getItem(which);
-                AlertDialog.Builder builderInner = new AlertDialog.Builder(EditComboActivity.this);
-                builderInner.setMessage(strName);
-                builderInner.setTitle("Your Selected Item is");
-                builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builderInner.show();
+                mList.get(position).value = strName.trim();
+                mAdapter.notifyDataSetChanged();
+
             }
         });
         builderSingle.show();
