@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -131,15 +132,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
 
-                return true;
-            }
-
-            @Override
-            public void onMoved(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, int fromPos, RecyclerView.ViewHolder target, int toPos, int x, int y) {
-
-                super.onMoved(recyclerView, viewHolder, fromPos, target, toPos, x, y);
-
-                Collections.swap(mList, fromPos, toPos);
                 int a = (int) ((CartOrderRecyclerAdapter.ItemHolder) viewHolder).ibtnEdit.getTag();
                 int b = (int) ((CartOrderRecyclerAdapter.ItemHolder) target).ibtnEdit.getTag();
 
@@ -149,9 +141,27 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                 String date1 = ((CartOrderRecyclerAdapter.ItemHolder) viewHolder).txtDate.getText().toString();
                 String date2 = ((CartOrderRecyclerAdapter.ItemHolder) target).txtDate.getText().toString();
 
+                Log.d("ggggggggggggggg", " A = " + date1 + " B = " + date2);
+
                 ((CartOrderRecyclerAdapter.ItemHolder) viewHolder).txtDate.setText(date2);
                 ((CartOrderRecyclerAdapter.ItemHolder) target).txtDate.setText(date1);
 
+                return true;
+            }
+
+            @Override
+            public void onMoved(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, int fromPos, RecyclerView.ViewHolder target, int toPos, int x, int y) {
+
+                super.onMoved(recyclerView, viewHolder, fromPos, target, toPos, x, y);
+
+                Log.d("gggggggggggg", "onMoved fromPos = " + fromPos + " toPos = " + toPos);
+
+                Collections.swap(mList, fromPos, toPos);
+
+                // Date should not swap.
+                String temp = mList.get(fromPos).date;
+                mList.get(fromPos).date = mList.get(toPos).date;
+                mList.get(toPos).date = temp;
                 mCartOrderRecyclerAdapter.notifyItemMoved(fromPos, toPos);
             }
 
@@ -239,8 +249,10 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
             }
         }
-//        mCartOrderRecyclerAdapter.notifyDataSetChanged();
+        if (mCartOrderRecyclerAdapter != null) {
 
+            mCartOrderRecyclerAdapter.notifyDataSetChanged();
+        }
     }
 
     private boolean checkForWeekDay(String weekDay) {
@@ -261,6 +273,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     private void menuProceed() {
 
+        String str = "";
 
     }
 
