@@ -79,10 +79,6 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
     public void run() {
 
         startActivity(new Intent(this, DashboardActivity.class));
-//        startActivity(new Intent(this, EditComboActivity.class));
-//        startActivity(new Intent(this, LocationActivity.class));
-//        startActivity(new Intent(this, RestaurantProfileActivity.class));
-        startActivity(new Intent(this, MealPreferenceActivity.class));
         finish();
     }
 
@@ -93,7 +89,6 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
     public void profileUpdatedCallback(Customer customer) {
 
         startActivity(new Intent(this, DashboardActivity.class));
-
         finish();
     }
 }

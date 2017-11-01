@@ -25,7 +25,7 @@
             android:weightSum="36">
 
             <LinearLayout
-                android:id="@+id/layout_veg"
+                android:id="@+id/layout_nonveg"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
@@ -33,7 +33,7 @@
                 android:orientation="vertical" />
 
             <LinearLayout
-                android:id="@+id/layout_nonveg"
+                android:id="@+id/layout_veg"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"

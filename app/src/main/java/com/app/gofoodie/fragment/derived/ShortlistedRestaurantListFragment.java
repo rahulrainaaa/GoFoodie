@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.activity.derived.AddShortlistedRestaurants;
 import com.app.gofoodie.activity.derived.ComboPlanActivity;
 import com.app.gofoodie.activity.derived.RestaurantProfileActivity;
 import com.app.gofoodie.adapter.listviewadapter.ShortlistedRestaurantListViewAdapter;
@@ -49,7 +50,6 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.frag_restaurant_list_main, container, false);
-        Toast.makeText(getActivity(), "Restaurant List fragment", Toast.LENGTH_SHORT).show();
         setHasOptionsMenu(true);
         mListView = (ListView) view.findViewById(R.id.listview_restaurants);
 
@@ -81,7 +81,6 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(getActivity(), "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {         // Fetched all shortlisted restaurant(s).
 
             handleShortlistRestaurantResponse(rawObject);
@@ -107,6 +106,10 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
             mList = (ArrayList<Shortlisted>) shortlistedRestaurants.shortlisted;
             mAdapter = new ShortlistedRestaurantListViewAdapter(getDashboardActivity(), R.layout.item_see_shortlisted_restaurant, mList, this);
             mListView.setAdapter(mAdapter);
+        } else if (shortlistedRestaurants.statusCode == 204) {
+
+            Toast.makeText(getActivity(), "Please add restaurant to shortlist", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), AddShortlistedRestaurants.class));
         } else {
             Toast.makeText(getActivity(), "" + shortlistedRestaurants.statusMessage, Toast.LENGTH_SHORT).show();
         }

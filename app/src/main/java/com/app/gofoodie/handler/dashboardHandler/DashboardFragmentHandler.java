@@ -13,6 +13,7 @@ import com.app.gofoodie.fragment.derived.NewSocialRegisterFragment;
 import com.app.gofoodie.fragment.derived.ProfileFragment;
 import com.app.gofoodie.fragment.derived.ShortlistedRestaurantListFragment;
 import com.app.gofoodie.fragment.derived.WalletFragment;
+import com.app.gofoodie.utility.SessionUtils;
 
 /**
  * @class DashboardFragmentHandler
@@ -32,6 +33,15 @@ public class DashboardFragmentHandler {
         if (DashboardInterruptListener.FRAGMENT_TYPE.DASHBOARD == fragmentType) {
 
             return new HomeFragment();
+        } else if (DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_USER == fragmentType) {
+
+            return new NewRegisterFragment();
+        } else if (DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_SOCIAL == fragmentType) {
+
+            return new NewSocialRegisterFragment();
+        } else if (!SessionUtils.getInstance().isSessionExist()) {      // After cases need login session.
+
+            return new LoginFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.SHORTLISTED_RESTAURANTS == fragmentType) {
 
             return new ShortlistedRestaurantListFragment();
@@ -50,9 +60,6 @@ public class DashboardFragmentHandler {
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.FORGOT_PASSWORD == fragmentType) {
 
             return new ForgotPasswordFragment();
-        } else if (DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_USER == fragmentType) {
-
-            return new NewRegisterFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.CHANGE_PASSWORD == fragmentType) {
 
             return new ChangePasswordFragment();
@@ -65,9 +72,6 @@ public class DashboardFragmentHandler {
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.MY_ORDERS == fragmentType) {
 
             return new MyOrdersFragment();
-        } else if (DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_SOCIAL == fragmentType) {
-
-            return new NewSocialRegisterFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.SHORTLISTED_RESTAURANTS == fragmentType) {
 
             return new ShortlistedRestaurantListFragment();

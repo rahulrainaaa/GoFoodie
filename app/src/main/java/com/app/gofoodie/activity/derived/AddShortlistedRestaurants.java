@@ -317,7 +317,6 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(this, "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {
 
             handleRestaurantResponse(rawObject);

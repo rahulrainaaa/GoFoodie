@@ -17,7 +17,7 @@ public class CartResponse extends BaseModel implements Parcelable {
     public List<Cart> cart = null;
     @SerializedName("totalPrice")
     @Expose
-    public String totalPrice;
+    public Integer totalPrice;
     @SerializedName("statusCode")
     @Expose
     public Integer statusCode;
@@ -42,7 +42,7 @@ public class CartResponse extends BaseModel implements Parcelable {
 
     protected CartResponse(Parcel in) {
         in.readList(this.cart, (Cart.class.getClassLoader()));
-        this.totalPrice = ((String) in.readValue((String.class.getClassLoader())));
+        this.totalPrice = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
     }

@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -119,7 +120,6 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(getActivity(), "HTTP Success: " + rawObject, Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {     // Get cart items.
 
             handleViewCartResponse(rawObject);
@@ -160,39 +160,31 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
      */
     private void deleteClicked(View view) {
 
-        Cart cart = (Cart) view.getTag();
+        final Cart cart = (Cart) view.getTag();
 
-        try {
+        Snackbar.make(view, "Are you sure ?", Snackbar.LENGTH_LONG).setAction("Remove", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-            JSONObject jsonRequest = new JSONObject();
-            JSONArray jsonArrayItems = new JSONArray();
-            Iterator<Description> descriptionIterator = cart.description.iterator();
-            while (descriptionIterator.hasNext()) {
+                try {
 
-                Description description = descriptionIterator.next();
-                JSONArray jsonArrayOptions = new JSONArray(description.options);
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("options", jsonArrayOptions);
-                jsonObject.put("name", description.value);
-                jsonObject.put("value", description.value);
-                jsonObject.put("item_id", description.itemId);
-                jsonArrayItems.put(jsonObject);
+                    JSONObject jsonRequest = new JSONObject();
+
+                    jsonRequest.put("customer_id", getSession().getData().getCustomerId());
+                    jsonRequest.put("login_id", getSession().getData().getLoginId());
+                    jsonRequest.put("cart_item_id", cart.cartItemId);
+                    jsonRequest.put("token", getSession().getData().getToken());
+                    NetworkHandler networkHandler = new NetworkHandler();
+                    networkHandler.httpCreate(1, getDashboardActivity(), CartFragment.this, jsonRequest, Network.URL_CART_ITEM_REMOVE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                    networkHandler.executePost();
+
+                } catch (JSONException jsonExc) {
+
+                    jsonExc.printStackTrace();
+                    Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
-
-            jsonRequest.put("description", jsonArrayItems);
-            jsonRequest.put("customer_id", getSession().getData().getCustomerId());
-            jsonRequest.put("login_id", getSession().getData().getLoginId());
-            jsonRequest.put("combo_id", cart.comboId);
-            jsonRequest.put("token", getSession().getData().getToken());
-            NetworkHandler networkHandler = new NetworkHandler();
-            networkHandler.httpCreate(1, getDashboardActivity(), this, jsonRequest, Network.URL_CART_ITEM_REMOVE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-            networkHandler.executePost();
-
-        } catch (JSONException jsonExc) {
-
-            jsonExc.printStackTrace();
-            Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+        }).show();
     }
 
     /**
@@ -237,7 +229,8 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
                             jsonRequest.put("customer_id", getSession().getData().getCustomerId());
                             jsonRequest.put("login_id", getSession().getData().getLoginId());
                             jsonRequest.put("combo_id", cart.comboId);
-                            jsonRequest.put("branch_id", "1");
+                            jsonRequest.put("cart_item_id", cart.cartItemId);
+                            jsonRequest.put("branch_id", cart.branchId);
                             jsonRequest.put("quantity", "" + qtySelected);
                             jsonRequest.put("token", getSession().getData().getToken());
 
@@ -256,15 +249,6 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
                 });
         AlertDialog alert = builder.create();
         alert.show();
-
-
-    }
-
-    /**
-     * @method updateQuantity
-     * @desc Method to update Quantity of selected item in cart.
-     */
-    private void updateQuantity(final View view) {
 
 
     }

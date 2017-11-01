@@ -63,7 +63,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     private SignInButton mSignInButton = null;
     private CallbackManager callbackManager = null;
     private FacebookLoginHandler mFacebookLoginHandler = null;
-    private GoogleApiClient mGoogleApiClient = null;
 
     private String mNewSocialEmail = "";             // to share with email.
     private String mSocialType = "";      // empty = manual, google = google signin & facebook = facebook Login (Lowercase String).
@@ -75,7 +74,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         View view = inflater.inflate(R.layout.frag_login, container, false);
         doViewMapping(view);
-        Toast.makeText(getActivity(), "Login Fragment", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Please Login", Toast.LENGTH_SHORT).show();
 
         /**
          * Facebook button and login code.
@@ -97,10 +96,18 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 .requestEmail()
                 .build();
 
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .enableAutoManage(getFragmentActivity(), this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+        try {
+            if (GlobalData.mGoogleApiClient == null) {
+
+                GlobalData.mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                        .enableAutoManage(getDashboardActivity(), this)
+                        .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                        .build();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Toast.makeText(getActivity(), "" + ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
         return view;
     }
 
@@ -205,7 +212,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
      * @desc Method to be called for google signing in.
      */
     private void googleSignIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(GlobalData.mGoogleApiClient);
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN);
     }
 

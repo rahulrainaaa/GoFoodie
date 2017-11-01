@@ -141,8 +141,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                 String date1 = ((CartOrderRecyclerAdapter.ItemHolder) viewHolder).txtDate.getText().toString();
                 String date2 = ((CartOrderRecyclerAdapter.ItemHolder) target).txtDate.getText().toString();
 
-                Log.d("ggggggggggggggg", " A = " + date1 + " B = " + date2);
-
                 ((CartOrderRecyclerAdapter.ItemHolder) viewHolder).txtDate.setText(date2);
                 ((CartOrderRecyclerAdapter.ItemHolder) target).txtDate.setText(date1);
 
@@ -273,7 +271,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     private void menuProceed() {
 
-        String str = "";
+        Toast.makeText(this, "Proceed to place order under development.", Toast.LENGTH_SHORT).show();
 
     }
 

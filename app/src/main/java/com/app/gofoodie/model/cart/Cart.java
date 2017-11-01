@@ -17,6 +17,12 @@ public class Cart implements Parcelable
     @SerializedName("restaurantName")
     @Expose
     public String restaurantName;
+    @SerializedName("restaurant_id")
+    @Expose
+    public String restaurantId;
+    @SerializedName("branch_id")
+    @Expose
+    public String branchId;
     @SerializedName("combo_id")
     @Expose
     public String comboId;
@@ -58,6 +64,8 @@ public class Cart implements Parcelable
     protected Cart(Parcel in) {
         this.cartItemId = ((String) in.readValue((String.class.getClassLoader())));
         this.restaurantName = ((String) in.readValue((String.class.getClassLoader())));
+        this.restaurantId = ((String) in.readValue((String.class.getClassLoader())));
+        this.branchId = ((String) in.readValue((String.class.getClassLoader())));
         this.comboId = ((String) in.readValue((String.class.getClassLoader())));
         this.comboName = ((String) in.readValue((String.class.getClassLoader())));
         this.image = ((String) in.readValue((String.class.getClassLoader())));
@@ -73,6 +81,8 @@ public class Cart implements Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(cartItemId);
         dest.writeValue(restaurantName);
+        dest.writeValue(restaurantId);
+        dest.writeValue(branchId);
         dest.writeValue(comboId);
         dest.writeValue(comboName);
         dest.writeValue(image);

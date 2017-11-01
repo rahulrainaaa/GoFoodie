@@ -4,6 +4,7 @@ package com.app.gofoodie.global.data;
 import com.app.gofoodie.model.cart.Cart;
 import com.app.gofoodie.model.cartOrder.CartOrder;
 import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 
@@ -18,4 +19,6 @@ public class GlobalData {
 
     public static ArrayList<Cart> cartArrayList = null;         //ArrayList share from cart to order-cart.
     public static ArrayList<CartOrder> cartOrderArrayList = null;       // Array list to share from Cart-Order activity to Edit combo activity.
+
+    public static GoogleApiClient mGoogleApiClient = null;
 }

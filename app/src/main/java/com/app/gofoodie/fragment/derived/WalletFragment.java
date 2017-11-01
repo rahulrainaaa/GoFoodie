@@ -80,7 +80,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
                 imgAlert.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_blink));
             }
         } catch (ParseException e) {
-            Toast.makeText(getActivity(), "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Get Subscription plan to proceed.", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
@@ -143,6 +143,15 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
      */
     private void showWalletTransactions() {
 
+        if (mTransaction.walletTransactions == null) {
+
+            Toast.makeText(getActivity(), "No Wallet Transactions", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (mTransaction.walletTransactions.size() == 0) {
+
+            Toast.makeText(getActivity(), "No Wallet Transactions", Toast.LENGTH_SHORT).show();
+            return;
+        }
         WalletTransactionListViewAdapter adapter = new WalletTransactionListViewAdapter(getActivity(), R.layout.item_listview_transactions, (ArrayList<WalletTransaction>) mTransaction.walletTransactions);
         mListView.setAdapter(adapter);
 
@@ -154,6 +163,15 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
      */
     private void showBankPaymentTransactions() {
 
+        if (mTransaction.paymentTransactions == null) {
+
+            Toast.makeText(getActivity(), "No Bank Transaction", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (mTransaction.paymentTransactions.size() == 0) {
+
+            Toast.makeText(getActivity(), "No Bank Transaction", Toast.LENGTH_SHORT).show();
+            return;
+        }
         PaymentTransactionListViewAdapter adapter = new PaymentTransactionListViewAdapter(getActivity(), R.layout.item_listview_transactions, (ArrayList<PaymentTransaction>) mTransaction.paymentTransactions);
         mListView.setAdapter(adapter);
     }
@@ -164,7 +182,6 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(getActivity(), "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {
 
             parseModel(rawObject);

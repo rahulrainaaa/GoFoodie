@@ -12,8 +12,10 @@ import java.util.List;
 public class CartOrder {
 
     public String date = "";
-
+    public String cartItemId;
     public String restaurantName;
+    public String restaurantId;
+    public String branchId;
     public String comboId;
     public String comboName;
     public String image;
@@ -24,7 +26,9 @@ public class CartOrder {
 
     public CartOrder(Cart cart) {
 
+        this.cartItemId = cart.cartItemId;
         this.restaurantName = cart.restaurantName;
+        this.restaurantId = cart.restaurantId;
         this.comboId = cart.comboId;
         this.comboName = cart.comboName;
         this.image = cart.image;
