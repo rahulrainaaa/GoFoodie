@@ -10,6 +10,8 @@ public class Network {
      * POST REST Web APIs.
      */
 
+    public static final String URL_PLACE_ORDER = "http://gofoodie.drushtiindia.com/API/Orders/placeOrders";
+
     public static final String URL_UPDATE_CART_ITEM = "http://gofoodie.drushtiindia.com/API/Cart/updateCart";
 
     public static final String URL_ADD_TO_CART = "http://gofoodie.drushtiindia.com/API/Cart/AddToCart";

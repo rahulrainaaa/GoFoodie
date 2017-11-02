@@ -1,8 +1,9 @@
 package com.app.gofoodie.model.cartOrder;
 
 import com.app.gofoodie.model.cart.Cart;
-import com.app.gofoodie.model.cart.Description;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class CartOrder {
     public String type;
     public String comboPrice;
     public String quantity;
-    public List<Description> description = null;
+    public List<Description> description = new ArrayList<>();
 
     public CartOrder(Cart cart) {
 
@@ -35,7 +36,13 @@ public class CartOrder {
         this.type = cart.type;
         this.comboPrice = cart.comboPrice;
         this.quantity = cart.quantity;
-        this.description = cart.description;
+
+        description.clear();
+        Iterator<com.app.gofoodie.model.cart.Description> descriptionIterator = cart.description.iterator();
+        while (descriptionIterator.hasNext()) {
+
+            this.description.add(new Description(descriptionIterator.next()));
+        }
     }
 
 }

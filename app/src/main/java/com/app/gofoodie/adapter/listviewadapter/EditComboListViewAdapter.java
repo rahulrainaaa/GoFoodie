@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.app.gofoodie.R;
-import com.app.gofoodie.model.cart.Description;
+import com.app.gofoodie.model.cartOrder.Description;
 
 import java.util.ArrayList;
 

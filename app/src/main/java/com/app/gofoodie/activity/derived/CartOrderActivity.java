@@ -2,6 +2,7 @@ package com.app.gofoodie.activity.derived;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,11 +17,20 @@ import android.widget.Toast;
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.recyclerviewadapter.CartOrderRecyclerAdapter;
+import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.global.data.GlobalData;
+import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.cart.Cart;
 import com.app.gofoodie.model.cartOrder.CartOrder;
+import com.app.gofoodie.model.cartOrder.Description;
+import com.app.gofoodie.network.callback.NetworkCallbackListener;
+import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.DateUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,7 +40,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 
-public class CartOrderActivity extends BaseAppCompatActivity implements View.OnClickListener {
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+public class CartOrderActivity extends BaseAppCompatActivity implements View.OnClickListener, NetworkCallbackListener {
 
     public static final String TAG = "CartOrderActivity";
 
@@ -271,8 +283,136 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     private void menuProceed() {
 
-        Toast.makeText(this, "Proceed to place order under development.", Toast.LENGTH_SHORT).show();
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setTitle("Place Order");
+        pDialog.setCancelable(true);
+        pDialog.show();
+        pDialog.setConfirmText("Confirm");
+        pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                JSONObject jsonRequest = getOrderRequestPacket();
+                if (jsonRequest == null) {
+
+                    Toast.makeText(CartOrderActivity.this, "Json Request NULL", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                NetworkHandler networkHandler = new NetworkHandler();
+                networkHandler.httpCreate(1, CartOrderActivity.this, CartOrderActivity.this, jsonRequest, Network.URL_PLACE_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                networkHandler.executePost();
+                sweetAlertDialog.dismiss();
+            }
+        });
+
+        pDialog.setCancelText("Cancel");
+
+        pDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                sweetAlertDialog.dismiss();
+            }
+        });
 
     }
 
+    private JSONObject getOrderRequestPacket() {
+
+        try {
+            JSONObject jsonRequest = new JSONObject();
+            JSONArray arrCartOrder = new JSONArray();
+
+            Iterator<CartOrder> cartOrderIterator = mList.iterator();
+            while (cartOrderIterator.hasNext()) {
+
+                CartOrder cartOrder = cartOrderIterator.next();
+                JSONArray arrDescription = new JSONArray();
+
+                Iterator<Description> descriptionIterator = cartOrder.description.iterator();
+                while (descriptionIterator.hasNext()) {
+
+                    Description description = descriptionIterator.next();
+                    JSONArray optionsJsonArray = new JSONArray();
+
+                    Iterator<String> optionIterator = description.options.iterator();
+                    while (optionIterator.hasNext()) {
+
+                        optionsJsonArray.put("" + optionIterator.next());
+                    }
+                    JSONObject objDescription = new JSONObject();
+                    objDescription.put("options", optionsJsonArray);
+                    objDescription.put("name", description.name);
+                    objDescription.put("value", description.value);
+                    objDescription.put("item_id", description.itemId);
+
+                    arrDescription.put(objDescription);
+                }
+
+                JSONObject objCartOrder = new JSONObject();
+                objCartOrder.put("description", arrDescription);
+                objCartOrder.put("combo_id", cartOrder.comboId);
+                objCartOrder.put("comboPrice", cartOrder.comboPrice);
+                objCartOrder.put("delivery_date", cartOrder.date);
+                objCartOrder.put("restaurant_id", cartOrder.restaurantId);
+                objCartOrder.put("branch_id", cartOrder.branchId);
+
+                arrCartOrder.put(objCartOrder);
+            }
+
+            jsonRequest.put("cartorders", arrCartOrder);
+            jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.profile.customerId);
+            jsonRequest.put("token", getSessionData().getToken());
+            jsonRequest.put("login_id", getSessionData().getLoginId());
+            jsonRequest.put("delivery_address", CustomerProfileHandler.CUSTOMER.profile.address);
+            jsonRequest.put("area", CustomerProfileHandler.CUSTOMER.profile.area);
+            jsonRequest.put("geo_lat", CustomerProfileHandler.CUSTOMER.profile.geoLat);
+            jsonRequest.put("geo_lng", CustomerProfileHandler.CUSTOMER.profile.geoLng);
+            jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.profile.walletId);
+
+            JSONArray cartItemIdArray = new JSONArray();
+            Iterator<Cart> cartIterator = GlobalData.cartArrayList.iterator();
+            while (cartIterator.hasNext()) {
+
+                cartItemIdArray.put(cartIterator.next().cartItemId.trim());
+            }
+            jsonRequest.put("cart_item_id", cartItemIdArray);
+            return jsonRequest;
+
+        } catch (JSONException jsonExc) {
+
+            jsonExc.printStackTrace();
+            Toast.makeText(this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+
+            return null;
+        }
+
+    }
+
+    @Override
+    public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+        Toast.makeText(this, "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
+        if (requestCode == 1) {
+
+            handleOrderPlacedResponse(rawObject);
+        }
+    }
+
+
+    @Override
+    public void networkFailResponse(int requestCode, String message) {
+
+        Toast.makeText(this, "Http Fail: " + message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void handleOrderPlacedResponse(JSONObject json) {
+
+        ModelParser parser = new ModelParser();
+
+
+    }
 }

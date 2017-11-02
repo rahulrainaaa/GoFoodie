@@ -14,8 +14,8 @@ import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.listviewadapter.EditComboListViewAdapter;
 import com.app.gofoodie.global.data.GlobalData;
-import com.app.gofoodie.model.cart.Description;
 import com.app.gofoodie.model.cartOrder.CartOrder;
+import com.app.gofoodie.model.cartOrder.Description;
 
 import java.util.ArrayList;
 import java.util.Iterator;
