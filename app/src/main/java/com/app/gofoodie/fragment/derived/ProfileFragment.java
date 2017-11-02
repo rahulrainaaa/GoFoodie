@@ -99,6 +99,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     private void btnMyOrdersClicked(View view) {
 
+        getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.MY_ORDERS);
     }
 
     private void btnMyPreferencesClicked(View view) {
