@@ -66,15 +66,15 @@ public class MyOrdersFragment extends BaseFragment {
                 break;
             case R.id.menu_item_long_vacation:
 
-                menuItemLongVacationSected();
+                menuItemLongVacationSelected();
                 break;
             case R.id.menu_item_short_vacation:
 
-                menuItemShortVacationSected();
+                menuItemShortVacationSelected();
                 break;
             case R.id.menu_item_emergency:
 
-                menuItemEmergencySected();
+                menuItemEmergencySelected();
                 break;
 
         }
@@ -105,15 +105,15 @@ public class MyOrdersFragment extends BaseFragment {
 
     }
 
-    private void menuItemLongVacationSected() {
+    private void menuItemLongVacationSelected() {
 
     }
 
-    private void menuItemShortVacationSected() {
+    private void menuItemShortVacationSelected() {
 
     }
 
-    private void menuItemEmergencySected() {
+    private void menuItemEmergencySelected() {
 
     }
 
