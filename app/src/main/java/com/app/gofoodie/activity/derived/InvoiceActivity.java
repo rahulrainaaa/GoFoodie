@@ -1,9 +1,10 @@
 package com.app.gofoodie.activity.derived;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.model.order.OrderResponse;
 
 public class InvoiceActivity extends AppCompatActivity {
 
@@ -11,5 +12,6 @@ public class InvoiceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoice);
+        OrderResponse orderResponse = getIntent().getParcelableExtra("data");
     }
 }
