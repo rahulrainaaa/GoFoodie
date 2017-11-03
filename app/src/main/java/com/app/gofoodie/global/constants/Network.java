@@ -10,6 +10,8 @@ public class Network {
      * POST REST Web APIs.
      */
 
+    public static final String URL_GET_MY_ORDER = "http://gofoodie.drushtiindia.com/API/Orders/myOrders";
+
     public static final String URL_PLACE_ORDER = "http://gofoodie.drushtiindia.com/API/Orders/placeOrders";
 
     public static final String URL_UPDATE_CART_ITEM = "http://gofoodie.drushtiindia.com/API/Cart/updateCart";
@@ -35,6 +37,7 @@ public class Network {
     public static final String URL_APPLY_SUBS_PLAN = "http://gofoodie.drushtiindia.com/API/SubscriptionPlan/applyForPlan";
 
     public static final String URL_SET_WEEK_PREF = "http://gofoodie.drushtiindia.com/API/Preferences/setWeekPreference";
+
     /**
      * GET REST Web APIs.
      */

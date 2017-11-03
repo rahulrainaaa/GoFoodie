@@ -1,9 +1,6 @@
 package com.app.gofoodie.activity.derived;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -42,23 +39,6 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
-
-        showDialog();
-    }
-
-    public void showDialog() {
-        View view = getLayoutInflater().inflate(R.layout.dialog_combo_details, null);
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Combo Plan Name");
-        alertDialog.setView(view);
-        alertDialog.setCancelable(false);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
     }
 
     @Override

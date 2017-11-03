@@ -83,6 +83,7 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
             holder.txtPrice = (TextView) view.findViewById(R.id.txt_price);
 
             holder.iBtnAddToCart.setOnClickListener(mClickListener);
+            holder.imgCombo.setOnClickListener(mClickListener);
             view.setTag(holder);
         } else {
 
@@ -90,7 +91,7 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
         }
 
         holder.iBtnAddToCart.setTag(comboplan);
-
+        holder.imgCombo.setTag(comboplan);
         holder.txtComboName.setText(comboplan.comboName);
         holder.txtTags.setText(comboplan.cuisineName != null ? comboplan.cuisineName : "");
         holder.txtPrice.setText("AED " + comboplan.price);

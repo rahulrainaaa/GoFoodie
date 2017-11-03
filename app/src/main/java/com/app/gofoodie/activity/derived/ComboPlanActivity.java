@@ -1,8 +1,12 @@
 package com.app.gofoodie.activity.derived;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
@@ -116,6 +120,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
 
             String statusMessage = json.getString("statusMessage");
             Toast.makeText(this, "" + statusMessage, Toast.LENGTH_SHORT).show();
+
         } catch (JSONException jsonExc) {
 
             jsonExc.printStackTrace();
@@ -135,6 +140,10 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
             case R.id.ibtn_cart:
 
                 addToCartClicked(view);
+                break;
+            case R.id.image_combo:
+
+                showComboDescription(view);
                 break;
         }
 
@@ -189,6 +198,37 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
             Toast.makeText(this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+
+    public void showComboDescription(View v) {
+
+        Comboplan comboplan = (Comboplan) v.getTag();
+        View view = getLayoutInflater().inflate(R.layout.dialog_combo_details, null);
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(comboplan.comboName);
+        alertDialog.setView(view);
+        ((RatingBar) view.findViewById(R.id.rating_bar)).setRating(Float.parseFloat(comboplan.avgRating.trim()));
+        ((TextView) view.findViewById(R.id.type_n_cuisine)).setText(comboplan.cuisineName);
+        ((TextView) view.findViewById(R.id.desc)).setText(comboplan.description);
+        ((TextView) view.findViewById(R.id.txt_price)).setText("AED " + comboplan.price);
+        if (comboplan.type.trim().toLowerCase().equals("nonveg")) {
+
+            view.findViewById(R.id.img_veg).setVisibility(View.GONE);
+            view.findViewById(R.id.img_nonveg).setVisibility(View.VISIBLE);
+        } else {
+
+            view.findViewById(R.id.img_veg).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.img_nonveg).setVisibility(View.GONE);
+        }
+        alertDialog.setCancelable(false);
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
 }

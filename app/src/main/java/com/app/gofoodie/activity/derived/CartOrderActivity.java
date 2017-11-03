@@ -341,7 +341,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                     Iterator<String> optionIterator = description.options.iterator();
                     while (optionIterator.hasNext()) {
 
-                        optionsJsonArray.put("" + optionIterator.next().trim().substring(0, 10));
+                        optionsJsonArray.put("" + optionIterator.next());
                     }
                     JSONObject objDescription = new JSONObject();
                     objDescription.put("options", optionsJsonArray);
@@ -356,7 +356,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                 objCartOrder.put("description", arrDescription);
                 objCartOrder.put("combo_id", cartOrder.comboId);
                 objCartOrder.put("comboPrice", cartOrder.comboPrice);
-                objCartOrder.put("delivery_date", cartOrder.date);
+                objCartOrder.put("delivery_date", cartOrder.date.trim().substring(0, 10));
                 objCartOrder.put("restaurant_id", cartOrder.restaurantId);
                 objCartOrder.put("branch_id", cartOrder.branchId);
 
@@ -392,6 +392,9 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     }
 
+    /**
+     * {@link NetworkCallbackListener} http response listener callback method(s).
+     */
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
