@@ -341,7 +341,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                     Iterator<String> optionIterator = description.options.iterator();
                     while (optionIterator.hasNext()) {
 
-                        optionsJsonArray.put("" + optionIterator.next());
+                        optionsJsonArray.put("" + optionIterator.next().trim().substring(0, 10));
                     }
                     JSONObject objDescription = new JSONObject();
                     objDescription.put("options", optionsJsonArray);

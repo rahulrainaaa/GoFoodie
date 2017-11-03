@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_item_date"
+        android:icon="@drawable/icon_date"
+        android:iconTint="@color/colorWhite"
+        android:title="@string/menu_pick_date"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_item_long_vacation"
+        android:icon="@drawable/icon_date"
+        android:iconTint="@color/colorWhite"
+        android:title="@string/menu_long_vacation"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_item_short_vacation"
+        android:icon="@drawable/icon_date"
+        android:iconTint="@color/colorWhite"
+        android:title="@string/menu_short_vacation"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_item_emergency"
+        android:icon="@drawable/icon_date"
+        android:iconTint="@color/colorWhite"
+        android:title="@string/menu_emergency"
+        app:showAsAction="never" />
+
+</menu>
