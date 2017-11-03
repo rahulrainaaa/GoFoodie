@@ -34,7 +34,7 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
         mAdapter = new RatingListViewAdapter(this, R.layout.item_list_rating, mList);
         mListView.setAdapter(mAdapter);
 
-        String url = Network.URL_GET_BRANCH_REV + "1";
+        String url = Network.URL_GET_BRANCH_REV + getIntent().getStringExtra("branch_id").trim();
 
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);

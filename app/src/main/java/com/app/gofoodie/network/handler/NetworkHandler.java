@@ -2,6 +2,7 @@ package com.app.gofoodie.network.handler;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -146,13 +147,19 @@ public class NetworkHandler implements Response.ErrorListener {
 
         // Validation: Check for Packet data.
         if (mUrl == null) {
+
+            Log.d(TAG, "URL is null.");
             return;
         } else if (mUrl.isEmpty()) {
+
+            Log.d(TAG, "URL is empty.");
             return;
         }
 
         HTTP_TOTAL_SENT++;                                          // Handler counter monitor.
         setProcessingDialogVisibility(true);
+
+        Log.d(TAG, "HTTP Request S.No: " + HTTP_TOTAL_SENT);
 
         if (mResponseType == RESPONSE_TYPE.JSON_OBJECT) {           // if JSONObject response.
 

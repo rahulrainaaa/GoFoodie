@@ -96,25 +96,41 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     @Override
     public void onClick(View view) {
 
-        Shortlisted shortlisted = getIntent().getParcelableExtra("data");
+        String email = "";
+        String coordinates = "";
+        String branchId = "";
+        MODE mode = (MODE) getIntent().getSerializableExtra("mode");
+        if (mode == MODE.SHORTLISTED) {
+
+            Shortlisted shortlisted = getIntent().getParcelableExtra("data");
+            email = shortlisted.branchEmail.trim();
+            coordinates = shortlisted.branchGeoLat + "," + shortlisted.branchGeoLng;
+            branchId = shortlisted.branchId.trim();
+        } else if (mode == MODE.REST_BRANCH) {
+
+            Restaurant restaurant = getIntent().getParcelableExtra("data");
+            email = restaurant.branchEmail.trim();
+            coordinates = restaurant.geoLat + "," + restaurant.geoLng;
+            branchId = restaurant.branchId.trim();
+        }
         switch (view.getId()) {
 
 
             case R.id.btn_call:
 
-                callClicked(view, shortlisted);
+                callClicked(view);
                 break;
             case R.id.btn_email:
 
-                emailClicked(view, shortlisted);
+                emailClicked(view, email);
                 break;
             case R.id.btn_map:
 
-                mapClicked(view, shortlisted);
+                mapClicked(view, coordinates);
                 break;
             case R.id.btn_rate:
 
-                reviewClicked(view, shortlisted);
+                reviewClicked(view, branchId);
                 break;
         }
     }
@@ -182,12 +198,11 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     }
 
     /**
-     * @param shortlisted
      * @param view
      * @desc Method to handle the call.
      * @method callClicked
      */
-    private void callClicked(View view, Shortlisted shortlisted) {
+    private void callClicked(View view) {
 
         Toast.makeText(this, "Calling Not Allowed.", Toast.LENGTH_SHORT).show();
 
@@ -195,16 +210,16 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
 
     /**
      * @param view
-     * @param shortlisted
+     * @param email
      * @desc Method to handle logic on email click.
      * @method emailClicked
      */
-    private void emailClicked(View view, Shortlisted shortlisted) {
+    private void emailClicked(View view, String email) {
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{shortlisted.branchEmail});
-        intent.putExtra(Intent.EXTRA_SUBJECT, "CustomerID:" + shortlisted.customerId);
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+        intent.putExtra(Intent.EXTRA_SUBJECT, "");
         intent.putExtra(Intent.EXTRA_TEXT, "");
 
         try {
@@ -219,24 +234,26 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
 
     /**
      * @param view
-     * @param shortlisted
+     * @param coordinates
      * @method mapClicked
      * @desc Method to handle logic on map clicked.
      */
-    private void mapClicked(View view, Shortlisted shortlisted) {
+    private void mapClicked(View view, String coordinates) {
 
-        Toast.makeText(this, "start Map under development.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Under development:\n" + coordinates, Toast.LENGTH_SHORT).show();
     }
 
     /**
      * @param view
-     * @param shortlisted
+     * @param branchId
      * @method reviewClicked
      * @desc Method to handle login on reviews click.
      */
-    private void reviewClicked(View view, Shortlisted shortlisted) {
+    private void reviewClicked(View view, String branchId) {
 
-        startActivity(new Intent(this, RatingActivity.class));
+        Intent intent = new Intent(this, RatingActivity.class);
+        intent.putExtra("branch_id", branchId.trim());
+        startActivity(intent);
     }
 
 }

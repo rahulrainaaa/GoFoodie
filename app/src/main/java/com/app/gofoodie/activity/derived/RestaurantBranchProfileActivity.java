@@ -12,10 +12,10 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.model.restaurantBranch.RestaurantBranch;
 import com.app.gofoodie.model.restaurantBranch.RestaurantBranchResponse;
-import com.app.gofoodie.model.shortlisted.Shortlisted;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 
@@ -74,18 +74,13 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
         Map = (ImageButton) findViewById(R.id.btn_map);
         Review = (ImageButton) findViewById(R.id.btn_rate);
 
-        Call.setOnClickListener(this);
-        Email.setOnClickListener(this);
-        Map.setOnClickListener(this);
-        Review.setOnClickListener(this);
-
         fetchBranchDetails();
     }
 
     private void fetchBranchDetails() {
 
         String branch_id = getIntent().getStringExtra("branch_id");
-        String url = "" + branch_id;
+        String url = Network.URL_GET_BRANCH_DETAILS + "18";// + branch_id;
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, new NetworkCallbackListener() {
             @Override
@@ -99,8 +94,10 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
 
                 Toast.makeText(RestaurantBranchProfileActivity.this, "Http Fail: " + message, Toast.LENGTH_SHORT).show();
             }
-        }, new JSONObject(), "", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        }, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+
         networkHandler.executeGet();
+
 
     }
 
@@ -110,7 +107,6 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
     @Override
     public void onClick(View view) {
 
-        Shortlisted shortlisted = getIntent().getParcelableExtra("data");
         switch (view.getId()) {
 
 
@@ -173,6 +169,10 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
             Veg.setVisibility(View.GONE);
             NonVeg.setVisibility(View.VISIBLE);
         }
+        Call.setOnClickListener(this);
+        Email.setOnClickListener(this);
+        Map.setOnClickListener(this);
+        Review.setOnClickListener(this);
     }
 
     /**
@@ -183,7 +183,6 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
     private void callClicked(View view) {
 
         Toast.makeText(this, "Calling Not Allowed.", Toast.LENGTH_SHORT).show();
-
     }
 
     /**
@@ -217,7 +216,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
      */
     private void mapClicked(View view) {
 
-        Toast.makeText(this, "start Map under development.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Start Map under development.", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -227,6 +226,8 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
      */
     private void reviewClicked(View view) {
 
-        startActivity(new Intent(this, RatingActivity.class));
+        Intent intent = new Intent(this, RatingActivity.class);
+        intent.putExtra("branch_id", restaurant.branchId.trim());
+        startActivity(intent);
     }
 }

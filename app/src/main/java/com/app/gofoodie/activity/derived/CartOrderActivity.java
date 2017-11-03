@@ -24,6 +24,7 @@ import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.cart.Cart;
 import com.app.gofoodie.model.cartOrder.CartOrder;
 import com.app.gofoodie.model.cartOrder.Description;
+import com.app.gofoodie.model.order.OrderResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.DateUtils;
@@ -415,7 +416,15 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     private void handleOrderPlacedResponse(JSONObject json) {
 
         ModelParser parser = new ModelParser();
+        OrderResponse orderResponse = (OrderResponse) parser.getModel(json.toString(), OrderResponse.class, null);
 
+        Toast.makeText(this, "" + orderResponse.statusMessage, Toast.LENGTH_SHORT).show();
+        if (orderResponse.statusCode == 200) {
+
+            Intent intent = new Intent(this, InvoiceActivity.class);
+            intent.putExtra("data", orderResponse);
+            startActivity(intent);
+        }
 
     }
 }

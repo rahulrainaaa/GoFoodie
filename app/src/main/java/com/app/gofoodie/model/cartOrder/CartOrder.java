@@ -29,6 +29,7 @@ public class CartOrder {
 
         this.cartItemId = cart.cartItemId;
         this.restaurantName = cart.restaurantName;
+        this.branchId = cart.branchId;
         this.restaurantId = cart.restaurantId;
         this.comboId = cart.comboId;
         this.comboName = cart.comboName;
