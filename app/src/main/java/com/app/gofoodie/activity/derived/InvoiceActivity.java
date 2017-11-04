@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.order.OrderResponse;
 import com.app.gofoodie.model.order.PlacedOrders;
 
@@ -65,6 +66,9 @@ public class InvoiceActivity extends BaseAppCompatActivity {
                 finish();
             }
         });
+
+        CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
+        customerProfileHandler.refresh(this, this, null);
 
         Log.d(TAG, orderResponse.toString());
     }
