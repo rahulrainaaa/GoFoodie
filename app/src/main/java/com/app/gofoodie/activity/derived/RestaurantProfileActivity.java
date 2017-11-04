@@ -109,7 +109,7 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         } else if (mode == MODE.REST_BRANCH) {
 
             Restaurant restaurant = getIntent().getParcelableExtra("data");
-            email = restaurant.branchEmail.trim();
+            email = restaurant.branchEmail;
             coordinates = restaurant.geoLat + "," + restaurant.geoLng;
             branchId = restaurant.branchId.trim();
         }

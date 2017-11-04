@@ -96,7 +96,6 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
 
         Subscriptionplan plan = mRechargePlan.subscriptionplan.get(position);
         GlobalData.subscriptionplan = plan;
-        Toast.makeText(this, "Please do the payment", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, PaymentGatewayActivity.class));
         finish();
     }

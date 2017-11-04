@@ -115,7 +115,6 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(getActivity(), "success http", Toast.LENGTH_SHORT).show();
         switch (requestCode) {
 
             case 1:
@@ -128,7 +127,7 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
     @Override
     public void networkFailResponse(int requestCode, String message) {
 
-        Toast.makeText(getActivity(), "Http_fail: " + message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Http Fail: " + message, Toast.LENGTH_SHORT).show();
     }
 
     /**

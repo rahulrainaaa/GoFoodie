@@ -2,12 +2,10 @@ package com.app.gofoodie.activity.derived;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -164,9 +162,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             public void onMoved(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, int fromPos, RecyclerView.ViewHolder target, int toPos, int x, int y) {
 
                 super.onMoved(recyclerView, viewHolder, fromPos, target, toPos, x, y);
-
-                Log.d("gggggggggggg", "onMoved fromPos = " + fromPos + " toPos = " + toPos);
-
                 Collections.swap(mList, fromPos, toPos);
 
                 // Date should not swap.
@@ -206,12 +201,11 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     private void pickStartDate() {
 
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                Toast.makeText(CartOrderActivity.this, "year  = " + year + ", month = " + month + ", day = " + day, Toast.LENGTH_SHORT).show();
+                Toast.makeText(CartOrderActivity.this, "Order start from: " + year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
 
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 try {
@@ -231,7 +225,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         }, 2017, 10, 1);
 
         datePickerDialog.show();
-
     }
 
     private void assignDate(Date startDate) {
@@ -284,11 +277,9 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     private void menuProceed() {
 
-
         SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Loading");
-        pDialog.setTitle("Place Order");
+        pDialog.setTitleText("Place Order");
+        pDialog.setContentText("Confirm placing order?");
         pDialog.setCancelable(true);
         pDialog.show();
         pDialog.setConfirmText("Confirm");
@@ -417,6 +408,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         ModelParser parser = new ModelParser();
         OrderResponse orderResponse = (OrderResponse) parser.getModel(json.toString(), OrderResponse.class, null);
 
+        Toast.makeText(this, "" + orderResponse.statusMessage, Toast.LENGTH_SHORT).show();
         if (orderResponse.statusCode == 200) {
 
             Intent intent = new Intent(this, InvoiceActivity.class);

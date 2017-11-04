@@ -23,6 +23,8 @@ import java.util.Date;
  */
 public class CustomerProfileHandler implements NetworkCallbackListener {
 
+    public static final String TAG = "CustomerProfileHandler";
+
     /**
      * Class Private data members.
      */
@@ -38,6 +40,7 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
      * Class private static data member.
      */
     private static Date sPrevTime = null;   // Last data refreshed DateTime.
+    private static boolean inProgress = false;      // Http request in progress or not.
 
     /**
      * @param context
@@ -47,7 +50,6 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
     public CustomerProfileHandler(Context context) {
 
         this.mContext = context;
-
     }
 
     /**
@@ -67,6 +69,14 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
      */
     public void refresh(Context context, BaseAppCompatActivity activity, ProfileUpdateListener listener) {
 
+        /**
+         * If already in progress to refresh customer profile.
+         */
+        if (inProgress) {
+
+            return;
+        }
+        inProgress = true;
         this.mListener = listener;
         try {
 
@@ -95,6 +105,7 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
+        inProgress = false;
         if (requestCode == 1) {
 
             ModelParser parser = new ModelParser();
@@ -105,12 +116,12 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
                 mListener.profileUpdatedCallback(CUSTOMER);
             }
         }
-
     }
 
     @Override
     public void networkFailResponse(int requestCode, String message) {
 
+        inProgress = false;
         Toast.makeText(mContext, "Customer Fetch fail:\n" + message, Toast.LENGTH_SHORT).show();
 
         if (mListener != null) {

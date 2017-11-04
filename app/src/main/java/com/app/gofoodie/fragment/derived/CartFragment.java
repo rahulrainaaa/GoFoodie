@@ -149,7 +149,8 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
             Toast.makeText(getActivity(), "" + cartResponse.statusMessage, Toast.LENGTH_SHORT).show();
             cartResponse.cart = new ArrayList<Cart>();
         } else {
-            mTxtLabel.setText("Total Qty: " + cartResponse.cart.size() + ",  Price: AED " + cartResponse.totalPrice.toString());
+
+            mTxtLabel.setText("Total Items: " + cartResponse.cart.size() + ",  Price: AED " + cartResponse.totalPrice.toString());
         }
         mCartList = (ArrayList<Cart>) cartResponse.cart;
         mAdapter = new CartListViewAdapter(getActivity(), mCartItemClickListener, R.layout.item_listview_cart, mCartList);

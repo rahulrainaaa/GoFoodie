@@ -27,6 +27,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 /**
  * @method ComboPlanActivity
  * @desc {@link BaseAppCompatActivity} Activity class to show the Restaurant's ComboPlan(s) with filtering applied.
@@ -75,7 +77,6 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(this, "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {         // Fetched combo plan(s).
 
             handleComboPlanResponse(rawObject);
@@ -124,7 +125,9 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
         } catch (JSONException jsonExc) {
 
             jsonExc.printStackTrace();
-            Toast.makeText(this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+            SweetAlertDialog sad = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE);
+            sad.setContentText(jsonExc.getMessage());
+            sad.setTitleText("Error");
         }
 
     }

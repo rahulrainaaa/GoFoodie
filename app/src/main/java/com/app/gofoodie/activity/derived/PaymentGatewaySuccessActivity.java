@@ -129,7 +129,6 @@ public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity impleme
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(this, "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {
             handleResponse(rawObject);
         }
@@ -148,6 +147,8 @@ public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity impleme
      */
     private void handleResponse(JSONObject json) {
 
+        CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
+        customerProfileHandler.refresh(this, this, null);
         try {
 
             int statusCode = json.getInt("statusCode");
