@@ -10,9 +10,9 @@ import android.widget.TextView;
 import com.app.gofoodie.R;
 import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
-import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
 import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.model.login.Login;
+import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
 import com.app.gofoodie.utility.SessionUtils;
 import com.telr.mobile.sdk.activty.WebviewActivity;
 import com.telr.mobile.sdk.entity.request.payment.Address;
@@ -100,6 +100,7 @@ public class PaymentGatewayActivity extends AppCompatActivity {
 
         intent.putExtra(WebviewActivity.IS_SECURITY_ENABLED, isSecurityEnabled);
         startActivity(intent);
+        finish();
     }
 
     private MobileRequest getMobileRequest() {

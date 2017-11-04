@@ -44,7 +44,6 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(this, "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {
 
             handleReviewResponse(rawObject);
@@ -66,6 +65,19 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
         ModelParser parser = new ModelParser();
         Ratings ratings = (Ratings) parser.getModel(json.toString(), Ratings.class, null);
 
+        if (ratings.statusCode != 200) {
+
+            Toast.makeText(this, "" + ratings.statusMessage.trim(), Toast.LENGTH_SHORT).show();
+            finish();
+        } else if (ratings.review == null) {
+
+            Toast.makeText(this, "" + ratings.statusMessage.trim(), Toast.LENGTH_SHORT).show();
+            finish();
+        } else if (ratings.review.size() == 0) {
+
+            Toast.makeText(this, "No Reviews", Toast.LENGTH_SHORT).show();
+            finish();
+        }
         mList = (ArrayList<Review>) ratings.review;
         RatingListViewAdapter mAdapter = new RatingListViewAdapter(this, R.layout.item_list_rating, mList);
         mListView.setAdapter(mAdapter);

@@ -10,7 +10,7 @@
     <!-- Navigation items -->
     <string name="app_name">GoFoodie</string>
     <string name="navigation_dashboard">Dashboard</string>
-    <string name="navigation_combos">Combos</string>
+    <string name="navigation_combos">Order</string>
     <string name="navigation_wallet">Wallet</string>
     <string name="navigation_cart">Cart</string>
     <string name="navigation_profile">Profile</string>

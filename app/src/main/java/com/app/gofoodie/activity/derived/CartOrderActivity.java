@@ -399,7 +399,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(this, "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {
 
             handleOrderPlacedResponse(rawObject);
@@ -418,12 +417,16 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         ModelParser parser = new ModelParser();
         OrderResponse orderResponse = (OrderResponse) parser.getModel(json.toString(), OrderResponse.class, null);
 
-        Toast.makeText(this, "" + orderResponse.statusMessage, Toast.LENGTH_SHORT).show();
         if (orderResponse.statusCode == 200) {
 
             Intent intent = new Intent(this, InvoiceActivity.class);
             intent.putExtra("data", orderResponse);
             startActivity(intent);
+            finish();
+        } else {
+            SweetAlertDialog sad = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE);
+            sad.setTitleText("Failed");
+            sad.setContentText("" + orderResponse.statusMessage);
         }
 
     }

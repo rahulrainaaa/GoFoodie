@@ -47,6 +47,12 @@ public class MyOrder implements Parcelable
     @SerializedName("item_details")
     @Expose
     public List<ItemDetail> itemDetails = null;
+    @SerializedName("restaurant_id")
+    @Expose
+    public String restaurantId;
+    @SerializedName("branch_id")
+    @Expose
+    public String branchId;
     @SerializedName("branch_name")
     @Expose
     public String branchName;
@@ -82,7 +88,9 @@ public class MyOrder implements Parcelable
         this.otherTax = ((String) in.readValue((String.class.getClassLoader())));
         this.deliveryDate = ((String) in.readValue((String.class.getClassLoader())));
         this.comboId = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.itemDetails, (com.app.gofoodie.model.myorders.ItemDetail.class.getClassLoader()));
+        in.readList(this.itemDetails, (ItemDetail.class.getClassLoader()));
+        this.restaurantId = ((String) in.readValue((String.class.getClassLoader())));
+        this.branchId = ((String) in.readValue((String.class.getClassLoader())));
         this.branchName = ((String) in.readValue((String.class.getClassLoader())));
         this.comboname = ((String) in.readValue((String.class.getClassLoader())));
     }
@@ -103,6 +111,8 @@ public class MyOrder implements Parcelable
         dest.writeValue(deliveryDate);
         dest.writeValue(comboId);
         dest.writeList(itemDetails);
+        dest.writeValue(restaurantId);
+        dest.writeValue(branchId);
         dest.writeValue(branchName);
         dest.writeValue(comboname);
     }

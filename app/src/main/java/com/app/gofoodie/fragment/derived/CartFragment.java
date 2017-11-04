@@ -145,8 +145,11 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
         CartResponse cartResponse = (CartResponse) parser.getModel(json.toString(), CartResponse.class, null);
         if (cartResponse.statusCode != 200) {
 
+            mTxtLabel.setText("Empty Cart");
             Toast.makeText(getActivity(), "" + cartResponse.statusMessage, Toast.LENGTH_SHORT).show();
             cartResponse.cart = new ArrayList<Cart>();
+        } else {
+            mTxtLabel.setText("Total Qty: " + cartResponse.cart.size() + ",  Price: AED " + cartResponse.totalPrice.toString());
         }
         mCartList = (ArrayList<Cart>) cartResponse.cart;
         mAdapter = new CartListViewAdapter(getActivity(), mCartItemClickListener, R.layout.item_listview_cart, mCartList);

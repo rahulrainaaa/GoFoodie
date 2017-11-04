@@ -167,6 +167,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             if (statusCode == 200) {
 
                 Toast.makeText(this, "Profile Updated Successfully.", Toast.LENGTH_SHORT).show();
+                finish();
             } else {
 
                 Toast.makeText(this, "Update failed. " + statusMessage, Toast.LENGTH_SHORT).show();
