@@ -1,17 +1,63 @@
 package com.app.gofoodie.activity.derived;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.model.order.OrderResponse;
+import com.app.gofoodie.model.order.PlacedOrders;
 
-public class InvoiceActivity extends AppCompatActivity {
+/**
+ * Activity class to get the {@link OrderResponse} as intent and show it as Invoice on Activity UI.
+ */
+public class InvoiceActivity extends BaseAppCompatActivity {
+
+    public static final String TAG = "InvoiceActivity";
+
+    /**
+     * Class private data member(s).
+     */
+    private TextView txtOrderId = null;
+    private TextView txtPaidPrice = null;
+    private TextView txtDate = null;
+    private TextView txtTotalOrders = null;
+    private Button btnDone = null;
+
+    /**
+     * {@link BaseAppCompatActivity} activity lifecycle callback method(s).
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoice);
         OrderResponse orderResponse = getIntent().getParcelableExtra("data");
+        PlacedOrders order = orderResponse.placedOrders;
+
+        txtOrderId = (TextView) findViewById(R.id.txt_order_id);
+        txtPaidPrice = (TextView) findViewById(R.id.price_paid);
+        txtDate = (TextView) findViewById(R.id.date);
+        txtTotalOrders = (TextView) findViewById(R.id.total_orders);
+        btnDone = (Button) findViewById(R.id.btn_done);
+
+        txtOrderId.setText("OrderID: " + order.orderSetId);
+        txtPaidPrice.setText("Paid AED " + order.pricePaid);
+        txtDate.setText("From: " + order.startDate + "\nTill: " + order.endDate);
+        txtTotalOrders.setText(txtTotalOrders + " Orders placed");
+
+        btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                finish();
+            }
+        });
+
+        Log.d(TAG, orderResponse.toString());
     }
+
 }
