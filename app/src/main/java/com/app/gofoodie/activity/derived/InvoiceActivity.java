@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
@@ -36,6 +37,14 @@ public class InvoiceActivity extends BaseAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoice);
         OrderResponse orderResponse = getIntent().getParcelableExtra("data");
+
+        if (orderResponse == null) {
+
+            Toast.makeText(this, "Data not found in Intent.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
         PlacedOrders order = orderResponse.placedOrders;
 
         txtOrderId = (TextView) findViewById(R.id.txt_order_id);
@@ -47,7 +56,7 @@ public class InvoiceActivity extends BaseAppCompatActivity {
         txtOrderId.setText("OrderID: " + order.orderSetId);
         txtPaidPrice.setText("Paid AED " + order.pricePaid);
         txtDate.setText("From: " + order.startDate + "\nTill: " + order.endDate);
-        txtTotalOrders.setText(txtTotalOrders + " Orders placed");
+        txtTotalOrders.setText(order.orderCount + " Orders placed");
 
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override

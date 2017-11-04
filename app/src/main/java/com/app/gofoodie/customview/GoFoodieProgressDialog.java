@@ -48,7 +48,7 @@ public class GoFoodieProgressDialog {
         mAlertDialog.setView(mView);
         mAlertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mAlertDialog.setCancelable(false);
-        isCreated = true;
+        isCreated = true;mAlertDialog.show();
     }
 
     /**

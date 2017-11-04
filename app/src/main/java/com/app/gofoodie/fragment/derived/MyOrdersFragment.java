@@ -15,6 +15,9 @@ import com.app.gofoodie.R;
 import com.app.gofoodie.adapter.listviewadapter.MyOrdersListViewAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.model.myorders.MyOrder;
+import com.app.gofoodie.model.myorders.MyOrdersResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
@@ -25,14 +28,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 /**
  * @class NetworkErrorFragment
  * @desc {@link BaseFragment} Fragment class to handle My Order list UI screen.
  */
-public class MyOrdersFragment extends BaseFragment implements NetworkCallbackListener {
+public class MyOrdersFragment extends BaseFragment implements NetworkCallbackListener, View.OnClickListener {
+
+    public static final String TAG = "MyOrdersFragment";
 
     ListView mListViewOrders = null;
-    private ArrayList<String> mOrderList = new ArrayList<String>();
+    private ArrayList<MyOrder> mList = null;
     private MyOrdersListViewAdapter mAdapter = null;
 
     @Nullable
@@ -43,14 +50,7 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
         setHasOptionsMenu(true);
         mListViewOrders = (ListView) view.findViewById(R.id.list_view_my_orders);
 
-        mOrderList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-
-            mOrderList.add("My Order " + i);
-        }
-
-        mAdapter = new MyOrdersListViewAdapter(getDashboardActivity(), R.layout.item_listview_my_orders, mOrderList);
-        mListViewOrders.setAdapter(mAdapter);
+        fetchMyOrders(null, null);
         return view;
 
     }
@@ -152,7 +152,7 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
         Toast.makeText(getActivity(), "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {
 
-
+            handleMyOrdersResponse(rawObject);
         }
     }
 
@@ -161,4 +161,97 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
         Toast.makeText(getActivity(), "Http Fail: " + message, Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     * @param json
+     * @method handleMyOrdersResponse
+     * @desc Method to handle the MyOrder response from web api.
+     */
+    private void handleMyOrdersResponse(JSONObject json) {
+
+        ModelParser parser = new ModelParser();
+        MyOrdersResponse myOrdersResponse = (MyOrdersResponse) parser.getModel(json.toString(), MyOrdersResponse.class, null);
+
+        if (myOrdersResponse.statusCode != 200 || myOrdersResponse.myOrders == null) {
+
+            Toast.makeText(getActivity(), "" + myOrdersResponse.statusMessage, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        mList = (ArrayList<MyOrder>) myOrdersResponse.myOrders;
+        mAdapter = new MyOrdersListViewAdapter(getDashboardActivity(), this, R.layout.item_listview_my_orders, mList);
+        mListViewOrders.setAdapter(mAdapter);
+
+    }
+
+    /**
+     * {@link android.view.View.OnClickListener} click event listener callback method(s).
+     */
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+
+            case R.id.add_rating:
+
+                addRating(view);
+                break;
+            case R.id.show_desc:
+
+                showDescription(view);
+                break;
+            case R.id.edit:
+
+                editCancelOrder(view);
+                break;
+        }
+    }
+
+    private void addRating(View view) {
+
+        MyOrder order = (MyOrder) view.getTag();
+
+    }
+
+    private void showDescription(View view) {
+
+        MyOrder order = (MyOrder) view.getTag();
+
+    }
+
+    private void editCancelOrder(View view) {
+
+        MyOrder order = (MyOrder) view.getTag();
+
+        if (!order.status.toLowerCase().trim().equals("accepted")) {
+
+            Toast.makeText(getActivity(), "Cannot cancel this order.", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.NORMAL_TYPE);
+            sweetAlertDialog.setTitleText("Cancel Order");
+            sweetAlertDialog.setContentText("Are you sure?");
+            sweetAlertDialog.setConfirmText("Yes");
+            sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                    sweetAlertDialog.dismissWithAnimation();
+                }
+            });
+
+            sweetAlertDialog.setCancelText("No");
+            sweetAlertDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                    sweetAlertDialog.dismissWithAnimation();
+                }
+            });
+            sweetAlertDialog.show();
+        }
+    }
+
+
 }

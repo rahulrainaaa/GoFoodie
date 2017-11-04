@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.derived.ShortlistedRestaurantsActivity;
@@ -15,6 +16,7 @@ import com.app.gofoodie.activity.derived.UpdateProfileActivity;
 import com.app.gofoodie.activity.derived.WeekPreferenceActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.utility.SessionUtils;
 
 /**
@@ -32,6 +34,10 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.frag_profile, container, false);
+
+        ((TextView) view.findViewById(R.id.txt_customer_name)).setText("" + CustomerProfileHandler.CUSTOMER.profile.name);
+        ((TextView) view.findViewById(R.id.txt_email)).setText("" + CustomerProfileHandler.CUSTOMER.profile.email);
+        ((TextView) view.findViewById(R.id.btn_phone)).setText("" + CustomerProfileHandler.CUSTOMER.profile.mobile1);
 
         view.findViewById(R.id.btn_my_profile).setOnClickListener(this);
         view.findViewById(R.id.btn_my_orders).setOnClickListener(this);
