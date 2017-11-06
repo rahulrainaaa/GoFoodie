@@ -225,10 +225,12 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
         final MyOrder order = (MyOrder) v.getTag();
 
-        final RatingBar ratingBar = new RatingBar(getActivity());
+        View view = getActivity().getLayoutInflater().inflate(R.layout.rating_bar_layout, null);
+        final RatingBar ratingBar = (RatingBar) view.findViewById(R.id.rating_bar);
+
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
         alertDialog.setTitle(order.comboname);
-        alertDialog.setView(ratingBar);
+        alertDialog.setView(view);
 
         alertDialog.setCancelable(true);
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Rate",
@@ -321,10 +323,11 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
         alertDialog.setTitle(order.comboname);
         alertDialog.setView(view);
         ((RatingBar) view.findViewById(R.id.rating_bar)).setVisibility(View.GONE);
-        ((TextView) view.findViewById(R.id.type_n_cuisine)).setText(order.status);
-        ((TextView) view.findViewById(R.id.desc)).setText(order.deliveryDate);
+        ((TextView) view.findViewById(R.id.type_n_cuisine)).setText("  " + order.deliveryDate);
+        ((TextView) view.findViewById(R.id.desc)).setText(order.status);
         ((TextView) view.findViewById(R.id.txt_price)).setText("AED " + order.pricePaid);
-
+        view.findViewById(R.id.img_veg).setVisibility(View.GONE);
+        view.findViewById(R.id.img_nonveg).setVisibility(View.GONE);
         alertDialog.setCancelable(false);
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
                 new DialogInterface.OnClickListener() {
@@ -365,8 +368,11 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
                         jsonRequest.put("order_set_id", order.orderSetId.trim());
                         jsonRequest.put("branch_id", order.branchId.trim());
                         jsonRequest.put("token", getSession().getData().getToken());
-                        jsonRequest.put("from", mStrFromDate.trim());
-                        jsonRequest.put("to", mStrToDate.trim());
+                        if (mStrFromDate != null && mStrToDate != null) {
+
+                            jsonRequest.put("from", mStrFromDate.trim());
+                            jsonRequest.put("to", mStrToDate.trim());
+                        }
                         jsonRequest.put("limit", "100");
 
                         NetworkHandler networkHandler = new NetworkHandler();
