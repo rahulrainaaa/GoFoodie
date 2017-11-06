@@ -16,6 +16,7 @@ import com.app.gofoodie.adapter.listviewadapter.MyOrdersListViewAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.myorders.MyOrder;
 import com.app.gofoodie.model.myorders.MyOrdersResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
@@ -23,6 +24,7 @@ import com.app.gofoodie.network.handler.NetworkHandler;
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -38,9 +40,15 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
     public static final String TAG = "MyOrdersFragment";
 
+    /**
+     * Class private data member(s).
+     */
     ListView mListViewOrders = null;
     private ArrayList<MyOrder> mList = null;
     private MyOrdersListViewAdapter mAdapter = null;
+
+    private String mStrFromDate = null;
+    private String mStrToDate = null;
 
     @Nullable
     @Override
@@ -95,6 +103,9 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
 
     private void fetchMyOrders(String fromDate, String toDate) {
+
+        mStrFromDate = fromDate;
+        mStrToDate = toDate;
 
         String url = Network.URL_GET_MY_ORDER + "?customerid=" + getSession().getData().getCustomerId();
         if (fromDate != null && toDate != null) {
@@ -221,7 +232,7 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
     private void editCancelOrder(View view) {
 
-        MyOrder order = (MyOrder) view.getTag();
+        final MyOrder order = (MyOrder) view.getTag();
 
         if (!order.status.toLowerCase().trim().equals("accepted")) {
 
@@ -237,6 +248,30 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
                 @Override
                 public void onClick(SweetAlertDialog sweetAlertDialog) {
 
+                    try {
+
+                        JSONObject jsonRequest = new JSONObject();
+                        jsonRequest.put("login_id", getSession().getData().getLoginId());
+                        jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.profile.customerId.trim());
+                        jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.profile.walletId.trim());
+                        jsonRequest.put("order_id", order.orderId.trim());
+                        jsonRequest.put("price_paid", order.pricePaid.trim());
+                        jsonRequest.put("order_set_id", order.comboId.trim());
+                        jsonRequest.put("branch_id", order.branchId.trim());
+                        jsonRequest.put("token", getSession().getData().getToken());
+                        jsonRequest.put("from", mStrFromDate.trim());
+                        jsonRequest.put("to", mStrToDate.trim());
+                        jsonRequest.put("limit", "100");
+
+                        NetworkHandler networkHandler = new NetworkHandler();
+                        networkHandler.httpCreate(1, getDashboardActivity(), MyOrdersFragment.this, jsonRequest, Network.URL_CANCEL_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                        networkHandler.executePost();
+
+                    } catch (JSONException jsonExc) {
+
+                        jsonExc.printStackTrace();
+                        Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                     sweetAlertDialog.dismissWithAnimation();
                 }
             });
