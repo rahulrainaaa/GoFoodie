@@ -68,7 +68,7 @@ public class InvoiceActivity extends BaseAppCompatActivity {
         });
 
         CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
-        customerProfileHandler.refresh(this, this, null);
+        customerProfileHandler.refresh(this, null);
 
         Log.d(TAG, orderResponse.toString());
     }

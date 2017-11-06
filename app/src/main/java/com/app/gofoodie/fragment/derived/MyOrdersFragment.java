@@ -1,7 +1,9 @@
 package com.app.gofoodie.fragment.derived;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
@@ -160,7 +164,6 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(getActivity(), "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {
 
             handleMyOrdersResponse(rawObject);
@@ -218,15 +221,118 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
         }
     }
 
-    private void addRating(View view) {
+    private void addRating(View v) {
 
-        MyOrder order = (MyOrder) view.getTag();
+        final MyOrder order = (MyOrder) v.getTag();
+
+        final RatingBar ratingBar = new RatingBar(getActivity());
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle(order.comboname);
+        alertDialog.setView(ratingBar);
+
+        alertDialog.setCancelable(true);
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Rate",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        int rating = (int) (ratingBar.getRating());
+                        String comment = "";
+                        switch (rating) {
+
+                            case 0:
+                                comment = "Worst";
+                                break;
+                            case 1:
+                                comment = "Poor";
+                                break;
+                            case 2:
+                                comment = "Below Average";
+                                break;
+                            case 3:
+                                comment = "Average";
+                                break;
+                            case 4:
+                                comment = "Good";
+                                break;
+                            case 5:
+                                comment = "Excellent";
+                                break;
+                        }
+
+                        try {
+
+                            JSONObject jsonRequest = new JSONObject();
+                            jsonRequest.put("customer_id", getSession().getData().getCustomerId());
+                            jsonRequest.put("login_id", getSession().getData().getLoginId());
+                            jsonRequest.put("restaurant_id", order.restaurantId.trim());
+                            jsonRequest.put("branch_id", order.branchId.trim());
+                            jsonRequest.put("combo_id", order.comboId.trim());
+                            jsonRequest.put("order_id", order.orderId.trim());
+                            jsonRequest.put("rating", rating + "");
+                            jsonRequest.put("comment", comment);
+                            jsonRequest.put("reviewer", CustomerProfileHandler.CUSTOMER.profile.name);
+                            jsonRequest.put("token", getSession().getData().getToken().trim());
+
+                            NetworkHandler networkHandler = new NetworkHandler();
+                            networkHandler.httpCreate(1, getDashboardActivity(), new NetworkCallbackListener() {
+                                @Override
+                                public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+                                    try {
+
+                                        Toast.makeText(getActivity(), "" + rawObject.getString("statusMessage").trim(), Toast.LENGTH_SHORT).show();
+
+                                    } catch (JSONException jsonExc) {
+
+                                        jsonExc.printStackTrace();
+                                        Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void networkFailResponse(int requestCode, String message) {
+
+                                    Toast.makeText(getActivity(), "Http Fail: " + message, Toast.LENGTH_SHORT).show();
+
+                                }
+                            }, jsonRequest, Network.URL_POST_REVIEW, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                            networkHandler.executePost();
+
+                        } catch (JSONException jsonExc) {
+
+                            jsonExc.printStackTrace();
+                            Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
 
     }
 
-    private void showDescription(View view) {
+    private void showDescription(View v) {
 
-        MyOrder order = (MyOrder) view.getTag();
+        MyOrder order = (MyOrder) v.getTag();
+
+
+        View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_combo_details, null);
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle(order.comboname);
+        alertDialog.setView(view);
+        ((RatingBar) view.findViewById(R.id.rating_bar)).setVisibility(View.GONE);
+        ((TextView) view.findViewById(R.id.type_n_cuisine)).setText(order.status);
+        ((TextView) view.findViewById(R.id.desc)).setText(order.deliveryDate);
+        ((TextView) view.findViewById(R.id.txt_price)).setText("AED " + order.pricePaid);
+
+        alertDialog.setCancelable(false);
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
 
     }
 
@@ -256,7 +362,7 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
                         jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.profile.walletId.trim());
                         jsonRequest.put("order_id", order.orderId.trim());
                         jsonRequest.put("price_paid", order.pricePaid.trim());
-                        jsonRequest.put("order_set_id", order.comboId.trim());
+                        jsonRequest.put("order_set_id", order.orderSetId.trim());
                         jsonRequest.put("branch_id", order.branchId.trim());
                         jsonRequest.put("token", getSession().getData().getToken());
                         jsonRequest.put("from", mStrFromDate.trim());

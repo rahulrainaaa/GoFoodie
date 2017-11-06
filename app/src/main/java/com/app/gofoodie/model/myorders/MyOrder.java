@@ -17,6 +17,9 @@ public class MyOrder implements Parcelable
     @SerializedName("co_id")
     @Expose
     public String coId;
+    @SerializedName("order_set_id")
+    @Expose
+    public String orderSetId;
     @SerializedName("order_date")
     @Expose
     public String orderDate;
@@ -79,6 +82,7 @@ public class MyOrder implements Parcelable
     protected MyOrder(Parcel in) {
         this.orderId = ((String) in.readValue((String.class.getClassLoader())));
         this.coId = ((String) in.readValue((String.class.getClassLoader())));
+        this.orderSetId = ((String) in.readValue((String.class.getClassLoader())));
         this.orderDate = ((String) in.readValue((String.class.getClassLoader())));
         this.status = ((String) in.readValue((String.class.getClassLoader())));
         this.pricePaid = ((String) in.readValue((String.class.getClassLoader())));
@@ -88,7 +92,7 @@ public class MyOrder implements Parcelable
         this.otherTax = ((String) in.readValue((String.class.getClassLoader())));
         this.deliveryDate = ((String) in.readValue((String.class.getClassLoader())));
         this.comboId = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.itemDetails, (ItemDetail.class.getClassLoader()));
+        in.readList(this.itemDetails, (com.app.gofoodie.model.myorders.ItemDetail.class.getClassLoader()));
         this.restaurantId = ((String) in.readValue((String.class.getClassLoader())));
         this.branchId = ((String) in.readValue((String.class.getClassLoader())));
         this.branchName = ((String) in.readValue((String.class.getClassLoader())));
@@ -101,6 +105,7 @@ public class MyOrder implements Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(orderId);
         dest.writeValue(coId);
+        dest.writeValue(orderSetId);
         dest.writeValue(orderDate);
         dest.writeValue(status);
         dest.writeValue(pricePaid);

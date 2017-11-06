@@ -47,6 +47,9 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         view.findViewById(R.id.btn_about_us).setOnClickListener(this);
         view.findViewById(R.id.btn_logout).setOnClickListener(this);
 
+        CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(getActivity());
+        customerProfileHandler.refresh(null, null);
+
         return view;
     }
 

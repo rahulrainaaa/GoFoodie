@@ -66,8 +66,6 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(this, "http success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
-
         switch (requestCode) {
 
             case 1:                 // Set week preference response.
@@ -147,7 +145,7 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
                 return;
             }
             CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
-            customerProfileHandler.refresh(this, this, new ProfileUpdateListener() {
+            customerProfileHandler.refresh(this, new ProfileUpdateListener() {
                 @Override
                 public void profileUpdatedCallback(Customer customer) {
                     finish();

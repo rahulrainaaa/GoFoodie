@@ -1,6 +1,7 @@
 package com.app.gofoodie.handler.profileDataHandler;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
@@ -63,11 +64,12 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
     }
 
     /**
-     * @param context
+     * @param activity instance to run progress dialog on Http request while refreshing from Web API. (can be null)
+     * @param listener Profile updated on http response listener. (can be null).
      * @method refresh
      * @desc Method to fetch the customer full profile from web API.
      */
-    public void refresh(Context context, BaseAppCompatActivity activity, ProfileUpdateListener listener) {
+    public void refresh(BaseAppCompatActivity activity, ProfileUpdateListener listener) {
 
         /**
          * If already in progress to refresh customer profile.
@@ -94,7 +96,6 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
         } catch (JSONException jsonExc) {
 
             jsonExc.printStackTrace();
-            Toast.makeText(context, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -106,6 +107,8 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
         inProgress = false;
+
+        Log.d(TAG, "Http Success: " + rawObject.toString());
         if (requestCode == 1) {
 
             ModelParser parser = new ModelParser();
@@ -122,6 +125,8 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
     public void networkFailResponse(int requestCode, String message) {
 
         inProgress = false;
+
+        Log.d(TAG, "Http Fail: " + message);
         Toast.makeText(mContext, "Customer Fetch fail:\n" + message, Toast.LENGTH_SHORT).show();
 
         if (mListener != null) {

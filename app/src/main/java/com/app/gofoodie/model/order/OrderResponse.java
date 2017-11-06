@@ -8,6 +8,9 @@ import com.app.gofoodie.model.base.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Model Class hold response after placing an order. Data contains all the Invoice related details.
+ */
 public class OrderResponse extends BaseModel implements Parcelable {
 
     @SerializedName("placedOrders")

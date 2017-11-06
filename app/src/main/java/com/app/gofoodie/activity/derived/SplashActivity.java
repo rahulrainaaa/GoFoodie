@@ -49,7 +49,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
         if (SessionUtils.getInstance().isSessionExist()) {
 
             CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
-            customerProfileHandler.refresh(this, null, this);
+            customerProfileHandler.refresh( null, this);
         }
     }
 

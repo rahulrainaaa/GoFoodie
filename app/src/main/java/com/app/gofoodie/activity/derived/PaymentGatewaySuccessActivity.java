@@ -148,7 +148,7 @@ public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity impleme
     private void handleResponse(JSONObject json) {
 
         CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
-        customerProfileHandler.refresh(this, this, null);
+        customerProfileHandler.refresh( this, null);
         try {
 
             int statusCode = json.getInt("statusCode");

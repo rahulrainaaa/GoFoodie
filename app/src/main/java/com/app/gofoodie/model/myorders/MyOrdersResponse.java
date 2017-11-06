@@ -10,6 +10,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+/**
+ * Model to hold the already placed Combo Orders.
+ */
 public class MyOrdersResponse extends BaseModel implements Parcelable {
 
     @SerializedName("my_orders")
