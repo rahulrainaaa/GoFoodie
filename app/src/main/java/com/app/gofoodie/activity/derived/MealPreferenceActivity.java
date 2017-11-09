@@ -110,7 +110,12 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
                 mStrCategoriesId.append("" + category.cateId + ",");
             }
         }
-        mStrCategoriesId.deleteCharAt(mStrCategoriesId.length() - 1);
+
+        try {
+            mStrCategoriesId.deleteCharAt(mStrCategoriesId.length() - 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // Save the preference into the cache (offline).
         CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_CAT_KEY, mStrCategoriesId.toString()).commit();

@@ -294,7 +294,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
     /**
      * @param json
      * @method handleRestaurantResponse
-     * @desc Meethod to handle the response of restaurant add to customer's shortlist.
+     * @desc Method to handle the response of restaurant add to customer's shortlist.
      */
     private void handleRestaurantAdded(JSONObject json) {
 

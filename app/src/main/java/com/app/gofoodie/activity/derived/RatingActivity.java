@@ -69,14 +69,17 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
 
             Toast.makeText(this, "" + ratings.statusMessage.trim(), Toast.LENGTH_SHORT).show();
             finish();
+            return;
         } else if (ratings.review == null) {
 
             Toast.makeText(this, "" + ratings.statusMessage.trim(), Toast.LENGTH_SHORT).show();
             finish();
+            return;
         } else if (ratings.review.size() == 0) {
 
             Toast.makeText(this, "No Reviews", Toast.LENGTH_SHORT).show();
             finish();
+            return;
         }
         mList = (ArrayList<Review>) ratings.review;
         RatingListViewAdapter mAdapter = new RatingListViewAdapter(this, R.layout.item_list_rating, mList);
