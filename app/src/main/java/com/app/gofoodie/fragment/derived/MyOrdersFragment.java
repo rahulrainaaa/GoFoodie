@@ -34,8 +34,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
-
 /**
  * @class NetworkErrorFragment
  * @desc {@link BaseFragment} Fragment class to handle My Order list UI screen.
@@ -349,54 +347,60 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
         } else {
 
-            SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.NORMAL_TYPE);
-            sweetAlertDialog.setTitleText("Cancel Order");
-            sweetAlertDialog.setContentText("Are you sure?");
-            sweetAlertDialog.setConfirmText("Yes");
-            sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                @Override
-                public void onClick(SweetAlertDialog sweetAlertDialog) {
 
-                    try {
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+            alertDialog.setTitle("Cancel Order");
+            alertDialog.setCancelable(false);
+            alertDialog.setMessage("Are you sure?");
 
-                        JSONObject jsonRequest = new JSONObject();
-                        jsonRequest.put("login_id", getSession().getData().getLoginId());
-                        jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.profile.customerId.trim());
-                        jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.profile.walletId.trim());
-                        jsonRequest.put("order_id", order.orderId.trim());
-                        jsonRequest.put("price_paid", order.pricePaid.trim());
-                        jsonRequest.put("order_set_id", order.orderSetId.trim());
-                        jsonRequest.put("branch_id", order.branchId.trim());
-                        jsonRequest.put("token", getSession().getData().getToken());
-                        if (mStrFromDate != null && mStrToDate != null) {
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
 
-                            jsonRequest.put("from", mStrFromDate.trim());
-                            jsonRequest.put("to", mStrToDate.trim());
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            try {
+
+                                JSONObject jsonRequest = new JSONObject();
+                                jsonRequest.put("login_id", getSession().getData().getLoginId());
+                                jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.profile.customerId.trim());
+                                jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.profile.walletId.trim());
+                                jsonRequest.put("order_id", order.orderId.trim());
+                                jsonRequest.put("price_paid", order.pricePaid.trim());
+                                jsonRequest.put("order_set_id", order.orderSetId.trim());
+                                jsonRequest.put("branch_id", order.branchId.trim());
+                                jsonRequest.put("token", getSession().getData().getToken());
+                                if (mStrFromDate != null && mStrToDate != null) {
+
+                                    jsonRequest.put("from", mStrFromDate.trim());
+                                    jsonRequest.put("to", mStrToDate.trim());
+                                }
+                                jsonRequest.put("limit", "100");
+
+                                NetworkHandler networkHandler = new NetworkHandler();
+                                networkHandler.httpCreate(1, getDashboardActivity(), MyOrdersFragment.this, jsonRequest, Network.URL_CANCEL_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                                networkHandler.executePost();
+
+                            } catch (JSONException jsonExc) {
+
+                                jsonExc.printStackTrace();
+                                Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                            dialog.dismiss();
                         }
-                        jsonRequest.put("limit", "100");
+                    });
 
-                        NetworkHandler networkHandler = new NetworkHandler();
-                        networkHandler.httpCreate(1, getDashboardActivity(), MyOrdersFragment.this, jsonRequest, Network.URL_CANCEL_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                        networkHandler.executePost();
+            alertDialog.show();
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
 
-                    } catch (JSONException jsonExc) {
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
-                        jsonExc.printStackTrace();
-                        Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                    sweetAlertDialog.dismissWithAnimation();
-                }
-            });
+                            dialog.dismiss();
+                        }
+                    });
 
-            sweetAlertDialog.setCancelText("No");
-            sweetAlertDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                @Override
-                public void onClick(SweetAlertDialog sweetAlertDialog) {
+            alertDialog.show();
 
-                    sweetAlertDialog.dismissWithAnimation();
-                }
-            });
-            sweetAlertDialog.show();
         }
     }
 

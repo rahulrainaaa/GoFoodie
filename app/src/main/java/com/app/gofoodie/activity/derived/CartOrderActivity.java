@@ -1,6 +1,8 @@
 package com.app.gofoodie.activity.derived;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -277,38 +279,39 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     private void menuProceed() {
 
-        SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE);
-        pDialog.setTitleText("Place Order");
-        pDialog.setContentText("Confirm placing order?");
-        pDialog.setCancelable(true);
-        pDialog.show();
-        pDialog.setConfirmText("Confirm");
-        pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Place Order");
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage("Confirm placing order?");
 
-                JSONObject jsonRequest = getOrderRequestPacket();
-                if (jsonRequest == null) {
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Confirm",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
 
-                    Toast.makeText(CartOrderActivity.this, "Json Request NULL", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                NetworkHandler networkHandler = new NetworkHandler();
-                networkHandler.httpCreate(1, CartOrderActivity.this, CartOrderActivity.this, jsonRequest, Network.URL_PLACE_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                networkHandler.executePost();
-                sweetAlertDialog.dismiss();
-            }
-        });
+                        JSONObject jsonRequest = getOrderRequestPacket();
+                        if (jsonRequest == null) {
 
-        pDialog.setCancelText("Cancel");
+                            Toast.makeText(CartOrderActivity.this, "Json Request NULL", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        NetworkHandler networkHandler = new NetworkHandler();
+                        networkHandler.httpCreate(1, CartOrderActivity.this, CartOrderActivity.this, jsonRequest, Network.URL_PLACE_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                        networkHandler.executePost();
 
-        pDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        dialog.dismiss();
+                    }
+                });
 
-                sweetAlertDialog.dismiss();
-            }
-        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
+
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.show();
 
     }
 
