@@ -227,6 +227,16 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
             publishRestaurantList((ArrayList<Restaurant>) restaurantResponse.restaurant);
         } else {
 
+            try {
+
+                mList.clear();
+                mAdapter.notifyDataSetChanged();
+                
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+
             Toast.makeText(this, "" + statusMessage.toString(), Toast.LENGTH_SHORT).show();
         }
     }

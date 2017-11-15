@@ -95,7 +95,6 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(this, "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {         // Fetched all shortlisted restaurant(s).
 
             handleShortlistRestaurantResponse(rawObject);
@@ -125,6 +124,12 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
             mAdapter = new ShortlistedRestaurantListViewAdapter(this, R.layout.item_shortlisted_restaurants, mList, this);
             mListView.setAdapter(mAdapter);
         } else {
+            try {
+                mList.clear();
+                mAdapter.notifyDataSetChanged();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Toast.makeText(this, "" + shortlistedRestaurants.statusMessage, Toast.LENGTH_SHORT).show();
         }
 

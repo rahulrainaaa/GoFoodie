@@ -282,6 +282,15 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         alertDialog.setCancelable(false);
         alertDialog.setMessage("Confirm placing order?");
 
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
+
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                });
+
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Confirm",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -295,15 +304,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                         NetworkHandler networkHandler = new NetworkHandler();
                         networkHandler.httpCreate(1, CartOrderActivity.this, CartOrderActivity.this, jsonRequest, Network.URL_PLACE_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
                         networkHandler.executePost();
-
-                        dialog.dismiss();
-                    }
-                });
-
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
-
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
 
                         dialog.dismiss();
                     }

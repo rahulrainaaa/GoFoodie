@@ -1,5 +1,7 @@
 package com.app.gofoodie.fragment.derived;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -108,8 +110,8 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
             mListView.setAdapter(mAdapter);
         } else if (shortlistedRestaurants.statusCode == 204) {
 
-            Toast.makeText(getActivity(), "Please add restaurant to shortlist", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getActivity(), AddShortlistedRestaurants.class));
+            callToShortlistActivity();
+
         } else {
             Toast.makeText(getActivity(), "" + shortlistedRestaurants.statusMessage, Toast.LENGTH_SHORT).show();
         }
@@ -165,6 +167,38 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
         startActivity(intent);
     }
 
+    /**
+     * Method to call shortlist Activity if user select on Alert Dialog.
+     */
+    private void callToShortlistActivity() {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage("No Shortlist Restaurant found.\nDo you want to select?");
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
+
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Toast.makeText(getActivity(), "You have not shortlisted any restaurant.", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        startActivity(new Intent(getActivity(), AddShortlistedRestaurants.class));
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.show();
+    }
 
     @Override
     public void fragQuitCallback() {
