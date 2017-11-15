@@ -10,6 +10,7 @@ import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
+import com.app.gofoodie.handler.profileDataHandler.ProfileUpdateListener;
 import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
@@ -47,16 +48,39 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
         mEtAddress = (MaterialEditText) findViewById(R.id.et_address);
         mEtLocation = (MaterialEditText) findViewById(R.id.et_location_pref);
 
-        Customer customer = CustomerProfileHandler.CUSTOMER;
-        mEtName.setText("" + customer.profile.name);
-        mEtMobile.setText("" + customer.profile.mobile1);
-        mEtAltMobile.setText("" + customer.profile.mobile2);
-        mAltEmail.setText("" + customer.profile.email2);
-        mEtAddress.setText("" + customer.profile.address);
+        try {
 
-        mButton = (Button) findViewById(R.id.btn_update_profile);
-        mButton.setOnClickListener(this);
-        mEtLocation.setOnClickListener(this);
+            Customer customer = CustomerProfileHandler.CUSTOMER;
+            mEtName.setText("" + customer.profile.name);
+            mEtMobile.setText("" + customer.profile.mobile1);
+            mEtAltMobile.setText("" + customer.profile.mobile2);
+            mAltEmail.setText("" + customer.profile.email2);
+            mEtAddress.setText("" + customer.profile.address);
+
+            mButton = (Button) findViewById(R.id.btn_update_profile);
+            mButton.setOnClickListener(this);
+            mEtLocation.setOnClickListener(this);
+
+        } catch (Exception e) {
+
+            CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
+            customerProfileHandler.refresh(this, new ProfileUpdateListener() {
+                @Override
+                public void profileUpdatedCallback(Customer customer) {
+
+                    if (customer != null) {
+
+                        startActivity(new Intent(UpdateProfileActivity.this, UpdateProfileActivity.class));
+                        finish();
+                    } else {
+
+                        // No internet connection.
+                    }
+                }
+            });
+            e.printStackTrace();
+
+        }
     }
 
     @Override

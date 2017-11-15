@@ -80,7 +80,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
     private void fetchBranchDetails() {
 
         String branch_id = getIntent().getStringExtra("branch_id");
-        String url = Network.URL_GET_BRANCH_DETAILS + "18";// + branch_id;
+        String url = Network.URL_GET_BRANCH_DETAILS + branch_id;
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, new NetworkCallbackListener() {
             @Override

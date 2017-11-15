@@ -33,9 +33,10 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
     public ProfileUpdateListener mListener = null;
 
     /**
-     * {@link Customer} static object to hold the customer full data.
+     * Class public static data member(s) to share.
      */
     public static Customer CUSTOMER = null;
+    public static boolean profileExist = false;
 
     /**
      * Class private static data member.
@@ -114,6 +115,7 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
             ModelParser parser = new ModelParser();
             Customer customer = (Customer) parser.getModel(rawObject.toString(), Customer.class, null);
             CUSTOMER = customer;
+            profileExist = true;
             if (mListener != null) {
 
                 mListener.profileUpdatedCallback(CUSTOMER);
@@ -125,9 +127,13 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
     public void networkFailResponse(int requestCode, String message) {
 
         inProgress = false;
-
+        profileExist = false;
         Log.d(TAG, "Http Fail: " + message);
-        Toast.makeText(mContext, "Customer Fetch fail:\n" + message, Toast.LENGTH_SHORT).show();
+
+        if (mContext != null) {
+
+            Toast.makeText(mContext, "Unable to fetch profile data", Toast.LENGTH_SHORT).show();
+        }
 
         if (mListener != null) {
 

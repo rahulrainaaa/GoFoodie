@@ -35,9 +35,16 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
         View view = inflater.inflate(R.layout.frag_profile, container, false);
 
-        ((TextView) view.findViewById(R.id.txt_customer_name)).setText("" + CustomerProfileHandler.CUSTOMER.profile.name);
-        ((TextView) view.findViewById(R.id.txt_email)).setText("" + CustomerProfileHandler.CUSTOMER.profile.email);
-        ((TextView) view.findViewById(R.id.btn_phone)).setText("" + CustomerProfileHandler.CUSTOMER.profile.mobile1);
+        try {
+
+            ((TextView) view.findViewById(R.id.txt_customer_name)).setText("" + CustomerProfileHandler.CUSTOMER.profile.name);
+            ((TextView) view.findViewById(R.id.txt_email)).setText("" + CustomerProfileHandler.CUSTOMER.profile.email);
+            ((TextView) view.findViewById(R.id.btn_phone)).setText("" + CustomerProfileHandler.CUSTOMER.profile.mobile1);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
 
         view.findViewById(R.id.btn_my_profile).setOnClickListener(this);
         view.findViewById(R.id.btn_my_orders).setOnClickListener(this);

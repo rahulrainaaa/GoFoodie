@@ -64,30 +64,39 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         mTabLayout.setOnTabSelectedListener(this);
         imgBtnSubscribe.setOnClickListener(this);
 
-        mTxtWalletAmount.setText("AED " + CustomerProfileHandler.CUSTOMER.profile.amount);
-        mTxtValidUpto.setText("Subscription till: " + CustomerProfileHandler.CUSTOMER.profile.validUpto);
+        if (CustomerProfileHandler.profileExist) {
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date expDate = format.parse(CustomerProfileHandler.CUSTOMER.profile.validUpto);
-            Date curDate = new Date();
-            if (curDate.before(expDate)) {
+            mTxtWalletAmount.setText("AED " + CustomerProfileHandler.CUSTOMER.profile.amount);
+            mTxtValidUpto.setText("Subscription till: " + CustomerProfileHandler.CUSTOMER.profile.validUpto);
 
-                imgAlert.setVisibility(View.GONE);
-            } else {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date expDate = format.parse(CustomerProfileHandler.CUSTOMER.profile.validUpto);
+                Date curDate = new Date();
+                if (curDate.before(expDate)) {
 
-                imgAlert.setVisibility(View.VISIBLE);
-                imgAlert.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_blink));
+                    imgAlert.setVisibility(View.GONE);
+                } else {
+
+                    imgAlert.setVisibility(View.VISIBLE);
+                    imgAlert.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_blink));
+                }
+            } catch (ParseException e) {
+                Toast.makeText(getActivity(), "Get Subscription plan to proceed.", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
             }
-        } catch (ParseException e) {
-            Toast.makeText(getActivity(), "Get Subscription plan to proceed.", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
+
+            String url = Network.URL_GET_TRANSACTION + "?customerLoginId=" + getSession().getData().getLoginId();
+            NetworkHandler networkHandler = new NetworkHandler();
+            networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+            networkHandler.executeGet();
+
+        } else {
+
+            Toast.makeText(getActivity(), "Check internet connection", Toast.LENGTH_SHORT).show();
+
         }
 
-        String url = Network.URL_GET_TRANSACTION + "?customerLoginId=" + getSession().getData().getLoginId();
-        NetworkHandler networkHandler = new NetworkHandler();
-        networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-        networkHandler.executeGet();
 
         return view;
     }

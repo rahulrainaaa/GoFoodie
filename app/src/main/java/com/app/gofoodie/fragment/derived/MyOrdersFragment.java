@@ -347,7 +347,6 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
         } else {
 
-
             AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
             alertDialog.setTitle("Cancel Order");
             alertDialog.setCancelable(false);

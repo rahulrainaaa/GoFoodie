@@ -46,8 +46,28 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
     protected void onResume() {
         super.onResume();
 
-        showWeekDialog();
+        if (CustomerProfileHandler.profileExist) {
+            showWeekDialog();
 
+        } else {
+
+            CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
+            customerProfileHandler.refresh(this, new ProfileUpdateListener() {
+                @Override
+                public void profileUpdatedCallback(Customer customer) {
+
+                    if (customer != null) {
+
+                        showWeekDialog();
+
+                    } else {
+
+                        finish();
+                        // Unable to fetch profile because of no internet connection.
+                    }
+                }
+            });
+        }
     }
 
     /**

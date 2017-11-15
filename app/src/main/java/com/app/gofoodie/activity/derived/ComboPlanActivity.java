@@ -64,7 +64,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     private void refreshComboList(String search) {
 
         String branchId = getIntent().getStringExtra("branch_id");
-        String url = Network.URL_GET_BRANCH_COMBOS + "13," + branchId;
+        String url = Network.URL_GET_BRANCH_COMBOS + branchId;
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();

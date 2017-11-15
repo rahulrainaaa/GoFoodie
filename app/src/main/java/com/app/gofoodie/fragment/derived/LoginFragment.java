@@ -309,7 +309,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
         getDashboardActivity().getProgressDialog().hide();
-        Toast.makeText(getActivity(), "Network Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {     // Login Response.
 
             loginResponseHandling(rawObject);
@@ -323,7 +322,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     public void networkFailResponse(int requestCode, String message) {
 
         getDashboardActivity().getProgressDialog().hide();
-        Toast.makeText(getActivity(), "Network Fail: " + message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "" + message, Toast.LENGTH_SHORT).show();
 
     }
 

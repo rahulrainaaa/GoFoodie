@@ -41,8 +41,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
-
 public class CartOrderActivity extends BaseAppCompatActivity implements View.OnClickListener, NetworkCallbackListener {
 
     public static final String TAG = "CartOrderActivity";
@@ -419,9 +417,23 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             startActivity(intent);
             finish();
         } else {
-            SweetAlertDialog sad = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE);
-            sad.setTitleText("Failed");
-            sad.setContentText("" + orderResponse.statusMessage);
+
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Failed");
+            alertDialog.setCancelable(false);
+            alertDialog.setMessage("" + orderResponse.statusMessage);
+
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            dialog.dismiss();
+                        }
+                    });
+
+            alertDialog.show();
+
         }
 
     }
