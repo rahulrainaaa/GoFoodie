@@ -70,7 +70,7 @@ public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity impleme
                 Subscriptionplan subscriptionplan = GlobalData.subscriptionplan;
 
                 int days = Integer.parseInt(subscriptionplan.validityDays);
-                String planType = (days > 0) ? "Subscription for " + days + "days" : "Recharge";
+                String planType = (days > 0) ? "Subscription for " + days + " days" : "Recharge";
                 String remarks = "Success: " + planType + " with amount = " + subscriptionplan.payAmount + ", Plan ID = " + subscriptionplan.planId;
 
                 // Profile details.
@@ -80,7 +80,7 @@ public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity impleme
                 jsonRequest.put("wallet_id", customer.profile.walletId);
 
                 // Payment Transaction information.
-                jsonRequest.put("plan_type", planType);
+                jsonRequest.put("plan_type", (days > 0) ? "subscription" : "recharge");
                 jsonRequest.put("pg_transaction_id", telrTrace);
                 jsonRequest.put("pg_response", "success");
                 jsonRequest.put("transaction_response", "success");

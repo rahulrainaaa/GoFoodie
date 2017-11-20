@@ -79,7 +79,7 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
                     Subscriptionplan subscriptionplan = GlobalData.subscriptionplan;
 
                     int days = Integer.parseInt(subscriptionplan.validityDays);
-                    String planType = (days > 0) ? "Subscription for " + days + "days" : "Recharge";
+                    String planType = (days > 0) ? "subscription for " + days + " days" : "recharge";
                     String remarks = "Failed: " + planType + " with amount = " + subscriptionplan.payAmount + ", Plan ID = " + subscriptionplan.planId;
 
                     // Profile details.
@@ -89,7 +89,7 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
                     jsonRequest.put("wallet_id", customer.profile.walletId);
 
                     // Payment Transaction information.
-                    jsonRequest.put("plan_type", planType);
+                    jsonRequest.put("plan_type", (days > 0) ? "subscription" : "recharge");
                     jsonRequest.put("pg_transaction_id", telrTrace);
                     jsonRequest.put("pg_response", "fail");
                     jsonRequest.put("transaction_response", "fail");
@@ -107,8 +107,8 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
                     jsonRequest.put("telr_code", telrCode);
                     jsonRequest.put("telr_message", telrMessage);
                     jsonRequest.put("telr_ca_valid", telrCa_valid);
-                    jsonRequest.put("telr_cardcode", telrCardcode);
-                    jsonRequest.put("telr_cardlast4", telrCardlast4);
+                    jsonRequest.put("telr_cardcode", "");
+                    jsonRequest.put("telr_cardlast4", "");
                     jsonRequest.put("telr_cvv", telrCvv);
                     jsonRequest.put("telr_tranref", telrTranref);
 
@@ -139,7 +139,6 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(this, "Http Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {
             handleResponse(rawObject);
         }
