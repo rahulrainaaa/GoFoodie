@@ -78,7 +78,7 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
         }
 
         try {
-            Picasso.with(mActivity).load(mFeaturedRestaurant.profileIcon).into(holder.imgCombo);
+            Picasso.with(mActivity).load(mFeaturedRestaurant.profileIcon).error(R.drawable.icon_restaurant_default).into(holder.imgCombo);
         } catch (Exception exc) {
             Log.e(TAG, "Picasso Exception while loading restaurant profile image: " + exc.getMessage());
         }

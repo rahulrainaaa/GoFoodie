@@ -84,7 +84,7 @@ public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<Featured
 
         // Load image into imageView. (LazyLoading).
         try {
-            Picasso.with(mActivity).load(data.image).into(holder.imgRestaurant);
+            Picasso.with(mActivity).load(data.image).error(R.drawable.img_default_combo).into(holder.imgRestaurant);
             holder.txtRestaurantName.setText(data.comboName);
         } catch (Exception e) {
             e.printStackTrace();

@@ -117,7 +117,7 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
 
         try {
 
-            Picasso.with(mActivity).load(restaurant.profileIcon.trim()).into(holder.imgIcon);
+            Picasso.with(mActivity).load(restaurant.profileIcon.trim()).error(R.drawable.icon_restaurant_default).into(holder.imgIcon);
             holder.ratingBar.setRating(Float.parseFloat(restaurant.avgRating.trim()));
 
         } catch (Exception exc) {

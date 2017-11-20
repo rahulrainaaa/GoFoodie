@@ -119,7 +119,7 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
 
         try {
 
-            Picasso.with(mActivity).load(shortlisted.profileIcon.trim()).into(holder.imgIcon);
+            Picasso.with(mActivity).load(shortlisted.profileIcon.trim()).error(R.drawable.icon_restaurant_default).into(holder.imgIcon);
             holder.ratingBar.setRating(Float.parseFloat(shortlisted.avgRating.trim()));
 
         } catch (Exception exc) {

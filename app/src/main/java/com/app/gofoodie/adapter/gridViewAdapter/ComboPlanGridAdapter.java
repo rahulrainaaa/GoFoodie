@@ -98,7 +98,7 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
 
         try {
 
-            Picasso.with(mActivity).load(comboplan.image).into(holder.imgCombo);
+            Picasso.with(mActivity).load(comboplan.image).error(R.drawable.img_default_combo).into(holder.imgCombo);
         } catch (Exception exception) {
 
             exception.printStackTrace();
