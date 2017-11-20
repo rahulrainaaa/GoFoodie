@@ -27,6 +27,7 @@ import com.app.gofoodie.model.cart.Description;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.SessionUtils;
+import com.app.gofoodie.utility.VibrationUtil;
 import com.shawnlin.numberpicker.NumberPicker;
 
 import org.json.JSONArray;
@@ -141,6 +142,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
      */
     private void handleViewCartResponse(JSONObject json) {
 
+        VibrationUtil.getInstance().vibrate(getActivity());
         ModelParser parser = new ModelParser();
         CartResponse cartResponse = (CartResponse) parser.getModel(json.toString(), CartResponse.class, null);
         if (cartResponse.statusCode != 200) {
@@ -164,6 +166,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
      */
     private void deleteClicked(View view) {
 
+        VibrationUtil.getInstance().vibrate(getActivity());
         final Cart cart = (Cart) view.getTag();
 
         Snackbar.make(view, "Are you sure ?", Snackbar.LENGTH_LONG).setAction("Remove", new View.OnClickListener() {

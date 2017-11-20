@@ -19,6 +19,7 @@ import com.app.gofoodie.model.comboPlan.ComboPlanResponse;
 import com.app.gofoodie.model.comboPlan.Comboplan;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.app.gofoodie.utility.VibrationUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -118,9 +119,9 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     private void handleAddToCart(JSONObject json) {
 
         try {
-
+            VibrationUtil.getInstance().vibrate(this);
             String statusMessage = json.getString("statusMessage");
-            Toast.makeText(this, "" + statusMessage, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "" + statusMessage, Toast.LENGTH_SHORT).show();
 
         } catch (JSONException jsonExc) {
 

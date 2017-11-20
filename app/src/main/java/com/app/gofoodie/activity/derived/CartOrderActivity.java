@@ -28,6 +28,7 @@ import com.app.gofoodie.model.order.OrderResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.DateUtils;
+import com.app.gofoodie.utility.VibrationUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -163,6 +164,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                 ((CartOrderRecyclerAdapter.ItemHolder) viewHolder).txtDate.setText(date2);
                 ((CartOrderRecyclerAdapter.ItemHolder) target).txtDate.setText(date1);
 
+                VibrationUtil.getInstance().vibrate(CartOrderActivity.this);
                 return true;
             }
 

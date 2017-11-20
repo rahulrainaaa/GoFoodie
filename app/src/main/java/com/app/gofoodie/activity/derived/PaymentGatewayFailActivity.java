@@ -16,6 +16,7 @@ import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.app.gofoodie.utility.VibrationUtil;
 import com.telr.mobile.sdk.activty.WebviewActivity;
 import com.telr.mobile.sdk.entity.response.status.StatusResponse;
 
@@ -31,11 +32,8 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_gateway_fail);
-    }
+        VibrationUtil.getInstance().vibrate(this);
 
-    @Override
-    protected void onStart() {
-        super.onStart();
         Intent intent = getIntent();
         Object object = intent.getParcelableExtra(WebviewActivity.PAYMENT_RESPONSE);
         TextView textView = (TextView) findViewById(R.id.text_payment_result2);
@@ -128,6 +126,7 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
             textView.setText(textView.getText() + " : " + errorMessage);
         }
     }
+
 
     public void closeWindow(View view) {
         this.finish();
