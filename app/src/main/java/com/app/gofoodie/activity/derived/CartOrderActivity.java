@@ -48,8 +48,9 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     private RecyclerView mRecyclerView = null;
     private CartOrderRecyclerAdapter mCartOrderRecyclerAdapter = null;
     private ArrayList<CartOrder> mList = new ArrayList<>();
-    public ArrayList<Cart> cartArrayList = GlobalData.cartArrayList;
+    private ArrayList<Cart> cartArrayList = GlobalData.cartArrayList;
     private Date mStartDate = null;
+    private int mTotalPrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         setContentView(R.layout.activity_cart_order);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
+        mTotalPrice = 0;
         Iterator<Cart> cartIterator = cartArrayList.iterator();
         while (cartIterator.hasNext()) {
 
@@ -64,6 +66,12 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             int qty = Integer.valueOf(cart.quantity.trim());
             for (int i = 0; i < qty; i++) {
 
+                try {
+                    mTotalPrice = mTotalPrice + Integer.parseInt(cart.comboPrice.trim());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    mTotalPrice = -9999999;
+                }
                 mList.add(new CartOrder(cart));
             }
         }
@@ -280,7 +288,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Place Order");
         alertDialog.setCancelable(false);
-        alertDialog.setMessage("Confirm placing order?");
+        alertDialog.setMessage("Confirm placing order?" + ((mTotalPrice < 0) ? "Total Price = ERROR...!" : "Total Price: AED " + mTotalPrice));
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
                 new DialogInterface.OnClickListener() {

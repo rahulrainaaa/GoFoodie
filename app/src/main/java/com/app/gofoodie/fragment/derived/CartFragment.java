@@ -150,7 +150,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
             cartResponse.cart = new ArrayList<Cart>();
         } else {
 
-            mTxtLabel.setText("Total Items: " + cartResponse.cart.size() + ",  Price: AED " + cartResponse.totalPrice.toString());
+            mTxtLabel.setText("Total Items: " + cartResponse.cart.size());// + ",  Price: AED " + cartResponse.totalPrice.toString());
         }
         mCartList = (ArrayList<Cart>) cartResponse.cart;
         mAdapter = new CartListViewAdapter(getActivity(), mCartItemClickListener, R.layout.item_listview_cart, mCartList);
