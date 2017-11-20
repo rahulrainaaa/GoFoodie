@@ -11,9 +11,9 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
-import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
 import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.model.login.Login;
+import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.telr.mobile.sdk.activty.WebviewActivity;
@@ -42,7 +42,7 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
 
         if (object instanceof StatusResponse) {
             StatusResponse status = (StatusResponse) object;
-            textView.setText(textView.getText() + " : " + status.getTrace());
+            textView.setText("Transaction Reference:\n" + status.getTrace());
 
             if (status.getAuth() != null) {
                 String telrTrace = status.getTrace();
@@ -79,8 +79,8 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
                     Subscriptionplan subscriptionplan = GlobalData.subscriptionplan;
 
                     int days = Integer.parseInt(subscriptionplan.validityDays);
-                    String planType = (days > 0) ? "subscription" : "recharge";
-                    String remarks = "" + planType + " for days = " + days + ", Amount = " + subscriptionplan.payAmount + ", Plan ID = " + subscriptionplan.planId;
+                    String planType = (days > 0) ? "Subscription for " + days + "days" : "Recharge";
+                    String remarks = "Failed: " + planType + " with amount = " + subscriptionplan.payAmount + ", Plan ID = " + subscriptionplan.planId;
 
                     // Profile details.
                     jsonRequest.put("login_id", login.getData().getLoginId());

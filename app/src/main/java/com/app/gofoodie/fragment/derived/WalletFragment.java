@@ -66,9 +66,6 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
 
         if (CustomerProfileHandler.profileExist) {
 
-            mTxtWalletAmount.setText("AED " + CustomerProfileHandler.CUSTOMER.profile.amount);
-            mTxtValidUpto.setText("Subscription till: " + CustomerProfileHandler.CUSTOMER.profile.validUpto);
-
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 Date expDate = format.parse(CustomerProfileHandler.CUSTOMER.profile.validUpto);
@@ -94,11 +91,17 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         } else {
 
             Toast.makeText(getActivity(), "Check internet connection", Toast.LENGTH_SHORT).show();
-
         }
 
-
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mTxtWalletAmount.setText("AED " + CustomerProfileHandler.CUSTOMER.profile.amount);
+        mTxtValidUpto.setText("Subscription till: " + CustomerProfileHandler.CUSTOMER.profile.validUpto);
     }
 
     @Override

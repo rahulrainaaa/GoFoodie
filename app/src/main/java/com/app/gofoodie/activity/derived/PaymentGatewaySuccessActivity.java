@@ -25,6 +25,8 @@ import org.json.JSONObject;
 
 public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
+    public static final String TAG = "PaymentGatewaySuccessActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,7 @@ public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity impleme
         Intent intent = getIntent();
         StatusResponse status = (StatusResponse) intent.getParcelableExtra(WebviewActivity.PAYMENT_RESPONSE);
         TextView textView = (TextView) findViewById(R.id.text_payment_result);
-        textView.setText(textView.getText() + " : " + status.getTrace());
+        textView.setText("Transaction Reference:\n" + status.getTrace());
 
         if (status.getAuth() != null) {
             String telrTrace = status.getTrace();
@@ -68,8 +70,8 @@ public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity impleme
                 Subscriptionplan subscriptionplan = GlobalData.subscriptionplan;
 
                 int days = Integer.parseInt(subscriptionplan.validityDays);
-                String planType = (days > 0) ? "subscription" : "recharge";
-                String remarks = "" + planType + " for days = " + days + ", Amount = " + subscriptionplan.payAmount + ", Plan ID = " + subscriptionplan.planId;
+                String planType = (days > 0) ? "Subscription for " + days + "days" : "Recharge";
+                String remarks = "Success: " + planType + " with amount = " + subscriptionplan.payAmount + ", Plan ID = " + subscriptionplan.planId;
 
                 // Profile details.
                 jsonRequest.put("login_id", login.getData().getLoginId());
@@ -148,7 +150,7 @@ public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity impleme
     private void handleResponse(JSONObject json) {
 
         CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
-        customerProfileHandler.refresh( this, null);
+        customerProfileHandler.refresh(this, null);
         try {
 
             int statusCode = json.getInt("statusCode");

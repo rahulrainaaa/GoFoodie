@@ -283,7 +283,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         alertDialog.setMessage("Confirm placing order?");
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
-
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
