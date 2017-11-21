@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
@@ -49,7 +50,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
         if (SessionUtils.getInstance().isSessionExist()) {
 
             CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
-            customerProfileHandler.refresh( null, this);
+            customerProfileHandler.refresh(null, this);
         }
     }
 
@@ -88,8 +89,22 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
     @Override
     public void profileUpdatedCallback(Customer customer) {
 
-        startActivity(new Intent(this, DashboardActivity.class));
-//        startActivity(new Intent(this, InvoiceActivity.class));
-        finish();
+        if (customer.statusCode == 401) {
+
+            SessionUtils.getInstance().removeSession(this);
+            Toast.makeText(this, "Session is expired now", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, DashboardActivity.class));
+            finish();
+
+        } else if (customer.statusCode == 200) {
+
+            startActivity(new Intent(this, DashboardActivity.class));
+            finish();
+
+        } else {
+
+            Toast.makeText(this, "" + customer.statusMessage, Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
