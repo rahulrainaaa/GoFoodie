@@ -1,6 +1,7 @@
 package com.app.gofoodie.adapter.gridViewAdapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.activity.derived.RestaurantBranchProfileActivity;
 import com.app.gofoodie.model.featured.FeaturedRestaurant;
 import com.squareup.picasso.Picasso;
 
@@ -22,7 +24,7 @@ import java.util.ArrayList;
  * @class FeaturedRestaurantGridAdapter
  * @desc Adapter class for showing Featured Restaurant Grid View on Dashboard Home Fragment UI.
  */
-public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaurant> {
+public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaurant> implements View.OnClickListener {
 
     public static final String TAG = "ComboPlanGridAdapter";
 
@@ -72,12 +74,14 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
             holder.imgNonVeg = (ImageView) view.findViewById(R.id.img_nonveg);
             holder.txtComboName = (TextView) view.findViewById(R.id.restaurant_name);
             view.setTag(holder);
+            holder.imgCombo.setOnClickListener(this);
         } else {
 
             holder = (Holder) view.getTag();
         }
 
         try {
+            holder.imgCombo.setTag(mFeaturedRestaurant.branchId);
             Picasso.with(mActivity).load(mFeaturedRestaurant.profileIcon).error(R.drawable.icon_restaurant_default).into(holder.imgCombo);
         } catch (Exception exc) {
             Log.e(TAG, "Picasso Exception while loading restaurant profile image: " + exc.getMessage());
@@ -103,4 +107,18 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
 
         return view;
     }
+
+
+    @Override
+    public void onClick(View view) {
+
+        String branchId = (String) view.getTag();
+        Intent intent = new Intent(mActivity, RestaurantBranchProfileActivity.class);
+        intent.putExtra("branch_id", "" + branchId);
+        mActivity.startActivity(intent);
+
+
+    }
+
+
 }
