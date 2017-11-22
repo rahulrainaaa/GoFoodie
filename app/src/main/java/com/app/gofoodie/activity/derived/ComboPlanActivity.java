@@ -3,9 +3,11 @@ package com.app.gofoodie.activity.derived;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -48,6 +50,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     private ComboPlanGridAdapter mAdapter = null;
     private ArrayList<Comboplan> mComboPlanList = null;
     private String mPriceFilter = "";
+    private String mComboSearchSubString = "";
 
     /**
      * {@link BaseAppCompatActivity} Activity callback method(s).
@@ -78,10 +81,44 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
             filterMenu();
         } else if (id == R.id.menu_search) {
 
-
+            searchString();
         }
 
         return true;
+    }
+
+    /**
+     * Method to Combo plans with given substring as input.
+     */
+    private void searchString() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Search Combo");
+
+        final EditText input = new EditText(this);
+        builder.setIcon(R.drawable.icon_search);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setHint("Search...");
+        builder.setView(input);
+
+        builder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mComboSearchSubString = "&keyword=" + input.getText().toString();
+                        refreshComboList();
+                        dialog.dismiss();
+                    }
+                });
+        builder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builder.show();
     }
 
     /**
