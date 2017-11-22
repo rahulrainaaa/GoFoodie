@@ -105,19 +105,32 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         mComboSearchSubString = "&keyword=" + input.getText().toString();
                         refreshComboList();
                         dialog.dismiss();
                     }
                 });
+
         builder.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         dialog.dismiss();
                     }
                 });
 
+        builder.setNeutralButton("Reset",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+
+                        mComboSearchSubString = "";
+                        refreshComboList();
+                        dialog.dismiss();
+                    }
+                });
         builder.show();
     }
 
