@@ -232,10 +232,20 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
 
         ModelParser parser = new ModelParser();
         ComboPlanResponse comboPlanResponse = (ComboPlanResponse) parser.getModel(json.toString(), ComboPlanResponse.class, null);
-        mComboPlanList = (ArrayList<Comboplan>) comboPlanResponse.comboplan;
 
-        mAdapter = new ComboPlanGridAdapter(this, this, R.layout.item_gridview_combo_plan, mComboPlanList);
-        mComboGridView.setAdapter(mAdapter);
+        if (comboPlanResponse.statusCode != 200) {
+
+            Toast.makeText(this, "" + comboPlanResponse.statusMessage, Toast.LENGTH_SHORT).show();
+            mComboPlanList.clear();
+            mAdapter.notifyDataSetChanged();
+            return;
+
+        } else {
+
+            mComboPlanList = (ArrayList<Comboplan>) comboPlanResponse.comboplan;
+            mAdapter = new ComboPlanGridAdapter(this, this, R.layout.item_gridview_combo_plan, mComboPlanList);
+            mComboGridView.setAdapter(mAdapter);
+        }
 
     }
 
