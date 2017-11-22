@@ -17,6 +17,7 @@
 
     <!-- Menu -->
     <string name="menu_search">Search</string>
+    <string name="menu_filter">Filter</string>
     <string name="menu_pick_date">Pick Date</string>
     <string name="menu_long_vacation">Long Term Vacation</string>
     <string name="menu_short_vacation">Short Term Vacation</string>

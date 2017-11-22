@@ -3,6 +3,8 @@ package com.app.gofoodie.activity.derived;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.RatingBar;
@@ -20,6 +22,7 @@ import com.app.gofoodie.model.comboPlan.Comboplan;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.VibrationUtil;
+import com.appyvet.rangebar.RangeBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,6 +47,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     private GridView mComboGridView = null;
     private ComboPlanGridAdapter mAdapter = null;
     private ArrayList<Comboplan> mComboPlanList = null;
+    private String mPriceFilter = "";
 
     /**
      * {@link BaseAppCompatActivity} Activity callback method(s).
@@ -54,18 +58,105 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
         setContentView(R.layout.activity_combo_plan);
         mComboGridView = (GridView) findViewById(R.id.combo_plan_grid_layout);
 
-        refreshComboList(null);
+        refreshComboList();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_combo_plans, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.menu_filter) {
+
+            filterMenu();
+        } else if (id == R.id.menu_search) {
+
+
+        }
+
+        return true;
     }
 
     /**
-     * @param search search sub string of combo name.
+     * Method show AlertDialog to prompt for filter parameters.
+     */
+    private void filterMenu() {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Filter");
+        final View view = (View) getLayoutInflater().inflate(R.layout.layout_filter, null);
+
+        final TextView txtMinRange = (TextView) view.findViewById(R.id.txt_min_range);
+        final TextView txtMaxRange = (TextView) view.findViewById(R.id.txt_max_range);
+        txtMinRange.setText("Min Price");
+        txtMaxRange.setText("Max Price");
+
+        final RangeBar priceRangeBar = (RangeBar) view.findViewById(R.id.price_rangebar);
+
+        priceRangeBar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
+            @Override
+            public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex, int rightPinIndex, String leftPinValue, String rightPinValue) {
+
+                txtMinRange.setText("Min Price: " + leftPinValue);
+                txtMaxRange.setText("Max Price: " + rightPinValue);
+
+            }
+        });
+
+        alertDialog.setView(view);
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Filter",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        mPriceFilter = "&minPrice=" + priceRangeBar.getLeftPinValue() + "&maxPrice=" + priceRangeBar.getRightPinValue();
+                        refreshComboList();
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Reset",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        mPriceFilter = "";
+                        refreshComboList();
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    /**
+     * Method to search combo with keyword.
+     */
+    private void searchKeyword() {
+
+    }
+
+    /**
      * @desc Method to http request to get all the combo plans.
      * @method refreshComboList
      */
-    private void refreshComboList(String search) {
+    private void refreshComboList() {
 
         String branchId = getIntent().getStringExtra("branch_id");
-        String url = Network.URL_GET_BRANCH_COMBOS + branchId;
+        String url = Network.URL_GET_BRANCH_COMBOS + branchId + mPriceFilter.trim();
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
