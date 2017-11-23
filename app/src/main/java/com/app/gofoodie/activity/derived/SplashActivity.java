@@ -1,5 +1,7 @@
 package com.app.gofoodie.activity.derived;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -92,7 +94,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
         if (customer.statusCode == 401) {
 
             SessionUtils.getInstance().removeSession(this);
-            Toast.makeText(this, "Session is expired now", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Session is expired", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, DashboardActivity.class));
             finish();
 
@@ -101,6 +103,22 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
             startActivity(new Intent(this, DashboardActivity.class));
             finish();
 
+        } else if (customer.statusCode == 404) {
+
+            Toast.makeText(this, "" + customer.statusMessage, Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Error");
+            builder.setIcon(R.drawable.icon_error_alert);
+            builder.setMessage("Unexpected error occurred in server.\nPlease try later.");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    dialogInterface.dismiss();
+                    finish();
+                }
+            });
+            builder.show();
         } else {
 
             Toast.makeText(this, "" + customer.statusMessage, Toast.LENGTH_SHORT).show();

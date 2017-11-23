@@ -71,7 +71,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                     mTotalPrice = mTotalPrice + Integer.parseInt(cart.comboPrice.trim());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    mTotalPrice = -9999999;
+                    mTotalPrice = -9999999;     // make price -ve if price not parsed. -ve price means wrong price.
                 }
                 mList.add(new CartOrder(cart));
             }

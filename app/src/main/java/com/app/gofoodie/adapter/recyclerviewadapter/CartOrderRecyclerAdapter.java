@@ -23,6 +23,7 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
      * @desc {@link RecyclerView.ViewHolder} holder static class for Recycler View items.
      */
     public static class ItemHolder extends RecyclerView.ViewHolder {
+
         public CardView cv;
         public LinearLayout layoutVeg;
         public LinearLayout layoutNonveg;
