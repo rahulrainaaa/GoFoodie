@@ -91,10 +91,26 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
     @Override
     public void profileUpdatedCallback(Customer customer) {
 
-        if (customer.statusCode == 401) {
+        if (customer == null) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Error");
+            builder.setIcon(R.drawable.icon_error_alert);
+            builder.setMessage("Failed to connect to server.\nPlease try later.");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    dialogInterface.dismiss();
+                    finish();
+                }
+            });
+            builder.show();
+
+        } else if (customer.statusCode == 401 || customer.statusCode == 403) {
 
             SessionUtils.getInstance().removeSession(this);
-            Toast.makeText(this, "Session is expired", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + customer.statusMessage + "\nPlease login again.", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, DashboardActivity.class));
             finish();
 

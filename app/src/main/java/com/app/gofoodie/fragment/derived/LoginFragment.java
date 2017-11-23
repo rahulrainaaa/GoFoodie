@@ -1,5 +1,7 @@
 package com.app.gofoodie.fragment.derived;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -354,6 +356,22 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
                     registerNewSocialUser(mNewSocialEmail);
                 }
+                break;
+            case 403:
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Alert");
+                builder.setMessage("" + loginModel.getStatusMessage());
+                builder.setIcon(R.drawable.icon_error_alert);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        dialogInterface.dismiss();
+                    }
+                }).show();
+                Toast.makeText(getActivity(), "" + loginModel.getStatusMessage(), Toast.LENGTH_SHORT).show();
+
                 break;
         }
     }
