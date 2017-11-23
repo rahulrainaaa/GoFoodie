@@ -30,7 +30,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
     /**
      * Class private data member(s).
      */
-    private MaterialEditText mEtName, mEtMobile, mEtAltMobile, mAltEmail, mEtAddress, mEtLocation;
+    private MaterialEditText mEtName, mEtMobile, mEtAltMobile, mEtAltEmail, mEtAddress, mEtLocation;
     private Button mButton = null;
 
     /**
@@ -42,7 +42,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
         setContentView(R.layout.activity_update_profile);
 
         mEtName = (MaterialEditText) findViewById(R.id.et_name);
-        mAltEmail = (MaterialEditText) findViewById(R.id.et_alt_email);
+        mEtAltEmail = (MaterialEditText) findViewById(R.id.et_alt_email);
         mEtMobile = (MaterialEditText) findViewById(R.id.et_mobile);
         mEtAltMobile = (MaterialEditText) findViewById(R.id.et_alt_mobile);
         mEtAddress = (MaterialEditText) findViewById(R.id.et_address);
@@ -54,7 +54,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             mEtName.setText("" + customer.profile.name);
             mEtMobile.setText("" + customer.profile.mobile1);
             mEtAltMobile.setText("" + customer.profile.mobile2);
-            mAltEmail.setText("" + customer.profile.email2);
+            mEtAltEmail.setText("" + customer.profile.email2);
             mEtAddress.setText("" + customer.profile.address);
 
             mButton = (Button) findViewById(R.id.btn_update_profile);
@@ -63,21 +63,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
         } catch (Exception e) {
 
-            CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
-            customerProfileHandler.refresh(this, new ProfileUpdateListener() {
-                @Override
-                public void profileUpdatedCallback(Customer customer) {
-
-                    if (customer != null) {
-
-                        startActivity(new Intent(UpdateProfileActivity.this, UpdateProfileActivity.class));
-                        finish();
-                    } else {
-
-                        // No internet connection.
-                    }
-                }
-            });
+            Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
 
         }
@@ -130,15 +116,15 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             jsonRequest.put("customer_id", customer.profile.customerId);
             jsonRequest.put("token", getSessionData().getToken());
             jsonRequest.put("login_id", getSessionData().getLoginId());
-            jsonRequest.put("name", customer.profile.name);
-            jsonRequest.put("address", customer.profile.address);
+            jsonRequest.put("name", mEtName.getText().toString().trim());
+            jsonRequest.put("address", mEtAddress.getText().toString().trim());
             jsonRequest.put("location", LocationUtils.getInstance().getLocationId(this, ""));
             jsonRequest.put("geo_lat", "");
             jsonRequest.put("geo_lng", "");
-            jsonRequest.put("mobile", customer.profile.mobile1);
-            jsonRequest.put("mobile2", customer.profile.mobile2);
+            jsonRequest.put("mobile", mEtMobile.getText().toString().trim());
+            jsonRequest.put("mobile2", mEtAltMobile.getText().toString().trim());
             jsonRequest.put("email", customer.profile.email);
-            jsonRequest.put("email2", customer.profile.email2);
+            jsonRequest.put("email2", mEtAltEmail.getText().toString().trim());
 
             NetworkHandler networkHandler = new NetworkHandler();
             networkHandler.httpCreate(1, this, this, jsonRequest, Network.URL_UPDATE_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
@@ -190,8 +176,16 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
             if (statusCode == 200) {
 
-                Toast.makeText(this, "Profile Updated Successfully.", Toast.LENGTH_SHORT).show();
-                finish();
+                CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
+                customerProfileHandler.refresh(this, new ProfileUpdateListener() {
+                    @Override
+                    public void profileUpdatedCallback(Customer customer) {
+
+                        Toast.makeText(getApplicationContext(), "Profile Updated Successfully.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+
             } else {
 
                 Toast.makeText(this, "Update failed. " + statusMessage, Toast.LENGTH_SHORT).show();
@@ -244,14 +238,14 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             mEtAltMobile.setError(null);
         }
 
-        if (mAltEmail.getText().toString().trim().isEmpty()) {
+        if (mEtAltEmail.getText().toString().trim().isEmpty()) {
 
             flagValidation = false;
-            mAltEmail.setError(getString(R.string.cannot_be_empty));
+            mEtAltEmail.setError(getString(R.string.cannot_be_empty));
         } else {
 
             flagValidation = flagValidation && true;
-            mAltEmail.setError(null);
+            mEtAltEmail.setError(null);
         }
 
         if (mEtAddress.getText().toString().trim().isEmpty()) {

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.derived.ShortlistedRestaurantsActivity;
@@ -25,26 +26,24 @@ import com.app.gofoodie.utility.SessionUtils;
  */
 public class ProfileFragment extends BaseFragment implements View.OnClickListener {
 
+    public static final String TAG = "ProfileFragment";
+
+    private TextView mTxtName = null;
+    private TextView mTxtMobile = null;
+    private TextView mTxtEmail = null;
+
     /**
      * {@link BaseFragment} callback methods.
      */
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.frag_profile, container, false);
 
-        try {
-
-            ((TextView) view.findViewById(R.id.txt_customer_name)).setText("" + CustomerProfileHandler.CUSTOMER.profile.name);
-            ((TextView) view.findViewById(R.id.txt_email)).setText("" + CustomerProfileHandler.CUSTOMER.profile.email);
-            ((TextView) view.findViewById(R.id.btn_phone)).setText("" + CustomerProfileHandler.CUSTOMER.profile.mobile1);
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
+        mTxtName = (TextView) view.findViewById(R.id.txt_customer_name);
+        mTxtMobile = (TextView) view.findViewById(R.id.txt_email);
+        mTxtEmail = (TextView) view.findViewById(R.id.btn_phone);
 
         view.findViewById(R.id.btn_my_profile).setOnClickListener(this);
         view.findViewById(R.id.btn_my_orders).setOnClickListener(this);
@@ -60,6 +59,22 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        try {
+
+            mTxtName.setText("" + CustomerProfileHandler.CUSTOMER.profile.name.trim());
+            mTxtEmail.setText("" + CustomerProfileHandler.CUSTOMER.profile.email.trim());
+            mTxtMobile.setText("" + CustomerProfileHandler.CUSTOMER.profile.mobile1.trim());
+
+        } catch (Exception e) {
+
+            Toast.makeText(getActivity(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void fragQuitCallback() {
