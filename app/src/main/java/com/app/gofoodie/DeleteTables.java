@@ -10,7 +10,7 @@ public class DeleteTables {
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_Admin` (
-  `id` int(64) NOT NULL auto_increment,
+  `id` int(64) NOT NULL ,
   `name` varchar(100) default NULL,
   `email` varchar(100) default NULL,
   `password` varchar(255) default NULL,
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_Admin` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_CartItem` (
-  `cart_item_id` int(11) NOT NULL auto_increment,
+  `cart_item_id` int(11) NOT NULL ,
   `customer_id` int(11) default NULL,
   `branch_id` int(11) default NULL,
   `combo_id` int(11) default NULL,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_CartItem` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_Category` (
-  `cate_id` int(11) NOT NULL auto_increment,
+  `cate_id` int(11) NOT NULL ,
   `cate_name` varchar(50) NOT NULL,
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_Category` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_City` (
-  `city_id` int(64) NOT NULL auto_increment,
+  `city_id` int(64) NOT NULL ,
   `country_id` int(64) default NULL,
   `state_id` int(64) default NULL,
   `city_name` varchar(100) default NULL,
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_City` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_ComboOrders` (
-  `order_id` int(64) NOT NULL auto_increment,
+  `order_id` int(64) NOT NULL ,
   `co_id` varchar(1000) NOT NULL,
   `order_set_id` int(11) NOT NULL,
   `combo_id` int(64) default NULL,
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_ComboOrders` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_ComboPlan` (
-  `combo_id` int(64) NOT NULL auto_increment,
+  `combo_id` int(64) NOT NULL ,
   `cb_id` varchar(100) NOT NULL,
   `login_id` int(64) default NULL,
   `restaurant_id` int(64) default NULL,
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_ComboPlan` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_ComboPlanItems` (
-  `combo_item_id` int(64) NOT NULL auto_increment,
+  `combo_item_id` int(64) NOT NULL ,
   `combo_id` int(64) default NULL,
   `name` varchar(50) default NULL,
   `options` varchar(1000) default NULL,
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_ComboPlanItems` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_Country` (
-  `id` int(64) NOT NULL auto_increment,
+  `id` int(64) NOT NULL ,
   `country_id` int(64) default NULL,
   `country_name` varchar(50) default NULL,
   `version` int(11) NOT NULL default '1',
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_Country` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_Cuisine` (
-  `cuisine_id` int(11) NOT NULL auto_increment,
+  `cuisine_id` int(11) NOT NULL ,
   `cuisine_name` varchar(50) default NULL,
   `cate_id` int(11) default NULL,
   `version` int(11) NOT NULL default '1',
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_Cuisine` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_CustomerDetail` (
-  `customer_id` int(64) NOT NULL auto_increment,
+  `customer_id` int(64) NOT NULL ,
   `login_id` int(64) default NULL,
   `name` varchar(100) default NULL,
   `address` varchar(100) default NULL,
@@ -217,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_CustomerDetail` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_CustomerShortlistedBranches` (
-  `shortlist_id` int(11) NOT NULL auto_increment,
+  `shortlist_id` int(11) NOT NULL ,
   `customer_id` int(11) default NULL,
   `branch_id` int(11) default NULL,
   `login_id` int(11) default NULL,
@@ -235,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_CustomerShortlistedBranches` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_Items` (
-  `item_id` int(11) NOT NULL auto_increment,
+  `item_id` int(11) NOT NULL ,
   `restaurant_id` int(11) NOT NULL,
   `item_name` varchar(100) NOT NULL,
   `item_options` varchar(255) NOT NULL,
@@ -254,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_Items` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_Location` (
-  `area_id` int(64) NOT NULL auto_increment,
+  `area_id` int(64) NOT NULL ,
   `city_id` int(64) default NULL,
   `zone_id` int(11) NOT NULL,
   `area_name` varchar(100) default NULL,
@@ -268,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_Location` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_Login` (
-  `login_id` int(64) NOT NULL auto_increment,
+  `login_id` int(64) NOT NULL ,
   `username` varchar(50) default NULL,
   `email` varchar(50) default NULL,
   `phone` varchar(50) default NULL,
@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_Login` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_OrderSet` (
-  `order_set_id` int(11) NOT NULL auto_increment,
+  `order_set_id` int(11) NOT NULL ,
   `customer_id` int(11) default NULL,
   `order_count` int(11) default NULL,
   `start_date` varchar(20) default NULL,
@@ -306,7 +306,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_OrderSet` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_PaymentTransactions` (
-  `transaction_id` int(64) NOT NULL auto_increment,
+  `transaction_id` int(64) NOT NULL ,
   `wallet_id` int(64) default NULL,
   `pg_transaction_id` varchar(100) default NULL,
   `pg_response` varchar(100) default NULL,
@@ -326,7 +326,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_PaymentTransactions` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_RechargePlan` (
-  `plan_id` int(64) NOT NULL auto_increment,
+  `plan_id` int(64) NOT NULL ,
   `name` varchar(100) default NULL,
   `description` longtext,
   `image` varchar(50) NOT NULL,
@@ -348,7 +348,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_RechargePlan` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_RestaurantBranchCategories` (
-  `branch_category_id` int(11) NOT NULL auto_increment,
+  `branch_category_id` int(11) NOT NULL ,
   `branch_id` int(11) default NULL,
   `cate_id` int(11) default NULL,
   `version` int(11) NOT NULL default '1',
@@ -362,7 +362,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_RestaurantBranchCategories` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_RestaurantBranchLocation` (
-  `branch_id` int(64) NOT NULL auto_increment,
+  `branch_id` int(64) NOT NULL ,
   `location_id` int(64) default NULL COMMENT 'area ids from locations table',
   `restaurant_id` int(64) default NULL,
   `branch_name` varchar(100) default NULL,
@@ -386,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_RestaurantBranchLocation` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_RestaurantDetail` (
-  `restaurant_id` int(64) NOT NULL auto_increment,
+  `restaurant_id` int(64) NOT NULL ,
   `rs_id` varchar(1000) NOT NULL COMMENT 'Restaurant Unique Id',
   `login_id` int(64) default NULL,
   `name` varchar(100) default NULL,
@@ -419,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_RestaurantDetail` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_RestaurantReviews` (
-  `id` int(64) NOT NULL auto_increment,
+  `id` int(64) NOT NULL ,
   `customer_id` int(64) default NULL,
   `restaurant_id` int(64) default NULL,
   `branch_id` int(64) default NULL,
@@ -438,7 +438,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_RestaurantReviews` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_RestaurantType` (
-  `restro_type_id` int(11) NOT NULL auto_increment,
+  `restro_type_id` int(11) NOT NULL ,
   `restro_type` varchar(50) NOT NULL,
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL
@@ -449,7 +449,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_RestaurantType` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_Session` (
-  `id` int(64) NOT NULL auto_increment,
+  `id` int(64) NOT NULL ,
   `login_id` int(64) default NULL,
   `token` varchar(100) default NULL,
   `login_date` varchar(100) default NULL,
@@ -466,7 +466,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_Session` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_SimpleRecharge` (
-  `recharge_id` int(11) NOT NULL auto_increment,
+  `recharge_id` int(11) NOT NULL ,
   `amount` int(11) NOT NULL,
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL
@@ -481,7 +481,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_SimpleRecharge` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_SubscribedPlans` (
-  `subscription_id` int(64) NOT NULL auto_increment,
+  `subscription_id` int(64) NOT NULL ,
   `plan_id` int(64) default NULL,
   `transaction_id` int(64) default NULL,
   `customer_id` int(64) default NULL,
@@ -499,7 +499,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_SubscribedPlans` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_TelrPayment` (
-  `telr_id` int(11) NOT NULL auto_increment,
+  `telr_id` int(11) NOT NULL ,
   `transaction_id` int(11) default NULL,
   `telr_trace` varchar(50) default NULL,
   `telr_status` varchar(50) default NULL,
@@ -527,7 +527,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_TelrPayment` (
 
 
 CREATE TABLE IF NOT EXISTS `log_delete_Vacation` (
-  `vacation_id` int(11) NOT NULL auto_increment,
+  `vacation_id` int(11) NOT NULL ,
   `customer_id` int(11) default NULL,
   `order_set_id` int(11) default NULL,
   `from_date` varchar(20) default NULL,
@@ -539,134 +539,6 @@ CREATE TABLE IF NOT EXISTS `log_delete_Vacation` (
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
