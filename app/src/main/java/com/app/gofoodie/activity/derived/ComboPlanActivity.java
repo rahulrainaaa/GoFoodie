@@ -249,8 +249,11 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
         if (comboPlanResponse.statusCode != 200) {
 
             Toast.makeText(this, "" + comboPlanResponse.statusMessage, Toast.LENGTH_SHORT).show();
-            mComboPlanList.clear();
-            mAdapter.notifyDataSetChanged();
+
+            if (mComboPlanList != null) {
+                mComboPlanList.clear();
+                mAdapter.notifyDataSetChanged();
+            }
             return;
 
         } else {
