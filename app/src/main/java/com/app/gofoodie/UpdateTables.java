@@ -546,6 +546,49 @@ CREATE TABLE IF NOT EXISTS `log_update_Vacation` (
 
 
 
+CREATE TABLE IF NOT EXISTS `log_update_Wallet` (
+  `wallet_id` int(64) NOT NULL ,
+  `login_id` int(64) default NULL,
+  `amount` decimal(10,3) default NULL,
+  `valid_upto` varchar(20) NOT NULL COMMENT 'Date of Expiry (YYYYMMDD)',
+  `wl_id` varchar(100) NOT NULL,
+  `admin_status` enum('Due','Paid') NOT NULL default 'Due',
+  `version` int(11) NOT NULL default '1',
+  `meta_data` varchar(200) default NULL
+);
+
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS `log_update_WalletTransactions` (
+  `wallet_transaction_id` int(64) NOT NULL ,
+  `wallet_id` int(64) default NULL,
+  `invoice_id` varchar(100) NOT NULL,
+  `datetime` varchar(100) default NULL,
+  `remarks` varchar(1000) default NULL,
+  `amount` decimal(10,3) default NULL,
+  `type` enum('debit','credit','admin') default 'credit',
+  `version` int(11) NOT NULL default '1',
+  `meta_data` varchar(200) default NULL
+);
+
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS `log_update_Zone` (
+  `zone_id` int(11) NOT NULL ,
+  `zone_name` varchar(100) NOT NULL,
+  `version` int(11) NOT NULL default '1',
+  `meta_data` varchar(200) default NULL
+);
+
+
+
+
 
 
 

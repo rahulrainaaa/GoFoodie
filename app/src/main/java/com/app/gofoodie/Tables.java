@@ -589,14 +589,6 @@ CREATE TABLE IF NOT EXISTS `TelrPayment` (
 
 
 
-
-
-
-
-
-
-
-
 CREATE TABLE IF NOT EXISTS `Vacation` (
   `vacation_id` int(11) NOT NULL auto_increment,
   `customer_id` int(11) default NULL,
@@ -620,15 +612,51 @@ CREATE TABLE IF NOT EXISTS `Vacation` (
 
 
 
+CREATE TABLE IF NOT EXISTS `Wallet` (
+  `wallet_id` int(64) NOT NULL auto_increment,
+  `login_id` int(64) default NULL,
+  `amount` decimal(10,3) default NULL,
+  `valid_upto` varchar(20) NOT NULL COMMENT 'Date of Expiry (YYYYMMDD)',
+  `wl_id` varchar(100) NOT NULL,
+  `admin_status` enum('Due','Paid') NOT NULL default 'Due',
+  `version` int(11) NOT NULL default '1',
+  `meta_data` varchar(200) default NULL,
+  PRIMARY KEY  (`wallet_id`),
+  KEY `login_id` (`login_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
 
 
 
 
 
 
+CREATE TABLE IF NOT EXISTS `WalletTransactions` (
+  `wallet_transaction_id` int(64) NOT NULL auto_increment,
+  `wallet_id` int(64) default NULL,
+  `invoice_id` varchar(100) NOT NULL,
+  `datetime` varchar(100) default NULL,
+  `remarks` varchar(1000) default NULL,
+  `amount` decimal(10,3) default NULL,
+  `type` enum('debit','credit','admin') default 'credit',
+  `version` int(11) NOT NULL default '1',
+  `meta_data` varchar(200) default NULL,
+  PRIMARY KEY  (`wallet_transaction_id`),
+  KEY `wallet_id` (`wallet_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=157 ;
 
 
 
+
+
+
+CREATE TABLE IF NOT EXISTS `Zone` (
+  `zone_id` int(11) NOT NULL auto_increment,
+  `zone_name` varchar(100) NOT NULL,
+  `version` int(11) NOT NULL default '1',
+  `meta_data` varchar(200) default NULL,
+  PRIMARY KEY  (`zone_id`),
+  UNIQUE KEY `zone_name` (`zone_name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 
 
