@@ -334,6 +334,39 @@ TRUNCATE TABLE log_delete_Zone                        ;
 
 
 
+DROP TABLE Admin                       ;
+DROP TABLE CartItem                    ;
+DROP TABLE Category                    ;
+DROP TABLE City                        ;
+DROP TABLE ComboOrders                 ;
+DROP TABLE ComboPlan                   ;
+DROP TABLE ComboPlanItems              ;
+DROP TABLE Country                     ;
+DROP TABLE Cuisine                     ;
+DROP TABLE CustomerDetail              ;
+DROP TABLE CustomerShortlistedBranches ;
+DROP TABLE Items                       ;
+DROP TABLE Location                    ;
+DROP TABLE Login                       ;
+DROP TABLE OrderSet                    ;
+DROP TABLE PaymentTransactions         ;
+DROP TABLE RechargePlan                ;
+DROP TABLE RestaurantBranchCategories  ;
+DROP TABLE RestaurantBranchLocation    ;
+DROP TABLE RestaurantDetail            ;
+DROP TABLE RestaurantReviews           ;
+DROP TABLE RestaurantType              ;
+DROP TABLE Session                     ;
+DROP TABLE SimpleRecharge              ;
+DROP TABLE SubscribedPlans             ;
+DROP TABLE TelrPayment                 ;
+DROP TABLE Vacation                    ;
+DROP TABLE Wallet                      ;
+DROP TABLE WalletTransactions          ;
+DROP TABLE Zone                        ;
+
+
+
 
 
 

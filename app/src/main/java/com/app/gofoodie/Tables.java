@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `Admin` (
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+);
 
 
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `CartItem` (
   KEY `customer_id` (`customer_id`),
   KEY `branch_id` (`branch_id`),
   KEY `combo_id` (`combo_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=240 ;
+);
 
 
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `Category` (
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`cate_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ;
 
 
 
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `City` (
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`city_id`),
   KEY `country_id` (`country_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+);
 
 
 
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `ComboOrders` (
   KEY `customer_id` (`customer_id`),
   KEY `combo_id` (`combo_id`),
   KEY `order_set_id` (`order_set_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=506 ;
+) ;
 
 
 
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `ComboPlan` (
   KEY `login_id` (`login_id`),
   KEY `restaurant_id` (`restaurant_id`),
   KEY `cuisine_id` (`cuisine_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=75 ;
+);
 
 
 
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `ComboPlanItems` (
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`combo_item_id`),
   KEY `combo_id` (`combo_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=149 ;
+);
 
 
 
@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `Country` (
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+);
 
 
 
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `Cuisine` (
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`cuisine_id`),
   KEY `cate_id` (`cate_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+);
 
 
 
@@ -233,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `CustomerDetail` (
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`customer_id`),
   KEY `login_id` (`login_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=110 ;
+);
 
 
 
@@ -253,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `CustomerShortlistedBranches` (
   KEY `customer_id` (`customer_id`),
   KEY `branch_id` (`branch_id`),
   KEY `login_id` (`login_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=171 ;
+);
 
 
 
@@ -277,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `Items` (
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`item_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+);
 
 
 
@@ -296,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `Location` (
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`area_id`),
   KEY `city_id` (`city_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+);
 
 
 
@@ -317,7 +317,7 @@ CREATE TABLE IF NOT EXISTS `Login` (
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`login_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=162 ;
+) ;
 
 
 
@@ -337,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `OrderSet` (
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`order_set_id`),
   KEY `customer_id` (`customer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
+) ;
 
 
 
@@ -358,7 +358,7 @@ CREATE TABLE IF NOT EXISTS `PaymentTransactions` (
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`transaction_id`),
   KEY `wallet_id` (`wallet_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=97 ;
+);
 
 
 
@@ -379,7 +379,7 @@ CREATE TABLE IF NOT EXISTS `RechargePlan` (
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`plan_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+);
 
 
 
@@ -398,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `RestaurantBranchCategories` (
   PRIMARY KEY  (`branch_category_id`),
   KEY `branch_id` (`branch_id`),
   KEY `cate_id` (`cate_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=230 ;
+);
 
 
 
@@ -426,7 +426,7 @@ CREATE TABLE IF NOT EXISTS `RestaurantBranchLocation` (
   PRIMARY KEY  (`branch_id`),
   KEY `restaurant_id` (`restaurant_id`),
   KEY `location_id` (`location_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+);
 
 
 
@@ -435,7 +435,7 @@ CREATE TABLE IF NOT EXISTS `RestaurantBranchLocation` (
 
 CREATE TABLE IF NOT EXISTS `RestaurantDetail` (
   `restaurant_id` int(64) NOT NULL auto_increment,
-  `rs_id` varchar(1000) NOT NULL COMMENT 'Restaurant Unique Id',
+  `rs_id` varchar(760) NOT NULL COMMENT 'Restaurant Unique Id',
   `login_id` int(64) default NULL,
   `name` varchar(100) default NULL,
   `about_us` longtext,
@@ -459,7 +459,7 @@ CREATE TABLE IF NOT EXISTS `RestaurantDetail` (
   PRIMARY KEY  (`restaurant_id`),
   UNIQUE KEY `Rs_id` (`rs_id`),
   KEY `login_id` (`login_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
+);
 
 
 
@@ -488,7 +488,7 @@ CREATE TABLE IF NOT EXISTS `RestaurantReviews` (
   KEY `customer_id` (`customer_id`),
   KEY `branch_id` (`branch_id`),
   KEY `restaurant_id` (`restaurant_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+);
 
 
 
@@ -500,7 +500,7 @@ CREATE TABLE IF NOT EXISTS `RestaurantType` (
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`restro_type_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+);
 
 
 
@@ -519,7 +519,7 @@ CREATE TABLE IF NOT EXISTS `Session` (
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`id`),
   KEY `login_id` (`login_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=354 ;
+);
 
 
 
@@ -531,7 +531,7 @@ CREATE TABLE IF NOT EXISTS `SimpleRecharge` (
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`recharge_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+);
 
 
 
@@ -556,7 +556,7 @@ CREATE TABLE IF NOT EXISTS `SubscribedPlans` (
   KEY `transaction_id` (`transaction_id`),
   KEY `plan_id` (`plan_id`),
   KEY `customer_id` (`customer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=75 ;
+);
 
 
 
@@ -581,7 +581,7 @@ CREATE TABLE IF NOT EXISTS `TelrPayment` (
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`telr_id`),
   KEY `transaction_id` (`transaction_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=89 ;
+);
 
 
 
@@ -604,7 +604,7 @@ CREATE TABLE IF NOT EXISTS `Vacation` (
   PRIMARY KEY  (`vacation_id`),
   KEY `customer_id` (`customer_id`),
   KEY `order_set_id` (`order_set_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+);
 
 
 
@@ -623,7 +623,7 @@ CREATE TABLE IF NOT EXISTS `Wallet` (
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`wallet_id`),
   KEY `login_id` (`login_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
+);
 
 
 
@@ -642,7 +642,7 @@ CREATE TABLE IF NOT EXISTS `WalletTransactions` (
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`wallet_transaction_id`),
   KEY `wallet_id` (`wallet_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=157 ;
+);
 
 
 
@@ -656,7 +656,7 @@ CREATE TABLE IF NOT EXISTS `Zone` (
   `meta_data` varchar(200) default NULL,
   PRIMARY KEY  (`zone_id`),
   UNIQUE KEY `zone_name` (`zone_name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+);
 
 
 
