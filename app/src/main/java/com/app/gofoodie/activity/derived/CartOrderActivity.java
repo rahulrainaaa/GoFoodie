@@ -51,7 +51,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     private ArrayList<CartOrder> mList = new ArrayList<>();
     private ArrayList<Cart> cartArrayList = GlobalData.cartArrayList;
     private Date mStartDate = null;
-    private int mTotalPrice = 0;
+    private float mTotalPrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             for (int i = 0; i < qty; i++) {
 
                 try {
-                    mTotalPrice = mTotalPrice + Integer.parseInt(cart.comboPrice.trim());
+                    mTotalPrice = mTotalPrice + Float.parseFloat(cart.comboPrice.trim());
                 } catch (Exception e) {
                     e.printStackTrace();
                     mTotalPrice = -9999999;     // make price -ve if price not parsed. -ve price means wrong price.
@@ -290,7 +290,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Place Order");
         alertDialog.setCancelable(false);
-        alertDialog.setMessage("Confirm placing order?" + ((mTotalPrice < 0) ? "Total Price = ERROR...!" : "Total Price: AED " + mTotalPrice));
+        alertDialog.setMessage("Confirm placing order?\n" + ((mTotalPrice < 0) ? "Total Price = ERROR...!" : "Total Price: AED " + mTotalPrice));
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
                 new DialogInterface.OnClickListener() {
