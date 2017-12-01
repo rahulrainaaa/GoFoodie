@@ -407,7 +407,7 @@ CREATE TABLE IF NOT EXISTS `RestaurantBranchCategories` (
 
 
 CREATE TABLE IF NOT EXISTS `RestaurantBranchLocation` (
-  `branch_id` int(64) NOT NULL auto_increment,
+  `branch_id` int(64) NOT NULL auto_increment primary key,
   `location_id` int(64) default NULL COMMENT 'area ids from locations table',
   `restaurant_id` int(64) default NULL,
   `branch_name` varchar(100) default NULL,
