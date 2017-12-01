@@ -91,21 +91,28 @@ public class OtherGFDB {
         foreign key (login_id) references Login(login_id),
         meta varchar(100));
 
-        create table RestaurantBranchLocation (
-        branch_id int(64) not null auto_increment primary key,
-        location_id int(64),
-        restaurant_id int(64),
-        branch_name varchar(100),
-        description varchar(500),
-        tags varchar(100),
-        branch_address varchar(100),
-        branch_postal_code varchar(30),
-        geo_lat decimal(20,20),
-        geo_lng decimal(20,20),
-        table_version int(64) default 1,
+
+CREATE TABLE RestaurantBranchLocation (
+  `branch_id` int(64) NOT NULL auto_increment primary key,
+  `location_id` int(64) default NULL COMMENT 'area ids from locations table',
+  `restaurant_id` int(64) default NULL,
+  `branch_name` varchar(100) default NULL,
+  `branch_email` varchar(50) NOT NULL,
+  `description` varchar(500) default NULL,
+  `profile_icon` varchar(255) NOT NULL,
+  `tags` varchar(100) default NULL,
+  `category_id` varchar(255) NOT NULL,
+  `type` enum('Veg','Nonveg','Both') NOT NULL default 'Both',
+  `branch_address` varchar(100) default NULL,
+  `branch_postal_code` varchar(30) default NULL,
+  `geo_lat` varchar(30) default NULL,
+  `geo_lng` varchar(30) default NULL,
+  table_version int(64) default 1,
         foreign key (restaurant_id) references RestaurantDetail(restaurant_id),
         foreign key (location_id) references location(location_id),
-        meta varchar(100));
+        meta varchar(100)
+);
+
 
         create table CustomerDetail (
         customer_id int(64) not null auto_increment primary key,

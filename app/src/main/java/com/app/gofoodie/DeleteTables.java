@@ -359,10 +359,8 @@ CREATE TABLE IF NOT EXISTS `log_delete_RestaurantBranchCategories` (
 
 
 
-
-
 CREATE TABLE IF NOT EXISTS `log_delete_RestaurantBranchLocation` (
-  `branch_id` int(64) NOT NULL ,
+  `branch_id` int(64) NOT NULL default '0',
   `location_id` int(64) default NULL COMMENT 'area ids from locations table',
   `restaurant_id` int(64) default NULL,
   `branch_name` varchar(100) default NULL,
@@ -378,9 +376,7 @@ CREATE TABLE IF NOT EXISTS `log_delete_RestaurantBranchLocation` (
   `geo_lng` varchar(30) default NULL,
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL
-);
-
-
+  );
 
 
 

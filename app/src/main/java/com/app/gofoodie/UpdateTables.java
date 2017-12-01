@@ -361,8 +361,8 @@ CREATE TABLE IF NOT EXISTS `log_update_RestaurantBranchCategories` (
 
 
 
-CREATE TABLE IF NOT EXISTS `log_update_RestaurantBranchLocation` (
-  `branch_id` int(64) NOT NULL ,
+CREATE TABLE  `log_update_RestaurantBranchLocation` (
+  `branch_id` int(64) NOT NULL default '0',
   `location_id` int(64) default NULL COMMENT 'area ids from locations table',
   `restaurant_id` int(64) default NULL,
   `branch_name` varchar(100) default NULL,
@@ -372,13 +372,14 @@ CREATE TABLE IF NOT EXISTS `log_update_RestaurantBranchLocation` (
   `tags` varchar(100) default NULL,
   `category_id` varchar(255) NOT NULL,
   `type` enum('Veg','Nonveg','Both') NOT NULL default 'Both',
-  `branch_address` varchar(100) default NULL,
-  `branch_postal_code` varchar(30) default NULL,
-  `geo_lat` varchar(30) default NULL,
-  `geo_lng` varchar(30) default NULL,
+  `branch_address` varchar(100)  ,
+  `branch_postal_code` varchar(30)  ,
+  `geo_lat` varchar(30) ,
+  `geo_lng` varchar(30) ,
   `version` int(11) NOT NULL default '1',
   `meta_data` varchar(200) default NULL
-);
+ );
+
 
 
 
