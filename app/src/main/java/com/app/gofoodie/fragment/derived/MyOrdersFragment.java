@@ -146,14 +146,20 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
     private void menuItemLongVacationSelected() {
 
+        Toast.makeText(getActivity(), "Long-Term vacation under development", Toast.LENGTH_SHORT).show();
     }
 
     private void menuItemShortVacationSelected() {
+
+        Toast.makeText(getActivity(), "Short-Term vacation under development", Toast.LENGTH_SHORT).show();
+
+
 
     }
 
     private void menuItemEmergencySelected() {
 
+        Toast.makeText(getActivity(), "Emergency Cancellation under development", Toast.LENGTH_SHORT).show();
     }
 
     /**
