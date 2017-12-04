@@ -34,7 +34,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -189,6 +188,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         };
 
         return simpleCallback;
+
     }
 
     @Override
@@ -211,28 +211,56 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     private void pickStartDate() {
 
+        Calendar todayCal = Calendar.getInstance();
+        int curDay = todayCal.get(Calendar.DAY_OF_MONTH);
+        int curMonth = todayCal.get(Calendar.MONTH);
+        int curYear = todayCal.get(Calendar.YEAR);
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                Toast.makeText(CartOrderActivity.this, "Order start from: " + year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
+                Calendar selectedDay = Calendar.getInstance();
+                selectedDay.set(Calendar.DAY_OF_MONTH, day);
+                selectedDay.set(Calendar.MONTH, month);
+                selectedDay.set(Calendar.YEAR, year);
+                selectedDay.set(Calendar.HOUR, 0);
+                selectedDay.set(Calendar.MINUTE, 0);
+                selectedDay.set(Calendar.SECOND, 0);
 
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                try {
+                Date selectedDate = selectedDay.getTime();
 
-                    month++;
-                    Date date = sdf.parse(day + "-" + month + "-" + year);
-                    assignDate(date);
+                Calendar todayCAL = Calendar.getInstance();
+                todayCAL.set(Calendar.HOUR, 0);
+                todayCAL.set(Calendar.MINUTE, 0);
+                todayCAL.set(Calendar.HOUR, 0);
+                Date currentDate = todayCAL.getTime();
 
-                } catch (ParseException e) {
+                selectedDay.set(Calendar.HOUR, 0);
+                selectedDay.set(Calendar.MINUTE, 0);
+                selectedDay.set(Calendar.SECOND, 0);
+                long diff = selectedDay.getTimeInMillis();
+                long dayDiff = diff / (24 * 60 * 60 * 1000);
 
-                    e.printStackTrace();
-                    Toast.makeText(CartOrderActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                if (diff < 0) {
 
+                    Toast.makeText(CartOrderActivity.this, "Wrong date selected.\nSelecting min after 2 days from today", Toast.LENGTH_SHORT).show();
+                    pickStartDate();
+
+                } else if (dayDiff < 2) {
+
+                    Toast.makeText(CartOrderActivity.this, "Order date should start from min 2 days after today.", Toast.LENGTH_SHORT).show();
+                    pickStartDate();
+
+                } else {
+
+                    assignDate(selectedDate);
                 }
 
+
             }
-        }, 2017, 10, 1);
+        }, curYear, curMonth, curDay);
+
 
         datePickerDialog.show();
     }
@@ -382,6 +410,10 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                 cartItemIdArray.put(cartIterator.next().cartItemId.trim());
             }
             jsonRequest.put("cart_item_id", cartItemIdArray);
+            jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.profile.customerId.trim());
+            jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.profile.name.trim());
+            jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.profile.email.trim());
+
             return jsonRequest;
 
         } catch (JSONException jsonExc) {
