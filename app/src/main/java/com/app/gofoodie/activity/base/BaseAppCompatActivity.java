@@ -84,7 +84,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      * @method getSession
      * @desc Method to fetch the current session within the activity.
      */
-    protected Login getSession() {
+    public Login getSession() {
 
         return SessionUtils.getInstance().getSession();
     }

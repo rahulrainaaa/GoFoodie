@@ -19,6 +19,8 @@ import com.app.gofoodie.R;
 import com.app.gofoodie.adapter.listviewadapter.MyOrdersListViewAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.handler.cancellationHandler.OrderCancellationHandler;
+import com.app.gofoodie.handler.cancellationHandler.OrderCancellationListener;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.myorders.MyOrder;
@@ -344,68 +346,23 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
     private void editCancelOrder(View view) {
 
-        final MyOrder order = (MyOrder) view.getTag();
+        MyOrder order = (MyOrder) view.getTag();
 
         if (!order.status.toLowerCase().trim().equals("accepted")) {
 
             Toast.makeText(getActivity(), "Cannot cancel this order.", Toast.LENGTH_SHORT).show();
-
-        } else {
-
-            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-            alertDialog.setTitle("Cancel Order");
-            alertDialog.setCancelable(false);
-            alertDialog.setMessage("Are you sure?");
-
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
-
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            try {
-
-                                JSONObject jsonRequest = new JSONObject();
-                                jsonRequest.put("login_id", getSession().getData().getLoginId());
-                                jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.profile.customerId.trim());
-                                jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.profile.walletId.trim());
-                                jsonRequest.put("order_id", order.orderId.trim());
-                                jsonRequest.put("price_paid", order.pricePaid.trim());
-                                jsonRequest.put("order_set_id", order.orderSetId.trim());
-                                jsonRequest.put("branch_id", order.branchId.trim());
-                                jsonRequest.put("token", getSession().getData().getToken());
-                                if (mStrFromDate != null && mStrToDate != null) {
-
-                                    jsonRequest.put("from", mStrFromDate.trim());
-                                    jsonRequest.put("to", mStrToDate.trim());
-                                }
-                                jsonRequest.put("limit", "100");
-
-                                NetworkHandler networkHandler = new NetworkHandler();
-                                networkHandler.httpCreate(1, getDashboardActivity(), MyOrdersFragment.this, jsonRequest, Network.URL_CANCEL_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                                networkHandler.executePost();
-
-                            } catch (JSONException jsonExc) {
-
-                                jsonExc.printStackTrace();
-                                Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                            dialog.dismiss();
-                        }
-                    });
-
-            alertDialog.show();
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
-
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            dialog.dismiss();
-                        }
-                    });
-
-            alertDialog.show();
-
+            return;
         }
+
+        OrderCancellationHandler orderCancellationHandler = new OrderCancellationHandler(getDashboardActivity());
+        orderCancellationHandler.showCancellationOptions(order, new OrderCancellationListener() {
+            @Override
+            public void orderCancellationApplied(OrderCancellationHandler.RESP_CODE responseCode, OrderCancellationHandler.OP_CODE operationCode, JSONObject jsonResponse, String message) {
+
+                fetchMyOrders(null, null);
+            }
+        });
+
     }
 
 
