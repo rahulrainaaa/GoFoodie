@@ -10,6 +10,10 @@ public class Network {
      * POST REST Web APIs.
      */
 
+//    public static final String URL_LONG_VACATION = "http://gofoodie.drushtiindia.com/API/VacationRequest/shortVacationRequest";
+
+    public static final String URL_SHORT_VACATION = "http://gofoodie.drushtiindia.com/API/VacationRequest/shortVacationRequest";
+
     public static final String URL_POST_REVIEW = "http://gofoodie.drushtiindia.com/API/Reviews/PostReviews/";
 
     public static final String URL_CANCEL_ORDER = "http://gofoodie.drushtiindia.com/API/Orders/cancelOrder";

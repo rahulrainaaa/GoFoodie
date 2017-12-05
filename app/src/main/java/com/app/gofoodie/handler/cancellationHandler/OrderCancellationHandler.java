@@ -6,6 +6,7 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
@@ -15,10 +16,15 @@ import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.myorders.MyOrder;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.shawnlin.numberpicker.NumberPicker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class OrderCancellationHandler {
 
@@ -125,17 +131,210 @@ public class OrderCancellationHandler {
 
     private void cancelLongTerm() {
 
-        Toast.makeText(mActivity, "Long term cancellation", Toast.LENGTH_SHORT).show();
+        final NumberPicker numberPicker = (NumberPicker) mActivity.getLayoutInflater().inflate(R.layout.layout_number_picker, null);
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(20);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        builder.setTitle("Long-Term Vacation");
+        builder.setCancelable(false);
+        builder.setView(numberPicker);
+        builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                int days = numberPicker.getValue();
+
+                JSONObject jsonRequest = new JSONObject();
+                try {
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                    jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
+                    jsonRequest.put("customer_id", mActivity.getSession().getData().getCustomerId());
+                    jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.profile.name);
+                    jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.profile.email);
+                    jsonRequest.put("order_set_id", myOrder.orderSetId);
+                    jsonRequest.put("from_date", myOrder.deliveryDate);
+                    Calendar calendar = Calendar.getInstance();
+                    Date date = sdf.parse(myOrder.deliveryDate);
+                    calendar.setTime(date);
+                    calendar.add(Calendar.DATE, days - 1);
+                    jsonRequest.put("to_date", sdf.format(calendar.getTime()));
+                    jsonRequest.put("comment", "Long term vacation.");
+                    jsonRequest.put("token", mActivity.getSession().getData().getToken());
+
+                    Toast.makeText(mActivity, "Applying Short Term Vacation\nFrom: " + myOrder.deliveryDate + "\nTo: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
+
+                    NetworkHandler networkHandler = new NetworkHandler();
+                    networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
+                        @Override
+                        public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+                            respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.LONGTERM, rawObject, "Done");
+                        }
+
+                        @Override
+                        public void networkFailResponse(int requestCode, String message) {
+
+                            respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.LONGTERM, null, message);
+                        }
+                    }, jsonRequest, Network.URL_SHORT_VACATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+
+                    networkHandler.executePost();
+
+                } catch (JSONException jsonE) {
+
+                    jsonE.printStackTrace();
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
     }
 
     private void cancelShortTerm() {
 
-        Toast.makeText(mActivity, "Short term cancellation", Toast.LENGTH_SHORT).show();
+        final NumberPicker numberPicker = (NumberPicker) mActivity.getLayoutInflater().inflate(R.layout.layout_number_picker, null);
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(7);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        builder.setTitle("Short-Term Vacation");
+        builder.setCancelable(false);
+        builder.setView(numberPicker);
+        builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                int days = numberPicker.getValue();
+
+                JSONObject jsonRequest = new JSONObject();
+                try {
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                    jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
+                    jsonRequest.put("customer_id", mActivity.getSession().getData().getCustomerId());
+                    jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.profile.name);
+                    jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.profile.email);
+                    jsonRequest.put("order_set_id", myOrder.orderSetId);
+                    jsonRequest.put("from_date", myOrder.deliveryDate);
+                    Calendar calendar = Calendar.getInstance();
+                    Date date = sdf.parse(myOrder.deliveryDate);
+                    calendar.setTime(date);
+                    calendar.add(Calendar.DATE, days - 1);
+                    jsonRequest.put("to_date", sdf.format(calendar.getTime()));
+                    jsonRequest.put("comment", "Short term vacation.");
+                    jsonRequest.put("token", mActivity.getSession().getData().getToken());
+
+                    Toast.makeText(mActivity, "Applying Short Term Vacation\nFrom: " + myOrder.deliveryDate + "\nTo: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
+
+                    NetworkHandler networkHandler = new NetworkHandler();
+                    networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
+                        @Override
+                        public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+                            respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.SHORTTERM, rawObject, "Done");
+                        }
+
+                        @Override
+                        public void networkFailResponse(int requestCode, String message) {
+
+                            respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.SHORTTERM, null, message);
+                        }
+                    }, jsonRequest, Network.URL_SHORT_VACATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+
+                    networkHandler.executePost();
+
+                } catch (JSONException jsonE) {
+
+                    jsonE.printStackTrace();
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
     }
 
     private void cancelEmergency() {
 
-        Toast.makeText(mActivity, "Emergency mode cancellation", Toast.LENGTH_SHORT).show();
+        final TextView textView = new TextView(mActivity);
+        textView.setHint("Reason");
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        builder.setCancelable(false);
+        builder.setTitle("Emergency Cancellation");
+        builder.setView(textView);
+        builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                try {
+                    JSONObject jsonRequest = new JSONObject();
+                    jsonRequest.put("", "");
+                    jsonRequest.put("", "");
+                    jsonRequest.put("", "");
+                    jsonRequest.put("", "");
+                    jsonRequest.put("", "");
+                    jsonRequest.put("", "");
+
+                    NetworkHandler networkHandler = new NetworkHandler();
+                    networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
+                        @Override
+                        public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+                            respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.EMERGENCY, rawObject, "Done");
+                        }
+
+                        @Override
+                        public void networkFailResponse(int requestCode, String message) {
+
+                            respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.EMERGENCY, null, message);
+                        }
+                    }, jsonRequest, "url", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                    networkHandler.executePost();
+
+                } catch (JSONException jsonE) {
+
+                    jsonE.printStackTrace();
+                }
+
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
+
+        Toast.makeText(mActivity, "Emergency mode cancellation: Under development.", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -144,7 +343,7 @@ public class OrderCancellationHandler {
         public void onClick(View view) {
 
             mBottomSheetDialog.hide();
-            mActivity.getProgressDialog().show();
+
             switch (view.getId()) {
 
                 case R.id.btn_cancel_order:

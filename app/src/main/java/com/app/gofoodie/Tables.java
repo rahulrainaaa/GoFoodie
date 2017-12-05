@@ -662,7 +662,18 @@ CREATE TABLE IF NOT EXISTS `Zone` (
 
 
 
-
+create table DirectTransactions (
+transaction_id int not null auto_increment primary key,
+customer_id int,
+restaurant_id int,
+amount double not null default 0.0,
+otp int not null,
+from_time varchar(30),
+to_time varchar(30),
+status enum('pending','approved','rejected'),
+table_version int not null default 1,
+meta_data varchar(200)
+);
 
 
 

@@ -322,7 +322,6 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
         MyOrder order = (MyOrder) v.getTag();
 
-
         View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_combo_details, null);
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
         alertDialog.setTitle(order.comboname);
@@ -355,15 +354,20 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
         }
 
         OrderCancellationHandler orderCancellationHandler = new OrderCancellationHandler(getDashboardActivity());
-        orderCancellationHandler.showCancellationOptions(order, new OrderCancellationListener() {
-            @Override
-            public void orderCancellationApplied(OrderCancellationHandler.RESP_CODE responseCode, OrderCancellationHandler.OP_CODE operationCode, JSONObject jsonResponse, String message) {
-
-                fetchMyOrders(null, null);
-            }
-        });
+        orderCancellationHandler.showCancellationOptions(order, mOrderCancellationListener);
 
     }
 
+    private OrderCancellationListener mOrderCancellationListener = new OrderCancellationListener() {
+        @Override
+        public void orderCancellationApplied(OrderCancellationHandler.RESP_CODE responseCode, OrderCancellationHandler.OP_CODE operationCode, JSONObject jsonResponse, String message) {
+
+            if (responseCode != OrderCancellationHandler.RESP_CODE.RESP_SUCCESS) {
+
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            }
+            fetchMyOrders(null, null);
+        }
+    };
 
 }
