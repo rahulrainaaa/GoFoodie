@@ -6,13 +6,14 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.derived.DashboardActivity;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
+import com.app.gofoodie.model.customer.Profile;
 import com.app.gofoodie.model.myorders.MyOrder;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
@@ -164,7 +165,7 @@ public class OrderCancellationHandler {
                     jsonRequest.put("comment", "Long term vacation.");
                     jsonRequest.put("token", mActivity.getSession().getData().getToken());
 
-                    Toast.makeText(mActivity, "Applying Short Term Vacation\nFrom: " + myOrder.deliveryDate + "\nTo: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mActivity, "Applying Long Term Vacation\nFrom: " + myOrder.deliveryDate + "\nTo: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
 
                     NetworkHandler networkHandler = new NetworkHandler();
                     networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
@@ -179,7 +180,7 @@ public class OrderCancellationHandler {
 
                             respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.LONGTERM, null, message);
                         }
-                    }, jsonRequest, Network.URL_SHORT_VACATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                    }, jsonRequest, Network.URL_LONG_VACATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
 
                     networkHandler.executePost();
 
@@ -281,24 +282,38 @@ public class OrderCancellationHandler {
 
     private void cancelEmergency() {
 
-        final TextView textView = new TextView(mActivity);
-        textView.setHint("Reason");
+        final EditText txtReason = new EditText(mActivity);
+        txtReason.setHint("Reason");
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         builder.setCancelable(false);
         builder.setTitle("Emergency Cancellation");
-        builder.setView(textView);
+        builder.setView(txtReason);
         builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
+                String strReason = txtReason.getText().toString();
+
+                if (strReason.trim().isEmpty()) {
+                    Toast.makeText(mActivity, "Give reason for Emergency cancellation", Toast.LENGTH_LONG).show();
+                    cancelEmergency();
+                    return;
+                }
+
                 try {
+                    Profile profile = CustomerProfileHandler.CUSTOMER.profile;
+
                     JSONObject jsonRequest = new JSONObject();
-                    jsonRequest.put("", "");
-                    jsonRequest.put("", "");
-                    jsonRequest.put("", "");
-                    jsonRequest.put("", "");
-                    jsonRequest.put("", "");
-                    jsonRequest.put("", "");
+                    jsonRequest.put("login_id", profile.loginId);
+                    jsonRequest.put("customer_id", profile.customerId);
+                    jsonRequest.put("customer_name", profile.name);
+                    jsonRequest.put("customer_email", profile.email);
+                    jsonRequest.put("order_set_id", myOrder.orderSetId);
+                    jsonRequest.put("order_id", myOrder.orderId);
+                    jsonRequest.put("from_date", myOrder.deliveryDate);
+                    jsonRequest.put("to_date", myOrder.deliveryDate);
+                    jsonRequest.put("comment", strReason);
+                    jsonRequest.put("token", mActivity.getSession().getData().getToken());
 
                     NetworkHandler networkHandler = new NetworkHandler();
                     networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
@@ -313,7 +328,7 @@ public class OrderCancellationHandler {
 
                             respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.EMERGENCY, null, message);
                         }
-                    }, jsonRequest, "url", NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                    }, jsonRequest, Network.URL_EMERGENCY_CANCEL, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
                     networkHandler.executePost();
 
                 } catch (JSONException jsonE) {
@@ -334,7 +349,6 @@ public class OrderCancellationHandler {
         });
         builder.show();
 
-        Toast.makeText(mActivity, "Emergency mode cancellation: Under development.", Toast.LENGTH_SHORT).show();
     }
 
 
