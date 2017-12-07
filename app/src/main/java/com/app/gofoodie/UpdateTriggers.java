@@ -388,16 +388,21 @@ END$$
 DELIMITER ;
 
 
+
+
+
 DELIMITER $$
 CREATE TRIGGER trig_update_Zone
 BEFORE UPDATE ON Zone
 FOR EACH ROW
 BEGIN
 insert into log_update_Zone select * from Zone where zone_id = old.zone_id;
-update log_update_WalletTransactions set meta_data = concat('LOG: ', curdate(), '_', current_time(), '.') where zone_id = old.zone_id and version = old.version;
+update log_update_Zone set meta_data = concat('LOG: ', curdate(), '_', current_time(), '.') where zone_id = old.zone_id and version = old.version;
 set new.version = old.version + 1;
 END$$
 DELIMITER ;
+
+
 
 
 
