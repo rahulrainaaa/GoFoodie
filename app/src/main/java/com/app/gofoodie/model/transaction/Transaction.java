@@ -1,34 +1,23 @@
 
 package com.app.gofoodie.model.transaction;
 
+import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.Parcelable.Creator;
 
-import com.app.gofoodie.model.base.BaseModel;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+public class Transaction implements Parcelable
+{
 
-import java.util.List;
-
-public class Transaction extends BaseModel implements Parcelable {
-
-    @SerializedName("WalletTransactions")
-    @Expose
-    public List<WalletTransaction> walletTransactions = null;
-    @SerializedName("PaymentTransactions")
-    @Expose
-    public List<PaymentTransaction> paymentTransactions = null;
-    @SerializedName("statusCode")
-    @Expose
-    public Integer statusCode;
-    @SerializedName("statusMessage")
-    @Expose
-    public String statusMessage;
+    private List<WalletTransaction> walletTransactions = null;
+    private List<PaymentTransaction> paymentTransactions = null;
+    private Integer statusCode;
+    private String statusMessage;
     public final static Creator<Transaction> CREATOR = new Creator<Transaction>() {
 
 
         @SuppressWarnings({
-                "unchecked"
+            "unchecked"
         })
         public Transaction createFromParcel(Parcel in) {
             return new Transaction(in);
@@ -38,16 +27,49 @@ public class Transaction extends BaseModel implements Parcelable {
             return (new Transaction[size]);
         }
 
-    };
+    }
+    ;
 
     protected Transaction(Parcel in) {
-        in.readList(this.walletTransactions, (com.app.gofoodie.model.transaction.WalletTransaction.class.getClassLoader()));
-        in.readList(this.paymentTransactions, (com.app.gofoodie.model.transaction.PaymentTransaction.class.getClassLoader()));
+        in.readList(this.walletTransactions, (WalletTransaction.class.getClassLoader()));
+        in.readList(this.paymentTransactions, (PaymentTransaction.class.getClassLoader()));
         this.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     public Transaction() {
+    }
+
+    public List<WalletTransaction> getWalletTransactions() {
+        return walletTransactions;
+    }
+
+    public void setWalletTransactions(List<WalletTransaction> walletTransactions) {
+        this.walletTransactions = walletTransactions;
+    }
+
+    public List<PaymentTransaction> getPaymentTransactions() {
+        return paymentTransactions;
+    }
+
+    public void setPaymentTransactions(List<PaymentTransaction> paymentTransactions) {
+        this.paymentTransactions = paymentTransactions;
+    }
+
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public String getStatusMessage() {
+        return statusMessage;
+    }
+
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
     }
 
     public void writeToParcel(Parcel dest, int flags) {
@@ -58,7 +80,7 @@ public class Transaction extends BaseModel implements Parcelable {
     }
 
     public int describeContents() {
-        return 0;
+        return  0;
     }
 
 }
