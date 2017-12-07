@@ -62,10 +62,10 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
             holder = (Holder) cell.getTag();
         }
 
-        holder.txtTransactionId.setText(transaction.transactionId);
-        holder.txtDate.setText(transaction.datetime);
-        holder.txtReviews.setText(String.valueOf(transaction.remarks));
-        holder.txtPrice.setText(transaction.paidAmount);
+        holder.txtTransactionId.setText(transaction.getPgTransactionId());
+        holder.txtDate.setText(transaction.getDatetime());
+        holder.txtReviews.setText(String.valueOf(transaction.getRemarks()));
+        holder.txtPrice.setText(transaction.getPaidAmount());
 
         holder.imgType.setImageResource(R.drawable.icon_receive);
 

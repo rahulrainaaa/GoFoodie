@@ -1,23 +1,34 @@
 
 package com.app.gofoodie.model.transaction;
 
-import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
 
-public class Transaction implements Parcelable
-{
+import com.app.gofoodie.model.base.BaseModel;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
+public class Transaction extends BaseModel implements Parcelable {
+
+    @SerializedName("WalletTransactions")
+    @Expose
     private List<WalletTransaction> walletTransactions = null;
+    @SerializedName("PaymentTransactions")
+    @Expose
     private List<PaymentTransaction> paymentTransactions = null;
+    @SerializedName("statusCode")
+    @Expose
     private Integer statusCode;
+    @SerializedName("statusMessage")
+    @Expose
     private String statusMessage;
     public final static Creator<Transaction> CREATOR = new Creator<Transaction>() {
 
 
         @SuppressWarnings({
-            "unchecked"
+                "unchecked"
         })
         public Transaction createFromParcel(Parcel in) {
             return new Transaction(in);
@@ -27,8 +38,7 @@ public class Transaction implements Parcelable
             return (new Transaction[size]);
         }
 
-    }
-    ;
+    };
 
     protected Transaction(Parcel in) {
         in.readList(this.walletTransactions, (WalletTransaction.class.getClassLoader()));
@@ -80,7 +90,7 @@ public class Transaction implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

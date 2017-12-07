@@ -4,17 +4,35 @@ package com.app.gofoodie.model.transaction;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Parcelable.Creator;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class PaymentTransaction implements Parcelable
 {
 
+    @SerializedName("transaction_id")
+    @Expose
     private String transactionId;
+    @SerializedName("wallet_id")
+    @Expose
     private String walletId;
+    @SerializedName("pg_transaction_id")
+    @Expose
     private String pgTransactionId;
+    @SerializedName("pg_response")
+    @Expose
     private String pgResponse;
+    @SerializedName("transaction_response")
+    @Expose
     private String transactionResponse;
+    @SerializedName("datetime")
+    @Expose
     private String datetime;
+    @SerializedName("remarks")
+    @Expose
     private String remarks;
+    @SerializedName("paid_amount")
+    @Expose
     private String paidAmount;
     public final static Creator<PaymentTransaction> CREATOR = new Creator<PaymentTransaction>() {
 

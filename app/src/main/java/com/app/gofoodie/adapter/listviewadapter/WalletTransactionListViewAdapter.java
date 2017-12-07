@@ -63,12 +63,12 @@ public class WalletTransactionListViewAdapter extends ArrayAdapter<WalletTransac
         }
 
 //        holder.imgIcon
-        holder.txtTransactionId.setText(transaction.walletTransactionId);
-        holder.txtDate.setText(transaction.datetime);
-        holder.txtReviews.setText(transaction.remarks);
-        holder.txtPrice.setText(transaction.amount);
+        holder.txtTransactionId.setText(transaction.getInvoiceId());
+        holder.txtDate.setText(transaction.getDatetime());
+        holder.txtReviews.setText(transaction.getRemarks());
+        holder.txtPrice.setText(transaction.getAmount());
 
-        if (transaction.type.contains("credit")) {
+        if (transaction.getType().contains("credit")) {
 
             holder.imgType.setImageResource(R.drawable.icon_receive);
         } else {

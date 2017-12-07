@@ -155,16 +155,16 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
      */
     private void showWalletTransactions() {
 
-        if (mTransaction.walletTransactions == null) {
+        if (mTransaction.getWalletTransactions() == null) {
 
             Toast.makeText(getActivity(), "No Wallet Transactions", Toast.LENGTH_SHORT).show();
             return;
-        } else if (mTransaction.walletTransactions.size() == 0) {
+        } else if (mTransaction.getWalletTransactions().size() == 0) {
 
             Toast.makeText(getActivity(), "No Wallet Transactions", Toast.LENGTH_SHORT).show();
             return;
         }
-        WalletTransactionListViewAdapter adapter = new WalletTransactionListViewAdapter(getActivity(), R.layout.item_listview_transactions, (ArrayList<WalletTransaction>) mTransaction.walletTransactions);
+        WalletTransactionListViewAdapter adapter = new WalletTransactionListViewAdapter(getActivity(), R.layout.item_listview_transactions, (ArrayList<WalletTransaction>) mTransaction.getWalletTransactions());
         mListView.setAdapter(adapter);
 
     }
@@ -175,16 +175,16 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
      */
     private void showBankPaymentTransactions() {
 
-        if (mTransaction.paymentTransactions == null) {
+        if (mTransaction.getPaymentTransactions() == null) {
 
             Toast.makeText(getActivity(), "No Bank Transaction", Toast.LENGTH_SHORT).show();
             return;
-        } else if (mTransaction.paymentTransactions.size() == 0) {
+        } else if (mTransaction.getPaymentTransactions().size() == 0) {
 
             Toast.makeText(getActivity(), "No Bank Transaction", Toast.LENGTH_SHORT).show();
             return;
         }
-        PaymentTransactionListViewAdapter adapter = new PaymentTransactionListViewAdapter(getActivity(), R.layout.item_listview_transactions, (ArrayList<PaymentTransaction>) mTransaction.paymentTransactions);
+        PaymentTransactionListViewAdapter adapter = new PaymentTransactionListViewAdapter(getActivity(), R.layout.item_listview_transactions, (ArrayList<PaymentTransaction>) mTransaction.getPaymentTransactions());
         mListView.setAdapter(adapter);
     }
 
@@ -209,7 +209,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     /**
      * @param json
      * @method parseModel
-     * @desc Method to parse the responsse into model class.
+     * @desc Method to parse the response into model class.
      */
     private void parseModel(JSONObject json) {
 
