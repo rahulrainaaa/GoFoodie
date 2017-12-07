@@ -63,7 +63,7 @@ public class WalletTransactionListViewAdapter extends ArrayAdapter<WalletTransac
         }
 
 //        holder.imgIcon
-        holder.txtTransactionId.setText(transaction.getInvoiceId());
+        holder.txtTransactionId.setText("Invoice: " + transaction.getInvoiceId());
         holder.txtDate.setText(transaction.getDatetime());
         holder.txtReviews.setText(transaction.getRemarks());
         holder.txtPrice.setText(transaction.getAmount());

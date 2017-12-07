@@ -62,7 +62,7 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
             holder = (Holder) cell.getTag();
         }
 
-        holder.txtTransactionId.setText(transaction.getPgTransactionId());
+        holder.txtTransactionId.setText("Ref ID: " + transaction.getPgTransactionId());
         holder.txtDate.setText(transaction.getDatetime());
         holder.txtReviews.setText(String.valueOf(transaction.getRemarks()));
         holder.txtPrice.setText(transaction.getPaidAmount());
