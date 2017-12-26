@@ -41,10 +41,16 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 
+/**
+ * Activity class to handle the CartOrders, date assigning and combo item option selection.
+ */
 public class CartOrderActivity extends BaseAppCompatActivity implements View.OnClickListener, NetworkCallbackListener {
 
     public static final String TAG = "CartOrderActivity";
 
+    /**
+     * Class private data members.
+     */
     private RecyclerView mRecyclerView = null;
     private CartOrderRecyclerAdapter mCartOrderRecyclerAdapter = null;
     private ArrayList<CartOrder> mList = new ArrayList<>();
@@ -121,9 +127,10 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * {@link ItemTouchHelper} class to handle the RecyclerView gestures and item changing positions.
+     */
     private ItemTouchHelper.Callback createCallbackHelper() {
-
 
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
 
@@ -201,6 +208,10 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         }
     }
 
+    /**
+     * Method to start activity to customize a combo plan.
+     * @param view
+     */
     private void customizeComboPlan(View view) {
 
         int position = (int) view.getTag();
@@ -209,6 +220,9 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         startActivity(intent);
     }
 
+    /**
+     * Method to show DatePicker to pick the starting date of Orders.
+     */
     private void pickStartDate() {
 
         Calendar todayCal = Calendar.getInstance();
@@ -265,6 +279,10 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         datePickerDialog.show();
     }
 
+    /**
+     * Method to assign date of orders from picked date (or after 2 days in default case).
+     * @param startDate
+     */
     private void assignDate(Date startDate) {
 
         if (startDate == null) {
@@ -297,6 +315,11 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         }
     }
 
+    /**
+     * Method to check, if week day is working of off.
+     * @param weekDay
+     * @return
+     */
     private boolean checkForWeekDay(String weekDay) {
 
         String[] days = CustomerProfileHandler.CUSTOMER.profile.daysYouWantTheCombo.split(",");
@@ -313,6 +336,9 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     }
 
+    /**
+     * Method to Handle the proceed for the order placement with anount charging from wallet.
+     */
     private void menuProceed() {
 
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -350,6 +376,10 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     }
 
+    /**
+     * Method to process the response packet of OrderRequest (Placed order).
+     * @return JSONObject
+     */
     private JSONObject getOrderRequestPacket() {
 
         try {
