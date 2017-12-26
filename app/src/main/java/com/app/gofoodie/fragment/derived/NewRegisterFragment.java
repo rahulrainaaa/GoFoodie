@@ -127,70 +127,68 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         } else {
 
             isValid = true;
-        }
-
-        if (strLastName.isEmpty()) {
-
-            isValid = false;
-            mEtFirstName.setError(getString(R.string.cannot_be_empty));
-        } else {
-
-            isValid = true && isValid;
+            mEtFirstName.setError(null);
         }
 
         if (strEmail.isEmpty()) {
 
             isValid = false;
-            mEtFirstName.setError(getString(R.string.cannot_be_empty));
+            mEtEmail.setError(getString(R.string.cannot_be_empty));
         } else {
 
             isValid = true && isValid;
+            mEtEmail.setError(null);
         }
 
         if (strMobile.isEmpty()) {
 
             isValid = false;
-            mEtFirstName.setError(getString(R.string.cannot_be_empty));
+            mEtMobile.setError(getString(R.string.cannot_be_empty));
         } else {
 
             isValid = true && isValid;
+            mEtMobile.setError(null);
         }
 
         if (strAddress.isEmpty()) {
 
             isValid = false;
-            mEtFirstName.setError(getString(R.string.cannot_be_empty));
+            mEtAddress.setError(getString(R.string.cannot_be_empty));
         } else {
 
             isValid = true && isValid;
+            mEtAddress.setError(null);
         }
 
         if (strCompanyName.isEmpty()) {
 
             isValid = false;
-            mEtFirstName.setError(getString(R.string.cannot_be_empty));
+            mEtCompanyName.setError(getString(R.string.cannot_be_empty));
         } else {
 
             isValid = true && isValid;
+            mEtCompanyName.setError(null);
         }
 
         if (strPassword.isEmpty()) {
 
             isValid = false;
-            mEtFirstName.setError(getString(R.string.cannot_be_empty));
+            mEtPassword.setError(getString(R.string.cannot_be_empty));
         } else {
 
             isValid = true && isValid;
+            mEtPassword.setError(null);
         }
 
         // Check for confirm password match.
         if (!strConfirmPassword.equals(strPassword.trim())) {
 
             isValid = false;
-            mEtFirstName.setError(getString(R.string.confirm_password_not_match));
+            mEtCfmPassword.setError(getString(R.string.confirm_password_not_match));
         } else {
 
             isValid = true && isValid;
+            mEtCfmPassword.setError(null);
         }
 
         // Check if accepted terms & conditions.
