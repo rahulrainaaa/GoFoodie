@@ -39,7 +39,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
     private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtCompanyName, mLocationPref;
     private Button mBtnRegister = null;
     private CheckBox mChkAcceptTerms = null;
-    private String locationId = "0";
+    private String locationId = "1";
     private String locationName = "";
 
     @Nullable
@@ -130,51 +130,47 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
         } else {
 
             isValid = true;
-        }
-
-        if (strLastName.isEmpty()) {
-
-            isValid = false;
-            mEtFirstName.setError(getString(R.string.cannot_be_empty));
-        } else {
-
-            isValid = true && isValid;
+            mEtFirstName.setError(null);
         }
 
         if (strEmail.isEmpty()) {
 
             isValid = false;
-            mEtFirstName.setError(getString(R.string.cannot_be_empty));
+            mEtEmail.setError(getString(R.string.cannot_be_empty));
         } else {
 
             isValid = true && isValid;
+            mEtEmail.setError(null);
         }
 
         if (strMobile.isEmpty()) {
 
             isValid = false;
-            mEtFirstName.setError(getString(R.string.cannot_be_empty));
+            mEtMobile.setError(getString(R.string.cannot_be_empty));
         } else {
 
             isValid = true && isValid;
+            mEtMobile.setError(null);
         }
 
         if (strAddress.isEmpty()) {
 
             isValid = false;
-            mEtFirstName.setError(getString(R.string.cannot_be_empty));
+            mEtAddress.setError(getString(R.string.cannot_be_empty));
         } else {
 
             isValid = true && isValid;
+            mEtAddress.setError(null);
         }
 
         if (strCompanyName.isEmpty()) {
 
             isValid = false;
-            mEtFirstName.setError(getString(R.string.cannot_be_empty));
+            mEtCompanyName.setError(getString(R.string.cannot_be_empty));
         } else {
 
             isValid = true && isValid;
+            mEtCompanyName.setError(null);
         }
 
 

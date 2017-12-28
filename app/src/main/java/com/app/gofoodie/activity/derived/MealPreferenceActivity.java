@@ -90,11 +90,11 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
         switch (mRgpMealType.getCheckedRadioButtonId()) {
             case R.id.radio_veg:
 
-                mStrMealType = "veg";
+                mStrMealType = "1";
                 break;
             case R.id.radio_non_veg:
 
-                mStrMealType = "nonveg";
+                mStrMealType = "2";
                 break;
             case R.id.radio_both:
 

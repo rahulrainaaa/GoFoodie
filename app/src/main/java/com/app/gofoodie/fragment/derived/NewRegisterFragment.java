@@ -39,7 +39,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
     private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtCompanyName, mEtPassword, mEtCfmPassword, mLocationPref;
     private Button mBtnRegister = null;
     private CheckBox mChkAcceptTerms = null;
-    private String locationId = "0";
+    private String locationId = "1";
     private String locationName = "";
 
     @Nullable

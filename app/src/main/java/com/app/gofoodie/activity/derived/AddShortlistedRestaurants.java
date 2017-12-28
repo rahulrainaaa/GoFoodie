@@ -55,6 +55,10 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_shortlisted_restaurants);
 
+        // Remove the meal preference history.
+        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().remove(CacheUtils.PREF_MEAL_CAT_KEY).commit();
+        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().remove(CacheUtils.PREF_MEAL_TYPE_KEY).commit();
+
         mListView = (ListView) findViewById(R.id.list_view);
         mListView.setOnItemClickListener(this);
 
@@ -194,7 +198,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
 
         if (!meal_cat_pref.trim().isEmpty()) {
 
-            url = url + "&categories=" + meal_cat_pref;
+            url = url + "&category=" + meal_cat_pref;
         }
 
         if (!meal_type_pref.trim().isEmpty()) {
