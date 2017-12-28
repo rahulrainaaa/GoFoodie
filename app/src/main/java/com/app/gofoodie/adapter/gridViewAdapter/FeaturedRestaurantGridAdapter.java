@@ -45,19 +45,6 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
         this.mInflater = activity.getLayoutInflater();
     }
 
-    /**
-     * @class Holder
-     * @desc Public static holder class for holding the xml view reference.
-     */
-    public static class Holder {
-
-        public TextView txtComboName = null;
-        public ImageView imgVeg = null;
-        public ImageView imgNonVeg = null;
-        public ImageView imgCombo = null;
-        public int tag = -1;
-    }
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -93,21 +80,25 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
             holder.imgVeg.setVisibility(View.VISIBLE);
             holder.imgNonVeg.setVisibility(View.VISIBLE);
 
-        } else if (mFeaturedRestaurant.type.contains("Veg")) {
+        } else if (mFeaturedRestaurant.type.contains("1")) {
 
             holder.imgVeg.setVisibility(View.VISIBLE);
             holder.imgNonVeg.setVisibility(View.GONE);
 
-        } else {
+        } else if (mFeaturedRestaurant.type.contains("2")) {
 
             holder.imgVeg.setVisibility(View.GONE);
             holder.imgNonVeg.setVisibility(View.VISIBLE);
+
+        } else {
+
+            holder.imgVeg.setVisibility(View.GONE);
+            holder.imgNonVeg.setVisibility(View.GONE);
 
         }
 
         return view;
     }
-
 
     @Override
     public void onClick(View view) {
@@ -118,6 +109,19 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
         mActivity.startActivity(intent);
 
 
+    }
+
+    /**
+     * @class Holder
+     * @desc Public static holder class for holding the xml view reference.
+     */
+    public static class Holder {
+
+        public TextView txtComboName = null;
+        public ImageView imgVeg = null;
+        public ImageView imgNonVeg = null;
+        public ImageView imgCombo = null;
+        public int tag = -1;
     }
 
 
