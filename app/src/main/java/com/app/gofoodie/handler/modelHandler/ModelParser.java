@@ -51,5 +51,4 @@ public class ModelParser {
         return mGson.fromJson(jsonString, className);
     }
 
-
 }
