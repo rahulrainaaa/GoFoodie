@@ -83,18 +83,6 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
                 menuItemDateSelected();
                 break;
-            case R.id.menu_item_long_vacation:
-
-                menuItemLongVacationSelected();
-                break;
-            case R.id.menu_item_short_vacation:
-
-                menuItemShortVacationSelected();
-                break;
-            case R.id.menu_item_emergency:
-
-                menuItemEmergencySelected();
-                break;
 
         }
         return true;

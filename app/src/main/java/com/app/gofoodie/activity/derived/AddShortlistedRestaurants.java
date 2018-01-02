@@ -55,10 +55,6 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_shortlisted_restaurants);
 
-        // Remove the meal preference history.
-        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().remove(CacheUtils.PREF_MEAL_CAT_KEY).commit();
-        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().remove(CacheUtils.PREF_MEAL_TYPE_KEY).commit();
-
         mListView = (ListView) findViewById(R.id.list_view);
         mListView.setOnItemClickListener(this);
 
@@ -87,10 +83,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
 
                 menuSearch();
                 break;
-            case R.id.menu_item_filter:
 
-                startActivity(new Intent(this, MealPreferenceActivity.class));
-                break;
             case R.id.menu_item_location:
 
                 startActivity(new Intent(this, LocationActivity.class));
@@ -188,23 +181,23 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
         /**
          * Fetch the cuisine preference.
          */
-        String meal_cat_pref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_CAT_KEY, " ");
-        String meal_type_pref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_TYPE_KEY, " ");
+//        String meal_cat_pref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_CAT_KEY, " ");
+//        String meal_type_pref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_TYPE_KEY, " ");
 
         /**
          * Append parameters to url string.
          */
         String url = Network.URL_GET_RESTAURANT + "?areas=" + location_id;
 
-        if (!meal_cat_pref.trim().isEmpty()) {
-
-            url = url + "&category=" + meal_cat_pref;
-        }
-
-        if (!meal_type_pref.trim().isEmpty()) {
-
-            url = url + "&type=" + meal_type_pref;
-        }
+//        if (!meal_cat_pref.trim().isEmpty()) {
+//
+//            url = url + "&category=" + meal_cat_pref;
+//        }
+//
+//        if (!meal_type_pref.trim().isEmpty()) {
+//
+//            url = url + "&type=" + meal_type_pref;
+//        }
 
         if (search != null) {
 
