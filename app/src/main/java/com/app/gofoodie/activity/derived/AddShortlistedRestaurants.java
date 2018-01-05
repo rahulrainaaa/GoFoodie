@@ -23,7 +23,6 @@ import com.app.gofoodie.model.restaurant.Restaurant;
 import com.app.gofoodie.model.restaurant.RestaurantResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
-import com.app.gofoodie.utility.CacheUtils;
 import com.app.gofoodie.utility.LocationUtils;
 
 import org.json.JSONArray;
@@ -230,7 +229,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
 
                 mList.clear();
                 mAdapter.notifyDataSetChanged();
-                
+
             } catch (Exception e) {
 
                 e.printStackTrace();
