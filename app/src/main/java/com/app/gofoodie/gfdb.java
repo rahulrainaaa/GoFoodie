@@ -371,4 +371,78 @@ DROP TABLE Zone                        ;
 
 
 
+
+DROP TABLE log_update_Admin                       ;
+DROP TABLE log_update_CartItem                    ;
+DROP TABLE log_update_Category                    ;
+DROP TABLE log_update_City                        ;
+DROP TABLE log_update_ComboOrders                 ;
+DROP TABLE log_update_ComboPlan                   ;
+DROP TABLE log_update_ComboPlanItems              ;
+DROP TABLE log_update_Country                     ;
+DROP TABLE log_update_Cuisine                     ;
+DROP TABLE log_update_CustomerDetail              ;
+DROP TABLE log_update_CustomerShortlistedBranches ;
+DROP TABLE log_update_Items                       ;
+DROP TABLE log_update_Location                    ;
+DROP TABLE log_update_Login                       ;
+DROP TABLE log_update_OrderSet                    ;
+DROP TABLE log_update_PaymentTransactions         ;
+DROP TABLE log_update_RechargePlan                ;
+DROP TABLE log_update_RestaurantBranchCategories  ;
+DROP TABLE log_update_RestaurantBranchLocation    ;
+DROP TABLE log_update_RestaurantDetail            ;
+DROP TABLE log_update_RestaurantReviews           ;
+DROP TABLE log_update_RestaurantType              ;
+DROP TABLE log_update_Session                     ;
+DROP TABLE log_update_SimpleRecharge              ;
+DROP TABLE log_update_SubscribedPlans             ;
+DROP TABLE log_update_TelrPayment                 ;
+DROP TABLE log_update_Vacation                    ;
+DROP TABLE log_update_Wallet                      ;
+DROP TABLE log_update_WalletTransactions          ;
+DROP TABLE log_update_Zone                        ;
+
+
+
+
+
+
+DROP TABLE log_delete_Admin                       ;
+DROP TABLE log_delete_CartItem                    ;
+DROP TABLE log_delete_Category                    ;
+DROP TABLE log_delete_City                        ;
+DROP TABLE log_delete_ComboOrders                 ;
+DROP TABLE log_delete_ComboPlan                   ;
+DROP TABLE log_delete_ComboPlanItems              ;
+DROP TABLE log_delete_Country                     ;
+DROP TABLE log_delete_Cuisine                     ;
+DROP TABLE log_delete_CustomerDetail              ;
+DROP TABLE log_delete_CustomerShortlistedBranches ;
+DROP TABLE log_delete_Items                       ;
+DROP TABLE log_delete_Location                    ;
+DROP TABLE log_delete_Login                       ;
+DROP TABLE log_delete_OrderSet                    ;
+DROP TABLE log_delete_PaymentTransactions         ;
+DROP TABLE log_delete_RechargePlan                ;
+DROP TABLE log_delete_RestaurantBranchCategories  ;
+DROP TABLE log_delete_RestaurantBranchLocation    ;
+DROP TABLE log_delete_RestaurantDetail            ;
+DROP TABLE log_delete_RestaurantReviews           ;
+DROP TABLE log_delete_RestaurantType              ;
+DROP TABLE log_delete_Session                     ;
+DROP TABLE log_delete_SimpleRecharge              ;
+DROP TABLE log_delete_SubscribedPlans             ;
+DROP TABLE log_delete_TelrPayment                 ;
+DROP TABLE log_delete_Vacation                    ;
+DROP TABLE log_delete_Wallet                      ;
+DROP TABLE log_delete_WalletTransactions          ;
+DROP TABLE log_delete_Zone                        ;
+
+
+
+
+
+
+
  */
