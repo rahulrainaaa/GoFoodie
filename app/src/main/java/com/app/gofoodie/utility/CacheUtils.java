@@ -20,7 +20,7 @@ public class CacheUtils {
      * Preference Key(s).
      */
     public static final String PREF_KEY = "PREF_KEY";
-    public static final String PREF_MEAL_CAT_KEY = "PREF_MEAL_CAT_KEY";
+    public static final String PREF_MEAL_CUISINE_KEY = "PREF_MEAL_CUISINE_KEY";
     public static final String PREF_MEAL_TYPE_KEY = "PREF_MEAL_TYPE_KEY";
 
     /**

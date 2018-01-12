@@ -1,13 +1,12 @@
 package com.app.gofoodie.activity.derived;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -24,7 +23,6 @@ import com.app.gofoodie.model.comboPlan.Comboplan;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.VibrationUtil;
-import com.appyvet.rangebar.RangeBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,8 +30,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * @method ComboPlanActivity
@@ -49,8 +45,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     private GridView mComboGridView = null;
     private ComboPlanGridAdapter mAdapter = null;
     private ArrayList<Comboplan> mComboPlanList = null;
-    private String mPriceFilter = "";
-    private String mComboSearchSubString = "";
+    private boolean flagRefreshed = false;
 
     /**
      * {@link BaseAppCompatActivity} Activity callback method(s).
@@ -60,13 +55,21 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combo_plan);
         mComboGridView = (GridView) findViewById(R.id.combo_plan_grid_layout);
+    }
 
-        refreshComboList();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!flagRefreshed) {
+
+            flagRefreshed = true;
+            refreshComboList();
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_combo_plans, menu);
         return true;
     }
@@ -78,125 +81,11 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
 
         if (id == R.id.menu_filter) {
 
-            filterMenu();
-        } else if (id == R.id.menu_search) {
-
-            searchString();
+            flagRefreshed = false;
+            startActivity(new Intent(this, MealPreferenceActivity.class));
         }
 
         return true;
-    }
-
-    /**
-     * Method to Combo plans with given substring as input.
-     */
-    private void searchString() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Search Combo");
-
-        final EditText input = new EditText(this);
-        builder.setIcon(R.drawable.icon_search);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        input.setHint("Search...");
-        builder.setView(input);
-
-        builder.setPositiveButton("OK",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        mComboSearchSubString = "&keyword=" + input.getText().toString();
-                        refreshComboList();
-                        dialog.dismiss();
-                    }
-                });
-
-        builder.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-                    }
-                });
-
-        builder.setNeutralButton("Reset",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-
-                        mComboSearchSubString = "";
-                        refreshComboList();
-                        dialog.dismiss();
-                    }
-                });
-        builder.show();
-    }
-
-    /**
-     * Method show AlertDialog to prompt for filter parameters.
-     */
-    private void filterMenu() {
-
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Filter");
-        final View view = (View) getLayoutInflater().inflate(R.layout.layout_filter, null);
-
-        final TextView txtMinRange = (TextView) view.findViewById(R.id.txt_min_range);
-        final TextView txtMaxRange = (TextView) view.findViewById(R.id.txt_max_range);
-        txtMinRange.setText("Min Price");
-        txtMaxRange.setText("Max Price");
-
-        final RangeBar priceRangeBar = (RangeBar) view.findViewById(R.id.price_rangebar);
-
-        priceRangeBar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
-            @Override
-            public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex, int rightPinIndex, String leftPinValue, String rightPinValue) {
-
-                txtMinRange.setText("Min Price: " + leftPinValue);
-                txtMaxRange.setText("Max Price: " + rightPinValue);
-
-            }
-        });
-
-        alertDialog.setView(view);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Filter",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        mPriceFilter = "&minPrice=" + priceRangeBar.getLeftPinValue() + "&maxPrice=" + priceRangeBar.getRightPinValue();
-                        refreshComboList();
-                        dialog.dismiss();
-                    }
-                });
-
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Reset",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        mPriceFilter = "";
-                        refreshComboList();
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-    }
-
-    /**
-     * Method to search combo with keyword.
-     */
-    private void searchKeyword() {
-
     }
 
     /**
@@ -205,8 +94,9 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
      */
     private void refreshComboList() {
 
+        String mealPreference = "";
         String branchId = getIntent().getStringExtra("branch_id");
-        String url = Network.URL_GET_BRANCH_COMBOS + branchId + mPriceFilter.trim();
+        String url = Network.URL_GET_BRANCH_COMBOS + branchId + mealPreference.trim();
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
@@ -273,16 +163,14 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     private void handleAddToCart(JSONObject json) {
 
         try {
+
             VibrationUtil.getInstance().vibrate(this);
             String statusMessage = json.getString("statusMessage");
-//            Toast.makeText(this, "" + statusMessage, Toast.LENGTH_SHORT).show();
 
         } catch (JSONException jsonExc) {
 
             jsonExc.printStackTrace();
-            SweetAlertDialog sad = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE);
-            sad.setContentText(jsonExc.getMessage());
-            sad.setTitleText("Error");
+
         }
 
     }
@@ -358,7 +246,11 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
 
     }
 
-
+    /**
+     * Method to show the combo description.
+     *
+     * @param v
+     */
     public void showComboDescription(View v) {
 
         Comboplan comboplan = (Comboplan) v.getTag();

@@ -9,11 +9,11 @@
         android:title="@string/menu_filter"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/menu_search"
-        android:icon="@drawable/icon_search"
-        android:iconTint="@color/colorWhite"
-        android:title="@string/menu_search"
-        app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/menu_search"-->
+        <!--android:icon="@drawable/icon_search"-->
+        <!--android:iconTint="@color/colorWhite"-->
+        <!--android:title="@string/menu_search"-->
+        <!--app:showAsAction="always" />-->
 
 </menu>

@@ -13,8 +13,8 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.listviewadapter.CheckedListViewAdapter;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
-import com.app.gofoodie.model.category.Category;
-import com.app.gofoodie.model.category.CategoryResponse;
+import com.app.gofoodie.model.cuisine.Cuisine;
+import com.app.gofoodie.model.cuisine.CuisineResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.CacheUtils;
@@ -35,7 +35,7 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
      * Class private data member(s).
      */
     private ListView mListView = null;
-    private ArrayList<Category> mList = new ArrayList<>();
+    private ArrayList<Cuisine> mList = new ArrayList<>();
     private CheckedListViewAdapter mAdapter = null;
 
     private RadioGroup mRgpMealType = null;
@@ -101,13 +101,13 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
                 mStrMealType = "both";
                 break;
         }
-        Iterator<Category> iterator = mList.iterator();
+        Iterator<Cuisine> iterator = mList.iterator();
         while (iterator.hasNext()) {
 
-            Category category = iterator.next();
-            if (category.isChecked) {
+            Cuisine cuisine = iterator.next();
+            if (cuisine.isChecked) {
 
-                mStrCategoriesId.append("" + category.cateId + ",");
+                mStrCategoriesId.append("" + cuisine.getCuisineId() + ",");
             }
         }
 
@@ -118,7 +118,7 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
         }
 
         // Save the preference into the cache (offline).
-        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_CAT_KEY, mStrCategoriesId.toString()).commit();
+        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_CUISINE_KEY, mStrCategoriesId.toString()).commit();
         CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_TYPE_KEY, mStrMealType.toString()).commit();
 
         Toast.makeText(this, "Meal Preferences saved.", Toast.LENGTH_SHORT).show();
@@ -154,16 +154,16 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
     private void listResponseHandler(JSONObject json) {
 
         ModelParser modelParser = new ModelParser();
-        CategoryResponse response = (CategoryResponse) modelParser.getModel(json.toString(), CategoryResponse.class, null);
+        CuisineResponse response = (CuisineResponse) modelParser.getModel(json.toString(), CuisineResponse.class, null);
 
         // Check if the http response is non-success (!=200).
-        if (response.statusCode != 200) {
+        if (response.getStatusCode() != 200) {
 
             Toast.makeText(this, "Unable to fetch data.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        mList = (ArrayList<Category>) response.category;
+        mList = (ArrayList<Cuisine>) response.getCuisine();
         mAdapter = new CheckedListViewAdapter(this, mList);
         mListView.setAdapter(mAdapter);
         if (mList.size() == 0) {

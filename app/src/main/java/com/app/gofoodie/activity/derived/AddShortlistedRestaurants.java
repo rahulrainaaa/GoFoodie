@@ -180,7 +180,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
         /**
          * Fetch the cuisine preference.
          */
-//        String meal_cat_pref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_CAT_KEY, " ");
+//        String meal_cat_pref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_CUISINE_KEY, " ");
 //        String meal_type_pref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_TYPE_KEY, " ");
 
         /**
