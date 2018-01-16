@@ -1,4 +1,3 @@
-
 package com.app.gofoodie.model.comboPlan;
 
 import android.os.Parcel;
@@ -12,15 +11,6 @@ import java.util.List;
 
 public class ComboPlanResponse extends BaseModel implements Parcelable {
 
-    @SerializedName("comboplan")
-    @Expose
-    public List<Comboplan> comboplan = null;
-    @SerializedName("statusCode")
-    @Expose
-    public Integer statusCode;
-    @SerializedName("statusMessage")
-    @Expose
-    public String statusMessage;
     public final static Creator<ComboPlanResponse> CREATOR = new Creator<ComboPlanResponse>() {
 
 
@@ -36,9 +26,18 @@ public class ComboPlanResponse extends BaseModel implements Parcelable {
         }
 
     };
+    @SerializedName("comboplans")
+    @Expose
+    private List<Comboplan> comboplans = null;
+    @SerializedName("statusCode")
+    @Expose
+    private Integer statusCode;
+    @SerializedName("statusMessage")
+    @Expose
+    private String statusMessage;
 
     protected ComboPlanResponse(Parcel in) {
-        in.readList(this.comboplan, (com.app.gofoodie.model.comboPlan.Comboplan.class.getClassLoader()));
+        in.readList(this.comboplans, (Comboplan.class.getClassLoader()));
         this.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
     }
@@ -46,8 +45,32 @@ public class ComboPlanResponse extends BaseModel implements Parcelable {
     public ComboPlanResponse() {
     }
 
+    public List<Comboplan> getComboplans() {
+        return comboplans;
+    }
+
+    public void setComboplans(List<Comboplan> comboplans) {
+        this.comboplans = comboplans;
+    }
+
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public String getStatusMessage() {
+        return statusMessage;
+    }
+
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeList(comboplan);
+        dest.writeList(comboplans);
         dest.writeValue(statusCode);
         dest.writeValue(statusMessage);
     }

@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
 
     public static final String TAG = "ComboPlanGridAdapter";
-
+    public LayoutInflater mInflater = null;
     /**
      * Adapter Class private data members.
      */
@@ -34,7 +34,6 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
     private ArrayList<Comboplan> mComboList = null;
     private int mLayoutResource;
     private View.OnClickListener mClickListener = null;
-    public LayoutInflater mInflater = null;
 
     public ComboPlanGridAdapter(@NonNull Activity activity, View.OnClickListener clickListener, @LayoutRes int resource, ArrayList<Comboplan> list) {
         super(activity, resource, list);
@@ -43,22 +42,6 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
         this.mLayoutResource = resource;
         this.mClickListener = clickListener;
         this.mInflater = activity.getLayoutInflater();
-    }
-
-    /**
-     * @class Holder
-     * @desc Public static holder class for holding the xml view reference.
-     */
-    public static class Holder {
-
-        public ImageView imgCombo = null;
-        public TextView txtComboName = null;
-        public ImageView imgVeg = null;
-        public ImageView imgNonveg = null;
-        public ImageButton iBtnAddToCart = null;
-        public TextView txtTags = null;
-        public TextView txtPrice = null;
-        public int tag = -1;
     }
 
     @NonNull
@@ -92,20 +75,20 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
 
         holder.iBtnAddToCart.setTag(comboplan);
         holder.imgCombo.setTag(comboplan);
-        holder.txtComboName.setText(comboplan.comboName);
-        holder.txtTags.setText(comboplan.cuisineName != null ? comboplan.cuisineName : "");
-        holder.txtPrice.setText("AED " + comboplan.price);
+        holder.txtComboName.setText(comboplan.getComboName());
+        holder.txtTags.setText(comboplan.getCuisineName() != null ? comboplan.getCuisineName() : "");
+        holder.txtPrice.setText("AED " + comboplan.getComboPayPrice());
 
         try {
 
-            Picasso.with(mActivity).load(comboplan.image).error(R.drawable.img_default_combo).into(holder.imgCombo);
+            Picasso.with(mActivity).load(comboplan.getComboImage()).error(R.drawable.img_default_combo).into(holder.imgCombo);
         } catch (Exception exception) {
 
             exception.printStackTrace();
             Toast.makeText(mActivity, "Exception: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        if (comboplan.type.contains("nonveg")) {
+        if (comboplan.getComboType().contains("nonveg")) {
 
             holder.imgVeg.setVisibility(View.GONE);
             holder.imgNonveg.setVisibility(View.VISIBLE);
@@ -116,5 +99,21 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
         }
 
         return view;
+    }
+
+    /**
+     * @class Holder
+     * @desc Public static holder class for holding the xml view reference.
+     */
+    public static class Holder {
+
+        public ImageView imgCombo = null;
+        public TextView txtComboName = null;
+        public ImageView imgVeg = null;
+        public ImageView imgNonveg = null;
+        public ImageButton iBtnAddToCart = null;
+        public TextView txtTags = null;
+        public TextView txtPrice = null;
+        public int tag = -1;
     }
 }

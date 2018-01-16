@@ -3,12 +3,12 @@ package com.app.gofoodie.model.cuisine;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Cuisine implements Parcelable {
 
-    public final static Creator<Cuisine> CREATOR = new Creator<Cuisine>() {
+    public final static Parcelable.Creator<Cuisine> CREATOR = new Creator<Cuisine>() {
 
 
         @SuppressWarnings({
@@ -23,17 +23,21 @@ public class Cuisine implements Parcelable {
         }
 
     };
-    public boolean isChecked = true;
+    public boolean isChecked = false;
+    @SerializedName("cuisine_id")
+    @Expose
     private String cuisineId;
+    @SerializedName("cuisine_name")
+    @Expose
     private String cuisineName;
+    @SerializedName("cate_id")
+    @Expose
     private String cateId;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     protected Cuisine(Parcel in) {
         this.cuisineId = ((String) in.readValue((String.class.getClassLoader())));
         this.cuisineName = ((String) in.readValue((String.class.getClassLoader())));
         this.cateId = ((String) in.readValue((String.class.getClassLoader())));
-        this.additionalProperties = ((Map<String, Object>) in.readValue((Map.class.getClassLoader())));
     }
 
     public Cuisine() {
@@ -63,19 +67,10 @@ public class Cuisine implements Parcelable {
         this.cateId = cateId;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(cuisineId);
         dest.writeValue(cuisineName);
         dest.writeValue(cateId);
-        dest.writeValue(additionalProperties);
     }
 
     public int describeContents() {

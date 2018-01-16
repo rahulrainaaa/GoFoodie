@@ -55,6 +55,17 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
         mAdapter = new CheckedListViewAdapter(this, mList);
         mListView.setAdapter(mAdapter);
 
+        String type = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_TYPE_KEY, "nonveg");
+
+        if (type.equals("veg")) {
+
+            mRgpMealType.check(R.id.radio_veg);
+
+        } else {
+
+            mRgpMealType.check(R.id.radio_non_veg);
+        }
+
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), Network.URL_GET_CUISINE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
@@ -90,15 +101,15 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
         switch (mRgpMealType.getCheckedRadioButtonId()) {
             case R.id.radio_veg:
 
-                mStrMealType = "1";
+                mStrMealType = "veg";
                 break;
             case R.id.radio_non_veg:
 
-                mStrMealType = "2";
+                mStrMealType = "nonveg";
                 break;
             case R.id.radio_both:
 
-                mStrMealType = "both";
+                mStrMealType = "nonveg";
                 break;
         }
         Iterator<Cuisine> iterator = mList.iterator();
@@ -168,7 +179,7 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
         mListView.setAdapter(mAdapter);
         if (mList.size() == 0) {
 
-            Toast.makeText(this, "Category list is empty.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cuisine list is empty.", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -37,7 +37,8 @@
             android:layout_weight="1"
             android:checked="true"
             android:tag="3"
-            android:text="Both" />
+            android:text="Both"
+            android:visibility="gone" />
 
     </RadioGroup>
 

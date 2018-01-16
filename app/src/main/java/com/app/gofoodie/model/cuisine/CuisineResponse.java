@@ -4,14 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.app.gofoodie.model.base.BaseModel;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CuisineResponse extends BaseModel implements Parcelable {
 
-    public final static Creator<CuisineResponse> CREATOR = new Creator<CuisineResponse>() {
+    public final static Parcelable.Creator<CuisineResponse> CREATOR = new Creator<CuisineResponse>() {
 
 
         @SuppressWarnings({
@@ -26,16 +26,20 @@ public class CuisineResponse extends BaseModel implements Parcelable {
         }
 
     };
+    @SerializedName("cuisine")
+    @Expose
     private List<Cuisine> cuisine = null;
+    @SerializedName("statusCode")
+    @Expose
     private Integer statusCode;
+    @SerializedName("statusMessage")
+    @Expose
     private String statusMessage;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     protected CuisineResponse(Parcel in) {
-        in.readList(this.cuisine, (Cuisine.class.getClassLoader()));
+        in.readList(this.cuisine, (com.app.gofoodie.model.cuisine.Cuisine.class.getClassLoader()));
         this.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
-        this.additionalProperties = ((Map<String, Object>) in.readValue((Map.class.getClassLoader())));
     }
 
     public CuisineResponse() {
@@ -65,19 +69,10 @@ public class CuisineResponse extends BaseModel implements Parcelable {
         this.statusMessage = statusMessage;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeList(cuisine);
         dest.writeValue(statusCode);
         dest.writeValue(statusMessage);
-        dest.writeValue(additionalProperties);
     }
 
     public int describeContents() {

@@ -1,15 +1,11 @@
 package com.app.gofoodie.activity.derived;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
-import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
@@ -17,11 +13,12 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.gridViewAdapter.ComboPlanGridAdapter;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
-import com.app.gofoodie.model.comboPlan.ComboItem;
+import com.app.gofoodie.model.comboPlan.ComboOption;
 import com.app.gofoodie.model.comboPlan.ComboPlanResponse;
 import com.app.gofoodie.model.comboPlan.Comboplan;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.app.gofoodie.utility.CacheUtils;
 import com.app.gofoodie.utility.VibrationUtil;
 
 import org.json.JSONArray;
@@ -55,6 +52,16 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combo_plan);
         mComboGridView = (GridView) findViewById(R.id.combo_plan_grid_layout);
+
+        String cuisinePref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_CUISINE_KEY, "");
+        String typePref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_TYPE_KEY, "");
+
+        if (cuisinePref.trim().isEmpty() || typePref.trim().isEmpty()) {
+
+            startActivity(new Intent(this, MealPreferenceActivity.class));
+            Toast.makeText(this, "Select your preference", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     @Override
@@ -94,7 +101,12 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
      */
     private void refreshComboList() {
 
-        String mealPreference = "";
+        String cuisinePref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_CUISINE_KEY, "");
+        String typePref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_TYPE_KEY, "");
+
+
+        String mealPreference = "&cuisine=" + cuisinePref + "&combo_type=" + typePref;
+
         String branchId = getIntent().getStringExtra("branch_id");
         String url = Network.URL_GET_BRANCH_COMBOS + branchId + mealPreference.trim();
         NetworkHandler networkHandler = new NetworkHandler();
@@ -136,9 +148,9 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
         ModelParser parser = new ModelParser();
         ComboPlanResponse comboPlanResponse = (ComboPlanResponse) parser.getModel(json.toString(), ComboPlanResponse.class, null);
 
-        if (comboPlanResponse.statusCode != 200) {
+        if (comboPlanResponse.getStatusCode() != 200) {
 
-            Toast.makeText(this, "" + comboPlanResponse.statusMessage, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + comboPlanResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
 
             if (mComboPlanList != null) {
                 mComboPlanList.clear();
@@ -148,7 +160,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
 
         } else {
 
-            mComboPlanList = (ArrayList<Comboplan>) comboPlanResponse.comboplan;
+            mComboPlanList = (ArrayList<Comboplan>) comboPlanResponse.getComboplans();
             mAdapter = new ComboPlanGridAdapter(this, this, R.layout.item_gridview_combo_plan, mComboPlanList);
             mComboGridView.setAdapter(mAdapter);
         }
@@ -189,7 +201,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
                 break;
             case R.id.image_combo:
 
-                showComboDescription(view);
+//                showComboDescription(view);
                 break;
         }
 
@@ -208,18 +220,18 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
 
             JSONArray jsonArrayItems = new JSONArray();
 
-            Iterator<ComboItem> comboplanIterator = comboplan.comboItems.iterator();
+            Iterator<ComboOption> comboplanIterator = comboplan.getComboOptions().iterator();
 
             while (comboplanIterator.hasNext()) {
 
-                ComboItem item = comboplanIterator.next();
+                ComboOption item = comboplanIterator.next();
 
-                JSONArray jsonArrOptionList = new JSONArray(item.options);
+                JSONArray jsonArrOptionList = new JSONArray(item.getOptions());
 
                 JSONObject jsonItem = new JSONObject();
-                jsonItem.put("item_id", item.comboItemId);
-                jsonItem.put("name", item.itemName);
-                jsonItem.put("value", item.options.get(0));
+                jsonItem.put("item_id", item.getComboItemId());
+                jsonItem.put("name", item.getName());
+                jsonItem.put("value", item.getOptions().get(0));
                 jsonItem.put("options", jsonArrOptionList);
 
                 jsonArrayItems.put(jsonItem);
@@ -228,8 +240,8 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
             JSONObject jsonRequest = new JSONObject();
             jsonRequest.put("customer_id", getSessionData().getCustomerId());
             jsonRequest.put("login_id", getSessionData().getLoginId());
-            jsonRequest.put("branch_id", comboplan.branchId);
-            jsonRequest.put("combo_id", comboplan.comboId);
+            jsonRequest.put("branch_id", comboplan.getBranchId());
+            jsonRequest.put("combo_id", comboplan.getComboId());
             jsonRequest.put("quantity", "1");
             jsonRequest.put("token", getSessionData().getToken());
             jsonRequest.put("description", jsonArrayItems);
@@ -246,39 +258,39 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
 
     }
 
-    /**
-     * Method to show the combo description.
-     *
-     * @param v
-     */
-    public void showComboDescription(View v) {
-
-        Comboplan comboplan = (Comboplan) v.getTag();
-        View view = getLayoutInflater().inflate(R.layout.dialog_combo_details, null);
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle(comboplan.comboName);
-        alertDialog.setView(view);
-        ((RatingBar) view.findViewById(R.id.rating_bar)).setRating(Float.parseFloat(comboplan.avgRating.trim()));
-        ((TextView) view.findViewById(R.id.type_n_cuisine)).setText(comboplan.cuisineName);
-        ((TextView) view.findViewById(R.id.desc)).setText(comboplan.description);
-        ((TextView) view.findViewById(R.id.txt_price)).setText("AED " + comboplan.price);
-        if (comboplan.type.trim().toLowerCase().equals("nonveg")) {
-
-            view.findViewById(R.id.img_veg).setVisibility(View.GONE);
-            view.findViewById(R.id.img_nonveg).setVisibility(View.VISIBLE);
-        } else {
-
-            view.findViewById(R.id.img_veg).setVisibility(View.VISIBLE);
-            view.findViewById(R.id.img_nonveg).setVisibility(View.GONE);
-        }
-        alertDialog.setCancelable(false);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-    }
+//    /**
+//     * Method to show the combo description.
+//     *
+//     * @param v
+//     */
+//    public void showComboDescription(View v) {
+//
+//        Comboplan comboplan = (Comboplan) v.getTag();
+//        View view = getLayoutInflater().inflate(R.layout.dialog_combo_details, null);
+//        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+//        alertDialog.setTitle(comboplan.getComboName());
+//        alertDialog.setView(view);
+//        ((RatingBar) view.findViewById(R.id.rating_bar)).setRating(Float.parseFloat(comboplan..trim()));
+//        ((TextView) view.findViewById(R.id.type_n_cuisine)).setText(comboplan.get);
+//        ((TextView) view.findViewById(R.id.desc)).setText(comboplan.getComboDescription());
+//        ((TextView) view.findViewById(R.id.txt_price)).setText("AED " + comboplan.price);
+//        if (comboplan.type.trim().toLowerCase().equals("nonveg")) {
+//
+//            view.findViewById(R.id.img_veg).setVisibility(View.GONE);
+//            view.findViewById(R.id.img_nonveg).setVisibility(View.VISIBLE);
+//        } else {
+//
+//            view.findViewById(R.id.img_veg).setVisibility(View.VISIBLE);
+//            view.findViewById(R.id.img_nonveg).setVisibility(View.GONE);
+//        }
+//        alertDialog.setCancelable(false);
+//        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//        alertDialog.show();
+//    }
 
 }

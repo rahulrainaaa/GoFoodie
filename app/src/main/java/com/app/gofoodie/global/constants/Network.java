@@ -10,8 +10,6 @@ public class Network {
      * POST REST Web APIs.
      */
 
-    public static final String URL_GET_CUISINE = "http://gofoodie.drushtiindia.com/API/Cuisine/";
-
     public static final String URL_EMERGENCY_CANCEL = "http://gofoodie.drushtiindia.com/API/VacationRequest/emergencyVacationRequest";
 
     public static final String URL_LONG_VACATION = "http://gofoodie.drushtiindia.com/API/VacationRequest/longVacationRequest";
@@ -54,13 +52,13 @@ public class Network {
      * GET REST Web APIs.
      */
 
+    public static final String URL_GET_CUISINE = "http://gofoodie.drushtiindia.com/API/Cuisine/";
+
     public static final String URL_GET_CART = "http://gofoodie.drushtiindia.com/API/Cart/viewCart/";
 
-    public static final String URL_GET_BRANCH_COMBOS = "http://gofoodie.drushtiindia.com/API/Combos?branchId=";
+    public static final String URL_GET_BRANCH_COMBOS = "http://gofoodie.drushtiindia.com/API/combos/getComboPlans?branchId=";
 
     public static final String URL_GET_BRANCH_DETAILS = "http://gofoodie.drushtiindia.com/API/Restaurants/get_restaurant_branch?branch_id=";
-
-    public static final String URL_GET_WEEK_PREF = "http://gofoodie.drushtiindia.com/API/Preferences/getWeekPreference/";
 
     public static final String URL_GET_BRANCH_REV = "http://gofoodie.drushtiindia.com/API/Reviews?branch_id=";
 

@@ -1,66 +1,66 @@
 
 package com.app.gofoodie.model.comboPlan;
 
+import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class Comboplan implements Parcelable {
+public class Comboplan implements Parcelable
+{
 
     @SerializedName("combo_id")
     @Expose
-    public String comboId;
-    @SerializedName("cb_id")
-    @Expose
-    public String cbId;
+    private String comboId;
     @SerializedName("branch_id")
     @Expose
-    public String branchId;
-    @SerializedName("type")
-    @Expose
-    public String type;
-    @SerializedName("branch_name")
-    @Expose
-    public String branchName;
-    @SerializedName("restaurant_name")
-    @Expose
-    public String restaurantName;
+    private String branchId;
     @SerializedName("combo_name")
     @Expose
-    public String comboName;
-    @SerializedName("cate_name")
+    private String comboName;
+    @SerializedName("combo_type")
     @Expose
-    public String cateName;
+    private String comboType;
+    @SerializedName("combo_description")
+    @Expose
+    private String comboDescription;
+    @SerializedName("combo_pay_price")
+    @Expose
+    private String comboPayPrice;
+    @SerializedName("combo_image")
+    @Expose
+    private String comboImage;
+    @SerializedName("branch_name")
+    @Expose
+    private String branchName;
+    @SerializedName("branch_address")
+    @Expose
+    private String branchAddress;
+    @SerializedName("resturant_type")
+    @Expose
+    private String resturantType;
+    @SerializedName("cuisine_id")
+    @Expose
+    private String cuisineId;
     @SerializedName("cuisine_name")
     @Expose
-    public String cuisineName;
-    @SerializedName("description")
+    private String cuisineName;
+    @SerializedName("combo_options")
     @Expose
-    public String description;
-    @SerializedName("image")
-    @Expose
-    public String image;
-    @SerializedName("price")
-    @Expose
-    public String price;
+    private List<ComboOption> comboOptions = null;
     @SerializedName("avg_rating")
     @Expose
-    public String avgRating;
+    private Integer avgRating;
     @SerializedName("count_rating")
     @Expose
-    public String countRating;
-    @SerializedName("comboItems")
-    @Expose
-    public List<ComboItem> comboItems = null;
+    private Integer countRating;
     public final static Creator<Comboplan> CREATOR = new Creator<Comboplan>() {
 
 
         @SuppressWarnings({
-                "unchecked"
+            "unchecked"
         })
         public Comboplan createFromParcel(Parcel in) {
             return new Comboplan(in);
@@ -70,49 +70,170 @@ public class Comboplan implements Parcelable {
             return (new Comboplan[size]);
         }
 
-    };
+    }
+    ;
 
     protected Comboplan(Parcel in) {
         this.comboId = ((String) in.readValue((String.class.getClassLoader())));
-        this.cbId = ((String) in.readValue((String.class.getClassLoader())));
         this.branchId = ((String) in.readValue((String.class.getClassLoader())));
-        this.type = ((String) in.readValue((String.class.getClassLoader())));
-        this.branchName = ((String) in.readValue((String.class.getClassLoader())));
-        this.restaurantName = ((String) in.readValue((String.class.getClassLoader())));
         this.comboName = ((String) in.readValue((String.class.getClassLoader())));
-        this.cateName = ((String) in.readValue((String.class.getClassLoader())));
+        this.comboType = ((String) in.readValue((String.class.getClassLoader())));
+        this.comboDescription = ((String) in.readValue((String.class.getClassLoader())));
+        this.comboPayPrice = ((String) in.readValue((String.class.getClassLoader())));
+        this.comboImage = ((String) in.readValue((String.class.getClassLoader())));
+        this.branchName = ((String) in.readValue((String.class.getClassLoader())));
+        this.branchAddress = ((String) in.readValue((String.class.getClassLoader())));
+        this.resturantType = ((String) in.readValue((String.class.getClassLoader())));
+        this.cuisineId = ((String) in.readValue((String.class.getClassLoader())));
         this.cuisineName = ((String) in.readValue((String.class.getClassLoader())));
-        this.description = ((String) in.readValue((String.class.getClassLoader())));
-        this.image = ((String) in.readValue((String.class.getClassLoader())));
-        this.price = ((String) in.readValue((String.class.getClassLoader())));
-        this.avgRating = ((String) in.readValue((String.class.getClassLoader())));
-        this.countRating = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.comboItems, (com.app.gofoodie.model.comboPlan.ComboItem.class.getClassLoader()));
+        in.readList(this.comboOptions, (ComboOption.class.getClassLoader()));
+        this.avgRating = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.countRating = ((Integer) in.readValue((Integer.class.getClassLoader())));
     }
 
     public Comboplan() {
     }
 
+    public String getComboId() {
+        return comboId;
+    }
+
+    public void setComboId(String comboId) {
+        this.comboId = comboId;
+    }
+
+    public String getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
+    }
+
+    public String getComboName() {
+        return comboName;
+    }
+
+    public void setComboName(String comboName) {
+        this.comboName = comboName;
+    }
+
+    public String getComboType() {
+        return comboType;
+    }
+
+    public void setComboType(String comboType) {
+        this.comboType = comboType;
+    }
+
+    public String getComboDescription() {
+        return comboDescription;
+    }
+
+    public void setComboDescription(String comboDescription) {
+        this.comboDescription = comboDescription;
+    }
+
+    public String getComboPayPrice() {
+        return comboPayPrice;
+    }
+
+    public void setComboPayPrice(String comboPayPrice) {
+        this.comboPayPrice = comboPayPrice;
+    }
+
+    public String getComboImage() {
+        return comboImage;
+    }
+
+    public void setComboImage(String comboImage) {
+        this.comboImage = comboImage;
+    }
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    public String getBranchAddress() {
+        return branchAddress;
+    }
+
+    public void setBranchAddress(String branchAddress) {
+        this.branchAddress = branchAddress;
+    }
+
+    public String getResturantType() {
+        return resturantType;
+    }
+
+    public void setResturantType(String resturantType) {
+        this.resturantType = resturantType;
+    }
+
+    public String getCuisineId() {
+        return cuisineId;
+    }
+
+    public void setCuisineId(String cuisineId) {
+        this.cuisineId = cuisineId;
+    }
+
+    public String getCuisineName() {
+        return cuisineName;
+    }
+
+    public void setCuisineName(String cuisineName) {
+        this.cuisineName = cuisineName;
+    }
+
+    public List<ComboOption> getComboOptions() {
+        return comboOptions;
+    }
+
+    public void setComboOptions(List<ComboOption> comboOptions) {
+        this.comboOptions = comboOptions;
+    }
+
+    public Integer getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(Integer avgRating) {
+        this.avgRating = avgRating;
+    }
+
+    public Integer getCountRating() {
+        return countRating;
+    }
+
+    public void setCountRating(Integer countRating) {
+        this.countRating = countRating;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(comboId);
-        dest.writeValue(cbId);
         dest.writeValue(branchId);
-        dest.writeValue(type);
-        dest.writeValue(branchName);
-        dest.writeValue(restaurantName);
         dest.writeValue(comboName);
-        dest.writeValue(cateName);
+        dest.writeValue(comboType);
+        dest.writeValue(comboDescription);
+        dest.writeValue(comboPayPrice);
+        dest.writeValue(comboImage);
+        dest.writeValue(branchName);
+        dest.writeValue(branchAddress);
+        dest.writeValue(resturantType);
+        dest.writeValue(cuisineId);
         dest.writeValue(cuisineName);
-        dest.writeValue(description);
-        dest.writeValue(image);
-        dest.writeValue(price);
+        dest.writeList(comboOptions);
         dest.writeValue(avgRating);
         dest.writeValue(countRating);
-        dest.writeList(comboItems);
     }
 
     public int describeContents() {
-        return 0;
+        return  0;
     }
 
 }
