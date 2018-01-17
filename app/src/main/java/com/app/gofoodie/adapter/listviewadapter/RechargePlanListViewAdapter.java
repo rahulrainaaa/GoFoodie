@@ -1,6 +1,7 @@
 package com.app.gofoodie.adapter.listviewadapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,14 +23,6 @@ public class RechargePlanListViewAdapter extends ArrayAdapter<Subscriptionplan> 
     private ArrayList<Subscriptionplan> mListData = null;
     private int mLayoutResourceId;
 
-    private static class Holder {
-
-        public TextView txtRechargePlan = null;
-        public TextView txtRechargeDesc = null;
-        public TextView txtRechargePrice = null;
-        public TextView txtRechargeDays = null;
-        public int tag = -1;
-    }
 
     public RechargePlanListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Subscriptionplan> list) {
 
@@ -64,7 +57,27 @@ public class RechargePlanListViewAdapter extends ArrayAdapter<Subscriptionplan> 
         holder.txtRechargePlan.setText(plan.name);
         holder.txtRechargeDesc.setText(plan.description);
         holder.txtRechargePrice.setText("AED " + plan.payAmount);
-        holder.txtRechargeDays.setText(plan.validityDays + " Days");
+
+        if (Integer.parseInt(plan.validityDays.trim()) <= 0) {   // Recharge Plan.
+
+            holder.txtRechargePlan.setTextColor(Color.parseColor("#519f2d"));   // Green
+            holder.txtRechargeDays.setText("");
+
+        } else {        // Subscription Plan.
+
+            holder.txtRechargePlan.setTextColor(Color.parseColor("#F6333A"));   // Red
+            holder.txtRechargeDays.setText(plan.validityDays + " Days");
+        }
+
         return cell;
+    }
+
+    private static class Holder {
+
+        public TextView txtRechargePlan = null;
+        public TextView txtRechargeDesc = null;
+        public TextView txtRechargePrice = null;
+        public TextView txtRechargeDays = null;
+        public int tag = -1;
     }
 }

@@ -13,6 +13,7 @@ import com.app.gofoodie.adapter.listviewadapter.RechargePlanListViewAdapter;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.rechargePlan.RechargePlan;
 import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
  */
 public class SubscriptionActivity extends BaseAppCompatActivity implements NetworkCallbackListener, AdapterView.OnItemClickListener {
 
-    public static final String TAG = "";
+    public static final String TAG = "SubscriptionActivity";
 
     /**
      * Class private data member(s).
@@ -50,8 +51,21 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
         mListView = (ListView) findViewById(R.id.list_view);
         mListView.setOnItemClickListener(this);
 
+        String url;
+
+        boolean flagSubscription = CustomerProfileHandler.CUSTOMER.profile.validUpto.trim().isEmpty();
+
+        if (flagSubscription) { // No recharge plan needed.
+
+            url = Network.URL_GET_RECHARGE_PLANS + "?recharge=false";
+
+        } else {    // Get all plans (Subscription and Recharge plans).
+
+            url = Network.URL_GET_RECHARGE_PLANS + "?recharge=true";
+        }
+
         NetworkHandler networkHandler = new NetworkHandler();
-        networkHandler.httpCreate(1, this, this, new JSONObject(), Network.URL_GET_RECHARGE_PLANS, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
 
     }

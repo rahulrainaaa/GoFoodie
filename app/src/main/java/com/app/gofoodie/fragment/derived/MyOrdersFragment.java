@@ -53,6 +53,17 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
     private String mStrFromDate = null;
     private String mStrToDate = null;
+    private OrderCancellationListener mOrderCancellationListener = new OrderCancellationListener() {
+        @Override
+        public void orderCancellationApplied(OrderCancellationHandler.RESP_CODE responseCode, OrderCancellationHandler.OP_CODE operationCode, JSONObject jsonResponse, String message) {
+
+            if (responseCode != OrderCancellationHandler.RESP_CODE.RESP_SUCCESS) {
+
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            }
+            fetchMyOrders(null, null);
+        }
+    };
 
     @Nullable
     @Override
@@ -93,7 +104,6 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
 
     }
 
-
     private void fetchMyOrders(String fromDate, String toDate) {
 
         mStrFromDate = fromDate;
@@ -132,23 +142,6 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
         dpd.setAutoHighlight(true);
         dpd.show(getFragmentManager(), "Select Date Range");
 
-    }
-
-    private void menuItemLongVacationSelected() {
-
-        Toast.makeText(getActivity(), "Long-Term vacation under development", Toast.LENGTH_SHORT).show();
-    }
-
-    private void menuItemShortVacationSelected() {
-
-        Toast.makeText(getActivity(), "Short-Term vacation under development", Toast.LENGTH_SHORT).show();
-
-
-    }
-
-    private void menuItemEmergencySelected() {
-
-        Toast.makeText(getActivity(), "Emergency Cancellation under development", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -345,17 +338,5 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
         orderCancellationHandler.showCancellationOptions(order, mOrderCancellationListener);
 
     }
-
-    private OrderCancellationListener mOrderCancellationListener = new OrderCancellationListener() {
-        @Override
-        public void orderCancellationApplied(OrderCancellationHandler.RESP_CODE responseCode, OrderCancellationHandler.OP_CODE operationCode, JSONObject jsonResponse, String message) {
-
-            if (responseCode != OrderCancellationHandler.RESP_CODE.RESP_SUCCESS) {
-
-                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-            }
-            fetchMyOrders(null, null);
-        }
-    };
 
 }
