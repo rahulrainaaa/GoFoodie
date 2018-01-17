@@ -28,6 +28,9 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     public static final String TAG = "ProfileFragment";
 
+    /**
+     * Class private data member(s).
+     */
     private TextView mTxtName = null;
     private TextView mTxtMobile = null;
     private TextView mTxtEmail = null;
@@ -65,8 +68,22 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
         try {
 
+            /**
+             * Include 0s to make customer Id 7 characters in length.
+             */
+            int len = CustomerProfileHandler.CUSTOMER.profile.customerId.trim().length();
+
+            String cid = "";
+
+            while (len < 8) {
+
+                cid = cid + "0";
+                len++;
+            }
+
+            cid = cid + CustomerProfileHandler.CUSTOMER.profile.customerId.trim();
             mTxtName.setText("" + CustomerProfileHandler.CUSTOMER.profile.name.trim());
-            mTxtEmail.setText("" + CustomerProfileHandler.CUSTOMER.profile.email.trim());
+            mTxtEmail.setText("" + CustomerProfileHandler.CUSTOMER.profile.email.trim() + "\nCustomer ID: C." + cid + "");
             mTxtMobile.setText("" + CustomerProfileHandler.CUSTOMER.profile.mobile1.trim());
 
         } catch (Exception e) {

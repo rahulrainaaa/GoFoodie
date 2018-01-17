@@ -1,5 +1,7 @@
 package com.app.gofoodie.activity.derived;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -107,7 +109,34 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
      * @method btn_update_profile
      * @desc Method will handle the logic after update button is clicked.
      */
-    private void btnUpdateProfileClicked(View view) {
+    private void btnUpdateProfileClicked(final View view) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle("Alert");
+        builder.setMessage("Do you agree to change the delivery address to all orders which are yet to be delivered. It may charge you some amount which will be deducted from your wallet.");
+        builder.setIcon(R.drawable.icon_error_alert);
+        builder.setPositiveButton("Agree and Update", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                sendUpdateProfileRequest(view, true);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Remain Unchanged", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                sendUpdateProfileRequest(view, false);
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+
+    }
+
+    private void sendUpdateProfileRequest(View view, boolean changeAddress) {
 
         Customer customer = CustomerProfileHandler.CUSTOMER;
 
@@ -125,6 +154,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             jsonRequest.put("mobile2", mEtAltMobile.getText().toString().trim());
             jsonRequest.put("email", customer.profile.email);
             jsonRequest.put("email2", mEtAltEmail.getText().toString().trim());
+            jsonRequest.put("change_delivery_address", changeAddress);
 
             NetworkHandler networkHandler = new NetworkHandler();
             networkHandler.httpCreate(1, this, this, jsonRequest, Network.URL_UPDATE_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
@@ -146,7 +176,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
         mButton.setEnabled(true);
-        Toast.makeText(this, "HTTP Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
+
         if (requestCode == 1) {
 
             handleProfileUpdatedResponse(rawObject);

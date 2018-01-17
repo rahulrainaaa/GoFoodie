@@ -133,6 +133,16 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             mEtFirstName.setError(null);
         }
 
+        if (strLastName.isEmpty()) {
+
+            isValid = false;
+            mEtLastName.setError(getString(R.string.cannot_be_empty));
+        } else {
+
+            isValid = true;
+            mEtLastName.setError(null);
+        }
+
         if (strEmail.isEmpty()) {
 
             isValid = false;

@@ -178,25 +178,9 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
         }
 
         /**
-         * Fetch the cuisine preference.
-         */
-//        String meal_cat_pref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_CUISINE_KEY, " ");
-//        String meal_type_pref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_TYPE_KEY, " ");
-
-        /**
          * Append parameters to url string.
          */
         String url = Network.URL_GET_RESTAURANT + "?areas=" + location_id;
-
-//        if (!meal_cat_pref.trim().isEmpty()) {
-//
-//            url = url + "&category=" + meal_cat_pref;
-//        }
-//
-//        if (!meal_type_pref.trim().isEmpty()) {
-//
-//            url = url + "&type=" + meal_type_pref;
-//        }
 
         if (search != null) {
 

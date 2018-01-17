@@ -23,16 +23,6 @@ public class WalletTransactionListViewAdapter extends ArrayAdapter<WalletTransac
     private ArrayList<WalletTransaction> mListData = null;
     private int mLayoutResourceId;
 
-    private static class Holder {
-
-        public ImageView imgType = null;
-        public TextView txtTransactionId = null;
-        public TextView txtDate = null;
-        public TextView txtReviews = null;
-        public TextView txtPrice = null;
-        public int tag = -1;
-    }
-
     public WalletTransactionListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<WalletTransaction> list) {
 
         super(activity, resource, list);
@@ -63,7 +53,8 @@ public class WalletTransactionListViewAdapter extends ArrayAdapter<WalletTransac
         }
 
 //        holder.imgIcon
-        holder.txtTransactionId.setText("Invoice: " + transaction.getInvoiceId());
+//        holder.txtTransactionId.setText("Invoice: " + transaction.getInvoiceId());
+        holder.txtTransactionId.setText("Invoice ID: " + transaction.getWalletTransactionId());
         holder.txtDate.setText(transaction.getDatetime());
         holder.txtReviews.setText(transaction.getRemarks());
         holder.txtPrice.setText(transaction.getAmount());
@@ -77,5 +68,15 @@ public class WalletTransactionListViewAdapter extends ArrayAdapter<WalletTransac
         }
 
         return cell;
+    }
+
+    private static class Holder {
+
+        public ImageView imgType = null;
+        public TextView txtTransactionId = null;
+        public TextView txtDate = null;
+        public TextView txtReviews = null;
+        public TextView txtPrice = null;
+        public int tag = -1;
     }
 }
