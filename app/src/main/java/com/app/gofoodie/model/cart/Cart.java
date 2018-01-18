@@ -13,37 +13,43 @@ public class Cart implements Parcelable
 
     @SerializedName("cart_item_id")
     @Expose
-    public String cartItemId;
+    private String cartItemId;
+    @SerializedName("zone_shipping_charge")
+    @Expose
+    private String zoneShippingCharge;
     @SerializedName("restaurantName")
     @Expose
-    public String restaurantName;
+    private String restaurantName;
     @SerializedName("restaurant_id")
     @Expose
-    public String restaurantId;
+    private String restaurantId;
     @SerializedName("branch_id")
     @Expose
-    public String branchId;
+    private String branchId;
     @SerializedName("combo_id")
     @Expose
-    public String comboId;
+    private String comboId;
     @SerializedName("comboName")
     @Expose
-    public String comboName;
+    private String comboName;
     @SerializedName("image")
     @Expose
-    public String image;
+    private String image;
     @SerializedName("type")
     @Expose
-    public String type;
+    private String type;
     @SerializedName("comboPrice")
     @Expose
-    public String comboPrice;
+    private String comboPrice;
+    @SerializedName("pay_price")
+    @Expose
+    private String payPrice;
     @SerializedName("quantity")
     @Expose
-    public String quantity;
+    private String quantity;
     @SerializedName("description")
     @Expose
-    public List<Description> description = null;
+    private List<Description> description = null;
     public final static Creator<Cart> CREATOR = new Creator<Cart>() {
 
 
@@ -63,6 +69,7 @@ public class Cart implements Parcelable
 
     protected Cart(Parcel in) {
         this.cartItemId = ((String) in.readValue((String.class.getClassLoader())));
+        this.zoneShippingCharge = ((String) in.readValue((String.class.getClassLoader())));
         this.restaurantName = ((String) in.readValue((String.class.getClassLoader())));
         this.restaurantId = ((String) in.readValue((String.class.getClassLoader())));
         this.branchId = ((String) in.readValue((String.class.getClassLoader())));
@@ -71,6 +78,7 @@ public class Cart implements Parcelable
         this.image = ((String) in.readValue((String.class.getClassLoader())));
         this.type = ((String) in.readValue((String.class.getClassLoader())));
         this.comboPrice = ((String) in.readValue((String.class.getClassLoader())));
+        this.payPrice = ((String) in.readValue((String.class.getClassLoader())));
         this.quantity = ((String) in.readValue((String.class.getClassLoader())));
         in.readList(this.description, (Description.class.getClassLoader()));
     }
@@ -78,8 +86,113 @@ public class Cart implements Parcelable
     public Cart() {
     }
 
+    public String getCartItemId() {
+        return cartItemId;
+    }
+
+    public void setCartItemId(String cartItemId) {
+        this.cartItemId = cartItemId;
+    }
+
+    public String getZoneShippingCharge() {
+        return zoneShippingCharge;
+    }
+
+    public void setZoneShippingCharge(String zoneShippingCharge) {
+        this.zoneShippingCharge = zoneShippingCharge;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
+    public String getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    public String getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
+    }
+
+    public String getComboId() {
+        return comboId;
+    }
+
+    public void setComboId(String comboId) {
+        this.comboId = comboId;
+    }
+
+    public String getComboName() {
+        return comboName;
+    }
+
+    public void setComboName(String comboName) {
+        this.comboName = comboName;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getComboPrice() {
+        return comboPrice;
+    }
+
+    public void setComboPrice(String comboPrice) {
+        this.comboPrice = comboPrice;
+    }
+
+    public String getPayPrice() {
+        return payPrice;
+    }
+
+    public void setPayPrice(String payPrice) {
+        this.payPrice = payPrice;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public List<Description> getDescription() {
+        return description;
+    }
+
+    public void setDescription(List<Description> description) {
+        this.description = description;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(cartItemId);
+        dest.writeValue(zoneShippingCharge);
         dest.writeValue(restaurantName);
         dest.writeValue(restaurantId);
         dest.writeValue(branchId);
@@ -88,6 +201,7 @@ public class Cart implements Parcelable
         dest.writeValue(image);
         dest.writeValue(type);
         dest.writeValue(comboPrice);
+        dest.writeValue(payPrice);
         dest.writeValue(quantity);
         dest.writeList(description);
     }

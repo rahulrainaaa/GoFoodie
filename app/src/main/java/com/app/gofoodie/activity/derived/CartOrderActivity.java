@@ -56,7 +56,8 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     private ArrayList<CartOrder> mList = new ArrayList<>();
     private ArrayList<Cart> cartArrayList = GlobalData.cartArrayList;
     private Date mStartDate = null;
-    private float mTotalPrice = 0;
+    private float mTotalPrice = 0f;
+    private float mTotalPayablePrice = 0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +65,17 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         setContentView(R.layout.activity_cart_order);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
+        mTotalPayablePrice = Float.valueOf(getIntent().getFloatExtra("totalPayablePrice", 0f));
         mTotalPrice = 0;
         Iterator<Cart> cartIterator = cartArrayList.iterator();
         while (cartIterator.hasNext()) {
 
             Cart cart = cartIterator.next();
-            int qty = Integer.valueOf(cart.quantity.trim());
+            int qty = Integer.valueOf(cart.getQuantity().trim());
             for (int i = 0; i < qty; i++) {
 
                 try {
-                    mTotalPrice = mTotalPrice + Float.parseFloat(cart.comboPrice.trim());
+                    mTotalPrice = mTotalPrice + Float.parseFloat(cart.getComboPrice().trim());
                 } catch (Exception e) {
                     e.printStackTrace();
                     mTotalPrice = -9999999;     // make price -ve if price not parsed. -ve price means wrong price.
@@ -353,7 +355,10 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Place Order");
         alertDialog.setCancelable(false);
-        alertDialog.setMessage("" + ((mTotalPrice < 0) ? "Total Price = ERROR...!" : "Total Price: AED " + mTotalPrice + "\nThe amount will be deducted from wallet."));
+        alertDialog.setMessage("" + ((mTotalPrice < 0) ? "Total Combo Price = ERROR...!" : "Total Price: AED " + mTotalPrice
+                + "\nOther charges = " + (mTotalPayablePrice - mTotalPrice)
+                + "\nTotal Payable Price = " + mTotalPayablePrice
+        ));
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
                 new DialogInterface.OnClickListener() {
@@ -447,7 +452,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             Iterator<Cart> cartIterator = GlobalData.cartArrayList.iterator();
             while (cartIterator.hasNext()) {
 
-                cartItemIdArray.put(cartIterator.next().cartItemId.trim());
+                cartItemIdArray.put(cartIterator.next().getCartItemId().trim());
             }
             jsonRequest.put("cart_item_id", cartItemIdArray);
             jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.profile.customerId.trim());

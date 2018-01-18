@@ -19,33 +19,6 @@ import java.util.List;
 public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecyclerAdapter.ItemHolder> {
 
     /**
-     * @class ItemHolder
-     * @desc {@link RecyclerView.ViewHolder} holder static class for Recycler View items.
-     */
-    public static class ItemHolder extends RecyclerView.ViewHolder {
-
-        public CardView cv;
-        public LinearLayout layoutVeg;
-        public LinearLayout layoutNonveg;
-        public TextView txtComboName;
-        public TextView txtDate;
-        public TextView txtPrice;
-        public ImageButton ibtnEdit;
-
-        ItemHolder(View itemView, View.OnClickListener onClickListener) {
-            super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.cv);
-            layoutVeg = (LinearLayout) itemView.findViewById(R.id.layout_veg);
-            layoutNonveg = (LinearLayout) itemView.findViewById(R.id.layout_nonveg);
-            txtComboName = (TextView) itemView.findViewById(R.id.txt_combo_name);
-            txtDate = (TextView) itemView.findViewById(R.id.txt_date);
-            txtPrice = (TextView) itemView.findViewById(R.id.txt_price);
-            ibtnEdit = (ImageButton) itemView.findViewById(R.id.ibtn_edit);
-            ibtnEdit.setOnClickListener(onClickListener);
-        }
-    }
-
-    /**
      * private class Data members.
      */
     private List<CartOrder> mList = null;
@@ -83,7 +56,16 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
 
         holder.txtComboName.setText(cartOrder.comboName);
         holder.txtDate.setText("" + cartOrder.date);
-        holder.txtPrice.setText("AED " + cartOrder.comboPrice);
+
+        String extrsPrice = "";
+
+
+        if (Float.valueOf(cartOrder.zoneShippingCharge.trim()) > 0f) {
+
+            extrsPrice = " + " + cartOrder.zoneShippingCharge.trim();
+        }
+
+        holder.txtPrice.setText("AED " + cartOrder.comboPrice + extrsPrice);
 
         if (cartOrder.type.toLowerCase().trim().equals("nonveg")) {
 
@@ -105,6 +87,33 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    /**
+     * @class ItemHolder
+     * @desc {@link RecyclerView.ViewHolder} holder static class for Recycler View items.
+     */
+    public static class ItemHolder extends RecyclerView.ViewHolder {
+
+        public CardView cv;
+        public LinearLayout layoutVeg;
+        public LinearLayout layoutNonveg;
+        public TextView txtComboName;
+        public TextView txtDate;
+        public TextView txtPrice;
+        public ImageButton ibtnEdit;
+
+        ItemHolder(View itemView, View.OnClickListener onClickListener) {
+            super(itemView);
+            cv = (CardView) itemView.findViewById(R.id.cv);
+            layoutVeg = (LinearLayout) itemView.findViewById(R.id.layout_veg);
+            layoutNonveg = (LinearLayout) itemView.findViewById(R.id.layout_nonveg);
+            txtComboName = (TextView) itemView.findViewById(R.id.txt_combo_name);
+            txtDate = (TextView) itemView.findViewById(R.id.txt_date);
+            txtPrice = (TextView) itemView.findViewById(R.id.txt_price);
+            ibtnEdit = (ImageButton) itemView.findViewById(R.id.ibtn_edit);
+            ibtnEdit.setOnClickListener(onClickListener);
+        }
     }
 
 }

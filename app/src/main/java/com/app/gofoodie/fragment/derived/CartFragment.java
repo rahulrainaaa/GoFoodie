@@ -21,6 +21,7 @@ import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.cart.Cart;
 import com.app.gofoodie.model.cart.CartResponse;
 import com.app.gofoodie.model.cart.Description;
@@ -53,6 +54,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
     private CartListViewAdapter mAdapter = null;
     private ArrayList<Cart> mCartList = null;
     private Button btnProceed = null;
+    private float totalPayablePrice = 0f;
 
     /**
      * {@link BaseFragment} Fragment callback method(s).
@@ -82,6 +84,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
 
                 GlobalData.cartArrayList = mCartList;
                 Intent intent = new Intent(getActivity(), CartOrderActivity.class);
+                intent.putExtra("totalPayablePrice", totalPayablePrice);
                 startActivity(intent);
             }
         });
@@ -144,16 +147,17 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
         VibrationUtil.getInstance().vibrate(getActivity());
         ModelParser parser = new ModelParser();
         CartResponse cartResponse = (CartResponse) parser.getModel(json.toString(), CartResponse.class, null);
-        if (cartResponse.statusCode != 200) {
+        if (cartResponse.getStatusCode() != 200) {
 
             mTxtLabel.setText("Empty Cart");
-            Toast.makeText(getActivity(), "" + cartResponse.statusMessage, Toast.LENGTH_SHORT).show();
-            cartResponse.cart = new ArrayList<Cart>();
+            Toast.makeText(getActivity(), "" + cartResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
+            cartResponse.setCart(new ArrayList<Cart>());
         } else {
 
-            mTxtLabel.setText("Total Price: " + cartResponse.totalPrice + " AED");// + ",  Price: AED " + cartResponse.totalPrice.toString());
+            totalPayablePrice = Float.valueOf(cartResponse.getTotalPrice().trim());
+            mTxtLabel.setText("Total Price: " + cartResponse.getTotalPrice() + " AED");// + ",  Price: AED " + cartResponse.totalPrice.toString());
         }
-        mCartList = (ArrayList<Cart>) cartResponse.cart;
+        mCartList = (ArrayList<Cart>) cartResponse.getCart();
         mAdapter = new CartListViewAdapter(getActivity(), mCartItemClickListener, R.layout.item_listview_cart, mCartList);
         mListView.setAdapter(mAdapter);
     }
@@ -178,7 +182,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
 
                     jsonRequest.put("customer_id", getSession().getData().getCustomerId());
                     jsonRequest.put("login_id", getSession().getData().getLoginId());
-                    jsonRequest.put("cart_item_id", cart.cartItemId);
+                    jsonRequest.put("cart_item_id", cart.getCartItemId());
                     jsonRequest.put("token", getSession().getData().getToken());
                     NetworkHandler networkHandler = new NetworkHandler();
                     networkHandler.httpCreate(1, getDashboardActivity(), CartFragment.this, jsonRequest, Network.URL_CART_ITEM_REMOVE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
@@ -200,7 +204,6 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
      */
     private void qtySelected(final View view) {
 
-
         final NumberPicker numberPicker = (NumberPicker) getActivity().getLayoutInflater().inflate(R.layout.layout_number_picker, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -218,27 +221,28 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
 
                             JSONArray jsonArrayItems = new JSONArray();
 
-                            Iterator<Description> descriptionIterator = cart.description.iterator();
+                            Iterator<Description> descriptionIterator = cart.getDescription().iterator();
                             while (descriptionIterator.hasNext()) {
 
                                 Description description = descriptionIterator.next();
-                                JSONArray jsonArrayOptions = new JSONArray(description.options);
+                                JSONArray jsonArrayOptions = new JSONArray(description.getOptions());
                                 JSONObject jsonObject = new JSONObject();
                                 jsonObject.put("options", jsonArrayOptions);
-                                jsonObject.put("name", description.value);
-                                jsonObject.put("value", description.value);
-                                jsonObject.put("item_id", description.itemId);
+                                jsonObject.put("name", description.getValue());
+                                jsonObject.put("value", description.getValue());
+                                jsonObject.put("item_id", description.getItemId());
                                 jsonArrayItems.put(jsonObject);
                             }
 
                             jsonRequest.put("description", jsonArrayItems);
                             jsonRequest.put("customer_id", getSession().getData().getCustomerId());
                             jsonRequest.put("login_id", getSession().getData().getLoginId());
-                            jsonRequest.put("combo_id", cart.comboId);
-                            jsonRequest.put("cart_item_id", cart.cartItemId);
-                            jsonRequest.put("branch_id", cart.branchId);
+                            jsonRequest.put("combo_id", cart.getComboId());
+                            jsonRequest.put("cart_item_id", cart.getCartItemId());
+                            jsonRequest.put("branch_id", cart.getBranchId());
                             jsonRequest.put("quantity", "" + qtySelected);
                             jsonRequest.put("token", getSession().getData().getToken());
+                            jsonRequest.put("area", CustomerProfileHandler.CUSTOMER.profile.area.trim());
 
                             NetworkHandler networkHandler = new NetworkHandler();
                             networkHandler.httpCreate(1, getDashboardActivity(), CartFragment.this, jsonRequest, Network.URL_UPDATE_CART_ITEM, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);

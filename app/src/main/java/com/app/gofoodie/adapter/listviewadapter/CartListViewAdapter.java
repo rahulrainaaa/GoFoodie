@@ -93,18 +93,18 @@ public class CartListViewAdapter extends ArrayAdapter<Cart> {
 
         try {
 
-            Picasso.with(mActivity).load(cart.image).error(R.drawable.img_default_combo).into(holder.imgCombo);
+            Picasso.with(mActivity).load(cart.getImage()).error(R.drawable.img_default_combo).into(holder.imgCombo);
         } catch (Exception exception) {
 
             exception.printStackTrace();
         }
 
-        holder.txtName.setText(cart.comboName);
-        holder.txtPrice.setText("AED " + cart.comboPrice);
-        holder.btnQty.setText("Qty: " + cart.quantity);
+        holder.txtName.setText(cart.getComboName());
+        holder.txtPrice.setText("AED " + cart.getComboPrice());
+        holder.btnQty.setText("Qty: " + cart.getQuantity());
 
 
-        if (cart.type.toLowerCase().equals("nonveg")) {
+        if (cart.getType().toLowerCase().equals("nonveg")) {
 
             holder.imgVeg.setVisibility(View.GONE);
             holder.imgNonveg.setVisibility(View.VISIBLE);

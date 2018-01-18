@@ -21,25 +21,27 @@ public class CartOrder {
     public String comboName;
     public String image;
     public String type;
-    public String comboPrice;
+    public String comboPrice = "0.0";
     public String quantity;
     public List<Description> description = new ArrayList<>();
+    public String zoneShippingCharge = "0.0";
 
     public CartOrder(Cart cart) {
 
-        this.cartItemId = cart.cartItemId;
-        this.restaurantName = cart.restaurantName;
-        this.branchId = cart.branchId;
-        this.restaurantId = cart.restaurantId;
-        this.comboId = cart.comboId;
-        this.comboName = cart.comboName;
-        this.image = cart.image;
-        this.type = cart.type;
-        this.comboPrice = cart.comboPrice;
-        this.quantity = cart.quantity;
+        this.cartItemId = cart.getCartItemId();
+        this.zoneShippingCharge = cart.getZoneShippingCharge();
+        this.restaurantName = cart.getRestaurantName();
+        this.branchId = cart.getBranchId();
+        this.restaurantId = cart.getRestaurantId();
+        this.comboId = cart.getComboId();
+        this.comboName = cart.getComboName();
+        this.image = cart.getImage();
+        this.type = cart.getType();
+        this.comboPrice = cart.getComboPrice();
+        this.quantity = cart.getQuantity();
 
         description.clear();
-        Iterator<com.app.gofoodie.model.cart.Description> descriptionIterator = cart.description.iterator();
+        Iterator<com.app.gofoodie.model.cart.Description> descriptionIterator = cart.getDescription().iterator();
         while (descriptionIterator.hasNext()) {
 
             this.description.add(new Description(descriptionIterator.next()));

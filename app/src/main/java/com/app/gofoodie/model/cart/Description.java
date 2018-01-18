@@ -13,16 +13,16 @@ public class Description implements Parcelable
 
     @SerializedName("item_id")
     @Expose
-    public String itemId;
+    private String itemId;
     @SerializedName("name")
     @Expose
-    public String name;
+    private String name;
     @SerializedName("value")
     @Expose
-    public String value;
+    private String value;
     @SerializedName("options")
     @Expose
-    public List<String> options = null;
+    private List<String> options = null;
     public final static Creator<Description> CREATOR = new Creator<Description>() {
 
 
@@ -48,6 +48,38 @@ public class Description implements Parcelable
     }
 
     public Description() {
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public List<String> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<String> options) {
+        this.options = options;
     }
 
     public void writeToParcel(Parcel dest, int flags) {

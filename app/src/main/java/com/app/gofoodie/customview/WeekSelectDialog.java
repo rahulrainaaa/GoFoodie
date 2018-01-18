@@ -197,7 +197,7 @@ public class WeekSelectDialog implements View.OnClickListener {
             btn.setBackgroundResource(R.drawable.border_circle_week_button);
         } else {
 
-            btn.setTextColor(Color.rgb(190, 190, 190));
+            btn.setTextColor(Color.rgb(180, 180, 180));
             btn.setBackgroundResource(R.drawable.icon_denied);
         }
     }
