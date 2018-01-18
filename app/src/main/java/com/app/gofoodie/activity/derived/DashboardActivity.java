@@ -1,7 +1,9 @@
 package com.app.gofoodie.activity.derived;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -236,5 +238,34 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle("Alert");
+        builder.setMessage("Do you want to exit?");
+        builder.setIcon(R.drawable.icon_error_alert);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Exit from application.
+                dialog.dismiss();
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Dont exit. Remain same as it is.
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+
     }
 }

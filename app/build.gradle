@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'certificate'
+            keyPassword 'password'
+            storeFile file('/Users/user/AndroidStudioProjects/GoFoodie/app/AndroidSigningCertificate')
+            storePassword 'password'
+        }
+    }
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
@@ -12,19 +20,26 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            jniDebuggable true
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
-
     packagingOptions {
         exclude 'META-INF/license.txt'
         exclude 'META-INF/notice.txt'
     }
-
+    productFlavors {
+    }
 }
 
 repositories {

@@ -424,8 +424,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     public void onFacebookGraphAPIInformation(JSONObject object, GraphResponse response) {
 
         // Fetch the data from graph API and proceed for the social login.
-        Toast.makeText(getActivity(), "Graph API: " + object.toString(), Toast.LENGTH_SHORT).show();
-
         try {
             mSocialType = "facebook";
             String fbEmail = object.getString("email");
