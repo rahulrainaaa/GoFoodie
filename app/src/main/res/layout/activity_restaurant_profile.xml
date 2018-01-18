@@ -28,7 +28,8 @@
         android:id="@+id/img_profile"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="@drawable/rest_profile_image" />
+        android:scaleType="fitXY"
+        android:src="@drawable/rest_profile_image" />
 
     <TextView
         android:id="@+id/txt_name"

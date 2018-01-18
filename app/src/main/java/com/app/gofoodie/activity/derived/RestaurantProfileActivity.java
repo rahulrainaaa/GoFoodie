@@ -15,6 +15,7 @@ import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.model.restaurant.Restaurant;
 import com.app.gofoodie.model.shortlisted.Shortlisted;
+import com.squareup.picasso.Picasso;
 
 /**
  * @class RestaurantProfileActivity
@@ -23,9 +24,6 @@ import com.app.gofoodie.model.shortlisted.Shortlisted;
 public class RestaurantProfileActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "RestaurantProfileActivity";
-
-    public static enum MODE {SHORTLISTED, REST_BRANCH}
-
     /**
      * Class private data member(s).
      */
@@ -36,13 +34,10 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     private TextView Postal = null;
     private TextView Description = null;
     private TextView AboutUs = null;
-
     private RatingBar mRatingBar = null;
-
     private ImageView Veg = null;
     private ImageView NonVeg = null;
     private ImageView Profile = null;
-
     private ImageButton Call = null;
     private ImageButton Email = null;
     private ImageButton Map = null;
@@ -164,6 +159,15 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
             Veg.setVisibility(View.GONE);
             NonVeg.setVisibility(View.VISIBLE);
         }
+
+        try {
+
+            Picasso.with(this).load(shortlisted.profileIcon.trim()).into(Profile);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed loading profile image", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /**
@@ -182,17 +186,20 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         AboutUs.setText(restaurant.aboutUs);
         mRatingBar.setRating(Float.parseFloat(restaurant.avgRating.trim()));
 
-        if (restaurant.type.trim().toLowerCase().equals("veg")) {
+        /**
+         * Check the type of restaurant branch.
+         */
+        if (restaurant.type.trim().toLowerCase().equals("1")) {     // veg = 1.
 
             Veg.setVisibility(View.VISIBLE);
             NonVeg.setVisibility(View.GONE);
-        } else if (restaurant.type.toLowerCase().equals("both")) {
-
-            Veg.setVisibility(View.VISIBLE);
-            NonVeg.setVisibility(View.VISIBLE);
-        } else {
+        } else if (restaurant.type.toLowerCase().equals("2")) {     // nonveg = 2.
 
             Veg.setVisibility(View.GONE);
+            NonVeg.setVisibility(View.VISIBLE);
+        } else {                                                    // else = any (both).
+
+            Veg.setVisibility(View.VISIBLE);
             NonVeg.setVisibility(View.VISIBLE);
         }
     }
@@ -255,5 +262,7 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         intent.putExtra("branch_id", branchId.trim());
         startActivity(intent);
     }
+
+    public static enum MODE {SHORTLISTED, REST_BRANCH}
 
 }

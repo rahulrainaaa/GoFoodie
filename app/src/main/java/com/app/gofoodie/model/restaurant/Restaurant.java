@@ -1,15 +1,32 @@
-
 package com.app.gofoodie.model.restaurant;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Restaurant implements Parcelable
-{
+/**
+ * Restaurant branch information.
+ * Inner class of {@link RestaurantResponse}.
+ */
+public class Restaurant implements Parcelable {
 
+    public final static Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
+
+
+        @SuppressWarnings({
+                "unchecked"
+        })
+        public Restaurant createFromParcel(Parcel in) {
+            return new Restaurant(in);
+        }
+
+        public Restaurant[] newArray(int size) {
+            return (new Restaurant[size]);
+        }
+
+    };
     @SerializedName("branch_id")
     @Expose
     public String branchId;
@@ -58,22 +75,6 @@ public class Restaurant implements Parcelable
     @SerializedName("about_us")
     @Expose
     public String aboutUs;
-    public final static Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Restaurant createFromParcel(Parcel in) {
-            return new Restaurant(in);
-        }
-
-        public Restaurant[] newArray(int size) {
-            return (new Restaurant[size]);
-        }
-
-    }
-    ;
 
     protected Restaurant(Parcel in) {
         this.branchId = ((String) in.readValue((String.class.getClassLoader())));
@@ -117,7 +118,7 @@ public class Restaurant implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

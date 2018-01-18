@@ -18,6 +18,7 @@ import com.app.gofoodie.model.restaurantBranch.RestaurantBranch;
 import com.app.gofoodie.model.restaurantBranch.RestaurantBranchResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -156,19 +157,31 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
         AboutUs.setText(restaurant.aboutUs);
         mRatingBar.setRating(Float.parseFloat(restaurant.avgRating.trim()));
 
-        if (restaurant.type.trim().toLowerCase().equals("veg")) {
+        /**
+         * Check they type of restaurant branch.
+         */
+        if (restaurant.type.trim().toLowerCase().equals("1")) {     // veg = 1
 
             Veg.setVisibility(View.VISIBLE);
             NonVeg.setVisibility(View.GONE);
-        } else if (restaurant.type.toLowerCase().equals("both")) {
-
-            Veg.setVisibility(View.VISIBLE);
-            NonVeg.setVisibility(View.VISIBLE);
-        } else {
+        } else if (restaurant.type.toLowerCase().equals("2")) {     // nonveg = 2
 
             Veg.setVisibility(View.GONE);
             NonVeg.setVisibility(View.VISIBLE);
+        } else {                                                    // else = any (both).
+
+            Veg.setVisibility(View.VISIBLE);
+            NonVeg.setVisibility(View.VISIBLE);
         }
+
+        try {
+
+            Picasso.with(this).load(restaurant.profileIcon.trim()).into(Profile);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed loading profile image", Toast.LENGTH_SHORT).show();
+        }
+
         Call.setOnClickListener(this);
         Email.setOnClickListener(this);
         Map.setOnClickListener(this);

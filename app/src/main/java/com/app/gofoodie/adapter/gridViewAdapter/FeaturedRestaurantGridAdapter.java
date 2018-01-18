@@ -75,22 +75,20 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
         }
         holder.txtComboName.setText(mFeaturedRestaurant.branchName);
 
-        if (mFeaturedRestaurant.type.contains("Both")) {
-
-            holder.imgVeg.setVisibility(View.VISIBLE);
-            holder.imgNonVeg.setVisibility(View.VISIBLE);
-
-        } else if (mFeaturedRestaurant.type.contains("1")) {
+        /**
+         * Check the type of restaurant branch.
+         */
+        if (mFeaturedRestaurant.type.contains("1")) {        // veg = 1.
 
             holder.imgVeg.setVisibility(View.VISIBLE);
             holder.imgNonVeg.setVisibility(View.GONE);
 
-        } else if (mFeaturedRestaurant.type.contains("2")) {
+        } else if (mFeaturedRestaurant.type.contains("2")) {        // nonveg = 2.
 
             holder.imgVeg.setVisibility(View.GONE);
             holder.imgNonVeg.setVisibility(View.VISIBLE);
 
-        } else {
+        } else {                                                    // else = any (both).
 
             holder.imgVeg.setVisibility(View.GONE);
             holder.imgNonVeg.setVisibility(View.GONE);

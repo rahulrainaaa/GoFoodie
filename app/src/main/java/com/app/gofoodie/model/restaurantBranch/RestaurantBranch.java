@@ -1,15 +1,32 @@
-
 package com.app.gofoodie.model.restaurantBranch;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RestaurantBranch implements Parcelable
-{
+/**
+ * Contains restaurant branch information.
+ * Inner class of {@link RestaurantBranchResponse}.
+ */
+public class RestaurantBranch implements Parcelable {
 
+    public final static Creator<RestaurantBranch> CREATOR = new Creator<RestaurantBranch>() {
+
+
+        @SuppressWarnings({
+                "unchecked"
+        })
+        public RestaurantBranch createFromParcel(Parcel in) {
+            return new RestaurantBranch(in);
+        }
+
+        public RestaurantBranch[] newArray(int size) {
+            return (new RestaurantBranch[size]);
+        }
+
+    };
     @SerializedName("branch_id")
     @Expose
     public String branchId;
@@ -58,22 +75,6 @@ public class RestaurantBranch implements Parcelable
     @SerializedName("about_us")
     @Expose
     public String aboutUs;
-    public final static Creator<RestaurantBranch> CREATOR = new Creator<RestaurantBranch>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public RestaurantBranch createFromParcel(Parcel in) {
-            return new RestaurantBranch(in);
-        }
-
-        public RestaurantBranch[] newArray(int size) {
-            return (new RestaurantBranch[size]);
-        }
-
-    }
-    ;
 
     protected RestaurantBranch(Parcel in) {
         this.branchId = ((String) in.readValue((String.class.getClassLoader())));
@@ -117,7 +118,7 @@ public class RestaurantBranch implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

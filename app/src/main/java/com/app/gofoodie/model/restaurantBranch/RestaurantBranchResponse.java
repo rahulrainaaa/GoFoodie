@@ -1,4 +1,3 @@
-
 package com.app.gofoodie.model.restaurantBranch;
 
 import android.os.Parcel;
@@ -8,17 +7,12 @@ import com.app.gofoodie.model.base.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Response model class to hold the Restaurant branch information of only one branch in an object.
+ * Hold single branch information in an object.
+ */
 public class RestaurantBranchResponse extends BaseModel implements Parcelable {
 
-    @SerializedName("restaurant_branch")
-    @Expose
-    public RestaurantBranch restaurantBranch;
-    @SerializedName("statusCode")
-    @Expose
-    public Integer statusCode;
-    @SerializedName("statusMessage")
-    @Expose
-    public String statusMessage;
     public final static Creator<RestaurantBranchResponse> CREATOR = new Creator<RestaurantBranchResponse>() {
 
 
@@ -34,6 +28,15 @@ public class RestaurantBranchResponse extends BaseModel implements Parcelable {
         }
 
     };
+    @SerializedName("restaurant_branch")
+    @Expose
+    public RestaurantBranch restaurantBranch;
+    @SerializedName("statusCode")
+    @Expose
+    public Integer statusCode;
+    @SerializedName("statusMessage")
+    @Expose
+    public String statusMessage;
 
     protected RestaurantBranchResponse(Parcel in) {
         this.restaurantBranch = ((RestaurantBranch) in.readValue((RestaurantBranch.class.getClassLoader())));
