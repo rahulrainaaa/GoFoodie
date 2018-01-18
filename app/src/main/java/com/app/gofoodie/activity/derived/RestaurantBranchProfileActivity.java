@@ -2,6 +2,7 @@ package com.app.gofoodie.activity.derived;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,12 +13,14 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.model.restaurantBranch.RestaurantBranch;
 import com.app.gofoodie.model.restaurantBranch.RestaurantBranchResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.app.gofoodie.utility.ProfileUtils;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -195,7 +198,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
      */
     private void callClicked(View view) {
 
-        Toast.makeText(this, "Calling Not Allowed.", Toast.LENGTH_SHORT).show();
+        ProfileUtils.call(this, Constants.ADMIN_PHONE_NUMBER);
     }
 
     /**
@@ -208,7 +211,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{
-                restaurant.branchEmail
+                Constants.ADMIN_EMAIL
         });
         intent.putExtra(Intent.EXTRA_SUBJECT, "");
         intent.putExtra(Intent.EXTRA_TEXT, "");
@@ -229,7 +232,21 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
      */
     private void mapClicked(View view) {
 
-        Toast.makeText(this, "Start Map under development.", Toast.LENGTH_SHORT).show();
+        String coordinates = restaurant.geoLat.trim() + "," + restaurant.geoLng.trim();
+        Toast.makeText(this, "" + coordinates, Toast.LENGTH_SHORT).show();
+
+        if (coordinates == null) {
+
+            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
+
+        } else if (coordinates.trim().isEmpty()) {
+
+            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
+
+        } else {
+
+            ProfileUtils.mapLocation(this, coordinates);
+        }
     }
 
     /**

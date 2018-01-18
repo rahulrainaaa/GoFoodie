@@ -2,6 +2,7 @@ package com.app.gofoodie.activity.derived;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -13,8 +14,10 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.model.restaurant.Restaurant;
 import com.app.gofoodie.model.shortlisted.Shortlisted;
+import com.app.gofoodie.utility.ProfileUtils;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -211,7 +214,7 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
      */
     private void callClicked(View view) {
 
-        Toast.makeText(this, "Calling Not Allowed.", Toast.LENGTH_SHORT).show();
+        ProfileUtils.call(this, Constants.ADMIN_PHONE_NUMBER);
 
     }
 
@@ -225,7 +228,7 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{Constants.ADMIN_EMAIL});
         intent.putExtra(Intent.EXTRA_SUBJECT, "");
         intent.putExtra(Intent.EXTRA_TEXT, "");
 
@@ -247,7 +250,20 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
      */
     private void mapClicked(View view, String coordinates) {
 
-        Toast.makeText(this, "Under development:\n" + coordinates, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + coordinates, Toast.LENGTH_SHORT).show();
+
+        if (coordinates == null) {
+
+            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
+
+        } else if (coordinates.trim().isEmpty()) {
+
+            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
+
+        } else {
+
+            ProfileUtils.mapLocation(this, coordinates);
+        }
     }
 
     /**
