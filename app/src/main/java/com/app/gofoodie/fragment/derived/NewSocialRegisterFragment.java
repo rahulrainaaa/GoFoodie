@@ -46,7 +46,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        Toast.makeText(getActivity(), "New Social Register Fragment", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Enter your profile info", Toast.LENGTH_SHORT).show();
 
         View view = inflater.inflate(R.layout.frag_register_new_social, container, false);
 
@@ -242,7 +242,6 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(getActivity(), "HTTP Success: " + rawObject, Toast.LENGTH_SHORT).show();
         getDashboardActivity().getProgressDialog().hide();
         if (requestCode == 1) {             // New social register response.
 
@@ -259,7 +258,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
     @Override
     public void networkFailResponse(int requestCode, String message) {
 
-        Toast.makeText(getActivity(), "HTTP Success: " + message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "HTTP Failed: " + message, Toast.LENGTH_SHORT).show();
         getDashboardActivity().getProgressDialog().hide();
     }
 

@@ -114,10 +114,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
         switch (item.getItemId()) {
 
-            case R.id.menu_item_pick_date:
-
-                pickStartDate();
-                break;
             case R.id.menu_item_proceed:
 
                 menuProceed();
@@ -125,6 +121,16 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Callback method for button on click.
+     *
+     * @param view
+     */
+    public void btnClickProceed(View view) {
+
+        menuProceed();
     }
 
     /**
@@ -210,6 +216,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     /**
      * Method to start activity to customize a combo plan.
+     *
      * @param view
      */
     private void customizeComboPlan(View view) {
@@ -281,6 +288,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     /**
      * Method to assign date of orders from picked date (or after 2 days in default case).
+     *
      * @param startDate
      */
     private void assignDate(Date startDate) {
@@ -317,6 +325,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     /**
      * Method to check, if week day is working of off.
+     *
      * @param weekDay
      * @return
      */
@@ -344,7 +353,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Place Order");
         alertDialog.setCancelable(false);
-        alertDialog.setMessage("Confirm placing order?\n" + ((mTotalPrice < 0) ? "Total Price = ERROR...!" : "Total Price: AED " + mTotalPrice));
+        alertDialog.setMessage("" + ((mTotalPrice < 0) ? "Total Price = ERROR...!" : "Total Price: AED " + mTotalPrice + "\nThe amount will be deducted from wallet."));
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
                 new DialogInterface.OnClickListener() {
@@ -354,7 +363,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                     }
                 });
 
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Confirm",
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Place Order",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -378,6 +387,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     /**
      * Method to process the response packet of OrderRequest (Placed order).
+     *
      * @return JSONObject
      */
     private JSONObject getOrderRequestPacket() {

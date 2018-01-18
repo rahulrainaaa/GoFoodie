@@ -46,7 +46,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        Toast.makeText(getDashboardActivity(), "New Register Fragment.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getDashboardActivity(), "Enter profile info", Toast.LENGTH_SHORT).show();
 
         View view = inflater.inflate(R.layout.frag_register_new_user, container, false);
 
@@ -259,7 +259,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(getActivity(), "HTTP Success: " + rawObject, Toast.LENGTH_SHORT).show();
         getDashboardActivity().getProgressDialog().hide();
         if (requestCode == 1) {     // New register response.
 
@@ -276,7 +275,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void networkFailResponse(int requestCode, String message) {
 
-        Toast.makeText(getActivity(), "HTTP Success: " + message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "HTTP Failed: " + message, Toast.LENGTH_SHORT).show();
         getDashboardActivity().getProgressDialog().hide();
         if (requestCode == 1) {
 
@@ -317,7 +316,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             jsonExc.printStackTrace();
             Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        //getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.PROFILE);
+
     }
 
     /**

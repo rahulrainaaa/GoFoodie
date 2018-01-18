@@ -108,6 +108,10 @@ public class WeekSelectDialog implements View.OnClickListener {
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 dismiss();
+                if (mDialogListener != null) {
+
+                    mDialogListener.weekDialogCancelClicked(WeekSelectDialog.this);
+                }
             }
         });
         mAlertDialog.show();
@@ -189,10 +193,12 @@ public class WeekSelectDialog implements View.OnClickListener {
 
         if (checked) {
 
-            btn.setTextColor(Color.rgb(89, 153, 60));
+            btn.setTextColor(Color.BLACK);
+            btn.setBackgroundResource(R.drawable.border_circle_week_button);
         } else {
 
-            btn.setTextColor(Color.RED);
+            btn.setTextColor(Color.rgb(190, 190, 190));
+            btn.setBackgroundResource(R.drawable.icon_denied);
         }
     }
 

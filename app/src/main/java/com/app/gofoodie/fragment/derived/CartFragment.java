@@ -9,7 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,16 +44,15 @@ import java.util.Iterator;
 public class CartFragment extends BaseFragment implements NetworkCallbackListener {
 
     public final String TAG = "CartFragment";
-
+    public CartItemClickListener mCartItemClickListener = null;
+    public TextView mTxtLabel = null;
     /**
      * Class private data member(s).
      */
     private ListView mListView = null;
     private CartListViewAdapter mAdapter = null;
     private ArrayList<Cart> mCartList = null;
-    public CartItemClickListener mCartItemClickListener = null;
-    public TextView mTxtLabel = null;
-    private ImageButton mIBtnProceed = null;
+    private Button btnProceed = null;
 
     /**
      * {@link BaseFragment} Fragment callback method(s).
@@ -66,8 +65,8 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
         mCartItemClickListener = new CartItemClickListener();
         mListView = (ListView) view.findViewById(R.id.list_view_cart_items);
         mTxtLabel = (TextView) view.findViewById(R.id.txt_label);
-        mIBtnProceed = (ImageButton) view.findViewById(R.id.ibtn_proceed);
-        mIBtnProceed.setOnClickListener(new View.OnClickListener() {
+        btnProceed = (Button) view.findViewById(R.id.btn_proceed);
+        btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -121,7 +120,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        if (requestCode == 1) {     // Get cart items.
+        if (requestCode == 1) {     // Get all cart items.
 
             handleViewCartResponse(rawObject);
         } else if (requestCode == 2) {
@@ -152,7 +151,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
             cartResponse.cart = new ArrayList<Cart>();
         } else {
 
-            mTxtLabel.setText("Total Items: " + cartResponse.cart.size());// + ",  Price: AED " + cartResponse.totalPrice.toString());
+            mTxtLabel.setText("Total Price: " + cartResponse.totalPrice + " AED");// + ",  Price: AED " + cartResponse.totalPrice.toString());
         }
         mCartList = (ArrayList<Cart>) cartResponse.cart;
         mAdapter = new CartListViewAdapter(getActivity(), mCartItemClickListener, R.layout.item_listview_cart, mCartList);

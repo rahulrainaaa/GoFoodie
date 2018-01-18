@@ -83,11 +83,6 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
                 e.printStackTrace();
             }
 
-            String url = Network.URL_GET_TRANSACTION + "?customerLoginId=" + getSession().getData().getLoginId();
-            NetworkHandler networkHandler = new NetworkHandler();
-            networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-            networkHandler.executeGet();
-
         } else {
 
             Toast.makeText(getActivity(), "Check internet connection", Toast.LENGTH_SHORT).show();
@@ -102,6 +97,10 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
 
         mTxtWalletAmount.setText("AED " + CustomerProfileHandler.CUSTOMER.profile.amount);
         mTxtValidUpto.setText("Subscription till: " + CustomerProfileHandler.CUSTOMER.profile.validUpto);
+        String url = Network.URL_GET_TRANSACTION + "?customerLoginId=" + getSession().getData().getLoginId();
+        NetworkHandler networkHandler = new NetworkHandler();
+        networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.executeGet();
     }
 
     @Override

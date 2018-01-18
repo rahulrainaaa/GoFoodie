@@ -13,6 +13,7 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.gridViewAdapter.ComboPlanGridAdapter;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.comboPlan.ComboOption;
 import com.app.gofoodie.model.comboPlan.ComboPlanResponse;
 import com.app.gofoodie.model.comboPlan.Comboplan;
@@ -177,6 +178,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
         try {
 
             VibrationUtil.getInstance().vibrate(this);
+            Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show();
             String statusMessage = json.getString("statusMessage");
 
         } catch (JSONException jsonExc) {
@@ -245,6 +247,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
             jsonRequest.put("quantity", "1");
             jsonRequest.put("token", getSessionData().getToken());
             jsonRequest.put("description", jsonArrayItems);
+            jsonRequest.put("area", CustomerProfileHandler.CUSTOMER.profile.area.trim());
 
             NetworkHandler networkHandler = new NetworkHandler();
             networkHandler.httpCreate(2, this, this, jsonRequest, url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
