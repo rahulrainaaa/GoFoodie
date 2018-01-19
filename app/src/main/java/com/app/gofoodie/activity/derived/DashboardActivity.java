@@ -62,7 +62,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         if (getSharedPreferences("welcome", 0).getBoolean("welcome", true)) {
             // true (default) = show welcome screen.
 
-            startActivity(new Intent(this, AssistantActivity.class));
+            //startActivity(new Intent(this, AssistantActivity.class));
 
         }
     }

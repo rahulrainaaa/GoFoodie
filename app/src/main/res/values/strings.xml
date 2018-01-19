@@ -47,15 +47,14 @@
     <string name="cannot_be_empty">Cannot be empty</string>
     <string name="select_location_first">First select your location.</string>
     <string name="confirm_password_not_match">Confirm Password not matched</string>
-    <string name="connecting">Connecting.</string>
+    <string name="connecting">Connecting</string>
     <string name="invoice">Invoice</string>
     <string name="accept_the_terms">Accept the terms</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_activity_demo">DemoAct</string>
-    <string name="title_activity_edit_combo">EditCombo</string>
-    <string name="title_activity_restaurant_profile">RestaurantProfileActivity</string>
-    <string name="title_activity_combo_plan_description">ComboPlanDescriptionActivity</string>
-    <string name="title_activity_shortlisted_restaurants">ShortlistedRestaurantsActivity</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_edit_combo">Meal Items</string>
+    <string name="title_activity_restaurant_profile">Restaurant Profile</string>
+    <string name="title_activity_combo_plan_description">Combo Plan</string>
+    <string name="title_activity_shortlisted_restaurants">Shortlisted</string>
 
     <string name="desc_platinum_plan">PLATINUM: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.</string>
     <string name="title_activity_assistant">AssistantActivity</string>

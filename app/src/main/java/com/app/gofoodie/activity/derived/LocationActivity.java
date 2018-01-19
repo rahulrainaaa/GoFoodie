@@ -32,7 +32,9 @@ import java.util.Iterator;
 public class LocationActivity extends BaseAppCompatActivity implements AdapterView.OnItemSelectedListener, NetworkCallbackListener {
 
     public final String TAG = "LocationActivity";
-
+    public CountryResponse mCountryListResponse = null;
+    public CityResponse mCityResponse = null;
+    public AreaResponse mAreaResponse = null;
     /**
      * Class private data members.
      */
@@ -41,11 +43,6 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     private ArrayList<String> mCountryList = new ArrayList<>();
     private ArrayList<String> mCityList = new ArrayList<>();
     private ArrayList<String> mAreaList = new ArrayList<>();
-
-    public CountryResponse mCountryListResponse = null;
-    public CityResponse mCityResponse = null;
-    public AreaResponse mAreaResponse = null;
-
     private com.app.gofoodie.model.areaResponse.Datum mAreaLocationDatum = null;
 
     /**
@@ -128,7 +125,6 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
-
 
     /**
      * @param position

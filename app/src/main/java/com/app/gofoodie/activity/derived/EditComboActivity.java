@@ -58,22 +58,13 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
 
     private void showListViewDialog(final int position) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
-        builderSingle.setIcon(R.drawable.icon_error_alert);
-        builderSingle.setTitle("Select Option:");
-
+        builderSingle.setCancelable(true);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice);
         Iterator<String> iterator = mList.get(position).options.iterator();
         while (iterator.hasNext()) {
 
             arrayAdapter.add(iterator.next().trim());
         }
-
-        builderSingle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
 
         builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
             @Override
@@ -85,6 +76,7 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
             }
         });
         builderSingle.show();
+
     }
 
 
