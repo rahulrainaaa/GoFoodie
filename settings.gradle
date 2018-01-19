@@ -1,1 +1,1 @@
-include ':app', ':telrlibrary-release'
+include ':app', ':telrlibrary-release', ':library'

@@ -58,7 +58,7 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
 
     private void showListViewDialog(final int position) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
-        builderSingle.setIcon(R.drawable.ic_launcher);
+        builderSingle.setIcon(R.drawable.icon_error_alert);
         builderSingle.setTitle("Select Option:");
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice);
