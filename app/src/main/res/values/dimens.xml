@@ -12,5 +12,6 @@
     <dimen name="signup_edittext_textsize_xlarge">20sp</dimen>
     <dimen name="signup_edittext_padding_xlarge">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
 
 </resources>

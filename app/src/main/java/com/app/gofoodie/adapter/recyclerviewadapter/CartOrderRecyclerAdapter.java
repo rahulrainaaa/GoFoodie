@@ -65,7 +65,7 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
             extrsPrice = " + " + cartOrder.zoneShippingCharge.trim();
         }
 
-        holder.txtPrice.setText("AED " + cartOrder.comboPrice + extrsPrice);
+        holder.txtPrice.setText("AED " + cartOrder.payPrice + extrsPrice);
 
         if (cartOrder.type.toLowerCase().trim().equals("nonveg")) {
 

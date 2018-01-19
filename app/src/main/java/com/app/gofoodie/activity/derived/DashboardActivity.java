@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.activity.assistActivity.AssistantActivity;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.handler.dashboardHandler.DashboardFragmentHandler;
@@ -57,6 +58,13 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         mFragmentManager = getFragmentManager();
         mNavigationPanel.setOnNavigationItemSelectedListener(this);
         loadFragmentOnStart();
+
+        if (getSharedPreferences("welcome", 0).getBoolean("welcome", true)) {
+            // true (default) = show welcome screen.
+
+            startActivity(new Intent(this, AssistantActivity.class));
+
+        }
     }
 
     @Override

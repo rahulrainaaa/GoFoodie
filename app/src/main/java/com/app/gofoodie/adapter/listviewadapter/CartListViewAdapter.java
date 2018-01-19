@@ -35,22 +35,6 @@ public class CartListViewAdapter extends ArrayAdapter<Cart> {
     private int mLayoutResourceId;
     private CartFragment.CartItemClickListener mClickListener = null;
 
-    /**
-     * @class Holder
-     * @desc Class to hold the reference/id of list view items component(s).
-     */
-    private static class Holder {
-
-        public ImageView imgCombo = null;
-        public TextView txtName = null;
-        public TextView txtPrice = null;
-        public ImageButton iBtnDelete = null;
-        public Button btnQty = null;
-        public ImageView imgVeg = null;
-        public ImageView imgNonveg = null;
-        public int tag = -1;
-    }
-
     public CartListViewAdapter(@NonNull Activity activity, CartFragment.CartItemClickListener clickListener, @LayoutRes int resource, ArrayList<Cart> list) {
 
         super(activity, resource, list);
@@ -100,7 +84,7 @@ public class CartListViewAdapter extends ArrayAdapter<Cart> {
         }
 
         holder.txtName.setText(cart.getComboName());
-        holder.txtPrice.setText("AED " + cart.getComboPrice());
+        holder.txtPrice.setText("AED " + cart.getPayPrice());
         holder.btnQty.setText("Qty: " + cart.getQuantity());
 
 
@@ -119,5 +103,21 @@ public class CartListViewAdapter extends ArrayAdapter<Cart> {
         holder.imgCombo.setTag(cart);
 
         return cell;
+    }
+
+    /**
+     * @class Holder
+     * @desc Class to hold the reference/id of list view items component(s).
+     */
+    private static class Holder {
+
+        public ImageView imgCombo = null;
+        public TextView txtName = null;
+        public TextView txtPrice = null;
+        public ImageButton iBtnDelete = null;
+        public Button btnQty = null;
+        public ImageView imgVeg = null;
+        public ImageView imgNonveg = null;
+        public int tag = -1;
     }
 }

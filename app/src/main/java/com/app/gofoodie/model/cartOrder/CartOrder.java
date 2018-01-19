@@ -25,6 +25,7 @@ public class CartOrder {
     public String quantity;
     public List<Description> description = new ArrayList<>();
     public String zoneShippingCharge = "0.0";
+    public String payPrice = "0.0";
 
     public CartOrder(Cart cart) {
 
@@ -39,6 +40,7 @@ public class CartOrder {
         this.type = cart.getType();
         this.comboPrice = cart.getComboPrice();
         this.quantity = cart.getQuantity();
+        this.payPrice = cart.getPayPrice();
 
         description.clear();
         Iterator<com.app.gofoodie.model.cart.Description> descriptionIterator = cart.getDescription().iterator();

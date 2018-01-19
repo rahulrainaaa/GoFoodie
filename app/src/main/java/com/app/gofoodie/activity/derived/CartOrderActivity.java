@@ -75,7 +75,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             for (int i = 0; i < qty; i++) {
 
                 try {
-                    mTotalPrice = mTotalPrice + Float.parseFloat(cart.getComboPrice().trim());
+                    mTotalPrice = mTotalPrice + Float.parseFloat(cart.getPayPrice().trim());
                 } catch (Exception e) {
                     e.printStackTrace();
                     mTotalPrice = -9999999;     // make price -ve if price not parsed. -ve price means wrong price.
@@ -116,9 +116,9 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
         switch (item.getItemId()) {
 
-            case R.id.menu_item_proceed:
+            case R.id.menu_item_pick_date:
 
-                menuProceed();
+                pickStartDate();
                 break;
         }
 
@@ -211,7 +211,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         switch (view.getId()) {
             case R.id.ibtn_edit:
 
-                customizeComboPlan(view);
+                menuProceed();
                 break;
         }
     }
@@ -355,9 +355,9 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Place Order");
         alertDialog.setCancelable(false);
-        alertDialog.setMessage("" + ((mTotalPrice < 0) ? "Total Combo Price = ERROR...!" : "Total Price: AED " + mTotalPrice
-                + "\nOther charges = " + (mTotalPayablePrice - mTotalPrice)
-                + "\nTotal Payable Price = " + mTotalPayablePrice
+        alertDialog.setMessage("" + ((mTotalPrice < 0) ? "Total Combo Price = ERROR...!" : "Total Price: " + mTotalPrice + " AED"
+                + "\nOther charges = " + (mTotalPayablePrice - mTotalPrice + " AED")
+                + "\nTotal Payable Price = " + mTotalPayablePrice + " AED"
         ));
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
