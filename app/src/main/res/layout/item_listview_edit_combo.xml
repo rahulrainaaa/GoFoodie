@@ -14,21 +14,23 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="5"
-        android:fontFamily="sans-serif-light"
-        android:gravity="left"
+        android:gravity="left|center"
         android:text="Combo Item Name"
+        android:textColor="@color/text_color"
         android:textSize="14dp"
-        android:textStyle="normal" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txt_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="8"
+        android:drawableRight="@drawable/icon_drop_down"
         android:fontFamily="sans-serif"
-        android:gravity="right"
+        android:gravity="right|center"
         android:text="Combo Item Name"
-        android:textSize="13dp"
+        android:textColor="@color/text_color"
+        android:textSize="14dp"
         android:textStyle="normal" />
 
 

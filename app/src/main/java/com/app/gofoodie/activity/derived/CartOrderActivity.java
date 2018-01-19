@@ -126,13 +126,47 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     }
 
     /**
-     * Callback method for button on click.
+     * Callback method for 'Proceed' button on click.
      *
      * @param view
      */
     public void btnClickProceed(View view) {
 
-        menuProceed();
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Place Order");
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage("" + ((mTotalPrice < 0) ? "Total Combo Price = ERROR...!" : "Total Price: " + mTotalPrice + " AED"
+                + "\nOther charges = " + (mTotalPayablePrice - mTotalPrice + " AED")
+                + "\nTotal Payable Price = " + mTotalPayablePrice + " AED"
+        ));
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Place Order",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        JSONObject jsonRequest = getOrderRequestPacket();
+                        if (jsonRequest == null) {
+
+                            Toast.makeText(CartOrderActivity.this, "Json Request NULL", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        NetworkHandler networkHandler = new NetworkHandler();
+                        networkHandler.httpCreate(1, CartOrderActivity.this, CartOrderActivity.this, jsonRequest, Network.URL_PLACE_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                        networkHandler.executePost();
+
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.show();
     }
 
     /**
@@ -211,7 +245,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         switch (view.getId()) {
             case R.id.ibtn_edit:
 
-                menuProceed();
+                customizeComboPlan(view);
                 break;
         }
     }
@@ -344,49 +378,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         }
 
         return false;
-
-    }
-
-    /**
-     * Method to Handle the proceed for the order placement with anount charging from wallet.
-     */
-    private void menuProceed() {
-
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Place Order");
-        alertDialog.setCancelable(false);
-        alertDialog.setMessage("" + ((mTotalPrice < 0) ? "Total Combo Price = ERROR...!" : "Total Price: " + mTotalPrice + " AED"
-                + "\nOther charges = " + (mTotalPayablePrice - mTotalPrice + " AED")
-                + "\nTotal Payable Price = " + mTotalPayablePrice + " AED"
-        ));
-
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-                    }
-                });
-
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Place Order",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        JSONObject jsonRequest = getOrderRequestPacket();
-                        if (jsonRequest == null) {
-
-                            Toast.makeText(CartOrderActivity.this, "Json Request NULL", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        NetworkHandler networkHandler = new NetworkHandler();
-                        networkHandler.httpCreate(1, CartOrderActivity.this, CartOrderActivity.this, jsonRequest, Network.URL_PLACE_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                        networkHandler.executePost();
-
-                        dialog.dismiss();
-                    }
-                });
-
-        alertDialog.show();
 
     }
 
