@@ -30,6 +30,7 @@ import java.util.Date;
 public class OrderCancellationHandler {
 
     public static final String TAG = "OrderCancellationHandler";
+
     private MyOrder myOrder = null;
     private BaseAppCompatActivity mActivity = null;
     private BottomSheetDialog mBottomSheetDialog = null;
@@ -139,7 +140,7 @@ public class OrderCancellationHandler {
                     }
                 });
 
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -147,16 +148,7 @@ public class OrderCancellationHandler {
             }
         });
         alertDialog.show();
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
 
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-                    }
-                });
-
-        alertDialog.show();
     }
 
     private void cancelLongTerm() {

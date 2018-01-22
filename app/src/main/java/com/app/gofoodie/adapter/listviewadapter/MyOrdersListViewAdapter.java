@@ -24,20 +24,6 @@ public class MyOrdersListViewAdapter extends ArrayAdapter<MyOrder> {
     private int mLayoutResourceId;
     private View.OnClickListener mClickListener = null;
 
-    private static class Holder {
-
-        public TextView ComboName = null;
-        public TextView Date = null;
-        public TextView Price = null;
-        public TextView Status = null;
-
-        public ImageButton ibtnRate = null;
-        public ImageButton ibtnDescription = null;
-        public ImageButton ibtnEdit = null;
-
-        public int tag = -1;
-    }
-
     public MyOrdersListViewAdapter(@NonNull Activity activity, View.OnClickListener listener, @LayoutRes int resource, ArrayList<MyOrder> list) {
 
         super(activity, resource, list);
@@ -87,5 +73,19 @@ public class MyOrdersListViewAdapter extends ArrayAdapter<MyOrder> {
         holder.Price.setText("AED " + myOrder.pricePaid);
 
         return cell;
+    }
+
+    private static class Holder {
+
+        public TextView ComboName = null;
+        public TextView Date = null;
+        public TextView Price = null;
+        public TextView Status = null;
+
+        public ImageButton ibtnRate = null;
+        public ImageButton ibtnDescription = null;
+        public ImageButton ibtnEdit = null;
+
+        public int tag = -1;
     }
 }

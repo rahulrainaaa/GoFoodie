@@ -7,10 +7,6 @@ import com.app.gofoodie.model.base.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Model class to hold the response of restaurant branch info for single branch.
- * Hold single branch information.
- */
 public class RestaurantBranchResponse extends BaseModel implements Parcelable {
 
     public final static Creator<RestaurantBranchResponse> CREATOR = new Creator<RestaurantBranchResponse>() {

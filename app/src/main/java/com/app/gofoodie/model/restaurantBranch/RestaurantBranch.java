@@ -48,7 +48,7 @@ public class RestaurantBranch implements Parcelable
     private String branchAddress;
     @SerializedName("branch_postal_code")
     @Expose
-    private Object branchPostalCode;
+    private String branchPostalCode;
     @SerializedName("geo_lat")
     @Expose
     private String geoLat;
@@ -88,7 +88,7 @@ public class RestaurantBranch implements Parcelable
         this.tags = ((String) in.readValue((String.class.getClassLoader())));
         this.type = ((String) in.readValue((String.class.getClassLoader())));
         this.branchAddress = ((String) in.readValue((String.class.getClassLoader())));
-        this.branchPostalCode = ((Object) in.readValue((Object.class.getClassLoader())));
+        this.branchPostalCode = ((String) in.readValue((String.class.getClassLoader())));
         this.geoLat = ((String) in.readValue((String.class.getClassLoader())));
         this.geoLng = ((String) in.readValue((String.class.getClassLoader())));
         this.aboutUs = ((AboutUs) in.readValue((AboutUs.class.getClassLoader())));
@@ -193,11 +193,11 @@ public class RestaurantBranch implements Parcelable
         this.branchAddress = branchAddress;
     }
 
-    public Object getBranchPostalCode() {
+    public String getBranchPostalCode() {
         return branchPostalCode;
     }
 
-    public void setBranchPostalCode(Object branchPostalCode) {
+    public void setBranchPostalCode(String branchPostalCode) {
         this.branchPostalCode = branchPostalCode;
     }
 

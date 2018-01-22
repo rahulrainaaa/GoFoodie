@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:drawableStart="@drawable/icon_forward"
-        android:text="Apply Short Tern Vacation" />
+        android:text="Apply Short Term Vacation" />
 
     <LinearLayout
         android:layout_width="match_parent"

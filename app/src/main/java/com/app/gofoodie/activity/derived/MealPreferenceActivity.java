@@ -112,6 +112,7 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
                 mStrMealType = "nonveg";
                 break;
         }
+
         Iterator<Cuisine> iterator = mList.iterator();
         while (iterator.hasNext()) {
 
@@ -174,7 +175,21 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
             return;
         }
 
+        String cuisine_ids = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_CUISINE_KEY, "") + ",";
+
         mList = (ArrayList<Cuisine>) response.getCuisine();
+
+        Iterator<Cuisine> cuisineIterator = mList.iterator();
+        while (cuisineIterator.hasNext()) {
+
+            Cuisine c = cuisineIterator.next();
+
+            if (cuisine_ids.contains("," + c.getCuisineId().trim() + ",")) {
+
+                c.isChecked = true;
+            }
+        }
+
         mAdapter = new CheckedListViewAdapter(this, mList);
         mListView.setAdapter(mAdapter);
         if (mList.size() == 0) {
