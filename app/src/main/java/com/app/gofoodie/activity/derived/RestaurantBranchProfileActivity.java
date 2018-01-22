@@ -143,31 +143,31 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
         ModelParser parser = new ModelParser();
         RestaurantBranchResponse restaurantBranchResponse = (RestaurantBranchResponse) parser.getModel(json.toString(), RestaurantBranchResponse.class, null);
 
-        if (restaurantBranchResponse.statusCode != 200) {
+        if (restaurantBranchResponse.getStatusCode() != 200) {
 
-            Toast.makeText(this, "" + restaurantBranchResponse.statusMessage, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + restaurantBranchResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        restaurant = restaurantBranchResponse.restaurantBranch;
+        restaurant = restaurantBranchResponse.getRestaurantBranch();
 
-        Name.setText(restaurant.branchName);
-        ReviewCount.setText("(" + restaurant.countRating + ")");
-        Cuizine.setText(restaurant.tags);
-        Address.setText(restaurant.branchAddress);
-        Postal.setText(restaurant.branchPostalCode);
-        Description.setText(restaurant.description);
-        AboutUs.setText(restaurant.aboutUs);
-        mRatingBar.setRating(Float.parseFloat(restaurant.avgRating.trim()));
+        Name.setText(restaurant.getBranchName());
+        ReviewCount.setText("(" + restaurant.getCountRating() + ")");
+        Cuizine.setText(restaurant.getTags());
+        Address.setText(restaurant.getBranchAddress());
+        Postal.setText((String) restaurant.getBranchPostalCode());
+        Description.setText(restaurant.getDescription());
+        AboutUs.setText(restaurant.getAboutUs().getAboutus());
+        mRatingBar.setRating(Float.parseFloat(restaurant.getAvgRating()));
 
         /**
          * Check they type of restaurant branch.
          */
-        if (restaurant.type.trim().toLowerCase().equals("1")) {     // veg = 1
+        if (restaurant.getType().trim().toLowerCase().equals("1")) {     // veg = 1
 
             Veg.setVisibility(View.VISIBLE);
             NonVeg.setVisibility(View.GONE);
-        } else if (restaurant.type.toLowerCase().equals("2")) {     // nonveg = 2
+        } else if (restaurant.getType().toLowerCase().equals("2")) {     // nonveg = 2
 
             Veg.setVisibility(View.GONE);
             NonVeg.setVisibility(View.VISIBLE);
@@ -179,7 +179,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
 
         try {
 
-            Picasso.with(this).load(restaurant.profileIcon.trim()).into(Profile);
+            Picasso.with(this).load(restaurant.getProfileIcon().trim()).into(Profile);
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Failed loading profile image", Toast.LENGTH_SHORT).show();
@@ -232,7 +232,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
      */
     private void mapClicked(View view) {
 
-        String coordinates = restaurant.geoLat.trim() + "," + restaurant.geoLng.trim();
+        String coordinates = restaurant.getGeoLat().trim() + "," + restaurant.getGeoLng().trim();
         Toast.makeText(this, "" + coordinates, Toast.LENGTH_SHORT).show();
 
         if (coordinates == null) {
@@ -257,7 +257,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
     private void reviewClicked(View view) {
 
         Intent intent = new Intent(this, RatingActivity.class);
-        intent.putExtra("branch_id", restaurant.branchId.trim());
+        intent.putExtra("branch_id", restaurant.getBranchId().trim());
         startActivity(intent);
     }
 }

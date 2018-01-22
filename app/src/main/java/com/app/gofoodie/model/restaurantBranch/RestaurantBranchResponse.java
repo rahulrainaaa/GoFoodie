@@ -8,8 +8,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Response model class to hold the Restaurant branch information of only one branch in an object.
- * Hold single branch information in an object.
+ * Model class to hold the response of restaurant branch info for single branch.
+ * Hold single branch information.
  */
 public class RestaurantBranchResponse extends BaseModel implements Parcelable {
 
@@ -30,13 +30,13 @@ public class RestaurantBranchResponse extends BaseModel implements Parcelable {
     };
     @SerializedName("restaurant_branch")
     @Expose
-    public RestaurantBranch restaurantBranch;
+    private RestaurantBranch restaurantBranch;
     @SerializedName("statusCode")
     @Expose
-    public Integer statusCode;
+    private Integer statusCode;
     @SerializedName("statusMessage")
     @Expose
-    public String statusMessage;
+    private String statusMessage;
 
     protected RestaurantBranchResponse(Parcel in) {
         this.restaurantBranch = ((RestaurantBranch) in.readValue((RestaurantBranch.class.getClassLoader())));
@@ -45,6 +45,30 @@ public class RestaurantBranchResponse extends BaseModel implements Parcelable {
     }
 
     public RestaurantBranchResponse() {
+    }
+
+    public RestaurantBranch getRestaurantBranch() {
+        return restaurantBranch;
+    }
+
+    public void setRestaurantBranch(RestaurantBranch restaurantBranch) {
+        this.restaurantBranch = restaurantBranch;
+    }
+
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public String getStatusMessage() {
+        return statusMessage;
+    }
+
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
     }
 
     public void writeToParcel(Parcel dest, int flags) {

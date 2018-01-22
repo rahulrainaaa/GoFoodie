@@ -27,6 +27,7 @@
         <activity
             android:name=".activity.derived.SplashActivity"
             android:icon="@drawable/launncher_icon"
+            android:label="@string/welcome"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,10 +38,12 @@
         <activity
             android:name=".activity.derived.LocationActivity"
             android:icon="@drawable/launncher_icon"
+            android:label="@string/location_preference"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.SubscriptionActivity"
             android:icon="@drawable/launncher_icon"
+            android:label="@string/recharge_plans"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.EditComboActivity"
@@ -54,6 +57,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.derived.MealPreferenceActivity"
+            android:label="@string/meal_preference"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.ShortlistedRestaurantsActivity"
@@ -61,30 +65,39 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.RatingActivity"
+            android:label="@string/reviews"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.UpdateProfileActivity"
+            android:label="@string/update_profile"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.PaymentGatewayActivity"
+            android:label="@string/payment"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.PaymentGatewayFailActivity"
+            android:label="@string/failed"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.PaymentGatewaySuccessActivity"
+            android:label="@string/success"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.AddShortlistedRestaurants"
+            android:label="@string/restaurant_list"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.WeekPreferenceActivity"
+            android:label="@string/week_preference"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.ComboPlanActivity"
+            android:label="@string/combo_plans"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.CartOrderActivity"
+            android:label="@string/meal_plan"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.RestaurantBranchProfileActivity"
@@ -99,7 +112,11 @@
             android:label="@string/title_activity_assistant"
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme" />
-
+        <activity
+            android:name=".activity.derived.MyOrdersActivity"
+            android:label="@string/my_orders"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.derived.ChangePasswordActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.app.gofoodie.fragment.derived;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -11,12 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.activity.derived.ChangePasswordActivity;
+import com.app.gofoodie.activity.derived.MyOrdersActivity;
 import com.app.gofoodie.activity.derived.ShortlistedRestaurantsActivity;
 import com.app.gofoodie.activity.derived.SplashActivity;
 import com.app.gofoodie.activity.derived.UpdateProfileActivity;
 import com.app.gofoodie.activity.derived.WeekPreferenceActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
-import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.utility.SessionUtils;
 
@@ -147,7 +149,8 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     private void btnMyOrdersClicked(View view) {
 
-        getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.MY_ORDERS);
+        startActivity(new Intent(getActivity(), MyOrdersActivity.class));
+        //getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.MY_ORDERS);
     }
 
     private void btnMyPreferencesClicked(View view) {
@@ -162,11 +165,16 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     private void btnChangePasswordClicked(View view) {
 
-        getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.CHANGE_PASSWORD);
+        startActivity(new Intent(getActivity(), ChangePasswordActivity.class));
+        //getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.CHANGE_PASSWORD);
     }
 
     private void btnAboutUsClicked(View view) {
 
+        String url = "http://gofoodie.drushtiindia.com/#";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 
     private void btnLogoutClicked(View view) {

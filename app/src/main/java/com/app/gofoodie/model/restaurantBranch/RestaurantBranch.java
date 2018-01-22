@@ -1,22 +1,68 @@
+
 package com.app.gofoodie.model.restaurantBranch;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Contains restaurant branch information.
- * Inner class of {@link RestaurantBranchResponse}.
- */
-public class RestaurantBranch implements Parcelable {
+public class RestaurantBranch implements Parcelable
+{
 
+    @SerializedName("branch_id")
+    @Expose
+    private String branchId;
+    @SerializedName("restaurant_id")
+    @Expose
+    private String restaurantId;
+    @SerializedName("avg_rating")
+    @Expose
+    private String avgRating;
+    @SerializedName("count_rating")
+    @Expose
+    private String countRating;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("branch_name")
+    @Expose
+    private String branchName;
+    @SerializedName("branch_email")
+    @Expose
+    private String branchEmail;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("profile_icon")
+    @Expose
+    private String profileIcon;
+    @SerializedName("tags")
+    @Expose
+    private String tags;
+    @SerializedName("type")
+    @Expose
+    private String type;
+    @SerializedName("branch_address")
+    @Expose
+    private String branchAddress;
+    @SerializedName("branch_postal_code")
+    @Expose
+    private Object branchPostalCode;
+    @SerializedName("geo_lat")
+    @Expose
+    private String geoLat;
+    @SerializedName("geo_lng")
+    @Expose
+    private String geoLng;
+    @SerializedName("about_us")
+    @Expose
+    private AboutUs aboutUs;
     public final static Creator<RestaurantBranch> CREATOR = new Creator<RestaurantBranch>() {
 
 
         @SuppressWarnings({
-                "unchecked"
+            "unchecked"
         })
         public RestaurantBranch createFromParcel(Parcel in) {
             return new RestaurantBranch(in);
@@ -26,55 +72,8 @@ public class RestaurantBranch implements Parcelable {
             return (new RestaurantBranch[size]);
         }
 
-    };
-    @SerializedName("branch_id")
-    @Expose
-    public String branchId;
-    @SerializedName("restaurant_id")
-    @Expose
-    public String restaurantId;
-    @SerializedName("avg_rating")
-    @Expose
-    public String avgRating;
-    @SerializedName("count_rating")
-    @Expose
-    public String countRating;
-    @SerializedName("name")
-    @Expose
-    public String name;
-    @SerializedName("branch_name")
-    @Expose
-    public String branchName;
-    @SerializedName("branch_email")
-    @Expose
-    public String branchEmail;
-    @SerializedName("description")
-    @Expose
-    public String description;
-    @SerializedName("profile_icon")
-    @Expose
-    public String profileIcon;
-    @SerializedName("tags")
-    @Expose
-    public String tags;
-    @SerializedName("type")
-    @Expose
-    public String type;
-    @SerializedName("branch_address")
-    @Expose
-    public String branchAddress;
-    @SerializedName("branch_postal_code")
-    @Expose
-    public String branchPostalCode;
-    @SerializedName("geo_lat")
-    @Expose
-    public String geoLat;
-    @SerializedName("geo_lng")
-    @Expose
-    public String geoLng;
-    @SerializedName("about_us")
-    @Expose
-    public String aboutUs;
+    }
+    ;
 
     protected RestaurantBranch(Parcel in) {
         this.branchId = ((String) in.readValue((String.class.getClassLoader())));
@@ -89,13 +88,141 @@ public class RestaurantBranch implements Parcelable {
         this.tags = ((String) in.readValue((String.class.getClassLoader())));
         this.type = ((String) in.readValue((String.class.getClassLoader())));
         this.branchAddress = ((String) in.readValue((String.class.getClassLoader())));
-        this.branchPostalCode = ((String) in.readValue((String.class.getClassLoader())));
+        this.branchPostalCode = ((Object) in.readValue((Object.class.getClassLoader())));
         this.geoLat = ((String) in.readValue((String.class.getClassLoader())));
         this.geoLng = ((String) in.readValue((String.class.getClassLoader())));
-        this.aboutUs = ((String) in.readValue((String.class.getClassLoader())));
+        this.aboutUs = ((AboutUs) in.readValue((AboutUs.class.getClassLoader())));
     }
 
     public RestaurantBranch() {
+    }
+
+    public String getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
+    }
+
+    public String getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    public String getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(String avgRating) {
+        this.avgRating = avgRating;
+    }
+
+    public String getCountRating() {
+        return countRating;
+    }
+
+    public void setCountRating(String countRating) {
+        this.countRating = countRating;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    public String getBranchEmail() {
+        return branchEmail;
+    }
+
+    public void setBranchEmail(String branchEmail) {
+        this.branchEmail = branchEmail;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getProfileIcon() {
+        return profileIcon;
+    }
+
+    public void setProfileIcon(String profileIcon) {
+        this.profileIcon = profileIcon;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getBranchAddress() {
+        return branchAddress;
+    }
+
+    public void setBranchAddress(String branchAddress) {
+        this.branchAddress = branchAddress;
+    }
+
+    public Object getBranchPostalCode() {
+        return branchPostalCode;
+    }
+
+    public void setBranchPostalCode(Object branchPostalCode) {
+        this.branchPostalCode = branchPostalCode;
+    }
+
+    public String getGeoLat() {
+        return geoLat;
+    }
+
+    public void setGeoLat(String geoLat) {
+        this.geoLat = geoLat;
+    }
+
+    public String getGeoLng() {
+        return geoLng;
+    }
+
+    public void setGeoLng(String geoLng) {
+        this.geoLng = geoLng;
+    }
+
+    public AboutUs getAboutUs() {
+        return aboutUs;
+    }
+
+    public void setAboutUs(AboutUs aboutUs) {
+        this.aboutUs = aboutUs;
     }
 
     public void writeToParcel(Parcel dest, int flags) {
@@ -118,7 +245,7 @@ public class RestaurantBranch implements Parcelable {
     }
 
     public int describeContents() {
-        return 0;
+        return  0;
     }
 
 }

@@ -1,7 +1,5 @@
 package com.app.gofoodie.activity.derived;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -117,28 +115,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             return;
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(false);
-        builder.setTitle("Alert");
-        builder.setMessage("Do you agree to change the delivery address to all orders which are yet to be delivered. It may charge you some amount which will be deducted from your wallet.");
-        builder.setIcon(R.drawable.icon_error_alert);
-        builder.setPositiveButton("Agree and Update", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                sendUpdateProfileRequest(view, true);
-                dialog.dismiss();
-            }
-        });
-        builder.setNegativeButton("Remain Unchanged", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                sendUpdateProfileRequest(view, false);
-                dialog.dismiss();
-            }
-        });
-        builder.show();
+        sendUpdateProfileRequest(view, true);
 
     }
 
@@ -263,26 +240,6 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
             flagValidation = flagValidation && true;
             mEtMobile.setError(null);
-        }
-
-        if (mEtAltMobile.getText().toString().trim().isEmpty()) {
-
-            flagValidation = false;
-            mEtAltMobile.setError(getString(R.string.cannot_be_empty));
-        } else {
-
-            flagValidation = flagValidation && true;
-            mEtAltMobile.setError(null);
-        }
-
-        if (mEtAltEmail.getText().toString().trim().isEmpty()) {
-
-            flagValidation = false;
-            mEtAltEmail.setError(getString(R.string.cannot_be_empty));
-        } else {
-
-            flagValidation = flagValidation && true;
-            mEtAltEmail.setError(null);
         }
 
         if (mEtAddress.getText().toString().trim().isEmpty()) {

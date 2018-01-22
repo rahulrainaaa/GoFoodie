@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
-import com.app.gofoodie.activity.derived.DashboardActivity;
+import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.customer.Profile;
@@ -30,18 +30,40 @@ import java.util.Date;
 public class OrderCancellationHandler {
 
     public static final String TAG = "OrderCancellationHandler";
-
-    public enum OP_CODE {CANCEL, LONGTERM, SHORTTERM, EMERGENCY}
-
-    public enum RESP_CODE {RESP_SUCCESS, RESP_FAIL, RESP_EXCEPTION}
-
     private MyOrder myOrder = null;
-
-    private DashboardActivity mActivity = null;
+    private BaseAppCompatActivity mActivity = null;
     private BottomSheetDialog mBottomSheetDialog = null;
     private OrderCancellationListener mCancellationListener = null;
+    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
 
-    public OrderCancellationHandler(DashboardActivity activity) {
+            mBottomSheetDialog.hide();
+
+            switch (view.getId()) {
+
+                case R.id.btn_cancel_order:
+
+                    cancelSingleOrder();
+                    break;
+                case R.id.btn_long_term_vacation:
+
+                    cancelLongTerm();
+                    break;
+                case R.id.btn_short_term_vacation:
+
+                    cancelShortTerm();
+                    break;
+                case R.id.btn_emergency_mode:
+
+                    cancelEmergency();
+                    break;
+            }
+
+        }
+    };
+
+    public OrderCancellationHandler(BaseAppCompatActivity activity) {
 
         this.mActivity = activity;
     }
@@ -117,6 +139,13 @@ public class OrderCancellationHandler {
                     }
                 });
 
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
         alertDialog.show();
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
 
@@ -351,36 +380,6 @@ public class OrderCancellationHandler {
 
     }
 
-
-    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            mBottomSheetDialog.hide();
-
-            switch (view.getId()) {
-
-                case R.id.btn_cancel_order:
-
-                    cancelSingleOrder();
-                    break;
-                case R.id.btn_long_term_vacation:
-
-                    cancelLongTerm();
-                    break;
-                case R.id.btn_short_term_vacation:
-
-                    cancelShortTerm();
-                    break;
-                case R.id.btn_emergency_mode:
-
-                    cancelEmergency();
-                    break;
-            }
-
-        }
-    };
-
     private void respondCallback(RESP_CODE responseCode, OP_CODE opCode, JSONObject jsonResponse, String message) {
 
         try {
@@ -398,5 +397,10 @@ public class OrderCancellationHandler {
         }
 
     }
+
+
+    public enum OP_CODE {CANCEL, LONGTERM, SHORTTERM, EMERGENCY}
+
+    public enum RESP_CODE {RESP_SUCCESS, RESP_FAIL, RESP_EXCEPTION}
 
 }
