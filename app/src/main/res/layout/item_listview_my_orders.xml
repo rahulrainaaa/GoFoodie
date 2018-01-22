@@ -81,7 +81,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                app:srcCompat="@drawable/icon_rate" />
+                app:srcCompat="@drawable/icon_start" />
 
             <LinearLayout
                 android:layout_width="1dp"
@@ -95,7 +95,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                app:srcCompat="@drawable/icon_description" />
+                app:srcCompat="@drawable/icon_vacation_mode" />
 
             <LinearLayout
                 android:layout_width="1dp"
@@ -109,7 +109,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                app:srcCompat="@drawable/icon_respond" />
+                app:srcCompat="@drawable/icon_cross" />
 
         </LinearLayout>
 

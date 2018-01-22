@@ -178,8 +178,19 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
         try {
 
             VibrationUtil.getInstance().vibrate(this);
-            Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show();
-            String statusMessage = json.getString("statusMessage");
+            int statusCode = json.getInt("statusCode");
+
+            if (statusCode == 200) {
+
+                Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show();
+
+            } else if (statusCode == 406) {
+
+                Toast.makeText(this, "Already present in cart", Toast.LENGTH_SHORT).show();
+            } else {
+
+                Toast.makeText(this, json.getString("statusMessage"), Toast.LENGTH_SHORT).show();
+            }
 
         } catch (JSONException jsonExc) {
 

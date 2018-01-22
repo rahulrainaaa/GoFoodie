@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
@@ -276,32 +275,43 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
                         dialog.dismiss();
                     }
                 });
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Rate", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
         alertDialog.show();
 
     }
 
     private void showDescription(View v) {
 
-        MyOrder order = (MyOrder) v.getTag();
+        MyOrder myOrder = (MyOrder) v.getTag();
 
-        View view = getLayoutInflater().inflate(R.layout.dialog_combo_details, null);
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle(order.comboname);
-        alertDialog.setView(view);
-        ((RatingBar) view.findViewById(R.id.rating_bar)).setVisibility(View.GONE);
-        ((TextView) view.findViewById(R.id.type_n_cuisine)).setText("  " + order.deliveryDate);
-        ((TextView) view.findViewById(R.id.desc)).setText(order.status);
-        ((TextView) view.findViewById(R.id.txt_price)).setText("AED " + order.pricePaid);
-        view.findViewById(R.id.img_veg).setVisibility(View.GONE);
-        view.findViewById(R.id.img_nonveg).setVisibility(View.GONE);
-        alertDialog.setCancelable(false);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
+        OrderCancellationHandler orderCancellationHandler = new OrderCancellationHandler(this);
+        orderCancellationHandler.showCancellationOptions(myOrder, mOrderCancellationListener, 2);
+
+
+//        View view = getLayoutInflater().inflate(R.layout.dialog_combo_details, null);
+//        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+//        alertDialog.setTitle(order.comboname);
+//        alertDialog.setView(view);
+//        ((RatingBar) view.findViewById(R.id.rating_bar)).setVisibility(View.GONE);
+//        ((TextView) view.findViewById(R.id.type_n_cuisine)).setText("  " + order.deliveryDate);
+//        ((TextView) view.findViewById(R.id.desc)).setText(order.status);
+//        ((TextView) view.findViewById(R.id.txt_price)).setText("AED " + order.pricePaid);
+//        view.findViewById(R.id.img_veg).setVisibility(View.GONE);
+//        view.findViewById(R.id.img_nonveg).setVisibility(View.GONE);
+//        alertDialog.setCancelable(false);
+//        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//        alertDialog.show();
 
     }
 
@@ -316,7 +326,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
         }
 
         OrderCancellationHandler orderCancellationHandler = new OrderCancellationHandler(this);
-        orderCancellationHandler.showCancellationOptions(order, mOrderCancellationListener);
+        orderCancellationHandler.showCancellationOptions(order, mOrderCancellationListener, 1);
 
     }
 }

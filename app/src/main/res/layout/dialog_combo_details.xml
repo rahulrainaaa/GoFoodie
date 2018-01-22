@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:padding="5dp"
-            android:text="Desc List 1\nDesc List 2" />
+            android:text="Accepted" />
 
     </LinearLayout>
 

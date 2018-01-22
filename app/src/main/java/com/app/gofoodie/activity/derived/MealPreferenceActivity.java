@@ -175,7 +175,7 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
             return;
         }
 
-        String cuisine_ids = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_CUISINE_KEY, "") + ",";
+        String cuisine_ids = "," + CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_CUISINE_KEY, "") + ",";
 
         mList = (ArrayList<Cuisine>) response.getCuisine();
 
@@ -183,8 +183,8 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
         while (cuisineIterator.hasNext()) {
 
             Cuisine c = cuisineIterator.next();
-
-            if (cuisine_ids.contains("," + c.getCuisineId().trim() + ",")) {
+            String strMatch = "," + c.getCuisineId().trim() + ",";
+            if (cuisine_ids.contains(strMatch.trim())) {
 
                 c.isChecked = true;
             }

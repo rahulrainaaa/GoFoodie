@@ -69,7 +69,7 @@ public class OrderCancellationHandler {
         this.mActivity = activity;
     }
 
-    public void showCancellationOptions(MyOrder order, OrderCancellationListener cancellationListener) {
+    public void showCancellationOptions(MyOrder order, OrderCancellationListener cancellationListener, int mode) {
 
         this.myOrder = order;
         this.mCancellationListener = cancellationListener;
@@ -81,6 +81,17 @@ public class OrderCancellationHandler {
         Button btnLongTerm = (Button) bottomView.findViewById(R.id.btn_long_term_vacation);
         Button btnShortTerm = (Button) bottomView.findViewById(R.id.btn_short_term_vacation);
         Button btnEmergency = (Button) bottomView.findViewById(R.id.btn_emergency_mode);
+
+        if (mode == 1) {
+
+            btnLongTerm.setVisibility(View.GONE);
+            btnShortTerm.setVisibility(View.GONE);
+
+        } else if (mode == 2) {
+
+            btnCancel.setVisibility(View.GONE);
+            btnEmergency.setVisibility(View.GONE);
+        }
 
         btnCancel.setOnClickListener(mOnClickListener);
         btnLongTerm.setOnClickListener(mOnClickListener);

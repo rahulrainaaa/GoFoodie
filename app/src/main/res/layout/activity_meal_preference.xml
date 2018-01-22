@@ -47,6 +47,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
         android:gravity="center"
         android:text="Select your cuisine"
         android:textColor="#787878"

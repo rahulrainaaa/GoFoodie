@@ -335,7 +335,7 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
         }
 
         OrderCancellationHandler orderCancellationHandler = new OrderCancellationHandler(getDashboardActivity());
-        orderCancellationHandler.showCancellationOptions(order, mOrderCancellationListener);
+        orderCancellationHandler.showCancellationOptions(order, mOrderCancellationListener, 2);
 
     }
 
