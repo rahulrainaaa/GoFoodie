@@ -29,6 +29,10 @@
     <string name="menu_location">Location</string>
     <string name="menu_save">Save</string>
 
+    <string name="select_country">Select country</string>
+    <string name="select_city">Select City</string>
+    <string name="select_area">Select Area</string>
+
 
     <!-- UI Messages and Warnings -->
     <string name="test">Test</string>
@@ -54,7 +58,7 @@
     <string name="title_activity_edit_combo">Meal Items</string>
     <string name="title_activity_restaurant_profile">Restaurant Profile</string>
     <string name="title_activity_combo_plan_description">Combo Plan</string>
-    <string name="title_activity_shortlisted_restaurants">Shortlisted</string>
+    <string name="title_activity_shortlisted_restaurants">Shortlisted Restaurants</string>
 
     <string name="desc_platinum_plan">PLATINUM: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.</string>
     <string name="title_activity_assistant">AssistantActivity</string>

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
 import android.widget.GridView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
@@ -46,6 +47,7 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
      */
     private AdapterViewFlipper mFlipperBanner = null;
     private HomeImageViewFlipperAdapter mFlipperAdapter = null;
+    private ScrollView mScrollView = null;
 
     /**
      * Data members for Shortlisted Restaurants {@link RecyclerView}.
@@ -71,6 +73,7 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
         }
 
         View view = inflater.inflate(R.layout.frag_home, container, false);
+        mScrollView = (ScrollView) view.findViewById(R.id.scroll_view);
         mRVShortlistRestaurant = (RecyclerView) view.findViewById(R.id.rv_shortlist_restaurants);
         mFeaturedRestaurantsGrid = (GridView) view.findViewById(R.id.grid_view_banner);
 
@@ -155,6 +158,8 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
         mFeaturedRestaurantAdapter = new FeaturedRestaurantGridAdapter(getDashboardActivity(), R.layout.item_gridview_featured_restaurants, mListFeaturedRestaurant);
         mFeaturedRestaurantsGrid.setAdapter(mFeaturedRestaurantAdapter);
         ListViewUtils.setGridViewHeightBasedOnChildren(mFeaturedRestaurantsGrid);
+
+        mScrollView.fullScroll(ScrollView.FOCUS_UP);
 
     }
 

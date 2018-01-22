@@ -343,7 +343,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
             case 200:       // Success Login.
 
-                getCustomerProfile(loginModel.getData().getLoginId(), loginModel.getData().getToken());
+                getCustomerProfile(loginModel.getData().getLoginId(), loginModel.getData().getToken(), loginModel.getData().getCustomerId());
                 break;
             case 400:       // Bad Request.
 
@@ -382,17 +382,19 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
      * @method getCustomerProfile
      * @desc Get Customer Profile data as per loginId and token.
      */
-    private void getCustomerProfile(String loginId, String token) {
+    private void getCustomerProfile(String loginId, String token, String customer_id) {
 
         JSONObject profileJsonRequest = new JSONObject();
         try {
 
             profileJsonRequest.put("login_id", loginId);
             profileJsonRequest.put("token", token);
+            profileJsonRequest.put("customer_id", customer_id);
             NetworkHandler networkHandler = new NetworkHandler();
             networkHandler.httpCreate(2, getDashboardActivity(), this, profileJsonRequest, Network.URL_GET_CUST_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
             networkHandler.executePost();
         } catch (JSONException excJson) {
+
             excJson.printStackTrace();
             Toast.makeText(getActivity(), "EXCEPTION: " + excJson.getMessage(), Toast.LENGTH_SHORT).show();
         }

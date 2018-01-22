@@ -104,19 +104,19 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
                 mCityAdapter.notifyDataSetChanged();
                 mAreaList.clear();
                 mAreaAdapter.notifyDataSetChanged();
-                countrySelected(position);
+                countrySelected(position - 1);
                 break;
 
             case R.id.sp_locpref_city:
 
                 mAreaList.clear();
                 mAreaAdapter.notifyDataSetChanged();
-                citySelected(position);
+                citySelected(position - 1);
                 break;
 
             case R.id.sp_locpref_area:
 
-                areaSelected(position);
+                areaSelected(position - 1);
                 break;
         }
     }
@@ -133,6 +133,11 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
      */
     private void countrySelected(int position) {
 
+
+        if (position == -1) {
+            return;
+        }
+
         mAreaLocationDatum = null;
         Datum datum = mCountryListResponse.getData().get(position);
         String url = Network.URL_GET_CITY + "" + datum.getCountryId().trim();
@@ -148,6 +153,11 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
      */
     private void citySelected(int position) {
 
+
+        if (position == -1) {
+            return;
+        }
+
         mAreaLocationDatum = null;
         com.app.gofoodie.model.cityResponse.Datum datum = mCityResponse.getData().get(position);
         String url = Network.URL_GET_AREA + "" + datum.getCityId().trim();
@@ -162,6 +172,10 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
      * @desc Method to be called in case of area selected.
      */
     private void areaSelected(int position) {
+
+        if (position == -1) {
+            return;
+        }
 
         mAreaLocationDatum = mAreaResponse.getData().get(position);
     }
@@ -229,6 +243,8 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
 
         Iterator<Datum> listIterator = countryList.getData().iterator();
 
+        mCountryList.add("Select Country");
+
         while (listIterator.hasNext()) {
 
             mCountryList.add("" + listIterator.next().getCountryName());
@@ -250,6 +266,8 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
         }
 
         Iterator<com.app.gofoodie.model.cityResponse.Datum> listIterator = cityResponse.getData().iterator();
+
+        mCityList.add("Select City");
 
         while (listIterator.hasNext()) {
 
@@ -273,6 +291,8 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
         }
 
         Iterator<com.app.gofoodie.model.areaResponse.Datum> listIterator = areaResponse.getData().iterator();
+
+        mAreaList.add("Select Area");
 
         while (listIterator.hasNext()) {
 

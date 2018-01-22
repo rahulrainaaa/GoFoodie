@@ -25,24 +25,21 @@ import java.util.Date;
 public class CustomerProfileHandler implements NetworkCallbackListener {
 
     public static final String TAG = "CustomerProfileHandler";
-
-    /**
-     * Class Private data members.
-     */
-    public Context mContext = null;
-    public ProfileUpdateListener mListener = null;
-
     /**
      * Class public static data member(s) to share.
      */
     public static Customer CUSTOMER = null;
     public static boolean profileExist = false;
-
     /**
      * Class private static data member.
      */
     private static Date sPrevTime = null;   // Last data refreshed DateTime.
     private static boolean inProgress = false;      // Http request in progress or not.
+    /**
+     * Class Private data members.
+     */
+    public Context mContext = null;
+    public ProfileUpdateListener mListener = null;
 
     /**
      * @param context
@@ -85,9 +82,11 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
 
             String login_id = SessionUtils.getInstance().getSession().getData().getLoginId();
             String token = SessionUtils.getInstance().getSession().getData().getToken();
+            String customer_id = SessionUtils.getInstance().getSession().getData().getCustomerId();
 
             JSONObject jsonRequest = new JSONObject();
             jsonRequest.put("login_id", login_id);
+            jsonRequest.put("customer_id", customer_id);
             jsonRequest.put("token", token);
 
             NetworkHandler networkHandler = new NetworkHandler();
