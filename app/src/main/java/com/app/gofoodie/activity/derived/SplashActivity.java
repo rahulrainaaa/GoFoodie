@@ -13,6 +13,7 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.handler.profileDataHandler.ProfileUpdateListener;
 import com.app.gofoodie.model.customer.Customer;
+import com.app.gofoodie.model.restaurantBranch.RestaurantBranch;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.SessionUtils;
 import com.facebook.FacebookSdk;
@@ -54,6 +55,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
             CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
             customerProfileHandler.refresh(null, this);
         }
+
     }
 
     @Override

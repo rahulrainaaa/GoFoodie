@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:hint="Last Name (Optional)"
+            android:hint="Last Name*"
             android:maxLines="1"
             android:paddingLeft="@dimen/signup_edittext_padding_normal"
             android:textColorHint="@color/colorWhite"

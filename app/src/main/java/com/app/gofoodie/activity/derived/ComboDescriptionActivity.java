@@ -3,6 +3,7 @@ package com.app.gofoodie.activity.derived;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -13,20 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
-import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.model.restaurant.Restaurant;
 import com.app.gofoodie.model.shortlisted.Shortlisted;
 import com.app.gofoodie.utility.ProfileUtils;
 import com.squareup.picasso.Picasso;
 
-/**
- * @class RestaurantProfileActivity
- * @desc Activity class to simply show restaurant profile details with some actions.
- */
-public class RestaurantProfileActivity extends BaseAppCompatActivity implements View.OnClickListener {
-
-    public static final String TAG = "RestaurantProfileActivity";
+public class ComboDescriptionActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * Class private data member(s).
@@ -50,7 +44,7 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant_profile);
+        setContentView(R.layout.activity_combo_description);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -79,11 +73,11 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         Review.setOnClickListener(this);
 
 
-        MODE mode = (MODE) getIntent().getSerializableExtra("mode");
-        if (mode == MODE.SHORTLISTED) {
+        RestaurantProfileActivity.MODE mode = (RestaurantProfileActivity.MODE) getIntent().getSerializableExtra("mode");
+        if (mode == RestaurantProfileActivity.MODE.SHORTLISTED) {
 
             showShortlistedRestaurantProfile();
-        } else if (mode == MODE.REST_BRANCH) {
+        } else if (mode == RestaurantProfileActivity.MODE.REST_BRANCH) {
 
             showRestaurantBranchProfile();
         }
@@ -98,14 +92,14 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         String email = "";
         String coordinates = "";
         String branchId = "";
-        MODE mode = (MODE) getIntent().getSerializableExtra("mode");
-        if (mode == MODE.SHORTLISTED) {
+        RestaurantProfileActivity.MODE mode = (RestaurantProfileActivity.MODE) getIntent().getSerializableExtra("mode");
+        if (mode == RestaurantProfileActivity.MODE.SHORTLISTED) {
 
             Shortlisted shortlisted = getIntent().getParcelableExtra("data");
             email = shortlisted.branchEmail.trim();
             coordinates = shortlisted.branchGeoLat + "," + shortlisted.branchGeoLng;
             branchId = shortlisted.branchId.trim();
-        } else if (mode == MODE.REST_BRANCH) {
+        } else if (mode == RestaurantProfileActivity.MODE.REST_BRANCH) {
 
             Restaurant restaurant = getIntent().getParcelableExtra("data");
             email = restaurant.branchEmail;

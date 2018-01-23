@@ -39,7 +39,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
     private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtCompanyName, mLocationPref;
     private Button mBtnRegister = null;
     private CheckBox mChkAcceptTerms = null;
-    private String locationId = "1";
+    private String locationId = "";
     private String locationName = "";
 
     @Nullable
@@ -219,7 +219,8 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             jsonNewUserRegisterRequest.put("mobile2", strAltMobile);
             jsonNewUserRegisterRequest.put("email", strEmail);
             jsonNewUserRegisterRequest.put("email2", strAltEmail);
-            jsonNewUserRegisterRequest.put("location", locationId);
+            jsonNewUserRegisterRequest.put("location", mLocationPref.getText().toString().trim());
+            jsonNewUserRegisterRequest.put("location_id", locationId);
             jsonNewUserRegisterRequest.put("geo_lat", "");
             jsonNewUserRegisterRequest.put("geo_lng", "");
             jsonNewUserRegisterRequest.put("password", ""); // No password in social_login = yes

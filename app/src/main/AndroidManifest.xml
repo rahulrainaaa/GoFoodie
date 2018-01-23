@@ -116,7 +116,11 @@
             android:name=".activity.derived.MyOrdersActivity"
             android:label="@string/my_orders"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.derived.ChangePasswordActivity"></activity>
+        <activity android:name=".activity.derived.ChangePasswordActivity" />
+        <activity
+            android:name=".activity.derived.ComboDescriptionActivity"
+            android:label="@string/title_activity_combo_description"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
