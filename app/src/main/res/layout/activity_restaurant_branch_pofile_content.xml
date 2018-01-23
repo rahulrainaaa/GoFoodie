@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="3dp"
+                android:clickable="false"
                 android:isIndicator="false"
                 android:numStars="5"
                 android:rating="5"
