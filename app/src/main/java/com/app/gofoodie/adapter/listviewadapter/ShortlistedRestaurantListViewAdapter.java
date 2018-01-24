@@ -36,24 +36,6 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
     private View.OnClickListener mClickListener = null;
 
     /**
-     * @class Holder
-     * @desc Holder class to hold the reference of list view cell.
-     */
-    private static class Holder {
-
-        public ImageView imgIcon = null;
-        public ImageView imgVeg = null;
-        public ImageView imgNonVeg = null;
-        public ImageButton iBtnView = null;
-        public ImageButton iBtnCellType = null;
-        public TextView txtName = null;
-        public TextView txtTags = null;
-        public TextView txtCount = null;
-        public RatingBar ratingBar = null;
-        public int tag = -1;
-    }
-
-    /**
      * @param activity
      * @param resource
      * @param list
@@ -90,6 +72,8 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
             holder.txtCount = (TextView) cell.findViewById(R.id.txt_rating_count);
             holder.iBtnCellType = (ImageButton) cell.findViewById(R.id.ibtn_remove);
             holder.iBtnView = (ImageButton) cell.findViewById(R.id.ibtn_view);
+
+            holder.ratingBar.setEnabled(false);
 
             cell.setTag(holder);
         } else {
@@ -135,5 +119,23 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
         holder.iBtnView.setOnClickListener(mClickListener);
 
         return cell;
+    }
+
+    /**
+     * @class Holder
+     * @desc Holder class to hold the reference of list view cell.
+     */
+    private static class Holder {
+
+        public ImageView imgIcon = null;
+        public ImageView imgVeg = null;
+        public ImageView imgNonVeg = null;
+        public ImageButton iBtnView = null;
+        public ImageButton iBtnCellType = null;
+        public TextView txtName = null;
+        public TextView txtTags = null;
+        public TextView txtCount = null;
+        public RatingBar ratingBar = null;
+        public int tag = -1;
     }
 }

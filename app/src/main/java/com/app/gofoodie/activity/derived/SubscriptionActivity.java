@@ -51,18 +51,11 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
         mListView = (ListView) findViewById(R.id.list_view);
         mListView.setOnItemClickListener(this);
 
-        String url;
 
         boolean flagSubscription = CustomerProfileHandler.CUSTOMER.profile.validUpto.trim().isEmpty();
 
-        if (flagSubscription) { // No recharge plan needed.
-
-            url = Network.URL_GET_RECHARGE_PLANS + "?recharge=false";
-
-        } else {    // Get all plans (Subscription and Recharge plans).
-
-            url = Network.URL_GET_RECHARGE_PLANS + "?recharge=true";
-        }
+        // flagSubscription = true [only subscription plans needed], false = [all plans needed]
+        String url = Network.URL_GET_RECHARGE_PLANS + (flagSubscription ? "" : "rechargePlan");
 
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);

@@ -30,18 +30,6 @@ public class RatingListViewAdapter extends ArrayAdapter<Review> {
     private ArrayList<Review> mListData = null;
     private int mLayoutResourceId;
 
-    /**
-     * Holder class to hold the List View Cell reference.
-     */
-    private static class Holder {
-
-
-        public TextView Name = null;
-        public TextView Review = null;
-        public RatingBar ratingBar = null;
-        public int tag = -1;
-    }
-
     public RatingListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Review> list) {
 
         super(activity, resource, list);
@@ -62,6 +50,7 @@ public class RatingListViewAdapter extends ArrayAdapter<Review> {
             holder = new Holder();
 
             holder.ratingBar = (RatingBar) cell.findViewById(R.id.rating_bar);
+            holder.ratingBar.setEnabled(false);
             holder.Name = (TextView) cell.findViewById(R.id.name);
             holder.Review = (TextView) cell.findViewById(R.id.review);
 
@@ -78,5 +67,17 @@ public class RatingListViewAdapter extends ArrayAdapter<Review> {
         holder.ratingBar.setRating(Float.parseFloat(review.rating.trim()));
 
         return cell;
+    }
+
+    /**
+     * Holder class to hold the List View Cell reference.
+     */
+    private static class Holder {
+
+
+        public TextView Name = null;
+        public TextView Review = null;
+        public RatingBar ratingBar = null;
+        public int tag = -1;
     }
 }

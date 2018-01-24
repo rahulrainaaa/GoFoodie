@@ -35,24 +35,6 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
     private View.OnClickListener mClickListener = null;
 
     /**
-     * @class Holder
-     * @desc Holder class to hold the reference of list view cell.
-     */
-    private static class Holder {
-
-        public ImageView imgIcon = null;
-        public ImageView imgVeg = null;
-        public ImageView imgNonVeg = null;
-        public ImageButton iBtnView = null;
-        public ImageButton iBtnCellType = null;
-        public TextView txtName = null;
-        public TextView txtTags = null;
-        public TextView txtCount = null;
-        public RatingBar ratingBar = null;
-        public int tag = -1;
-    }
-
-    /**
      * @param activity
      * @param resource
      * @param list
@@ -89,6 +71,7 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
             holder.iBtnCellType = (ImageButton) cell.findViewById(R.id.ibtn_remove);
             holder.iBtnView = (ImageButton) cell.findViewById(R.id.ibtn_view);
 
+            holder.ratingBar.setEnabled(false);
             cell.setTag(holder);
         } else {
 
@@ -134,5 +117,23 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
         holder.iBtnView.setOnClickListener(mClickListener);
 
         return cell;
+    }
+
+    /**
+     * @class Holder
+     * @desc Holder class to hold the reference of list view cell.
+     */
+    private static class Holder {
+
+        public ImageView imgIcon = null;
+        public ImageView imgVeg = null;
+        public ImageView imgNonVeg = null;
+        public ImageButton iBtnView = null;
+        public ImageButton iBtnCellType = null;
+        public TextView txtName = null;
+        public TextView txtTags = null;
+        public TextView txtCount = null;
+        public RatingBar ratingBar = null;
+        public int tag = -1;
     }
 }

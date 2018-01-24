@@ -68,7 +68,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
         AboutUs = (TextView) findViewById(R.id.txt_about_us);
 
         mRatingBar = (RatingBar) findViewById(R.id.rating_bar);
-
+        mRatingBar.setEnabled(false);
         Veg = (ImageView) findViewById(R.id.img_veg);
         NonVeg = (ImageView) findViewById(R.id.img_nonveg);
         Profile = (ImageView) findViewById(R.id.img_profile);
