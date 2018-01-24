@@ -78,7 +78,7 @@
     <string name="meal_preference">Meal Preference</string>
     <string name="recharge_plans">Recharge Plans</string>
     <string name="location_preference">Location Preference</string>
-    <string name="welcome">Welcome</string>
+    <string name="welcome">GoFoodie</string>
     <string name="title_activity_combo_description">ComboDescriptionActivity</string>
 
 </resources>

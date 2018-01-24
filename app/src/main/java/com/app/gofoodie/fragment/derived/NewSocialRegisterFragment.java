@@ -319,6 +319,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
                 JSONObject jsonRequest = new JSONObject();
                 jsonRequest.put("login_id", login.getData().getLoginId());
                 jsonRequest.put("token", login.getData().getToken());
+                jsonRequest.put("customer_id", login.getData().getCustomerId());
 
                 NetworkHandler networkHandler = new NetworkHandler();
                 networkHandler.httpCreate(3, getDashboardActivity(), this, jsonRequest, Network.URL_GET_CUST_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);

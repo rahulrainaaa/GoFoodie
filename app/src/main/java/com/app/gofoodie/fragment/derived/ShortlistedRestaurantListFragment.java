@@ -23,6 +23,7 @@ import com.app.gofoodie.model.shortlisted.Shortlisted;
 import com.app.gofoodie.model.shortlisted.ShortlistedRestaurants;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -171,6 +172,23 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
      * Method to call shortlist Activity if user select on Alert Dialog.
      */
     private void callToShortlistActivity() {
+
+        new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Alert")
+                .setContentText("No Shortlist Restaurant found.\nDo you want to select?")
+                .setConfirmText("Yes,delete it!")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        // reuse previous dialog instance
+                        sDialog.setTitleText("Deleted!")
+                                .setContentText("Your imaginary file has been deleted!")
+                                .setConfirmText("OK")
+                                .setConfirmClickListener(null)
+                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                    }
+                })
+                .show();
 
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
         alertDialog.setTitle("Alert");

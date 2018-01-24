@@ -1,7 +1,5 @@
 package com.app.gofoodie.activity.derived;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,11 +11,11 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.handler.profileDataHandler.ProfileUpdateListener;
 import com.app.gofoodie.model.customer.Customer;
-import com.app.gofoodie.model.restaurantBranch.RestaurantBranch;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.SessionUtils;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * @class SplashActivity
@@ -95,19 +93,19 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
 
         if (customer == null) {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Error");
-            builder.setIcon(R.drawable.icon_error_alert);
-            builder.setMessage("Failed to connect to server.\nPlease try later.");
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Error")
+                    .setContentText("Server connection failed.\nPlease try later.")
+                    .setConfirmText("OK")
+                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
 
-                    dialogInterface.dismiss();
-                    finish();
-                }
-            });
-            builder.show();
+                            sDialog.cancel();
+                            SplashActivity.this.finish();
+                        }
+                    })
+                    .show();
 
         } else if (customer.statusCode == 401 || customer.statusCode == 403) {
 
@@ -123,20 +121,20 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
 
         } else if (customer.statusCode == 404) {
 
-            Toast.makeText(this, "" + customer.statusMessage, Toast.LENGTH_SHORT).show();
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Error");
-            builder.setIcon(R.drawable.icon_error_alert);
-            builder.setMessage("Unexpected error occurred in server.\nPlease try later.");
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Error")
+                    .setContentText("Unexpected server error.\nPlease try later.")
+                    .setConfirmText("OK")
+                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
 
-                    dialogInterface.dismiss();
-                    finish();
-                }
-            });
-            builder.show();
+                            sDialog.cancel();
+                            SplashActivity.this.finish();
+                        }
+                    })
+                    .show();
+
         } else {
 
             Toast.makeText(this, "" + customer.statusMessage, Toast.LENGTH_SHORT).show();

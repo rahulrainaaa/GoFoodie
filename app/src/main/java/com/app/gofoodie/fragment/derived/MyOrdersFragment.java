@@ -37,9 +37,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * @class NetworkErrorFragment
- * @desc {@link BaseFragment} Fragment class to handle My Order list UI screen.
+ * Abondoned class xxxxxxxxxxxxxxxxxxxxxxx
  */
+
 public class MyOrdersFragment extends BaseFragment implements NetworkCallbackListener, View.OnClickListener {
 
     public static final String TAG = "MyOrdersFragment";

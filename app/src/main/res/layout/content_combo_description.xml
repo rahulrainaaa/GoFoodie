@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="270dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.app.gofoodie.activity.derived.RestaurantProfileActivity"
-    tools:showIn="@layout/activity_restaurant_profile">
+    tools:context="com.app.gofoodie.activity.derived.RestaurantProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,14 +34,15 @@
                 android:numStars="5"
                 android:rating="5"
                 android:stepSize="0.5"
-                android:theme="@style/RatingBar" />
+                android:theme="@style/RatingBar"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/txt_rate_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
-                android:text="(16)" />
+                android:text="AED 235.55" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,7 +71,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorLight" />
+            android:background="@color/colorLight"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:paddingLeft="5dp"
-                android:text="Cuzine" />
+                android:text="Cuisine" />
 
             <TextView
                 android:id="@+id/txt_cuisine"

@@ -131,6 +131,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             jsonRequest.put("name", mEtName.getText().toString().trim());
             jsonRequest.put("address", mEtAddress.getText().toString().trim());
             jsonRequest.put("location", LocationUtils.getInstance().getLocationId(this, ""));
+            jsonRequest.put("location_id", LocationUtils.getInstance().getLocationId(this, ""));
             jsonRequest.put("area", LocationUtils.getInstance().getLocationId(this, ""));
             jsonRequest.put("geo_lat", "");
             jsonRequest.put("geo_lng", "");

@@ -1,11 +1,7 @@
 package com.app.gofoodie.activity.derived;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -14,20 +10,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
-import com.app.gofoodie.global.constants.Constants;
-import com.app.gofoodie.model.restaurant.Restaurant;
-import com.app.gofoodie.model.shortlisted.Shortlisted;
-import com.app.gofoodie.utility.ProfileUtils;
-import com.squareup.picasso.Picasso;
+import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.model.comboPlan.ComboPlanResponse;
+import com.app.gofoodie.model.comboPlan.Comboplan;
+import com.app.gofoodie.network.callback.NetworkCallbackListener;
+import com.app.gofoodie.network.handler.NetworkHandler;
 
-public class ComboDescriptionActivity extends AppCompatActivity implements View.OnClickListener {
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+/**
+ * Activity class to show full info/details of a single combo plan.
+ */
+public class ComboDescriptionActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
+
+    public static final String TAG = "ComboDescriptionActivity";
 
     /**
      * Class private data member(s).
      */
     private TextView Name = null;
-    private TextView ReviewCount = null;
-    private TextView Cuizine = null;
+    private TextView comboPrice = null;
+    private TextView Cuisine = null;
     private TextView Address = null;
     private TextView Postal = null;
     private TextView Description = null;
@@ -49,8 +55,8 @@ public class ComboDescriptionActivity extends AppCompatActivity implements View.
         setSupportActionBar(toolbar);
 
         Name = (TextView) findViewById(R.id.txt_name);
-        ReviewCount = (TextView) findViewById(R.id.txt_rate_count);
-        Cuizine = (TextView) findViewById(R.id.txt_cuisine);
+        comboPrice = (TextView) findViewById(R.id.txt_rate_count);
+        Cuisine = (TextView) findViewById(R.id.txt_cuisine);
         Address = (TextView) findViewById(R.id.txt_address);
         Postal = (TextView) findViewById(R.id.txt_postal_code);
         Description = (TextView) findViewById(R.id.txt_description);
@@ -67,213 +73,73 @@ public class ComboDescriptionActivity extends AppCompatActivity implements View.
         Map = (ImageButton) findViewById(R.id.btn_map);
         Review = (ImageButton) findViewById(R.id.btn_rate);
 
-        Call.setOnClickListener(this);
-        Email.setOnClickListener(this);
-        Map.setOnClickListener(this);
-        Review.setOnClickListener(this);
+        Call.setOnClickListener(null);
+        Email.setOnClickListener(null);
+        Map.setOnClickListener(null);
+        Review.setOnClickListener(null);
 
+        Call.setVisibility(View.GONE);
+        Email.setVisibility(View.GONE);
+        Map.setVisibility(View.GONE);
+        Review.setVisibility(View.GONE);
 
-        RestaurantProfileActivity.MODE mode = (RestaurantProfileActivity.MODE) getIntent().getSerializableExtra("mode");
-        if (mode == RestaurantProfileActivity.MODE.SHORTLISTED) {
+        String url = Network.URL_GET_COMBO_DETAIL + getIntent().getStringExtra("combo_id");
 
-            showShortlistedRestaurantProfile();
-        } else if (mode == RestaurantProfileActivity.MODE.REST_BRANCH) {
+        NetworkHandler networkHandler = new NetworkHandler();
+        networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+        networkHandler.executeGet();
 
-            showRestaurantBranchProfile();
-        }
     }
 
-    /**
-     * {@link android.view.View.OnClickListener} click event callback method(s).
-     */
+
     @Override
-    public void onClick(View view) {
+    public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        String email = "";
-        String coordinates = "";
-        String branchId = "";
-        RestaurantProfileActivity.MODE mode = (RestaurantProfileActivity.MODE) getIntent().getSerializableExtra("mode");
-        if (mode == RestaurantProfileActivity.MODE.SHORTLISTED) {
+        ModelParser parser = new ModelParser();
+        ComboPlanResponse comboDetailResponse = (ComboPlanResponse) parser.getModel(rawObject.toString(), ComboPlanResponse.class, null);
 
-            Shortlisted shortlisted = getIntent().getParcelableExtra("data");
-            email = shortlisted.branchEmail.trim();
-            coordinates = shortlisted.branchGeoLat + "," + shortlisted.branchGeoLng;
-            branchId = shortlisted.branchId.trim();
-        } else if (mode == RestaurantProfileActivity.MODE.REST_BRANCH) {
+        if (comboDetailResponse.getStatusCode() == 200) {
 
-            Restaurant restaurant = getIntent().getParcelableExtra("data");
-            email = restaurant.branchEmail;
-            coordinates = restaurant.geoLat + "," + restaurant.geoLng;
-            branchId = restaurant.branchId.trim();
-        }
-        switch (view.getId()) {
-
-
-            case R.id.btn_call:
-
-                callClicked(view);
-                break;
-            case R.id.btn_email:
-
-                emailClicked(view, email);
-                break;
-            case R.id.btn_map:
-
-                mapClicked(view, coordinates);
-                break;
-            case R.id.btn_rate:
-
-                reviewClicked(view, branchId);
-                break;
+            showComboInfo(comboDetailResponse.getComboplans().get(0));
+        } else {
+            Toast.makeText(this, comboDetailResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    /**
-     * @method showShortlistedRestaurantProfile
-     * @desc Method to show the Restaurant Branch profile of a Shortlisted Restaurant.
-     */
-    public void showShortlistedRestaurantProfile() {
-        Shortlisted shortlisted = getIntent().getParcelableExtra("data");
+    @Override
+    public void networkFailResponse(int requestCode, String message) {
 
-        Name.setText(shortlisted.branchName);
-        ReviewCount.setText("(" + shortlisted.countRating + ")");
-        Cuizine.setText(shortlisted.tags);
-        Address.setText(shortlisted.branchAddress);
-        Postal.setText(shortlisted.branchPostalCode);
-        Description.setText(shortlisted.description);
-        AboutUs.setText(shortlisted.aboutUs);
-        mRatingBar.setRating(Float.parseFloat(shortlisted.avgRating.trim()));
+        Toast.makeText(this, "Http fail: " + message, Toast.LENGTH_SHORT).show();
+    }
 
-        if (shortlisted.type.trim().toLowerCase().equals("veg")) {
+    private void showComboInfo(Comboplan comboplan) {
+
+        Name.setText(comboplan.getComboName());
+        comboPrice.setText("AED " + comboplan.getComboPayPrice());
+        Cuisine.setText(comboplan.getCuisineName());
+        Address.setText("");
+        Postal.setText("");
+        Description.setText(comboplan.getComboDescription());
+        AboutUs.setText("");
+
+        mRatingBar.setRating(comboplan.getAvgRating());
+
+
+        if (comboplan.getComboType().equals("veg")) {
 
             Veg.setVisibility(View.VISIBLE);
             NonVeg.setVisibility(View.GONE);
-        } else if (shortlisted.type.toLowerCase().equals("both")) {
 
-            Veg.setVisibility(View.VISIBLE);
-            NonVeg.setVisibility(View.VISIBLE);
         } else {
 
             Veg.setVisibility(View.GONE);
             NonVeg.setVisibility(View.VISIBLE);
+
         }
 
-        try {
-
-            Picasso.with(this).load(shortlisted.profileIcon.trim()).into(Profile);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Failed loading profile image", Toast.LENGTH_SHORT).show();
-        }
-
+        Veg = null;
+        NonVeg = null;
+        Profile = null;
     }
-
-    /**
-     * @method showRestaurantBranchProfile
-     * @desc Method to show the Restaurant Branch profile of selected Restaurant (which is not shortlisted restaurant).
-     */
-    public void showRestaurantBranchProfile() {
-        Restaurant restaurant = getIntent().getParcelableExtra("data");
-
-        Name.setText(restaurant.branchName);
-        ReviewCount.setText("(" + restaurant.countRating + ")");
-        Cuizine.setText(restaurant.tags);
-        Address.setText(restaurant.branchAddress);
-        Postal.setText(restaurant.branchPostalCode);
-        Description.setText(restaurant.description);
-        AboutUs.setText(restaurant.aboutUs);
-        mRatingBar.setRating(Float.parseFloat(restaurant.avgRating.trim()));
-
-        /**
-         * Check the type of restaurant branch.
-         */
-        if (restaurant.type.trim().toLowerCase().equals("1")) {     // veg = 1.
-
-            Veg.setVisibility(View.VISIBLE);
-            NonVeg.setVisibility(View.GONE);
-        } else if (restaurant.type.toLowerCase().equals("2")) {     // nonveg = 2.
-
-            Veg.setVisibility(View.GONE);
-            NonVeg.setVisibility(View.VISIBLE);
-        } else {                                                    // else = any (both).
-
-            Veg.setVisibility(View.VISIBLE);
-            NonVeg.setVisibility(View.VISIBLE);
-        }
-    }
-
-    /**
-     * @param view
-     * @desc Method to handle the call.
-     * @method callClicked
-     */
-    private void callClicked(View view) {
-
-        ProfileUtils.call(this, Constants.ADMIN_PHONE_NUMBER);
-
-    }
-
-    /**
-     * @param view
-     * @param email
-     * @desc Method to handle logic on email click.
-     * @method emailClicked
-     */
-    private void emailClicked(View view, String email) {
-
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("message/rfc822");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{Constants.ADMIN_EMAIL});
-        intent.putExtra(Intent.EXTRA_SUBJECT, "");
-        intent.putExtra(Intent.EXTRA_TEXT, "");
-
-        try {
-
-            startActivity(intent);
-        } catch (Exception exc) {
-
-            Log.e("TAG", exc.getMessage());
-            Toast.makeText(this, "EXCEPTION: " + exc.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    /**
-     * @param view
-     * @param coordinates
-     * @method mapClicked
-     * @desc Method to handle logic on map clicked.
-     */
-    private void mapClicked(View view, String coordinates) {
-
-        Toast.makeText(this, "" + coordinates, Toast.LENGTH_SHORT).show();
-
-        if (coordinates == null) {
-
-            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
-
-        } else if (coordinates.trim().isEmpty()) {
-
-            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
-
-        } else {
-
-            ProfileUtils.mapLocation(this, coordinates);
-        }
-    }
-
-    /**
-     * @param view
-     * @param branchId
-     * @method reviewClicked
-     * @desc Method to handle login on reviews click.
-     */
-    private void reviewClicked(View view, String branchId) {
-
-        Intent intent = new Intent(this, RatingActivity.class);
-        intent.putExtra("branch_id", branchId.trim());
-        startActivity(intent);
-    }
-
-    public static enum MODE {SHORTLISTED, REST_BRANCH}
 
 }

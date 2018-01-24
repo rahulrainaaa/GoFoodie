@@ -1,9 +1,7 @@
 package com.app.gofoodie.activity.derived;
 
-import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,13 +11,13 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.app.gofoodie.R;
-import com.app.gofoodie.activity.assistActivity.AssistantActivity;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.handler.dashboardHandler.DashboardFragmentHandler;
 import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.utility.SessionUtils;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * @class DashboardActivity
@@ -251,29 +249,29 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     @Override
     public void onBackPressed() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(false);
-        builder.setTitle("Alert");
-        builder.setMessage("Do you want to exit?");
-        builder.setIcon(R.drawable.icon_error_alert);
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        pDialog.setTitleText("Exit");
+        pDialog.setContentText("Do you want to exit?");
+        pDialog.setCancelable(false);
+        pDialog.setConfirmText("Exit");
+        pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
 
-                // Exit from application.
-                dialog.dismiss();
-                finish();
+                sweetAlertDialog.dismissWithAnimation();
+                DashboardActivity.this.finish();
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        pDialog.setCancelText("Cancel");
+        pDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
 
-                // Dont exit. Remain same as it is.
-                dialog.dismiss();
+                sweetAlertDialog.dismissWithAnimation();
             }
         });
-        builder.show();
+        pDialog.show();
+
 
     }
 }

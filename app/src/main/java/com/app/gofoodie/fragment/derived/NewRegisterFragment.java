@@ -335,6 +335,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
             jsonRequest.put("login_id", login.getData().getLoginId());
             jsonRequest.put("token", login.getData().getToken());
+            jsonRequest.put("customer_id", login.getData().getCustomerId());
 
             NetworkHandler networkHandler = new NetworkHandler();
             networkHandler.httpCreate(3, getDashboardActivity(), this, jsonRequest, Network.URL_GET_CUST_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);

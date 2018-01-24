@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,7 @@ import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.DateUtils;
 import com.app.gofoodie.utility.VibrationUtil;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -132,41 +134,42 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
      */
     public void btnClickProceed(View view) {
 
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Place Order");
-        alertDialog.setCancelable(false);
-        alertDialog.setMessage("" + ((mTotalPrice < 0) ? "Total Combo Price = ERROR...!" : "Total Price: " + mTotalPrice + " AED"
+        SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Place Order");
+        pDialog.setContentText("" + ((mTotalPrice < 0) ? "Total Combo Price = ERROR...!" : "Total Price: " + mTotalPrice + " AED"
                 + "\nOther charges = " + (mTotalPayablePrice - mTotalPrice + " AED")
-                + "\nTotal Payable Price = " + mTotalPayablePrice + " AED"
-        ));
+                + "\nTotal Payable Price = " + mTotalPayablePrice + " AED"));
+        pDialog.setCancelable(false);
+        pDialog.setConfirmText("Place Order");
+        pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
 
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                JSONObject jsonRequest = getOrderRequestPacket();
+                if (jsonRequest == null) {
 
-                        dialog.dismiss();
-                    }
-                });
+                    Toast.makeText(CartOrderActivity.this, "Json Request NULL", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                NetworkHandler networkHandler = new NetworkHandler();
+                networkHandler.httpCreate(1, CartOrderActivity.this, CartOrderActivity.this, jsonRequest, Network.URL_PLACE_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                networkHandler.executePost();
 
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Place Order",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                sweetAlertDialog.dismissWithAnimation();
 
-                        JSONObject jsonRequest = getOrderRequestPacket();
-                        if (jsonRequest == null) {
+            }
+        });
+        pDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
 
-                            Toast.makeText(CartOrderActivity.this, "Json Request NULL", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        NetworkHandler networkHandler = new NetworkHandler();
-                        networkHandler.httpCreate(1, CartOrderActivity.this, CartOrderActivity.this, jsonRequest, Network.URL_PLACE_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                        networkHandler.executePost();
+                sweetAlertDialog.dismissWithAnimation();
+            }
+        });
+        pDialog.setCancelText("Cancel");
+        pDialog.show();
 
-                        dialog.dismiss();
-                    }
-                });
-
-        alertDialog.show();
     }
 
     /**
