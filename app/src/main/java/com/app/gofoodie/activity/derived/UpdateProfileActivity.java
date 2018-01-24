@@ -51,11 +51,11 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
         try {
 
             Customer customer = CustomerProfileHandler.CUSTOMER;
-            mEtName.setText("" + customer.profile.name);
-            mEtMobile.setText("" + customer.profile.mobile1);
-            mEtAltMobile.setText("" + customer.profile.mobile2);
-            mEtAltEmail.setText("" + customer.profile.email2);
-            mEtAddress.setText("" + customer.profile.address);
+            mEtName.setText("" + customer.getProfile().getName());
+            mEtMobile.setText("" + customer.getProfile().getMobile1());
+            mEtAltMobile.setText("" + customer.getProfile().getMobile2());
+            mEtAltEmail.setText("" + customer.getProfile().getEmail2());
+            mEtAddress.setText("" + customer.getProfile().getAddress());
 
             mButton = (Button) findViewById(R.id.btn_update_profile);
             mButton.setOnClickListener(this);
@@ -125,7 +125,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
         JSONObject jsonRequest = new JSONObject();
         try {
-            jsonRequest.put("customer_id", customer.profile.customerId);
+            jsonRequest.put("customer_id", customer.getProfile().getCustomerId());
             jsonRequest.put("token", getSessionData().getToken());
             jsonRequest.put("login_id", getSessionData().getLoginId());
             jsonRequest.put("name", mEtName.getText().toString().trim());
@@ -137,7 +137,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             jsonRequest.put("geo_lng", "");
             jsonRequest.put("mobile", mEtMobile.getText().toString().trim());
             jsonRequest.put("mobile2", mEtAltMobile.getText().toString().trim());
-            jsonRequest.put("email", customer.profile.email);
+            jsonRequest.put("email", customer.getProfile().getEmail());
             jsonRequest.put("email2", mEtAltEmail.getText().toString().trim());
             jsonRequest.put("change_delivery_address", changeAddress);
 

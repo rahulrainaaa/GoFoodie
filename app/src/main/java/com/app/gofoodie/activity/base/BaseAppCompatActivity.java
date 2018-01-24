@@ -2,13 +2,19 @@ package com.app.gofoodie.activity.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.app.gofoodie.customview.GoFoodieProgressDialog;
 import com.app.gofoodie.model.login.Data;
 import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.utility.SessionUtils;
+
+import java.lang.reflect.Field;
 
 /**
  * @class BaseAppCompatActivity
@@ -19,6 +25,28 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     public final String TAG = "BaseAppCompatActivity";
 
     private GoFoodieProgressDialog mGoFoodieProgressDialog = null;
+
+    public void disableShiftMode(BottomNavigationView view) {
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
+        try {
+            Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
+            shiftingMode.setAccessible(true);
+            shiftingMode.setBoolean(menuView, false);
+            shiftingMode.setAccessible(false);
+            for (int i = 0; i < menuView.getChildCount(); i++) {
+                BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
+                //noinspection RestrictedApi
+                item.setShiftingMode(false);
+                // set once again checked value, so view will be updated
+                //noinspection RestrictedApi
+                item.setChecked(item.getItemData().isChecked());
+            }
+        } catch (NoSuchFieldException e) {
+            Log.e("BNVHelper", "Unable to get shift mode field", e);
+        } catch (IllegalAccessException e) {
+            Log.e("BNVHelper", "Unable to change value of shift mode", e);
+        }
+    }
 
     /**
      * {@link AppCompatActivity} override callback method(s).
@@ -105,5 +133,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
             return login.getData();
         }
     }
+
 
 }

@@ -55,6 +55,8 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         mDashboardFragmentHandler = new DashboardFragmentHandler();
         mFragmentManager = getFragmentManager();
         mNavigationPanel.setOnNavigationItemSelectedListener(this);
+
+        disableShiftMode(mNavigationPanel);
         loadFragmentOnStart();
 
         if (getSharedPreferences("welcome", 0).getBoolean("welcome", true)) {
@@ -277,7 +279,6 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
             }
         });
         pDialog.show();
-
 
     }
 }

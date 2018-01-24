@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <GridView
         android:id="@+id/combo_plan_grid_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/id_layout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="@color/colorWhite"
         android:clipToPadding="false"
         android:horizontalSpacing="5dp"
@@ -19,4 +21,45 @@
         android:scrollbars="none"
         android:verticalSpacing="5dp" />
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/id_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:text="Total Cart Items"
+        android:weightSum="6">
+
+        <TextView
+            android:id="@+id/txt_cart_items"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="Cart Items"
+            android:textColor="@color/colorWhite"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/grad_separator_line_vertical_wrw" />
+
+        <Button
+            android:id="@+id/btn_view_cart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@color/colorAccent"
+            android:drawableRight="@drawable/icon_arrow_move_next"
+            android:gravity="center"
+            android:text="View Cart"
+            android:textColor="@color/mdtp_white"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

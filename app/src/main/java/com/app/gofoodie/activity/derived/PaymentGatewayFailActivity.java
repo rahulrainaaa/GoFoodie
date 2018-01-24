@@ -84,7 +84,7 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
                     jsonRequest.put("login_id", login.getData().getLoginId());
                     jsonRequest.put("customer_id", login.getData().getCustomerId());
                     jsonRequest.put("token", login.getData().getToken());
-                    jsonRequest.put("wallet_id", customer.profile.walletId);
+                    jsonRequest.put("wallet_id", customer.getProfile().getWalletId());
 
                     // Payment Transaction information.
                     jsonRequest.put("plan_type", (days > 0) ? "subscription" : "recharge");

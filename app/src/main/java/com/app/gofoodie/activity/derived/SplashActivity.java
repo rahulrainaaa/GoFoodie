@@ -107,19 +107,19 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
                     })
                     .show();
 
-        } else if (customer.statusCode == 401 || customer.statusCode == 403) {
+        } else if (customer.getStatusCode() == 401 || customer.getStatusCode() == 403) {
 
             SessionUtils.getInstance().removeSession(this);
-            Toast.makeText(this, "" + customer.statusMessage + "\nPlease login again.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + customer.getStatusMessage() + "\nPlease login again.", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, DashboardActivity.class));
             finish();
 
-        } else if (customer.statusCode == 200) {
+        } else if (customer.getStatusCode() == 200) {
 
             startActivity(new Intent(this, DashboardActivity.class));
             finish();
 
-        } else if (customer.statusCode == 404) {
+        } else if (customer.getStatusCode() == 404) {
 
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Error")
@@ -137,7 +137,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
 
         } else {
 
-            Toast.makeText(this, "" + customer.statusMessage, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + customer.getStatusMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }

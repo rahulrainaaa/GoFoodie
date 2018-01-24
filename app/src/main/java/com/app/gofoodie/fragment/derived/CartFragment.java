@@ -64,6 +64,8 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.frag_cart, container, false);
+        // Reset global flag to show cart.
+        GlobalData.ShowCart = false;
         mCartItemClickListener = new CartItemClickListener();
         mListView = (ListView) view.findViewById(R.id.list_view_cart_items);
         mTxtLabel = (TextView) view.findViewById(R.id.txt_label);
@@ -242,7 +244,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
                             jsonRequest.put("branch_id", cart.getBranchId());
                             jsonRequest.put("quantity", "" + qtySelected);
                             jsonRequest.put("token", getSession().getData().getToken());
-                            jsonRequest.put("area", CustomerProfileHandler.CUSTOMER.profile.area.trim());
+                            jsonRequest.put("area", CustomerProfileHandler.CUSTOMER.getProfile().getArea().trim());
 
                             NetworkHandler networkHandler = new NetworkHandler();
                             networkHandler.httpCreate(1, getDashboardActivity(), CartFragment.this, jsonRequest, Network.URL_UPDATE_CART_ITEM, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);

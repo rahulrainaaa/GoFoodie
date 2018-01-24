@@ -5,13 +5,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.gridViewAdapter.ComboPlanGridAdapter;
 import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.comboPlan.ComboOption;
@@ -44,6 +47,8 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     private ComboPlanGridAdapter mAdapter = null;
     private ArrayList<Comboplan> mComboPlanList = null;
     private boolean flagRefreshed = false;
+    private Button btnViewCart = null;
+    private TextView txtCartItems = null;
 
     /**
      * {@link BaseAppCompatActivity} Activity callback method(s).
@@ -53,6 +58,12 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combo_plan);
         mComboGridView = (GridView) findViewById(R.id.combo_plan_grid_layout);
+
+        btnViewCart = (Button) findViewById(R.id.btn_view_cart);
+        btnViewCart.setOnClickListener(this);
+        txtCartItems = (TextView) findViewById(R.id.txt_cart_items);
+        txtCartItems.setText("Cart Items: " + CustomerProfileHandler.CUSTOMER.getCartCount());
+
 
         String cuisinePref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_CUISINE_KEY, "");
         String typePref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_TYPE_KEY, "");
@@ -68,6 +79,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     @Override
     protected void onResume() {
         super.onResume();
+
         if (!flagRefreshed) {
 
             flagRefreshed = true;
@@ -182,6 +194,9 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
 
             if (statusCode == 200) {
 
+                CustomerProfileHandler.CUSTOMER.setCartCount(CustomerProfileHandler.CUSTOMER.getCartCount() + 1);
+                txtCartItems.setText("Cart Items: " + CustomerProfileHandler.CUSTOMER.getCartCount());
+
                 Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show();
 
             } else if (statusCode == 406) {
@@ -214,7 +229,11 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
                 break;
             case R.id.image_combo:
 
-//                showComboDescription(view);
+
+                break;
+            case R.id.btn_view_cart:
+
+                btnViewCartClicked(view);
                 break;
         }
 
@@ -258,7 +277,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
             jsonRequest.put("quantity", "1");
             jsonRequest.put("token", getSessionData().getToken());
             jsonRequest.put("description", jsonArrayItems);
-            jsonRequest.put("area", CustomerProfileHandler.CUSTOMER.profile.area.trim());
+            jsonRequest.put("area", CustomerProfileHandler.CUSTOMER.getProfile().getArea().trim());
 
             NetworkHandler networkHandler = new NetworkHandler();
             networkHandler.httpCreate(2, this, this, jsonRequest, url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
@@ -272,39 +291,15 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
 
     }
 
-//    /**
-//     * Method to show the combo description.
-//     *
-//     * @param v
-//     */
-//    public void showComboDescription(View v) {
-//
-//        Comboplan comboplan = (Comboplan) v.getTag();
-//        View view = getLayoutInflater().inflate(R.layout.dialog_combo_details, null);
-//        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-//        alertDialog.setTitle(comboplan.getComboName());
-//        alertDialog.setView(view);
-//        ((RatingBar) view.findViewById(R.id.rating_bar)).setRating(Float.parseFloat(comboplan..trim()));
-//        ((TextView) view.findViewById(R.id.type_n_cuisine)).setText(comboplan.get);
-//        ((TextView) view.findViewById(R.id.desc)).setText(comboplan.getComboDescription());
-//        ((TextView) view.findViewById(R.id.txt_price)).setText("AED " + comboplan.price);
-//        if (comboplan.type.trim().toLowerCase().equals("nonveg")) {
-//
-//            view.findViewById(R.id.img_veg).setVisibility(View.GONE);
-//            view.findViewById(R.id.img_nonveg).setVisibility(View.VISIBLE);
-//        } else {
-//
-//            view.findViewById(R.id.img_veg).setVisibility(View.VISIBLE);
-//            view.findViewById(R.id.img_nonveg).setVisibility(View.GONE);
-//        }
-//        alertDialog.setCancelable(false);
-//        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//        alertDialog.show();
-//    }
+    /**
+     * Method to close this activity and start cart fragment activity.
+     *
+     * @param view
+     */
+    public void btnViewCartClicked(View view) {
+
+        GlobalData.ShowCart = true;
+        finish();
+    }
 
 }

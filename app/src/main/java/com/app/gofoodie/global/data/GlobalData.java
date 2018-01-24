@@ -21,4 +21,6 @@ public class GlobalData {
     public static ArrayList<CartOrder> cartOrderArrayList = null;       // Array list to share from Cart-Order activity to Edit combo activity.
 
     public static GoogleApiClient mGoogleApiClient = null;
+
+    public static boolean ShowCart = false;
 }

@@ -18,6 +18,8 @@ import com.app.gofoodie.activity.derived.RestaurantProfileActivity;
 import com.app.gofoodie.adapter.listviewadapter.ShortlistedRestaurantListViewAdapter;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.global.data.GlobalData;
+import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.model.shortlisted.Shortlisted;
 import com.app.gofoodie.model.shortlisted.ShortlistedRestaurants;
@@ -63,7 +65,14 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
     public void onResume() {
         super.onResume();
 
-        refreshList();
+        if (GlobalData.ShowCart) {
+
+            GlobalData.ShowCart = false;
+            getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.CART);
+        } else {
+
+            refreshList();
+        }
     }
 
     /**

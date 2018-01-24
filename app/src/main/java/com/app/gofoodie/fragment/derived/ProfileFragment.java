@@ -73,7 +73,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             /**
              * Include 0s to make customer Id 7 characters in length.
              */
-            int len = CustomerProfileHandler.CUSTOMER.profile.customerId.trim().length();
+            int len = CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim().length();
 
             String cid = "";
 
@@ -83,10 +83,10 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 len++;
             }
 
-            cid = cid + CustomerProfileHandler.CUSTOMER.profile.customerId.trim();
-            mTxtName.setText("" + CustomerProfileHandler.CUSTOMER.profile.name.trim());
-            mTxtEmail.setText("" + CustomerProfileHandler.CUSTOMER.profile.email.trim() + "\nCustomer ID: C." + cid + "");
-            mTxtMobile.setText("" + CustomerProfileHandler.CUSTOMER.profile.mobile1.trim());
+            cid = cid + CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim();
+            mTxtName.setText("" + CustomerProfileHandler.CUSTOMER.getProfile().getName().trim());
+            mTxtEmail.setText("" + CustomerProfileHandler.CUSTOMER.getProfile().getEmail().trim() + "\nCustomer ID: C." + cid + "");
+            mTxtMobile.setText("" + CustomerProfileHandler.CUSTOMER.getProfile().getMobile1().trim());
 
         } catch (Exception e) {
 

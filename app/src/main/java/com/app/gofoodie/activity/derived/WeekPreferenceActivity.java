@@ -76,7 +76,7 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
      */
     private void showWeekDialog() {
         mWeekDialog = new WeekSelectDialog(this, this);
-        mWeekDialog.parseWeekPreference(CustomerProfileHandler.CUSTOMER.profile.daysYouWantTheCombo);
+        mWeekDialog.parseWeekPreference(CustomerProfileHandler.CUSTOMER.getProfile().getDaysYouWantTheCombo());
         mWeekDialog.show();
     }
 

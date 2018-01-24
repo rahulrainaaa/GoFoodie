@@ -120,7 +120,7 @@
         <activity
             android:name=".activity.derived.ComboDescriptionActivity"
             android:label="@string/title_activity_combo_description"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -52,7 +52,7 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
         mListView.setOnItemClickListener(this);
 
 
-        boolean flagSubscription = CustomerProfileHandler.CUSTOMER.profile.validUpto.trim().isEmpty();
+        boolean flagSubscription = CustomerProfileHandler.CUSTOMER.getProfile().getValidUpto().trim().isEmpty();
 
         // flagSubscription = true [only subscription plans needed], false = [all plans needed]
         String url = Network.URL_GET_RECHARGE_PLANS + (flagSubscription ? "" : "rechargePlan");

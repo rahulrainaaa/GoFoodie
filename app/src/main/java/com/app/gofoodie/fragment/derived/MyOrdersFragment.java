@@ -258,7 +258,7 @@ public class MyOrdersFragment extends BaseFragment implements NetworkCallbackLis
                             jsonRequest.put("order_id", order.orderId.trim());
                             jsonRequest.put("rating", rating + "");
                             jsonRequest.put("comment", comment);
-                            jsonRequest.put("reviewer", CustomerProfileHandler.CUSTOMER.profile.name);
+                            jsonRequest.put("reviewer", CustomerProfileHandler.CUSTOMER.getProfile().getName());
                             jsonRequest.put("token", getSession().getData().getToken().trim());
 
                             NetworkHandler networkHandler = new NetworkHandler();

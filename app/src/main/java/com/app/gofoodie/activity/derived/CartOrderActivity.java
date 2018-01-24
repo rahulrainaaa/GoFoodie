@@ -370,7 +370,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
      */
     private boolean checkForWeekDay(String weekDay) {
 
-        String[] days = CustomerProfileHandler.CUSTOMER.profile.daysYouWantTheCombo.split(",");
+        String[] days = CustomerProfileHandler.CUSTOMER.getProfile().getDaysYouWantTheCombo().split(",");
 
         for (int i = 0; i < days.length; i++) {
 
@@ -433,14 +433,14 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             }
 
             jsonRequest.put("cartorders", arrCartOrder);
-            jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.profile.customerId);
+            jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId());
             jsonRequest.put("token", getSessionData().getToken());
             jsonRequest.put("login_id", getSessionData().getLoginId());
-            jsonRequest.put("delivery_address", CustomerProfileHandler.CUSTOMER.profile.address);
-            jsonRequest.put("area", CustomerProfileHandler.CUSTOMER.profile.area);
-            jsonRequest.put("geo_lat", CustomerProfileHandler.CUSTOMER.profile.geoLat);
-            jsonRequest.put("geo_lng", CustomerProfileHandler.CUSTOMER.profile.geoLng);
-            jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.profile.walletId);
+            jsonRequest.put("delivery_address", CustomerProfileHandler.CUSTOMER.getProfile().getAddress());
+            jsonRequest.put("area", CustomerProfileHandler.CUSTOMER.getProfile().getArea());
+            jsonRequest.put("geo_lat", CustomerProfileHandler.CUSTOMER.getProfile().getGeoLat());
+            jsonRequest.put("geo_lng", CustomerProfileHandler.CUSTOMER.getProfile().getGeoLng());
+            jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.getProfile().getWalletId());
 
             JSONArray cartItemIdArray = new JSONArray();
             Iterator<Cart> cartIterator = GlobalData.cartArrayList.iterator();
@@ -449,9 +449,9 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                 cartItemIdArray.put(cartIterator.next().getCartItemId().trim());
             }
             jsonRequest.put("cart_item_id", cartItemIdArray);
-            jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.profile.customerId.trim());
-            jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.profile.name.trim());
-            jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.profile.email.trim());
+            jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim());
+            jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.getProfile().getName().trim());
+            jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail().trim());
 
             return jsonRequest;
 

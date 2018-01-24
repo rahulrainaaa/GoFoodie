@@ -118,8 +118,8 @@ public class OrderCancellationHandler {
 
                             final JSONObject jsonRequest = new JSONObject();
                             jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
-                            jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.profile.customerId.trim());
-                            jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.profile.walletId.trim());
+                            jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim());
+                            jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.getProfile().getWalletId().trim());
                             jsonRequest.put("order_id", myOrder.orderId.trim());
                             jsonRequest.put("price_paid", myOrder.pricePaid.trim());
                             jsonRequest.put("order_set_id", myOrder.orderSetId.trim());
@@ -185,8 +185,8 @@ public class OrderCancellationHandler {
 
                     jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
                     jsonRequest.put("customer_id", mActivity.getSession().getData().getCustomerId());
-                    jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.profile.name);
-                    jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.profile.email);
+                    jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.getProfile().getName());
+                    jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail());
                     jsonRequest.put("order_set_id", myOrder.orderSetId);
                     jsonRequest.put("from_date", myOrder.deliveryDate);
                     Calendar calendar = Calendar.getInstance();
@@ -260,8 +260,8 @@ public class OrderCancellationHandler {
 
                     jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
                     jsonRequest.put("customer_id", mActivity.getSession().getData().getCustomerId());
-                    jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.profile.name);
-                    jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.profile.email);
+                    jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.getProfile().getName());
+                    jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail());
                     jsonRequest.put("order_set_id", myOrder.orderSetId);
                     jsonRequest.put("from_date", myOrder.deliveryDate);
                     Calendar calendar = Calendar.getInstance();
@@ -333,13 +333,13 @@ public class OrderCancellationHandler {
                 }
 
                 try {
-                    Profile profile = CustomerProfileHandler.CUSTOMER.profile;
+                    Profile profile = CustomerProfileHandler.CUSTOMER.getProfile();
 
                     JSONObject jsonRequest = new JSONObject();
-                    jsonRequest.put("login_id", profile.loginId);
-                    jsonRequest.put("customer_id", profile.customerId);
-                    jsonRequest.put("customer_name", profile.name);
-                    jsonRequest.put("customer_email", profile.email);
+                    jsonRequest.put("login_id", profile.getLoginId());
+                    jsonRequest.put("customer_id", profile.getCustomerId());
+                    jsonRequest.put("customer_name", profile.getName());
+                    jsonRequest.put("customer_email", profile.getEmail());
                     jsonRequest.put("order_set_id", myOrder.orderSetId);
                     jsonRequest.put("order_id", myOrder.orderId);
                     jsonRequest.put("from_date", myOrder.deliveryDate);

@@ -68,7 +68,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
 
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             try {
-                Date expDate = format.parse(CustomerProfileHandler.CUSTOMER.profile.validUpto);
+                Date expDate = format.parse(CustomerProfileHandler.CUSTOMER.getProfile().getValidUpto());
                 Date curDate = new Date();
                 if (curDate.before(expDate)) {
 
@@ -95,8 +95,8 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     public void onResume() {
         super.onResume();
 
-        mTxtWalletAmount.setText("AED " + CustomerProfileHandler.CUSTOMER.profile.amount);
-        mTxtValidUpto.setText("Subscription till: " + CustomerProfileHandler.CUSTOMER.profile.validUpto);
+        mTxtWalletAmount.setText("AED " + CustomerProfileHandler.CUSTOMER.getProfile().getAmount());
+        mTxtValidUpto.setText("Subscription till: " + CustomerProfileHandler.CUSTOMER.getProfile().getValidUpto());
         String url = Network.URL_GET_TRANSACTION + "?customerLoginId=" + getSession().getData().getLoginId();
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, getDashboardActivity(), this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
