@@ -132,10 +132,10 @@ public class PaymentGatewayActivity extends AppCompatActivity {
         address.setCity("Dubai");                       // City : the minimum required details for a transaction to be processed
         address.setCountry("AE");                       // Country : Country must be sent as a 2 character ISO code. A list of country codes can be found at the end of this document. the minimum required details for a transaction to be processed
         address.setRegion("Dubai");                     // Region
-        address.setLine1("SIT G=Towe");                 // Street address – line 1: the minimum required details for a transaction to be processed
-        //address.setLine2("SIT G=Towe");               // (Optinal)
-        //address.setLine3("SIT G=Towe");               // (Optinal)
-        //address.setZip("SIT G=Towe");                 // (Optinal)
+        address.setLine1("SIT G=Towe");                 // Street address: line 1: the minimum required details for a transaction to be processed
+//        address.setLine2("SIT G=Towe");               // (Optinal)
+//        address.setLine3("SIT G=Towe");               // (Optinal)
+//        address.setZip("SIT G=Towe");                 // (Optinal)
         billing.setAddress(address);
         Name name = new Name();
         name.setFirst("john");                          // Forename : the minimum required details for a transaction to be processed
