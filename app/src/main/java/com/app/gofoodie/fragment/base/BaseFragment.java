@@ -17,12 +17,9 @@ import java.util.Stack;
 public abstract class BaseFragment extends Fragment implements FragmentQuitHandler {
 
     public static final String TAG = "BaseFragment";
-
-    private boolean flagPushIntoStack = true;       // If this has to push into stack (Forward flow).
-    private static Stack<DashboardInterruptListener.FRAGMENT_TYPE> FRAG_STACK = new Stack<>();
-
     public static DashboardInterruptListener.FRAGMENT_TYPE CURRENT_FRAG = null;
-
+    private static Stack<DashboardInterruptListener.FRAGMENT_TYPE> FRAG_STACK = new Stack<>();
+    private boolean flagPushIntoStack = true;       // If this has to push into stack (Forward flow).
     private boolean mFlagSaveBeforeExit = false;        //false = nothing; true = something to save.
 
     /**

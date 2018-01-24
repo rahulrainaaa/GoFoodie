@@ -32,6 +32,9 @@ public class CartResponse extends BaseModel implements Parcelable {
     @SerializedName("totalPrice")
     @Expose
     private String totalPrice;
+    @SerializedName("tax_perc")
+    @Expose
+    private Integer taxPerc;
     @SerializedName("statusCode")
     @Expose
     private Integer statusCode;
@@ -42,6 +45,7 @@ public class CartResponse extends BaseModel implements Parcelable {
     protected CartResponse(Parcel in) {
         in.readList(this.cart, (Cart.class.getClassLoader()));
         this.totalPrice = ((String) in.readValue((String.class.getClassLoader())));
+        this.taxPerc = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
     }
@@ -65,6 +69,14 @@ public class CartResponse extends BaseModel implements Parcelable {
         this.totalPrice = totalPrice;
     }
 
+    public Integer getTaxPerc() {
+        return taxPerc;
+    }
+
+    public void setTaxPerc(Integer taxPerc) {
+        this.taxPerc = taxPerc;
+    }
+
     public Integer getStatusCode() {
         return statusCode;
     }
@@ -84,6 +96,7 @@ public class CartResponse extends BaseModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeList(cart);
         dest.writeValue(totalPrice);
+        dest.writeValue(taxPerc);
         dest.writeValue(statusCode);
         dest.writeValue(statusMessage);
     }

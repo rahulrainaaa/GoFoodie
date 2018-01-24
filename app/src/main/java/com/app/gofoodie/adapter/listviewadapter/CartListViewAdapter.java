@@ -84,14 +84,14 @@ public class CartListViewAdapter extends ArrayAdapter<Cart> {
         }
 
         holder.txtName.setText(cart.getComboName());
-        holder.txtPrice.setText("AED " + cart.getPayPrice());
+        holder.txtPrice.setText("AED " + cart.getPayPrice().trim() + cart.getZoneShippingCharge().trim());
         holder.btnQty.setText("Qty: " + cart.getQuantity());
-
 
         if (cart.getType().toLowerCase().equals("nonveg")) {
 
             holder.imgVeg.setVisibility(View.GONE);
             holder.imgNonveg.setVisibility(View.VISIBLE);
+
         } else {
 
             holder.imgVeg.setVisibility(View.VISIBLE);

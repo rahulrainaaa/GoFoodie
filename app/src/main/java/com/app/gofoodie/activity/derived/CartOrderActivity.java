@@ -77,7 +77,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             for (int i = 0; i < qty; i++) {
 
                 try {
-                    mTotalPrice = mTotalPrice + Float.parseFloat(cart.getPayPrice().trim());
+                    mTotalPrice = mTotalPrice + Float.parseFloat(cart.getPayPrice().trim()) + Float.parseFloat(cart.getZoneShippingCharge().trim());
                 } catch (Exception e) {
                     e.printStackTrace();
                     mTotalPrice = -9999999;     // make price -ve if price not parsed. -ve price means wrong price.
@@ -104,7 +104,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
