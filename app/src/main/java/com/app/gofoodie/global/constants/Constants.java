@@ -9,8 +9,6 @@ import com.app.gofoodie.R;
  */
 public class Constants {
 
-    public static final String TAG = "Constants";
-
     /**
      * Dashboard Screen
      */

@@ -1,8 +1,8 @@
 <resources>
 
     <!-- Facebook SDK Resource -->
-    <string name="facebook_app_id">112922456087448</string>
-    <string name="fb_login_protocol_scheme">fb112922456087448</string>
+    <string name="facebook_app_id">1991089837786884</string>
+    <string name="fb_login_protocol_scheme">fb1991089837786884</string>
 
 
     <string name="text_empty"></string>
