@@ -17,13 +17,13 @@
 
     <!-- Menu -->
     <string name="menu_search">Search</string>
-    <string name="menu_filter">Filter</string>
+    <string name="menu_filter">Meal Preference</string>
     <string name="menu_pick_date">Pick Date</string>
     <string name="menu_long_vacation">Long Term Vacation</string>
     <string name="menu_short_vacation">Short Term Vacation</string>
     <string name="menu_emergency">Emergency Holidays</string>
     <string name="menu_proceed">Proceed</string>
-    <string name="menu_new">New</string>
+    <string name="menu_new">Add Restaurant</string>
     <string name="menu_share">Share</string>
     <string name="menu_sort">Sort</string>
     <string name="menu_location">Location</string>

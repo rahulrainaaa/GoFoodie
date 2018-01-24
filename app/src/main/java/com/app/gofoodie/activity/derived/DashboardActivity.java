@@ -249,6 +249,12 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     @Override
     public void onBackPressed() {
 
+        if (mFragmentType != FRAGMENT_TYPE.DASHBOARD) {
+
+            signalLoadFragment(FRAGMENT_TYPE.DASHBOARD);
+            return;
+        }
+
         SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
         pDialog.setTitleText("Exit");
         pDialog.setContentText("Do you want to exit?");

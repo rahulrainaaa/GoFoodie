@@ -15,6 +15,6 @@
         android:icon="@drawable/icon_cur_location"
         android:iconTint="@color/colorWhite"
         android:title="@string/menu_location"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 
 </menu>

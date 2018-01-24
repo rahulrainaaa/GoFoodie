@@ -22,7 +22,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:text="Country"
-        android:textColor="@android:color/black"
+        android:textColor="@color/colorAccent"
         android:textSize="11dp" />
 
     <Spinner
@@ -45,7 +45,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:text="City"
-        android:textColor="@android:color/black"
+        android:textColor="@color/colorAccent"
         android:textSize="11dp" />
 
     <Spinner
@@ -68,7 +68,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:text="Area"
-        android:textColor="@android:color/black"
+        android:textColor="@color/colorAccent"
         android:textSize="11dp" />
 
     <Spinner
