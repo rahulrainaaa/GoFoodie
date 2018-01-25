@@ -26,6 +26,9 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * Activity class to show the description info of a single restaurant branch with given branch_id.
+ */
 public class RestaurantBranchProfileActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "RestaurantBranchProfileActivity";
@@ -81,6 +84,9 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
         fetchBranchDetails();
     }
 
+    /**
+     * Method to handle the http response packet of restaurant branch info and publish it on UI.
+     */
     private void fetchBranchDetails() {
 
         String branch_id = getIntent().getStringExtra("branch_id");

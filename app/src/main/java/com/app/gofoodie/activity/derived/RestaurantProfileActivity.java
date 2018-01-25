@@ -22,7 +22,7 @@ import com.squareup.picasso.Picasso;
 
 /**
  * @class RestaurantProfileActivity
- * @desc Activity class to simply show restaurant profile details with some actions.
+ * @desc Activity class to simply show restaurant profile details given in the model class.
  */
 public class RestaurantProfileActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
@@ -151,17 +151,17 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         AboutUs.setText(shortlisted.aboutUs);
         mRatingBar.setRating(Float.parseFloat(shortlisted.avgRating.trim()));
 
-        if (shortlisted.type.trim().toLowerCase().equals("veg")) {
+        if (shortlisted.type.trim().toLowerCase().equals("1")) {      // 1 = veg
 
             Veg.setVisibility(View.VISIBLE);
             NonVeg.setVisibility(View.GONE);
-        } else if (shortlisted.type.toLowerCase().equals("both")) {
-
-            Veg.setVisibility(View.VISIBLE);
-            NonVeg.setVisibility(View.VISIBLE);
-        } else {
+        } else if (shortlisted.type.toLowerCase().equals("2")) {      // 2 = non veg.
 
             Veg.setVisibility(View.GONE);
+            NonVeg.setVisibility(View.VISIBLE);
+        } else {                                                      // else = both
+
+            Veg.setVisibility(View.VISIBLE);
             NonVeg.setVisibility(View.VISIBLE);
         }
 

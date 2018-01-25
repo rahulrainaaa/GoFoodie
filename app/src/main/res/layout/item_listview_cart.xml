@@ -22,6 +22,7 @@
             android:layout_marginLeft="1dp"
             android:layout_marginTop="1dp"
             android:background="@drawable/img_frame"
+            android:scaleType="fitXY"
             app:srcCompat="@drawable/img_default_combo" />
 
         <LinearLayout
@@ -106,13 +107,13 @@
 
                 <Button
                     android:id="@+id/btn_qty"
-                    android:textColor="#515151"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/colorWhite"
                     android:drawableRight="@drawable/icon_drop_down"
                     android:text="Qty: 1"
+                    android:textColor="#515151"
                     android:textSize="12sp" />
 
 

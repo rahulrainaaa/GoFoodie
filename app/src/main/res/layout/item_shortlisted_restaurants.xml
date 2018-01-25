@@ -115,15 +115,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:orientation="horizontal"
+                android:gravity="center|left"
                 android:weightSum="10">
 
-                <ImageButton
+                <Button
                     android:id="@+id/ibtn_view"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:background="@color/colorWhite"
-                    android:text="Move to wishlist"
+                    android:text="Info"
+                    android:textColor="#6c6c6c"
                     android:textSize="10sp"
                     app:srcCompat="@drawable/icon_detail" />
 
@@ -132,13 +134,14 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/grad_separator_line_vertical_light" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/ibtn_remove"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:background="@color/colorWhite"
                     android:text="Remove"
+                    android:textColor="#6c6c6c"
                     android:textSize="10sp"
                     app:srcCompat="@drawable/icon_remove" />
 

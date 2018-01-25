@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -70,8 +70,8 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
             holder.txtName = (TextView) cell.findViewById(R.id.txt_branch_name);
             holder.txtTags = (TextView) cell.findViewById(R.id.txt_branch_tags);
             holder.txtCount = (TextView) cell.findViewById(R.id.txt_rating_count);
-            holder.iBtnCellType = (ImageButton) cell.findViewById(R.id.ibtn_remove);
-            holder.iBtnView = (ImageButton) cell.findViewById(R.id.ibtn_view);
+            holder.BtnCellType = (Button) cell.findViewById(R.id.ibtn_remove);
+            holder.BtnView = (Button) cell.findViewById(R.id.ibtn_view);
 
             holder.ratingBar.setEnabled(false);
 
@@ -81,8 +81,8 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
             holder = (Holder) cell.getTag();
         }
 
-        holder.iBtnView.setTag(shortlisted);
-        holder.iBtnCellType.setTag(shortlisted);
+        holder.BtnView.setTag(shortlisted);
+        holder.BtnCellType.setTag(shortlisted);
 
         if (shortlisted.type.toLowerCase().equals("both")) {
 
@@ -115,8 +115,8 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
         holder.txtName.setText(shortlisted.branchName);
         holder.txtTags.setText(shortlisted.tags);
         holder.txtCount.setText("(" + shortlisted.countRating + ")");
-        holder.iBtnCellType.setOnClickListener(mClickListener);
-        holder.iBtnView.setOnClickListener(mClickListener);
+        holder.BtnCellType.setOnClickListener(mClickListener);
+        holder.BtnView.setOnClickListener(mClickListener);
 
         return cell;
     }
@@ -130,8 +130,8 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
         public ImageView imgIcon = null;
         public ImageView imgVeg = null;
         public ImageView imgNonVeg = null;
-        public ImageButton iBtnView = null;
-        public ImageButton iBtnCellType = null;
+        public Button BtnView = null;
+        public Button BtnCellType = null;
         public TextView txtName = null;
         public TextView txtTags = null;
         public TextView txtCount = null;
