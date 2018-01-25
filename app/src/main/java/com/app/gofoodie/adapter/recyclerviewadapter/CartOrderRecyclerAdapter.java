@@ -56,7 +56,9 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
 
         holder.txtComboName.setText(cartOrder.comboName);
         holder.txtDate.setText("" + cartOrder.date);
-        holder.txtPrice.setText("AED " + cartOrder.payPrice);
+        float payPrice = Float.valueOf(cartOrder.payPrice.trim());
+        float zonePrice = Float.valueOf(cartOrder.zoneShippingCharge.trim());
+        holder.txtPrice.setText("AED " + (payPrice + zonePrice));
 
         if (cartOrder.type.toLowerCase().trim().equals("nonveg")) {
 

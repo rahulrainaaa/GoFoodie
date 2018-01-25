@@ -47,6 +47,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
     public final String TAG = "CartFragment";
     public CartItemClickListener mCartItemClickListener = null;
     public TextView mTxtLabel = null;
+
     /**
      * Class private data member(s).
      */
@@ -55,6 +56,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
     private ArrayList<Cart> mCartList = null;
     private Button btnProceed = null;
     private float totalPayablePrice = 0f;
+    private float taxPercent = 0f;
 
     /**
      * {@link BaseFragment} Fragment callback method(s).
@@ -64,6 +66,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.frag_cart, container, false);
+
         // Reset global flag to show cart.
         GlobalData.ShowCart = false;
         mCartItemClickListener = new CartItemClickListener();
@@ -87,7 +90,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
 
                 GlobalData.cartArrayList = mCartList;
                 Intent intent = new Intent(getActivity(), CartOrderActivity.class);
-                intent.putExtra("totalPayablePrice", totalPayablePrice);
+                intent.putExtra("taxPercent", taxPercent);
                 startActivity(intent);
             }
         });
@@ -129,8 +132,9 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
         if (requestCode == 1) {     // Get all cart items.
 
             handleViewCartResponse(rawObject);
-        } else if (requestCode == 2) {
+        } else if (requestCode == 2) { // Http response for cart item delete and update.
 
+            refreshCartList();
         }
     }
 
@@ -157,6 +161,8 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
             cartResponse.setCart(new ArrayList<Cart>());
         } else {
 
+            // Parse the response on success and also parse the taxPercent and
+            taxPercent = cartResponse.getTaxPerc();
             totalPayablePrice = Float.valueOf(cartResponse.getTotalPrice().trim());
             mTxtLabel.setText("Total Price: " + cartResponse.getTotalPrice() + " AED");// + ",  Price: AED " + cartResponse.totalPrice.toString());
         }
@@ -262,8 +268,6 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
                 });
         AlertDialog alert = builder.create();
         alert.show();
-
-
     }
 
     /**

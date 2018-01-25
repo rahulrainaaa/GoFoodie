@@ -58,8 +58,10 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     private ArrayList<CartOrder> mList = new ArrayList<>();
     private ArrayList<Cart> cartArrayList = GlobalData.cartArrayList;
     private Date mStartDate = null;
+
+    // Price data fields.
     private float mTotalPrice = 0f;
-    private float mTotalPayablePrice = 0f;
+    private float mTaxPrice = 0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +69,10 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         setContentView(R.layout.activity_cart_order);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        mTotalPayablePrice = Float.valueOf(getIntent().getFloatExtra("totalPayablePrice", 0f));
-        mTotalPrice = 0;
+        /**
+         * Price analysis for pay price and tax payments.
+         */
+
         Iterator<Cart> cartIterator = cartArrayList.iterator();
         while (cartIterator.hasNext()) {
 
@@ -86,6 +90,9 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             }
         }
 
+        float mTaxPercent = Float.valueOf(getIntent().getFloatExtra("taxPercent", 0f));
+        mTaxPrice = (mTaxPercent * mTotalPrice) / 100;
+
         GlobalData.cartOrderArrayList = mList;
         Date startDate = new Date();
         Calendar cal = Calendar.getInstance();
@@ -102,7 +109,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createCallbackHelper());
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
-
     }
 
     @Override
@@ -133,18 +139,38 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
      */
     public void btnClickProceed(View view) {
 
+        /**
+         * Check if there is any error in the calculation.
+         * Then show error message box.
+         */
+        if (mTotalPrice < 0) {
+
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Oops...")
+                    .setContentText("Some Error occurred in total price calculation.")
+                    .show();
+            return;
+        }
+
+        /**
+         * Prompt to place an order.
+         * Show the price and tax payment.
+         */
         SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialog.setTitleText("Place Order");
-        pDialog.setContentText("" + ((mTotalPrice < 0) ? "Total Combo Price = ERROR...!" : "Total Price: " + mTotalPrice + " AED"
-                + "\nOther charges = " + (mTotalPayablePrice - mTotalPrice + " AED")
-                + "\nTotal Payable Price = " + mTotalPayablePrice + " AED"));
+        pDialog.setContentText("Total Price: " + mTotalPrice + " AED"
+                + "\nApplied Tax = " + (mTaxPrice + " AED")
+                + "\nFinal Price = " + (mTotalPrice + mTaxPrice) + " AED");
         pDialog.setCancelable(false);
         pDialog.setConfirmText("Place Order");
         pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
             @Override
             public void onClick(SweetAlertDialog sweetAlertDialog) {
 
+                /**
+                 * Create a request packet and proceed to place and order.
+                 */
                 JSONObject jsonRequest = getOrderRequestPacket();
                 if (jsonRequest == null) {
 
@@ -483,6 +509,11 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         Toast.makeText(this, "Http Fail: " + message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * method to handle the order placed response.
+     *
+     * @param json {@link JSONObject} http response packet.
+     */
     private void handleOrderPlacedResponse(JSONObject json) {
 
         ModelParser parser = new ModelParser();
