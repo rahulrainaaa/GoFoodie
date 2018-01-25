@@ -156,12 +156,12 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
          * Prompt to place an order.
          * Show the price and tax payment.
          */
-        SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE);
+        SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialog.setTitleText("Place Order");
         pDialog.setContentText("Total Price: " + mTotalPrice + " AED"
-                + "\nApplied Tax = " + (mTaxPrice + " AED")
-                + "\nFinal Price = " + (mTotalPrice + mTaxPrice) + " AED");
+                + "\nApplied Tax: " + (mTaxPrice + " AED")
+                + "\nFinal Price: " + (mTotalPrice + mTaxPrice) + " AED");
         pDialog.setCancelable(false);
         pDialog.setConfirmText("Place Order");
         pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {

@@ -185,7 +185,8 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
 
         try {
 
-            Picasso.with(this).load(restaurant.getProfileIcon().trim()).into(Profile);
+            String imageUrl = restaurantBranchResponse.getRestaurantBranch().getProfileIcon().trim() + "" + restaurant.getAboutUs().getBanner().trim();
+            Picasso.with(this).load(imageUrl.trim()).into(Profile);
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Failed loading profile image", Toast.LENGTH_SHORT).show();

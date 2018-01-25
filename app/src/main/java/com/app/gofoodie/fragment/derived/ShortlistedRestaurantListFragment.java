@@ -1,7 +1,5 @@
 package com.app.gofoodie.fragment.derived;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -182,49 +180,32 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
      */
     private void callToShortlistActivity() {
 
+        /**
+         * Show alert dialog to show AddNewRestaurantActivity.
+         */
         new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Alert")
-                .setContentText("No Shortlist Restaurant found.\nDo you want to select?")
-                .setConfirmText("Yes,delete it!")
+                .setContentText("No Shortlist Restaurant found.\nDo you want to add new?")
+                .setConfirmText("Yes")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
-                        // reuse previous dialog instance
-                        sDialog.setTitleText("Deleted!")
-                                .setContentText("Your imaginary file has been deleted!")
-                                .setConfirmText("OK")
-                                .setConfirmClickListener(null)
-                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+
+                        startActivity(new Intent(getActivity(), AddShortlistedRestaurants.class));
+                        sDialog.dismissWithAnimation();
+                    }
+                })
+                .setCancelText("No")
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                        Toast.makeText(getActivity(), "You have not shortlisted any restaurant.", Toast.LENGTH_SHORT).show();
+                        sweetAlertDialog.dismissWithAnimation();
                     }
                 })
                 .show();
 
-        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setCancelable(false);
-        alertDialog.setMessage("No Shortlist Restaurant found.\nDo you want to select?");
-
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
-
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        Toast.makeText(getActivity(), "You have not shortlisted any restaurant.", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                });
-
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        startActivity(new Intent(getActivity(), AddShortlistedRestaurants.class));
-                        dialog.dismiss();
-                    }
-                });
-
-        alertDialog.show();
     }
 
     @Override

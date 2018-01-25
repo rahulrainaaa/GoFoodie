@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
-                android:text="(16)" />
+                android:text="" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,14 +55,16 @@
                     android:id="@+id/img_veg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/veg" />
+                    android:src="@drawable/veg"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/img_nonveg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/nonveg" />
+                    android:src="@drawable/nonveg"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -158,7 +160,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
-                android:text="Indian, Italian, Chinese, Mexican" />
+                android:text="" />
 
         </LinearLayout>
 
@@ -183,7 +185,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
-                android:text="Restaurant Address Line 1\nRestaurant Address Line 2\nPin: 2342343" />
+                android:text="" />
 
         </LinearLayout>
 
@@ -207,8 +209,7 @@
                 android:id="@+id/txt_postal_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
-                android:text="411041" />
+                android:layout_weight="6" />
 
         </LinearLayout>
 
@@ -232,8 +233,7 @@
                 android:id="@+id/txt_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
-                android:text="Description Line 1\ndescription Line 2\nDescription Line 3" />
+                android:layout_weight="6" />
 
         </LinearLayout>
 
@@ -257,8 +257,7 @@
                 android:id="@+id/txt_about_us"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
-                android:text="Something about restaurant." />
+                android:layout_weight="6" />
 
         </LinearLayout>
 

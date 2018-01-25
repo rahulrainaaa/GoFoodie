@@ -28,8 +28,7 @@
         android:id="@+id/img_profile"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/rest_profile_image" />
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/txt_name"
@@ -41,7 +40,7 @@
         android:paddingBottom="30dp"
         android:paddingLeft="20dp"
         android:paddingRight="10dp"
-        android:text="Restaurant Branch Name Hereeeeeeeeeeeeeeeeeeeee"
+        android:text=""
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
         app:layout_anchor="@id/img_profile"
