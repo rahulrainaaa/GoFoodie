@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -224,6 +225,14 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
 
                         int qtySelected = numberPicker.getValue();
                         Cart cart = (Cart) view.getTag();
+                        int oldQty = Integer.valueOf(cart.getQuantity().trim());
+
+                        if (oldQty == qtySelected) {
+
+                            Log.d(TAG, "Same quantity picked for cart item.");
+                            return;
+                        }
+
                         JSONObject jsonRequest = new JSONObject();
 
                         try {
