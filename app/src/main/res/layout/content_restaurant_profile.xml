@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="270dp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.app.gofoodie.activity.derived.RestaurantProfileActivity"
-    tools:showIn="@layout/activity_restaurant_profile">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +30,7 @@
                 android:clickable="false"
                 android:isIndicator="false"
                 android:numStars="5"
-                android:rating="5"
+                android:rating="0"
                 android:stepSize="0.5"
                 android:theme="@style/RatingBar" />
 
@@ -42,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
-                android:text="(16)" />
+                android:text="" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,14 +52,16 @@
                     android:id="@+id/img_veg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/veg" />
+                    android:src="@drawable/veg"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/img_nonveg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/nonveg" />
+                    android:src="@drawable/nonveg"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

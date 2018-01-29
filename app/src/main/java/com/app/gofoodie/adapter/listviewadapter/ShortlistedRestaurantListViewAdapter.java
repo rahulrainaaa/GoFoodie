@@ -84,20 +84,20 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
         holder.BtnView.setTag(shortlisted);
         holder.BtnCellType.setTag(shortlisted);
 
-        if (shortlisted.type.toLowerCase().equals("both")) {
+        if (shortlisted.type.toLowerCase().equals("1")) { // 1 = veg
 
             holder.imgVeg.setVisibility(View.VISIBLE);
-            holder.imgNonVeg.setVisibility(View.VISIBLE);
+            holder.imgNonVeg.setVisibility(View.GONE);
 
-        } else if (shortlisted.type.toLowerCase().equals("nonveg")) {
+        } else if (shortlisted.type.toLowerCase().equals("2")) {    // 2 = nonveg
 
             holder.imgVeg.setVisibility(View.GONE);
             holder.imgNonVeg.setVisibility(View.VISIBLE);
 
-        } else {
+        } else {                                                    // else = any (both)
 
             holder.imgVeg.setVisibility(View.VISIBLE);
-            holder.imgNonVeg.setVisibility(View.GONE);
+            holder.imgNonVeg.setVisibility(View.VISIBLE);
 
         }
 
