@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.activity.derived.ForgotPasswordActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.global.data.GlobalData;
@@ -203,7 +204,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 break;
             case R.id.btn_forgot_password:
 
-                getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.FORGOT_PASSWORD);
+                startActivity(new Intent(getActivity(), ForgotPasswordActivity.class));
                 break;
         }
     }

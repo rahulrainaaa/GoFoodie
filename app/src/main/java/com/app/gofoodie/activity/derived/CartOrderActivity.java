@@ -1,8 +1,6 @@
 package com.app.gofoodie.activity.derived;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -61,6 +59,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
     // Price data fields.
     private float mTotalPrice = 0f;
+    private float mComboPrice = 0f;
     private float mTaxPrice = 0f;
 
     @Override
@@ -82,6 +81,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
                 try {
                     mTotalPrice = mTotalPrice + Float.parseFloat(cart.getPayPrice().trim()) + Float.parseFloat(cart.getZoneShippingCharge().trim());
+                    mComboPrice = mComboPrice + Float.parseFloat(cart.getPayPrice().trim());
                 } catch (Exception e) {
                     e.printStackTrace();
                     mTotalPrice = -9999999;     // make price -ve if price not parsed. -ve price means wrong price.
@@ -91,7 +91,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         }
 
         float mTaxPercent = Float.valueOf(getIntent().getFloatExtra("taxPercent", 0f));
-        mTaxPrice = (mTaxPercent * mTotalPrice) / 100;
+        mTaxPrice = (mTaxPercent * mComboPrice) / 100;
 
         GlobalData.cartOrderArrayList = mList;
         Date startDate = new Date();
@@ -153,6 +153,18 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         }
 
         /**
+         * Check if customer has the subscription plan.
+         */
+        if (CustomerProfileHandler.CUSTOMER.getProfile().getValidUpto().trim().isEmpty()) {
+
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Failed")
+                    .setContentText("No subscription plan.\nFirst go for subscription plan.")
+                    .show();
+            return;
+        }
+
+        /**
          * Prompt to place an order.
          * Show the price and tax payment.
          */
@@ -160,6 +172,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialog.setTitleText("Place Order");
         pDialog.setContentText("Total Price: " + mTotalPrice + " AED"
+                + "\n Shipping Price: " + (mTotalPrice - mComboPrice)
                 + "\nApplied Tax: " + (mTaxPrice + " AED")
                 + "\nFinal Price: " + (mTotalPrice + mTaxPrice) + " AED");
         pDialog.setCancelable(false);
@@ -528,21 +541,10 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             finish();
         } else {
 
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Failed");
-            alertDialog.setCancelable(false);
-            alertDialog.setMessage("" + orderResponse.statusMessage);
-
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            dialog.dismiss();
-                        }
-                    });
-
-            alertDialog.show();
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Failed")
+                    .setContentText("" + orderResponse.statusMessage)
+                    .show();
 
         }
 

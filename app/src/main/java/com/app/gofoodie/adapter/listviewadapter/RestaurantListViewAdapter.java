@@ -81,20 +81,20 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
         holder.iBtnView.setTag(restaurant);
         holder.iBtnCellType.setTag(restaurant);
 
-        if (restaurant.type.toLowerCase().equals("both")) {
+        if (restaurant.type.toLowerCase().equals("1")) {    // 1 - veg
 
             holder.imgVeg.setVisibility(View.VISIBLE);
-            holder.imgNonVeg.setVisibility(View.VISIBLE);
+            holder.imgNonVeg.setVisibility(View.GONE);
 
-        } else if (restaurant.type.toLowerCase().equals("nonveg")) {
+        } else if (restaurant.type.toLowerCase().equals("2")) { // 2 - nonveg
 
             holder.imgVeg.setVisibility(View.GONE);
             holder.imgNonVeg.setVisibility(View.VISIBLE);
 
-        } else {
+        } else {    // else = both (any)
 
             holder.imgVeg.setVisibility(View.VISIBLE);
-            holder.imgNonVeg.setVisibility(View.GONE);
+            holder.imgNonVeg.setVisibility(View.VISIBLE);
 
         }
 

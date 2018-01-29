@@ -282,10 +282,22 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
                 dialog.dismiss();
             }
         });
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Rate", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
         alertDialog.show();
 
     }
 
+    /**
+     * Method to show the order description click.
+     *
+     * @param v
+     */
     private void showDescription(View v) {
 
         MyOrder myOrder = (MyOrder) v.getTag();
@@ -315,6 +327,11 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
     }
 
+    /**
+     * Method to edit: cancel the combo order.
+     *
+     * @param view
+     */
     private void editCancelOrder(View view) {
 
         MyOrder order = (MyOrder) view.getTag();

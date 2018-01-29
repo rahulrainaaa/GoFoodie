@@ -10,6 +10,7 @@ public class Network {
      * POST REST Web APIs.
      */
 
+    public static final String URL_FORGOT_PASSWORD = "http://gofoodie.drushtiindia.com/API/ForgotPwd/";
 
     public static final String URL_EMERGENCY_CANCEL = "http://gofoodie.drushtiindia.com/API/VacationRequest/emergencyVacationRequest";
 

@@ -77,7 +77,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
             String cid = "";
 
-            while (len < 8) {
+            while (len < 7) {
 
                 cid = cid + "0";
                 len++;
@@ -85,7 +85,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
             cid = cid + CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim();
             mTxtName.setText("" + CustomerProfileHandler.CUSTOMER.getProfile().getName().trim());
-            mTxtEmail.setText("" + CustomerProfileHandler.CUSTOMER.getProfile().getEmail().trim() + "\nCustomer ID: C." + cid + "");
+            mTxtEmail.setText("" + CustomerProfileHandler.CUSTOMER.getProfile().getEmail().trim() + "\nCustomer ID: C_" + cid + "");
             mTxtMobile.setText("" + CustomerProfileHandler.CUSTOMER.getProfile().getMobile1().trim());
 
         } catch (Exception e) {

@@ -49,6 +49,8 @@
 
     <!-- UI validation error messages -->
     <string name="cannot_be_empty">Cannot be empty</string>
+    <string name="proper_mobile_number">Enter proper mobile number</string>
+    <string name="proper_email_id">Enter proper Email ID</string>
     <string name="select_location_first">First select your location.</string>
     <string name="confirm_password_not_match">Confirm Password not matching</string>
     <string name="connecting">Connecting</string>

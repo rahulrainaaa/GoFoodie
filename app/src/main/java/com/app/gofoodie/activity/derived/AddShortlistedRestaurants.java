@@ -112,8 +112,8 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
         builder.setPositiveButton("Search", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String search = input.getText().toString();
 
+                String search = input.getText().toString();
                 fetchRestaurants(search.trim());
             }
         });
@@ -121,6 +121,13 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
+            }
+        });
+        builder.setNeutralButton("Reset", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                fetchRestaurants("");
             }
         });
 

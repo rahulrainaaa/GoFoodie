@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.derived.LocationActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
+import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
@@ -30,13 +31,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Pattern;
+
 /**
  * @class NewRegisterFragment
  * @desc {@link BaseFragment} Fragment class to handle New Customer Registration UI screen.
  */
 public class NewRegisterFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener {
 
-    private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtCompanyName, mEtPassword, mEtCfmPassword, mLocationPref;
+    private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mEtAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtLocationName, mEtPassword, mEtCfmPassword, mLocationPref;
     private Button mBtnRegister = null;
     private CheckBox mChkAcceptTerms = null;
     private String locationId = "";
@@ -53,12 +56,12 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         mEtFirstName = (MaterialEditText) view.findViewById(R.id.et_first_name);
         mEtLastName = (MaterialEditText) view.findViewById(R.id.et_last_name);
         mEtEmail = (MaterialEditText) view.findViewById(R.id.et_email);
-        mAltEmail = (MaterialEditText) view.findViewById(R.id.et_alt_email);
+        mEtAltEmail = (MaterialEditText) view.findViewById(R.id.et_alt_email);
         mEtMobile = (MaterialEditText) view.findViewById(R.id.et_mobile);
         mEtAltMobile = (MaterialEditText) view.findViewById(R.id.et_alt_mobile);
         mEtAddress = (MaterialEditText) view.findViewById(R.id.et_address);
         mLocationPref = (MaterialEditText) view.findViewById(R.id.et_location_pref);
-        mEtCompanyName = (MaterialEditText) view.findViewById(R.id.et_location_pref);
+        mEtLocationName = (MaterialEditText) view.findViewById(R.id.et_location_pref);
         mEtPassword = (MaterialEditText) view.findViewById(R.id.et_password);
         mEtCfmPassword = (MaterialEditText) view.findViewById(R.id.et_conform_password);
         mChkAcceptTerms = (CheckBox) view.findViewById(R.id.chk_agree_terms);
@@ -109,17 +112,19 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         String strFirstName = mEtFirstName.getText().toString().trim();
         String strLastName = mEtLastName.getText().toString().trim();
         String strEmail = mEtEmail.getText().toString().trim();
-        String strAltEmail = mAltEmail.getText().toString().trim();
+        String strAltEmail = mEtAltEmail.getText().toString().trim();
         String strMobile = mEtMobile.getText().toString().trim();
         String strAltMobile = mEtAltMobile.getText().toString().trim();
         String strAddress = mEtAddress.getText().toString().trim();
-        String strCompanyName = mEtCompanyName.getText().toString().trim();
+        String strCompanyName = mEtLocationName.getText().toString().trim();
         String strPassword = mEtPassword.getText().toString().trim();
         String strConfirmPassword = mEtCfmPassword.getText().toString().trim();
 
         boolean isValid = false;
 
-        // Check for empty field.
+        /**
+         * Name field validation.
+         */
         if (strFirstName.isEmpty()) {
 
             isValid = false;
@@ -136,30 +141,83 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             mEtLastName.setError(getString(R.string.cannot_be_empty));
         } else {
 
-            isValid = true;
+            isValid = isValid & true;
             mEtLastName.setError(null);
         }
 
+        /**
+         * Email field validation.
+         */
         if (strEmail.isEmpty()) {
 
             isValid = false;
             mEtEmail.setError(getString(R.string.cannot_be_empty));
+
+        } else if (!Pattern.compile(Constants.REGEX_EMAIL).matcher(strEmail).matches()) {
+
+            isValid = false;
+            mEtEmail.setError(getString(R.string.proper_email_id));
+
         } else {
 
             isValid = true && isValid;
             mEtEmail.setError(null);
         }
 
+        if (strAltEmail.trim().isEmpty()) {
+
+            isValid = true & isValid;
+            mEtAltEmail.setError(null);
+
+        } else if (!Pattern.compile(Constants.REGEX_EMAIL).matcher(strAltEmail).matches()) {
+
+            isValid = false;
+            mEtAltEmail.setError(getString(R.string.proper_email_id));
+
+        } else {
+
+            isValid = true & isValid;
+            mEtAltEmail.setError(null);
+        }
+
+        /**
+         * Mobile number validation.
+         */
         if (strMobile.isEmpty()) {
 
             isValid = false;
             mEtMobile.setError(getString(R.string.cannot_be_empty));
+
+        } else if (!Pattern.compile(Constants.REGEX_MOBILE).matcher(strMobile).matches()) {
+
+            isValid = false;
+            mEtMobile.setError(getString(R.string.proper_mobile_number));
+
         } else {
 
             isValid = true && isValid;
             mEtMobile.setError(null);
         }
 
+        if (strAltMobile.trim().isEmpty()) {
+
+            isValid = true & isValid;
+            mEtAltMobile.setError(null);
+
+        } else if (!Pattern.compile(Constants.REGEX_MOBILE).matcher(strAltMobile).matches()) {
+
+            isValid = false;
+            mEtAltMobile.setError(getString(R.string.proper_mobile_number));
+
+        } else {
+
+            isValid = true & isValid;
+            mEtAltMobile.setError(null);
+        }
+
+        /**
+         * Address field validation.
+         */
         if (strAddress.isEmpty()) {
 
             isValid = false;
@@ -173,13 +231,16 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         if (strCompanyName.isEmpty()) {
 
             isValid = false;
-            mEtCompanyName.setError(getString(R.string.cannot_be_empty));
+            startActivity(new Intent(getActivity(), LocationActivity.class));
         } else {
 
             isValid = true && isValid;
-            mEtCompanyName.setError(null);
+            mEtLocationName.setError(null);
         }
 
+        /**
+         * Password field validations.
+         */
         if (strPassword.isEmpty()) {
 
             isValid = false;
@@ -201,7 +262,9 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             mEtCfmPassword.setError(null);
         }
 
-        // Check if accepted terms & conditions.
+        /**
+         * Check for terms accepted.
+         */
         if (!mChkAcceptTerms.isChecked()) {
 
             isValid = false;
@@ -209,6 +272,9 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             return;
         }
 
+        /**
+         * Proceed after validation.
+         */
         if (!isValid) {
 
             return;

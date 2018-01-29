@@ -122,6 +122,7 @@
             android:name=".activity.derived.ComboDescriptionActivity"
             android:label="@string/title_activity_combo_description"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.derived.ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>

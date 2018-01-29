@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
+import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.handler.profileDataHandler.ProfileUpdateListener;
@@ -20,6 +21,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.regex.Pattern;
 
 /**
  * @class UpdateProfileActivity
@@ -223,6 +226,9 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
         boolean flagValidation = false;
 
+        /**
+         * Name field validation.
+         */
         if (mEtName.getText().toString().trim().isEmpty()) {
 
             flagValidation = false;
@@ -233,23 +239,75 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             mEtName.setError(null);
         }
 
-        if (mEtMobile.getText().toString().trim().isEmpty()) {
+        /**
+         * Email field validations.
+         */
+        String strAltEmail = mEtAltEmail.getText().toString().trim();
+        if (strAltEmail.trim().isEmpty()) {
+
+            flagValidation = true & flagValidation;
+            mEtAltEmail.setError(null);
+
+        } else if (!Pattern.compile(Constants.REGEX_EMAIL).matcher(strAltEmail).matches()) {
+
+            flagValidation = false;
+            mEtAltEmail.setError(getString(R.string.proper_email_id));
+
+        } else {
+
+            flagValidation = true & flagValidation;
+            mEtAltEmail.setError(null);
+        }
+
+        /**
+         * Mobile field validation.
+         */
+        String strMobile = mEtMobile.getText().toString().trim();
+        if (strMobile.isEmpty()) {
 
             flagValidation = false;
             mEtMobile.setError(getString(R.string.cannot_be_empty));
+
+        } else if (!Pattern.compile(Constants.REGEX_MOBILE).matcher(strMobile).matches()) {
+
+            flagValidation = false;
+            mEtMobile.setError(getString(R.string.proper_mobile_number));
+
         } else {
 
-            flagValidation = flagValidation && true;
+            flagValidation = true && flagValidation;
             mEtMobile.setError(null);
         }
 
-        if (mEtAddress.getText().toString().trim().isEmpty()) {
+        String strAltMobile = mEtAltMobile.getText().toString().trim();
+        if (strAltMobile.isEmpty()) {
+
+            flagValidation = true & flagValidation;
+            mEtAltMobile.setError(null);
+
+        } else if (!Pattern.compile(Constants.REGEX_MOBILE).matcher(strAltMobile).matches()) {
+
+            flagValidation = false;
+            mEtAltMobile.setError(getString(R.string.proper_mobile_number));
+
+        } else {
+
+            flagValidation = true & flagValidation;
+            mEtAltMobile.setError(null);
+        }
+
+        /**
+         * Address field validation check.
+         */
+        if (mEtLocation.getText().toString().trim().isEmpty()) {
 
             flagValidation = false;
             startActivity(new Intent(this, LocationActivity.class));
+
         } else {
 
             flagValidation = flagValidation && true;
+
         }
 
         if (mEtAddress.getText().toString().trim().isEmpty()) {
