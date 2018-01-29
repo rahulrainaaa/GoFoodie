@@ -30,6 +30,6 @@ public class Constants {
     public static final String ADMIN_EMAIL = "info@gofoodie.com";
 
     public static final String REGEX_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-    public static final String REGEX_MOBILE = "^\\+[0-9]{10,13}$";
+    public static final String REGEX_MOBILE = "^[0-9]{10,15}$";
 
 }

@@ -61,6 +61,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     private float mTotalPrice = 0f;
     private float mComboPrice = 0f;
     private float mTaxPrice = 0f;
+    private float mPayPrice = 0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,8 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
         float mTaxPercent = Float.valueOf(getIntent().getFloatExtra("taxPercent", 0f));
         mTaxPrice = (mTaxPercent * mComboPrice) / 100;
+
+        mPayPrice = mTotalPrice + mTaxPrice;
 
         GlobalData.cartOrderArrayList = mList;
         Date startDate = new Date();
@@ -173,8 +176,8 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         pDialog.setTitleText("Place Order");
         pDialog.setContentText("Total Price: " + mTotalPrice + " AED"
                 + "\n Shipping Price: " + (mTotalPrice - mComboPrice)
-                + "\nApplied Tax: " + (mTaxPrice + " AED")
-                + "\nFinal Price: " + (mTotalPrice + mTaxPrice) + " AED");
+                + "\nApplied Tax: " + mTaxPrice + " AED"
+                + "\nFinal Price: " + mPayPrice + " AED");
         pDialog.setCancelable(false);
         pDialog.setConfirmText("Place Order");
         pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -479,6 +482,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             jsonRequest.put("geo_lat", CustomerProfileHandler.CUSTOMER.getProfile().getGeoLat());
             jsonRequest.put("geo_lng", CustomerProfileHandler.CUSTOMER.getProfile().getGeoLng());
             jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.getProfile().getWalletId());
+            jsonRequest.put("finalPrice", String.valueOf(mPayPrice));
 
             JSONArray cartItemIdArray = new JSONArray();
             Iterator<Cart> cartIterator = GlobalData.cartArrayList.iterator();
