@@ -1,8 +1,8 @@
 package com.app.gofoodie.activity.derived;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -17,6 +17,8 @@ import com.app.gofoodie.model.comboPlan.ComboPlanResponse;
 import com.app.gofoodie.model.comboPlan.Comboplan;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -46,13 +48,12 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
     private ImageButton Email = null;
     private ImageButton Map = null;
     private ImageButton Review = null;
+    private Button mBtnCartItems = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combo_description);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         Name = (TextView) findViewById(R.id.txt_name);
         comboPrice = (TextView) findViewById(R.id.txt_rate_count);
@@ -61,6 +62,7 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
         Postal = (TextView) findViewById(R.id.txt_postal_code);
         Description = (TextView) findViewById(R.id.txt_description);
         AboutUs = (TextView) findViewById(R.id.txt_about_us);
+        mBtnCartItems = (Button) findViewById(R.id.btn_combo_items);
 
         mRatingBar = (RatingBar) findViewById(R.id.rating_bar);
 
@@ -73,6 +75,16 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
         Map = (ImageButton) findViewById(R.id.btn_map);
         Review = (ImageButton) findViewById(R.id.btn_rate);
 
+        mBtnCartItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ComboPlanResponse combo = (ComboPlanResponse) v.getTag();
+                showItems(combo);
+
+            }
+        });
+        mRatingBar.setEnabled(false);
         Call.setOnClickListener(null);
         Email.setOnClickListener(null);
         Map.setOnClickListener(null);
@@ -91,7 +103,6 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
 
     }
 
-
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
@@ -100,9 +111,21 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
 
         if (comboDetailResponse.getStatusCode() == 200) {
 
+
             showComboInfo(comboDetailResponse.getComboplans().get(0));
+            mBtnCartItems.setTag(comboDetailResponse);
         } else {
-            Toast.makeText(this, comboDetailResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
+
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Alert")
+                    .setContentText("" + comboDetailResponse.getStatusMessage())
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            finish();
+                        }
+                    })
+                    .show();
         }
     }
 
@@ -117,10 +140,12 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
         Name.setText(comboplan.getComboName());
         comboPrice.setText("AED " + comboplan.getComboPayPrice());
         Cuisine.setText(comboplan.getCuisineName());
-        Address.setText("");
-        Postal.setText("");
+        Address.setText(comboplan.getBranchName());
+        Postal.setText(comboplan.getBranchAddress());
         Description.setText(comboplan.getComboDescription());
-        AboutUs.setText("");
+//        AboutUs.setText("");
+
+        Picasso.with(this).load(comboplan.getComboImage()).into(Profile);
 
         mRatingBar.setRating(comboplan.getAvgRating());
 
@@ -141,5 +166,14 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
         NonVeg = null;
         Profile = null;
     }
+
+    /**
+     * Method to show combo items in bottom action sheet.
+     */
+    private void showItems(ComboPlanResponse comboPlanResponse) {
+
+
+    }
+
 
 }

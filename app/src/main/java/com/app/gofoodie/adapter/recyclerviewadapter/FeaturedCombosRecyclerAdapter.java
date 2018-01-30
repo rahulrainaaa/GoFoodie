@@ -109,7 +109,7 @@ public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<Featured
 
         Intent intent = new Intent(mActivity, ComboDescriptionActivity.class);
         intent.putExtra("combo_id", comboId);
-//        mActivity.startActivity(intent);
+        mActivity.startActivity(intent);
     }
 
     /**

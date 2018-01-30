@@ -117,12 +117,18 @@
             android:name=".activity.derived.MyOrdersActivity"
             android:label="@string/my_orders"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.derived.ChangePasswordActivity" />
+        <activity
+            android:name=".activity.derived.ChangePasswordActivity"
+            android:label="@string/change_password"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.ComboDescriptionActivity"
             android:label="@string/title_activity_combo_description"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.derived.ForgotPasswordActivity"></activity>
+        <activity
+            android:name=".activity.derived.ForgotPasswordActivity"
+            android:label="@string/password_reset"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
