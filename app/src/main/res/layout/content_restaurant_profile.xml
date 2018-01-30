@@ -68,68 +68,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorLight" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="9dp"
-            android:layout_marginTop="9dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="22">
-
-            <ImageButton
-                android:id="@+id/btn_call"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:background="@color/float_transparent"
-                app:srcCompat="@drawable/icon_call" />
-
-            <LinearLayout
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/grad_separator_line_vertical_light" />
-
-            <ImageButton
-                android:id="@+id/btn_email"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:background="@color/float_transparent"
-                app:srcCompat="@drawable/icon_email" />
-
-            <LinearLayout
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/grad_separator_line_vertical_light" />
-
-            <ImageButton
-                android:id="@+id/btn_map"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:background="@color/float_transparent"
-                app:srcCompat="@drawable/icon_map" />
-
-            <LinearLayout
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/grad_separator_line_vertical_light" />
-
-            <ImageButton
-                android:id="@+id/btn_rate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:background="@color/float_transparent"
-                app:srcCompat="@drawable/icon_grade" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -205,8 +143,7 @@
                 android:id="@+id/txt_postal_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
-                android:text="411041" />
+                android:layout_weight="6" />
 
         </LinearLayout>
 
