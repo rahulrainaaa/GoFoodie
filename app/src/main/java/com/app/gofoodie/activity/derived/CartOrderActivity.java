@@ -175,7 +175,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialog.setTitleText("Place Order");
         pDialog.setContentText("Total Price: " + mTotalPrice + " AED"
-                + "\n Shipping Price: " + (mTotalPrice - mComboPrice)
+                + "\n Shipping Price: " + (mTotalPrice - mComboPrice) + "AED"
                 + "\nApplied Tax: " + mTaxPrice + " AED"
                 + "\nFinal Price: " + mPayPrice + " AED");
         pDialog.setCancelable(false);
@@ -536,9 +536,21 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         ModelParser parser = new ModelParser();
         OrderResponse orderResponse = (OrderResponse) parser.getModel(json.toString(), OrderResponse.class, null);
 
-        Toast.makeText(this, "" + orderResponse.statusMessage, Toast.LENGTH_SHORT).show();
-        if (orderResponse.statusCode == 200) {
+        Toast.makeText(this, "" + orderResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
+        if (orderResponse.getStatusCode() == 200) {
 
+            /**
+             * Check of the placed orders object is null.
+             * Raise an error.
+             */
+            if (orderResponse.getPlacedOrders() == null) {
+
+                new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Failed")
+                        .setContentText("" + orderResponse.getStatusMessage())
+                        .show();
+                return;
+            }
             Intent intent = new Intent(this, InvoiceActivity.class);
             intent.putExtra("data", orderResponse);
             startActivity(intent);
@@ -547,7 +559,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
 
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Failed")
-                    .setContentText("" + orderResponse.statusMessage)
+                    .setContentText("" + orderResponse.getStatusMessage())
                     .show();
 
         }

@@ -1,4 +1,3 @@
-
 package com.app.gofoodie.model.order;
 
 import android.os.Parcel;
@@ -8,20 +7,8 @@ import com.app.gofoodie.model.base.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Model Class hold response after placing an order. Data contains all the Invoice related details.
- */
 public class OrderResponse extends BaseModel implements Parcelable {
 
-    @SerializedName("placedOrders")
-    @Expose
-    public PlacedOrders placedOrders;
-    @SerializedName("statusCode")
-    @Expose
-    public Integer statusCode;
-    @SerializedName("statusMessage")
-    @Expose
-    public String statusMessage;
     public final static Creator<OrderResponse> CREATOR = new Creator<OrderResponse>() {
 
 
@@ -37,6 +24,15 @@ public class OrderResponse extends BaseModel implements Parcelable {
         }
 
     };
+    @SerializedName("placedOrders")
+    @Expose
+    private PlacedOrders placedOrders;
+    @SerializedName("statusCode")
+    @Expose
+    private Integer statusCode;
+    @SerializedName("statusMessage")
+    @Expose
+    private String statusMessage;
 
     protected OrderResponse(Parcel in) {
         this.placedOrders = ((PlacedOrders) in.readValue((PlacedOrders.class.getClassLoader())));
@@ -45,6 +41,30 @@ public class OrderResponse extends BaseModel implements Parcelable {
     }
 
     public OrderResponse() {
+    }
+
+    public PlacedOrders getPlacedOrders() {
+        return placedOrders;
+    }
+
+    public void setPlacedOrders(PlacedOrders placedOrders) {
+        this.placedOrders = placedOrders;
+    }
+
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public String getStatusMessage() {
+        return statusMessage;
+    }
+
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
     }
 
     public void writeToParcel(Parcel dest, int flags) {

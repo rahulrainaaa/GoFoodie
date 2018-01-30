@@ -46,7 +46,7 @@ public class InvoiceActivity extends BaseAppCompatActivity {
             return;
         }
 
-        PlacedOrders order = orderResponse.placedOrders;
+        PlacedOrders order = orderResponse.getPlacedOrders();
 
         txtOrderId = (TextView) findViewById(R.id.txt_order_id);
         txtPaidPrice = (TextView) findViewById(R.id.price_paid);
@@ -54,10 +54,10 @@ public class InvoiceActivity extends BaseAppCompatActivity {
         txtTotalOrders = (TextView) findViewById(R.id.total_orders);
         btnDone = (Button) findViewById(R.id.btn_done);
 
-        txtOrderId.setText("OrderID: " + order.orderSetId);
-        txtPaidPrice.setText("Paid AED " + order.pricePaid);
-        txtDate.setText("From: " + order.startDate + "\nTill: " + order.endDate);
-        txtTotalOrders.setText(order.orderCount + " Orders placed");
+        txtOrderId.setText("OrderID: " + order.getOrderSetId());
+        txtPaidPrice.setText("Paid AED " + order.getPricePaid());
+        txtDate.setText("From: " + order.getStartDate() + "\nTill: " + order.getEndDate());
+        txtTotalOrders.setText(order.getOrderCount() + " Orders placed");
 
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,12 +1,17 @@
 package com.app.gofoodie.activity.derived;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,8 +25,16 @@ import com.app.gofoodie.model.cartOrder.Description;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Activity to edit/customize your combo meal items (based on plan).
+ */
 public class EditComboActivity extends BaseAppCompatActivity implements AdapterView.OnItemClickListener {
 
+    public static final String TAG = "EditComboActivity";
+
+    /**
+     * Class private data member(s).
+     */
     private ListView mListView = null;
     private ArrayList<Description> mList = new ArrayList<>();
     private EditComboListViewAdapter mAdapter = null;
@@ -56,15 +69,22 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
         showListViewDialog(position);
     }
 
+    /**
+     * Method to show the list view dialog for customization.
+     *
+     * @param position
+     */
     private void showListViewDialog(final int position) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
         builderSingle.setCancelable(true);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice);
+        String match = mList.get(position).value;
+        ArrayList<String> choices = new ArrayList<>();
         Iterator<String> iterator = mList.get(position).options.iterator();
         while (iterator.hasNext()) {
 
-            arrayAdapter.add(iterator.next().trim());
+            choices.add(iterator.next().trim());
         }
+        final ItemAdapter arrayAdapter = new ItemAdapter(this, R.layout.item_combo_item, choices, match);
 
         builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
             @Override
@@ -77,6 +97,40 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
         });
         builderSingle.show();
 
+    }
+
+    /**
+     * {@link ItemAdapter} adapter class to show the options (choice) for combo item(s).
+     */
+    private class ItemAdapter extends ArrayAdapter<String> {
+
+        /**
+         * Inner class private data member(s).
+         */
+        private Context context = null;
+        private int resourceId = -1;
+        private String match = null;
+        private ArrayList<String> choices = null;
+
+        public ItemAdapter(@NonNull Context context, int resource, ArrayList<String> list, String match) {
+            super(context, resource, list);
+
+            this.context = context;
+            this.resourceId = resource;
+            this.match = match;
+            this.choices = list;
+
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+            CheckedTextView view = (CheckedTextView) getLayoutInflater().inflate(resourceId, null);
+            view.setText(choices.get(position));
+            view.setChecked(choices.get(position).trim().contains(match.trim()));
+            return view;
+        }
     }
 
 

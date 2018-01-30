@@ -15,8 +15,12 @@ import com.app.gofoodie.model.cartOrder.CartOrder;
 
 import java.util.List;
 
-
+/**
+ * Activity to show all the orders to be placed with delivery date assigned.
+ */
 public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecyclerAdapter.ItemHolder> {
+
+    public static final String TAG = "CartOrderRecyclerAdapter";
 
     /**
      * private class Data members.

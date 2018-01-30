@@ -102,6 +102,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.RestaurantBranchProfileActivity"
+            android:label="@string/title_activity_restaurant_profile"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.InvoiceActivity"

@@ -85,6 +85,13 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
         return true;
     }
 
+    /**
+     * Method to fetch all my orders within the selected date range.
+     * Use default value for today's date.
+     *
+     * @param fromDate
+     * @param toDate
+     */
     private void fetchMyOrders(String fromDate, String toDate) {
 
         mStrFromDate = fromDate;
