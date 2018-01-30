@@ -19,6 +19,7 @@ import com.app.gofoodie.model.shortlisted.Shortlisted;
 import com.app.gofoodie.model.shortlisted.ShortlistedRestaurants;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -123,14 +124,25 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
             mList = (ArrayList<Shortlisted>) shortlistedRestaurants.shortlisted;
             mAdapter = new ShortlistedRestaurantListViewAdapter(this, R.layout.item_shortlisted_restaurants, mList, this);
             mListView.setAdapter(mAdapter);
+
         } else {
+
             try {
                 mList.clear();
                 mAdapter.notifyDataSetChanged();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Toast.makeText(this, "" + shortlistedRestaurants.statusMessage, Toast.LENGTH_SHORT).show();
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Oops...")
+                    .setContentText(shortlistedRestaurants.statusMessage.trim())
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            finish();
+                        }
+                    })
+                    .show();
         }
 
     }

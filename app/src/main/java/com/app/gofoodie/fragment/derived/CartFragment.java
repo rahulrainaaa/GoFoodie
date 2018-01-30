@@ -30,6 +30,7 @@ import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.SessionUtils;
 import com.app.gofoodie.utility.VibrationUtil;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.shawnlin.numberpicker.NumberPicker;
 
 import org.json.JSONArray;
@@ -157,8 +158,10 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
         CartResponse cartResponse = (CartResponse) parser.getModel(json.toString(), CartResponse.class, null);
         if (cartResponse.getStatusCode() != 200) {
 
-            mTxtLabel.setText("Empty Cart");
-            Toast.makeText(getActivity(), "" + cartResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
+            new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Oops...")
+                    .setContentText(cartResponse.getStatusMessage())
+                    .show();
             cartResponse.setCart(new ArrayList<Cart>());
         } else {
 

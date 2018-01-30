@@ -24,6 +24,7 @@ import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.CacheUtils;
 import com.app.gofoodie.utility.VibrationUtil;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -163,12 +164,21 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
 
         if (comboPlanResponse.getStatusCode() != 200) {
 
-            Toast.makeText(this, "" + comboPlanResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
-
             if (mComboPlanList != null) {
                 mComboPlanList.clear();
                 mAdapter.notifyDataSetChanged();
             }
+
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Oops...")
+                    .setContentText(comboPlanResponse.getStatusMessage())
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            finish();
+                        }
+                    })
+                    .show();
             return;
 
         } else {

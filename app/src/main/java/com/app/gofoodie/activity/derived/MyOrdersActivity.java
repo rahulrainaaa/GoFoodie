@@ -23,6 +23,7 @@ import com.app.gofoodie.model.myorders.MyOrdersResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -154,7 +155,16 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
         if (myOrdersResponse.statusCode != 200 || myOrdersResponse.myOrders == null) {
 
-            Toast.makeText(this, "" + myOrdersResponse.statusMessage, Toast.LENGTH_SHORT).show();
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Oops...")
+                    .setContentText(myOrdersResponse.statusMessage.trim())
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            finish();
+                        }
+                    })
+                    .show();
             return;
         }
 

@@ -24,6 +24,7 @@ import com.app.gofoodie.model.restaurant.RestaurantResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.LocationUtils;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,7 +107,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
 
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         input.setSingleLine();
-        input.setSingleLine(true);
+        input.setSingleLine(false);
         builder.setView(input);
 
         builder.setPositiveButton("Search", new DialogInterface.OnClickListener() {
@@ -226,7 +227,16 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
                 e.printStackTrace();
             }
 
-            Toast.makeText(this, "" + statusMessage.toString(), Toast.LENGTH_SHORT).show();
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Oops...")
+                    .setContentText("No such restaurant found.")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            finish();
+                        }
+                    })
+                    .show();
         }
     }
 

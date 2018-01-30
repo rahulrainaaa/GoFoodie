@@ -121,7 +121,12 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
             callToShortlistActivity();
 
         } else {
-            Toast.makeText(getActivity(), "" + shortlistedRestaurants.statusMessage, Toast.LENGTH_SHORT).show();
+
+            new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Oops...")
+                    .setContentText("" + shortlistedRestaurants.statusMessage)
+                    .setConfirmText("Ok")
+                    .show();
         }
 
     }
