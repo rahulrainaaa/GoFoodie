@@ -19,7 +19,6 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-
             <RatingBar
                 android:id="@+id/rating_bar"
                 style="?android:attr/ratingBarStyleSmall"
@@ -67,7 +66,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"

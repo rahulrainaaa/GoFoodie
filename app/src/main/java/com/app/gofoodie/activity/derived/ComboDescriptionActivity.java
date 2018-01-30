@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -49,10 +48,6 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
     private ImageView Veg = null;
     private ImageView NonVeg = null;
     private ImageView Profile = null;
-    private ImageButton Call = null;
-    private ImageButton Email = null;
-    private ImageButton Map = null;
-    private ImageButton Review = null;
     private Button mBtnCartItems = null;
 
     @Override
@@ -75,11 +70,6 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
         NonVeg = (ImageView) findViewById(R.id.img_nonveg);
         Profile = (ImageView) findViewById(R.id.img_profile);
 
-        Call = (ImageButton) findViewById(R.id.btn_call);
-        Email = (ImageButton) findViewById(R.id.btn_email);
-        Map = (ImageButton) findViewById(R.id.btn_map);
-        Review = (ImageButton) findViewById(R.id.btn_rate);
-
         mBtnCartItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,16 +79,6 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
 
             }
         });
-        mRatingBar.setEnabled(false);
-        Call.setOnClickListener(null);
-        Email.setOnClickListener(null);
-        Map.setOnClickListener(null);
-        Review.setOnClickListener(null);
-
-        Call.setVisibility(View.GONE);
-        Email.setVisibility(View.GONE);
-        Map.setVisibility(View.GONE);
-        Review.setVisibility(View.GONE);
 
         String url = Network.URL_GET_COMBO_DETAIL + getIntent().getStringExtra("combo_id");
 
@@ -222,6 +202,5 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
         bottomSheetDialog.show();
 
     }
-
 
 }
