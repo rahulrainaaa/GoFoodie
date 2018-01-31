@@ -310,7 +310,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
         try {
             int statusCode = json.getInt("statusCode");
             String statusMessage = json.getString("statusMessage");
-            Toast.makeText(this, statusCode + ". " + statusMessage, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + statusMessage, Toast.LENGTH_SHORT).show();
 
         } catch (JSONException jsonExc) {
 

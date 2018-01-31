@@ -17,6 +17,7 @@ import com.app.gofoodie.model.customer.Profile;
 import com.app.gofoodie.model.myorders.MyOrder;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.shawnlin.numberpicker.NumberPicker;
 
 import org.json.JSONArray;
@@ -27,10 +28,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Handler class to handle order cancellation.
+ */
 public class OrderCancellationHandler {
 
     public static final String TAG = "OrderCancellationHandler";
 
+    /**
+     * class private data member(s).
+     */
     private MyOrder myOrder = null;
     private BaseAppCompatActivity mActivity = null;
     private BottomSheetDialog mBottomSheetDialog = null;
@@ -60,7 +67,6 @@ public class OrderCancellationHandler {
                     cancelEmergency();
                     break;
             }
-
         }
     };
 
@@ -74,6 +80,22 @@ public class OrderCancellationHandler {
         this.myOrder = order;
         this.mCancellationListener = cancellationListener;
 
+        /**
+         * Check if (1) means single order cancellation.
+         */
+        if (mode == 1) {
+
+            cancelSingleOrder();
+            return;
+//            btnLongTerm.setVisibility(View.GONE);
+//            btnShortTerm.setVisibility(View.GONE);
+        }
+
+        /**
+         * proceed for else case.
+         * Inflate view and show in Bottom Action Sheet.
+         */
+
         View bottomView = mActivity.getLayoutInflater().inflate(R.layout.layout_bottom_sheet_my_orders, null);
         mBottomSheetDialog = new BottomSheetDialog(mActivity);
 
@@ -82,12 +104,7 @@ public class OrderCancellationHandler {
         Button btnShortTerm = (Button) bottomView.findViewById(R.id.btn_short_term_vacation);
         Button btnEmergency = (Button) bottomView.findViewById(R.id.btn_emergency_mode);
 
-        if (mode == 1) {
-
-            btnLongTerm.setVisibility(View.GONE);
-            btnShortTerm.setVisibility(View.GONE);
-
-        } else if (mode == 2) {
+        if (mode == 2) {     // Any Vacation mode.
 
             btnCancel.setVisibility(View.GONE);
             btnEmergency.setVisibility(View.GONE);
@@ -102,17 +119,17 @@ public class OrderCancellationHandler {
         mBottomSheetDialog.show();
     }
 
+    /**
+     * Simple cancel a single order.
+     */
     private void cancelSingleOrder() {
 
-        AlertDialog alertDialog = new AlertDialog.Builder(mActivity).create();
-        alertDialog.setTitle("Confirm Cancel");
-        alertDialog.setCancelable(false);
-        alertDialog.setMessage("Are you sure to cancel this order?");
-
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
-
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+        new SweetAlertDialog(mActivity)
+                .setTitleText("Order cancel")
+                .setContentText("Are you sure to cancel this order?")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
 
                         try {
 
@@ -125,6 +142,7 @@ public class OrderCancellationHandler {
                             jsonRequest.put("order_set_id", myOrder.orderSetId.trim());
                             jsonRequest.put("branch_id", myOrder.branchId.trim());
                             jsonRequest.put("token", mActivity.getSession().getData().getToken());
+                            jsonRequest.put("delivery_date", myOrder.deliveryDate.trim());
 
                             NetworkHandler networkHandler = new NetworkHandler();
                             networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
@@ -147,21 +165,23 @@ public class OrderCancellationHandler {
 
                             jsonExc.printStackTrace();
                         }
-                        dialog.dismiss();
                     }
-                });
+                })
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
 
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.dismiss();
-            }
-        });
-        alertDialog.show();
-
+                        sweetAlertDialog.dismissWithAnimation();
+                    }
+                })
+                .setConfirmText("Yes")
+                .setCancelText("No")
+                .show();
     }
 
+    /**
+     * Apply long term cancellation.
+     */
     private void cancelLongTerm() {
 
         final NumberPicker numberPicker = (NumberPicker) mActivity.getLayoutInflater().inflate(R.layout.layout_number_picker, null);
@@ -237,6 +257,9 @@ public class OrderCancellationHandler {
         builder.show();
     }
 
+    /**
+     * Method to apply short term vacation mode.
+     */
     private void cancelShortTerm() {
 
         final NumberPicker numberPicker = (NumberPicker) mActivity.getLayoutInflater().inflate(R.layout.layout_number_picker, null);
@@ -312,6 +335,9 @@ public class OrderCancellationHandler {
         builder.show();
     }
 
+    /**
+     * Method to apply cancellation with emergency mode.
+     */
     private void cancelEmergency() {
 
         final EditText txtReason = new EditText(mActivity);

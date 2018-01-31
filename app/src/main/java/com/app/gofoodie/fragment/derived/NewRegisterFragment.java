@@ -39,6 +39,11 @@ import java.util.regex.Pattern;
  */
 public class NewRegisterFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener {
 
+    public static final String TAG = "NewRegisterFragment";
+
+    /**
+     * class private data member(s).
+     */
     private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mEtAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtLocationName, mEtPassword, mEtCfmPassword, mLocationPref;
     private Button mBtnRegister = null;
     private CheckBox mChkAcceptTerms = null;

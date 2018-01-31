@@ -30,6 +30,8 @@ import java.util.regex.Pattern;
  */
 public class UpdateProfileActivity extends BaseAppCompatActivity implements View.OnClickListener, NetworkCallbackListener {
 
+    public static final String TAG = "UpdateProfileActivity";
+
     /**
      * Class private data member(s).
      */

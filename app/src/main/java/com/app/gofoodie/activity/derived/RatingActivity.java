@@ -19,8 +19,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Activity class to show the rating of given restaurant branch (branch_id).
+ */
 public class RatingActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
+    public static final String TAG = "RatingActivity";
+
+    /**
+     * class private data member(s).
+     */
     private ListView mListView = null;
     private ArrayList<Review> mList = new ArrayList<>();
     private RatingListViewAdapter mAdapter = null;
@@ -77,7 +85,7 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
             return;
         } else if (ratings.review.size() == 0) {
 
-            Toast.makeText(this, "No Reviews", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No Reviews Present", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }

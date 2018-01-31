@@ -2,7 +2,6 @@ package com.app.gofoodie.handler.dashboardHandler;
 
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.fragment.derived.CartFragment;
-import com.app.gofoodie.fragment.derived.ChangePasswordFragment;
 import com.app.gofoodie.fragment.derived.EmptyListFragment;
 import com.app.gofoodie.fragment.derived.HomeFragment;
 import com.app.gofoodie.fragment.derived.LoginFragment;
@@ -55,9 +54,6 @@ public class DashboardFragmentHandler {
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.LOGIN == fragmentType) {
 
             return new LoginFragment();
-        } else if (DashboardInterruptListener.FRAGMENT_TYPE.CHANGE_PASSWORD == fragmentType) {
-
-            return new ChangePasswordFragment();
         } else if (DashboardInterruptListener.FRAGMENT_TYPE.RESTAURANT_LIST == fragmentType) {
 
             return new ShortlistedRestaurantListFragment();

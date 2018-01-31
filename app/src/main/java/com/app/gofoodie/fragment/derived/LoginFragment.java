@@ -53,9 +53,11 @@ import org.json.JSONObject;
 public class LoginFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener, FacebookLoginListener, GoogleApiClient.OnConnectionFailedListener {
 
     public final String TAG = "LoginFragment";
+    /**
+     * class private constant(s).
+     */
     private final int FACEBOOK_LOGIN = 12121;   // Facebook Intent Request code.
     private final int GOOGLE_SIGN_IN = 34343;   // Google Intent request code
-
     /**
      * Class private data members.
      */

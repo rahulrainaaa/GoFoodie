@@ -16,10 +16,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Activity class to change signed in customer password.
+ */
 public class ChangePasswordActivity extends BaseAppCompatActivity implements View.OnClickListener, NetworkCallbackListener {
 
     public static final String TAG = "ChangePasswordActivity";
 
+    /**
+     * class private data member(s).
+     */
     private MaterialEditText mEtOldPassword = null;
     private MaterialEditText mEtNewPassword = null;
     private MaterialEditText mEtCfmNewPassword = null;

@@ -17,10 +17,18 @@ import java.util.Stack;
 public abstract class BaseFragment extends Fragment implements FragmentQuitHandler {
 
     public static final String TAG = "BaseFragment";
+
+    /**
+     * Class public data member(s).
+     */
     public static DashboardInterruptListener.FRAGMENT_TYPE CURRENT_FRAG = null;
+
+    /**
+     * Class private data member(s).
+     */
     private static Stack<DashboardInterruptListener.FRAGMENT_TYPE> FRAG_STACK = new Stack<>();
     private boolean flagPushIntoStack = true;       // If this has to push into stack (Forward flow).
-    private boolean mFlagSaveBeforeExit = false;        //false = nothing; true = something to save.
+    private boolean mFlagSaveBeforeExit = false;        //false = nothing; true = something to save (Do not exit).
 
     /**
      * @param status boolean set/reset flag.
@@ -35,9 +43,9 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
     /**
      * @return boolean false = unload; true = don't unload.
      * @method exitWork
-     * @desc Method need to be called before proceeding fragment unload.
+     * @desc Method need to be called before proceeding fragment unload (final = important to be called).
      */
-    public boolean exitWork() {
+    public final boolean exitWork() {
 
         if (mFlagSaveBeforeExit == true) {
             // Don't unload fragment.
