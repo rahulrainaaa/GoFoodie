@@ -103,10 +103,11 @@ public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<Featured
     @Override
     public void onClick(View v) {
 
+        /**
+         * Show combo info of the selected combo plan.
+         */
         int position = (int) v.getTag();
-
         String comboId = mList.get(position).comboId;
-
         Intent intent = new Intent(mActivity, ComboDescriptionActivity.class);
         intent.putExtra("combo_id", comboId);
         mActivity.startActivity(intent);

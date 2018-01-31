@@ -2,7 +2,6 @@ package com.app.gofoodie.activity.derived;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -239,21 +238,28 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
      */
     private void mapClicked(View view) {
 
-        String coordinates = restaurant.getGeoLat().trim() + "," + restaurant.getGeoLng().trim();
-        Toast.makeText(this, "" + coordinates, Toast.LENGTH_SHORT).show();
+        String branch_id = restaurant.getGeoLat().trim() + "," + restaurant.getBranchId().trim();
 
-        if (coordinates == null) {
+        Intent intent = new Intent(this, RestaurantComboActivity.class);
+        intent.putExtra("branch_id", branch_id);
+        startActivity(intent);
 
-            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
+//        String coordinates = restaurant.getGeoLat().trim() + "," + restaurant.getGeoLng().trim();
+//        Toast.makeText(this, "" + coordinates, Toast.LENGTH_SHORT).show();
+//
+//        if (coordinates == null) {
+//
+//            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
+//
+//        } else if (coordinates.trim().isEmpty()) {
+//
+//            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
+//
+//        } else {
+//
+//            ProfileUtils.mapLocation(this, coordinates);
+//    }
 
-        } else if (coordinates.trim().isEmpty()) {
-
-            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
-
-        } else {
-
-            ProfileUtils.mapLocation(this, coordinates);
-        }
     }
 
     /**

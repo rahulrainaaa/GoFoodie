@@ -130,6 +130,10 @@
             android:name=".activity.derived.ForgotPasswordActivity"
             android:label="@string/password_reset"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.derived.RestaurantComboActivity"
+            android:label="@string/combo_plans"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
