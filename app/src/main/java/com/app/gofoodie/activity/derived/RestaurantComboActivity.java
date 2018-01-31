@@ -67,7 +67,6 @@ public class RestaurantComboActivity extends BaseAppCompatActivity implements Ne
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
-
     }
 
     /**

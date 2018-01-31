@@ -238,7 +238,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
      */
     private void mapClicked(View view) {
 
-        String branch_id = restaurant.getGeoLat().trim() + "," + restaurant.getBranchId().trim();
+        String branch_id = restaurant.getBranchId().trim();
 
         Intent intent = new Intent(this, RestaurantComboActivity.class);
         intent.putExtra("branch_id", branch_id);

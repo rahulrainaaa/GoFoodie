@@ -109,7 +109,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                app:srcCompat="@drawable/icon_cross" />
+                app:srcCompat="@drawable/icon_cancel_order" />
 
         </LinearLayout>
 
