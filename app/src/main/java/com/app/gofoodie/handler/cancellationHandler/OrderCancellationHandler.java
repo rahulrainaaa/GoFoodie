@@ -164,6 +164,8 @@ public class OrderCancellationHandler {
                         } catch (JSONException jsonExc) {
 
                             jsonExc.printStackTrace();
+                        } finally {
+                            sweetAlertDialog.dismissWithAnimation();
                         }
                     }
                 })

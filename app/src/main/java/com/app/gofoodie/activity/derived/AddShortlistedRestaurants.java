@@ -233,7 +233,8 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            finish();
+//                            finish();
+                            sweetAlertDialog.dismissWithAnimation();
                         }
                     })
                     .show();

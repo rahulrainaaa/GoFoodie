@@ -21,7 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_restaurant_profile" />
+    <include layout="@layout/content_combo_profile" />
 
     <ImageView
         android:id="@+id/img_profile"

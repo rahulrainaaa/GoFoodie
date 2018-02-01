@@ -20,6 +20,7 @@ import com.app.gofoodie.model.restaurantBranch.RestaurantBranchResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.ProfileUtils;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -37,7 +38,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
      */
     private TextView Name = null;
     private TextView ReviewCount = null;
-    private TextView Cuizine = null;
+    private TextView Cuisine = null;
     private TextView Address = null;
     private TextView Postal = null;
     private TextView Description = null;
@@ -63,7 +64,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
 
         Name = (TextView) findViewById(R.id.txt_name);
         ReviewCount = (TextView) findViewById(R.id.txt_rate_count);
-        Cuizine = (TextView) findViewById(R.id.txt_cuisine);
+        Cuisine = (TextView) findViewById(R.id.txt_cuisine);
         Address = (TextView) findViewById(R.id.txt_address);
         Postal = (TextView) findViewById(R.id.txt_postal_code);
         Description = (TextView) findViewById(R.id.txt_description);
@@ -101,7 +102,17 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
             @Override
             public void networkFailResponse(int requestCode, String message) {
 
-                Toast.makeText(RestaurantBranchProfileActivity.this, "Http Fail: " + message, Toast.LENGTH_SHORT).show();
+                new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText("No Internet")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                                finish();
+                            }
+                        })
+                        .show();
             }
         }, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
 
@@ -158,7 +169,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
 
         Name.setText(restaurant.getBranchName());
         ReviewCount.setText("(" + restaurant.getCountRating() + ")");
-        Cuizine.setText(restaurant.getTags());
+        Cuisine.setText(restaurant.getTags());
         Address.setText(restaurant.getBranchAddress());
         Postal.setText((String) restaurant.getBranchPostalCode());
         Description.setText(restaurant.getDescription());

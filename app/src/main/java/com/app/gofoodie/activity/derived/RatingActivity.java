@@ -13,6 +13,7 @@ import com.app.gofoodie.model.ratings.Ratings;
 import com.app.gofoodie.model.ratings.Review;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -75,22 +76,39 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
 
         if (ratings.statusCode != 200) {
 
-            Toast.makeText(this, "" + ratings.statusMessage.trim(), Toast.LENGTH_SHORT).show();
-            finish();
+            showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", ratings.statusMessage.trim());
             return;
         } else if (ratings.review == null) {
 
-            Toast.makeText(this, "" + ratings.statusMessage.trim(), Toast.LENGTH_SHORT).show();
-            finish();
+            showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", ratings.statusMessage.trim());
             return;
         } else if (ratings.review.size() == 0) {
 
-            Toast.makeText(this, "No Reviews Present", Toast.LENGTH_SHORT).show();
-            finish();
+            showAlertAndClose(SweetAlertDialog.WARNING_TYPE, "Alert", "No Reviews Present");
             return;
         }
         mList = (ArrayList<Review>) ratings.review;
         RatingListViewAdapter mAdapter = new RatingListViewAdapter(this, R.layout.item_list_rating, mList);
         mListView.setAdapter(mAdapter);
+    }
+
+    /**
+     * Method to show alert.
+     */
+    private void showAlertAndClose(int alertType, String title, String content) {
+
+        new SweetAlertDialog(this, alertType)
+                .setTitleText(title)
+                .setContentText(content)
+                .setConfirmText("Ok")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                        sweetAlertDialog.dismissWithAnimation();
+                        finish();
+                    }
+                })
+                .show();
     }
 }

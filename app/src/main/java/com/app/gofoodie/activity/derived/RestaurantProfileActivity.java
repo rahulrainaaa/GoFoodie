@@ -2,7 +2,6 @@ package com.app.gofoodie.activity.derived;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -31,21 +30,21 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     /**
      * Class private data member(s).
      */
-    private TextView Name = null;
-    private TextView ReviewCount = null;
-    private TextView Cuizine = null;
-    private TextView Address = null;
-    private TextView Postal = null;
-    private TextView Description = null;
-    private TextView AboutUs = null;
+    private TextView mEtName = null;
+    private TextView mEtReviewCount = null;
+    private TextView mEtCuisine = null;
+    private TextView mEtAddress = null;
+    private TextView mEtPostal = null;
+    private TextView mEtDescription = null;
+    private TextView mEtAboutUs = null;
     private RatingBar mRatingBar = null;
-    private ImageView Veg = null;
-    private ImageView NonVeg = null;
-    private ImageView Profile = null;
-    private ImageButton Call = null;
-    private ImageButton Email = null;
-    private ImageButton Map = null;
-    private ImageButton Review = null;
+    private ImageView mImgVeg = null;
+    private ImageView mImgNonVeg = null;
+    private ImageView mImgProfile = null;
+    private ImageButton mIBtnCall = null;
+    private ImageButton mIBtnEmail = null;
+    private ImageButton mIBtnMap = null;
+    private ImageButton mIBtnReview = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,30 +53,30 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Name = (TextView) findViewById(R.id.txt_name);
-        ReviewCount = (TextView) findViewById(R.id.txt_rate_count);
-        Cuizine = (TextView) findViewById(R.id.txt_cuisine);
-        Address = (TextView) findViewById(R.id.txt_address);
-        Postal = (TextView) findViewById(R.id.txt_postal_code);
-        Description = (TextView) findViewById(R.id.txt_description);
-        AboutUs = (TextView) findViewById(R.id.txt_about_us);
+        mEtName = (TextView) findViewById(R.id.txt_name);
+        mEtReviewCount = (TextView) findViewById(R.id.txt_rate_count);
+        mEtCuisine = (TextView) findViewById(R.id.txt_cuisine);
+        mEtAddress = (TextView) findViewById(R.id.txt_address);
+        mEtPostal = (TextView) findViewById(R.id.txt_postal_code);
+        mEtDescription = (TextView) findViewById(R.id.txt_description);
+        mEtAboutUs = (TextView) findViewById(R.id.txt_about_us);
 
         mRatingBar = (RatingBar) findViewById(R.id.rating_bar);
         mRatingBar.setEnabled(false);
 
-        Veg = (ImageView) findViewById(R.id.img_veg);
-        NonVeg = (ImageView) findViewById(R.id.img_nonveg);
-        Profile = (ImageView) findViewById(R.id.img_profile);
+        mImgVeg = (ImageView) findViewById(R.id.img_veg);
+        mImgNonVeg = (ImageView) findViewById(R.id.img_nonveg);
+        mImgProfile = (ImageView) findViewById(R.id.img_profile);
 
-        Call = (ImageButton) findViewById(R.id.btn_call);
-        Email = (ImageButton) findViewById(R.id.btn_email);
-        Map = (ImageButton) findViewById(R.id.btn_map);
-        Review = (ImageButton) findViewById(R.id.btn_rate);
+        mIBtnCall = (ImageButton) findViewById(R.id.btn_call);
+        mIBtnEmail = (ImageButton) findViewById(R.id.btn_email);
+        mIBtnMap = (ImageButton) findViewById(R.id.btn_map);
+        mIBtnReview = (ImageButton) findViewById(R.id.btn_rate);
 
-        Call.setOnClickListener(this);
-        Email.setOnClickListener(this);
-        Map.setOnClickListener(this);
-        Review.setOnClickListener(this);
+        mIBtnCall.setOnClickListener(this);
+        mIBtnEmail.setOnClickListener(this);
+        mIBtnMap.setOnClickListener(this);
+        mIBtnReview.setOnClickListener(this);
 
 
         MODE mode = (MODE) getIntent().getSerializableExtra("mode");
@@ -97,24 +96,23 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     public void onClick(View view) {
 
         String email = "";
-        String coordinates = "";
+        //String coordinates = "";
         String branchId = "";
         MODE mode = (MODE) getIntent().getSerializableExtra("mode");
         if (mode == MODE.SHORTLISTED) {
 
             Shortlisted shortlisted = getIntent().getParcelableExtra("data");
             email = shortlisted.branchEmail.trim();
-            coordinates = shortlisted.branchGeoLat + "," + shortlisted.branchGeoLng;
+            //coordinates = shortlisted.branchGeoLat + "," + shortlisted.branchGeoLng;
             branchId = shortlisted.branchId.trim();
         } else if (mode == MODE.REST_BRANCH) {
 
             Restaurant restaurant = getIntent().getParcelableExtra("data");
             email = restaurant.branchEmail;
-            coordinates = restaurant.geoLat + "," + restaurant.geoLng;
+            //coordinates = restaurant.geoLat + "," + restaurant.geoLng;
             branchId = restaurant.branchId.trim();
         }
         switch (view.getId()) {
-
 
             case R.id.btn_call:
 
@@ -126,7 +124,7 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
                 break;
             case R.id.btn_map:
 
-                mapClicked(view, coordinates);
+                comboClicked(view, branchId.trim());
                 break;
             case R.id.btn_rate:
 
@@ -142,32 +140,32 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     public void showShortlistedRestaurantProfile() {
         Shortlisted shortlisted = getIntent().getParcelableExtra("data");
 
-        Name.setText(shortlisted.branchName);
-        ReviewCount.setText("(" + shortlisted.countRating + ")");
-        Cuizine.setText(shortlisted.tags);
-        Address.setText(shortlisted.branchAddress);
-        Postal.setText(shortlisted.branchPostalCode);
-        Description.setText(shortlisted.description);
-        AboutUs.setText(shortlisted.aboutUs);
+        mEtName.setText(shortlisted.branchName);
+        mEtReviewCount.setText("(" + shortlisted.countRating + ")");
+        mEtCuisine.setText(shortlisted.tags);
+        mEtAddress.setText(shortlisted.branchAddress);
+        mEtPostal.setText(shortlisted.branchPostalCode);
+        mEtDescription.setText(shortlisted.description);
+        mEtAboutUs.setText(shortlisted.aboutUs);
         mRatingBar.setRating(Float.parseFloat(shortlisted.avgRating.trim()));
 
         if (shortlisted.type.trim().toLowerCase().equals("1")) {      // 1 = veg
 
-            Veg.setVisibility(View.VISIBLE);
-            NonVeg.setVisibility(View.GONE);
+            mImgVeg.setVisibility(View.VISIBLE);
+            mImgNonVeg.setVisibility(View.GONE);
         } else if (shortlisted.type.toLowerCase().equals("2")) {      // 2 = non veg.
 
-            Veg.setVisibility(View.GONE);
-            NonVeg.setVisibility(View.VISIBLE);
+            mImgVeg.setVisibility(View.GONE);
+            mImgNonVeg.setVisibility(View.VISIBLE);
         } else {                                                      // else = both
 
-            Veg.setVisibility(View.VISIBLE);
-            NonVeg.setVisibility(View.VISIBLE);
+            mImgVeg.setVisibility(View.VISIBLE);
+            mImgNonVeg.setVisibility(View.VISIBLE);
         }
 
         try {
 
-            Picasso.with(this).load(shortlisted.profileIcon.trim()).into(Profile);
+            Picasso.with(this).load(shortlisted.profileIcon.trim()).into(mImgProfile);
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Failed loading profile image", Toast.LENGTH_SHORT).show();
@@ -182,13 +180,13 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     public void showRestaurantBranchProfile() {
         Restaurant restaurant = getIntent().getParcelableExtra("data");
 
-        Name.setText(restaurant.branchName);
-        ReviewCount.setText("(" + restaurant.countRating + ")");
-        Cuizine.setText(restaurant.tags);
-        Address.setText(restaurant.branchAddress);
-        Postal.setText(restaurant.branchPostalCode);
-        Description.setText(restaurant.description);
-        AboutUs.setText(restaurant.aboutUs);
+        mEtName.setText(restaurant.branchName);
+        mEtReviewCount.setText("(" + restaurant.countRating + ")");
+        mEtCuisine.setText(restaurant.tags);
+        mEtAddress.setText(restaurant.branchAddress);
+        mEtPostal.setText(restaurant.branchPostalCode);
+        mEtDescription.setText(restaurant.description);
+        mEtAboutUs.setText(restaurant.aboutUs);
         mRatingBar.setRating(Float.parseFloat(restaurant.avgRating.trim()));
 
         /**
@@ -196,16 +194,16 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
          */
         if (restaurant.type.trim().toLowerCase().equals("1")) {     // veg = 1.
 
-            Veg.setVisibility(View.VISIBLE);
-            NonVeg.setVisibility(View.GONE);
+            mImgVeg.setVisibility(View.VISIBLE);
+            mImgNonVeg.setVisibility(View.GONE);
         } else if (restaurant.type.toLowerCase().equals("2")) {     // nonveg = 2.
 
-            Veg.setVisibility(View.GONE);
-            NonVeg.setVisibility(View.VISIBLE);
+            mImgVeg.setVisibility(View.GONE);
+            mImgNonVeg.setVisibility(View.VISIBLE);
         } else {                                                    // else = any (both).
 
-            Veg.setVisibility(View.VISIBLE);
-            NonVeg.setVisibility(View.VISIBLE);
+            mImgVeg.setVisibility(View.VISIBLE);
+            mImgNonVeg.setVisibility(View.VISIBLE);
         }
     }
 
@@ -246,26 +244,42 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
 
     /**
      * @param view
-     * @param coordinates
+     * @param branch_id
      * @method mapClicked
-     * @desc Method to handle logic on map clicked.
+     * @desc Method to show all branch combos.
      */
-    private void mapClicked(View view, String coordinates) {
+    private void comboClicked(View view, String branch_id) {
 
-        Toast.makeText(this, "" + coordinates, Toast.LENGTH_SHORT).show();
+        MODE mode = (MODE) getIntent().getSerializableExtra("mode");
+        if (mode == MODE.SHORTLISTED) {         // show combos with add to cart.
 
-        if (coordinates == null) {
+            Intent intent = new Intent(this, RestaurantComboActivity.class);
+            intent.putExtra("branch_id", branch_id);
+            startActivity(intent);
 
-            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
+        } else {            // show combos grid only.
 
-        } else if (coordinates.trim().isEmpty()) {
+            Intent intent = new Intent(this, RestaurantComboActivity.class);
+            intent.putExtra("branch_id", branch_id);
+            startActivity(intent);
 
-            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
-
-        } else {
-
-            ProfileUtils.mapLocation(this, coordinates);
         }
+
+
+//        Toast.makeText(this, "" + coordinates, Toast.LENGTH_SHORT).show();
+//
+//        if (coordinates == null) {
+//
+//            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
+//
+//        } else if (coordinates.trim().isEmpty()) {
+//
+//            Snackbar.make(view, "Coordinates not present.", Snackbar.LENGTH_SHORT).show();
+//
+//        } else {
+//
+//            ProfileUtils.mapLocation(this, coordinates);
+//        }
     }
 
     /**

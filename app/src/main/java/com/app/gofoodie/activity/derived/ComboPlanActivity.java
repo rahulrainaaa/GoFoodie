@@ -175,7 +175,8 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            finish();
+                            // finish();
+                            sweetAlertDialog.dismissWithAnimation();
                         }
                     })
                     .show();

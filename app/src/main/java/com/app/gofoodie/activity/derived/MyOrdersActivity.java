@@ -51,8 +51,15 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
             if (responseCode != OrderCancellationHandler.RESP_CODE.RESP_SUCCESS) {
 
+                new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Error...")
+                        .setContentText(message)
+                        .show();
+            } else {
+
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
+
             fetchMyOrders(null, null);
         }
     };
@@ -263,15 +270,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
                                 @Override
                                 public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-                                    try {
-
-                                        Toast.makeText(getApplicationContext(), "" + rawObject.getString("statusMessage").trim(), Toast.LENGTH_SHORT).show();
-
-                                    } catch (JSONException jsonExc) {
-
-                                        jsonExc.printStackTrace();
-                                        Toast.makeText(getApplicationContext(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
+                                    Toast.makeText(getApplicationContext(), "Thankyou for reviews", Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override
@@ -319,6 +318,15 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
         MyOrder myOrder = (MyOrder) v.getTag();
 
+        /**
+         * check if the order is accepted then only proceed.
+         */
+        if (!myOrder.status.toLowerCase().trim().equals("accepted")) {
+
+            Toast.makeText(this, "Vacation mode applied already", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         OrderCancellationHandler orderCancellationHandler = new OrderCancellationHandler(this);
         orderCancellationHandler.showCancellationOptions(myOrder, mOrderCancellationListener, 2);
 
@@ -353,9 +361,12 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
         MyOrder order = (MyOrder) view.getTag();
 
+        /**
+         * Check if the order already cancelled.
+         */
         if (!order.status.toLowerCase().trim().equals("accepted")) {
 
-            Toast.makeText(this, "Cannot cancel this order.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Already cancelled", Toast.LENGTH_SHORT).show();
             return;
         }
 
