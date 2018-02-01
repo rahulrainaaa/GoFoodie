@@ -128,7 +128,7 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
     private void showComboInfo(Comboplan comboplan) {
 
         mTxtName.setText(comboplan.getComboName());
-        mTxtComboPrice.setText("AED " + comboplan.getComboPayPrice());
+        mTxtComboPrice.setText(comboplan.getComboPayPrice() + " AED");
         mTxtCuisine.setText(comboplan.getCuisineName());
         mTxtRestaurantName.setText(comboplan.getBranchName());
         mTxtRestaurantAddress.setText(comboplan.getBranchAddress());

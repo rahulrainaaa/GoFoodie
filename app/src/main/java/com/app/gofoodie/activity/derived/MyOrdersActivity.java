@@ -169,7 +169,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
         if (myOrdersResponse.statusCode != 200 || myOrdersResponse.myOrders == null) {
 
-            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+            SweetAlertDialog s = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Oops...")
                     .setContentText(myOrdersResponse.statusMessage.trim())
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -177,8 +177,9 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
                             finish();
                         }
-                    })
-                    .show();
+                    });
+            s.setCancelable(false);
+            s.show();
             return;
         }
 

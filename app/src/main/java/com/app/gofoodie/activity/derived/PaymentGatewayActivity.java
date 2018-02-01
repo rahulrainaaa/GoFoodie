@@ -79,7 +79,7 @@ public class PaymentGatewayActivity extends AppCompatActivity {
 
         txtPlanName.setText(planName);
         txtPlanDetail.setText(planDetail);
-        txtGetPrice.setText("AED " + amount);
+        txtGetPrice.setText(amount + " AED");
         txtDays.setText("Valid upto " + days + " days");
 
     }

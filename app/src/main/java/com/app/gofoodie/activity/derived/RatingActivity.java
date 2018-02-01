@@ -97,7 +97,7 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
      */
     private void showAlertAndClose(int alertType, String title, String content) {
 
-        new SweetAlertDialog(this, alertType)
+        SweetAlertDialog s = new SweetAlertDialog(this, alertType)
                 .setTitleText(title)
                 .setContentText(content)
                 .setConfirmText("Ok")
@@ -108,7 +108,8 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
                         sweetAlertDialog.dismissWithAnimation();
                         finish();
                     }
-                })
-                .show();
+                });
+        s.setCancelable(false);
+        s.show();
     }
 }

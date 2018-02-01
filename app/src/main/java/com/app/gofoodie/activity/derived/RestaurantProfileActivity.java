@@ -205,6 +205,14 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
             mImgVeg.setVisibility(View.VISIBLE);
             mImgNonVeg.setVisibility(View.VISIBLE);
         }
+
+        try {
+
+            Picasso.with(this).load(restaurant.profileIcon.trim()).into(mImgProfile);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed loading profile image", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -215,7 +223,6 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     private void callClicked(View view) {
 
         ProfileUtils.call(this, Constants.ADMIN_PHONE_NUMBER);
-
     }
 
     /**

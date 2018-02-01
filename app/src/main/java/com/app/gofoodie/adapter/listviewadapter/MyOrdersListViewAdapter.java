@@ -71,7 +71,7 @@ public class MyOrdersListViewAdapter extends ArrayAdapter<MyOrder> {
         holder.Date.setText(myOrder.deliveryDate);
         String p_status = myOrder.status.trim().substring(0, 1).toUpperCase() + myOrder.status.trim().substring(1);
         holder.Status.setText(p_status);
-        holder.Price.setText("AED " + myOrder.pricePaid);
+        holder.Price.setText(myOrder.pricePaid + " AED");
 
         return cell;
     }

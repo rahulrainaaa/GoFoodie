@@ -174,8 +174,8 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialog.setTitleText("Place Order");
-        pDialog.setContentText("Total Price: " + mTotalPrice + " AED"
-                + "\n Shipping Price: " + (mTotalPrice - mComboPrice) + "AED"
+        pDialog.setContentText("Total Price: " + mComboPrice + " AED"
+                + "\n Shipping Price: " + (mTotalPrice - mComboPrice) + " AED"
                 + "\nApplied Tax: " + mTaxPrice + " AED"
                 + "\nFinal Price: " + mPayPrice + " AED");
         pDialog.setCancelable(false);

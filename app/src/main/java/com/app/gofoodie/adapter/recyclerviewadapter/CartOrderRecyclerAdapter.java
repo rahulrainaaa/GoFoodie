@@ -62,7 +62,7 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
         holder.txtDate.setText("" + cartOrder.date);
         float payPrice = Float.valueOf(cartOrder.payPrice.trim());
         float zonePrice = Float.valueOf(cartOrder.zoneShippingCharge.trim());
-        holder.txtPrice.setText("AED " + (payPrice + zonePrice));
+        holder.txtPrice.setText(payPrice + " AED");
 
         if (cartOrder.type.toLowerCase().trim().equals("nonveg")) {
 

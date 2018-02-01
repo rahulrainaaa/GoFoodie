@@ -56,7 +56,7 @@ public class RechargePlanListViewAdapter extends ArrayAdapter<Subscriptionplan> 
 
         holder.txtRechargePlan.setText(plan.name);
         holder.txtRechargeDesc.setText(plan.description);
-        holder.txtRechargePrice.setText("AED " + plan.payAmount);
+        holder.txtRechargePrice.setText(plan.payAmount + " AED");
 
         if (Integer.parseInt(plan.validityDays.trim()) <= 0) {   // Recharge Plan.
 

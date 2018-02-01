@@ -133,16 +133,12 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+            SweetAlertDialog s = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Oops...")
-                    .setContentText(shortlistedRestaurants.statusMessage.trim())
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            finish();
-                        }
-                    })
-                    .show();
+                    .setContentText(shortlistedRestaurants.statusMessage.trim());
+            s.setCancelable(false);
+            s.show();
+
         }
 
     }

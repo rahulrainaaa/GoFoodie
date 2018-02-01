@@ -77,7 +77,7 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
         holder.imgCombo.setTag(comboplan);
         holder.txtComboName.setText(comboplan.getComboName());
         holder.txtTags.setText(comboplan.getCuisineName() != null ? comboplan.getCuisineName() : "");
-        holder.txtPrice.setText("AED " + comboplan.getComboPayPrice());
+        holder.txtPrice.setText(comboplan.getComboPayPrice() + " AED");
 
         try {
 
