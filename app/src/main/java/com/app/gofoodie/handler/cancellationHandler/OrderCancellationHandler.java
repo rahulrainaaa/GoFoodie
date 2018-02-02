@@ -137,12 +137,12 @@ public class OrderCancellationHandler {
                             jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
                             jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim());
                             jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.getProfile().getWalletId().trim());
-                            jsonRequest.put("order_id", myOrder.orderId.trim());
-                            jsonRequest.put("price_paid", myOrder.pricePaid.trim());
-                            jsonRequest.put("order_set_id", myOrder.orderSetId.trim());
-                            jsonRequest.put("branch_id", myOrder.branchId.trim());
+                            jsonRequest.put("order_id", myOrder.getOrderId().trim());
+                            jsonRequest.put("price_paid", myOrder.getPricePaid().trim());
+                            jsonRequest.put("order_set_id", myOrder.getOrderSetId().trim());
+                            jsonRequest.put("branch_id", myOrder.getBranchId().trim());
                             jsonRequest.put("token", mActivity.getSession().getData().getToken());
-                            jsonRequest.put("delivery_date", myOrder.deliveryDate.trim());
+                            jsonRequest.put("delivery_date", myOrder.getDeliveryDate().trim());
 
                             NetworkHandler networkHandler = new NetworkHandler();
                             networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
@@ -209,17 +209,17 @@ public class OrderCancellationHandler {
                     jsonRequest.put("customer_id", mActivity.getSession().getData().getCustomerId());
                     jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.getProfile().getName());
                     jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail());
-                    jsonRequest.put("order_set_id", myOrder.orderSetId);
-                    jsonRequest.put("from_date", myOrder.deliveryDate);
+                    jsonRequest.put("order_set_id", myOrder.getOrderSetId());
+                    jsonRequest.put("from_date", myOrder.getDeliveryDate());
                     Calendar calendar = Calendar.getInstance();
-                    Date date = sdf.parse(myOrder.deliveryDate);
+                    Date date = sdf.parse(myOrder.getDeliveryDate());
                     calendar.setTime(date);
                     calendar.add(Calendar.DATE, days - 1);
                     jsonRequest.put("to_date", sdf.format(calendar.getTime()));
                     jsonRequest.put("comment", "Long term vacation.");
                     jsonRequest.put("token", mActivity.getSession().getData().getToken());
 
-                    Toast.makeText(mActivity, "Applying Long Term Vacation\nFrom: " + myOrder.deliveryDate + "\nTo: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mActivity, "Applying Long Term Vacation\nFrom: " + myOrder.getDeliveryDate() + "\nTo: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
 
                     NetworkHandler networkHandler = new NetworkHandler();
                     networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
@@ -287,17 +287,17 @@ public class OrderCancellationHandler {
                     jsonRequest.put("customer_id", mActivity.getSession().getData().getCustomerId());
                     jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.getProfile().getName());
                     jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail());
-                    jsonRequest.put("order_set_id", myOrder.orderSetId);
-                    jsonRequest.put("from_date", myOrder.deliveryDate);
+                    jsonRequest.put("order_set_id", myOrder.getOrderSetId());
+                    jsonRequest.put("from_date", myOrder.getDeliveryDate());
                     Calendar calendar = Calendar.getInstance();
-                    Date date = sdf.parse(myOrder.deliveryDate);
+                    Date date = sdf.parse(myOrder.getDeliveryDate());
                     calendar.setTime(date);
                     calendar.add(Calendar.DATE, days - 1);
                     jsonRequest.put("to_date", sdf.format(calendar.getTime()));
                     jsonRequest.put("comment", "Short term vacation.");
                     jsonRequest.put("token", mActivity.getSession().getData().getToken());
 
-                    Toast.makeText(mActivity, "Applying Short Term Vacation\nFrom: " + myOrder.deliveryDate + "\nTo: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mActivity, "Applying Short Term Vacation\nFrom: " + myOrder.getDeliveryDate() + "\nTo: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
 
                     NetworkHandler networkHandler = new NetworkHandler();
                     networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
@@ -368,10 +368,10 @@ public class OrderCancellationHandler {
                     jsonRequest.put("customer_id", profile.getCustomerId());
                     jsonRequest.put("customer_name", profile.getName());
                     jsonRequest.put("customer_email", profile.getEmail());
-                    jsonRequest.put("order_set_id", myOrder.orderSetId);
-                    jsonRequest.put("order_id", myOrder.orderId);
-                    jsonRequest.put("from_date", myOrder.deliveryDate);
-                    jsonRequest.put("to_date", myOrder.deliveryDate);
+                    jsonRequest.put("order_set_id", myOrder.getOrderSetId());
+                    jsonRequest.put("order_id", myOrder.getOrderId());
+                    jsonRequest.put("from_date", myOrder.getDeliveryDate());
+                    jsonRequest.put("to_date", myOrder.getDeliveryDate());
                     jsonRequest.put("comment", strReason);
                     jsonRequest.put("token", mActivity.getSession().getData().getToken());
 

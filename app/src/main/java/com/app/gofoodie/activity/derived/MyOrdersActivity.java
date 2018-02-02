@@ -167,11 +167,11 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
         ModelParser parser = new ModelParser();
         MyOrdersResponse myOrdersResponse = (MyOrdersResponse) parser.getModel(json.toString(), MyOrdersResponse.class, null);
 
-        if (myOrdersResponse.statusCode != 200 || myOrdersResponse.myOrders == null) {
+        if (myOrdersResponse.getStatusCode() != 200 || myOrdersResponse.getMyOrders() == null) {
 
             SweetAlertDialog s = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Oops...")
-                    .setContentText(myOrdersResponse.statusMessage.trim())
+                    .setContentText(myOrdersResponse.getStatusMessage().trim())
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -183,7 +183,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
             return;
         }
 
-        mList = (ArrayList<MyOrder>) myOrdersResponse.myOrders;
+        mList = (ArrayList<MyOrder>) myOrdersResponse.getMyOrders();
         mAdapter = new MyOrdersListViewAdapter(this, this, R.layout.item_listview_my_orders, mList);
         mListViewOrders.setAdapter(mAdapter);
 
@@ -219,8 +219,16 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
         View view = getLayoutInflater().inflate(R.layout.rating_bar_layout, null);
         final RatingBar ratingBar = (RatingBar) view.findViewById(R.id.rating_bar);
 
+        try {
+            ratingBar.setRating(Float.parseFloat(order.getRating().trim()));
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle(order.comboname);
+        alertDialog.setTitle(order.getComboname());
         alertDialog.setView(view);
 
         alertDialog.setCancelable(true);
@@ -228,7 +236,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-                        int rating = (int) (ratingBar.getRating());
+                        final int rating = (int) (ratingBar.getRating());
                         String comment = "";
                         switch (rating) {
 
@@ -257,10 +265,10 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
                             JSONObject jsonRequest = new JSONObject();
                             jsonRequest.put("customer_id", getSession().getData().getCustomerId());
                             jsonRequest.put("login_id", getSession().getData().getLoginId());
-                            jsonRequest.put("restaurant_id", order.restaurantId.trim());
-                            jsonRequest.put("branch_id", order.branchId.trim());
-                            jsonRequest.put("combo_id", order.comboId.trim());
-                            jsonRequest.put("order_id", order.orderId.trim());
+                            jsonRequest.put("restaurant_id", order.getRestaurantId().trim());
+                            jsonRequest.put("branch_id", order.getBranchId().trim());
+                            jsonRequest.put("combo_id", order.getComboId().trim());
+                            jsonRequest.put("order_id", order.getOrderId().trim());
                             jsonRequest.put("rating", rating + "");
                             jsonRequest.put("comment", comment);
                             jsonRequest.put("reviewer", CustomerProfileHandler.CUSTOMER.getProfile().getName());
@@ -271,6 +279,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
                                 @Override
                                 public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
+                                    order.setRating("" + rating);
                                     Toast.makeText(getApplicationContext(), "Thank you", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -315,7 +324,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
         /**
          * check if the order is accepted then only proceed.
          */
-        if (!myOrder.status.toLowerCase().trim().equals("accepted")) {
+        if (!myOrder.getStatus().toLowerCase().trim().equals("accepted")) {
 
             Toast.makeText(this, "Vacation mode applied already", Toast.LENGTH_SHORT).show();
             return;
@@ -358,7 +367,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
         /**
          * Check if the order already cancelled.
          */
-        if (!order.status.toLowerCase().trim().equals("accepted")) {
+        if (!order.getStatus().toLowerCase().trim().equals("accepted")) {
 
             Toast.makeText(this, "Already cancelled", Toast.LENGTH_SHORT).show();
             return;

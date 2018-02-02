@@ -74,12 +74,12 @@ public class MyOrdersListViewAdapter extends ArrayAdapter<MyOrder> {
         holder.ibtnDescription.setTag(myOrder);
         holder.ibtnEdit.setTag(myOrder);
 
-        holder.ComboName.setText(myOrder.comboname);
-        holder.Date.setText(myOrder.deliveryDate);
-        String p_status = myOrder.status.trim().substring(0, 1).toUpperCase() + myOrder.status.trim().substring(1);
+        holder.ComboName.setText(myOrder.getComboname());
+        holder.Date.setText(myOrder.getDeliveryDate());
+        String p_status = myOrder.getStatus().trim().substring(0, 1).toUpperCase() + myOrder.getStatus().trim().substring(1);
         holder.Status.setText(p_status);
-        holder.OrderId.setText("#" + myOrder.coId);
-        holder.Price.setText(myOrder.pricePaid + " AED");
+        holder.OrderId.setText("#" + myOrder.getCoId());
+        holder.Price.setText(myOrder.getPricePaid() + " AED");
 
         return cell;
     }

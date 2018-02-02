@@ -1,4 +1,3 @@
-
 package com.app.gofoodie.model.myorders;
 
 import android.os.Parcel;
@@ -10,20 +9,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Model to hold the already placed Combo Orders.
- */
 public class MyOrdersResponse extends BaseModel implements Parcelable {
 
-    @SerializedName("my_orders")
-    @Expose
-    public List<MyOrder> myOrders = null;
-    @SerializedName("statusCode")
-    @Expose
-    public Integer statusCode;
-    @SerializedName("statusMessage")
-    @Expose
-    public String statusMessage;
     public final static Creator<MyOrdersResponse> CREATOR = new Creator<MyOrdersResponse>() {
 
 
@@ -39,6 +26,15 @@ public class MyOrdersResponse extends BaseModel implements Parcelable {
         }
 
     };
+    @SerializedName("my_orders")
+    @Expose
+    private List<MyOrder> myOrders = null;
+    @SerializedName("statusCode")
+    @Expose
+    private Integer statusCode;
+    @SerializedName("statusMessage")
+    @Expose
+    private String statusMessage;
 
     protected MyOrdersResponse(Parcel in) {
         in.readList(this.myOrders, (MyOrder.class.getClassLoader()));
@@ -47,6 +43,30 @@ public class MyOrdersResponse extends BaseModel implements Parcelable {
     }
 
     public MyOrdersResponse() {
+    }
+
+    public List<MyOrder> getMyOrders() {
+        return myOrders;
+    }
+
+    public void setMyOrders(List<MyOrder> myOrders) {
+        this.myOrders = myOrders;
+    }
+
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public String getStatusMessage() {
+        return statusMessage;
+    }
+
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
     }
 
     public void writeToParcel(Parcel dest, int flags) {

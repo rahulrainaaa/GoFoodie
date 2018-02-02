@@ -1,33 +1,20 @@
-
 package com.app.gofoodie.model.myorders;
 
-import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ItemDetail implements Parcelable
-{
+import java.util.List;
 
-    @SerializedName("options")
-    @Expose
-    public List<String> options = null;
-    @SerializedName("name")
-    @Expose
-    public String name;
-    @SerializedName("value")
-    @Expose
-    public String value;
-    @SerializedName("item_id")
-    @Expose
-    public String itemId;
+public class ItemDetail implements Parcelable {
+
     public final static Creator<ItemDetail> CREATOR = new Creator<ItemDetail>() {
 
 
         @SuppressWarnings({
-            "unchecked"
+                "unchecked"
         })
         public ItemDetail createFromParcel(Parcel in) {
             return new ItemDetail(in);
@@ -37,8 +24,19 @@ public class ItemDetail implements Parcelable
             return (new ItemDetail[size]);
         }
 
-    }
-    ;
+    };
+    @SerializedName("options")
+    @Expose
+    private List<String> options = null;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("value")
+    @Expose
+    private String value;
+    @SerializedName("item_id")
+    @Expose
+    private String itemId;
 
     protected ItemDetail(Parcel in) {
         in.readList(this.options, (String.class.getClassLoader()));
@@ -50,6 +48,38 @@ public class ItemDetail implements Parcelable
     public ItemDetail() {
     }
 
+    public List<String> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<String> options) {
+        this.options = options;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeList(options);
         dest.writeValue(name);
@@ -58,7 +88,7 @@ public class ItemDetail implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }
