@@ -271,7 +271,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
                                 @Override
                                 public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-                                    Toast.makeText(getApplicationContext(), "Thankyou for reviews", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Thank you", Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override
@@ -292,14 +292,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
                         dialog.dismiss();
                     }
                 });
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Rate", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.dismiss();
-            }
-        });
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Rate", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Dismiss", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 

@@ -57,7 +57,7 @@ public class WalletTransactionListViewAdapter extends ArrayAdapter<WalletTransac
         holder.txtTransactionId.setText("Invoice ID: " + transaction.getWalletTransactionId());
         holder.txtDate.setText(transaction.getDatetime());
         holder.txtReviews.setText(transaction.getRemarks());
-        holder.txtPrice.setText(transaction.getAmount());
+        holder.txtPrice.setText(transaction.getAmount() + " AED");
 
         if (transaction.getType().contains("credit")) {
 

@@ -23,16 +23,6 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
     private ArrayList<PaymentTransaction> mListData = null;
     private int mLayoutResourceId;
 
-    private static class Holder {
-
-        public ImageView imgType = null;
-        public TextView txtTransactionId = null;
-        public TextView txtDate = null;
-        public TextView txtReviews = null;
-        public TextView txtPrice = null;
-        public int tag = -1;
-    }
-
     public PaymentTransactionListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<PaymentTransaction> list) {
 
         super(activity, resource, list);
@@ -65,10 +55,20 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
         holder.txtTransactionId.setText("Ref ID: " + transaction.getPgTransactionId());
         holder.txtDate.setText(transaction.getDatetime());
         holder.txtReviews.setText(String.valueOf(transaction.getRemarks()));
-        holder.txtPrice.setText(transaction.getPaidAmount());
+        holder.txtPrice.setText(transaction.getPaidAmount() + " AED");
 
         holder.imgType.setImageResource(R.drawable.icon_receive);
 
         return cell;
+    }
+
+    private static class Holder {
+
+        public ImageView imgType = null;
+        public TextView txtTransactionId = null;
+        public TextView txtDate = null;
+        public TextView txtReviews = null;
+        public TextView txtPrice = null;
+        public int tag = -1;
     }
 }

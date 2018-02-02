@@ -95,7 +95,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     public void onResume() {
         super.onResume();
 
-        mTxtWalletAmount.setText("AED " + CustomerProfileHandler.CUSTOMER.getProfile().getAmount());
+        mTxtWalletAmount.setText(CustomerProfileHandler.CUSTOMER.getProfile().getAmount() + " AED");
         mTxtValidUpto.setText("Subscription till: " + CustomerProfileHandler.CUSTOMER.getProfile().getValidUpto());
         String url = Network.URL_GET_TRANSACTION + "?customerLoginId=" + getSession().getData().getLoginId();
         NetworkHandler networkHandler = new NetworkHandler();

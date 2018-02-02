@@ -15,10 +15,16 @@ import com.app.gofoodie.model.myorders.MyOrder;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter class to bind with list view.
+ */
 public class MyOrdersListViewAdapter extends ArrayAdapter<MyOrder> {
 
     public static final String TAG = "MyOrdersListViewAdapter";
 
+    /**
+     * private class data member(s).
+     */
     private Activity mActivity = null;
     private ArrayList<MyOrder> mList = null;
     private int mLayoutResourceId;
@@ -49,6 +55,7 @@ public class MyOrdersListViewAdapter extends ArrayAdapter<MyOrder> {
             holder.Price = (TextView) cell.findViewById(R.id.txt_price);
             holder.Date = (TextView) cell.findViewById(R.id.txt_date);
             holder.Status = (TextView) cell.findViewById(R.id.txt_status);
+            holder.OrderId = (TextView) cell.findViewById(R.id.txt_order_id);
 
             holder.ibtnRate = (ImageButton) cell.findViewById(R.id.add_rating);
             holder.ibtnDescription = (ImageButton) cell.findViewById(R.id.show_desc);
@@ -71,17 +78,22 @@ public class MyOrdersListViewAdapter extends ArrayAdapter<MyOrder> {
         holder.Date.setText(myOrder.deliveryDate);
         String p_status = myOrder.status.trim().substring(0, 1).toUpperCase() + myOrder.status.trim().substring(1);
         holder.Status.setText(p_status);
+        holder.OrderId.setText("#" + myOrder.coId);
         holder.Price.setText(myOrder.pricePaid + " AED");
 
         return cell;
     }
 
+    /**
+     * Holder class for the ListView items.
+     */
     private static class Holder {
 
         public TextView ComboName = null;
         public TextView Date = null;
         public TextView Price = null;
         public TextView Status = null;
+        public TextView OrderId = null;
 
         public ImageButton ibtnRate = null;
         public ImageButton ibtnDescription = null;
