@@ -75,7 +75,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
         mListView = (ListView) view.findViewById(R.id.list_view_cart_items);
         mTxtLabel = (TextView) view.findViewById(R.id.txt_label);
         btnProceed = (Button) view.findViewById(R.id.btn_proceed);
-
+//        btnProceed.setCompoundDrawables(null, null, getResources().getDrawable(R.drawable.icon_cart_proceed), null);
         btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
