@@ -321,12 +321,13 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
         MyOrder myOrder = (MyOrder) v.getTag();
 
+        String status = "Order status is already " + myOrder.getStatus();
         /**
          * check if the order is accepted then only proceed.
          */
         if (!myOrder.getStatus().toLowerCase().trim().equals("accepted")) {
 
-            Toast.makeText(this, "Vacation mode applied already", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, status.trim(), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -364,12 +365,13 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
         MyOrder order = (MyOrder) view.getTag();
 
+        String status = "Status is already " + order.getStatus();
         /**
          * Check if the order already cancelled.
          */
         if (!order.getStatus().toLowerCase().trim().equals("accepted")) {
 
-            Toast.makeText(this, "Already cancelled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, status.trim(), Toast.LENGTH_SHORT).show();
             return;
         }
 

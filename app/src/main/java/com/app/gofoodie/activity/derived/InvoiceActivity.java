@@ -32,7 +32,6 @@ public class InvoiceActivity extends BaseAppCompatActivity {
     /**
      * {@link BaseAppCompatActivity} activity lifecycle callback method(s).
      */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +54,7 @@ public class InvoiceActivity extends BaseAppCompatActivity {
         btnDone = (Button) findViewById(R.id.btn_done);
 
         txtOrderId.setText("OrderID: " + order.getOrderSetId());
-        txtPaidPrice.setText("Paid AED " + order.getPricePaid());
+        txtPaidPrice.setText("Paid " + order.getPricePaid() + " AED");
         txtDate.setText("From: " + order.getStartDate() + "\nTill: " + order.getEndDate());
         txtTotalOrders.setText(order.getOrderCount() + " Orders placed");
 
