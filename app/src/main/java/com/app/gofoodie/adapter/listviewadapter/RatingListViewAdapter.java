@@ -50,7 +50,6 @@ public class RatingListViewAdapter extends ArrayAdapter<Review> {
             holder = new Holder();
 
             holder.ratingBar = (RatingBar) cell.findViewById(R.id.rating_bar);
-            holder.ratingBar.setEnabled(false);
             holder.Name = (TextView) cell.findViewById(R.id.name);
             holder.Review = (TextView) cell.findViewById(R.id.review);
 

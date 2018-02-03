@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#F6333A</color>
     <color name="colorPrimaryDark">#F6333A</color>
     <color name="colorAccent">#F6333A</color>
@@ -13,9 +14,11 @@
     <color name="selectedCellYellow">#F9E899</color>
     <color name="colorGreen">#59993c</color>
 
-    <color name="colorTextName">#4e4e4e</color>
+    <color name="colorTextName">#3e3e3e</color>
     <color name="colorBlack">#000000</color>
 
     <color name="black_overlay">#66000000</color>
     <color name="test_color">#A5DC86</color>
+    <color name="background_material_dark">#d82222</color>
+
 </resources>

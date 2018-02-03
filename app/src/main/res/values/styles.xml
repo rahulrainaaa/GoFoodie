@@ -20,9 +20,12 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="RatingBar" parent="Theme.AppCompat">
+    <style name="RatingBar" parent="Widget.AppCompat.RatingBar">
         <item name="colorControlNormal">@color/colorLight</item>
-        <item name="colorControlActivated">@color/yellow</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+
     </style>
 
     <style name="FullscreenTheme" parent="AppTheme">
@@ -36,5 +39,6 @@
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
+
 
 </resources>

@@ -73,7 +73,6 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
             holder.BtnCellType = (Button) cell.findViewById(R.id.ibtn_remove);
             holder.BtnView = (Button) cell.findViewById(R.id.ibtn_view);
 
-            holder.ratingBar.setEnabled(false);
 
             cell.setTag(holder);
         } else {

@@ -71,7 +71,6 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
             holder.iBtnCellType = (Button) cell.findViewById(R.id.ibtn_remove);
             holder.iBtnView = (Button) cell.findViewById(R.id.ibtn_view);
 
-            holder.ratingBar.setEnabled(false);
             cell.setTag(holder);
         } else {
 

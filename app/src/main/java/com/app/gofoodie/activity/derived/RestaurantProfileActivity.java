@@ -19,6 +19,8 @@ import com.app.gofoodie.model.shortlisted.Shortlisted;
 import com.app.gofoodie.utility.ProfileUtils;
 import com.squareup.picasso.Picasso;
 
+import me.zhanghai.android.materialratingbar.MaterialRatingBar;
+
 /**
  * @class RestaurantProfileActivity
  * @desc Activity class to simply show restaurant profile details given in the model class.
@@ -37,7 +39,7 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     private TextView mEtPostal = null;
     private TextView mEtDescription = null;
     private TextView mEtAboutUs = null;
-    private RatingBar mRatingBar = null;
+    private MaterialRatingBar mRatingBar = null;
     private ImageView mImgVeg = null;
     private ImageView mImgNonVeg = null;
     private ImageView mImgProfile = null;
@@ -61,8 +63,7 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         mEtDescription = (TextView) findViewById(R.id.txt_description);
         mEtAboutUs = (TextView) findViewById(R.id.txt_about_us);
 
-        mRatingBar = (RatingBar) findViewById(R.id.rating_bar);
-        mRatingBar.setEnabled(false);
+        mRatingBar = (MaterialRatingBar) findViewById(R.id.rating_bar);
 
         mImgVeg = (ImageView) findViewById(R.id.img_veg);
         mImgNonVeg = (ImageView) findViewById(R.id.img_nonveg);

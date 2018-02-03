@@ -26,6 +26,8 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import me.zhanghai.android.materialratingbar.MaterialRatingBar;
+
 /**
  * Activity class to show the description info of a single restaurant branch with given branch_id.
  */
@@ -44,7 +46,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
     private TextView Description = null;
     private TextView AboutUs = null;
 
-    private RatingBar mRatingBar = null;
+    private MaterialRatingBar mRatingBar = null;
 
     private ImageView Veg = null;
     private ImageView NonVeg = null;
@@ -70,8 +72,8 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
         Description = (TextView) findViewById(R.id.txt_description);
         AboutUs = (TextView) findViewById(R.id.txt_about_us);
 
-        mRatingBar = (RatingBar) findViewById(R.id.rating_bar);
-        mRatingBar.setEnabled(false);
+        mRatingBar = (MaterialRatingBar) findViewById(R.id.rating_bar);
+
         Veg = (ImageView) findViewById(R.id.img_veg);
         NonVeg = (ImageView) findViewById(R.id.img_nonveg);
         Profile = (ImageView) findViewById(R.id.img_profile);
@@ -175,6 +177,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
         Description.setText(restaurant.getDescription());
         AboutUs.setText(restaurant.getAboutUs().getAboutus());
         mRatingBar.setRating(Float.parseFloat(restaurant.getAvgRating()));
+
 
         /**
          * Check they type of restaurant branch.

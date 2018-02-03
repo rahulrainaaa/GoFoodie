@@ -11,7 +11,6 @@ import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.maksim88.passwordedittext.PasswordEditText;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,9 +68,23 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
         String strNewPassword = mEtOldPassword.getText().toString().trim();
         String strCfmNewPassword = mEtOldPassword.getText().toString().trim();
 
-        if (!strNewPassword.equals(strCfmNewPassword.toString())) {
+        if (strNewPassword.isEmpty()) {
 
-            mEtCfmNewPassword.setError("Conform New password not matching");
+            mEtNewPassword.setError("New password cannot be empty");
+            mEtCfmNewPassword.setError(null);
+            mEtOldPassword.setError(null);
+            return;
+        } else if (!strNewPassword.equals(strCfmNewPassword.toString())) {
+
+            mEtCfmNewPassword.setError("Confirm New password not matching");
+            mEtNewPassword.setError(null);
+            mEtOldPassword.setError(null);
+            return;
+        } else if (strOldPassword.isEmpty()) {
+
+            mEtOldPassword.setError("Old Password cannot be empty");
+            mEtCfmNewPassword.setError(null);
+            mEtNewPassword.setError(null);
             return;
         }
 
@@ -80,6 +93,7 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
             jsonChangePasswordRequest.put("email", getSession().getData().getEmail());
             jsonChangePasswordRequest.put("login_id", getSession().getData().getLoginId());
             jsonChangePasswordRequest.put("newPwd", "" + strNewPassword);
+            jsonChangePasswordRequest.put("oldPwd", "" + strOldPassword);
             jsonChangePasswordRequest.put("token", getSession().getData().getToken());
             NetworkHandler networkHandler = new NetworkHandler();
             networkHandler.httpCreate(1, this, this, jsonChangePasswordRequest, Network.URL_CHANGE_PASSWORD, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
@@ -99,7 +113,6 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
         getProgressDialog().hide();
-        Toast.makeText(this, "Network Success: " + rawObject.toString(), Toast.LENGTH_SHORT).show();
         if (requestCode == 1) {
 
             changePasswordResponseHandler(rawObject);
@@ -128,7 +141,6 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
 
             int statusCode = raw.getInt("statusCode");
             String statusMessage = raw.getString("statusMessage");
-            Toast.makeText(this, statusCode + " # " + statusMessage, Toast.LENGTH_SHORT).show();
             if (statusCode == 200) {
 
                 Toast.makeText(this, "Successfully changed password", Toast.LENGTH_SHORT).show();
