@@ -10,6 +10,7 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.maksim88.passwordedittext.PasswordEditText;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONArray;
@@ -26,18 +27,18 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
     /**
      * class private data member(s).
      */
-    private MaterialEditText mEtOldPassword = null;
-    private MaterialEditText mEtNewPassword = null;
-    private MaterialEditText mEtCfmNewPassword = null;
+    private PasswordEditText mEtOldPassword = null;
+    private PasswordEditText mEtNewPassword = null;
+    private PasswordEditText mEtCfmNewPassword = null;
     private Button mBtnChangePassword = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        mEtOldPassword = (MaterialEditText) findViewById(R.id.et_old_password);
-        mEtNewPassword = (MaterialEditText) findViewById(R.id.et_new_password);
-        mEtCfmNewPassword = (MaterialEditText) findViewById(R.id.et_cfm_new_password);
+        mEtOldPassword = (PasswordEditText) findViewById(R.id.et_old_password);
+        mEtNewPassword = (PasswordEditText) findViewById(R.id.et_new_password);
+        mEtCfmNewPassword = (PasswordEditText) findViewById(R.id.et_cfm_new_password);
         mBtnChangePassword = (Button) findViewById(R.id.btn_change_password);
         mBtnChangePassword.setOnClickListener(this);
 

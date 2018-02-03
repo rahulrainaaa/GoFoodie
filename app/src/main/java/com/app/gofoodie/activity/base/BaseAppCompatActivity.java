@@ -17,8 +17,7 @@ import com.app.gofoodie.utility.SessionUtils;
 import java.lang.reflect.Field;
 
 /**
- * @class BaseAppCompatActivity
- * @desc {@link AppCompatActivity} Base class for application customization.
+ * {@link AppCompatActivity} Base class for application customization.
  */
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
 

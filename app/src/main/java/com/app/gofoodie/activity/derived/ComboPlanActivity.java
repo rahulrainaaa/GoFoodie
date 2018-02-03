@@ -118,7 +118,6 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
         String cuisinePref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_CUISINE_KEY, "");
         String typePref = CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).getString(CacheUtils.PREF_MEAL_TYPE_KEY, "");
 
-
         String mealPreference = "&cuisine=" + cuisinePref + "&combo_type=" + typePref;
 
         String branchId = getIntent().getStringExtra("branch_id");
@@ -188,7 +187,6 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
             mAdapter = new ComboPlanGridAdapter(this, this, R.layout.item_gridview_combo_plan, mComboPlanList);
             mComboGridView.setAdapter(mAdapter);
         }
-
     }
 
     /**
@@ -223,7 +221,6 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
             jsonExc.printStackTrace();
 
         }
-
     }
 
     /**
@@ -240,14 +237,13 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
                 break;
             case R.id.image_combo:
 
-
+                showComboDescription(view);
                 break;
             case R.id.btn_view_cart:
 
                 btnViewCartClicked(view);
                 break;
         }
-
     }
 
     /**
@@ -313,4 +309,16 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
         finish();
     }
 
+    /**
+     * Method to show the combo description.
+     *
+     * @param view
+     */
+    public void showComboDescription(View view) {
+
+        Comboplan comboplan = (Comboplan) view.getTag();
+        Intent intent = new Intent(this, ComboDescriptionActivity.class);
+        intent.putExtra("combo_id", comboplan.getComboId().trim());
+        startActivity(intent);
+    }
 }

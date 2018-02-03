@@ -32,11 +32,15 @@ import java.util.Iterator;
 public class LocationActivity extends BaseAppCompatActivity implements AdapterView.OnItemSelectedListener, NetworkCallbackListener {
 
     public final String TAG = "LocationActivity";
+
+    /**
+     * Class public data member(s).
+     */
     public CountryResponse mCountryListResponse = null;
     public CityResponse mCityResponse = null;
     public AreaResponse mAreaResponse = null;
     /**
-     * Class private data members.
+     * Class private data member(s).
      */
     private Spinner mSpCountry, mSpCity, mSpArea;
     private ArrayAdapter<String> mCountryAdapter, mCityAdapter, mAreaAdapter;

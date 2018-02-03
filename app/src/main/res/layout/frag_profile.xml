@@ -88,13 +88,24 @@
                 android:textAllCaps="false" />
 
             <Button
+                android:id="@+id/btn_address_change_request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/profile_btn_outline"
+                android:drawableRight="@drawable/icon_nav_next_black"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Address Change Request"
+                android:textAllCaps="false" />
+
+            <Button
                 android:id="@+id/btn_preference"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_btn_outline"
                 android:drawableRight="@drawable/icon_nav_next_black"
                 android:gravity="center_vertical"
-                android:onClick="onClickPreferences"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text="Week Preference"

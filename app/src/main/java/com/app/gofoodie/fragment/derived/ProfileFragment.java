@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
+import com.app.gofoodie.activity.derived.AddressChangeRequestActivity;
 import com.app.gofoodie.activity.derived.ChangePasswordActivity;
 import com.app.gofoodie.activity.derived.MyOrdersActivity;
 import com.app.gofoodie.activity.derived.ShortlistedRestaurantsActivity;
@@ -52,6 +53,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
         view.findViewById(R.id.btn_my_profile).setOnClickListener(this);
         view.findViewById(R.id.btn_my_orders).setOnClickListener(this);
+        view.findViewById(R.id.btn_address_change_request).setOnClickListener(this);
         view.findViewById(R.id.btn_preference).setOnClickListener(this);
         view.findViewById(R.id.btn_shortlisted_restaurants).setOnClickListener(this);
         view.findViewById(R.id.btn_change_password).setOnClickListener(this);
@@ -116,6 +118,10 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
                 btnMyOrdersClicked(view);
                 break;
+            case R.id.btn_address_change_request:
+
+                btnAddressChangeRequest(view);
+                break;
             case R.id.btn_preference:
 
                 btnMyPreferencesClicked(view);
@@ -151,6 +157,11 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
         startActivity(new Intent(getActivity(), MyOrdersActivity.class));
         //getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.MY_ORDERS);
+    }
+
+    private void btnAddressChangeRequest(View view) {
+
+        startActivity(new Intent(getActivity(), AddressChangeRequestActivity.class));
     }
 
     private void btnMyPreferencesClicked(View view) {

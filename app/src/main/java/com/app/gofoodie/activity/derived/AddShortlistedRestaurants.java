@@ -19,6 +19,7 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.listviewadapter.RestaurantListViewAdapter;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
+import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.restaurant.Restaurant;
 import com.app.gofoodie.model.restaurant.RestaurantResponse;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
@@ -57,7 +58,6 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
 
         mListView = (ListView) findViewById(R.id.list_view);
         mListView.setOnItemClickListener(this);
-
     }
 
     @Override
@@ -175,8 +175,8 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
         /**
          * Fetch the location preferences.
          */
-        String location_id = LocationUtils.getInstance().getLocationId(this, "");
-        String location_name = LocationUtils.getInstance().getLocationName(this, "");
+        String location_id = LocationUtils.getInstance().getLocationId(this, CustomerProfileHandler.CUSTOMER.getProfile().getArea().trim());
+        String location_name = LocationUtils.getInstance().getLocationName(this, CustomerProfileHandler.CUSTOMER.getProfile().getName().trim());
 
         if (location_id.trim().isEmpty()) {
 

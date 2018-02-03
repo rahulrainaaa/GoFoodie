@@ -99,18 +99,21 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         //String coordinates = "";
         String branchId = "";
         MODE mode = (MODE) getIntent().getSerializableExtra("mode");
+
         if (mode == MODE.SHORTLISTED) {
 
             Shortlisted shortlisted = getIntent().getParcelableExtra("data");
             email = shortlisted.branchEmail.trim();
             //coordinates = shortlisted.branchGeoLat + "," + shortlisted.branchGeoLng;
             branchId = shortlisted.branchId.trim();
+
         } else if (mode == MODE.REST_BRANCH) {
 
             Restaurant restaurant = getIntent().getParcelableExtra("data");
             email = restaurant.branchEmail;
             //coordinates = restaurant.geoLat + "," + restaurant.geoLng;
             branchId = restaurant.branchId.trim();
+
         }
         switch (view.getId()) {
 
