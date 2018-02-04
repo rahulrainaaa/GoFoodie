@@ -44,6 +44,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    dexOptions {
+    }
 }
 
 repositories {
@@ -86,5 +88,4 @@ dependencies {
     implementation 'uk.co.samuelwall:material-tap-target-prompt:2.6.0'
     implementation 'com.maksim88:PasswordEditText:v0.9'
     implementation 'me.zhanghai.android.materialratingbar:library:1.2.0'
-
 }
