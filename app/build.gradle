@@ -54,17 +54,17 @@ repositories {
 
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile project(':telrlibrary-release')
-    compile('org.simpleframework:simple-xml:2.7.1', {
+    implementation project(':telrlibrary-release')
+    implementation('org.simpleframework:simple-xml:2.7.1', {
         exclude group: 'stax', module: 'stax'
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'xpp3', module: 'xpp3'
     })
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
     implementation project(':library')
     implementation 'com.android.support:support-v13:27.0.2'
     implementation 'com.android.support:customtabs:27.0.2'

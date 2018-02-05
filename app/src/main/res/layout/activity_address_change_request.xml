@@ -22,7 +22,8 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="13dp"
         android:background="@drawable/border_red_curve"
-        android:gravity="center|left" />
+        android:gravity="center|left"
+        android:spinnerMode="dialog" />
 
     <EditText
         android:id="@+id/et_new_address"
@@ -34,8 +35,8 @@
         android:background="@drawable/border_red_curve"
         android:gravity="left|top"
         android:hint="New Address Here..."
+        android:maxLines="4"
         android:padding="4dp"
-        android:singleLine="true"
         android:textColorHint="#acacac"
         android:textSize="14sp" />
 
@@ -47,10 +48,10 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_login_btn"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
         android:text="Request Change"
         android:textColor="@color/colorWhite"
-        android:textSize="18sp" />
+        android:textSize="13sp" />
 
 </LinearLayout>

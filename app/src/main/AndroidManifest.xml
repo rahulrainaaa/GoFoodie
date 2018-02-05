@@ -134,7 +134,10 @@
             android:name=".activity.derived.RestaurantComboActivity"
             android:label="@string/combo_plans"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.derived.AddressChangeRequestActivity"></activity>
+        <activity
+            android:name=".activity.derived.AddressChangeRequestActivity"
+            android:label="@string/address_change"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

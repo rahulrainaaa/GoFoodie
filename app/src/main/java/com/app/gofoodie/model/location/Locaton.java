@@ -1,26 +1,18 @@
-
 package com.app.gofoodie.model.location;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Locaton implements Parcelable
-{
+public class Locaton implements Parcelable {
 
-    @SerializedName("area_id")
-    @Expose
-    private String areaId;
-    @SerializedName("area_name")
-    @Expose
-    private String areaName;
     public final static Creator<Locaton> CREATOR = new Creator<Locaton>() {
 
 
         @SuppressWarnings({
-            "unchecked"
+                "unchecked"
         })
         public Locaton createFromParcel(Parcel in) {
             return new Locaton(in);
@@ -30,8 +22,13 @@ public class Locaton implements Parcelable
             return (new Locaton[size]);
         }
 
-    }
-    ;
+    };
+    @SerializedName("area_id")
+    @Expose
+    private String areaId;
+    @SerializedName("area_name")
+    @Expose
+    private String areaName;
 
     protected Locaton(Parcel in) {
         this.areaId = ((String) in.readValue((String.class.getClassLoader())));
@@ -39,6 +36,13 @@ public class Locaton implements Parcelable
     }
 
     public Locaton() {
+    }
+
+    public Locaton(String id, String name) {
+
+        this.areaId = id;
+        this.areaName = name;
+
     }
 
     public String getAreaId() {
@@ -63,7 +67,7 @@ public class Locaton implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }
