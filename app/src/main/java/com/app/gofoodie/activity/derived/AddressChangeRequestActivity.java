@@ -116,7 +116,7 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
 
             if (statusCode == 200) {
 
-                Toast.makeText(this, statusMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Request placed successfully", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
 
