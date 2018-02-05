@@ -196,7 +196,7 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
             jsonObject.put("current_area", oldLocationId.trim());
             jsonObject.put("current_address", oldAddress.trim());
             jsonObject.put("newarea", newLocationId.trim());
-            jsonObject.put("newaddress", newAddress.trim());
+            jsonObject.put("new_address", newAddress.trim());
             jsonObject.put("email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail());
             jsonObject.put("token", getSessionData().getToken());
 
