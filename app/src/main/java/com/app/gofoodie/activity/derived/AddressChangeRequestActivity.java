@@ -192,10 +192,13 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("customer_id", CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim());
+            jsonObject.put("login_id", CustomerProfileHandler.CUSTOMER.getProfile().getLoginId().trim());
             jsonObject.put("current_area", oldLocationId.trim());
             jsonObject.put("current_address", oldAddress.trim());
             jsonObject.put("newarea", newLocationId.trim());
             jsonObject.put("newaddress", newAddress.trim());
+            jsonObject.put("email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail());
+            jsonObject.put("token", getSessionData().getToken());
 
             NetworkHandler networkHandler = new NetworkHandler();
             networkHandler.httpCreate(2, this, this, jsonObject, Network.URL_ADDRESS_CHANGE_REQUEST, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
