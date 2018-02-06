@@ -8,18 +8,16 @@ import android.content.Context;
  */
 public class LocationUtils {
     private static final LocationUtils ourInstance = new LocationUtils();
-
-    public static LocationUtils getInstance() {
-        return ourInstance;
-    }
-
     /**
      * Location preferences key fields.
      */
     public final String KEY_LOCATION_NAME = "KL_NAME";
     public final String KEY_LOCATION_ID = "KL_ID";
-
     private LocationUtils() {
+    }
+
+    public static LocationUtils getInstance() {
+        return ourInstance;
     }
 
     /**

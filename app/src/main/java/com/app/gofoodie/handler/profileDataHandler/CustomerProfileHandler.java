@@ -10,6 +10,7 @@ import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.app.gofoodie.utility.LocationUtils;
 import com.app.gofoodie.utility.SessionUtils;
 
 import org.json.JSONArray;
@@ -114,6 +115,21 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
             ModelParser parser = new ModelParser();
             Customer customer = (Customer) parser.getModel(rawObject.toString(), Customer.class, null);
             CUSTOMER = customer;
+
+            /**
+             * Check of location preference is empty.
+             * Then set customer profile location into preference.
+             */
+            String location_name = LocationUtils.getInstance().getLocationName(mContext, "").trim();
+            String location_id = LocationUtils.getInstance().getLocationId(mContext, "").trim();
+
+            if ((location_name.isEmpty() || location_id.isEmpty()) && customer != null) {
+
+                location_name = CustomerProfileHandler.CUSTOMER.getProfile().getAreaName().trim();
+                location_id = CustomerProfileHandler.CUSTOMER.getProfile().getArea().trim();
+                LocationUtils.getInstance().saveLocation(mContext, location_id.trim(), location_name.trim());
+            }
+
             profileExist = true;
             if (mListener != null) {
 
@@ -127,6 +143,7 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
 
         inProgress = false;
         profileExist = false;
+
         Log.d(TAG, "Http Fail: " + message);
 
         if (mContext != null) {

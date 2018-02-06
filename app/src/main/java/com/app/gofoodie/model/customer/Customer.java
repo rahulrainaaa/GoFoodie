@@ -7,9 +7,6 @@ import com.app.gofoodie.model.base.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Model class to hold the response for getCustomerProfile web API.
- */
 public class Customer extends BaseModel implements Parcelable {
 
     public final static Creator<Customer> CREATOR = new Creator<Customer>() {
@@ -33,6 +30,9 @@ public class Customer extends BaseModel implements Parcelable {
     @SerializedName("cart_count")
     @Expose
     private Integer cartCount;
+    @SerializedName("order_count")
+    @Expose
+    private Integer orderCount;
     @SerializedName("statusCode")
     @Expose
     private Integer statusCode;
@@ -43,6 +43,7 @@ public class Customer extends BaseModel implements Parcelable {
     protected Customer(Parcel in) {
         this.profile = ((Profile) in.readValue((Profile.class.getClassLoader())));
         this.cartCount = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.orderCount = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
     }
@@ -66,6 +67,14 @@ public class Customer extends BaseModel implements Parcelable {
         this.cartCount = cartCount;
     }
 
+    public Integer getOrderCount() {
+        return orderCount;
+    }
+
+    public void setOrderCount(Integer orderCount) {
+        this.orderCount = orderCount;
+    }
+
     public Integer getStatusCode() {
         return statusCode;
     }
@@ -85,6 +94,7 @@ public class Customer extends BaseModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(profile);
         dest.writeValue(cartCount);
+        dest.writeValue(orderCount);
         dest.writeValue(statusCode);
         dest.writeValue(statusMessage);
     }

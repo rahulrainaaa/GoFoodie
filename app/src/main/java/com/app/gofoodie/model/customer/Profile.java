@@ -1,21 +1,34 @@
-
 package com.app.gofoodie.model.customer;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Profile implements Parcelable
-{
+public class Profile implements Parcelable {
 
+    public final static Creator<Profile> CREATOR = new Creator<Profile>() {
+
+
+        @SuppressWarnings({
+                "unchecked"
+        })
+        public Profile createFromParcel(Parcel in) {
+            return new Profile(in);
+        }
+
+        public Profile[] newArray(int size) {
+            return (new Profile[size]);
+        }
+
+    };
     @SerializedName("login_id")
     @Expose
     private String loginId;
     @SerializedName("username")
     @Expose
-    private String username;
+    private Object username;
     @SerializedName("email")
     @Expose
     private String email;
@@ -24,7 +37,7 @@ public class Profile implements Parcelable
     private String phone;
     @SerializedName("salt_key")
     @Expose
-    private String saltKey;
+    private Object saltKey;
     @SerializedName("status")
     @Expose
     private String status;
@@ -100,29 +113,13 @@ public class Profile implements Parcelable
     @SerializedName("area_name")
     @Expose
     private String areaName;
-    public final static Creator<Profile> CREATOR = new Creator<Profile>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Profile createFromParcel(Parcel in) {
-            return new Profile(in);
-        }
-
-        public Profile[] newArray(int size) {
-            return (new Profile[size]);
-        }
-
-    }
-    ;
 
     protected Profile(Parcel in) {
         this.loginId = ((String) in.readValue((String.class.getClassLoader())));
-        this.username = ((String) in.readValue((String.class.getClassLoader())));
+        this.username = ((Object) in.readValue((Object.class.getClassLoader())));
         this.email = ((String) in.readValue((String.class.getClassLoader())));
         this.phone = ((String) in.readValue((String.class.getClassLoader())));
-        this.saltKey = ((String) in.readValue((String.class.getClassLoader())));
+        this.saltKey = ((Object) in.readValue((Object.class.getClassLoader())));
         this.status = ((String) in.readValue((String.class.getClassLoader())));
         this.registerDate = ((String) in.readValue((String.class.getClassLoader())));
         this.modifyDate = ((String) in.readValue((String.class.getClassLoader())));
@@ -161,11 +158,11 @@ public class Profile implements Parcelable
         this.loginId = loginId;
     }
 
-    public String getUsername() {
+    public Object getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(Object username) {
         this.username = username;
     }
 
@@ -185,11 +182,11 @@ public class Profile implements Parcelable
         this.phone = phone;
     }
 
-    public String getSaltKey() {
+    public Object getSaltKey() {
         return saltKey;
     }
 
-    public void setSaltKey(String saltKey) {
+    public void setSaltKey(Object saltKey) {
         this.saltKey = saltKey;
     }
 
@@ -427,7 +424,7 @@ public class Profile implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

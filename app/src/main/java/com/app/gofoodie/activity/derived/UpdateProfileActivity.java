@@ -37,6 +37,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
      */
     private MaterialEditText mEtName, mEtMobile, mEtAltMobile, mEtAltEmail, mEtAddress, mEtLocation;
     private Button mButton = null;
+    private String mLocationName, mLocationId;
 
     /**
      * {@link com.app.gofoodie.activity.base.BaseAppCompatActivity} callback method(s).
@@ -64,13 +65,29 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
             mButton = (Button) findViewById(R.id.btn_update_profile);
             mButton.setOnClickListener(this);
-            mEtLocation.setOnClickListener(this);
+
+            /**
+             * Check if there is not order present.
+             */
+            if (CustomerProfileHandler.CUSTOMER.getOrderCount() == 0) {
+
+                mEtLocation.setOnClickListener(this);
+
+            } else {
+
+                mEtAddress.setClickable(false);
+                mEtLocation.setClickable(false);
+
+                mEtAddress.setFocusable(false);
+                mEtLocation.setFocusable(false);
+
+            }
+
 
         } catch (Exception e) {
 
             Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
-
         }
     }
 
@@ -78,9 +95,28 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
     protected void onResume() {
         super.onResume();
 
-        String location_name = LocationUtils.getInstance().getLocationName(this, "");
-        mEtLocation.setText("" + location_name);
-        if (location_name.trim().isEmpty()) {
+        /**
+         * Check for the customer order count.
+         * Check if there is not order present.
+         */
+        if (CustomerProfileHandler.CUSTOMER.getOrderCount() == 0) {
+
+            mLocationId = LocationUtils.getInstance().getLocationId(this, "");
+            mLocationName = LocationUtils.getInstance().getLocationName(this, "");
+
+        } else {
+
+            mLocationId = CustomerProfileHandler.CUSTOMER.getProfile().getArea().trim();
+            mLocationName = CustomerProfileHandler.CUSTOMER.getProfile().getAreaName().trim();
+
+        }
+
+        mEtLocation.setText("" + mLocationName.trim());
+
+        /**
+         * Get from location preference of not present.
+         */
+        if (mLocationName.trim().isEmpty() || mLocationId.trim().isEmpty()) {
 
             startActivity(new Intent(this, LocationActivity.class));
         }
