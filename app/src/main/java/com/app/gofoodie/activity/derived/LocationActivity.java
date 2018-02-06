@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.model.areaResponse.AreaResponse;
 import com.app.gofoodie.model.cityResponse.CityResponse;
@@ -89,6 +90,7 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
 
                 LocationUtils.getInstance().saveLocation(LocationActivity.this, mAreaLocationDatum.getAreaId(), mAreaLocationDatum.getAreaName());
                 Toast.makeText(LocationActivity.this, "Location Saved", Toast.LENGTH_SHORT).show();
+                GlobalData.applyLocationPref = true;
                 finish();
             }
         });

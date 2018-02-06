@@ -50,8 +50,9 @@ public final class R {
         public static int success_stroke_color = 0x7f06000f;
         public static int sweet_dialog_bg_color = 0x7f060010;
         public static int text_color = 0x7f060011;
-        public static int trans_success_stroke_color = 0x7f060012;
-        public static int warning_stroke_color = 0x7f060013;
+        public static int text_hint_color = 0x7f060012;
+        public static int trans_success_stroke_color = 0x7f060013;
+        public static int warning_stroke_color = 0x7f060014;
     }
     public static final class dimen {
         public static int alert_width = 0x7f080001;

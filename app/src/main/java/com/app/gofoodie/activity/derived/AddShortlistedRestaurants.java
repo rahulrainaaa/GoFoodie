@@ -18,6 +18,7 @@ import com.app.gofoodie.R;
 import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.adapter.listviewadapter.RestaurantListViewAdapter;
 import com.app.gofoodie.global.constants.Network;
+import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.modelHandler.ModelParser;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.model.restaurant.Restaurant;
@@ -58,13 +59,16 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
 
         mListView = (ListView) findViewById(R.id.list_view);
         mListView.setOnItemClickListener(this);
+        GlobalData.applyLocationPref = false;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        fetchRestaurants(null);
+
+        fetchRestaurants(null, GlobalData.applyLocationPref);
+        GlobalData.applyLocationPref = false;
     }
 
     @Override
@@ -115,7 +119,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
             public void onClick(DialogInterface dialog, int which) {
 
                 String search = input.getText().toString();
-                fetchRestaurants(search.trim());
+                fetchRestaurants(search.trim(), false);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -128,7 +132,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                fetchRestaurants("");
+                fetchRestaurants(null, false);
             }
         });
 
@@ -170,7 +174,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
      * @method fetchRestaurants
      * @desc Method to fetch restaurants from API with filter/parameter applied.
      */
-    private void fetchRestaurants(String search) {
+    private void fetchRestaurants(String search, boolean applyLocation) {
 
         /**
          * Fetch the location preferences.
@@ -185,14 +189,29 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
             return;
         }
 
-        /**
-         * Append parameters to url string.
-         */
-        String url = Network.URL_GET_RESTAURANT + "?areas=" + location_id;
+        boolean appended = false;
 
+        String url = Network.URL_GET_RESTAURANT;
+        /**
+         * Check if location filter has to be applied.
+         */
+        if (applyLocation) {
+
+            url = url + "?areas=" + location_id;
+            appended = true;
+        }
+
+        /**
+         * Append keyword parameter to url string.
+         */
         if (search != null) {
 
-            url = url + "&keyword=" + search;
+            if (appended) {
+                url = url + "&";
+            } else {
+                url = url + "?";
+            }
+            url = url + "keyword=" + search;
         }
 
         NetworkHandler networkHandler = new NetworkHandler();

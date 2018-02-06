@@ -1,13 +1,10 @@
 package com.app.gofoodie.activity.derived;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
@@ -24,15 +21,18 @@ import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
+import com.stepstone.apprating.AppRatingDialog;
+import com.stepstone.apprating.listener.RatingDialogListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
-public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCallbackListener, View.OnClickListener {
+public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCallbackListener, View.OnClickListener, RatingDialogListener {
 
     public static final String TAG = "MyOrdersActivity";
 
@@ -42,7 +42,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
     ListView mListViewOrders = null;
     private ArrayList<MyOrder> mList = null;
     private MyOrdersListViewAdapter mAdapter = null;
-
+    private MyOrder reviewMyOrder = null;
     private String mStrFromDate = null;
     private String mStrToDate = null;
     private OrderCancellationListener mOrderCancellationListener = new OrderCancellationListener() {
@@ -214,101 +214,37 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
     private void addRating(View v) {
 
-        final MyOrder order = (MyOrder) v.getTag();
+        reviewMyOrder = (MyOrder) v.getTag();
 
-        View view = getLayoutInflater().inflate(R.layout.rating_bar_layout, null);
-        final RatingBar ratingBar = (RatingBar) view.findViewById(R.id.rating_bar);
+        int defaultRating = 0;
 
         try {
-            ratingBar.setRating(Float.parseFloat(order.getRating().trim()));
-
+            defaultRating = Integer.parseInt(reviewMyOrder.getRating().trim());
         } catch (Exception e) {
-
             e.printStackTrace();
         }
 
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle(order.getComboname());
-        alertDialog.setView(view);
+        new AppRatingDialog.Builder()
+                .setPositiveButtonText("Submit")
+                .setNegativeButtonText("Cancel")
+                .setNeutralButtonText("Later")
+                .setNoteDescriptions(Arrays.asList("Worst", "Poor", "Average", "Good", "Excellent !!!"))
+                .setDefaultRating(defaultRating)
+                .setTitle("Rate Order")
+                .setDescription("Rate It!")
+                .setDefaultComment(reviewMyOrder.getComment().trim() + " ")
+                .setStarColor(R.color.colorPrimary)
+                .setNoteDescriptionTextColor(R.color.text_color)
+                .setTitleTextColor(R.color.colorPrimary)
+                .setDescriptionTextColor(R.color.text_color)
+                .setHint("Your comment...")
+                .setHintTextColor(R.color.text_hint_color)
+                .setCommentTextColor(R.color.text_color)
+                .setCommentBackgroundColor(R.color.colorLittleWhite)
+                .setWindowAnimation(R.anim.modal_in)
+                .create(MyOrdersActivity.this)
+                .show();
 
-        alertDialog.setCancelable(true);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Rate",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        final int rating = (int) (ratingBar.getRating());
-                        String comment = "";
-                        switch (rating) {
-
-                            case 0:
-                                comment = "Worst";
-                                break;
-                            case 1:
-                                comment = "Poor";
-                                break;
-                            case 2:
-                                comment = "Below Average";
-                                break;
-                            case 3:
-                                comment = "Average";
-                                break;
-                            case 4:
-                                comment = "Good";
-                                break;
-                            case 5:
-                                comment = "Excellent";
-                                break;
-                        }
-
-                        try {
-
-                            JSONObject jsonRequest = new JSONObject();
-                            jsonRequest.put("customer_id", getSession().getData().getCustomerId());
-                            jsonRequest.put("login_id", getSession().getData().getLoginId());
-                            jsonRequest.put("restaurant_id", order.getRestaurantId().trim());
-                            jsonRequest.put("branch_id", order.getBranchId().trim());
-                            jsonRequest.put("combo_id", order.getComboId().trim());
-                            jsonRequest.put("order_id", order.getOrderId().trim());
-                            jsonRequest.put("rating", rating + "");
-                            jsonRequest.put("comment", comment);
-                            jsonRequest.put("reviewer", CustomerProfileHandler.CUSTOMER.getProfile().getName());
-                            jsonRequest.put("token", getSession().getData().getToken().trim());
-
-                            NetworkHandler networkHandler = new NetworkHandler();
-                            networkHandler.httpCreate(1, MyOrdersActivity.this, new NetworkCallbackListener() {
-                                @Override
-                                public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
-
-                                    order.setRating("" + rating);
-                                    Toast.makeText(getApplicationContext(), "Thank you", Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void networkFailResponse(int requestCode, String message) {
-
-                                    Toast.makeText(getApplicationContext(), "Http Fail: " + message, Toast.LENGTH_SHORT).show();
-
-                                }
-                            }, jsonRequest, Network.URL_POST_REVIEW, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                            networkHandler.executePost();
-
-                        } catch (JSONException jsonExc) {
-
-                            jsonExc.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Dismiss", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.dismiss();
-            }
-        });
-        alertDialog.show();
 
     }
 
@@ -377,6 +313,59 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
         OrderCancellationHandler orderCancellationHandler = new OrderCancellationHandler(this);
         orderCancellationHandler.showCancellationOptions(order, mOrderCancellationListener, 1);
+
+    }
+
+    @Override
+    public void onPositiveButtonClicked(int rating, String comment) {
+
+        try {
+
+            JSONObject jsonRequest = new JSONObject();
+            jsonRequest.put("customer_id", getSession().getData().getCustomerId());
+            jsonRequest.put("login_id", getSession().getData().getLoginId());
+            jsonRequest.put("restaurant_id", reviewMyOrder.getRestaurantId().trim());
+            jsonRequest.put("branch_id", reviewMyOrder.getBranchId().trim());
+            jsonRequest.put("combo_id", reviewMyOrder.getComboId().trim());
+            jsonRequest.put("order_id", reviewMyOrder.getOrderId().trim());
+            jsonRequest.put("rating", rating + "");
+            jsonRequest.put("comment", comment);
+            jsonRequest.put("reviewer", CustomerProfileHandler.CUSTOMER.getProfile().getName());
+            jsonRequest.put("token", getSession().getData().getToken().trim());
+
+            NetworkHandler networkHandler = new NetworkHandler();
+            networkHandler.httpCreate(1, MyOrdersActivity.this, new NetworkCallbackListener() {
+                @Override
+                public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+                    reviewMyOrder.setRating("" + rating);
+                    reviewMyOrder.setComment("" + comment);
+                    Toast.makeText(getApplicationContext(), "Thank you", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void networkFailResponse(int requestCode, String message) {
+
+                    Toast.makeText(getApplicationContext(), "Http Fail: " + message, Toast.LENGTH_SHORT).show();
+
+                }
+            }, jsonRequest, Network.URL_POST_REVIEW, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+            networkHandler.executePost();
+
+        } catch (JSONException jsonExc) {
+
+            jsonExc.printStackTrace();
+            Toast.makeText(getApplicationContext(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onNegativeButtonClicked() {
+
+    }
+
+    @Override
+    public void onNeutralButtonClicked() {
 
     }
 }

@@ -23,4 +23,6 @@ public class GlobalData {
     public static GoogleApiClient mGoogleApiClient = null;
 
     public static boolean ShowCart = false;
+
+    public static boolean applyLocationPref = false;
 }
