@@ -189,29 +189,18 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
             return;
         }
 
-        boolean appended = false;
-
         String url = Network.URL_GET_RESTAURANT;
         /**
          * Check if location filter has to be applied.
+         * else, Append keyword parameter to url string.
          */
         if (applyLocation) {
 
             url = url + "?areas=" + location_id;
-            appended = true;
-        }
 
-        /**
-         * Append keyword parameter to url string.
-         */
-        if (search != null) {
+        } else if (search != null) {
 
-            if (appended) {
-                url = url + "&";
-            } else {
-                url = url + "?";
-            }
-            url = url + "keyword=" + search;
+            url = url + "?keyword=" + search;
         }
 
         NetworkHandler networkHandler = new NetworkHandler();
