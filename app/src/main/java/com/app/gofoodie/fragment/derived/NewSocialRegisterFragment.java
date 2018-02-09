@@ -44,7 +44,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
     /**
      * Class private data member(s).
      */
-    private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mEtAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtLocationName, mLocationPref;
+    private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mEtAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtLocationName;
     private Button mBtnRegister = null;
     private CheckBox mChkAcceptTerms = null;
     private String locationId = "";
@@ -65,7 +65,6 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
         mEtMobile = (MaterialEditText) view.findViewById(R.id.et_mobile);
         mEtAltMobile = (MaterialEditText) view.findViewById(R.id.et_alt_mobile);
         mEtAddress = (MaterialEditText) view.findViewById(R.id.et_address);
-        mLocationPref = (MaterialEditText) view.findViewById(R.id.et_location_pref);
         mEtLocationName = (MaterialEditText) view.findViewById(R.id.et_location_pref);
         mChkAcceptTerms = (CheckBox) view.findViewById(R.id.chk_agree_terms);
         mBtnRegister = (Button) view.findViewById(R.id.btn_register_new);
@@ -73,7 +72,8 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
         mEtEmail.setText(GlobalData.newSocialEmail.trim());
 
         mBtnRegister.setOnClickListener(this);
-        startActivity(new Intent(getActivity(), LocationActivity.class));
+        mEtLocationName.setOnClickListener(this);
+
         return view;
     }
 
@@ -85,7 +85,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
         locationId = LocationUtils.getInstance().getLocationId(getActivity(), "");
         locationName = LocationUtils.getInstance().getLocationName(getActivity(), "");
 
-        mLocationPref.setText(locationName);
+        mEtLocationName.setText(locationName);
         if (GlobalData.newSocialEmail.trim().isEmpty()) {
 
             mEtEmail.setText(GlobalData.newSocialEmail);
@@ -108,6 +108,11 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             case R.id.btn_register_new:
 
                 registerNewUser();
+                break;
+
+            case R.id.et_location_pref:
+
+                startActivity(new Intent(getActivity(), LocationActivity.class));
                 break;
         }
     }
@@ -137,6 +142,12 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
             isValid = false;
             mEtFirstName.setError(getString(R.string.cannot_be_empty));
+
+        } else if (!Pattern.compile(Constants.REGEX_NAME).matcher(strFirstName).matches()) {
+
+            isValid = false;
+            mEtFirstName.setError(getString(R.string.alpha_allowed));
+
         } else {
 
             isValid = true;
@@ -147,9 +158,15 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
             isValid = false;
             mEtLastName.setError(getString(R.string.cannot_be_empty));
+
+        } else if (!Pattern.compile(Constants.REGEX_NAME).matcher(strLastName).matches()) {
+
+            isValid = false;
+            mEtLastName.setError(getString(R.string.alpha_allowed));
+
         } else {
 
-            isValid = true;
+            isValid = true & isValid;
             mEtLastName.setError(null);
         }
 
@@ -238,10 +255,12 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
         if (strLocationName.isEmpty()) {
 
+            mEtLocationName.setError(getString(R.string.cannot_be_empty));
             isValid = false;
             startActivity(new Intent(getActivity(), LocationActivity.class));
         } else {
 
+            mEtLocationName.setError(null);
             isValid = true && isValid;
             mEtLocationName.setError(null);
         }
@@ -265,7 +284,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
         }
 
 
-        mLocationPref.setText(locationName);
+        mEtLocationName.setText(locationName);
 
         // Check if the customer has selected his location preference.
         if (locationId.isEmpty() || locationName.isEmpty()) {
@@ -286,7 +305,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             jsonNewUserRegisterRequest.put("mobile2", strAltMobile);
             jsonNewUserRegisterRequest.put("email", strEmail);
             jsonNewUserRegisterRequest.put("email2", strAltEmail);
-            jsonNewUserRegisterRequest.put("location", mLocationPref.getText().toString().trim());
+            jsonNewUserRegisterRequest.put("location", mEtLocationName.getText().toString().trim());
             jsonNewUserRegisterRequest.put("location_id", locationId);
             jsonNewUserRegisterRequest.put("geo_lat", "");
             jsonNewUserRegisterRequest.put("geo_lng", "");

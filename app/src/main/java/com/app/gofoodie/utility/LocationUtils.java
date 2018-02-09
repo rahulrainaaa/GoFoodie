@@ -13,6 +13,7 @@ public class LocationUtils {
      */
     public final String KEY_LOCATION_NAME = "KL_NAME";
     public final String KEY_LOCATION_ID = "KL_ID";
+
     private LocationUtils() {
     }
 
@@ -54,6 +55,17 @@ public class LocationUtils {
     public String getLocationName(Context context, String defVal) {
 
         return CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).getString(KEY_LOCATION_NAME, defVal);
+    }
+
+    /**
+     * Method to remove and reset the Location preference cache data.
+     *
+     * @param context
+     */
+    public void resetLocationPref(Context context) {
+
+        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().remove(KEY_LOCATION_ID).commit();
+        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().remove(KEY_LOCATION_NAME).commit();
     }
 
 }

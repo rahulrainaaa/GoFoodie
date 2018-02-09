@@ -73,7 +73,8 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         mBtnRegister = (Button) view.findViewById(R.id.btn_register_new);
 
         mBtnRegister.setOnClickListener(this);
-        startActivity(new Intent(getActivity(), LocationActivity.class));
+        mBtnRegister.setOnClickListener(this);
+        mEtLocationName.setOnClickListener(this);
         return view;
     }
 
@@ -104,6 +105,10 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
                 registerNewUser();
                 break;
+            case R.id.et_location_pref:
+
+                startActivity(new Intent(getActivity(), LocationActivity.class));
+                break;
         }
     }
 
@@ -121,7 +126,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         String strMobile = mEtMobile.getText().toString().trim();
         String strAltMobile = mEtAltMobile.getText().toString().trim();
         String strAddress = mEtAddress.getText().toString().trim();
-        String strCompanyName = mEtLocationName.getText().toString().trim();
+        String strLocationName = mEtLocationName.getText().toString().trim();
         String strPassword = mEtPassword.getText().toString().trim();
         String strConfirmPassword = mEtCfmPassword.getText().toString().trim();
 
@@ -134,6 +139,12 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
             isValid = false;
             mEtFirstName.setError(getString(R.string.cannot_be_empty));
+
+        } else if (!Pattern.compile(Constants.REGEX_NAME).matcher(strFirstName).matches()) {
+
+            isValid = false;
+            mEtFirstName.setError(getString(R.string.alpha_allowed));
+
         } else {
 
             isValid = true;
@@ -144,6 +155,12 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
             isValid = false;
             mEtLastName.setError(getString(R.string.cannot_be_empty));
+
+        } else if (!Pattern.compile(Constants.REGEX_NAME).matcher(strFirstName).matches()) {
+
+            isValid = false;
+            mEtFirstName.setError(getString(R.string.alpha_allowed));
+
         } else {
 
             isValid = isValid & true;
@@ -233,12 +250,14 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             mEtAddress.setError(null);
         }
 
-        if (strCompanyName.isEmpty()) {
+        if (strLocationName.isEmpty()) {
 
             isValid = false;
+            mEtLocationName.setError(getString(R.string.cannot_be_empty));
             startActivity(new Intent(getActivity(), LocationActivity.class));
         } else {
 
+            mEtLocationName.setError(null);
             isValid = true && isValid;
             mEtLocationName.setError(null);
         }
@@ -301,7 +320,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
             jsonNewUserRegisterRequest.put("name", strFirstName + " " + strLastName);
             jsonNewUserRegisterRequest.put("address", strAddress);
-            jsonNewUserRegisterRequest.put("company_name", strCompanyName);
+            jsonNewUserRegisterRequest.put("company_name", strLocationName);
             jsonNewUserRegisterRequest.put("social_login", "no");
             jsonNewUserRegisterRequest.put("mobile", strMobile);
             jsonNewUserRegisterRequest.put("mobile2", strAltMobile);

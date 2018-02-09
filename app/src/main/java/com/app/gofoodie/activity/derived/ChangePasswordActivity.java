@@ -11,6 +11,7 @@ import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.maksim88.passwordedittext.PasswordEditText;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,27 +66,24 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
     private void changePassword() {
 
         String strOldPassword = mEtOldPassword.getText().toString().trim();
-        String strNewPassword = mEtOldPassword.getText().toString().trim();
-        String strCfmNewPassword = mEtOldPassword.getText().toString().trim();
+        String strNewPassword = mEtNewPassword.getText().toString().trim();
+        String strCfmNewPassword = mEtCfmNewPassword.getText().toString().trim();
 
-        if (strNewPassword.isEmpty()) {
+        if (strOldPassword.isEmpty()) {
 
-            mEtNewPassword.setError("New password cannot be empty");
-            mEtCfmNewPassword.setError(null);
-            mEtOldPassword.setError(null);
+            showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", "Old password cannot be empty.");
             return;
+
+        } else if (strNewPassword.isEmpty()) {
+
+            showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", "New password cannot be empty.");
+            return;
+
         } else if (!strNewPassword.equals(strCfmNewPassword.toString())) {
 
-            mEtCfmNewPassword.setError("Confirm New password not matching");
-            mEtNewPassword.setError(null);
-            mEtOldPassword.setError(null);
+            showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", "Confirm new password not matching.");
             return;
-        } else if (strOldPassword.isEmpty()) {
 
-            mEtOldPassword.setError("Old Password cannot be empty");
-            mEtCfmNewPassword.setError(null);
-            mEtNewPassword.setError(null);
-            return;
         }
 
         JSONObject jsonChangePasswordRequest = new JSONObject();
@@ -146,11 +144,34 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
                 Toast.makeText(this, "Successfully changed password", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
+
+                showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", statusMessage);
             }
         } catch (JSONException jsonExc) {
 
             jsonExc.printStackTrace();
             Toast.makeText(this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+            showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", "Exception occurred.");
         }
+    }
+
+    /**
+     * Method to show alert.
+     */
+    private void showAlertAndClose(int alertType, String title, String content) {
+
+        SweetAlertDialog s = new SweetAlertDialog(this, alertType)
+                .setTitleText(title)
+                .setContentText(content)
+                .setConfirmText("Ok")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                        sweetAlertDialog.dismissWithAnimation();
+                    }
+                });
+        s.setCancelable(false);
+        s.show();
     }
 }

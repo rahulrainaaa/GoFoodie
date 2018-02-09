@@ -466,6 +466,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                 objCartOrder.put("description", arrDescription);
                 objCartOrder.put("combo_id", cartOrder.comboId);
                 objCartOrder.put("comboPrice", cartOrder.comboPrice);
+                objCartOrder.put("pay_price", cartOrder.payPrice);
                 objCartOrder.put("delivery_date", cartOrder.date.trim().substring(0, 10));
                 objCartOrder.put("restaurant_id", cartOrder.restaurantId);
                 objCartOrder.put("branch_id", cartOrder.branchId);

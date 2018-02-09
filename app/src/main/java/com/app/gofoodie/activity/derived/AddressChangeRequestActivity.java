@@ -89,7 +89,7 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
         if (response.getStatusCode() == 200) {
 
             mAreaList = (ArrayList<Locaton>) response.getLocatons();
-            mAreaList.add(0, new Locaton("-1", "Pick location"));
+            mAreaList.add(0, new Locaton("-1", "Pick new area"));
             mAdapter = new LocationSpinnerAdapter(this, R.layout.item_spinner_text_view, mAreaList);
             mSpLocations.setAdapter(mAdapter);
 

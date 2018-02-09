@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.app.gofoodie.R;
 import com.app.gofoodie.activity.derived.ForgotPasswordActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
+import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.global.data.GlobalData;
 import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
@@ -25,6 +26,7 @@ import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.app.gofoodie.utility.LocationUtils;
 import com.app.gofoodie.utility.SessionUtils;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookException;
@@ -45,6 +47,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.regex.Pattern;
 
 /**
  * @class LoginFragment
@@ -115,6 +119,9 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
             ex.printStackTrace();
             Toast.makeText(getActivity(), "" + ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
+        // Remove older location preference in case new user enters.
+        LocationUtils.getInstance().resetLocationPref(getActivity());
         return view;
     }
 
@@ -286,15 +293,23 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         boolean isValid = false;
 
-        // Validate Username
+        /**
+         * Check Email field validation.
+         */
         if (strEmailMobile.isEmpty()) {
 
             isValid = false;
             mEtMobileEmail.setError(getActivity().getString(R.string.cannot_be_empty));
+        } else if (!Pattern.compile(Constants.REGEX_EMAIL).matcher(strEmailMobile).matches()) {
+
+            mEtMobileEmail.setError(getString(R.string.proper_email_id));
+            isValid = false;
+
         } else {
 
             isValid = true;
         }
+
 
         // Validate Password
         if (strPassword.isEmpty()) {

@@ -74,17 +74,17 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
         ModelParser parser = new ModelParser();
         Ratings ratings = (Ratings) parser.getModel(json.toString(), Ratings.class, null);
 
-        if (ratings.statusCode != 200) {
+        if (ratings.statusCode == 204) {        // No content.
 
-            showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", ratings.statusMessage.trim());
+            showAlertAndClose(SweetAlertDialog.WARNING_TYPE, "Oops", getString(R.string.no_reviews));
             return;
-        } else if (ratings.review == null) {
+        } else if (ratings.review == null) {    // null value of reviews.
 
-            showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", ratings.statusMessage.trim());
+            showAlertAndClose(SweetAlertDialog.WARNING_TYPE, "Oops...", getString(R.string.no_reviews));
             return;
-        } else if (ratings.review.size() == 0) {
+        } else if (ratings.review.size() == 0) {       // if review array length = 0.
 
-            showAlertAndClose(SweetAlertDialog.WARNING_TYPE, "Alert", "No Reviews Present");
+            showAlertAndClose(SweetAlertDialog.WARNING_TYPE, "Oops...", getString(R.string.no_reviews));
             return;
         }
         mList = (ArrayList<Review>) ratings.review;
