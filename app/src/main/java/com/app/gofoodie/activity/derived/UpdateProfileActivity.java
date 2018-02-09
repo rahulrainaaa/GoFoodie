@@ -83,7 +83,6 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
             }
 
-
         } catch (Exception e) {
 
             Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -271,6 +270,12 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
             flagValidation = false;
             mEtName.setError(getString(R.string.cannot_be_empty));
+
+        } else if (!Pattern.compile(Constants.REGEX_NAME).matcher(mEtName.getText().toString()).matches()) {
+
+            flagValidation = false;
+            mEtName.setError(getString(R.string.alpha_allowed));
+
         } else {
 
             flagValidation = true;

@@ -57,7 +57,14 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
         holder.txtReviews.setText(String.valueOf(transaction.getRemarks()));
         holder.txtPrice.setText(transaction.getPaidAmount() + " AED");
 
-        holder.imgType.setImageResource(R.drawable.icon_receive);
+        if (transaction.getTransactionResponse().contains("fail")) {
+
+            holder.imgType.setImageResource(R.drawable.icon_alert_warning);
+
+        } else {
+
+            holder.imgType.setImageResource(R.drawable.icon_receive);
+        }
 
         return cell;
     }

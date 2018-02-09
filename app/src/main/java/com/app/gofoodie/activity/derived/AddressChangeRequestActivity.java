@@ -234,7 +234,7 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
 
             new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("Alert")
-                    .setContentText("Pick a location")
+                    .setContentText("Pick an area")
                     .show();
 
             return false;

@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -119,7 +118,6 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
         }, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
 
         networkHandler.executeGet();
-
 
     }
 

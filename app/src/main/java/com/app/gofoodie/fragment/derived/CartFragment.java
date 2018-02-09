@@ -163,10 +163,13 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
                     .setContentText(cartResponse.getStatusMessage())
                     .show();
             cartResponse.setCart(new ArrayList<Cart>());
+            mTxtLabel.setText("Cart");
+
         } else {
 
             // Parse the response on success and also parse the taxPercent and
             taxPercent = cartResponse.getTaxPerc();
+            CustomerProfileHandler.CUSTOMER.setCartCount(cartResponse.getCart().size());
             totalPayablePrice = Float.valueOf(cartResponse.getTotalPrice().trim());
             mTxtLabel.setText("Total Price: " + cartResponse.getTotalPrice() + " AED");// + ",  Price: AED " + cartResponse.totalPrice.toString());
         }

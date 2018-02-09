@@ -156,7 +156,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             isValid = false;
             mEtLastName.setError(getString(R.string.cannot_be_empty));
 
-        } else if (!Pattern.compile(Constants.REGEX_NAME).matcher(strFirstName).matches()) {
+        } else if (!Pattern.compile(Constants.REGEX_NAME).matcher(strLastName).matches()) {
 
             isValid = false;
             mEtFirstName.setError(getString(R.string.alpha_allowed));

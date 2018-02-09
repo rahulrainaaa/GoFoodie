@@ -160,8 +160,10 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
 
             int statusCode = json.getInt("statusCode");
             String statusMessage = json.getString("statusMessage");
-            Toast.makeText(this, "" + statusMessage, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "" + statusMessage, Toast.LENGTH_SHORT).show();
+
         } catch (JSONException jsonExc) {
+
 
             jsonExc.printStackTrace();
             Toast.makeText(this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
