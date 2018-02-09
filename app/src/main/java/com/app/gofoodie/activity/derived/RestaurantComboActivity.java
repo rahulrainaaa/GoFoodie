@@ -106,7 +106,7 @@ public class RestaurantComboActivity extends BaseAppCompatActivity implements Ne
 
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Oops...")
-                    .setContentText(comboPlanResponse.getStatusMessage())
+                    .setContentText("No combo plans")
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {

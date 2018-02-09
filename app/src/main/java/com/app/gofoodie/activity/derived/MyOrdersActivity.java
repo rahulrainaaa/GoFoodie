@@ -32,6 +32,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * Activity class to show all signed in customer order(s) with date range applied.
+ * Order cancellation and order Rating also handled.
+ */
 public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCallbackListener, View.OnClickListener {
 
     public static final String TAG = "MyOrdersActivity";
@@ -115,6 +119,9 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
         networkHandler.executeGet();
     }
 
+    /**
+     * Method to select rate range to get the orders within that date range.
+     */
     private void menuItemDateSelected() {
 
         Calendar now = Calendar.getInstance();
@@ -171,7 +178,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
             SweetAlertDialog s = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Oops...")
-                    .setContentText(myOrdersResponse.getStatusMessage().trim())
+                    .setContentText("No order present")
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -212,10 +219,28 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
         }
     }
 
+    /**
+     * Method show ratingBar alert to input form user and add rating to the order placed.
+     *
+     * @param v
+     */
     private void addRating(View v) {
 
         final MyOrder order = (MyOrder) v.getTag();
 
+        /**
+         * Check if order is not completed, then return.
+         * If status is completed, then continue for review alert.
+         */
+        if (!order.getStatus().toLowerCase().contains("completed")) {
+
+            Toast.makeText(this, "You can only rate completed orders", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        /**
+         * Proceed for rating.
+         */
         View view = getLayoutInflater().inflate(R.layout.rating_bar_layout, null);
         final RatingBar ratingBar = (RatingBar) view.findViewById(R.id.rating_bar);
 
@@ -262,6 +287,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
                         try {
 
+
                             JSONObject jsonRequest = new JSONObject();
                             jsonRequest.put("customer_id", getSession().getData().getCustomerId());
                             jsonRequest.put("login_id", getSession().getData().getLoginId());
@@ -279,8 +305,8 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
                                 @Override
                                 public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-                                    order.setRating("" + rating);
                                     Toast.makeText(getApplicationContext(), "Thank you", Toast.LENGTH_SHORT).show();
+                                    order.setRating("" + rating);
                                 }
 
                                 @Override
@@ -379,4 +405,5 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
         orderCancellationHandler.showCancellationOptions(order, mOrderCancellationListener, 1);
 
     }
+
 }

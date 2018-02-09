@@ -135,7 +135,7 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
             }
             SweetAlertDialog s = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Oops...")
-                    .setContentText(shortlistedRestaurants.statusMessage.trim());
+                    .setContentText("No shortlisted restaurant");
             s.setCancelable(false);
             s.show();
 

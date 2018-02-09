@@ -318,8 +318,16 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
 
         try {
             int statusCode = json.getInt("statusCode");
-            String statusMessage = json.getString("statusMessage");
-            Toast.makeText(this, "" + statusMessage, Toast.LENGTH_SHORT).show();
+            if (statusCode == 200) {
+
+                Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
+
+            } else {
+
+                String statusMessage = json.getString("statusMessage");
+                Toast.makeText(this, "" + statusMessage, Toast.LENGTH_SHORT).show();
+            }
+
 
         } catch (JSONException jsonExc) {
 
@@ -335,10 +343,11 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        if (requestCode == 1) {
+        if (requestCode == 1) {     // fetched all restaurants
 
             handleRestaurantResponse(rawObject);
-        } else if (requestCode == 2) {
+
+        } else if (requestCode == 2) {      // http response - added restaurant(s).
 
             handleRestaurantAdded(rawObject);
         }

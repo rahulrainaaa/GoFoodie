@@ -83,7 +83,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         View view = inflater.inflate(R.layout.frag_login, container, false);
         doViewMapping(view);
-        Toast.makeText(getActivity(), "Please Login", Toast.LENGTH_SHORT).show();
 
         LoginManager.getInstance().logOut();
 
@@ -169,7 +168,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-        Toast.makeText(getActivity(), "Google Login Failed.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Google SignIn Failed.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -367,11 +366,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 break;
             case 400:       // Bad Request.
 
-                Toast.makeText(getActivity(), "Invalid Credentials. Try Again.", Toast.LENGTH_SHORT).show();
+                showAlertDialog(SweetAlertDialog.ERROR_TYPE, "Invalid credentials", "Please enter valid email and password.");
                 break;
             case 406:       // Not Active or not registered.
 
-                Toast.makeText(getActivity(), loginModel.getStatusMessage().trim(), Toast.LENGTH_SHORT).show();
+                showAlertDialog(SweetAlertDialog.ERROR_TYPE, "Error", loginModel.getStatusMessage().trim());
                 if (isSocialLoginAttempt) {
 
                     registerNewSocialUser(mNewSocialEmail);
@@ -379,11 +378,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
                 break;
             case 403:
 
-                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
-                        .setTitleText("Alert")
-                        .setContentText("" + loginModel.getStatusMessage())
-                        .show();
-
+                showAlertDialog(SweetAlertDialog.ERROR_TYPE, "Error", loginModel.getStatusMessage());
                 break;
         }
     }
@@ -477,6 +472,22 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         GlobalData.newSocialEmail = mNewSocialEmail;
         getDashboardActivity().signalLoadFragment(DashboardInterruptListener.FRAGMENT_TYPE.REGISTER_NEW_SOCIAL);
+
+    }
+
+    /**
+     * Method to simply show sweet alert dialog box of given type and content.
+     *
+     * @param alertType Type of {@link SweetAlertDialog}.
+     * @param title     Text to show in the title.
+     * @param content   Text to show in the content.
+     */
+    private void showAlertDialog(int alertType, String title, String content) {
+
+        new SweetAlertDialog(getActivity(), alertType)
+                .setTitleText(title)
+                .setContentText(content)
+                .show();
 
     }
 

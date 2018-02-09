@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
@@ -39,9 +40,11 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
     private ArrayList<Description> mList = new ArrayList<>();
     private EditComboListViewAdapter mAdapter = null;
     private CartOrder mCartOrder = null;
+    private TextView mTxtComboName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_combo);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -56,11 +59,11 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
         mCartOrder = GlobalData.cartOrderArrayList.get(position);
         mList = (ArrayList<Description>) mCartOrder.description;
         mListView = (ListView) findViewById(R.id.list_view);
-
-
+        mTxtComboName = (TextView) findViewById(R.id.txt_combo_name);
         mAdapter = new EditComboListViewAdapter(this, R.layout.item_listview_edit_combo, mList);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
+        mTxtComboName.setText(mCartOrder.comboName);
 
     }
 

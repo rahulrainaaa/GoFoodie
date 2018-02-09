@@ -11,6 +11,7 @@ import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONArray;
@@ -98,8 +99,38 @@ public class ForgotPasswordActivity extends BaseAppCompatActivity implements Vie
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-        Toast.makeText(this, "Check your Email", Toast.LENGTH_SHORT).show();
-        finish();
+        try {
+
+            int statusCode = rawObject.getInt("statusCode");
+            String statusMessage = rawObject.getString("statusMessage");
+
+            if (statusCode == 200) {
+
+                Toast.makeText(this, "Please check your email", Toast.LENGTH_SHORT).show();
+                finish();
+
+            } else if (statusCode == 202) {
+
+                showSweetAlert(SweetAlertDialog.ERROR_TYPE, "Error", "Something unexpected wrong happened.\nPlease try later.");
+
+            } else if (statusCode == 203) {
+
+                showSweetAlert(SweetAlertDialog.WARNING_TYPE, "Information", "You can directly with your social account.");
+
+            } else if (statusCode == 204) {
+
+                showSweetAlert(SweetAlertDialog.WARNING_TYPE, "Alert", "Invalid email entered.");
+
+            } else {
+
+                Toast.makeText(this, "" + statusMessage, Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            Toast.makeText(this, "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -107,4 +138,20 @@ public class ForgotPasswordActivity extends BaseAppCompatActivity implements Vie
 
         Toast.makeText(this, "Http Error: " + message, Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     * Method to show alertType dialog box of given type and with given content.
+     *
+     * @param alertType Type of {@link com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog}
+     * @param title     Text to show in title.
+     * @param content   Text to show in the content.
+     */
+    private void showSweetAlert(int alertType, String title, String content) {
+
+        new SweetAlertDialog(this, alertType)
+                .setTitleText(title)
+                .setContentText(content)
+                .show();
+    }
+
 }

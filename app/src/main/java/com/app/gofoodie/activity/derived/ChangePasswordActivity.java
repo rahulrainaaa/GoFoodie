@@ -97,6 +97,7 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
             networkHandler.httpCreate(1, this, this, jsonChangePasswordRequest, Network.URL_CHANGE_PASSWORD, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
             networkHandler.executePost();
             getProgressDialog().show();
+
         } catch (JSONException jsonExc) {
 
             jsonExc.printStackTrace();

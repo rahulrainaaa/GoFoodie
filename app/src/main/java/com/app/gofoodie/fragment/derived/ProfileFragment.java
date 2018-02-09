@@ -60,6 +60,14 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         view.findViewById(R.id.btn_about_us).setOnClickListener(this);
         view.findViewById(R.id.btn_logout).setOnClickListener(this);
 
+        /**
+         * If customer = social user then hide change password option.
+         */
+        if (getSession().getData().getSocial().toLowerCase().contains("yes")) {
+
+            view.findViewById(R.id.btn_change_password).setVisibility(View.GONE);
+        }
+
         CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(getActivity());
         customerProfileHandler.refresh(null, null);
 
