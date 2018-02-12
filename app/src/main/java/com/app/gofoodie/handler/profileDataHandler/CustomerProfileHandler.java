@@ -36,11 +36,13 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
      */
     private static Date sPrevTime = null;   // Last data refreshed DateTime.
     private static boolean inProgress = false;      // Http request in progress or not.
+    private static boolean isProgressdDialogVisible = false;
     /**
      * Class Private data members.
      */
-    public Context mContext = null;
-    public ProfileUpdateListener mListener = null;
+    private Context mContext = null;
+    private BaseAppCompatActivity mActivity = null;
+    private ProfileUpdateListener mListener = null;
 
     /**
      * @param context
@@ -94,6 +96,13 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
             networkHandler.httpCreate(1, activity, this, jsonRequest, Network.URL_GET_CUST_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
             networkHandler.executePost();
 
+            if (activity != null) {
+
+                activity.getProgressDialog().show();
+                this.mActivity = activity;
+                isProgressdDialogVisible = true;
+            }
+
         } catch (JSONException jsonExc) {
 
             jsonExc.printStackTrace();
@@ -106,6 +115,11 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
      */
     @Override
     public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+        if (mActivity != null) {
+            mActivity.getProgressDialog().hide();
+            mActivity = null;
+        }
 
         inProgress = false;
 
@@ -140,6 +154,11 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
 
     @Override
     public void networkFailResponse(int requestCode, String message) {
+
+        if (mActivity != null) {
+            mActivity.getProgressDialog().hide();
+            mActivity = null;
+        }
 
         inProgress = false;
         profileExist = false;

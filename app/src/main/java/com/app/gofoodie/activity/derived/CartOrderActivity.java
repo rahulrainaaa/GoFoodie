@@ -474,6 +474,13 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                 arrCartOrder.put(objCartOrder);
             }
 
+            JSONArray cartItemIdArray = new JSONArray();
+            Iterator<Cart> cartIterator = GlobalData.cartArrayList.iterator();
+            while (cartIterator.hasNext()) {
+
+                cartItemIdArray.put(cartIterator.next().getCartItemId().trim());
+            }
+            jsonRequest.put("cart_item_id", cartItemIdArray);
             jsonRequest.put("cartorders", arrCartOrder);
             jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId());
             jsonRequest.put("token", getSessionData().getToken());
@@ -484,14 +491,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             jsonRequest.put("geo_lng", CustomerProfileHandler.CUSTOMER.getProfile().getGeoLng());
             jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.getProfile().getWalletId());
             jsonRequest.put("finalPrice", String.valueOf(mPayPrice));
-
-            JSONArray cartItemIdArray = new JSONArray();
-            Iterator<Cart> cartIterator = GlobalData.cartArrayList.iterator();
-            while (cartIterator.hasNext()) {
-
-                cartItemIdArray.put(cartIterator.next().getCartItemId().trim());
-            }
-            jsonRequest.put("cart_item_id", cartItemIdArray);
             jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim());
             jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.getProfile().getName().trim());
             jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail().trim());

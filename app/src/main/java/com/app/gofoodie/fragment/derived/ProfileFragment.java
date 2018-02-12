@@ -21,6 +21,8 @@ import com.app.gofoodie.activity.derived.UpdateProfileActivity;
 import com.app.gofoodie.activity.derived.WeekPreferenceActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
+import com.app.gofoodie.handler.profileDataHandler.ProfileUpdateListener;
+import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.utility.SessionUtils;
 
 /**
@@ -69,7 +71,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         }
 
         CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(getActivity());
-        customerProfileHandler.refresh(null, null);
+        customerProfileHandler.refresh(getDashboardActivity(), null);
 
         return view;
     }
@@ -158,7 +160,19 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
      */
     private void btnMyProfileClicked(View view) {
 
-        startActivity(new Intent(getActivity(), UpdateProfileActivity.class));
+        /**
+         * refresh the customer profile first and then proceed for profile update.
+         */
+        CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(getActivity());
+        customerProfileHandler.refresh(getDashboardActivity(), new ProfileUpdateListener() {
+
+            @Override
+            public void profileUpdatedCallback(Customer customer) {
+
+                startActivity(new Intent(getActivity(), UpdateProfileActivity.class));
+            }
+        });
+
     }
 
     private void btnMyOrdersClicked(View view) {

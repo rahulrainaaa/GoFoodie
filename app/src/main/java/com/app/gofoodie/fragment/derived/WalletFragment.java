@@ -215,7 +215,16 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         ModelParser parser = new ModelParser();
         Transaction transaction = (Transaction) parser.getModel(json.toString(), Transaction.class, null);
         mTransaction = transaction;
-        showWalletTransactions();
+
+        if (mTabLayout.getSelectedTabPosition() == 0) {
+
+            showWalletTransactions();
+
+        } else {
+
+            showBankPaymentTransactions();
+        }
+
     }
 
 }
