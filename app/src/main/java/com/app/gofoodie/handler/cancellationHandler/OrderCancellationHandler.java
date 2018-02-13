@@ -210,6 +210,7 @@ public class OrderCancellationHandler {
                     jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.getProfile().getName());
                     jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail());
                     jsonRequest.put("order_set_id", myOrder.getOrderSetId());
+                    jsonRequest.put("req_type", "Long");
                     jsonRequest.put("from_date", myOrder.getDeliveryDate());
                     Calendar calendar = Calendar.getInstance();
                     Date date = sdf.parse(myOrder.getDeliveryDate());
@@ -226,7 +227,16 @@ public class OrderCancellationHandler {
                         @Override
                         public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-                            respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.LONGTERM, rawObject, "Done");
+                            try {
+
+                                String statusMessage = rawObject.getString("statusMessage");
+                                respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.CANCEL, rawObject, statusMessage);
+
+                            } catch (Exception e) {
+
+                                respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.CANCEL, rawObject, "Expected Error");
+                            }
+
                         }
 
                         @Override
@@ -234,7 +244,7 @@ public class OrderCancellationHandler {
 
                             respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.LONGTERM, null, message);
                         }
-                    }, jsonRequest, Network.URL_LONG_VACATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                    }, jsonRequest, Network.URL_APPLY_VACATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
 
                     networkHandler.executePost();
 
@@ -288,6 +298,7 @@ public class OrderCancellationHandler {
                     jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.getProfile().getName());
                     jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail());
                     jsonRequest.put("order_set_id", myOrder.getOrderSetId());
+                    jsonRequest.put("req_type", "Short");
                     jsonRequest.put("from_date", myOrder.getDeliveryDate());
                     Calendar calendar = Calendar.getInstance();
                     Date date = sdf.parse(myOrder.getDeliveryDate());
@@ -304,7 +315,15 @@ public class OrderCancellationHandler {
                         @Override
                         public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-                            respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.SHORTTERM, rawObject, "Done");
+                            try {
+
+                                String statusMessage = rawObject.getString("statusMessage");
+                                respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.SHORTTERM, rawObject, statusMessage);
+                            } catch (Exception e) {
+
+                                respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.SHORTTERM, rawObject, "Done");
+                            }
+
                         }
 
                         @Override
@@ -312,7 +331,7 @@ public class OrderCancellationHandler {
 
                             respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.SHORTTERM, null, message);
                         }
-                    }, jsonRequest, Network.URL_SHORT_VACATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                    }, jsonRequest, Network.URL_APPLY_VACATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
 
                     networkHandler.executePost();
 
@@ -373,6 +392,7 @@ public class OrderCancellationHandler {
                     jsonRequest.put("from_date", myOrder.getDeliveryDate());
                     jsonRequest.put("to_date", myOrder.getDeliveryDate());
                     jsonRequest.put("comment", strReason);
+                    jsonRequest.put("type", "Emergency mode.");
                     jsonRequest.put("token", mActivity.getSession().getData().getToken());
 
                     NetworkHandler networkHandler = new NetworkHandler();

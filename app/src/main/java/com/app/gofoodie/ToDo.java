@@ -6,7 +6,9 @@ public class ToDo {
     /**
      *
      *
-     * Google Login - API key update.
+     * Java Docs.
+     *
+     * pre 5.0 compatibility (for shape drawables).
      *
      *
      *

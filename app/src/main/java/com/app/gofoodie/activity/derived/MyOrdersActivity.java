@@ -55,16 +55,17 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
             if (responseCode != OrderCancellationHandler.RESP_CODE.RESP_SUCCESS) {
 
-                new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.ERROR_TYPE)
+                new SweetAlertDialog(MyOrdersActivity.this, SweetAlertDialog.ERROR_TYPE)
                         .setTitleText("Error...")
-                        .setContentText(message)
+                        .setContentText((message == null ? "Some unexpected error occurred." : message))
                         .show();
             } else {
 
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
 
-            fetchMyOrders(null, null);
+            // Now refresh the Order list.
+            fetchMyOrders(mStrFromDate, mStrToDate);
         }
     };
 

@@ -16,9 +16,11 @@ public class Network {
 
     public static final String URL_EMERGENCY_CANCEL = "http://gofoodie.drushtiindia.com/API/VacationRequest/emergencyVacationRequest";
 
-    public static final String URL_LONG_VACATION = "http://gofoodie.drushtiindia.com/API/VacationRequest/longVacationRequest";
+    public static final String URL_APPLY_VACATION = "http://gofoodie.drushtiindia.com/API/VacationRequest/customervacation_request";
 
-    public static final String URL_SHORT_VACATION = "http://gofoodie.drushtiindia.com/API/VacationRequest/shortVacationRequest";
+    //public static final String URL_LONG_VACATION = "http://gofoodie.drushtiindia.com/API/VacationRequest/longVacationRequest";
+
+    //public static final String URL_SHORT_VACATION = "http://gofoodie.drushtiindia.com/API/VacationRequest/shortVacationRequest";
 
     public static final String URL_POST_REVIEW = "http://gofoodie.drushtiindia.com/API/Reviews/PostReviews/";
 
