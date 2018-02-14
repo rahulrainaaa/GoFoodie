@@ -1,4 +1,3 @@
-
 package com.app.gofoodie.model.cartOrder;
 
 import java.util.ArrayList;

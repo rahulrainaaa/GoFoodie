@@ -11,7 +11,6 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.global.constants.Constants;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
-import com.app.gofoodie.handler.profileDataHandler.ProfileUpdateListener;
 import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
@@ -47,13 +46,13 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
 
-        mEtName = (MaterialEditText) findViewById(R.id.et_name);
-        mEtAltEmail = (MaterialEditText) findViewById(R.id.et_alt_email);
-        mEtMobile = (MaterialEditText) findViewById(R.id.et_mobile);
-        mEtAltMobile = (MaterialEditText) findViewById(R.id.et_alt_mobile);
-        mEtAddress = (MaterialEditText) findViewById(R.id.et_address);
-        mEtLocation = (MaterialEditText) findViewById(R.id.et_location_pref);
-        mEtCompanyName = (MaterialEditText) findViewById(R.id.et_company_name);
+        mEtName = findViewById(R.id.et_name);
+        mEtAltEmail = findViewById(R.id.et_alt_email);
+        mEtMobile = findViewById(R.id.et_mobile);
+        mEtAltMobile = findViewById(R.id.et_alt_mobile);
+        mEtAddress = findViewById(R.id.et_address);
+        mEtLocation = findViewById(R.id.et_location_pref);
+        mEtCompanyName = findViewById(R.id.et_company_name);
 
         try {
 
@@ -65,7 +64,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             mEtAddress.setText("" + customer.getProfile().getAddress());
             mEtCompanyName.setText("" + customer.getProfile().getCompanyName());
 
-            mButton = (Button) findViewById(R.id.btn_update_profile);
+            mButton = findViewById(R.id.btn_update_profile);
             mButton.setOnClickListener(this);
 
             /**
@@ -157,11 +156,11 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             return;
         }
 
-        sendUpdateProfileRequest(view, true);
+        sendUpdateProfileRequest(view);
 
     }
 
-    private void sendUpdateProfileRequest(View view, boolean changeAddress) {
+    private void sendUpdateProfileRequest(View view) {
 
         Customer customer = CustomerProfileHandler.CUSTOMER;
 
@@ -182,7 +181,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             jsonRequest.put("email", customer.getProfile().getEmail());
             jsonRequest.put("email2", mEtAltEmail.getText().toString().trim());
             jsonRequest.put("company_name", mEtCompanyName.getText().toString().trim());
-            jsonRequest.put("change_delivery_address", changeAddress);
+            jsonRequest.put("change_delivery_address", true);
 
             NetworkHandler networkHandler = new NetworkHandler();
             networkHandler.httpCreate(1, this, this, jsonRequest, Network.URL_UPDATE_PROFILE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
@@ -235,13 +234,10 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             if (statusCode == 200) {
 
                 CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
-                customerProfileHandler.refresh(this, new ProfileUpdateListener() {
-                    @Override
-                    public void profileUpdatedCallback(Customer customer) {
+                customerProfileHandler.refresh(this, customer -> {
 
-                        Toast.makeText(getApplicationContext(), "Profile Updated Successfully.", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
+                    Toast.makeText(getApplicationContext(), "Profile Updated Successfully.", Toast.LENGTH_SHORT).show();
+                    finish();
                 });
 
             } else {
@@ -291,7 +287,6 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
         String strAltEmail = mEtAltEmail.getText().toString().trim();
         if (strAltEmail.trim().isEmpty()) {
 
-            flagValidation = true & flagValidation;
             mEtAltEmail.setError(null);
 
         } else if (!Pattern.compile(Constants.REGEX_EMAIL).matcher(strAltEmail).matches()) {
@@ -301,7 +296,6 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
         } else {
 
-            flagValidation = true & flagValidation;
             mEtAltEmail.setError(null);
         }
 
@@ -321,14 +315,12 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
         } else {
 
-            flagValidation = true && flagValidation;
             mEtMobile.setError(null);
         }
 
         String strAltMobile = mEtAltMobile.getText().toString().trim();
         if (strAltMobile.isEmpty()) {
 
-            flagValidation = true & flagValidation;
             mEtAltMobile.setError(null);
 
         } else if (!Pattern.compile(Constants.REGEX_MOBILE).matcher(strAltMobile).matches()) {
@@ -338,7 +330,6 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
         } else {
 
-            flagValidation = true & flagValidation;
             mEtAltMobile.setError(null);
         }
 
@@ -349,10 +340,6 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
             flagValidation = false;
             startActivity(new Intent(this, LocationActivity.class));
-
-        } else {
-
-            flagValidation = flagValidation && true;
         }
 
         if (mEtAddress.getText().toString().trim().isEmpty()) {
@@ -361,7 +348,6 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             mEtAddress.setError(getString(R.string.cannot_be_empty));
         } else {
 
-            flagValidation = flagValidation && true;
             mEtAddress.setError(null);
         }
 
@@ -371,7 +357,6 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             mEtCompanyName.setError(getString(R.string.cannot_be_empty));
         } else {
 
-            flagValidation = flagValidation && true;
             mEtCompanyName.setError(null);
         }
 

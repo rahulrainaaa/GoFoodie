@@ -54,13 +54,13 @@ public class CartListViewAdapter extends ArrayAdapter<Cart> {
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
             holder = new Holder();
-            holder.imgCombo = (ImageView) cell.findViewById(R.id.img_combo);
-            holder.txtName = (TextView) cell.findViewById(R.id.txt_name);
-            holder.txtPrice = (TextView) cell.findViewById(R.id.txt_price);
-            holder.iBtnDelete = (ImageButton) cell.findViewById(R.id.ibtn_delete);
-            holder.btnQty = (Button) cell.findViewById(R.id.btn_qty);
-            holder.imgVeg = (ImageView) cell.findViewById(R.id.ibtn_veg);
-            holder.imgNonveg = (ImageView) cell.findViewById(R.id.ibtn_nonveg);
+            holder.imgCombo = cell.findViewById(R.id.img_combo);
+            holder.txtName = cell.findViewById(R.id.txt_name);
+            holder.txtPrice = cell.findViewById(R.id.txt_price);
+            holder.iBtnDelete = cell.findViewById(R.id.ibtn_delete);
+            holder.btnQty = cell.findViewById(R.id.btn_qty);
+            holder.imgVeg = cell.findViewById(R.id.ibtn_veg);
+            holder.imgNonveg = cell.findViewById(R.id.ibtn_nonveg);
 
             holder.imgCombo.setOnClickListener(mClickListener);
             holder.iBtnDelete.setOnClickListener(mClickListener);

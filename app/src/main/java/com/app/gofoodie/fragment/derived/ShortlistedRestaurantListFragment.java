@@ -54,7 +54,7 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
 
         View view = inflater.inflate(R.layout.frag_restaurant_list_main, container, false);
         setHasOptionsMenu(true);
-        mListView = (ListView) view.findViewById(R.id.listview_restaurants);
+        mListView = view.findViewById(R.id.listview_restaurants);
 
         return view;
     }
@@ -77,7 +77,7 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
      * @nethod refreshList
      * @desc Method to refresh the list of shortlisted restaurant(s).
      */
-    public void refreshList() {
+    private void refreshList() {
 
         String url = Network.URL_GET_SLR + getSession().getData().getCustomerId();
         NetworkHandler networkHandler = new NetworkHandler();
@@ -192,22 +192,16 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
                 .setTitleText("Alert")
                 .setContentText("No Shortlist Restaurant found.\nDo you want to add new?")
                 .setConfirmText("Yes")
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sDialog) {
+                .setConfirmClickListener(sDialog -> {
 
-                        startActivity(new Intent(getActivity(), AddShortlistedRestaurants.class));
-                        sDialog.dismissWithAnimation();
-                    }
+                    startActivity(new Intent(getActivity(), AddShortlistedRestaurants.class));
+                    sDialog.dismissWithAnimation();
                 })
                 .setCancelText("No")
-                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                .setCancelClickListener(sweetAlertDialog -> {
 
-                        Toast.makeText(getActivity(), "You have not shortlisted any restaurant.", Toast.LENGTH_SHORT).show();
-                        sweetAlertDialog.dismissWithAnimation();
-                    }
+                    Toast.makeText(getActivity(), "You have not shortlisted any restaurant.", Toast.LENGTH_SHORT).show();
+                    sweetAlertDialog.dismissWithAnimation();
                 })
                 .show();
 

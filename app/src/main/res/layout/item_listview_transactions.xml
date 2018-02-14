@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="20">
@@ -67,6 +68,7 @@
                 android:id="@+id/image_alert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/image"
                 app:srcCompat="@drawable/icon_sent" />
 
             <TextView

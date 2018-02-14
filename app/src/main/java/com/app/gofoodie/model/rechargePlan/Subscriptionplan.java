@@ -1,4 +1,3 @@
-
 package com.app.gofoodie.model.rechargePlan;
 
 import android.os.Parcel;
@@ -7,9 +6,23 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Subscriptionplan implements Parcelable
-{
+public class Subscriptionplan implements Parcelable {
 
+    public final static Creator<Subscriptionplan> CREATOR = new Creator<Subscriptionplan>() {
+
+
+        @SuppressWarnings({
+                "unchecked"
+        })
+        public Subscriptionplan createFromParcel(Parcel in) {
+            return new Subscriptionplan(in);
+        }
+
+        public Subscriptionplan[] newArray(int size) {
+            return (new Subscriptionplan[size]);
+        }
+
+    };
     @SerializedName("plan_id")
     @Expose
     public String planId;
@@ -28,24 +41,8 @@ public class Subscriptionplan implements Parcelable
     @SerializedName("validity_days")
     @Expose
     public String validityDays;
-    public final static Creator<Subscriptionplan> CREATOR = new Creator<Subscriptionplan>() {
 
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Subscriptionplan createFromParcel(Parcel in) {
-            return new Subscriptionplan(in);
-        }
-
-        public Subscriptionplan[] newArray(int size) {
-            return (new Subscriptionplan[size]);
-        }
-
-    }
-    ;
-
-    protected Subscriptionplan(Parcel in) {
+    private Subscriptionplan(Parcel in) {
         this.planId = ((String) in.readValue((String.class.getClassLoader())));
         this.name = ((String) in.readValue((String.class.getClassLoader())));
         this.description = ((String) in.readValue((String.class.getClassLoader())));
@@ -67,7 +64,7 @@ public class Subscriptionplan implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

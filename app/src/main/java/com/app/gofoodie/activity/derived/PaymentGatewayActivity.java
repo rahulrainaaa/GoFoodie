@@ -62,11 +62,11 @@ public class PaymentGatewayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_gateway);
 
-        txtPlanName = (TextView) findViewById(R.id.txt_plan_name);
-        txtPlanDetail = (TextView) findViewById(R.id.txt_details);
-        txtGetPrice = (TextView) findViewById(R.id.txt_get_price);
-        txtDays = (TextView) findViewById(R.id.txt_days);
-        btnConform = (Button) findViewById(R.id.btn_confirm);
+        txtPlanName = findViewById(R.id.txt_plan_name);
+        txtPlanDetail = findViewById(R.id.txt_details);
+        txtGetPrice = findViewById(R.id.txt_get_price);
+        txtDays = findViewById(R.id.txt_days);
+        btnConform = findViewById(R.id.btn_confirm);
 
         Login login = SessionUtils.getInstance().getSession();
         Customer customer = CustomerProfileHandler.CUSTOMER;

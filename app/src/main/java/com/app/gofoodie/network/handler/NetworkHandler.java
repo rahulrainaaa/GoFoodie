@@ -26,18 +26,35 @@ import org.json.JSONObject;
 public class NetworkHandler implements Response.ErrorListener {
 
     public static final String TAG = "NetworkHandler";
-
-    /**
-     * Enumerated Response type from {@link NetworkHandler}.
-     */
-    public static enum RESPONSE_TYPE {
-        JSON_OBJECT, JSON_ARRAY
-    }
-
     /**
      * Volley {@link RequestQueue} for this application.
      */
     private static RequestQueue VolleyRequestQueue = null;
+    /**
+     * Counter for monitoring number of network hits.
+     */
+    private static int OBJECTS_CREATED = 0;
+    private static int OBJECTS_RELEASED = 0;
+    private static int HTTP_TOTAL_SENT = 0;
+    private static int HTTP_FAILED = 0;
+    private static int HTTP_SUCCESS = 0;
+    /**
+     * Class private data members.
+     */
+    private String mUrl = null;
+    private int mRequestCode = -1;
+    private JSONObject mJsonRequestBody = null;
+    private JsonRequest<?> mHttpJsonRequest = null;
+    private BaseAppCompatActivity mBaseAppCompatActivity = null;
+    private NetworkCallbackListener mNetworkCallbackListener = null;
+    private RESPONSE_TYPE mResponseType = RESPONSE_TYPE.JSON_OBJECT;    // default response type = JSONObject
+    /**
+     * @constructor NetworkHandler
+     * @desc default Constructor for Network Handler.
+     */
+    public NetworkHandler() {
+        OBJECTS_CREATED++;
+    }
 
     /**
      * @param context Application context.
@@ -70,34 +87,6 @@ public class NetworkHandler implements Response.ErrorListener {
         if (VolleyRequestQueue == null) {
             VolleyRequestQueue.stop();
         }
-    }
-
-    /**
-     * Counter for monitoring number of network hits.
-     */
-    public static int OBJECTS_CREATED = 0;
-    public static int OBJECTS_RELEASED = 0;
-    public static int HTTP_TOTAL_SENT = 0;
-    public static int HTTP_FAILED = 0;
-    public static int HTTP_SUCCESS = 0;
-
-    /**
-     * Class private data members.
-     */
-    private String mUrl = null;
-    private int mRequestCode = -1;
-    private JSONObject mJsonRequestBody = null;
-    private JsonRequest<?> mHttpJsonRequest = null;
-    private BaseAppCompatActivity mBaseAppCompatActivity = null;
-    private NetworkCallbackListener mNetworkCallbackListener = null;
-    private RESPONSE_TYPE mResponseType = RESPONSE_TYPE.JSON_OBJECT;    // default response type = JSONObject
-
-    /**
-     * @constructor NetworkHandler
-     * @desc default Constructor for Network Handler.
-     */
-    public NetworkHandler() {
-        OBJECTS_CREATED++;
     }
 
     /**
@@ -188,52 +177,6 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
-     * @class JsonObjectResponse
-     * @desc Class to handle the success response in case of JSONObject response.
-     */
-    private class JsonObjectResponse implements Response.Listener<JSONObject> {
-
-        /**
-         * {@link Response.Listener} interface implemented method.
-         */
-        @Override
-        public void onResponse(JSONObject response) {
-
-            HTTP_SUCCESS++;
-            setProcessingDialogVisibility(false);
-
-            if (NetworkHandler.this.mNetworkCallbackListener != null) {
-                mNetworkCallbackListener.networkSuccessResponse(NetworkHandler.this.mRequestCode, response, null);
-            }
-        }
-    }
-
-    /**
-     * @class JSONArrayResponse
-     * @desc Class to handle the success response in case of JSONArray response.
-     */
-    private class JsonArrayResponse implements Response.Listener<JSONArray> {
-
-        /**
-         * {@link Response.Listener} interface implemented method.
-         */
-        @Override
-        public void onResponse(JSONArray response) {
-
-            HTTP_SUCCESS++;
-            setProcessingDialogVisibility(false);
-
-            if (NetworkHandler.this.mNetworkCallbackListener != null) {
-                try {
-                    mNetworkCallbackListener.networkSuccessResponse(NetworkHandler.this.mRequestCode, null, response);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    /**
      * {@link Response.ErrorListener} interface method implemented.
      */
     @Override
@@ -292,7 +235,7 @@ public class NetworkHandler implements Response.ErrorListener {
      * @method setProcessingDialogVisibility
      * @desc Method to set the visibility {@link com.app.gofoodie.customview.GoFoodieProgressDialog}.
      */
-    public void setProcessingDialogVisibility(boolean status) {
+    private void setProcessingDialogVisibility(boolean status) {
 
         // Check if instance is present.
         if (mBaseAppCompatActivity == null) {
@@ -304,6 +247,59 @@ public class NetworkHandler implements Response.ErrorListener {
             mBaseAppCompatActivity.getProgressDialog().show();
         } else {
             mBaseAppCompatActivity.getProgressDialog().hide();
+        }
+    }
+
+    /**
+     * Enumerated Response type from {@link NetworkHandler}.
+     */
+    public enum RESPONSE_TYPE {
+        JSON_OBJECT, JSON_ARRAY
+    }
+
+    /**
+     * @class JsonObjectResponse
+     * @desc Class to handle the success response in case of JSONObject response.
+     */
+    private class JsonObjectResponse implements Response.Listener<JSONObject> {
+
+        /**
+         * {@link Response.Listener} interface implemented method.
+         */
+        @Override
+        public void onResponse(JSONObject response) {
+
+            HTTP_SUCCESS++;
+            setProcessingDialogVisibility(false);
+
+            if (NetworkHandler.this.mNetworkCallbackListener != null) {
+                mNetworkCallbackListener.networkSuccessResponse(NetworkHandler.this.mRequestCode, response, null);
+            }
+        }
+    }
+
+    /**
+     * @class JSONArrayResponse
+     * @desc Class to handle the success response in case of JSONArray response.
+     */
+    private class JsonArrayResponse implements Response.Listener<JSONArray> {
+
+        /**
+         * {@link Response.Listener} interface implemented method.
+         */
+        @Override
+        public void onResponse(JSONArray response) {
+
+            HTTP_SUCCESS++;
+            setProcessingDialogVisibility(false);
+
+            if (NetworkHandler.this.mNetworkCallbackListener != null) {
+                try {
+                    mNetworkCallbackListener.networkSuccessResponse(NetworkHandler.this.mRequestCode, null, response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

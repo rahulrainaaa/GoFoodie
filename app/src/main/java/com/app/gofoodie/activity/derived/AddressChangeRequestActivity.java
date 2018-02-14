@@ -3,7 +3,6 @@ package com.app.gofoodie.activity.derived;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -38,10 +37,7 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
      */
     private Spinner mSpLocations = null;
     private EditText mEtAddress = null;
-    private Button mBtnRequest = null;
-
     private ArrayList<Locaton> mAreaList = null;
-    private LocationSpinnerAdapter mAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +45,9 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
 
         setContentView(R.layout.activity_address_change_request);
 
-        mSpLocations = (Spinner) findViewById(R.id.sp_areas);
-        mEtAddress = (EditText) findViewById(R.id.et_new_address);
-        mBtnRequest = (Button) findViewById(R.id.btn_change);
-        mBtnRequest.setOnClickListener(this);
+        mSpLocations = findViewById(R.id.sp_areas);
+        mEtAddress = findViewById(R.id.et_new_address);
+        findViewById(R.id.btn_change).setOnClickListener(this);
         fetchLocations();
 
     }
@@ -69,7 +64,7 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
     /**
      * Method fetch areas from web api.
      */
-    public void fetchLocations() {
+    private void fetchLocations() {
 
         NetworkHandler networkHandler = new NetworkHandler();
         networkHandler.httpCreate(1, this, this, new JSONObject(), Network.URL_GET_LOCATIONS, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
@@ -90,8 +85,7 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
 
             mAreaList = (ArrayList<Locaton>) response.getLocatons();
             mAreaList.add(0, new Locaton("-1", "Pick new area"));
-            mAdapter = new LocationSpinnerAdapter(this, R.layout.item_spinner_text_view, mAreaList);
-            mSpLocations.setAdapter(mAdapter);
+            mSpLocations.setAdapter(new LocationSpinnerAdapter(this, R.layout.item_spinner_text_view, mAreaList));
 
         } else {
 
@@ -154,16 +148,10 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
         /**
          * Get main thread to show UI response.
          */
-        new Handler(getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-
-                new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.ERROR_TYPE)
-                        .setTitleText("Error")
-                        .setContentText(message)
-                        .show();
-            }
-        });
+        new Handler(getMainLooper()).post(() -> new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("Error")
+                .setContentText(message)
+                .show());
     }
 
     /**

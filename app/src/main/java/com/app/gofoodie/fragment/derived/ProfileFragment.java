@@ -21,8 +21,6 @@ import com.app.gofoodie.activity.derived.UpdateProfileActivity;
 import com.app.gofoodie.activity.derived.WeekPreferenceActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
-import com.app.gofoodie.handler.profileDataHandler.ProfileUpdateListener;
-import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.utility.SessionUtils;
 
 /**
@@ -49,9 +47,9 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
         View view = inflater.inflate(R.layout.frag_profile, container, false);
 
-        mTxtName = (TextView) view.findViewById(R.id.txt_customer_name);
-        mTxtMobile = (TextView) view.findViewById(R.id.txt_email);
-        mTxtEmail = (TextView) view.findViewById(R.id.btn_phone);
+        mTxtName = view.findViewById(R.id.txt_customer_name);
+        mTxtMobile = view.findViewById(R.id.txt_email);
+        mTxtEmail = view.findViewById(R.id.btn_phone);
 
         view.findViewById(R.id.btn_my_profile).setOnClickListener(this);
         view.findViewById(R.id.btn_my_orders).setOnClickListener(this);
@@ -164,14 +162,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
          * refresh the customer profile first and then proceed for profile update.
          */
         CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(getActivity());
-        customerProfileHandler.refresh(getDashboardActivity(), new ProfileUpdateListener() {
-
-            @Override
-            public void profileUpdatedCallback(Customer customer) {
-
-                startActivity(new Intent(getActivity(), UpdateProfileActivity.class));
-            }
-        });
+        customerProfileHandler.refresh(getDashboardActivity(), customer -> startActivity(new Intent(getActivity(), UpdateProfileActivity.class)));
 
     }
 
@@ -213,13 +204,10 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     private void btnLogoutClicked(View view) {
 
         // Also Check for social login and logout from that.
-        Snackbar.make(view, "Are you sure", Snackbar.LENGTH_LONG).setAction("Logout ?", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        Snackbar.make(view, "Are you sure", Snackbar.LENGTH_LONG).setAction("Logout ?", view1 -> {
 
-                SessionUtils.getInstance().removeSession(ProfileFragment.this.getActivity());
-                startActivity(new Intent(ProfileFragment.this.getActivity(), SplashActivity.class));
-            }
+            SessionUtils.getInstance().removeSession(ProfileFragment.this.getActivity());
+            startActivity(new Intent(ProfileFragment.this.getActivity(), SplashActivity.class));
         }).show();
     }
 

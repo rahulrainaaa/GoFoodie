@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:baselineAligned="false"
     android:orientation="horizontal"
     android:weightSum="15">
 
@@ -56,6 +57,7 @@
             android:id="@+id/img_veg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/image"
             android:scaleType="fitXY"
             android:src="@drawable/veg" />
 
@@ -63,6 +65,7 @@
             android:id="@+id/img_nonveg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/image"
             android:scaleType="fitXY"
             android:src="@drawable/nonveg" />
 

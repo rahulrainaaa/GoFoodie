@@ -58,19 +58,19 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
         View view = inflater.inflate(R.layout.frag_register_new_user, container, false);
 
-        mEtFirstName = (MaterialEditText) view.findViewById(R.id.et_first_name);
-        mEtLastName = (MaterialEditText) view.findViewById(R.id.et_last_name);
-        mEtEmail = (MaterialEditText) view.findViewById(R.id.et_email);
-        mEtAltEmail = (MaterialEditText) view.findViewById(R.id.et_alt_email);
-        mEtMobile = (MaterialEditText) view.findViewById(R.id.et_mobile);
-        mEtAltMobile = (MaterialEditText) view.findViewById(R.id.et_alt_mobile);
-        mEtAddress = (MaterialEditText) view.findViewById(R.id.et_address);
-        mEtCompanyName = (MaterialEditText) view.findViewById(R.id.et_company_name);
-        mEtLocation = (MaterialEditText) view.findViewById(R.id.et_location_pref);
-        mEtPassword = (MaterialEditText) view.findViewById(R.id.et_password);
-        mEtCfmPassword = (MaterialEditText) view.findViewById(R.id.et_conform_password);
-        mChkAcceptTerms = (CheckBox) view.findViewById(R.id.chk_agree_terms);
-        mBtnRegister = (Button) view.findViewById(R.id.btn_register_new);
+        mEtFirstName = view.findViewById(R.id.et_first_name);
+        mEtLastName = view.findViewById(R.id.et_last_name);
+        mEtEmail = view.findViewById(R.id.et_email);
+        mEtAltEmail = view.findViewById(R.id.et_alt_email);
+        mEtMobile = view.findViewById(R.id.et_mobile);
+        mEtAltMobile = view.findViewById(R.id.et_alt_mobile);
+        mEtAddress = view.findViewById(R.id.et_address);
+        mEtCompanyName = view.findViewById(R.id.et_company_name);
+        mEtLocation = view.findViewById(R.id.et_location_pref);
+        mEtPassword = view.findViewById(R.id.et_password);
+        mEtCfmPassword = view.findViewById(R.id.et_conform_password);
+        mChkAcceptTerms = view.findViewById(R.id.chk_agree_terms);
+        mBtnRegister = view.findViewById(R.id.btn_register_new);
 
         mBtnRegister.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
@@ -164,7 +164,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
         } else {
 
-            isValid = isValid & true;
             mEtLastName.setError(null);
         }
 
@@ -183,13 +182,11 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
         } else {
 
-            isValid = true && isValid;
             mEtEmail.setError(null);
         }
 
         if (strAltEmail.trim().isEmpty()) {
 
-            isValid = true & isValid;
             mEtAltEmail.setError(null);
 
         } else if (!Pattern.compile(Constants.REGEX_EMAIL).matcher(strAltEmail).matches()) {
@@ -199,7 +196,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
         } else {
 
-            isValid = true & isValid;
             mEtAltEmail.setError(null);
         }
 
@@ -218,13 +214,11 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
         } else {
 
-            isValid = true && isValid;
             mEtMobile.setError(null);
         }
 
         if (strAltMobile.trim().isEmpty()) {
 
-            isValid = true & isValid;
             mEtAltMobile.setError(null);
         } else if (!Pattern.compile(Constants.REGEX_MOBILE).matcher(strAltMobile).matches()) {
 
@@ -232,7 +226,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             mEtAltMobile.setError(getString(R.string.proper_mobile_number));
         } else {
 
-            isValid = true & isValid;
             mEtAltMobile.setError(null);
         }
 
@@ -247,7 +240,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
         } else {
 
-            isValid = isValid & true;
             mEtCompanyName.setError(null);
         }
 
@@ -258,7 +250,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
         } else {
 
-            isValid = true && isValid;
             mEtAddress.setError(null);
         }
 
@@ -269,8 +260,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             startActivity(new Intent(getActivity(), LocationActivity.class));
         } else {
 
-            mEtLocation.setError(null);
-            isValid = true && isValid;
             mEtLocation.setError(null);
         }
 
@@ -283,7 +272,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             mEtPassword.setError(getString(R.string.cannot_be_empty));
         } else {
 
-            isValid = true && isValid;
             mEtPassword.setError(null);
         }
 
@@ -294,7 +282,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             mEtCfmPassword.setError(getString(R.string.confirm_password_not_match));
         } else {
 
-            isValid = true && isValid;
             mEtCfmPassword.setError(null);
         }
 

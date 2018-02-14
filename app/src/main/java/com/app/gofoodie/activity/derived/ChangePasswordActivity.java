@@ -36,10 +36,10 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        mEtOldPassword = (PasswordEditText) findViewById(R.id.et_old_password);
-        mEtNewPassword = (PasswordEditText) findViewById(R.id.et_new_password);
-        mEtCfmNewPassword = (PasswordEditText) findViewById(R.id.et_cfm_new_password);
-        mBtnChangePassword = (Button) findViewById(R.id.btn_change_password);
+        mEtOldPassword = findViewById(R.id.et_old_password);
+        mEtNewPassword = findViewById(R.id.et_new_password);
+        mEtCfmNewPassword = findViewById(R.id.et_cfm_new_password);
+        mBtnChangePassword = findViewById(R.id.btn_change_password);
         mBtnChangePassword.setOnClickListener(this);
 
     }
@@ -71,17 +71,17 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
 
         if (strOldPassword.isEmpty()) {
 
-            showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", "Old password cannot be empty.");
+            showAlertAndClose("Error", "Old password cannot be empty.");
             return;
 
         } else if (strNewPassword.isEmpty()) {
 
-            showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", "New password cannot be empty.");
+            showAlertAndClose("Error", "New password cannot be empty.");
             return;
 
         } else if (!strNewPassword.equals(strCfmNewPassword.toString())) {
 
-            showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", "Confirm new password not matching.");
+            showAlertAndClose("Error", "Confirm new password not matching.");
             return;
 
         }
@@ -146,32 +146,26 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
                 finish();
             } else {
 
-                showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", statusMessage);
+                showAlertAndClose("Error", statusMessage);
             }
         } catch (JSONException jsonExc) {
 
             jsonExc.printStackTrace();
             Toast.makeText(this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
-            showAlertAndClose(SweetAlertDialog.ERROR_TYPE, "Error", "Exception occurred.");
+            showAlertAndClose("Exception", "Exception occurred.");
         }
     }
 
     /**
      * Method to show alert.
      */
-    private void showAlertAndClose(int alertType, String title, String content) {
+    private void showAlertAndClose(String title, String content) {
 
-        SweetAlertDialog s = new SweetAlertDialog(this, alertType)
+        SweetAlertDialog s = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                 .setTitleText(title)
                 .setContentText(content)
                 .setConfirmText("Ok")
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-
-                        sweetAlertDialog.dismissWithAnimation();
-                    }
-                });
+                .setConfirmClickListener(sweetAlertDialog -> sweetAlertDialog.dismissWithAnimation());
         s.setCancelable(false);
         s.show();
     }

@@ -45,7 +45,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_parent);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
@@ -65,12 +65,6 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
             //startActivity(new Intent(this, AssistantActivity.class));
 
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //hideNavigationBar();
     }
 
     @Override
@@ -126,8 +120,8 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
      */
     private void doViewMapping() {
 
-        mNavigationPanel = (BottomNavigationView) findViewById(R.id.navigation_panel);
-        mFragmentLayout = (LinearLayout) findViewById(R.id.dashboard_fragment);
+        mNavigationPanel = findViewById(R.id.navigation_panel);
+        mFragmentLayout = findViewById(R.id.dashboard_fragment);
     }
 
     /**
@@ -215,7 +209,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
             mFragmentTransaction.remove(mFragment);
         }
         mFragment = mDashboardFragmentHandler.getFragmentClass(mFragmentType);      // Get a new Fragment for dashboard.
-        mFragment.CURRENT_FRAG = mFragmentType;
+        BaseFragment.CURRENT_FRAG = mFragmentType;
         mFragmentTransaction.replace(R.id.dashboard_fragment, mFragment);           // Replace with new fragment in the container.
         mFragmentTransaction.commit();
     }
@@ -241,11 +235,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     @Override
     public boolean signalMessage(SIGNAL_CODE signalCode) {
 
-        if (SIGNAL_CODE.HIDE_NAGIVATION_BAR == signalCode) {
-
-            return true;
-        }
-        return false;
+        return SIGNAL_CODE.HIDE_NAVIGATION_BAR == signalCode;
     }
 
     @Override
@@ -262,22 +252,13 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         pDialog.setContentText("Do you want to exit?");
         pDialog.setCancelable(false);
         pDialog.setConfirmText("Exit");
-        pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
+        pDialog.setConfirmClickListener(sweetAlertDialog -> {
 
-                sweetAlertDialog.dismissWithAnimation();
-                DashboardActivity.this.finish();
-            }
+            sweetAlertDialog.dismissWithAnimation();
+            DashboardActivity.this.finish();
         });
         pDialog.setCancelText("Cancel");
-        pDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
-
-                sweetAlertDialog.dismissWithAnimation();
-            }
-        });
+        pDialog.setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismissWithAnimation());
         pDialog.show();
 
     }

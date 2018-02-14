@@ -1,15 +1,28 @@
-
 package com.app.gofoodie.model.transaction;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PaymentTransaction implements Parcelable
-{
+public class PaymentTransaction implements Parcelable {
 
+    public final static Creator<PaymentTransaction> CREATOR = new Creator<PaymentTransaction>() {
+
+
+        @SuppressWarnings({
+                "unchecked"
+        })
+        public PaymentTransaction createFromParcel(Parcel in) {
+            return new PaymentTransaction(in);
+        }
+
+        public PaymentTransaction[] newArray(int size) {
+            return (new PaymentTransaction[size]);
+        }
+
+    };
     @SerializedName("transaction_id")
     @Expose
     private String transactionId;
@@ -34,24 +47,8 @@ public class PaymentTransaction implements Parcelable
     @SerializedName("paid_amount")
     @Expose
     private String paidAmount;
-    public final static Creator<PaymentTransaction> CREATOR = new Creator<PaymentTransaction>() {
 
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public PaymentTransaction createFromParcel(Parcel in) {
-            return new PaymentTransaction(in);
-        }
-
-        public PaymentTransaction[] newArray(int size) {
-            return (new PaymentTransaction[size]);
-        }
-
-    }
-    ;
-
-    protected PaymentTransaction(Parcel in) {
+    private PaymentTransaction(Parcel in) {
         this.transactionId = ((String) in.readValue((String.class.getClassLoader())));
         this.walletId = ((String) in.readValue((String.class.getClassLoader())));
         this.pgTransactionId = ((String) in.readValue((String.class.getClassLoader())));
@@ -141,7 +138,7 @@ public class PaymentTransaction implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

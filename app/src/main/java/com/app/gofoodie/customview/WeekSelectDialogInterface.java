@@ -2,26 +2,24 @@ package com.app.gofoodie.customview;
 
 
 /**
- * @interface WeekSelectDialogInterface
- * @desc Interface for dialog buttoon ok callback.
+ * Interface for dialog buttoon ok callback.
  */
 public interface WeekSelectDialogInterface {
 
 
     /**
-     * @param dialog
-     * @method weekDialogOkClicked
-     * @desc Callback method to dialog button ok clicked.
+     * Callback method to dialog button ok clicked.
+     *
+     * @param dialog reference
      */
-    public void weekDialogOkClicked(WeekSelectDialog dialog);
+    void weekDialogOkClicked(WeekSelectDialog dialog);
 
     /**
-     * @param dialog
-     * @method weekDialogCancelClicked
-     * @desc Callback method to dialog button cancel clicked.
+     * Callback method to dialog button cancel clicked.
+     *
+     * @param dialog reference
      */
-    public void weekDialogCancelClicked(WeekSelectDialog dialog);
-
+    void weekDialogCancelClicked(WeekSelectDialog dialog);
 
 
 }

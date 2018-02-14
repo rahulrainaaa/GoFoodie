@@ -22,6 +22,7 @@
             android:layout_marginLeft="1dp"
             android:layout_marginTop="1dp"
             android:background="@drawable/img_frame"
+            android:contentDescription="@string/image"
             app:srcCompat="@drawable/ic_account_balance_black_24dp" />
 
         <LinearLayout
@@ -68,11 +69,13 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginRight="5dp"
+                        android:contentDescription="@string/image"
                         android:src="@drawable/nonveg" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:contentDescription="@string/image"
                         android:src="@drawable/veg" />
 
                 </LinearLayout>
@@ -117,8 +120,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:background="@color/colorWhite"
-                    android:text="Move to wishlist"
-                    android:textSize="10sp"
+                    android:contentDescription="@string/click"
                     app:srcCompat="@drawable/icon_detail" />
 
                 <LinearLayout
@@ -132,8 +134,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:background="@color/colorWhite"
-                    android:text="Remove"
-                    android:textSize="10sp"
+                    android:contentDescription="@string/click"
                     app:srcCompat="@drawable/icon_add_new" />
 
 

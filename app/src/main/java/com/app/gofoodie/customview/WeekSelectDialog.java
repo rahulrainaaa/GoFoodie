@@ -61,13 +61,13 @@ public class WeekSelectDialog implements View.OnClickListener {
 
         View view = mActivity.getLayoutInflater().inflate(R.layout.dialog_week, null);
 
-        tglBtnSun = (ToggleButton) view.findViewById(R.id.tglBtn_sunday);
-        tglBtnMon = (ToggleButton) view.findViewById(R.id.tglBtn_monday);
-        tglBtnTue = (ToggleButton) view.findViewById(R.id.tglBtn_tuesday);
-        tglBtnWed = (ToggleButton) view.findViewById(R.id.tglBtn_wednesday);
-        tglBtnThu = (ToggleButton) view.findViewById(R.id.tglBtn_thursday);
-        tglBtnFri = (ToggleButton) view.findViewById(R.id.tglBtn_friday);
-        tglBtnSat = (ToggleButton) view.findViewById(R.id.tglBtn_saturday);
+        tglBtnSun = view.findViewById(R.id.tglBtn_sunday);
+        tglBtnMon = view.findViewById(R.id.tglBtn_monday);
+        tglBtnTue = view.findViewById(R.id.tglBtn_tuesday);
+        tglBtnWed = view.findViewById(R.id.tglBtn_wednesday);
+        tglBtnThu = view.findViewById(R.id.tglBtn_thursday);
+        tglBtnFri = view.findViewById(R.id.tglBtn_friday);
+        tglBtnSat = view.findViewById(R.id.tglBtn_saturday);
 
         tglBtnSun.setChecked(sun);
         tglBtnMon.setChecked(mon);
@@ -129,7 +129,7 @@ public class WeekSelectDialog implements View.OnClickListener {
      * @method dismiss
      * @desc Method to show dismiss and clear the dialog alert from memory.
      */
-    public void dismiss() {
+    private void dismiss() {
 
         if (mAlertDialog != null) {
             mAlertDialog.dismiss();
@@ -351,11 +351,10 @@ public class WeekSelectDialog implements View.OnClickListener {
     }
 
     /**
-     * @return boolean true = successful parsed, false = unable to parse.
      * @method parseWeekPreference
      * @desc Method to parse week days separated by commas [,].
      */
-    public boolean parseWeekPreference(String str) {
+    public void parseWeekPreference(String str) {
 
         sun = false;
         mon = false;
@@ -372,46 +371,32 @@ public class WeekSelectDialog implements View.OnClickListener {
             if (strArrWeekDays[i].trim().equals("Sun")) {
 
                 sun = true;
-                continue;
-            }
 
-            if (strArrWeekDays[i].trim().equals("Mon")) {
+            } else if (strArrWeekDays[i].trim().equals("Mon")) {
 
                 mon = true;
-                continue;
-            }
 
-            if (strArrWeekDays[i].trim().equals("Tue")) {
+            } else if (strArrWeekDays[i].trim().equals("Tue")) {
 
                 tue = true;
-                continue;
-            }
 
-            if (strArrWeekDays[i].trim().equals("Wed")) {
+            } else if (strArrWeekDays[i].trim().equals("Wed")) {
 
                 wed = true;
-                continue;
-            }
 
-            if (strArrWeekDays[i].trim().equals("Thu")) {
+            } else if (strArrWeekDays[i].trim().equals("Thu")) {
 
                 thu = true;
-                continue;
-            }
 
-            if (strArrWeekDays[i].trim().equals("Fri")) {
+            } else if (strArrWeekDays[i].trim().equals("Fri")) {
 
                 fri = true;
-                continue;
-            }
 
-            if (strArrWeekDays[i].trim().equals("Sat")) {
+            } else if (strArrWeekDays[i].trim().equals("Sat")) {
 
                 sat = true;
-                continue;
             }
         }
-        return true;
     }
 
 }

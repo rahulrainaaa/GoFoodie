@@ -26,10 +26,11 @@ import java.util.ArrayList;
 public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
 
     public static final String TAG = "ComboPlanGridAdapter";
-    public LayoutInflater mInflater = null;
+
     /**
      * Adapter Class private data members.
      */
+    private LayoutInflater mInflater = null;
     private Activity mActivity = null;
     private ArrayList<Comboplan> mComboList = null;
     private int mLayoutResource;
@@ -57,13 +58,13 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
             view = mInflater.inflate(mLayoutResource, null);
             holder = new Holder();
 
-            holder.imgCombo = (ImageView) view.findViewById(R.id.image_combo);
-            holder.txtComboName = (TextView) view.findViewById(R.id.txt_combo_name);
-            holder.imgVeg = (ImageView) view.findViewById(R.id.img_veg);
-            holder.imgNonveg = (ImageView) view.findViewById(R.id.img_nonveg);
-            holder.iBtnAddToCart = (ImageButton) view.findViewById(R.id.ibtn_cart);
-            holder.txtTags = (TextView) view.findViewById(R.id.txt_tags);
-            holder.txtPrice = (TextView) view.findViewById(R.id.txt_price);
+            holder.imgCombo = view.findViewById(R.id.image_combo);
+            holder.txtComboName = view.findViewById(R.id.txt_combo_name);
+            holder.imgVeg = view.findViewById(R.id.img_veg);
+            holder.imgNonveg = view.findViewById(R.id.img_nonveg);
+            holder.iBtnAddToCart = view.findViewById(R.id.ibtn_cart);
+            holder.txtTags = view.findViewById(R.id.txt_tags);
+            holder.txtPrice = view.findViewById(R.id.txt_price);
 
             holder.iBtnAddToCart.setOnClickListener(mClickListener);
             holder.imgCombo.setOnClickListener(mClickListener);

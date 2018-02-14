@@ -34,7 +34,7 @@ public class Cuisine implements Parcelable {
     @Expose
     private String cateId;
 
-    protected Cuisine(Parcel in) {
+    private Cuisine(Parcel in) {
         this.cuisineId = ((String) in.readValue((String.class.getClassLoader())));
         this.cuisineName = ((String) in.readValue((String.class.getClassLoader())));
         this.cateId = ((String) in.readValue((String.class.getClassLoader())));

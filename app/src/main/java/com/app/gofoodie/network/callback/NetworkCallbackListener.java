@@ -16,7 +16,7 @@ public interface NetworkCallbackListener {
      * @callback networkSuccessResponse
      * @desc Callback method for success response from server and response parsed successfully.
      */
-    public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray);
+    void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray);
 
     /**
      * @param requestCode The request id by user to handle distinctly.
@@ -24,5 +24,5 @@ public interface NetworkCallbackListener {
      * @callback networkFailResponse
      * @desc Callback method for Fail in server response, connection error. Server status code != 200.
      */
-    public void networkFailResponse(int requestCode, String message);
+    void networkFailResponse(int requestCode, String message);
 }

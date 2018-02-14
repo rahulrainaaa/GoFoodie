@@ -25,9 +25,12 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
     private GoFoodieProgressDialog mGoFoodieProgressDialog = null;
 
-    public void disableShiftMode(BottomNavigationView view) {
+    protected void disableShiftMode(BottomNavigationView view) {
+
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
+
         try {
+
             Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
             shiftingMode.setAccessible(true);
             shiftingMode.setBoolean(menuView, false);
@@ -40,6 +43,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
                 //noinspection RestrictedApi
                 item.setChecked(item.getItemData().isChecked());
             }
+
         } catch (NoSuchFieldException e) {
             Log.e("BNVHelper", "Unable to get shift mode field", e);
         } catch (IllegalAccessException e) {

@@ -51,27 +51,27 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mEtName = (TextView) findViewById(R.id.txt_name);
-        mEtReviewCount = (TextView) findViewById(R.id.txt_rate_count);
-        mEtCuisine = (TextView) findViewById(R.id.txt_cuisine);
-        mEtAddress = (TextView) findViewById(R.id.txt_address);
-        mEtPostal = (TextView) findViewById(R.id.txt_postal_code);
-        mEtDescription = (TextView) findViewById(R.id.txt_description);
-        mEtAboutUs = (TextView) findViewById(R.id.txt_about_us);
+        mEtName = findViewById(R.id.txt_name);
+        mEtReviewCount = findViewById(R.id.txt_rate_count);
+        mEtCuisine = findViewById(R.id.txt_cuisine);
+        mEtAddress = findViewById(R.id.txt_address);
+        mEtPostal = findViewById(R.id.txt_postal_code);
+        mEtDescription = findViewById(R.id.txt_description);
+        mEtAboutUs = findViewById(R.id.txt_about_us);
 
-        mRatingBar = (MaterialRatingBar) findViewById(R.id.rating_bar);
+        mRatingBar = findViewById(R.id.rating_bar);
 
-        mImgVeg = (ImageView) findViewById(R.id.img_veg);
-        mImgNonVeg = (ImageView) findViewById(R.id.img_nonveg);
-        mImgProfile = (ImageView) findViewById(R.id.img_profile);
+        mImgVeg = findViewById(R.id.img_veg);
+        mImgNonVeg = findViewById(R.id.img_nonveg);
+        mImgProfile = findViewById(R.id.img_profile);
 
-        mIBtnCall = (ImageButton) findViewById(R.id.btn_call);
-        mIBtnEmail = (ImageButton) findViewById(R.id.btn_email);
-        mIBtnMap = (ImageButton) findViewById(R.id.btn_map);
-        mIBtnReview = (ImageButton) findViewById(R.id.btn_rate);
+        mIBtnCall = findViewById(R.id.btn_call);
+        mIBtnEmail = findViewById(R.id.btn_email);
+        mIBtnMap = findViewById(R.id.btn_map);
+        mIBtnReview = findViewById(R.id.btn_rate);
 
         mIBtnCall.setOnClickListener(this);
         mIBtnEmail.setOnClickListener(this);
@@ -305,6 +305,6 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         startActivity(intent);
     }
 
-    public static enum MODE {SHORTLISTED, REST_BRANCH}
+    public enum MODE {SHORTLISTED, REST_BRANCH}
 
 }

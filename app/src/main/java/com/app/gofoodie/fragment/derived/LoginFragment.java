@@ -91,14 +91,14 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
          */
         callbackManager = CallbackManager.Factory.create();
         mFacebookLoginHandler = new FacebookLoginHandler(getActivity(), this);
-        mLoginButton = (LoginButton) view.findViewById(R.id.facebook_login_button);
+        mLoginButton = view.findViewById(R.id.facebook_login_button);
         mLoginButton.setReadPermissions("email");
         mLoginButton.registerCallback(callbackManager, mFacebookLoginHandler);
 
         /**
          * Google button and login code.
          */
-        SignInButton signInButton = (SignInButton) view.findViewById(R.id.google_login_button);
+        SignInButton signInButton = view.findViewById(R.id.google_login_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
         signInButton.setOnClickListener(this);
 
@@ -182,11 +182,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
      */
     private void doViewMapping(View view) {
 
-        mEtMobileEmail = (MaterialEditText) view.findViewById(R.id.et_mobile_email);
-        mEtPassword = (MaterialEditText) view.findViewById(R.id.et_password);
-        mBtnSignin = (Button) view.findViewById(R.id.btn_sign_in);
-        mBtnForgot = (Button) view.findViewById(R.id.btn_forgot_password);
-        mBtnSignup = (Button) view.findViewById(R.id.btn_sign_up);
+        mEtMobileEmail = view.findViewById(R.id.et_mobile_email);
+        mEtPassword = view.findViewById(R.id.et_password);
+        mBtnSignin = view.findViewById(R.id.btn_sign_in);
+        mBtnForgot = view.findViewById(R.id.btn_forgot_password);
+        mBtnSignup = view.findViewById(R.id.btn_sign_up);
 
         mBtnSignin.setOnClickListener(this);
         mBtnForgot.setOnClickListener(this);
@@ -315,9 +315,10 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
             isValid = false;
             mEtPassword.setError(getActivity().getString(R.string.cannot_be_empty));
+
         } else {
 
-            isValid = true && isValid;
+            mEtPassword.setError(null);
         }
 
         return isValid;

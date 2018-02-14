@@ -58,11 +58,11 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combo_plan);
-        mComboGridView = (GridView) findViewById(R.id.combo_plan_grid_layout);
+        mComboGridView = findViewById(R.id.combo_plan_grid_layout);
 
-        btnViewCart = (Button) findViewById(R.id.btn_view_cart);
+        btnViewCart = findViewById(R.id.btn_view_cart);
         btnViewCart.setOnClickListener(this);
-        txtCartItems = (TextView) findViewById(R.id.txt_cart_items);
+        txtCartItems = findViewById(R.id.txt_cart_items);
         txtCartItems.setText("Cart Items: " + CustomerProfileHandler.CUSTOMER.getCartCount());
 
 
@@ -171,15 +171,11 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Oops...")
                     .setContentText(comboPlanResponse.getStatusMessage())
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            // finish();
-                            sweetAlertDialog.dismissWithAnimation();
-                        }
+                    .setConfirmClickListener(sweetAlertDialog -> {
+                        // finish();
+                        sweetAlertDialog.dismissWithAnimation();
                     })
                     .show();
-            return;
 
         } else {
 
@@ -303,7 +299,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
      *
      * @param view
      */
-    public void btnViewCartClicked(View view) {
+    private void btnViewCartClicked(View view) {
 
         GlobalData.ShowCart = true;
         finish();
@@ -314,7 +310,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
      *
      * @param view
      */
-    public void showComboDescription(View view) {
+    private void showComboDescription(View view) {
 
         Comboplan comboplan = (Comboplan) view.getTag();
         Intent intent = new Intent(this, ComboDescriptionActivity.class);

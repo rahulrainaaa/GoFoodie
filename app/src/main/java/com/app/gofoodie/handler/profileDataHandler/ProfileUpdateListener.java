@@ -13,6 +13,6 @@ public interface ProfileUpdateListener {
      * @method profileUpdatedCallback
      * @desc Callback method for {@link Customer} profile update listener.
      */
-    public void profileUpdatedCallback(Customer customer);
+    void profileUpdatedCallback(Customer customer);
 
 }

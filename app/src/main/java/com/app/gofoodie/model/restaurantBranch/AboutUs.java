@@ -1,15 +1,28 @@
-
 package com.app.gofoodie.model.restaurantBranch;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AboutUs implements Parcelable
-{
+public class AboutUs implements Parcelable {
 
+    public final static Creator<AboutUs> CREATOR = new Creator<AboutUs>() {
+
+
+        @SuppressWarnings({
+                "unchecked"
+        })
+        public AboutUs createFromParcel(Parcel in) {
+            return new AboutUs(in);
+        }
+
+        public AboutUs[] newArray(int size) {
+            return (new AboutUs[size]);
+        }
+
+    };
     @SerializedName("aboutus")
     @Expose
     private String aboutus;
@@ -22,24 +35,8 @@ public class AboutUs implements Parcelable
     @SerializedName("banner")
     @Expose
     private String banner;
-    public final static Creator<AboutUs> CREATOR = new Creator<AboutUs>() {
 
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public AboutUs createFromParcel(Parcel in) {
-            return new AboutUs(in);
-        }
-
-        public AboutUs[] newArray(int size) {
-            return (new AboutUs[size]);
-        }
-
-    }
-    ;
-
-    protected AboutUs(Parcel in) {
+    private AboutUs(Parcel in) {
         this.aboutus = ((String) in.readValue((String.class.getClassLoader())));
         this.isManager = ((String) in.readValue((String.class.getClassLoader())));
         this.logo = ((String) in.readValue((String.class.getClassLoader())));
@@ -89,7 +86,7 @@ public class AboutUs implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

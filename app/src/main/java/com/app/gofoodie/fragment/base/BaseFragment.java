@@ -47,7 +47,7 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
      */
     public final boolean exitWork() {
 
-        if (mFlagSaveBeforeExit == true) {
+        if (mFlagSaveBeforeExit) {
             // Don't unload fragment.
             // Do callback for something to save.
             fragQuitCallback();

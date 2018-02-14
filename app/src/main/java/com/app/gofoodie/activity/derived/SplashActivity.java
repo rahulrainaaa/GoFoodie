@@ -61,7 +61,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
         super.onResume();
 
         showFullScreen();
-        mImgSplashLogo = (ImageView) findViewById(R.id.img_splash_logo);
+        mImgSplashLogo = findViewById(R.id.img_splash_logo);
         mHandler = new Handler();
         if (!SessionUtils.getInstance().isSessionExist()) {
             mHandler.postDelayed(this, 3000);

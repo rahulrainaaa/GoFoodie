@@ -87,11 +87,6 @@ public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<Featured
         return mList.size();
     }
 
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-    }
-
     private void setAnimation(View viewToAnimate, int position) {
         if (position > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(this.mActivity, R.anim.anim_rv_item_show);
@@ -125,9 +120,9 @@ public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<Featured
 
         ItemHolder(View itemView, View.OnClickListener onClickListener) {
             super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.cv);
-            txtRestaurantName = (TextView) itemView.findViewById(R.id.name);
-            imgRestaurant = (RoundedImageView) itemView.findViewById(R.id.image);
+            cv = itemView.findViewById(R.id.cv);
+            txtRestaurantName = itemView.findViewById(R.id.name);
+            imgRestaurant = itemView.findViewById(R.id.image);
             imgRestaurant.setOnClickListener(onClickListener);
         }
     }

@@ -9,10 +9,10 @@ import com.app.gofoodie.model.base.BaseModel;
 public interface ModelParsingListener {
 
     /**
+     * Callback method to get status of model parsing.
+     *
      * @param statusMessage status Message in case of Exception in parsing. Else Class name if successfully parsed.
-     * @param baseModel
-     * @method modelParsingCallback
-     * @desc Callback method to get status of model parsing.
+     * @param baseModel     model object reference
      */
-    public void modelParsingCallback(BaseModel baseModel, String statusMessage);
+    void modelParsingCallback(BaseModel baseModel, String statusMessage);
 }

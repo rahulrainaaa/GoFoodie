@@ -1,7 +1,7 @@
 package com.app.gofoodie;
 
 
-public class ToDo {
+class ToDo {
 
     /**
      *
@@ -10,7 +10,7 @@ public class ToDo {
      *
      * pre 5.0 compatibility (for shape drawables).
      *
-     *
+     * Applying Vacation Toast - remove.
      *
      *
      */

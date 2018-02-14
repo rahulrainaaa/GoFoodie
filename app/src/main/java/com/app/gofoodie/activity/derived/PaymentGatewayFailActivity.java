@@ -36,7 +36,7 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
 
         Intent intent = getIntent();
         Object object = intent.getParcelableExtra(WebviewActivity.PAYMENT_RESPONSE);
-        TextView textView = (TextView) findViewById(R.id.text_payment_result2);
+        TextView textView = findViewById(R.id.text_payment_result2);
 
         if (object instanceof StatusResponse) {
             StatusResponse status = (StatusResponse) object;

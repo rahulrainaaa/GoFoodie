@@ -58,17 +58,17 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
         View view = inflater.inflate(R.layout.frag_register_new_social, container, false);
 
-        mEtFirstName = (MaterialEditText) view.findViewById(R.id.et_first_name);
-        mEtLastName = (MaterialEditText) view.findViewById(R.id.et_last_name);
-        mEtEmail = (MaterialEditText) view.findViewById(R.id.et_email);
-        mEtAltEmail = (MaterialEditText) view.findViewById(R.id.et_alt_email);
-        mEtMobile = (MaterialEditText) view.findViewById(R.id.et_mobile);
-        mEtAltMobile = (MaterialEditText) view.findViewById(R.id.et_alt_mobile);
-        mEtCompanyName = (MaterialEditText) view.findViewById(R.id.et_company_name);
-        mEtAddress = (MaterialEditText) view.findViewById(R.id.et_address);
-        mEtLocationName = (MaterialEditText) view.findViewById(R.id.et_location_pref);
-        mChkAcceptTerms = (CheckBox) view.findViewById(R.id.chk_agree_terms);
-        mBtnRegister = (Button) view.findViewById(R.id.btn_register_new);
+        mEtFirstName = view.findViewById(R.id.et_first_name);
+        mEtLastName = view.findViewById(R.id.et_last_name);
+        mEtEmail = view.findViewById(R.id.et_email);
+        mEtAltEmail = view.findViewById(R.id.et_alt_email);
+        mEtMobile = view.findViewById(R.id.et_mobile);
+        mEtAltMobile = view.findViewById(R.id.et_alt_mobile);
+        mEtCompanyName = view.findViewById(R.id.et_company_name);
+        mEtAddress = view.findViewById(R.id.et_address);
+        mEtLocationName = view.findViewById(R.id.et_location_pref);
+        mChkAcceptTerms = view.findViewById(R.id.chk_agree_terms);
+        mBtnRegister = view.findViewById(R.id.btn_register_new);
 
         mEtEmail.setText(GlobalData.newSocialEmail.trim());
 
@@ -168,7 +168,6 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
         } else {
 
-            isValid = true & isValid;
             mEtLastName.setError(null);
         }
 
@@ -187,13 +186,11 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
         } else {
 
-            isValid = true && isValid;
             mEtEmail.setError(null);
         }
 
         if (strAltEmail.trim().isEmpty()) {
 
-            isValid = true & isValid;
             mEtAltEmail.setError(null);
 
         } else if (!Pattern.compile(Constants.REGEX_EMAIL).matcher(strAltEmail).matches()) {
@@ -203,7 +200,6 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
         } else {
 
-            isValid = true & isValid;
             mEtAltEmail.setError(null);
         }
 
@@ -222,13 +218,11 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
         } else {
 
-            isValid = true && isValid;
             mEtMobile.setError(null);
         }
 
         if (strAltMobile.trim().isEmpty()) {
 
-            isValid = true & isValid;
             mEtAltMobile.setError(null);
 
         } else if (!Pattern.compile(Constants.REGEX_MOBILE).matcher(strAltMobile).matches()) {
@@ -238,7 +232,6 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
         } else {
 
-            isValid = true & isValid;
             mEtAltMobile.setError(null);
         }
 
@@ -252,7 +245,6 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             mEtCompanyName.setError(getString(R.string.cannot_be_empty));
         } else {
 
-            isValid = isValid & true;
             mEtCompanyName.setError(null);
         }
 
@@ -262,7 +254,6 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             mEtAddress.setError(getString(R.string.cannot_be_empty));
         } else {
 
-            isValid = true && isValid;
             mEtAddress.setError(null);
         }
 
@@ -273,8 +264,6 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             startActivity(new Intent(getActivity(), LocationActivity.class));
         } else {
 
-            mEtLocationName.setError(null);
-            isValid = true && isValid;
             mEtLocationName.setError(null);
         }
 

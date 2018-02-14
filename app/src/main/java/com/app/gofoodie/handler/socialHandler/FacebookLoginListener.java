@@ -17,7 +17,7 @@ public interface FacebookLoginListener {
      * @method onFacebookLogin
      * @desc Callback, when application facebook successfully login happens.
      */
-    public void onFacebookLogin(LoginResult loginResult);
+    void onFacebookLogin(LoginResult loginResult);
 
     /**
      * @param object   {@link org.json.JSONArray} parameters asked from Graph API.
@@ -25,12 +25,12 @@ public interface FacebookLoginListener {
      * @method onFacebookGraphAPIInformation
      * @desc Callback, when the facebook user detail is fetched completely.
      */
-    public void onFacebookGraphAPIInformation(JSONObject object, GraphResponse response);
+    void onFacebookGraphAPIInformation(JSONObject object, GraphResponse response);
 
     /**
      * @param e {@link FacebookException}
      * @method onFacebookError
      * @desc Callback, when there is error/failure/exception in facebook login, within this application.
      */
-    public void onFacebookError(FacebookException e);
+    void onFacebookError(FacebookException e);
 }

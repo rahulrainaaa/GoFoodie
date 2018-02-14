@@ -1,6 +1,6 @@
 package com.app.gofoodie.utility;
 
-public class View {
+class View {
 }
 
 

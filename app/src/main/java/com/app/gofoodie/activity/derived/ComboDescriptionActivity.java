@@ -55,29 +55,26 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combo_description);
 
-        mTxtName = (TextView) findViewById(R.id.txt_name);
-        mTxtComboPrice = (TextView) findViewById(R.id.txt_rate_count);
-        mTxtCuisine = (TextView) findViewById(R.id.txt_cuisine);
-        mTxtRestaurantName = (TextView) findViewById(R.id.txt_address);
-        mTxtRestaurantAddress = (TextView) findViewById(R.id.txt_postal_code);
-        mTxtDescription = (TextView) findViewById(R.id.txt_description);
-        AboutUs = (TextView) findViewById(R.id.txt_about_us);
-        mBtnCartItems = (Button) findViewById(R.id.btn_combo_items);
+        mTxtName = findViewById(R.id.txt_name);
+        mTxtComboPrice = findViewById(R.id.txt_rate_count);
+        mTxtCuisine = findViewById(R.id.txt_cuisine);
+        mTxtRestaurantName = findViewById(R.id.txt_address);
+        mTxtRestaurantAddress = findViewById(R.id.txt_postal_code);
+        mTxtDescription = findViewById(R.id.txt_description);
+        AboutUs = findViewById(R.id.txt_about_us);
+        mBtnCartItems = findViewById(R.id.btn_combo_items);
 
-        mRatingBar = (RatingBar) findViewById(R.id.rating_bar);
+        mRatingBar = findViewById(R.id.rating_bar);
 
-        Veg = (ImageView) findViewById(R.id.img_veg);
-        NonVeg = (ImageView) findViewById(R.id.img_nonveg);
-        Profile = (ImageView) findViewById(R.id.img_profile);
+        Veg = findViewById(R.id.img_veg);
+        NonVeg = findViewById(R.id.img_nonveg);
+        Profile = findViewById(R.id.img_profile);
 
-        mBtnCartItems.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mBtnCartItems.setOnClickListener(v -> {
 
-                ComboPlanResponse combo = (ComboPlanResponse) v.getTag();
-                showItems(combo);
+            ComboPlanResponse combo = (ComboPlanResponse) v.getTag();
+            showItems(combo);
 
-            }
         });
 
         String url = Network.URL_GET_COMBO_DETAIL + getIntent().getStringExtra("combo_id");
@@ -104,12 +101,7 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Alert")
                     .setContentText("" + comboDetailResponse.getStatusMessage())
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            finish();
-                        }
-                    })
+                    .setConfirmClickListener(sweetAlertDialog -> finish())
                     .show();
         }
     }
@@ -174,8 +166,8 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
          * Create a bottom sheet dialog.
          */
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        View view = (View) getLayoutInflater().inflate(R.layout.layout_combo_attributes, null);
-        LinearLayout containerLayout = (LinearLayout) view.findViewById(R.id.container_layout);
+        View view = getLayoutInflater().inflate(R.layout.layout_combo_attributes, null);
+        LinearLayout containerLayout = view.findViewById(R.id.container_layout);
 
         try {
 
@@ -186,9 +178,9 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
             List<ComboOption> items = comboPlanResponse.getComboplans().get(0).getComboOptions();
             for (int i = 0; i < attrLength; i++) {
 
-                View attrCell = (View) getLayoutInflater().inflate(R.layout.layout_combo_items, null);
-                TextView txtAttributeKey = (TextView) attrCell.findViewById(R.id.txt_key);
-                TextView txtAttributeValue = (TextView) attrCell.findViewById(R.id.txt_key_value);
+                View attrCell = getLayoutInflater().inflate(R.layout.layout_combo_items, null);
+                TextView txtAttributeKey = attrCell.findViewById(R.id.txt_key);
+                TextView txtAttributeValue = attrCell.findViewById(R.id.txt_key_value);
                 txtAttributeKey.setText("" + items.get(i).getName().trim());
                 txtAttributeValue.setText("" + items.get(i).getOptions().get(0).trim());
                 containerLayout.addView(attrCell);

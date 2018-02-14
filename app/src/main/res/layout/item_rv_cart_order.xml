@@ -71,6 +71,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:background="@drawable/border_gray_circle"
+            android:contentDescription="@string/click"
             app:srcCompat="@drawable/icon_list" />
     </LinearLayout>
 

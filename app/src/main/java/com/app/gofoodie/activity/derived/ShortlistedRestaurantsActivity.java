@@ -50,7 +50,7 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shortlisted_restaurants);
 
-        mListView = (ListView) findViewById(R.id.list_view);
+        mListView = findViewById(R.id.list_view);
     }
 
     @Override
@@ -186,25 +186,22 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
 
         final Shortlisted shortlisted = (Shortlisted) view.getTag();
 
-        Snackbar.make(view, "Remove Restaurant ?", Snackbar.LENGTH_LONG).setAction("Remove", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        Snackbar.make(view, "Remove Restaurant ?", Snackbar.LENGTH_LONG).setAction("Remove", view1 -> {
 
-                try {
+            try {
 
-                    JSONObject jsonRequest = new JSONObject();
-                    jsonRequest.put("customer_id", getSessionData().getCustomerId());
-                    jsonRequest.put("login_id", getSessionData().getLoginId());
-                    jsonRequest.put("branch_id", shortlisted.branchId);
-                    jsonRequest.put("token", getSessionData().getToken());
-                    NetworkHandler networkHandler = new NetworkHandler();
-                    networkHandler.httpCreate(2, ShortlistedRestaurantsActivity.this, ShortlistedRestaurantsActivity.this, jsonRequest, Network.URL_REM_SR, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                    networkHandler.executePost();
-                } catch (JSONException jsonExc) {
+                JSONObject jsonRequest = new JSONObject();
+                jsonRequest.put("customer_id", getSessionData().getCustomerId());
+                jsonRequest.put("login_id", getSessionData().getLoginId());
+                jsonRequest.put("branch_id", shortlisted.branchId);
+                jsonRequest.put("token", getSessionData().getToken());
+                NetworkHandler networkHandler = new NetworkHandler();
+                networkHandler.httpCreate(2, ShortlistedRestaurantsActivity.this, ShortlistedRestaurantsActivity.this, jsonRequest, Network.URL_REM_SR, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                networkHandler.executePost();
+            } catch (JSONException jsonExc) {
 
-                    jsonExc.printStackTrace();
-                    Toast.makeText(ShortlistedRestaurantsActivity.this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+                jsonExc.printStackTrace();
+                Toast.makeText(ShortlistedRestaurantsActivity.this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }).show();
 

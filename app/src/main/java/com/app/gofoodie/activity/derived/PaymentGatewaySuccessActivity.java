@@ -35,8 +35,8 @@ public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity impleme
         VibrationUtil.getInstance().vibrate(this);
 
         Intent intent = getIntent();
-        StatusResponse status = (StatusResponse) intent.getParcelableExtra(WebviewActivity.PAYMENT_RESPONSE);
-        TextView textView = (TextView) findViewById(R.id.text_payment_result);
+        StatusResponse status = intent.getParcelableExtra(WebviewActivity.PAYMENT_RESPONSE);
+        TextView textView = findViewById(R.id.text_payment_result);
         textView.setText("Transaction Reference:\n" + status.getTrace());
 
         if (status.getAuth() != null) {

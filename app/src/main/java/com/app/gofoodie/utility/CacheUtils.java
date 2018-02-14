@@ -12,7 +12,7 @@ public class CacheUtils {
     /**
      * {@link SharedPreferences} Preference naming.
      */
-    public static enum PREF_NAME {
+    public enum PREF_NAME {
         PREF_LOGIN, PREF_MEAL, PREF_AREA_LOCATION
     }
 

@@ -49,9 +49,9 @@ public class RatingListViewAdapter extends ArrayAdapter<Review> {
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
             holder = new Holder();
 
-            holder.ratingBar = (RatingBar) cell.findViewById(R.id.rating_bar);
-            holder.Name = (TextView) cell.findViewById(R.id.name);
-            holder.Review = (TextView) cell.findViewById(R.id.review);
+            holder.ratingBar = cell.findViewById(R.id.rating_bar);
+            holder.Name = cell.findViewById(R.id.name);
+            holder.Review = cell.findViewById(R.id.review);
 
             cell.setTag(holder);
         } else {

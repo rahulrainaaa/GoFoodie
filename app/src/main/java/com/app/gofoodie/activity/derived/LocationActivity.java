@@ -58,13 +58,13 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
-        mCountryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, mCountryList);
-        mCityAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, mCityList);
-        mAreaAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, mAreaList);
+        mCountryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, mCountryList);
+        mCityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, mCityList);
+        mAreaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, mAreaList);
 
-        mSpCountry = (Spinner) findViewById(R.id.sp_locpref_country);
-        mSpCity = (Spinner) findViewById(R.id.sp_locpref_city);
-        mSpArea = (Spinner) findViewById(R.id.sp_locpref_area);
+        mSpCountry = findViewById(R.id.sp_locpref_country);
+        mSpCity = findViewById(R.id.sp_locpref_city);
+        mSpArea = findViewById(R.id.sp_locpref_area);
 
         mSpCountry.setAdapter(mCountryAdapter);
         mSpCity.setAdapter(mCityAdapter);

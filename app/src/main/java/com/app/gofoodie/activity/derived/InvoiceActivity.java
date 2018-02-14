@@ -47,11 +47,11 @@ public class InvoiceActivity extends BaseAppCompatActivity {
 
         PlacedOrders order = orderResponse.getPlacedOrders();
 
-        txtOrderId = (TextView) findViewById(R.id.txt_order_id);
-        txtPaidPrice = (TextView) findViewById(R.id.price_paid);
-        txtDate = (TextView) findViewById(R.id.date);
-        txtTotalOrders = (TextView) findViewById(R.id.total_orders);
-        btnDone = (Button) findViewById(R.id.btn_done);
+        txtOrderId = findViewById(R.id.txt_order_id);
+        txtPaidPrice = findViewById(R.id.price_paid);
+        txtDate = findViewById(R.id.date);
+        txtTotalOrders = findViewById(R.id.total_orders);
+        btnDone = findViewById(R.id.btn_done);
 
         txtOrderId.setText("OrderID: " + order.getOrderSetId());
         txtPaidPrice.setText("Paid " + order.getPricePaid() + " AED");

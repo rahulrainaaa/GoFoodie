@@ -1,6 +1,5 @@
 package com.app.gofoodie.fragment.derived;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -38,18 +37,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
- * @class CartFragment
- * @desc {@link BaseFragment} Fragment class to handle Cart UI screen.
+ * {@link BaseFragment} Fragment class to handle Cart UI screen.
  */
 public class CartFragment extends BaseFragment implements NetworkCallbackListener {
 
     public final String TAG = "CartFragment";
-    public CartItemClickListener mCartItemClickListener = null;
-    public TextView mTxtLabel = null;
 
+    private TextView mTxtLabel = null;
+    private CartItemClickListener mCartItemClickListener = null;
     /**
      * Class private data member(s).
      */
@@ -72,29 +69,26 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
         // Reset global flag to show cart.
         GlobalData.ShowCart = false;
         mCartItemClickListener = new CartItemClickListener();
-        mListView = (ListView) view.findViewById(R.id.list_view_cart_items);
-        mTxtLabel = (TextView) view.findViewById(R.id.txt_label);
-        btnProceed = (Button) view.findViewById(R.id.btn_proceed);
+        mListView = view.findViewById(R.id.list_view_cart_items);
+        mTxtLabel = view.findViewById(R.id.txt_label);
+        btnProceed = view.findViewById(R.id.btn_proceed);
 //        btnProceed.setCompoundDrawables(null, null, getResources().getDrawable(R.drawable.icon_cart_proceed), null);
-        btnProceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnProceed.setOnClickListener(view1 -> {
 
-                if (mCartList == null) {
+            if (mCartList == null) {
 
-                    Toast.makeText(getDashboardActivity(), "Cart is Empty.", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (mCartList.size() == 0) {
+                Toast.makeText(getDashboardActivity(), "Cart is Empty.", Toast.LENGTH_SHORT).show();
+                return;
+            } else if (mCartList.size() == 0) {
 
-                    Toast.makeText(getDashboardActivity(), "Cart is Empty.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                GlobalData.cartArrayList = mCartList;
-                Intent intent = new Intent(getActivity(), CartOrderActivity.class);
-                intent.putExtra("taxPercent", taxPercent);
-                startActivity(intent);
+                Toast.makeText(getDashboardActivity(), "Cart is Empty.", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            GlobalData.cartArrayList = mCartList;
+            Intent intent = new Intent(getActivity(), CartOrderActivity.class);
+            intent.putExtra("taxPercent", taxPercent);
+            startActivity(intent);
         });
         return view;
     }
@@ -112,8 +106,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
     }
 
     /**
-     * @method refreshCartList
-     * @desc Method to refresh the cart list by sending the http request.
+     * Method to refresh the cart list by sending the http request.
      */
     private void refreshCartList() {
 
@@ -147,9 +140,9 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
     }
 
     /**
+     * Method to handle the view cart response from http web service.
+     *
      * @param json http {@link JSONObject} response.
-     * @method handleViewCartResponse
-     * @desc Method to handle the view cart response from http web service.
      */
     private void handleViewCartResponse(JSONObject json) {
 
@@ -162,7 +155,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
                     .setTitleText("Oops...")
                     .setContentText(cartResponse.getStatusMessage())
                     .show();
-            cartResponse.setCart(new ArrayList<Cart>());
+            cartResponse.setCart(new ArrayList<>());
             mTxtLabel.setText("Cart");
 
         } else {
@@ -170,7 +163,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
             // Parse the response on success and also parse the taxPercent and
             taxPercent = cartResponse.getTaxPerc();
             CustomerProfileHandler.CUSTOMER.setCartCount(cartResponse.getCart().size());
-            totalPayablePrice = Float.valueOf(cartResponse.getTotalPrice().trim());
+            totalPayablePrice = cartResponse.getTotalPrice();
             mTxtLabel.setText("Total Price: " + cartResponse.getTotalPrice() + " AED");// + ",  Price: AED " + cartResponse.totalPrice.toString());
         }
         mCartList = (ArrayList<Cart>) cartResponse.getCart();
@@ -179,44 +172,41 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
     }
 
     /**
-     * @param view
-     * @method deleteClicked
-     * @desc Method to handle the delete button clicked.
+     * Method to handle the delete button clicked.
+     *
+     * @param view reference
      */
     private void deleteClicked(View view) {
 
         VibrationUtil.getInstance().vibrate(getActivity());
         final Cart cart = (Cart) view.getTag();
 
-        Snackbar.make(view, "Are you sure ?", Snackbar.LENGTH_LONG).setAction("Remove", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        Snackbar.make(view, "Are you sure ?", Snackbar.LENGTH_LONG).setAction("Remove", view1 -> {
 
-                try {
+            try {
 
-                    JSONObject jsonRequest = new JSONObject();
+                JSONObject jsonRequest = new JSONObject();
 
-                    jsonRequest.put("customer_id", getSession().getData().getCustomerId());
-                    jsonRequest.put("login_id", getSession().getData().getLoginId());
-                    jsonRequest.put("cart_item_id", cart.getCartItemId());
-                    jsonRequest.put("token", getSession().getData().getToken());
-                    NetworkHandler networkHandler = new NetworkHandler();
-                    networkHandler.httpCreate(1, getDashboardActivity(), CartFragment.this, jsonRequest, Network.URL_CART_ITEM_REMOVE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                    networkHandler.executePost();
+                jsonRequest.put("customer_id", getSession().getData().getCustomerId());
+                jsonRequest.put("login_id", getSession().getData().getLoginId());
+                jsonRequest.put("cart_item_id", cart.getCartItemId());
+                jsonRequest.put("token", getSession().getData().getToken());
+                NetworkHandler networkHandler = new NetworkHandler();
+                networkHandler.httpCreate(1, getDashboardActivity(), CartFragment.this, jsonRequest, Network.URL_CART_ITEM_REMOVE, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                networkHandler.executePost();
 
-                } catch (JSONException jsonExc) {
+            } catch (JSONException jsonExc) {
 
-                    jsonExc.printStackTrace();
-                    Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+                jsonExc.printStackTrace();
+                Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }).show();
     }
 
     /**
-     * @param view
-     * @method qtySelected
-     * @desc Method to handle the Qty button clicked.
+     * Method to handle the Qty button clicked.
+     *
+     * @param view reference
      */
     private void qtySelected(final View view) {
 
@@ -226,69 +216,65 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
         builder.setTitle("Quantity");
         builder.setView(numberPicker)
                 .setCancelable(true)
-                .setPositiveButton("Update Qty", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                .setPositiveButton("Update Qty", (dialog, id) -> {
 
-                        int qtySelected = numberPicker.getValue();
-                        Cart cart = (Cart) view.getTag();
-                        int oldQty = Integer.valueOf(cart.getQuantity().trim());
+                    int qtySelected = numberPicker.getValue();
+                    Cart cart = (Cart) view.getTag();
+                    int oldQty = Integer.valueOf(cart.getQuantity().trim());
 
-                        if (oldQty == qtySelected) {
+                    if (oldQty == qtySelected) {
 
-                            Log.d(TAG, "Same quantity picked for cart item.");
-                            return;
-                        }
-
-                        JSONObject jsonRequest = new JSONObject();
-
-                        try {
-
-                            JSONArray jsonArrayItems = new JSONArray();
-
-                            Iterator<Description> descriptionIterator = cart.getDescription().iterator();
-                            while (descriptionIterator.hasNext()) {
-
-                                Description description = descriptionIterator.next();
-                                JSONArray jsonArrayOptions = new JSONArray(description.getOptions());
-                                JSONObject jsonObject = new JSONObject();
-                                jsonObject.put("options", jsonArrayOptions);
-                                jsonObject.put("name", description.getValue());
-                                jsonObject.put("value", description.getValue());
-                                jsonObject.put("item_id", description.getItemId());
-                                jsonArrayItems.put(jsonObject);
-                            }
-
-                            jsonRequest.put("description", jsonArrayItems);
-                            jsonRequest.put("customer_id", getSession().getData().getCustomerId());
-                            jsonRequest.put("login_id", getSession().getData().getLoginId());
-                            jsonRequest.put("combo_id", cart.getComboId());
-                            jsonRequest.put("cart_item_id", cart.getCartItemId());
-                            jsonRequest.put("branch_id", cart.getBranchId());
-                            jsonRequest.put("quantity", "" + qtySelected);
-                            jsonRequest.put("token", getSession().getData().getToken());
-                            jsonRequest.put("area", CustomerProfileHandler.CUSTOMER.getProfile().getArea().trim());
-
-                            NetworkHandler networkHandler = new NetworkHandler();
-                            networkHandler.httpCreate(1, getDashboardActivity(), CartFragment.this, jsonRequest, Network.URL_UPDATE_CART_ITEM, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                            networkHandler.executePost();
-
-                        } catch (JSONException jsonExc) {
-
-                            jsonExc.printStackTrace();
-                            Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-
-
+                        Log.d(TAG, "Same quantity picked for cart item.");
+                        return;
                     }
+
+                    JSONObject jsonRequest = new JSONObject();
+
+                    try {
+
+                        JSONArray jsonArrayItems = new JSONArray();
+
+                        for (Description description : cart.getDescription()) {
+
+                            JSONArray jsonArrayOptions = new JSONArray(description.getOptions());
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("options", jsonArrayOptions);
+                            jsonObject.put("name", description.getValue());
+                            jsonObject.put("value", description.getValue());
+                            jsonObject.put("item_id", description.getItemId());
+                            jsonArrayItems.put(jsonObject);
+                        }
+
+                        jsonRequest.put("description", jsonArrayItems);
+                        jsonRequest.put("customer_id", getSession().getData().getCustomerId());
+                        jsonRequest.put("login_id", getSession().getData().getLoginId());
+                        jsonRequest.put("combo_id", cart.getComboId());
+                        jsonRequest.put("cart_item_id", cart.getCartItemId());
+                        jsonRequest.put("branch_id", cart.getBranchId());
+                        jsonRequest.put("quantity", "" + qtySelected);
+                        jsonRequest.put("token", getSession().getData().getToken());
+                        jsonRequest.put("area", CustomerProfileHandler.CUSTOMER.getProfile().getArea().trim());
+
+                        NetworkHandler networkHandler = new NetworkHandler();
+                        networkHandler.httpCreate(1, getDashboardActivity(), CartFragment.this, jsonRequest, Network.URL_UPDATE_CART_ITEM, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                        networkHandler.executePost();
+
+                    } catch (JSONException jsonExc) {
+
+                        jsonExc.printStackTrace();
+                        Toast.makeText(getActivity(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+
                 });
         AlertDialog alert = builder.create();
         alert.show();
     }
 
     /**
-     * @param view
-     * @method imgComboClicked
-     * @desc Method to handle the combo image view clicked. Show the combo descriprion.
+     * Method to handle the combo image view clicked. Show the combo description.
+     *
+     * @param view reference
      */
     private void imgComboClicked(View view) {
 
@@ -297,8 +283,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
     }
 
     /**
-     * @class CartItemClickListener
-     * @desc Sub-Class to handle the click events of cart item(s).
+     * Sub-Class to handle the click events of cart item(s).
      */
     public class CartItemClickListener implements View.OnClickListener {
 

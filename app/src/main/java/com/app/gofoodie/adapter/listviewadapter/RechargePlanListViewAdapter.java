@@ -43,10 +43,10 @@ public class RechargePlanListViewAdapter extends ArrayAdapter<Subscriptionplan> 
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
             holder = new Holder();
-            holder.txtRechargePlan = (TextView) cell.findViewById(R.id.recharge_plan);
-            holder.txtRechargeDesc = (TextView) cell.findViewById(R.id.recharge_desc);
-            holder.txtRechargePrice = (TextView) cell.findViewById(R.id.recharge_price);
-            holder.txtRechargeDays = (TextView) cell.findViewById(R.id.recharge_days);
+            holder.txtRechargePlan = cell.findViewById(R.id.recharge_plan);
+            holder.txtRechargeDesc = cell.findViewById(R.id.recharge_desc);
+            holder.txtRechargePrice = cell.findViewById(R.id.recharge_price);
+            holder.txtRechargeDays = cell.findViewById(R.id.recharge_days);
             cell.setTag(holder);
 
         } else {

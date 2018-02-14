@@ -1,4 +1,3 @@
-
 package com.app.gofoodie.model.featured;
 
 import android.os.Parcel;
@@ -12,18 +11,6 @@ import java.util.List;
 
 public class Featured extends BaseModel implements Parcelable {
 
-    @SerializedName("featured_restaurants")
-    @Expose
-    public List<FeaturedRestaurant> featuredRestaurants = null;
-    @SerializedName("featured_combos")
-    @Expose
-    public List<FeaturedCombo> featuredCombos = null;
-    @SerializedName("statusCode")
-    @Expose
-    public Integer statusCode;
-    @SerializedName("statusMessage")
-    @Expose
-    public String statusMessage;
     public final static Creator<Featured> CREATOR = new Creator<Featured>() {
 
 
@@ -39,6 +26,18 @@ public class Featured extends BaseModel implements Parcelable {
         }
 
     };
+    @SerializedName("featured_restaurants")
+    @Expose
+    public List<FeaturedRestaurant> featuredRestaurants = null;
+    @SerializedName("featured_combos")
+    @Expose
+    public List<FeaturedCombo> featuredCombos = null;
+    @SerializedName("statusCode")
+    @Expose
+    public Integer statusCode;
+    @SerializedName("statusMessage")
+    @Expose
+    public String statusMessage;
 
     protected Featured(Parcel in) {
         in.readList(this.featuredRestaurants, (FeaturedRestaurant.class.getClassLoader()));

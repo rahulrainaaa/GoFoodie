@@ -85,7 +85,7 @@ public class FacebookLoginHandler implements FacebookCallback<LoginResult>, Grap
      * @desc Getting facebook user data using Graph API.
      * @method triggerGraphAPI
      */
-    public void triggerGraphAPI() {
+    private void triggerGraphAPI() {
 
         GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), this);
         Bundle parameters = new Bundle();

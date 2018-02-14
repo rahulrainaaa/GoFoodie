@@ -55,6 +55,7 @@
                     android:id="@+id/img_veg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/image"
                     android:src="@drawable/veg" />
 
                 <ImageView
@@ -62,6 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:contentDescription="@string/image"
                     android:src="@drawable/nonveg" />
 
             </LinearLayout>
@@ -89,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:background="@color/float_transparent"
+                android:contentDescription="@string/click"
                 app:srcCompat="@drawable/icon_call" />
 
             <LinearLayout
@@ -102,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:background="@color/float_transparent"
+                android:contentDescription="@string/click"
                 app:srcCompat="@drawable/icon_email" />
 
             <LinearLayout
@@ -115,6 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:background="@color/float_transparent"
+                android:contentDescription="@string/click"
                 app:srcCompat="@drawable/icon_map" />
 
             <LinearLayout
@@ -128,6 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:background="@color/float_transparent"
+                android:contentDescription="@string/click"
                 app:srcCompat="@drawable/icon_grade" />
 
         </LinearLayout>

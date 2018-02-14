@@ -51,7 +51,7 @@ public class PlacedOrders implements Parcelable {
     @Expose
     private String geoLng;
 
-    protected PlacedOrders(Parcel in) {
+    private PlacedOrders(Parcel in) {
         this.orderSetId = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.orderDate = ((String) in.readValue((String.class.getClassLoader())));
         this.startDate = ((String) in.readValue((String.class.getClassLoader())));

@@ -42,11 +42,11 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
             holder = new Holder();
-            holder.imgType = (ImageView) cell.findViewById(R.id.image_alert);
-            holder.txtTransactionId = (TextView) cell.findViewById(R.id.transaction_id);
-            holder.txtDate = (TextView) cell.findViewById(R.id.text_view_date);
-            holder.txtReviews = (TextView) cell.findViewById(R.id.text_view_remark);
-            holder.txtPrice = (TextView) cell.findViewById(R.id.text_view_price);
+            holder.imgType = cell.findViewById(R.id.image_alert);
+            holder.txtTransactionId = cell.findViewById(R.id.transaction_id);
+            holder.txtDate = cell.findViewById(R.id.text_view_date);
+            holder.txtReviews = cell.findViewById(R.id.text_view_remark);
+            holder.txtPrice = cell.findViewById(R.id.text_view_price);
             cell.setTag(holder);
         } else {
             holder = (Holder) cell.getTag();

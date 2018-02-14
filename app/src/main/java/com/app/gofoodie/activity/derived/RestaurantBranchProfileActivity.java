@@ -63,24 +63,24 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_branch_pofile);
 
-        Name = (TextView) findViewById(R.id.txt_name);
-        ReviewCount = (TextView) findViewById(R.id.txt_rate_count);
-        Cuisine = (TextView) findViewById(R.id.txt_cuisine);
-        Address = (TextView) findViewById(R.id.txt_address);
-        Postal = (TextView) findViewById(R.id.txt_postal_code);
-        Description = (TextView) findViewById(R.id.txt_description);
-        AboutUs = (TextView) findViewById(R.id.txt_about_us);
+        Name = findViewById(R.id.txt_name);
+        ReviewCount = findViewById(R.id.txt_rate_count);
+        Cuisine = findViewById(R.id.txt_cuisine);
+        Address = findViewById(R.id.txt_address);
+        Postal = findViewById(R.id.txt_postal_code);
+        Description = findViewById(R.id.txt_description);
+        AboutUs = findViewById(R.id.txt_about_us);
 
-        mRatingBar = (MaterialRatingBar) findViewById(R.id.rating_bar);
+        mRatingBar = findViewById(R.id.rating_bar);
 
-        Veg = (ImageView) findViewById(R.id.img_veg);
-        NonVeg = (ImageView) findViewById(R.id.img_nonveg);
-        Profile = (ImageView) findViewById(R.id.img_profile);
+        Veg = findViewById(R.id.img_veg);
+        NonVeg = findViewById(R.id.img_nonveg);
+        Profile = findViewById(R.id.img_profile);
 
-        Call = (ImageButton) findViewById(R.id.btn_call);
-        Email = (ImageButton) findViewById(R.id.btn_email);
-        Map = (ImageButton) findViewById(R.id.btn_map);
-        Review = (ImageButton) findViewById(R.id.btn_rate);
+        Call = findViewById(R.id.btn_call);
+        Email = findViewById(R.id.btn_email);
+        Map = findViewById(R.id.btn_map);
+        Review = findViewById(R.id.btn_rate);
 
         fetchBranchDetails();
     }
@@ -106,13 +106,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
                 new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.ERROR_TYPE)
                         .setTitleText("Oops...")
                         .setContentText("No Internet")
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-
-                                finish();
-                            }
-                        })
+                        .setConfirmClickListener(sweetAlertDialog -> finish())
                         .show();
             }
         }, new JSONObject(), url, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
@@ -171,7 +165,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
         ReviewCount.setText("(" + restaurant.getCountRating() + ")");
         Cuisine.setText(restaurant.getTags());
         Address.setText(restaurant.getBranchAddress());
-        Postal.setText((String) restaurant.getBranchPostalCode());
+        Postal.setText(restaurant.getBranchPostalCode());
         Description.setText(restaurant.getDescription());
         AboutUs.setText(restaurant.getAboutUs().getAboutus());
         mRatingBar.setRating(Float.parseFloat(restaurant.getAvgRating()));

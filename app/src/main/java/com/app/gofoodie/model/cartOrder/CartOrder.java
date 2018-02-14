@@ -3,13 +3,11 @@ package com.app.gofoodie.model.cartOrder;
 import com.app.gofoodie.model.cart.Cart;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by Android on 11/1/2017.
+ * Model class to hold from cart item, in order to proceed for the payment.
  */
-
 public class CartOrder {
 
     public String date = "";
@@ -43,10 +41,10 @@ public class CartOrder {
         this.payPrice = cart.getPayPrice();
 
         description.clear();
-        Iterator<com.app.gofoodie.model.cart.Description> descriptionIterator = cart.getDescription().iterator();
-        while (descriptionIterator.hasNext()) {
 
-            this.description.add(new Description(descriptionIterator.next()));
+        for (com.app.gofoodie.model.cart.Description desc : cart.getDescription()) {
+
+            this.description.add(new Description(desc));
         }
     }
 

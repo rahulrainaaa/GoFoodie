@@ -39,7 +39,7 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
 
-        mListView = (ListView) findViewById(R.id.list_view);
+        mListView = findViewById(R.id.list_view);
         mAdapter = new RatingListViewAdapter(this, R.layout.item_list_rating, mList);
         mListView.setAdapter(mAdapter);
 
@@ -101,13 +101,10 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
                 .setTitleText(title)
                 .setContentText(content)
                 .setConfirmText("Ok")
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                .setConfirmClickListener(sweetAlertDialog -> {
 
-                        sweetAlertDialog.dismissWithAnimation();
-                        finish();
-                    }
+                    sweetAlertDialog.dismissWithAnimation();
+                    finish();
                 });
         s.setCancelable(false);
         s.show();

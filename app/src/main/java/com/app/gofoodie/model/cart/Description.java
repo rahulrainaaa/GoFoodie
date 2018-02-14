@@ -1,16 +1,30 @@
-
 package com.app.gofoodie.model.cart;
 
-import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Description implements Parcelable
-{
+import java.util.List;
 
+public class Description implements Parcelable {
+
+    public final static Creator<Description> CREATOR = new Creator<Description>() {
+
+
+        @SuppressWarnings({
+                "unchecked"
+        })
+        public Description createFromParcel(Parcel in) {
+            return new Description(in);
+        }
+
+        public Description[] newArray(int size) {
+            return (new Description[size]);
+        }
+
+    };
     @SerializedName("item_id")
     @Expose
     private String itemId;
@@ -23,22 +37,6 @@ public class Description implements Parcelable
     @SerializedName("options")
     @Expose
     private List<String> options = null;
-    public final static Creator<Description> CREATOR = new Creator<Description>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Description createFromParcel(Parcel in) {
-            return new Description(in);
-        }
-
-        public Description[] newArray(int size) {
-            return (new Description[size]);
-        }
-
-    }
-    ;
 
     protected Description(Parcel in) {
         this.itemId = ((String) in.readValue((String.class.getClassLoader())));
@@ -90,7 +88,7 @@ public class Description implements Parcelable
     }
 
     public int describeContents() {
-        return  0;
+        return 0;
     }
 
 }

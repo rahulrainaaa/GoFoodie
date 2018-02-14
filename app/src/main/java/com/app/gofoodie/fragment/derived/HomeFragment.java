@@ -73,12 +73,12 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
         }
 
         View view = inflater.inflate(R.layout.frag_home, container, false);
-        mScrollView = (ScrollView) view.findViewById(R.id.scroll_view);
-        mRVShortlistRestaurant = (RecyclerView) view.findViewById(R.id.rv_shortlist_restaurants);
-        mFeaturedRestaurantsGrid = (GridView) view.findViewById(R.id.grid_view_banner);
+        mScrollView = view.findViewById(R.id.scroll_view);
+        mRVShortlistRestaurant = view.findViewById(R.id.rv_shortlist_restaurants);
+        mFeaturedRestaurantsGrid = view.findViewById(R.id.grid_view_banner);
 
         // AdapterViewFlipper - Banner slide show Handling Code.
-        mFlipperBanner = (AdapterViewFlipper) view.findViewById(R.id.banner_adapterviewflipper);
+        mFlipperBanner = view.findViewById(R.id.banner_adapterviewflipper);
         mFlipperAdapter = new HomeImageViewFlipperAdapter(getActivity(), R.layout.image_banner_layout, Constants.BANNER_IMAGES);
         mFlipperBanner.setAdapter(mFlipperAdapter);
         mFlipperBanner.setFlipInterval(4000);

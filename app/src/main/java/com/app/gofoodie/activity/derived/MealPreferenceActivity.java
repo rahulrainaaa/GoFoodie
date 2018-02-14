@@ -50,8 +50,8 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_preference);
 
-        mRgpMealType = (RadioGroup) findViewById(R.id.radio_group_meal_type);
-        mListView = (ListView) findViewById(R.id.category_list_view);
+        mRgpMealType = findViewById(R.id.radio_group_meal_type);
+        mListView = findViewById(R.id.category_list_view);
         mAdapter = new CheckedListViewAdapter(this, mList);
         mListView.setAdapter(mAdapter);
 

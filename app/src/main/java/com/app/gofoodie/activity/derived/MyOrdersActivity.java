@@ -43,7 +43,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
     /**
      * Class private data member(s).
      */
-    ListView mListViewOrders = null;
+    private ListView mListViewOrders = null;
     private ArrayList<MyOrder> mList = null;
     private MyOrdersListViewAdapter mAdapter = null;
 
@@ -70,7 +70,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_orders);
-        mListViewOrders = (ListView) findViewById(R.id.list_view_my_orders);
+        mListViewOrders = findViewById(R.id.list_view_my_orders);
         fetchMyOrders(null, null);
     }
 

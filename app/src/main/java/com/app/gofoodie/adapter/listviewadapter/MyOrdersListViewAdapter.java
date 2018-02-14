@@ -51,15 +51,15 @@ public class MyOrdersListViewAdapter extends ArrayAdapter<MyOrder> {
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
             holder = new Holder();
 
-            holder.ComboName = (TextView) cell.findViewById(R.id.txt_combo_name);
-            holder.Price = (TextView) cell.findViewById(R.id.txt_price);
-            holder.Date = (TextView) cell.findViewById(R.id.txt_date);
-            holder.Status = (TextView) cell.findViewById(R.id.txt_status);
-            holder.OrderId = (TextView) cell.findViewById(R.id.txt_order_id);
+            holder.ComboName = cell.findViewById(R.id.txt_combo_name);
+            holder.Price = cell.findViewById(R.id.txt_price);
+            holder.Date = cell.findViewById(R.id.txt_date);
+            holder.Status = cell.findViewById(R.id.txt_status);
+            holder.OrderId = cell.findViewById(R.id.txt_order_id);
 
-            holder.ibtnRate = (ImageButton) cell.findViewById(R.id.add_rating);
-            holder.ibtnDescription = (ImageButton) cell.findViewById(R.id.show_desc);
-            holder.ibtnEdit = (ImageButton) cell.findViewById(R.id.edit);
+            holder.ibtnRate = cell.findViewById(R.id.add_rating);
+            holder.ibtnDescription = cell.findViewById(R.id.show_desc);
+            holder.ibtnEdit = cell.findViewById(R.id.edit);
 
             holder.ibtnRate.setOnClickListener(mClickListener);
             holder.ibtnDescription.setOnClickListener(mClickListener);

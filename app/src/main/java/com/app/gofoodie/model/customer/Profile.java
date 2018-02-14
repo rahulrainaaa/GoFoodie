@@ -114,12 +114,12 @@ public class Profile implements Parcelable {
     @Expose
     private String areaName;
 
-    protected Profile(Parcel in) {
+    private Profile(Parcel in) {
         this.loginId = ((String) in.readValue((String.class.getClassLoader())));
-        this.username = ((Object) in.readValue((Object.class.getClassLoader())));
+        this.username = in.readValue((Object.class.getClassLoader()));
         this.email = ((String) in.readValue((String.class.getClassLoader())));
         this.phone = ((String) in.readValue((String.class.getClassLoader())));
-        this.saltKey = ((Object) in.readValue((Object.class.getClassLoader())));
+        this.saltKey = in.readValue((Object.class.getClassLoader()));
         this.status = ((String) in.readValue((String.class.getClassLoader())));
         this.registerDate = ((String) in.readValue((String.class.getClassLoader())));
         this.modifyDate = ((String) in.readValue((String.class.getClassLoader())));

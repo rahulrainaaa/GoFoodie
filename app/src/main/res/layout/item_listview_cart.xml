@@ -22,6 +22,7 @@
             android:layout_marginLeft="1dp"
             android:layout_marginTop="1dp"
             android:background="@drawable/img_frame"
+            android:contentDescription="@string/image"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/img_default_combo" />
 
@@ -44,6 +45,7 @@
                     android:id="@+id/ibtn_veg"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
+                    android:contentDescription="@string/image"
                     android:scaleType="fitXY"
                     android:src="@drawable/veg" />
 
@@ -51,6 +53,7 @@
                     android:id="@+id/ibtn_nonveg"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
+                    android:contentDescription="@string/image"
                     android:scaleType="fitXY"
                     android:src="@drawable/nonveg" />
 
@@ -101,8 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/colorWhite"
-                    android:text="Qty: 1"
-                    android:textSize="9sp"
+                    android:contentDescription="@string/click"
                     app:srcCompat="@drawable/icon_remove" />
 
                 <Button

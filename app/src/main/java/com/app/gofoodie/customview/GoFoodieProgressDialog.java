@@ -43,7 +43,7 @@ public class GoFoodieProgressDialog {
     private void createFirstTime() {
 
         mView = mActivity.getLayoutInflater().inflate(R.layout.process_dialog, null);
-        mTextView = (TextView) mView.findViewById(R.id.process_text);
+        mTextView = mView.findViewById(R.id.process_text);
         mAlertDialog = new AlertDialog.Builder(mActivity).create();
         mAlertDialog.setView(mView);
         mAlertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

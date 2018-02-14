@@ -51,6 +51,7 @@
                     android:id="@+id/img_veg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/image"
                     android:src="@drawable/veg"
                     android:visibility="gone" />
 
@@ -59,6 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:contentDescription="@string/image"
                     android:src="@drawable/nonveg"
                     android:visibility="gone" />
 

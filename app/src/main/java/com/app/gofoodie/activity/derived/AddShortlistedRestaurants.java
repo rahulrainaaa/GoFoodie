@@ -1,6 +1,5 @@
 package com.app.gofoodie.activity.derived;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -57,7 +56,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_shortlisted_restaurants);
 
-        mListView = (ListView) findViewById(R.id.list_view);
+        mListView = findViewById(R.id.list_view);
         mListView.setOnItemClickListener(this);
         GlobalData.applyLocationPref = false;
     }
@@ -114,27 +113,14 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
         input.setSingleLine(false);
         builder.setView(input);
 
-        builder.setPositiveButton("Search", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setPositiveButton("Search", (dialog, which) -> {
 
-                String search = input.getText().toString();
-                fetchRestaurants(search.trim(), false);
-            }
+            String search = input.getText().toString();
+            fetchRestaurants(search.trim(), false);
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        builder.setNeutralButton("Reset", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-                fetchRestaurants(null, false);
-            }
-        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+        builder.setNeutralButton("Reset", (dialog, which) -> fetchRestaurants(null, false));
 
         builder.show();
     }
@@ -238,12 +224,9 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Oops...")
                     .setContentText("No such restaurant found.")
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    .setConfirmClickListener(sweetAlertDialog -> {
 //                            finish();
-                            sweetAlertDialog.dismissWithAnimation();
-                        }
+                        sweetAlertDialog.dismissWithAnimation();
                     })
                     .show();
         }
@@ -284,27 +267,24 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
     private void addToShortlist(View view) {
 
         final Restaurant restaurant = (Restaurant) view.getTag();
-        Snackbar.make(view, "Add as Shortlisted Restaurant ?", Snackbar.LENGTH_LONG).setAction("Add", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        Snackbar.make(view, "Add as Shortlisted Restaurant ?", Snackbar.LENGTH_LONG).setAction("Add", view1 -> {
 
-                try {
-                    JSONObject json = new JSONObject();
+            try {
+                JSONObject json = new JSONObject();
 
-                    json.put("customer_id", getSessionData().getCustomerId());
-                    json.put("branch_id", restaurant.branchId);
-                    json.put("login_id", getSessionData().getLoginId());
-                    json.put("token", getSessionData().getToken());
+                json.put("customer_id", getSessionData().getCustomerId());
+                json.put("branch_id", restaurant.branchId);
+                json.put("login_id", getSessionData().getLoginId());
+                json.put("token", getSessionData().getToken());
 
-                    NetworkHandler networkHandler = new NetworkHandler();
-                    networkHandler.httpCreate(2, AddShortlistedRestaurants.this, AddShortlistedRestaurants.this, json, Network.URL_ADD_AS_SHORT_REST, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                    networkHandler.executePost();
+                NetworkHandler networkHandler = new NetworkHandler();
+                networkHandler.httpCreate(2, AddShortlistedRestaurants.this, AddShortlistedRestaurants.this, json, Network.URL_ADD_AS_SHORT_REST, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                networkHandler.executePost();
 
-                } catch (JSONException jsonExc) {
+            } catch (JSONException jsonExc) {
 
-                    jsonExc.printStackTrace();
-                    Toast.makeText(AddShortlistedRestaurants.this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+                jsonExc.printStackTrace();
+                Toast.makeText(AddShortlistedRestaurants.this, "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }).show();
     }

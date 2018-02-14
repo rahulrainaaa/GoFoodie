@@ -38,8 +38,8 @@ public class ForgotPasswordActivity extends BaseAppCompatActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        mEtEmail = (MaterialEditText) findViewById(R.id.et_forgot_email);
-        mBtnForgot = (Button) findViewById(R.id.btn_forgot_password);
+        mEtEmail = findViewById(R.id.et_forgot_email);
+        mBtnForgot = findViewById(R.id.btn_forgot_password);
         mBtnForgot.setOnClickListener(this);
 
     }

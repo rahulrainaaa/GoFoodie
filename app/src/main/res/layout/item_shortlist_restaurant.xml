@@ -22,6 +22,7 @@
             android:layout_marginLeft="1dp"
             android:layout_marginTop="1dp"
             android:background="@drawable/img_frame"
+            android:contentDescription="@string/image"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_account_balance_black_24dp" />
 
@@ -71,12 +72,14 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginRight="5dp"
+                        android:contentDescription="@string/image"
                         android:src="@drawable/nonveg" />
 
                     <ImageView
                         android:id="@+id/img_veg"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:contentDescription="@string/image"
                         android:src="@drawable/veg" />
 
                 </LinearLayout>

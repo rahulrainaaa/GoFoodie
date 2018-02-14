@@ -56,10 +56,10 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
         if (view == null) {
             view = mInflater.inflate(mLayoutResource, null);
             holder = new Holder();
-            holder.imgCombo = (ImageView) view.findViewById(R.id.image_restaurant);
-            holder.imgVeg = (ImageView) view.findViewById(R.id.img_veg);
-            holder.imgNonVeg = (ImageView) view.findViewById(R.id.img_nonveg);
-            holder.txtComboName = (TextView) view.findViewById(R.id.restaurant_name);
+            holder.imgCombo = view.findViewById(R.id.image_restaurant);
+            holder.imgVeg = view.findViewById(R.id.img_veg);
+            holder.imgNonVeg = view.findViewById(R.id.img_nonveg);
+            holder.txtComboName = view.findViewById(R.id.restaurant_name);
             view.setTag(holder);
             holder.imgCombo.setOnClickListener(this);
         } else {

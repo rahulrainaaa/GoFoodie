@@ -42,7 +42,7 @@ public class LocationSpinnerAdapter extends ArrayAdapter<Locaton> {
 
         if (convertView != null) {
 
-            textView = (TextView) textView;
+            textView = textView;
 
         } else {
 

@@ -27,11 +27,11 @@ public class ModelParser {
     }
 
     /**
-     * @param jsonString
-     * @param className
+     * Method to get {@link BaseModel} schema from {@link org.json.JSONObject} string.
+     *
+     * @param jsonString reference
+     * @param className  reference
      * @return BaseModel
-     * @method getModel
-     * @desc Method to get {@link BaseModel} schema from {@link org.json.JSONObject} string.
      */
     public BaseModel getModel(String jsonString, Class<? extends BaseModel> className, ModelParsingListener listener) {
 

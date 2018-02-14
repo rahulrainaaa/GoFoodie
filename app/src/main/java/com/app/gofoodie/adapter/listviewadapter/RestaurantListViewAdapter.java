@@ -61,15 +61,15 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
             holder = new Holder();
-            holder.imgIcon = (ImageView) cell.findViewById(R.id.img_restaurant);
-            holder.imgVeg = (ImageView) cell.findViewById(R.id.img_veg);
-            holder.imgNonVeg = (ImageView) cell.findViewById(R.id.img_nonveg);
-            holder.ratingBar = (RatingBar) cell.findViewById(R.id.rating_bar);
-            holder.txtName = (TextView) cell.findViewById(R.id.txt_branch_name);
-            holder.txtTags = (TextView) cell.findViewById(R.id.txt_branch_tags);
-            holder.txtCount = (TextView) cell.findViewById(R.id.txt_rating_count);
-            holder.iBtnCellType = (Button) cell.findViewById(R.id.ibtn_remove);
-            holder.iBtnView = (Button) cell.findViewById(R.id.ibtn_view);
+            holder.imgIcon = cell.findViewById(R.id.img_restaurant);
+            holder.imgVeg = cell.findViewById(R.id.img_veg);
+            holder.imgNonVeg = cell.findViewById(R.id.img_nonveg);
+            holder.ratingBar = cell.findViewById(R.id.rating_bar);
+            holder.txtName = cell.findViewById(R.id.txt_branch_name);
+            holder.txtTags = cell.findViewById(R.id.txt_branch_tags);
+            holder.txtCount = cell.findViewById(R.id.txt_rating_count);
+            holder.iBtnCellType = cell.findViewById(R.id.ibtn_remove);
+            holder.iBtnView = cell.findViewById(R.id.ibtn_view);
 
             cell.setTag(holder);
         } else {

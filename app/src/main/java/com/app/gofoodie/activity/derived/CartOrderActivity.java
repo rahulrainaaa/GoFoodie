@@ -10,7 +10,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
@@ -67,12 +66,10 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_order);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
 
-        /**
-         * Price analysis for pay price and tax payments.
-         */
 
+        // Price analysis for pay price and tax payments.
         Iterator<Cart> cartIterator = cartArrayList.iterator();
         while (cartIterator.hasNext()) {
 
@@ -91,7 +88,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             }
         }
 
-        float mTaxPercent = Float.valueOf(getIntent().getFloatExtra("taxPercent", 0f));
+        float mTaxPercent = getIntent().getFloatExtra("taxPercent", 0f);
         mTaxPrice = (mTaxPercent * mComboPrice) / 100;
 
         mPayPrice = mTotalPrice + mTaxPrice;
@@ -106,7 +103,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         LinearLayoutManager categoryLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(categoryLayoutManager);
-        mCartOrderRecyclerAdapter = new CartOrderRecyclerAdapter(this, R.layout.item_rv_cart_order, this, mList);
+        mCartOrderRecyclerAdapter = new CartOrderRecyclerAdapter(this, mList);
         mRecyclerView.setAdapter(mCartOrderRecyclerAdapter);
         mCartOrderRecyclerAdapter.notifyDataSetChanged();
 
@@ -138,14 +135,12 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     /**
      * Callback method for 'Proceed' button on click.
      *
-     * @param view
+     * @param view reference.
      */
     public void btnClickProceed(View view) {
 
-        /**
-         * Check if there is any error in the calculation.
-         * Then show error message box.
-         */
+
+        // Check if there is any error in the calculation. Then show error message box.
         if (mTotalPrice < 0) {
 
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
@@ -155,9 +150,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             return;
         }
 
-        /**
-         * Check if customer has the subscription plan.
-         */
+        // Check if customer has the subscription plan.
         if (CustomerProfileHandler.CUSTOMER.getProfile().getValidUpto().trim().isEmpty()) {
 
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
@@ -167,10 +160,9 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             return;
         }
 
-        /**
-         * Prompt to place an order.
-         * Show the price and tax payment.
-         */
+
+        //Prompt to place an order.
+        //Show the price and tax payment.
         SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialog.setTitleText("Place Order");
@@ -180,34 +172,25 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                 + "\nFinal Price: " + mPayPrice + " AED");
         pDialog.setCancelable(false);
         pDialog.setConfirmText("Place Order");
-        pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
+        pDialog.setConfirmClickListener(sweetAlertDialog -> {
 
-                /**
-                 * Create a request packet and proceed to place and order.
-                 */
-                JSONObject jsonRequest = getOrderRequestPacket();
-                if (jsonRequest == null) {
+            /**
+             * Create a request packet and proceed to place and order.
+             */
+            JSONObject jsonRequest = getOrderRequestPacket();
+            if (jsonRequest == null) {
 
-                    Toast.makeText(CartOrderActivity.this, "Json Request NULL", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                NetworkHandler networkHandler = new NetworkHandler();
-                networkHandler.httpCreate(1, CartOrderActivity.this, CartOrderActivity.this, jsonRequest, Network.URL_PLACE_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                networkHandler.executePost();
-
-                sweetAlertDialog.dismissWithAnimation();
-
+                Toast.makeText(CartOrderActivity.this, "Json Request NULL", Toast.LENGTH_SHORT).show();
+                return;
             }
-        });
-        pDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
+            NetworkHandler networkHandler = new NetworkHandler();
+            networkHandler.httpCreate(1, CartOrderActivity.this, CartOrderActivity.this, jsonRequest, Network.URL_PLACE_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+            networkHandler.executePost();
 
-                sweetAlertDialog.dismissWithAnimation();
-            }
+            sweetAlertDialog.dismissWithAnimation();
+
         });
+        pDialog.setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismissWithAnimation());
         pDialog.setCancelText("Cancel");
         pDialog.show();
 
@@ -218,7 +201,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
      */
     private ItemTouchHelper.Callback createCallbackHelper() {
 
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
+        return new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
 
             @Override
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
@@ -280,8 +263,6 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             }
         };
 
-        return simpleCallback;
-
     }
 
     @Override
@@ -297,7 +278,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     /**
      * Method to start activity to customize a combo plan.
      *
-     * @param view
+     * @param view reference.
      */
     private void customizeComboPlan(View view) {
 
@@ -317,49 +298,46 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         int curMonth = todayCal.get(Calendar.MONTH);
         int curYear = todayCal.get(Calendar.YEAR);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (datePicker, year, month, day) -> {
 
-                Calendar selectedDay = Calendar.getInstance();
-                selectedDay.set(Calendar.DAY_OF_MONTH, day);
-                selectedDay.set(Calendar.MONTH, month);
-                selectedDay.set(Calendar.YEAR, year);
-                selectedDay.set(Calendar.HOUR, 0);
-                selectedDay.set(Calendar.MINUTE, 0);
-                selectedDay.set(Calendar.SECOND, 0);
+            Calendar selectedDay = Calendar.getInstance();
+            selectedDay.set(Calendar.DAY_OF_MONTH, day);
+            selectedDay.set(Calendar.MONTH, month);
+            selectedDay.set(Calendar.YEAR, year);
+            selectedDay.set(Calendar.HOUR, 0);
+            selectedDay.set(Calendar.MINUTE, 0);
+            selectedDay.set(Calendar.SECOND, 0);
 
-                Date selectedDate = selectedDay.getTime();
+            Date selectedDate = selectedDay.getTime();
 
-                Calendar todayCAL = Calendar.getInstance();
-                todayCAL.set(Calendar.HOUR, 0);
-                todayCAL.set(Calendar.MINUTE, 0);
-                todayCAL.set(Calendar.HOUR, 0);
-                Date currentDate = todayCAL.getTime();
+            Calendar todayCAL = Calendar.getInstance();
+            todayCAL.set(Calendar.HOUR, 0);
+            todayCAL.set(Calendar.MINUTE, 0);
+            todayCAL.set(Calendar.HOUR, 0);
+            Date currentDate = todayCAL.getTime();
 
-                selectedDay.set(Calendar.HOUR, 0);
-                selectedDay.set(Calendar.MINUTE, 0);
-                selectedDay.set(Calendar.SECOND, 0);
-                long diff = selectedDay.getTimeInMillis();
-                long dayDiff = diff / (24 * 60 * 60 * 1000);
+            selectedDay.set(Calendar.HOUR, 0);
+            selectedDay.set(Calendar.MINUTE, 0);
+            selectedDay.set(Calendar.SECOND, 0);
+            long diff = selectedDay.getTimeInMillis();
+            long dayDiff = diff / (24 * 60 * 60 * 1000);
 
-                if (diff < 0) {
+            if (diff < 0) {
 
-                    Toast.makeText(CartOrderActivity.this, "Wrong date selected.\nSelecting min after 2 days from today", Toast.LENGTH_SHORT).show();
-                    pickStartDate();
+                Toast.makeText(CartOrderActivity.this, "Wrong date selected.\nSelecting min after 2 days from today", Toast.LENGTH_SHORT).show();
+                pickStartDate();
 
-                } else if (dayDiff < 2) {
+            } else if (dayDiff < 2) {
 
-                    Toast.makeText(CartOrderActivity.this, "Order date should start from min 2 days after today.", Toast.LENGTH_SHORT).show();
-                    pickStartDate();
+                Toast.makeText(CartOrderActivity.this, "Order date should start from min 2 days after today.", Toast.LENGTH_SHORT).show();
+                pickStartDate();
 
-                } else {
+            } else {
 
-                    assignDate(selectedDate);
-                }
-
-
+                assignDate(selectedDate);
             }
+
+
         }, curYear, curMonth, curDay);
 
 
@@ -369,7 +347,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     /**
      * Method to assign date of orders from picked date (or after 2 days in default case).
      *
-     * @param startDate
+     * @param startDate starting date for the order set.
      */
     private void assignDate(Date startDate) {
 
@@ -406,16 +384,16 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     /**
      * Method to check, if week day is working of off.
      *
-     * @param weekDay
-     * @return
+     * @param weekDay week day to check with.
+     * @return true = if day is working.
      */
     private boolean checkForWeekDay(String weekDay) {
 
         String[] days = CustomerProfileHandler.CUSTOMER.getProfile().getDaysYouWantTheCombo().split(",");
 
-        for (int i = 0; i < days.length; i++) {
+        for (String day : days) {
 
-            if (days[i].trim().toLowerCase().equals(weekDay.toLowerCase().trim())) {
+            if (day.trim().toLowerCase().equals(weekDay.toLowerCase().trim())) {
 
                 return true;
             }
@@ -465,8 +443,8 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                 JSONObject objCartOrder = new JSONObject();
                 objCartOrder.put("description", arrDescription);
                 objCartOrder.put("combo_id", cartOrder.comboId);
-                objCartOrder.put("comboPrice", cartOrder.comboPrice);
-                objCartOrder.put("pay_price", cartOrder.payPrice);
+                objCartOrder.put("comboPrice", cartOrder.comboPrice.trim());
+                objCartOrder.put("pay_price", cartOrder.payPrice.trim());
                 objCartOrder.put("delivery_date", cartOrder.date.trim().substring(0, 10));
                 objCartOrder.put("restaurant_id", cartOrder.restaurantId);
                 objCartOrder.put("branch_id", cartOrder.branchId);
@@ -539,10 +517,9 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         Toast.makeText(this, "" + orderResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
         if (orderResponse.getStatusCode() == 200) {
 
-            /**
-             * Check of the placed orders object is null.
-             * Raise an error.
-             */
+
+            // Check of the placed orders object is null.
+            // Raise an error.
             if (orderResponse.getPlacedOrders() == null) {
 
                 new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)

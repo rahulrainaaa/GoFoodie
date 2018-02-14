@@ -1,7 +1,6 @@
 package com.app.gofoodie.handler.cancellationHandler;
 
 
-import android.content.DialogInterface;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -96,10 +95,10 @@ public class OrderCancellationHandler {
         View bottomView = mActivity.getLayoutInflater().inflate(R.layout.layout_bottom_sheet_my_orders, null);
         mBottomSheetDialog = new BottomSheetDialog(mActivity);
 
-        Button btnCancel = (Button) bottomView.findViewById(R.id.btn_cancel_order);
-        Button btnLongTerm = (Button) bottomView.findViewById(R.id.btn_long_term_vacation);
-        Button btnShortTerm = (Button) bottomView.findViewById(R.id.btn_short_term_vacation);
-        Button btnEmergency = (Button) bottomView.findViewById(R.id.btn_emergency_mode);
+        Button btnCancel = bottomView.findViewById(R.id.btn_cancel_order);
+        Button btnLongTerm = bottomView.findViewById(R.id.btn_long_term_vacation);
+        Button btnShortTerm = bottomView.findViewById(R.id.btn_short_term_vacation);
+        Button btnEmergency = bottomView.findViewById(R.id.btn_emergency_mode);
 
         if (mode == 2) {     // Any Vacation mode.
 
@@ -124,55 +123,46 @@ public class OrderCancellationHandler {
         new SweetAlertDialog(mActivity)
                 .setTitleText("Order cancel")
                 .setContentText("Are you sure to cancel this order?")
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                .setConfirmClickListener(sweetAlertDialog -> {
 
-                        try {
+                    try {
 
-                            final JSONObject jsonRequest = new JSONObject();
-                            jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
-                            jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim());
-                            jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.getProfile().getWalletId().trim());
-                            jsonRequest.put("order_id", myOrder.getOrderId().trim());
-                            jsonRequest.put("price_paid", myOrder.getPricePaid().trim());
-                            jsonRequest.put("order_set_id", myOrder.getOrderSetId().trim());
-                            jsonRequest.put("branch_id", myOrder.getBranchId().trim());
-                            jsonRequest.put("token", mActivity.getSession().getData().getToken());
-                            jsonRequest.put("delivery_date", myOrder.getDeliveryDate().trim());
+                        final JSONObject jsonRequest = new JSONObject();
+                        jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
+                        jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim());
+                        jsonRequest.put("wallet_id", CustomerProfileHandler.CUSTOMER.getProfile().getWalletId().trim());
+                        jsonRequest.put("order_id", myOrder.getOrderId().trim());
+                        jsonRequest.put("price_paid", myOrder.getPricePaid().trim());
+                        jsonRequest.put("order_set_id", myOrder.getOrderSetId().trim());
+                        jsonRequest.put("branch_id", myOrder.getBranchId().trim());
+                        jsonRequest.put("token", mActivity.getSession().getData().getToken());
+                        jsonRequest.put("delivery_date", myOrder.getDeliveryDate().trim());
 
-                            NetworkHandler networkHandler = new NetworkHandler();
-                            networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
-                                @Override
-                                public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+                        NetworkHandler networkHandler = new NetworkHandler();
+                        networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
+                            @Override
+                            public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-                                    respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.CANCEL, rawObject, "Done");
-                                }
+                                respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.CANCEL, rawObject, "Done");
+                            }
 
-                                @Override
-                                public void networkFailResponse(int requestCode, String message) {
+                            @Override
+                            public void networkFailResponse(int requestCode, String message) {
 
-                                    respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.CANCEL, null, message);
-                                }
-                            }, jsonRequest, Network.URL_CANCEL_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                                respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.CANCEL, null, message);
+                            }
+                        }, jsonRequest, Network.URL_CANCEL_ORDER, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
 
-                            networkHandler.executePost();
+                        networkHandler.executePost();
 
-                        } catch (JSONException jsonExc) {
+                    } catch (JSONException jsonExc) {
 
-                            jsonExc.printStackTrace();
-                        } finally {
-                            sweetAlertDialog.dismissWithAnimation();
-                        }
-                    }
-                })
-                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-
+                        jsonExc.printStackTrace();
+                    } finally {
                         sweetAlertDialog.dismissWithAnimation();
                     }
                 })
+                .setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismissWithAnimation())
                 .setConfirmText("Yes")
                 .setCancelText("No")
                 .show();
@@ -191,78 +181,69 @@ public class OrderCancellationHandler {
         builder.setTitle("Long-Term Vacation");
         builder.setCancelable(false);
         builder.setView(numberPicker);
-        builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        builder.setPositiveButton("Apply", (dialogInterface, i) -> {
 
-                int days = numberPicker.getValue();
+            int days = numberPicker.getValue();
 
-                JSONObject jsonRequest = new JSONObject();
-                try {
+            JSONObject jsonRequest = new JSONObject();
+            try {
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-                    jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
-                    jsonRequest.put("customer_id", mActivity.getSession().getData().getCustomerId());
-                    jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.getProfile().getName());
-                    jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail());
-                    jsonRequest.put("order_set_id", myOrder.getOrderSetId());
-                    jsonRequest.put("req_type", "Long");
-                    jsonRequest.put("from_date", myOrder.getDeliveryDate());
-                    Calendar calendar = Calendar.getInstance();
-                    Date date = sdf.parse(myOrder.getDeliveryDate());
-                    calendar.setTime(date);
-                    calendar.add(Calendar.DATE, days - 1);
-                    jsonRequest.put("to_date", sdf.format(calendar.getTime()));
-                    jsonRequest.put("comment", "Long term vacation.");
-                    jsonRequest.put("token", mActivity.getSession().getData().getToken());
+                jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
+                jsonRequest.put("customer_id", mActivity.getSession().getData().getCustomerId());
+                jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.getProfile().getName());
+                jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail());
+                jsonRequest.put("order_set_id", myOrder.getOrderSetId());
+                jsonRequest.put("req_type", "Long");
+                jsonRequest.put("from_date", myOrder.getDeliveryDate());
+                Calendar calendar = Calendar.getInstance();
+                Date date = sdf.parse(myOrder.getDeliveryDate());
+                calendar.setTime(date);
+                calendar.add(Calendar.DATE, days - 1);
+                jsonRequest.put("to_date", sdf.format(calendar.getTime()));
+                jsonRequest.put("comment", "Long term vacation.");
+                jsonRequest.put("token", mActivity.getSession().getData().getToken());
 
-                    Toast.makeText(mActivity, "Applying Long Term Vacation\nFrom: " + myOrder.getDeliveryDate() + "\nTo: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, "Applying Long Term Vacation\nFrom: " + myOrder.getDeliveryDate() + "\nTo: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
 
-                    NetworkHandler networkHandler = new NetworkHandler();
-                    networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
-                        @Override
-                        public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+                NetworkHandler networkHandler = new NetworkHandler();
+                networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
+                    @Override
+                    public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-                            try {
+                        try {
 
-                                String statusMessage = rawObject.getString("statusMessage");
-                                respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.CANCEL, rawObject, statusMessage);
+                            String statusMessage = rawObject.getString("statusMessage");
+                            respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.CANCEL, rawObject, statusMessage);
 
-                            } catch (Exception e) {
+                        } catch (Exception e) {
 
-                                respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.CANCEL, rawObject, "Expected Error");
-                            }
-
+                            respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.CANCEL, rawObject, "Expected Error");
                         }
 
-                        @Override
-                        public void networkFailResponse(int requestCode, String message) {
+                    }
 
-                            respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.LONGTERM, null, message);
-                        }
-                    }, jsonRequest, Network.URL_APPLY_VACATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                    @Override
+                    public void networkFailResponse(int requestCode, String message) {
 
-                    networkHandler.executePost();
+                        respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.LONGTERM, null, message);
+                    }
+                }, jsonRequest, Network.URL_APPLY_VACATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
 
-                } catch (JSONException jsonE) {
+                networkHandler.executePost();
 
-                    jsonE.printStackTrace();
-                } catch (Exception e) {
+            } catch (JSONException jsonE) {
 
-                    e.printStackTrace();
-                }
+                jsonE.printStackTrace();
+            } catch (Exception e) {
 
-                dialogInterface.dismiss();
+                e.printStackTrace();
             }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
 
-                dialogInterface.dismiss();
-            }
+            dialogInterface.dismiss();
         });
+        builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.show();
     }
 
@@ -279,77 +260,68 @@ public class OrderCancellationHandler {
         builder.setTitle("Short-Term Vacation");
         builder.setCancelable(false);
         builder.setView(numberPicker);
-        builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        builder.setPositiveButton("Apply", (dialogInterface, i) -> {
 
-                int days = numberPicker.getValue();
+            int days = numberPicker.getValue();
 
-                JSONObject jsonRequest = new JSONObject();
-                try {
+            JSONObject jsonRequest = new JSONObject();
+            try {
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-                    jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
-                    jsonRequest.put("customer_id", mActivity.getSession().getData().getCustomerId());
-                    jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.getProfile().getName());
-                    jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail());
-                    jsonRequest.put("order_set_id", myOrder.getOrderSetId());
-                    jsonRequest.put("req_type", "Short");
-                    jsonRequest.put("from_date", myOrder.getDeliveryDate());
-                    Calendar calendar = Calendar.getInstance();
-                    Date date = sdf.parse(myOrder.getDeliveryDate());
-                    calendar.setTime(date);
-                    calendar.add(Calendar.DATE, days - 1);
-                    jsonRequest.put("to_date", sdf.format(calendar.getTime()));
-                    jsonRequest.put("comment", "Short term vacation.");
-                    jsonRequest.put("token", mActivity.getSession().getData().getToken());
+                jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
+                jsonRequest.put("customer_id", mActivity.getSession().getData().getCustomerId());
+                jsonRequest.put("customer_name", CustomerProfileHandler.CUSTOMER.getProfile().getName());
+                jsonRequest.put("customer_email", CustomerProfileHandler.CUSTOMER.getProfile().getEmail());
+                jsonRequest.put("order_set_id", myOrder.getOrderSetId());
+                jsonRequest.put("req_type", "Short");
+                jsonRequest.put("from_date", myOrder.getDeliveryDate());
+                Calendar calendar = Calendar.getInstance();
+                Date date = sdf.parse(myOrder.getDeliveryDate());
+                calendar.setTime(date);
+                calendar.add(Calendar.DATE, days - 1);
+                jsonRequest.put("to_date", sdf.format(calendar.getTime()));
+                jsonRequest.put("comment", "Short term vacation.");
+                jsonRequest.put("token", mActivity.getSession().getData().getToken());
 
-                    Toast.makeText(mActivity, "Applying Short Term Vacation\nFrom: " + myOrder.getDeliveryDate() + "\nTo: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, "Applying Short Term Vacation\nFrom: " + myOrder.getDeliveryDate() + "\nTo: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
 
-                    NetworkHandler networkHandler = new NetworkHandler();
-                    networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
-                        @Override
-                        public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+                NetworkHandler networkHandler = new NetworkHandler();
+                networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
+                    @Override
+                    public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
 
-                            try {
+                        try {
 
-                                String statusMessage = rawObject.getString("statusMessage");
-                                respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.SHORTTERM, rawObject, statusMessage);
-                            } catch (Exception e) {
+                            String statusMessage = rawObject.getString("statusMessage");
+                            respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.SHORTTERM, rawObject, statusMessage);
+                        } catch (Exception e) {
 
-                                respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.SHORTTERM, rawObject, "Done");
-                            }
-
+                            respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.SHORTTERM, rawObject, "Done");
                         }
 
-                        @Override
-                        public void networkFailResponse(int requestCode, String message) {
+                    }
 
-                            respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.SHORTTERM, null, message);
-                        }
-                    }, jsonRequest, Network.URL_APPLY_VACATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                    @Override
+                    public void networkFailResponse(int requestCode, String message) {
 
-                    networkHandler.executePost();
+                        respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.SHORTTERM, null, message);
+                    }
+                }, jsonRequest, Network.URL_APPLY_VACATION, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
 
-                } catch (JSONException jsonE) {
+                networkHandler.executePost();
 
-                    jsonE.printStackTrace();
-                } catch (Exception e) {
+            } catch (JSONException jsonE) {
 
-                    e.printStackTrace();
-                }
+                jsonE.printStackTrace();
+            } catch (Exception e) {
 
-                dialogInterface.dismiss();
+                e.printStackTrace();
             }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
 
-                dialogInterface.dismiss();
-            }
+            dialogInterface.dismiss();
         });
+        builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.show();
     }
 
@@ -364,66 +336,56 @@ public class OrderCancellationHandler {
         builder.setCancelable(false);
         builder.setTitle("Emergency Cancellation");
         builder.setView(txtReason);
-        builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        builder.setPositiveButton("Apply", (dialogInterface, i) -> {
 
-                String strReason = txtReason.getText().toString();
+            String strReason = txtReason.getText().toString();
 
-                if (strReason.trim().isEmpty()) {
-                    Toast.makeText(mActivity, "Give reason for Emergency cancellation", Toast.LENGTH_LONG).show();
-                    cancelEmergency();
-                    return;
-                }
-
-                try {
-                    Profile profile = CustomerProfileHandler.CUSTOMER.getProfile();
-
-                    JSONObject jsonRequest = new JSONObject();
-                    jsonRequest.put("login_id", profile.getLoginId());
-                    jsonRequest.put("customer_id", profile.getCustomerId());
-                    jsonRequest.put("customer_name", profile.getName());
-                    jsonRequest.put("customer_email", profile.getEmail());
-                    jsonRequest.put("order_set_id", myOrder.getOrderSetId());
-                    jsonRequest.put("order_id", myOrder.getOrderId());
-                    jsonRequest.put("from_date", myOrder.getDeliveryDate());
-                    jsonRequest.put("to_date", myOrder.getDeliveryDate());
-                    jsonRequest.put("comment", strReason);
-                    jsonRequest.put("type", "Emergency mode.");
-                    jsonRequest.put("token", mActivity.getSession().getData().getToken());
-
-                    NetworkHandler networkHandler = new NetworkHandler();
-                    networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
-                        @Override
-                        public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
-
-                            respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.EMERGENCY, rawObject, "Done");
-                        }
-
-                        @Override
-                        public void networkFailResponse(int requestCode, String message) {
-
-                            respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.EMERGENCY, null, message);
-                        }
-                    }, jsonRequest, Network.URL_EMERGENCY_CANCEL, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                    networkHandler.executePost();
-
-                } catch (JSONException jsonE) {
-
-                    jsonE.printStackTrace();
-                }
-
-                dialogInterface.dismiss();
+            if (strReason.trim().isEmpty()) {
+                Toast.makeText(mActivity, "Give reason for Emergency cancellation", Toast.LENGTH_LONG).show();
+                cancelEmergency();
+                return;
             }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
 
+            try {
+                Profile profile = CustomerProfileHandler.CUSTOMER.getProfile();
 
-                dialogInterface.dismiss();
+                JSONObject jsonRequest = new JSONObject();
+                jsonRequest.put("login_id", profile.getLoginId());
+                jsonRequest.put("customer_id", profile.getCustomerId());
+                jsonRequest.put("customer_name", profile.getName());
+                jsonRequest.put("customer_email", profile.getEmail());
+                jsonRequest.put("order_set_id", myOrder.getOrderSetId());
+                jsonRequest.put("order_id", myOrder.getOrderId());
+                jsonRequest.put("from_date", myOrder.getDeliveryDate());
+                jsonRequest.put("to_date", myOrder.getDeliveryDate());
+                jsonRequest.put("comment", strReason);
+                jsonRequest.put("type", "Emergency mode.");
+                jsonRequest.put("token", mActivity.getSession().getData().getToken());
+
+                NetworkHandler networkHandler = new NetworkHandler();
+                networkHandler.httpCreate(1, mActivity, new NetworkCallbackListener() {
+                    @Override
+                    public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+                        respondCallback(RESP_CODE.RESP_SUCCESS, OP_CODE.EMERGENCY, rawObject, "Done");
+                    }
+
+                    @Override
+                    public void networkFailResponse(int requestCode, String message) {
+
+                        respondCallback(RESP_CODE.RESP_FAIL, OP_CODE.EMERGENCY, null, message);
+                    }
+                }, jsonRequest, Network.URL_EMERGENCY_CANCEL, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                networkHandler.executePost();
+
+            } catch (JSONException jsonE) {
+
+                jsonE.printStackTrace();
             }
+
+            dialogInterface.dismiss();
         });
+        builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.show();
 
     }

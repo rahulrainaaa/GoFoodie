@@ -55,12 +55,12 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
 
         View view = inflater.inflate(R.layout.frag_wallet, container, false);
 
-        ImageButton imgAlert = (ImageButton) view.findViewById(R.id.image_alert);
-        ImageButton imgBtnSubscribe = (ImageButton) view.findViewById(R.id.img_btn_subscibe);
-        mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
-        mListView = (ListView) view.findViewById(R.id.list_view);
-        mTxtWalletAmount = (TextView) view.findViewById(R.id.wallet_amount);
-        mTxtValidUpto = (TextView) view.findViewById(R.id.valid_upto);
+        ImageButton imgAlert = view.findViewById(R.id.image_alert);
+        ImageButton imgBtnSubscribe = view.findViewById(R.id.img_btn_subscibe);
+        mTabLayout = view.findViewById(R.id.tab_layout);
+        mListView = view.findViewById(R.id.list_view);
+        mTxtWalletAmount = view.findViewById(R.id.wallet_amount);
+        mTxtValidUpto = view.findViewById(R.id.valid_upto);
         mTabLayout.setOnTabSelectedListener(this);
         imgBtnSubscribe.setOnClickListener(this);
 
@@ -213,8 +213,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     private void parseModel(JSONObject json) {
 
         ModelParser parser = new ModelParser();
-        Transaction transaction = (Transaction) parser.getModel(json.toString(), Transaction.class, null);
-        mTransaction = transaction;
+        mTransaction = (Transaction) parser.getModel(json.toString(), Transaction.class, null);
 
         if (mTabLayout.getSelectedTabPosition() == 0) {
 

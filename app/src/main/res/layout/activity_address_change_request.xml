@@ -12,7 +12,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="29dp"
         android:gravity="center"
-        android:hint="Update your address here to change your order delivery address." />
+        android:hint="Update your address here to amend your order delivery address." />
 
     <Spinner
         android:id="@+id/sp_areas"
@@ -50,7 +50,7 @@
         android:background="@drawable/bg_login_btn"
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
-        android:text="Request Change"
+        android:text="Send Request"
         android:textColor="@color/colorWhite"
         android:textSize="13sp" />
 

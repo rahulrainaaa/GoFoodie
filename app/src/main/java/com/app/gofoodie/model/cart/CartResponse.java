@@ -31,10 +31,10 @@ public class CartResponse extends BaseModel implements Parcelable {
     private List<Cart> cart = null;
     @SerializedName("totalPrice")
     @Expose
-    private String totalPrice;
+    private Float totalPrice;
     @SerializedName("tax_perc")
     @Expose
-    private Integer taxPerc;
+    private Float taxPerc;
     @SerializedName("statusCode")
     @Expose
     private Integer statusCode;
@@ -42,10 +42,10 @@ public class CartResponse extends BaseModel implements Parcelable {
     @Expose
     private String statusMessage;
 
-    protected CartResponse(Parcel in) {
+    private CartResponse(Parcel in) {
         in.readList(this.cart, (Cart.class.getClassLoader()));
-        this.totalPrice = ((String) in.readValue((String.class.getClassLoader())));
-        this.taxPerc = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.totalPrice = ((Float) in.readValue((Float.class.getClassLoader())));
+        this.taxPerc = ((Float) in.readValue((Float.class.getClassLoader())));
         this.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
     }
@@ -61,19 +61,19 @@ public class CartResponse extends BaseModel implements Parcelable {
         this.cart = cart;
     }
 
-    public String getTotalPrice() {
+    public Float getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(String totalPrice) {
+    public void setTotalPrice(Float totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public Integer getTaxPerc() {
+    public Float getTaxPerc() {
         return taxPerc;
     }
 
-    public void setTaxPerc(Integer taxPerc) {
+    public void setTaxPerc(Float taxPerc) {
         this.taxPerc = taxPerc;
     }
 

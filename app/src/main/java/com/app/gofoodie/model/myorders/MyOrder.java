@@ -92,7 +92,7 @@ public class MyOrder implements Parcelable {
     @Expose
     private Integer reviewId;
 
-    protected MyOrder(Parcel in) {
+    private MyOrder(Parcel in) {
         this.orderId = ((String) in.readValue((String.class.getClassLoader())));
         this.coId = ((String) in.readValue((String.class.getClassLoader())));
         this.orderSetId = ((String) in.readValue((String.class.getClassLoader())));

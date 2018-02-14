@@ -48,8 +48,8 @@ public class EditComboListViewAdapter extends ArrayAdapter<Description> {
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
             holder = new Holder();
 
-            holder.txtName = (TextView) cell.findViewById(R.id.txt_name);
-            holder.txtValue = (TextView) cell.findViewById(R.id.txt_value);
+            holder.txtName = cell.findViewById(R.id.txt_name);
+            holder.txtValue = cell.findViewById(R.id.txt_value);
 
             cell.setTag(holder);
         } else {

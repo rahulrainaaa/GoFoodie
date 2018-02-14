@@ -27,7 +27,8 @@
                 android:id="@+id/image_alert"
                 android:layout_width="29dp"
                 android:layout_height="29dp"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/click" />
         </LinearLayout>
 
         <LinearLayout
@@ -74,6 +75,7 @@
                 android:layout_width="29dp"
                 android:layout_height="29dp"
                 android:background="@drawable/border_circle_white"
+                android:contentDescription="@string/click"
                 android:fontFamily="sans-serif-thin"
                 app:srcCompat="@drawable/icon_add" />
         </LinearLayout>

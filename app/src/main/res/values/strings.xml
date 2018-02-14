@@ -5,7 +5,7 @@
     <string name="fb_login_protocol_scheme">fb1991089837786884</string>
 
 
-    <string name="text_empty"></string>
+    <string name="text_empty" />
 
     <!-- Navigation items -->
     <string name="app_name">GoFoodie</string>
@@ -75,6 +75,8 @@
     <string name="meal_plan">Meal Plan</string>
     <string name="combo_plans">Combo Plans</string>
     <string name="address_change">Address Change</string>
+    <string name="image">Image</string>
+    <string name="click">Click</string>
     <string name="restaurant_list">Restaurant List</string>
     <string name="success">Success</string>
     <string name="failed">Failed</string>

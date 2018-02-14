@@ -48,7 +48,7 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscription);
 
-        mListView = (ListView) findViewById(R.id.list_view);
+        mListView = findViewById(R.id.list_view);
         mListView.setOnItemClickListener(this);
 
 
@@ -101,8 +101,7 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-        Subscriptionplan plan = mRechargePlan.subscriptionplan.get(position);
-        GlobalData.subscriptionplan = plan;
+        GlobalData.subscriptionplan = mRechargePlan.subscriptionplan.get(position);
         startActivity(new Intent(this, PaymentGatewayActivity.class));
         finish();
     }

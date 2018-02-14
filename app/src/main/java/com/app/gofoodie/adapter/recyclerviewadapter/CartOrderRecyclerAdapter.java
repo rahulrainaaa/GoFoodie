@@ -1,6 +1,5 @@
 package com.app.gofoodie.adapter.recyclerviewadapter;
 
-import android.app.Activity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,20 +25,16 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
      * private class Data members.
      */
     private List<CartOrder> mList = null;
-    private Activity mActivity = null;
-    private int lastPosition;
     private View.OnClickListener onClickListener = null;
-    private int mLayoutResourceId = -1;
 
     /**
      * @constructor CategoryRecyclerAdapter
      * @desc Constructor method for this class.
      */
-    public CartOrderRecyclerAdapter(Activity activity, int layoutResourceId, View.OnClickListener onClickListener, List<CartOrder> categories) {
-        this.mActivity = activity;
+    public CartOrderRecyclerAdapter(View.OnClickListener onClickListener, List<CartOrder> categories) {
+
         this.mList = categories;
         this.onClickListener = onClickListener;
-        this.mLayoutResourceId = layoutResourceId;
     }
 
     /**
@@ -47,9 +42,10 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
      */
     @Override
     public ItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(this.mLayoutResourceId, parent, false);
-        ItemHolder itemHolder = new ItemHolder(itemView, onClickListener);
-        return itemHolder;
+
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv_cart_order, parent, false);
+        return new ItemHolder(itemView, onClickListener);
+
     }
 
     @Override
@@ -61,7 +57,7 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
         holder.txtComboName.setText(cartOrder.comboName);
         holder.txtDate.setText("" + cartOrder.date);
         float payPrice = Float.valueOf(cartOrder.payPrice.trim());
-        float zonePrice = Float.valueOf(cartOrder.zoneShippingCharge.trim());
+//        float zonePrice = Float.valueOf(cartOrder.zoneShippingCharge.trim());
         holder.txtPrice.setText(payPrice + " AED");
 
         if (cartOrder.type.toLowerCase().trim().equals("nonveg")) {
@@ -81,11 +77,6 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
         return mList.size();
     }
 
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-    }
-
     /**
      * @class ItemHolder
      * @desc {@link RecyclerView.ViewHolder} holder static class for Recycler View items.
@@ -102,13 +93,13 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
 
         ItemHolder(View itemView, View.OnClickListener onClickListener) {
             super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.cv);
-            layoutVeg = (LinearLayout) itemView.findViewById(R.id.layout_veg);
-            layoutNonveg = (LinearLayout) itemView.findViewById(R.id.layout_nonveg);
-            txtComboName = (TextView) itemView.findViewById(R.id.txt_combo_name);
-            txtDate = (TextView) itemView.findViewById(R.id.txt_date);
-            txtPrice = (TextView) itemView.findViewById(R.id.txt_price);
-            ibtnEdit = (ImageButton) itemView.findViewById(R.id.ibtn_edit);
+            cv = itemView.findViewById(R.id.cv);
+            layoutVeg = itemView.findViewById(R.id.layout_veg);
+            layoutNonveg = itemView.findViewById(R.id.layout_nonveg);
+            txtComboName = itemView.findViewById(R.id.txt_combo_name);
+            txtDate = itemView.findViewById(R.id.txt_date);
+            txtPrice = itemView.findViewById(R.id.txt_price);
+            ibtnEdit = itemView.findViewById(R.id.ibtn_edit);
             ibtnEdit.setOnClickListener(onClickListener);
         }
     }
