@@ -35,7 +35,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
     /**
      * Class private data member(s).
      */
-    private MaterialEditText mEtName, mEtMobile, mEtAltMobile, mEtAltEmail, mEtAddress, mEtLocation;
+    private MaterialEditText mEtName, mEtMobile, mEtAltMobile, mEtAltEmail, mEtAddress, mEtLocation, mEtCompanyName;
     private Button mButton = null;
     private String mLocationName, mLocationId;
 
@@ -53,6 +53,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
         mEtAltMobile = (MaterialEditText) findViewById(R.id.et_alt_mobile);
         mEtAddress = (MaterialEditText) findViewById(R.id.et_address);
         mEtLocation = (MaterialEditText) findViewById(R.id.et_location_pref);
+        mEtCompanyName = (MaterialEditText) findViewById(R.id.et_company_name);
 
         try {
 
@@ -62,6 +63,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             mEtAltMobile.setText("" + customer.getProfile().getMobile2());
             mEtAltEmail.setText("" + customer.getProfile().getEmail2());
             mEtAddress.setText("" + customer.getProfile().getAddress());
+            mEtCompanyName.setText("" + customer.getProfile().getCompanyName());
 
             mButton = (Button) findViewById(R.id.btn_update_profile);
             mButton.setOnClickListener(this);
@@ -170,15 +172,16 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             jsonRequest.put("login_id", getSessionData().getLoginId());
             jsonRequest.put("name", mEtName.getText().toString().trim());
             jsonRequest.put("address", mEtAddress.getText().toString().trim());
-            jsonRequest.put("location", LocationUtils.getInstance().getLocationId(this, ""));
-            jsonRequest.put("location_id", LocationUtils.getInstance().getLocationId(this, ""));
-            jsonRequest.put("area", LocationUtils.getInstance().getLocationId(this, ""));
+            jsonRequest.put("location", mLocationId);
+            jsonRequest.put("location_id", mLocationId.trim());
+            jsonRequest.put("area", mEtLocation.getText().toString().trim());
             jsonRequest.put("geo_lat", "");
             jsonRequest.put("geo_lng", "");
             jsonRequest.put("mobile", mEtMobile.getText().toString().trim());
             jsonRequest.put("mobile2", mEtAltMobile.getText().toString().trim());
             jsonRequest.put("email", customer.getProfile().getEmail());
             jsonRequest.put("email2", mEtAltEmail.getText().toString().trim());
+            jsonRequest.put("company_name", mEtCompanyName.getText().toString().trim());
             jsonRequest.put("change_delivery_address", changeAddress);
 
             NetworkHandler networkHandler = new NetworkHandler();
@@ -350,7 +353,6 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
         } else {
 
             flagValidation = flagValidation && true;
-
         }
 
         if (mEtAddress.getText().toString().trim().isEmpty()) {
@@ -361,6 +363,16 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
             flagValidation = flagValidation && true;
             mEtAddress.setError(null);
+        }
+
+        if (mEtCompanyName.getText().toString().trim().isEmpty()) {
+
+            flagValidation = false;
+            mEtCompanyName.setError(getString(R.string.cannot_be_empty));
+        } else {
+
+            flagValidation = flagValidation && true;
+            mEtCompanyName.setError(null);
         }
 
         return flagValidation;

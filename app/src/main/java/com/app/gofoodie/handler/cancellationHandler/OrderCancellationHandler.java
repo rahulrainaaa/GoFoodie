@@ -42,31 +42,28 @@ public class OrderCancellationHandler {
     private BaseAppCompatActivity mActivity = null;
     private BottomSheetDialog mBottomSheetDialog = null;
     private OrderCancellationListener mCancellationListener = null;
-    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
+    private View.OnClickListener mOnClickListener = view -> {
 
-            mBottomSheetDialog.hide();
+        mBottomSheetDialog.hide();
 
-            switch (view.getId()) {
+        switch (view.getId()) {
 
-                case R.id.btn_cancel_order:
+            case R.id.btn_cancel_order:
 
-                    cancelSingleOrder();
-                    break;
-                case R.id.btn_long_term_vacation:
+                cancelSingleOrder();
+                break;
+            case R.id.btn_long_term_vacation:
 
-                    cancelLongTerm();
-                    break;
-                case R.id.btn_short_term_vacation:
+                cancelLongTerm();
+                break;
+            case R.id.btn_short_term_vacation:
 
-                    cancelShortTerm();
-                    break;
-                case R.id.btn_emergency_mode:
+                cancelShortTerm();
+                break;
+            case R.id.btn_emergency_mode:
 
-                    cancelEmergency();
-                    break;
-            }
+                cancelEmergency();
+                break;
         }
     };
 

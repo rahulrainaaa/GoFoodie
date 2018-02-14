@@ -44,11 +44,11 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
     /**
      * Class private data member(s).
      */
-    private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mEtAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtLocationName;
+    private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mEtAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtLocationName, mEtCompanyName;
     private Button mBtnRegister = null;
     private CheckBox mChkAcceptTerms = null;
-    private String locationId = "";
-    private String locationName = "";
+    private String mLocationId = "";
+    private String mLocationName = "";
 
     @Nullable
     @Override
@@ -64,6 +64,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
         mEtAltEmail = (MaterialEditText) view.findViewById(R.id.et_alt_email);
         mEtMobile = (MaterialEditText) view.findViewById(R.id.et_mobile);
         mEtAltMobile = (MaterialEditText) view.findViewById(R.id.et_alt_mobile);
+        mEtCompanyName = (MaterialEditText) view.findViewById(R.id.et_company_name);
         mEtAddress = (MaterialEditText) view.findViewById(R.id.et_address);
         mEtLocationName = (MaterialEditText) view.findViewById(R.id.et_location_pref);
         mChkAcceptTerms = (CheckBox) view.findViewById(R.id.chk_agree_terms);
@@ -82,10 +83,10 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
         super.onResume();
 
         // Load the user location preference into object and update UI.
-        locationId = LocationUtils.getInstance().getLocationId(getActivity(), "");
-        locationName = LocationUtils.getInstance().getLocationName(getActivity(), "");
+        mLocationId = LocationUtils.getInstance().getLocationId(getActivity(), "");
+        mLocationName = LocationUtils.getInstance().getLocationName(getActivity(), "");
 
-        mEtLocationName.setText(locationName);
+        mEtLocationName.setText(mLocationName);
         if (GlobalData.newSocialEmail.trim().isEmpty()) {
 
             mEtEmail.setText(GlobalData.newSocialEmail);
@@ -132,6 +133,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
         String strAltMobile = mEtAltMobile.getText().toString().trim();
         String strAddress = mEtAddress.getText().toString().trim();
         String strLocationName = mEtLocationName.getText().toString().trim();
+        String strCompanyName = mEtCompanyName.getText().toString().trim();
 
         boolean isValid = false;
 
@@ -243,6 +245,17 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
         /**
          * Address field validation.
          */
+
+        if (strCompanyName.isEmpty()) {
+
+            isValid = false;
+            mEtCompanyName.setError(getString(R.string.cannot_be_empty));
+        } else {
+
+            isValid = isValid & true;
+            mEtCompanyName.setError(null);
+        }
+
         if (strAddress.isEmpty()) {
 
             isValid = false;
@@ -283,11 +296,10 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             return;
         }
 
-
-        mEtLocationName.setText(locationName);
+        mEtLocationName.setText(mLocationName);
 
         // Check if the customer has selected his location preference.
-        if (locationId.isEmpty() || locationName.isEmpty()) {
+        if (mLocationId.isEmpty() || mLocationName.isEmpty()) {
 
             Toast.makeText(getActivity(), R.string.select_location_first, Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getActivity(), LocationActivity.class));
@@ -306,7 +318,8 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             jsonNewUserRegisterRequest.put("email", strEmail);
             jsonNewUserRegisterRequest.put("email2", strAltEmail);
             jsonNewUserRegisterRequest.put("location", mEtLocationName.getText().toString().trim());
-            jsonNewUserRegisterRequest.put("location_id", locationId);
+            jsonNewUserRegisterRequest.put("location_id", mLocationId);
+            jsonNewUserRegisterRequest.put("company_name", strCompanyName);
             jsonNewUserRegisterRequest.put("geo_lat", "");
             jsonNewUserRegisterRequest.put("geo_lng", "");
             jsonNewUserRegisterRequest.put("password", ""); // No password in social_login = yes

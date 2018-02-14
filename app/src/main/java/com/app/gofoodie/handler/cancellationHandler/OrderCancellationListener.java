@@ -11,10 +11,11 @@ public interface OrderCancellationListener {
 
     /**
      * Callback method for the cancellation/vacation of order.
+     *
      * @param responseCode
      * @param operationCode
      * @param jsonResponse
      * @param message
      */
-    public void orderCancellationApplied(OrderCancellationHandler.RESP_CODE responseCode, OrderCancellationHandler.OP_CODE operationCode, JSONObject jsonResponse, String message);
+    void orderCancellationApplied(OrderCancellationHandler.RESP_CODE responseCode, OrderCancellationHandler.OP_CODE operationCode, JSONObject jsonResponse, String message);
 }

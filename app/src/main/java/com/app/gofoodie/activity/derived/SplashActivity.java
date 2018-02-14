@@ -91,19 +91,29 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
     @Override
     public void profileUpdatedCallback(Customer customer) {
 
-        if (customer == null) {
+        if (customer.getStatusCode() == 404) {
+
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Error")
+                    .setContentText("Unable to fetch the profile.")
+                    .setConfirmText("OK")
+                    .setCancelClickListener(sDialog -> {
+
+                        sDialog.cancel();
+                        SplashActivity.this.finish();
+                    })
+                    .show();
+
+        } else if (customer == null) {
 
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Error")
                     .setContentText("Server connection failed.\nPlease try later.")
                     .setConfirmText("OK")
-                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sDialog) {
+                    .setCancelClickListener(sDialog -> {
 
-                            sDialog.cancel();
-                            SplashActivity.this.finish();
-                        }
+                        sDialog.cancel();
+                        SplashActivity.this.finish();
                     })
                     .show();
 
@@ -114,7 +124,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
             startActivity(new Intent(this, DashboardActivity.class));
             finish();
 
-        } else if (customer.getStatusCode() == 200) {
+        } else if (customer.getStatusCode() == 200 && customer.getProfile() != null) {
 
             startActivity(new Intent(this, DashboardActivity.class));
             finish();
@@ -125,13 +135,10 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
                     .setTitleText("Error")
                     .setContentText("Unexpected server error.\nPlease try later.")
                     .setConfirmText("OK")
-                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sDialog) {
+                    .setCancelClickListener(sDialog -> {
 
-                            sDialog.cancel();
-                            SplashActivity.this.finish();
-                        }
+                        sDialog.cancel();
+                        SplashActivity.this.finish();
                     })
                     .show();
 

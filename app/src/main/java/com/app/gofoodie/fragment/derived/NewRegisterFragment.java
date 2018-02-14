@@ -44,7 +44,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
     /**
      * class private data member(s).
      */
-    private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mEtAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtLocationName, mEtPassword, mEtCfmPassword, mLocationPref;
+    private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mEtAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtLocation, mEtPassword, mEtCfmPassword, mEtCompanyName;
     private Button mBtnRegister = null;
     private CheckBox mChkAcceptTerms = null;
     private String locationId = "";
@@ -65,8 +65,8 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         mEtMobile = (MaterialEditText) view.findViewById(R.id.et_mobile);
         mEtAltMobile = (MaterialEditText) view.findViewById(R.id.et_alt_mobile);
         mEtAddress = (MaterialEditText) view.findViewById(R.id.et_address);
-        mLocationPref = (MaterialEditText) view.findViewById(R.id.et_location_pref);
-        mEtLocationName = (MaterialEditText) view.findViewById(R.id.et_location_pref);
+        mEtCompanyName = (MaterialEditText) view.findViewById(R.id.et_company_name);
+        mEtLocation = (MaterialEditText) view.findViewById(R.id.et_location_pref);
         mEtPassword = (MaterialEditText) view.findViewById(R.id.et_password);
         mEtCfmPassword = (MaterialEditText) view.findViewById(R.id.et_conform_password);
         mChkAcceptTerms = (CheckBox) view.findViewById(R.id.chk_agree_terms);
@@ -74,7 +74,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
         mBtnRegister.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
-        mEtLocationName.setOnClickListener(this);
+        mEtLocation.setOnClickListener(this);
         return view;
     }
 
@@ -85,7 +85,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         // Load the user location preference into object and update UI.
         locationId = LocationUtils.getInstance().getLocationId(getActivity(), "");
         locationName = LocationUtils.getInstance().getLocationName(getActivity(), "");
-        mLocationPref.setText(locationName);
+        mEtLocation.setText(locationName);
 
     }
 
@@ -125,8 +125,9 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         String strAltEmail = mEtAltEmail.getText().toString().trim();
         String strMobile = mEtMobile.getText().toString().trim();
         String strAltMobile = mEtAltMobile.getText().toString().trim();
+        String strCompanyName = mEtCompanyName.getText().toString().trim();
         String strAddress = mEtAddress.getText().toString().trim();
-        String strLocationName = mEtLocationName.getText().toString().trim();
+        String strLocationName = mEtLocation.getText().toString().trim();
         String strPassword = mEtPassword.getText().toString().trim();
         String strConfirmPassword = mEtCfmPassword.getText().toString().trim();
 
@@ -225,12 +226,10 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
             isValid = true & isValid;
             mEtAltMobile.setError(null);
-
         } else if (!Pattern.compile(Constants.REGEX_MOBILE).matcher(strAltMobile).matches()) {
 
             isValid = false;
             mEtAltMobile.setError(getString(R.string.proper_mobile_number));
-
         } else {
 
             isValid = true & isValid;
@@ -240,10 +239,23 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         /**
          * Address field validation.
          */
+
+        if (strCompanyName.isEmpty()) {
+
+            isValid = false;
+            mEtCompanyName.setError(getString(R.string.cannot_be_empty));
+
+        } else {
+
+            isValid = isValid & true;
+            mEtCompanyName.setError(null);
+        }
+
         if (strAddress.isEmpty()) {
 
             isValid = false;
             mEtAddress.setError(getString(R.string.cannot_be_empty));
+
         } else {
 
             isValid = true && isValid;
@@ -253,13 +265,13 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         if (strLocationName.isEmpty()) {
 
             isValid = false;
-            mEtLocationName.setError(getString(R.string.cannot_be_empty));
+            mEtLocation.setError(getString(R.string.cannot_be_empty));
             startActivity(new Intent(getActivity(), LocationActivity.class));
         } else {
 
-            mEtLocationName.setError(null);
+            mEtLocation.setError(null);
             isValid = true && isValid;
-            mEtLocationName.setError(null);
+            mEtLocation.setError(null);
         }
 
         /**
@@ -305,7 +317,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         }
 
 
-        mLocationPref.setText(locationName);
+        mEtLocation.setText(locationName);
 
         // Check if the customer has selected his location preference.
         if (locationId.isEmpty() || locationName.isEmpty()) {
@@ -325,8 +337,9 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             jsonNewUserRegisterRequest.put("mobile", strMobile);
             jsonNewUserRegisterRequest.put("mobile2", strAltMobile);
             jsonNewUserRegisterRequest.put("email", strEmail);
+            jsonNewUserRegisterRequest.put("company_name", mEtCompanyName.getText().toString());
             jsonNewUserRegisterRequest.put("email2", strAltEmail);
-            jsonNewUserRegisterRequest.put("location", mLocationPref.getText().toString().trim());
+            jsonNewUserRegisterRequest.put("location", mEtLocation.getText().toString().trim());
             jsonNewUserRegisterRequest.put("location_id", locationId);
             jsonNewUserRegisterRequest.put("geo_lat", "");
             jsonNewUserRegisterRequest.put("geo_lng", "");

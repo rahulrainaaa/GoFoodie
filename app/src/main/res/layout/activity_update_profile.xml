@@ -88,6 +88,24 @@
             app:met_underlineColor="@color/colorRed" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:hint="Company Address*"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/signup_edittext_padding_normal"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="@dimen/signup_edittext_textsize_normal"
+            app:met_baseColor="@android:color/white"
+            app:met_errorColor="@color/colorRed"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorWhite"
+            app:met_textColorHint="@color/colorWhite"
+            app:met_underlineColor="@color/colorRed" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/et_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

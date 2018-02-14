@@ -49,24 +49,21 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
     private String mStrFromDate = null;
     private String mStrToDate = null;
-    private OrderCancellationListener mOrderCancellationListener = new OrderCancellationListener() {
-        @Override
-        public void orderCancellationApplied(OrderCancellationHandler.RESP_CODE responseCode, OrderCancellationHandler.OP_CODE operationCode, JSONObject jsonResponse, String message) {
+    private OrderCancellationListener mOrderCancellationListener = (responseCode, operationCode, jsonResponse, message) -> {
 
-            if (responseCode != OrderCancellationHandler.RESP_CODE.RESP_SUCCESS) {
+        if (responseCode != OrderCancellationHandler.RESP_CODE.RESP_SUCCESS) {
 
-                new SweetAlertDialog(MyOrdersActivity.this, SweetAlertDialog.ERROR_TYPE)
-                        .setTitleText("Error...")
-                        .setContentText((message == null ? "Some unexpected error occurred." : message))
-                        .show();
-            } else {
+            new SweetAlertDialog(MyOrdersActivity.this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Error...")
+                    .setContentText((message == null ? "Some unexpected error occurred." : message))
+                    .show();
+        } else {
 
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-            }
-
-            // Now refresh the Order list.
-            fetchMyOrders(mStrFromDate, mStrToDate);
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
         }
+
+        // Now refresh the Order list.
+        fetchMyOrders(mStrFromDate, mStrToDate);
     };
 
     @Override
@@ -180,12 +177,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
             SweetAlertDialog s = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Oops...")
                     .setContentText("No order present")
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            finish();
-                        }
-                    });
+                    .setConfirmClickListener(sweetAlertDialog -> finish());
             s.setCancelable(false);
             s.show();
             return;
@@ -243,7 +235,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
          * Proceed for rating.
          */
         View view = getLayoutInflater().inflate(R.layout.rating_bar_layout, null);
-        final RatingBar ratingBar = (RatingBar) view.findViewById(R.id.rating_bar);
+        final RatingBar ratingBar = view.findViewById(R.id.rating_bar);
 
         try {
             ratingBar.setRating(Float.parseFloat(order.getRating().trim()));
@@ -259,76 +251,77 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
         alertDialog.setCancelable(true);
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Rate",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
 
-                        final int rating = (int) (ratingBar.getRating());
-                        String comment = "";
-                        switch (rating) {
+                (dialog, which) -> {
 
-                            case 0:
-                                comment = "Worst";
-                                break;
-                            case 1:
-                                comment = "Poor";
-                                break;
-                            case 2:
-                                comment = "Below Average";
-                                break;
-                            case 3:
-                                comment = "Average";
-                                break;
-                            case 4:
-                                comment = "Good";
-                                break;
-                            case 5:
-                                comment = "Excellent";
-                                break;
-                        }
+                    final int rating = (int) (ratingBar.getRating());
+                    String comment = "";
+                    switch (rating) {
 
-                        try {
-
-
-                            JSONObject jsonRequest = new JSONObject();
-                            jsonRequest.put("customer_id", getSession().getData().getCustomerId());
-                            jsonRequest.put("login_id", getSession().getData().getLoginId());
-                            jsonRequest.put("restaurant_id", order.getRestaurantId().trim());
-                            jsonRequest.put("branch_id", order.getBranchId().trim());
-                            jsonRequest.put("combo_id", order.getComboId().trim());
-                            jsonRequest.put("order_id", order.getOrderId().trim());
-                            jsonRequest.put("rating", rating + "");
-                            jsonRequest.put("comment", comment);
-                            jsonRequest.put("reviewer", CustomerProfileHandler.CUSTOMER.getProfile().getName());
-                            jsonRequest.put("token", getSession().getData().getToken().trim());
-
-                            NetworkHandler networkHandler = new NetworkHandler();
-                            networkHandler.httpCreate(1, MyOrdersActivity.this, new NetworkCallbackListener() {
-                                @Override
-                                public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
-
-                                    Toast.makeText(getApplicationContext(), "Thank you", Toast.LENGTH_SHORT).show();
-                                    order.setRating("" + rating);
-                                }
-
-                                @Override
-                                public void networkFailResponse(int requestCode, String message) {
-
-                                    Toast.makeText(getApplicationContext(), "Http Fail: " + message, Toast.LENGTH_SHORT).show();
-
-                                }
-                            }, jsonRequest, Network.URL_POST_REVIEW, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
-                            networkHandler.executePost();
-
-                        } catch (JSONException jsonExc) {
-
-                            jsonExc.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-
-                        dialog.dismiss();
+                        case 0:
+                            comment = "Worst";
+                            break;
+                        case 1:
+                            comment = "Poor";
+                            break;
+                        case 2:
+                            comment = "Below Average";
+                            break;
+                        case 3:
+                            comment = "Average";
+                            break;
+                        case 4:
+                            comment = "Good";
+                            break;
+                        case 5:
+                            comment = "Excellent";
+                            break;
                     }
+
+                    try {
+
+
+                        JSONObject jsonRequest = new JSONObject();
+                        jsonRequest.put("customer_id", getSession().getData().getCustomerId());
+                        jsonRequest.put("login_id", getSession().getData().getLoginId());
+                        jsonRequest.put("restaurant_id", order.getRestaurantId().trim());
+                        jsonRequest.put("branch_id", order.getBranchId().trim());
+                        jsonRequest.put("combo_id", order.getComboId().trim());
+                        jsonRequest.put("order_id", order.getOrderId().trim());
+                        jsonRequest.put("rating", rating + "");
+                        jsonRequest.put("comment", comment);
+                        jsonRequest.put("reviewer", CustomerProfileHandler.CUSTOMER.getProfile().getName());
+                        jsonRequest.put("token", getSession().getData().getToken().trim());
+
+                        NetworkHandler networkHandler = new NetworkHandler();
+                        networkHandler.httpCreate(1, MyOrdersActivity.this, new NetworkCallbackListener() {
+                            @Override
+                            public void networkSuccessResponse(int requestCode, JSONObject rawObject, JSONArray rawArray) {
+
+                                Toast.makeText(getApplicationContext(), "Thank you", Toast.LENGTH_SHORT).show();
+                                order.setRating("" + rating);
+                            }
+
+                            @Override
+                            public void networkFailResponse(int requestCode, String message) {
+
+                                Toast.makeText(getApplicationContext(), "Http Fail: " + message, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }, jsonRequest, Network.URL_POST_REVIEW, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
+                        networkHandler.executePost();
+
+                    } catch (JSONException jsonExc) {
+
+                        jsonExc.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "JSONException: " + jsonExc.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    dialog.dismiss();
                 });
+
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Dismiss", new DialogInterface.OnClickListener() {
+
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
