@@ -24,7 +24,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center|left"
+            android:gravity="center|start"
             android:orientation="horizontal"
             android:weightSum="16">
 
@@ -33,8 +33,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:gravity="center|left"
-                android:paddingLeft="14dp"
+                android:gravity="center|start"
+                android:paddingStart="14dp"
                 android:paddingTop="5dp"
                 android:text="Combo Plan Name"
                 android:textColor="#000000" />
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="14dp"
+            android:paddingStart="14dp"
             android:weightSum="15">
 
             <TextView
@@ -86,8 +86,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:paddingBottom="5dp"
-            android:paddingLeft="14dp"
-            android:paddingRight="4dp"
+            android:paddingEnd="4dp"
+            android:paddingStart="14dp"
             android:paddingTop="2dp"
             android:text="Delivered"
             android:textColor="#000000" />

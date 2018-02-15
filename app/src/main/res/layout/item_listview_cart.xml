@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:gravity="center|left">
+    android:gravity="center|start">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:background="@color/colorWhite"
-        android:gravity="center|left"
+        android:gravity="center|start"
         android:orientation="horizontal">
 
         <ImageView
@@ -19,7 +19,7 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginBottom="1dp"
-            android:layout_marginLeft="1dp"
+            android:layout_marginStart="1dp"
             android:layout_marginTop="1dp"
             android:background="@drawable/img_frame"
             android:contentDescription="@string/image"
@@ -29,8 +29,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="9dp"
-            android:layout_marginRight="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="9dp"
             android:orientation="vertical"
             android:paddingTop="10dp"
             android:weightSum="3">
@@ -62,8 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
-                    android:gravity="left|center"
-                    android:paddingLeft="1dp"
+                    android:gravity="start|center"
+                    android:paddingStart="1dp"
                     android:text="  Combo Plan"
                     android:textColor="@color/colorTextName"
                     android:textSize="13dp" />
@@ -76,17 +76,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center|left"
+                android:gravity="center|start"
                 android:orientation="horizontal"
-                android:paddingLeft="20dp"
+                android:paddingStart="20dp"
                 android:text="AED 200"
                 android:textSize="15dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
                 android:background="@drawable/grad_separator_line" />
 
 
@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center|left"
+                android:gravity="center|start"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/colorWhite"
-                    android:drawableRight="@drawable/icon_drop_down"
+                    android:drawableEnd="@drawable/icon_drop_down"
                     android:text="Qty: 1"
                     android:textColor="#515151"
                     android:textSize="12sp" />

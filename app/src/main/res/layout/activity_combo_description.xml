@@ -25,9 +25,9 @@
 
     <ImageView
         android:id="@+id/img_profile"
-        android:contentDescription="@string/image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:contentDescription="@string/image"
         android:scaleType="fitXY" />
 
     <TextView
@@ -36,8 +36,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/grad_title_background"
         android:paddingBottom="30dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="20dp"
         android:text=""
         android:textColor="@color/colorWhite"
         android:textSize="20sp"

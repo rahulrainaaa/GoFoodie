@@ -37,6 +37,7 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
     private View.OnClickListener mClickListener = null;
 
     public ComboPlanGridAdapter(@NonNull Activity activity, View.OnClickListener clickListener, @LayoutRes int resource, ArrayList<Comboplan> list) {
+
         super(activity, resource, list);
         this.mActivity = activity;
         this.mComboList = list;
@@ -80,6 +81,7 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
         holder.txtTags.setText(comboplan.getCuisineName() != null ? comboplan.getCuisineName() : "");
         holder.txtPrice.setText(comboplan.getComboPayPrice() + " AED");
 
+        holder.imgCombo.setOnClickListener(mClickListener);
         try {
 
             Picasso.with(mActivity).load(comboplan.getComboImage()).error(R.drawable.img_default_combo).into(holder.imgCombo);

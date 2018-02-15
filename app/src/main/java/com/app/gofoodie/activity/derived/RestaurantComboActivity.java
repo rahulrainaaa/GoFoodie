@@ -1,6 +1,8 @@
 package com.app.gofoodie.activity.derived;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -36,6 +38,13 @@ public class RestaurantComboActivity extends BaseAppCompatActivity implements Ne
     private ComboPlanGridAdapter mAdapter = null;
     private ArrayList<Comboplan> mComboPlanList = null;
     private boolean flagRefreshed = false;
+    private View.OnClickListener mOnClickLickListener = (View view) -> {
+
+        Comboplan comboplan = (Comboplan) view.getTag();
+        Intent intent = new Intent(this, ComboDescriptionActivity.class);
+        intent.putExtra("combo_id", comboplan.getComboId().trim());
+        startActivity(intent);
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +122,9 @@ public class RestaurantComboActivity extends BaseAppCompatActivity implements Ne
         } else {
 
             mComboPlanList = (ArrayList<Comboplan>) comboPlanResponse.getComboplans();
-            mAdapter = new ComboPlanGridAdapter(this, null, R.layout.item_gridview_branch_combo_plan, mComboPlanList);
+            mAdapter = new ComboPlanGridAdapter(this, mOnClickLickListener, R.layout.item_gridview_branch_combo_plan, mComboPlanList);
             mComboGridView.setAdapter(mAdapter);
         }
     }
+
 }

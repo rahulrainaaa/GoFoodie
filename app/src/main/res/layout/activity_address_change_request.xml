@@ -22,7 +22,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="13dp"
         android:background="@drawable/border_red_curve"
-        android:gravity="center|left"
+        android:gravity="center|start"
         android:spinnerMode="dialog" />
 
     <EditText
@@ -33,7 +33,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="13dp"
         android:background="@drawable/border_red_curve"
-        android:gravity="left|top"
+        android:gravity="start|top"
         android:hint="New Address Here..."
         android:maxLines="4"
         android:padding="4dp"

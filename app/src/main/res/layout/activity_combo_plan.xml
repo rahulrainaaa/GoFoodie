@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:background="@color/colorAccent"
-            android:drawableRight="@drawable/icon_arrow_move_next"
+            android:drawableEnd="@drawable/icon_arrow_move_next"
             android:gravity="center"
             android:text="View Cart"
             android:textColor="@color/mdtp_white"

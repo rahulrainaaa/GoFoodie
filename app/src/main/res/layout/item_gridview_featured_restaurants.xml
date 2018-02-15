@@ -33,7 +33,7 @@
                 android:id="@+id/img_nonveg"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:contentDescription="@string/image"
                 android:src="@drawable/nonveg"
                 android:visibility="visible" />
@@ -50,8 +50,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:gravity="left|center"
-                android:paddingLeft="3dp"
+                android:gravity="start|center"
+                android:paddingStart="3dp"
                 android:text="Restaurant Name"
                 android:textColor="@color/colorTextName"
                 android:textSize="13dp" />

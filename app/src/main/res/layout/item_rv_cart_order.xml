@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border_gray_curved"
-        android:gravity="center|left"
+        android:gravity="center|start"
         android:orientation="horizontal"
         android:padding="4dp"
         android:weightSum="35">
@@ -36,9 +36,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="34"
-            android:gravity="center|left"
+            android:gravity="center|start"
             android:orientation="vertical"
-            android:paddingLeft="8dp">
+            android:paddingStart="8dp">
 
             <TextView
                 android:id="@+id/txt_combo_name"
