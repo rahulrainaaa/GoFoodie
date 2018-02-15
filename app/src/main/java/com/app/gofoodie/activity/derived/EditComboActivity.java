@@ -84,8 +84,8 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
         final ItemAdapter arrayAdapter = new ItemAdapter(this, choices, match);
 
         builderSingle.setAdapter(arrayAdapter, (dialog, which) -> {
-            String strName = arrayAdapter.getItem(which);
-            mList.get(position).value = strName;
+
+            mList.get(position).value = arrayAdapter.getItem(which);
             mAdapter.notifyDataSetChanged();
 
         });

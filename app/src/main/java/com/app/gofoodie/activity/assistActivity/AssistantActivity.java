@@ -1,6 +1,7 @@
 package com.app.gofoodie.activity.assistActivity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -30,7 +31,6 @@ public class AssistantActivity extends FragmentActivity {
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -78,16 +78,12 @@ public class AssistantActivity extends FragmentActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
             View rootView = inflater.inflate(R.layout.fragment_assistant, container, false);
-
             ImageView imgWelcome = rootView.findViewById(R.id.img_welcome);
-
             int number = getArguments().getInt(ARG_SECTION_NUMBER);
-
             imgWelcome.setImageResource(Constants.WELCOME_SCREEN_IMAGES[number]);
-
             return rootView;
         }
     }

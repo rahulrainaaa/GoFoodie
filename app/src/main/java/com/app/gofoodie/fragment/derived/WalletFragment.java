@@ -163,8 +163,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
             Toast.makeText(getActivity(), "No Wallet Transactions", Toast.LENGTH_SHORT).show();
             return;
         }
-        WalletTransactionListViewAdapter adapter = new WalletTransactionListViewAdapter(getActivity(), R.layout.item_listview_transactions, (ArrayList<WalletTransaction>) mTransaction.getWalletTransactions());
-        mListView.setAdapter(adapter);
+        mListView.setAdapter(new WalletTransactionListViewAdapter(getActivity(), (ArrayList<WalletTransaction>) mTransaction.getWalletTransactions()));
 
     }
 
@@ -183,8 +182,8 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
             Toast.makeText(getActivity(), "No Bank Transaction", Toast.LENGTH_SHORT).show();
             return;
         }
-        PaymentTransactionListViewAdapter adapter = new PaymentTransactionListViewAdapter(getActivity(), R.layout.item_listview_transactions, (ArrayList<PaymentTransaction>) mTransaction.getPaymentTransactions());
-        mListView.setAdapter(adapter);
+        mListView.setAdapter(new PaymentTransactionListViewAdapter(getActivity(), (ArrayList<PaymentTransaction>) mTransaction.getPaymentTransactions()));
+
     }
 
     /**

@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -157,7 +158,7 @@ public class OrderCancellationHandler {
                         sweetAlertDialog.dismissWithAnimation();
                     }
                 })
-                .setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismissWithAnimation())
+                .setCancelClickListener(SweetAlertDialog::dismissWithAnimation)
                 .setConfirmText("Yes")
                 .setCancelText("No")
                 .show();
@@ -231,7 +232,8 @@ public class OrderCancellationHandler {
             } catch (JSONException jsonE) {
 
                 jsonE.printStackTrace();
-            } catch (Exception e) {
+
+            } catch (ParseException e) {
 
                 e.printStackTrace();
             }
@@ -309,7 +311,8 @@ public class OrderCancellationHandler {
             } catch (JSONException jsonE) {
 
                 jsonE.printStackTrace();
-            } catch (Exception e) {
+
+            } catch (ParseException e) {
 
                 e.printStackTrace();
             }

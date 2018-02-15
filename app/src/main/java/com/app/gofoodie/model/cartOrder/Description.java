@@ -16,7 +16,10 @@ public class Description {
         this.itemId = description.getItemId();
         this.name = description.getName();
         this.value = description.getValue();
-        this.options = (ArrayList<String>) ((ArrayList<String>) description.getOptions()).clone();
+        this.options = new ArrayList<>();
+        options.addAll(description.getOptions());
+
+        //this.options = (ArrayList<String>) ((ArrayList<String>) description.getOptions()).clone();
     }
 
 }

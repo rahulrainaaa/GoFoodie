@@ -15,7 +15,6 @@ import com.app.gofoodie.activity.base.BaseAppCompatActivity;
 import com.app.gofoodie.fragment.base.BaseFragment;
 import com.app.gofoodie.handler.dashboardHandler.DashboardFragmentHandler;
 import com.app.gofoodie.handler.dashboardHandler.DashboardInterruptListener;
-import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
 import com.app.gofoodie.utility.SessionUtils;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -47,9 +46,6 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         setContentView(R.layout.activity_dashboard_parent);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
-        customerProfileHandler.getFullProfile();
 
         doViewMapping();
         mDashboardFragmentHandler = new DashboardFragmentHandler();

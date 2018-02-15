@@ -21,7 +21,7 @@ public class HomeImageViewFlipperAdapter extends ArrayAdapter<String> {
      * private data members.
      */
     private String[] mList = null;
-    private Activity mActiity = null;
+    private Activity mActivity = null;
     private LayoutInflater mInflater = null;
     private int mResourceId;
 
@@ -36,7 +36,7 @@ public class HomeImageViewFlipperAdapter extends ArrayAdapter<String> {
         super(activity, resource, list);
         this.mList = list;
         this.mResourceId = resource;
-        this.mActiity = activity;
+        this.mActivity = activity;
         this.mInflater = activity.getLayoutInflater();
     }
 
@@ -56,7 +56,6 @@ public class HomeImageViewFlipperAdapter extends ArrayAdapter<String> {
             v = mInflater.inflate(mResourceId, null);
             view = (ImageView) v;
             holder = new Holder();
-            holder.i = mList[position];
             holder.img = view;
             view.setTag(holder);
 
@@ -65,14 +64,11 @@ public class HomeImageViewFlipperAdapter extends ArrayAdapter<String> {
             holder = (Holder) view.getTag();
             view = holder.img;
 
-            if (holder.i != mList[position]) {
-
-                Picasso.with(mActiity).load(mList[position]).into(view);
-                holder.i = mList[position];
-                view.setTag(holder);
-            }
+            Picasso.with(mActivity).load(mList[position]).into(view);
+            view.setTag(holder);
         }
-        Picasso.with(mActiity).load(mList[position]).into(view);
+
+        Picasso.with(mActivity).load(mList[position]).into(view);
         return view;
     }
 
@@ -81,7 +77,6 @@ public class HomeImageViewFlipperAdapter extends ArrayAdapter<String> {
      */
     private static class Holder {
         ImageView img = null;
-        String i = null;
 
     }
 }

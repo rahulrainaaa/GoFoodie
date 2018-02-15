@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 
 /**
  * Activity class to handle the CartOrders, date assigning and combo item option selection.
@@ -185,7 +184,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             sweetAlertDialog.dismissWithAnimation();
 
         });
-        pDialog.setCancelClickListener(sweetAlertDialog -> sweetAlertDialog.dismissWithAnimation());
+        pDialog.setCancelClickListener(SweetAlertDialog::dismissWithAnimation);
         pDialog.setCancelText("Cancel");
         pDialog.show();
 
@@ -431,25 +430,27 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
                 objCartOrder.put("combo_id", cartOrder.comboId);
                 objCartOrder.put("comboPrice", cartOrder.comboPrice.trim());
                 objCartOrder.put("pay_price", cartOrder.payPrice.trim());
+                objCartOrder.put("branch_id", cartOrder.branchId);
                 objCartOrder.put("delivery_date", cartOrder.date.trim().substring(0, 10));
                 objCartOrder.put("restaurant_id", cartOrder.restaurantId);
-                objCartOrder.put("branch_id", cartOrder.branchId);
+
 
                 arrCartOrder.put(objCartOrder);
             }
 
             JSONArray cartItemIdArray = new JSONArray();
-            Iterator<Cart> cartIterator = GlobalData.cartArrayList.iterator();
-            while (cartIterator.hasNext()) {
 
-                cartItemIdArray.put(cartIterator.next().getCartItemId().trim());
+            for (Cart cart : GlobalData.cartArrayList) {
+
+                cartItemIdArray.put(cart.getCartItemId().trim());
             }
+
+            jsonRequest.put("delivery_address", CustomerProfileHandler.CUSTOMER.getProfile().getAddress());
             jsonRequest.put("cart_item_id", cartItemIdArray);
             jsonRequest.put("cartorders", arrCartOrder);
             jsonRequest.put("customer_id", CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId());
             jsonRequest.put("token", getSessionData().getToken());
             jsonRequest.put("login_id", getSessionData().getLoginId());
-            jsonRequest.put("delivery_address", CustomerProfileHandler.CUSTOMER.getProfile().getAddress());
             jsonRequest.put("area", CustomerProfileHandler.CUSTOMER.getProfile().getArea());
             jsonRequest.put("geo_lat", CustomerProfileHandler.CUSTOMER.getProfile().getGeoLat());
             jsonRequest.put("geo_lng", CustomerProfileHandler.CUSTOMER.getProfile().getGeoLng());

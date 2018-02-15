@@ -1,13 +1,11 @@
 package com.app.gofoodie.adapter.listviewadapter;
 
 import android.app.Activity;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.gofoodie.R;
@@ -15,20 +13,21 @@ import com.app.gofoodie.model.transaction.PaymentTransaction;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter class for showing Bank payments in List View on {@link com.app.gofoodie.fragment.derived.WalletFragment}.
+ */
 public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTransaction> {
 
     public static final String TAG = "PaymentTransactionListViewAdapter";
 
     private Activity mActivity = null;
     private ArrayList<PaymentTransaction> mListData = null;
-    private int mLayoutResourceId;
 
-    public PaymentTransactionListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<PaymentTransaction> list) {
+    public PaymentTransactionListViewAdapter(@NonNull Activity activity, ArrayList<PaymentTransaction> list) {
 
-        super(activity, resource, list);
+        super(activity, R.layout.item_listview_transactions, list);
         this.mActivity = activity;
         this.mListData = list;
-        this.mLayoutResourceId = resource;
     }
 
     @NonNull
@@ -40,9 +39,8 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
         Holder holder;
         if (convertView == null) {
 
-            cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
+            cell = mActivity.getLayoutInflater().inflate(R.layout.item_listview_transactions, null);
             holder = new Holder();
-            holder.imgType = cell.findViewById(R.id.image_alert);
             holder.txtTransactionId = cell.findViewById(R.id.transaction_id);
             holder.txtDate = cell.findViewById(R.id.text_view_date);
             holder.txtReviews = cell.findViewById(R.id.text_view_remark);
@@ -59,11 +57,10 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
 
         if (transaction.getTransactionResponse().contains("fail")) {
 
-            holder.imgType.setImageResource(R.drawable.icon_alert_warning);
-
+            holder.txtPrice.setCompoundDrawablesWithIntrinsicBounds(null, mActivity.getResources().getDrawable(R.drawable.icon_alert_warning), null, null);
         } else {
 
-            holder.imgType.setImageResource(R.drawable.icon_receive);
+            holder.txtPrice.setCompoundDrawablesWithIntrinsicBounds(null, mActivity.getResources().getDrawable(R.drawable.icon_receive), null, null);
         }
 
         return cell;
@@ -71,7 +68,6 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
 
     private static class Holder {
 
-        public ImageView imgType = null;
         public TextView txtTransactionId = null;
         public TextView txtDate = null;
         public TextView txtReviews = null;

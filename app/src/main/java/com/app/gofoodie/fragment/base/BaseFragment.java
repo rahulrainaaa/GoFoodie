@@ -34,6 +34,7 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
      *
      * @param status boolean set/reset flag.
      */
+    @SuppressWarnings("unused")
     protected void setExitFlag(boolean status) {
 
         this.mFlagSaveBeforeExit = status;
