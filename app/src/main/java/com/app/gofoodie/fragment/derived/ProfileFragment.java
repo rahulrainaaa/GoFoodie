@@ -81,17 +81,17 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             // Include 0s to make customer Id 7 characters in length.
             int len = CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim().length();
 
-            String cid = "";
+            StringBuilder cid = new StringBuilder();
 
             while (len < 7) {
 
-                cid = cid + "0";
+                cid.append("0");
                 len++;
             }
 
-            cid = cid + CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim();
+            cid.append(CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim());
             mTxtName.setText("" + CustomerProfileHandler.CUSTOMER.getProfile().getName().trim());
-            mTxtEmail.setText("" + CustomerProfileHandler.CUSTOMER.getProfile().getEmail().trim() + "\nCustomer ID: C_" + cid + "");
+            mTxtEmail.setText("" + CustomerProfileHandler.CUSTOMER.getProfile().getEmail().trim() + "\nCustomer ID: C_" + cid.toString() + "");
             mTxtMobile.setText("" + CustomerProfileHandler.CUSTOMER.getProfile().getMobile1().trim());
 
         } catch (Exception e) {

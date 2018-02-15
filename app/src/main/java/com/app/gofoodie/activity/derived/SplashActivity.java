@@ -104,19 +104,6 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
                     })
                     .show();
 
-        } else if (customer == null) {
-
-            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Error")
-                    .setContentText("Server connection failed.\nPlease try later.")
-                    .setConfirmText("OK")
-                    .setCancelClickListener(sDialog -> {
-
-                        sDialog.cancel();
-                        SplashActivity.this.finish();
-                    })
-                    .show();
-
         } else if (customer.getStatusCode() == 401 || customer.getStatusCode() == 403) {
 
             SessionUtils.getInstance().removeSession(this);

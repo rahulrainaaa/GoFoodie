@@ -254,7 +254,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
      */
     private boolean checkValidations() {
 
-        boolean flagValidation = false;
+        boolean flagValidation;
 
         // Name field validation.
         if (mEtName.getText().toString().trim().isEmpty()) {

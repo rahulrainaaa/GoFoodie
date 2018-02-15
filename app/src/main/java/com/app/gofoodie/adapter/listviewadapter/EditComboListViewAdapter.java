@@ -14,20 +14,19 @@ import com.app.gofoodie.model.cartOrder.Description;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter class for handling the Edit combo spinner.
+ */
 public class EditComboListViewAdapter extends ArrayAdapter<Description> {
 
     public static final String TAG = "RestaurantListViewAdapter";
 
+    /**
+     * Class private data member(S).
+     */
+    private final int mLayoutResourceId;
     private Activity mActivity = null;
     private ArrayList<Description> mListData = null;
-    private int mLayoutResourceId;
-
-    private static class Holder {
-
-        public TextView txtName = null;
-        public TextView txtValue = null;
-        public int tag = -1;
-    }
 
     public EditComboListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Description> list) {
 
@@ -42,7 +41,7 @@ public class EditComboListViewAdapter extends ArrayAdapter<Description> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         View cell = convertView;
-        Holder holder = null;
+        Holder holder;
         if (convertView == null) {
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
@@ -61,5 +60,15 @@ public class EditComboListViewAdapter extends ArrayAdapter<Description> {
         holder.txtName.setText(description.name);
         holder.txtValue.setText(description.value);
         return cell;
+    }
+
+    /**
+     * Holder class to hold the reference of view.
+     */
+    private static class Holder {
+
+        public TextView txtName = null;
+        public TextView txtValue = null;
+        public int tag = -1;
     }
 }

@@ -37,7 +37,7 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
 
         PaymentTransaction transaction = mListData.get(position);
         View cell = convertView;
-        Holder holder = null;
+        Holder holder;
         if (convertView == null) {
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);

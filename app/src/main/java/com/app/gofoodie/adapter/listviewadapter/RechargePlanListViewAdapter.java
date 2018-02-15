@@ -15,10 +15,17 @@ import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
 
 import java.util.ArrayList;
 
+
+/**
+ * Adapter class to handle the list view for showing recharge plan(s).
+ */
 public class RechargePlanListViewAdapter extends ArrayAdapter<Subscriptionplan> {
 
     public static final String TAG = "RechargePlanListViewAdapter";
 
+    /**
+     * Class private data member(s).
+     */
     private Activity mActivity = null;
     private ArrayList<Subscriptionplan> mListData = null;
     private int mLayoutResourceId;
@@ -38,7 +45,7 @@ public class RechargePlanListViewAdapter extends ArrayAdapter<Subscriptionplan> 
 
         Subscriptionplan plan = mListData.get(position);
         View cell = convertView;
-        Holder holder = null;
+        Holder holder;
         if (convertView == null) {
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
@@ -72,6 +79,9 @@ public class RechargePlanListViewAdapter extends ArrayAdapter<Subscriptionplan> 
         return cell;
     }
 
+    /**
+     * Holder class to retain the response of view.
+     */
     private static class Holder {
 
         public TextView txtRechargePlan = null;

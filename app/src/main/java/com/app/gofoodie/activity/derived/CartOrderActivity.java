@@ -68,12 +68,9 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         setContentView(R.layout.activity_cart_order);
         mRecyclerView = findViewById(R.id.recycler_view);
 
-
         // Price analysis for pay price and tax payments.
-        Iterator<Cart> cartIterator = cartArrayList.iterator();
-        while (cartIterator.hasNext()) {
+        for (Cart cart : cartArrayList) {
 
-            Cart cart = cartIterator.next();
             int qty = Integer.valueOf(cart.getQuantity().trim());
             for (int i = 0; i < qty; i++) {
 
@@ -225,11 +222,11 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
 
-                int a = (int) ((CartOrderRecyclerAdapter.ItemHolder) viewHolder).ibtnEdit.getTag();
-                int b = (int) ((CartOrderRecyclerAdapter.ItemHolder) target).ibtnEdit.getTag();
+                int a = (int) ((CartOrderRecyclerAdapter.ItemHolder) viewHolder).iBtnEdit.getTag();
+                int b = (int) ((CartOrderRecyclerAdapter.ItemHolder) target).iBtnEdit.getTag();
 
-                ((CartOrderRecyclerAdapter.ItemHolder) viewHolder).ibtnEdit.setTag(b);
-                ((CartOrderRecyclerAdapter.ItemHolder) target).ibtnEdit.setTag(a);
+                ((CartOrderRecyclerAdapter.ItemHolder) viewHolder).iBtnEdit.setTag(b);
+                ((CartOrderRecyclerAdapter.ItemHolder) target).iBtnEdit.setTag(a);
 
                 String date1 = ((CartOrderRecyclerAdapter.ItemHolder) viewHolder).txtDate.getText().toString();
                 String date2 = ((CartOrderRecyclerAdapter.ItemHolder) target).txtDate.getText().toString();
@@ -412,23 +409,14 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             JSONObject jsonRequest = new JSONObject();
             JSONArray arrCartOrder = new JSONArray();
 
-            Iterator<CartOrder> cartOrderIterator = mList.iterator();
-            while (cartOrderIterator.hasNext()) {
+            for (CartOrder cartOrder : mList) {
 
-                CartOrder cartOrder = cartOrderIterator.next();
                 JSONArray arrDescription = new JSONArray();
 
-                Iterator<Description> descriptionIterator = cartOrder.description.iterator();
-                while (descriptionIterator.hasNext()) {
+                for (Description description : cartOrder.description) {
 
-                    Description description = descriptionIterator.next();
-                    JSONArray optionsJsonArray = new JSONArray();
+                    JSONArray optionsJsonArray = new JSONArray(cartOrder.description);
 
-                    Iterator<String> optionIterator = description.options.iterator();
-                    while (optionIterator.hasNext()) {
-
-                        optionsJsonArray.put("" + optionIterator.next());
-                    }
                     JSONObject objDescription = new JSONObject();
                     objDescription.put("options", optionsJsonArray);
                     objDescription.put("name", description.name);

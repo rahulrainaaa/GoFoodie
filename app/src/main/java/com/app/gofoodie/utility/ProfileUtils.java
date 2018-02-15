@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.Toast;
 
-import java.util.Locale;
-
 /**
  * Utility class for handling some user action.
  */
@@ -50,19 +48,6 @@ public class ProfileUtils {
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
         intent.putExtra(Intent.EXTRA_SUBJECT, "");
         intent.putExtra(Intent.EXTRA_TEXT, "");
-        context.startActivity(intent);
-    }
-
-    /**
-     * Method to start google maps application and plot the given geo coordinates.
-     *
-     * @param context
-     * @param geo
-     */
-    public static void mapLocation(Context context, String geo) {
-
-        String uri = String.format(Locale.ENGLISH, "geo:" + geo);
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         context.startActivity(intent);
     }
 

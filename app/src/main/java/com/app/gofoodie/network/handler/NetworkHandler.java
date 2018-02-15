@@ -63,15 +63,14 @@ public class NetworkHandler implements Response.ErrorListener {
      * @desc Static Method to init the Volley {@link RequestQueue} for application.
      * @method initRequestQueue
      */
-    public static boolean initRequestQueue(Context context) {
+    public static void initRequestQueue(Context context) {
 
         // Init RequestQueue only if it is null and return true.
         // Else return false.
         if (VolleyRequestQueue == null) {
             VolleyRequestQueue = Volley.newRequestQueue(context);
-            return true;
+
         }
-        return false;
     }
 
     /**
@@ -182,7 +181,7 @@ public class NetworkHandler implements Response.ErrorListener {
         HTTP_FAILED++;
         setProcessingDialogVisibility(false);
 
-        String responseMessage = null;
+        String responseMessage;
         if (error.getCause() == null) {
             responseMessage = error.getMessage();       // API authentication fail error.
         } else {

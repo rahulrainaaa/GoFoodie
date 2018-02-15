@@ -170,10 +170,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Oops...")
                     .setContentText(comboPlanResponse.getStatusMessage())
-                    .setConfirmClickListener(sweetAlertDialog -> {
-
-                        sweetAlertDialog.dismissWithAnimation();
-                    })
+                    .setConfirmClickListener(SweetAlertDialog::dismissWithAnimation)
                     .show();
 
         } else {

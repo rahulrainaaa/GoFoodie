@@ -2,7 +2,6 @@ package com.app.gofoodie.activity.derived;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,13 +57,7 @@ public class InvoiceActivity extends BaseAppCompatActivity {
         txtDate.setText("From: " + order.getStartDate() + "\nTill: " + order.getEndDate());
         txtTotalOrders.setText(order.getOrderCount() + " Orders placed");
 
-        btnDone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                finish();
-            }
-        });
+        btnDone.setOnClickListener(view -> finish());
 
         CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
         customerProfileHandler.refresh(this, null);

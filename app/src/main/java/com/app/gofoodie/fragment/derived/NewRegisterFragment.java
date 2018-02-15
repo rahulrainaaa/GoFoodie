@@ -131,7 +131,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         String strPassword = mEtPassword.getText().toString().trim();
         String strConfirmPassword = mEtCfmPassword.getText().toString().trim();
 
-        boolean isValid = false;
+        boolean isValid;
 
 
         // Name field validation.
@@ -280,7 +280,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
             isValid = false;
             mChkAcceptTerms.setError(getString(R.string.accept_the_terms));
-            return;
         }
 
         // Proceed after validation.
@@ -354,9 +353,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
         Toast.makeText(getActivity(), "HTTP Failed: " + message, Toast.LENGTH_SHORT).show();
         getDashboardActivity().getProgressDialog().hide();
-        if (requestCode == 1) {
-
-        }
     }
 
     /**

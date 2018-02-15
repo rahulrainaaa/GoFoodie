@@ -24,12 +24,12 @@ public class SessionUtils {
     private static boolean isSession = false;
     private static Login LOGIN = null;
 
-    public static SessionUtils getInstance() {
-        return ourInstance;
-    }
-
     private SessionUtils() {
 
+    }
+
+    public static SessionUtils getInstance() {
+        return ourInstance;
     }
 
     /**
@@ -56,17 +56,16 @@ public class SessionUtils {
     }
 
     /**
-     * @param context
-     * @param login
+     * Method to save given parameters as the session for the application.
+     *
+     * @param context reference
+     * @param login   reference
      * @return int 0 = failed to save, 1 = session saved successfully, 2 = session saved and override existing session.
-     * @method saveSession
-     * @desc Method to save given parameters as the session for the application.
      */
-    public int saveSession(Context context, JSONObject login) {
+    public void saveSession(Context context, JSONObject login) {
 
         CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).edit().putString(CacheUtils.PREF_KEY, login.toString()).commit();
         loadSession(context);
-        return 1;
     }
 
     /**

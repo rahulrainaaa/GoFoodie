@@ -15,6 +15,9 @@ import com.app.gofoodie.model.location.Locaton;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter class for handing data in spinner for picking location on {@link com.app.gofoodie.activity.derived.AddressChangeRequestActivity}.
+ */
 public class LocationSpinnerAdapter extends ArrayAdapter<Locaton> {
 
     public static final String TAG = "LocationSpinnerAdapter";
@@ -38,11 +41,11 @@ public class LocationSpinnerAdapter extends ArrayAdapter<Locaton> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        TextView textView = null;
+        TextView textView;
 
         if (convertView != null) {
 
-            textView = textView;
+            textView = (TextView) convertView;
 
         } else {
 
@@ -67,7 +70,7 @@ public class LocationSpinnerAdapter extends ArrayAdapter<Locaton> {
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        TextView textView = null;
+        TextView textView;
 
         if (convertView == null) {
 

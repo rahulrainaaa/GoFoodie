@@ -80,17 +80,12 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
         builderSingle.setCancelable(true);
         String match = mList.get(position).value;
         ArrayList<String> choices = new ArrayList<>();
-
-        for (String item : mList.get(position).options) {
-
-            choices.add(item);
-        }
-
+        choices.addAll(mList.get(position).options);
         final ItemAdapter arrayAdapter = new ItemAdapter(this, choices, match);
 
         builderSingle.setAdapter(arrayAdapter, (dialog, which) -> {
             String strName = arrayAdapter.getItem(which);
-            mList.get(position).value = strName.trim();
+            mList.get(position).value = strName;
             mAdapter.notifyDataSetChanged();
 
         });

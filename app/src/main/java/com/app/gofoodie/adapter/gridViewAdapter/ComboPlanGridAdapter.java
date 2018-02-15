@@ -26,14 +26,13 @@ import java.util.ArrayList;
 public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
 
     public static final String TAG = "ComboPlanGridAdapter";
-
+    private final int mLayoutResource;
     /**
      * Adapter Class private data members.
      */
     private LayoutInflater mInflater = null;
     private Activity mActivity = null;
     private ArrayList<Comboplan> mComboList = null;
-    private int mLayoutResource;
     private View.OnClickListener mClickListener = null;
 
     public ComboPlanGridAdapter(@NonNull Activity activity, View.OnClickListener clickListener, @LayoutRes int resource, ArrayList<Comboplan> list) {
@@ -53,7 +52,7 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
         Comboplan comboplan = mComboList.get(position);
 
         View view = convertView;
-        Holder holder = null;
+        Holder holder;
 
         if (view == null) {
             view = mInflater.inflate(mLayoutResource, null);

@@ -1,6 +1,5 @@
 package com.app.gofoodie.activity.derived;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
@@ -313,14 +312,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
                     dialog.dismiss();
                 });
 
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Dismiss", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.dismiss();
-            }
-        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Dismiss", (dialog, which) -> dialog.dismiss());
         alertDialog.show();
 
     }

@@ -30,7 +30,13 @@ import java.util.ArrayList;
 public class RestaurantComboActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
     public static final String TAG = "RestaurantComboActivity";
+    private final View.OnClickListener mOnClickLickListener = (View view) -> {
 
+        Comboplan comboplan = (Comboplan) view.getTag();
+        Intent intent = new Intent(this, ComboDescriptionActivity.class);
+        intent.putExtra("combo_id", comboplan.getComboId().trim());
+        startActivity(intent);
+    };
     /**
      * Class private data members.
      */
@@ -38,13 +44,6 @@ public class RestaurantComboActivity extends BaseAppCompatActivity implements Ne
     private ComboPlanGridAdapter mAdapter = null;
     private ArrayList<Comboplan> mComboPlanList = null;
     private boolean flagRefreshed = false;
-    private View.OnClickListener mOnClickLickListener = (View view) -> {
-
-        Comboplan comboplan = (Comboplan) view.getTag();
-        Intent intent = new Intent(this, ComboDescriptionActivity.class);
-        intent.putExtra("combo_id", comboplan.getComboId().trim());
-        startActivity(intent);
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

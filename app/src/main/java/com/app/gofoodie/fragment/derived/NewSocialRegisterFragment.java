@@ -135,7 +135,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
         String strLocationName = mEtLocationName.getText().toString().trim();
         String strCompanyName = mEtCompanyName.getText().toString().trim();
 
-        boolean isValid = false;
+        boolean isValid;
 
         // Name Field validation.
         if (strFirstName.isEmpty()) {
@@ -264,7 +264,6 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
             isValid = false;
             mChkAcceptTerms.setError(getString(R.string.accept_the_terms));
-            return;
         }
 
         // Decide and proceed after validation check.

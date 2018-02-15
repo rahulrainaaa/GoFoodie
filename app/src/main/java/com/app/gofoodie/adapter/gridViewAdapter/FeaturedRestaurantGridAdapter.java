@@ -51,7 +51,7 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
 
         mFeaturedRestaurant = mComboList.get(position);
         View view = convertView;
-        Holder holder = null;
+        Holder holder;
 
         if (view == null) {
             view = mInflater.inflate(mLayoutResource, null);

@@ -52,7 +52,7 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
     public void onBindViewHolder(final ItemHolder holder, int position) {
 
         CartOrder cartOrder = mList.get(position);
-        holder.ibtnEdit.setTag(position);
+        holder.iBtnEdit.setTag(position);
 
         holder.txtComboName.setText(cartOrder.comboName);
         holder.txtDate.setText("" + cartOrder.date);
@@ -63,11 +63,11 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
         if (cartOrder.type.toLowerCase().trim().equals("nonveg")) {
 
             holder.layoutVeg.setVisibility(View.GONE);
-            holder.layoutNonveg.setVisibility(View.VISIBLE);
+            holder.layoutNonVeg.setVisibility(View.VISIBLE);
         } else {
 
             holder.layoutVeg.setVisibility(View.VISIBLE);
-            holder.layoutNonveg.setVisibility(View.GONE);
+            holder.layoutNonVeg.setVisibility(View.GONE);
         }
 
     }
@@ -83,24 +83,24 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
      */
     public static class ItemHolder extends RecyclerView.ViewHolder {
 
-        public CardView cv;
-        public LinearLayout layoutVeg;
-        public LinearLayout layoutNonveg;
-        public TextView txtComboName;
-        public TextView txtDate;
-        public TextView txtPrice;
-        public ImageButton ibtnEdit;
+        public final CardView cv;
+        public final LinearLayout layoutVeg;
+        public final LinearLayout layoutNonVeg;
+        public final TextView txtComboName;
+        public final TextView txtDate;
+        public final TextView txtPrice;
+        public final ImageButton iBtnEdit;
 
         ItemHolder(View itemView, View.OnClickListener onClickListener) {
             super(itemView);
             cv = itemView.findViewById(R.id.cv);
             layoutVeg = itemView.findViewById(R.id.layout_veg);
-            layoutNonveg = itemView.findViewById(R.id.layout_nonveg);
+            layoutNonVeg = itemView.findViewById(R.id.layout_nonveg);
             txtComboName = itemView.findViewById(R.id.txt_combo_name);
             txtDate = itemView.findViewById(R.id.txt_date);
             txtPrice = itemView.findViewById(R.id.txt_price);
-            ibtnEdit = itemView.findViewById(R.id.ibtn_edit);
-            ibtnEdit.setOnClickListener(onClickListener);
+            iBtnEdit = itemView.findViewById(R.id.ibtn_edit);
+            iBtnEdit.setOnClickListener(onClickListener);
         }
     }
 

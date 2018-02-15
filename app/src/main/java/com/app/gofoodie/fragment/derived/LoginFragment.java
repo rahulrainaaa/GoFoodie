@@ -286,7 +286,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
      */
     private boolean validateCredentials(String strEmailMobile, String strPassword) {
 
-        boolean isValid = false;
+        boolean isValid;
 
         // Check Email field validation.
         if (strEmailMobile.isEmpty()) {

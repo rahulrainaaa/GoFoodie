@@ -49,7 +49,7 @@ public class CartListViewAdapter extends ArrayAdapter<Cart> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         View cell = convertView;
-        Holder holder = null;
+        Holder holder;
         if (convertView == null) {
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);

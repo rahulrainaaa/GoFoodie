@@ -24,8 +24,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Activity class for handling failed payment.
+ */
 public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
+    public static final String TAG = "PaymentGatewayFailActivity";
+
+    /**
+     * Class private data member(s).
+     */
     private TextView mTextView;
 
     @Override

@@ -78,21 +78,18 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
         networkHandler.httpCreate(1, this, this, new JSONObject(), Network.URL_GET_COUNTRIES, NetworkHandler.RESPONSE_TYPE.JSON_OBJECT);
         networkHandler.executeGet();
 
-        findViewById(R.id.save_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        findViewById(R.id.save_btn).setOnClickListener(view -> {
 
-                if (LocationActivity.this.mAreaLocationDatum == null) {
+            if (LocationActivity.this.mAreaLocationDatum == null) {
 
-                    Toast.makeText(LocationActivity.this, "Please select an Area", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                LocationUtils.getInstance().saveLocation(LocationActivity.this, mAreaLocationDatum.getAreaId(), mAreaLocationDatum.getAreaName());
-                Toast.makeText(LocationActivity.this, "Location Saved", Toast.LENGTH_SHORT).show();
-                GlobalData.applyLocationPref = true;
-                finish();
+                Toast.makeText(LocationActivity.this, "Please select an Area", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            LocationUtils.getInstance().saveLocation(LocationActivity.this, mAreaLocationDatum.getAreaId(), mAreaLocationDatum.getAreaName());
+            Toast.makeText(LocationActivity.this, "Location Saved", Toast.LENGTH_SHORT).show();
+            GlobalData.applyLocationPref = true;
+            finish();
         });
     }
 

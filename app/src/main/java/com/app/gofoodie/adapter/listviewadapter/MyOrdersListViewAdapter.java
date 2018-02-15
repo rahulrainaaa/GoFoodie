@@ -45,7 +45,7 @@ public class MyOrdersListViewAdapter extends ArrayAdapter<MyOrder> {
 
         MyOrder myOrder = mList.get(position);
         View cell = convertView;
-        Holder holder = null;
+        Holder holder;
         if (convertView == null) {
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);

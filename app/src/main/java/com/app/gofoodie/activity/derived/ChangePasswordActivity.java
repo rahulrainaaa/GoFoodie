@@ -79,7 +79,7 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
             showAlertAndClose("Error", "New password cannot be empty.");
             return;
 
-        } else if (!strNewPassword.equals(strCfmNewPassword.toString())) {
+        } else if (!strNewPassword.equals(strCfmNewPassword)) {
 
             showAlertAndClose("Error", "Confirm new password not matching.");
             return;
@@ -124,9 +124,7 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
 
         getProgressDialog().hide();
         Toast.makeText(this, "Network Fail: " + message, Toast.LENGTH_SHORT).show();
-        if (requestCode == 1) {
 
-        }
     }
 
     /**
@@ -165,7 +163,7 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
                 .setTitleText(title)
                 .setContentText(content)
                 .setConfirmText("Ok")
-                .setConfirmClickListener(sweetAlertDialog -> sweetAlertDialog.dismissWithAnimation());
+                .setConfirmClickListener(SweetAlertDialog::dismissWithAnimation);
         s.setCancelable(false);
         s.show();
     }

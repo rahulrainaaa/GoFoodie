@@ -58,7 +58,7 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
 
         Shortlisted shortlisted = mList.get(position);
         View cell = convertView;
-        Holder holder = null;
+        Holder holder;
         if (convertView == null) {
 
             cell = mActivity.getLayoutInflater().inflate(mLayoutResourceId, null);
