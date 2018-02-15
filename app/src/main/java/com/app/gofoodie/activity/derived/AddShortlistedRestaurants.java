@@ -34,8 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * @class AddShortlistedRestaurants
- * @desc Activity class to show near by restaurant branches and adding them as shortlisted restaurants.
+ * Activity class to show near by restaurant branches and adding them as shortlisted restaurants.
  */
 public class AddShortlistedRestaurants extends BaseAppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener, NetworkCallbackListener {
 
@@ -97,8 +96,7 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
     }
 
     /**
-     * @method menuSearch
-     * @desc Method to handle on search menu item selected.
+     * Method to handle on search menu item selected.
      */
     private void menuSearch() {
 
@@ -157,14 +155,11 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
     }
 
     /**
-     * @method fetchRestaurants
-     * @desc Method to fetch restaurants from API with filter/parameter applied.
+     * Method to fetch restaurants from API with filter/parameter applied.
      */
     private void fetchRestaurants(String search, boolean applyLocation) {
 
-        /**
-         * Fetch the location preferences.
-         */
+        //Fetch the location preferences.
         String location_id = LocationUtils.getInstance().getLocationId(this, CustomerProfileHandler.CUSTOMER.getProfile().getArea().trim());
         String location_name = LocationUtils.getInstance().getLocationName(this, CustomerProfileHandler.CUSTOMER.getProfile().getName().trim());
 
@@ -176,10 +171,9 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
         }
 
         String url = Network.URL_GET_RESTAURANT;
-        /**
-         * Check if location filter has to be applied.
-         * else, Append keyword parameter to url string.
-         */
+
+        // Check if location filter has to be applied.
+        // else, Append keyword parameter to url string.
         if (applyLocation) {
 
             url = url + "?areas=" + location_id;
@@ -195,9 +189,9 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
     }
 
     /**
-     * @param json
-     * @method handleRestaurantResponse
-     * @desc Method to handle the http response of {@link com.app.gofoodie.model.restaurant.RestaurantResponse} and publish in ListView.
+     * Method to handle the http response of {@link com.app.gofoodie.model.restaurant.RestaurantResponse} and publish in ListView.
+     *
+     * @param json reference
      */
     private void handleRestaurantResponse(JSONObject json) {
 
@@ -224,18 +218,15 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Oops...")
                     .setContentText("No such restaurant found.")
-                    .setConfirmClickListener(sweetAlertDialog -> {
-//                            finish();
-                        sweetAlertDialog.dismissWithAnimation();
-                    })
+                    .setConfirmClickListener(SweetAlertDialog::dismissWithAnimation)
                     .show();
         }
     }
 
     /**
-     * @param restaurants
-     * @method publishRestaurantList
-     * @desc Method to public restaurant list in the UI ListView.
+     * Method to public restaurant list in the UI ListView.
+     *
+     * @param restaurants reference
      */
     private void publishRestaurantList(ArrayList<Restaurant> restaurants) {
 
@@ -246,9 +237,9 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
     }
 
     /**
+     * Method to show the complete profile description.
+     *
      * @param view {@link android.widget.ImageButton} clicked reference.
-     * @method showProfile
-     * @desc Method to show the complete profile description.
      */
     private void showProfile(View view) {
 
@@ -260,9 +251,9 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
     }
 
     /**
-     * @param view {@link android.widget.ImageButton} clicked reference.
-     * @method addToShortlist
-     * @desc Method to remove this particular restaurant
+     * Method to remove this particular restaurant
+     *
+     * @param view {@link android.widget.ImageButton} clicked view reference.
      */
     private void addToShortlist(View view) {
 
@@ -290,9 +281,9 @@ public class AddShortlistedRestaurants extends BaseAppCompatActivity implements 
     }
 
     /**
-     * @param json
-     * @method handleRestaurantResponse
-     * @desc Method to handle the response of restaurant add to customer's shortlist.
+     * Method to handle the response of restaurant add to customer's shortlist.
+     *
+     * @param json reference
      */
     private void handleRestaurantAdded(JSONObject json) {
 

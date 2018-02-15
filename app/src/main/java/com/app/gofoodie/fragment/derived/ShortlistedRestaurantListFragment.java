@@ -185,9 +185,8 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
      */
     private void callToShortlistActivity() {
 
-        /**
-         * Show alert dialog to show AddNewRestaurantActivity.
-         */
+
+        // Show alert dialog to show AddNewRestaurantActivity.
         new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Alert")
                 .setContentText("No Shortlist Restaurant found.\nDo you want to add new?")

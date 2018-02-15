@@ -68,9 +68,9 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     }
 
     /**
+     * Method to get the progress dialog for the activity.
+     *
      * @return GoFoodieProgressDialog
-     * @method getProgressDialog
-     * @desc Method to get the progress dialog for the activity.
      */
     public GoFoodieProgressDialog getProgressDialog() {
 
@@ -78,8 +78,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     }
 
     /**
-     * @method showFullScreen
-     * @desc Method to show full screen by hiding title, navigation and status bar.
+     * Method to show full screen by hiding title, navigation and status bar.
      */
     protected void showFullScreen() {
 
@@ -92,8 +91,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     }
 
     /**
-     * @method hideNavigationBar
-     * @desc Method to hide the navigation bar within the activity.
+     * Method to hide the navigation bar within the activity.
      */
     protected void hideNavigationBar() {
 
@@ -111,9 +109,8 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     }
 
     /**
-     * @return
-     * @method getSession
-     * @desc Method to fetch the current session within the activity.
+     * @return reference to {@link Login} object (session).
+     * Method to fetch the current session within the activity.
      */
     public Login getSession() {
 
@@ -121,9 +118,9 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     }
 
     /**
+     * Method to get the Data from session.
+     *
      * @return Data from {@link Login}.{@link Data} reference.
-     * @method getSessionData
-     * @desc Method to get the Data from session.
      */
     protected Data getSessionData() {
 
@@ -136,6 +133,5 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
             return login.getData();
         }
     }
-
 
 }

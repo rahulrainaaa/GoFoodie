@@ -170,10 +170,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
         AboutUs.setText(restaurant.getAboutUs().getAboutus());
         mRatingBar.setRating(Float.parseFloat(restaurant.getAvgRating()));
 
-
-        /**
-         * Check they type of restaurant branch.
-         */
+        // Check they type of restaurant branch.
         if (restaurant.getType().trim().toLowerCase().equals("1")) {     // veg = 1
 
             Veg.setVisibility(View.VISIBLE);

@@ -4,17 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * @class CacheUtils
- * @desc Utility class to get and save values to cache.
+ * Utility class to get and save values to cache.
  */
 public class CacheUtils {
-
-    /**
-     * {@link SharedPreferences} Preference naming.
-     */
-    public enum PREF_NAME {
-        PREF_LOGIN, PREF_MEAL, PREF_AREA_LOCATION
-    }
 
     /**
      * Preference Key(s).
@@ -22,27 +14,26 @@ public class CacheUtils {
     public static final String PREF_KEY = "PREF_KEY";
     public static final String PREF_MEAL_CUISINE_KEY = "PREF_MEAL_CUISINE_KEY";
     public static final String PREF_MEAL_TYPE_KEY = "PREF_MEAL_TYPE_KEY";
+    private static final CacheUtils ourInstance = new CacheUtils();
 
     /**
      * Class private data members.
      */
     private SharedPreferences mPreferences = null;
 
-    private static final CacheUtils ourInstance = new CacheUtils();
+    private CacheUtils() {
+    }
 
     public static CacheUtils getInstance() {
         return ourInstance;
     }
 
-    private CacheUtils() {
-    }
-
     /**
-     * @param context
-     * @param prefName
+     * Method to get SharedPreferences from given {@link Context} and {@link PREF_NAME} and save.
+     *
+     * @param context  reference
+     * @param prefName reference
      * @return SharedPreferences
-     * @desc Method to get SharedPreferences from given {@link Context} and {@link PREF_NAME} and save.
-     * @@method getPref
      */
     public SharedPreferences getPref(Context context, PREF_NAME prefName) {
 
@@ -51,9 +42,9 @@ public class CacheUtils {
     }
 
     /**
+     * Method to get SharedPreferences from older saved {@link Context} and {@link PREF_NAME}.
+     *
      * @return SharedPreferences
-     * @desc Method to get SharedPreferences from older saved {@link Context} and {@link PREF_NAME}.
-     * @@method getPref
      */
     public SharedPreferences getPref() {
 
@@ -61,10 +52,11 @@ public class CacheUtils {
     }
 
     /**
-     * @param context
-     * @param prefName
+     * Private method to init, save pref-detail and get {@link SharedPreferences}.
+     *
+     * @param context  reference
+     * @param prefName reference
      * @return SharedPreferences
-     * @desc Private method to init, save pref-detail and get {@link SharedPreferences}.
      */
     private SharedPreferences initPref(Context context, PREF_NAME prefName) {
 
@@ -81,5 +73,12 @@ public class CacheUtils {
 
             return null;
         }
+    }
+
+    /**
+     * {@link SharedPreferences} Preference naming.
+     */
+    public enum PREF_NAME {
+        PREF_LOGIN, PREF_MEAL, PREF_AREA_LOCATION
     }
 }

@@ -11,8 +11,7 @@ import com.app.gofoodie.utility.SessionUtils;
 import java.util.Stack;
 
 /**
- * @class BaseFragment
- * @desc Base class for all the Fragment classes for application customization.
+ * Base class for all the Fragment classes for application customization.
  */
 public abstract class BaseFragment extends Fragment implements FragmentQuitHandler {
 
@@ -31,9 +30,9 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
     private boolean mFlagSaveBeforeExit = false;        //false = nothing; true = something to save (Do not exit).
 
     /**
+     * Method to set/reset the flag for Fragment.
+     *
      * @param status boolean set/reset flag.
-     * @method setExitFlag
-     * @desc Method to set/reset the flag for Fragment.
      */
     protected void setExitFlag(boolean status) {
 
@@ -41,9 +40,9 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
     }
 
     /**
+     * Method need to be called before proceeding fragment unload (final = important to be called).
+     *
      * @return boolean false = unload; true = don't unload.
-     * @method exitWork
-     * @desc Method need to be called before proceeding fragment unload (final = important to be called).
      */
     public final boolean exitWork() {
 
@@ -57,9 +56,9 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
     }
 
     /**
+     * Method to get the {@link DashboardActivity} activity instance.
+     *
      * @return DashboardActivity object
-     * @method getDashboardActivity
-     * @desc Method to get the {@link DashboardActivity} activity instance.
      */
     protected DashboardActivity getDashboardActivity() {
 
@@ -67,9 +66,9 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
     }
 
     /**
+     * Method to get the instance of {@link AppCompatActivity} of parent activity, from fragment.
+     *
      * @return AppCompatActivity
-     * @method getFragmentActivity
-     * @desc Method to get the instance of {@link AppCompatActivity} of parent activity, from fragment.
      */
     public AppCompatActivity getFragmentActivity() {
 
@@ -77,9 +76,9 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
     }
 
     /**
+     * Method to get the {@link DashboardInterruptListener} activity instance.
+     *
      * @return DashboardInterruptListener object
-     * @method getDashboardInterruptListener
-     * @desc Method to get the {@link DashboardInterruptListener} activity instance.
      */
     protected DashboardInterruptListener getDashboardInterruptListener() {
 
@@ -93,19 +92,17 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
     public void onDetach() {
         super.onDetach();
 
-        /**
-         * Forward flowing process will be pushed into stack.
-         * Backward flow will be popped. It will never be pushed into stack.
-         */
+        // Forward flowing process will be pushed into stack.
+        // Backward flow will be popped. It will never be pushed into stack.
         if (flagPushIntoStack) {
             FRAG_STACK.push(CURRENT_FRAG);
         }
     }
 
     /**
-     * @return
-     * @method getSession
-     * @desc Method to fetch the current session within the fragment.
+     * Method to fetch the current session within the fragment.
+     *
+     * @return Session info in {@link Login} object reference.
      */
     protected Login getSession() {
 

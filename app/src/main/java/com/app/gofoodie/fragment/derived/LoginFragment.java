@@ -86,18 +86,14 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         LoginManager.getInstance().logOut();
 
-        /**
-         * Facebook button and login code.
-         */
+        // Facebook button and login code.
         callbackManager = CallbackManager.Factory.create();
         mFacebookLoginHandler = new FacebookLoginHandler(getActivity(), this);
         mLoginButton = view.findViewById(R.id.facebook_login_button);
         mLoginButton.setReadPermissions("email");
         mLoginButton.registerCallback(callbackManager, mFacebookLoginHandler);
 
-        /**
-         * Google button and login code.
-         */
+        // Google button and login code.
         SignInButton signInButton = view.findViewById(R.id.google_login_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
         signInButton.setOnClickListener(this);
@@ -292,9 +288,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         boolean isValid = false;
 
-        /**
-         * Check Email field validation.
-         */
+        // Check Email field validation.
         if (strEmailMobile.isEmpty()) {
 
             isValid = false;
@@ -451,23 +445,19 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         if (e == null) {
 
-            /**
-             * Facebook login cancelled.
-             */
+            // Facebook login cancelled.
             Toast.makeText(getActivity(), "Facebook Error while login.", Toast.LENGTH_SHORT).show();
         } else {
 
-            /**
-             * {@link FacebookException} caught while login.
-             */
+            // {@link FacebookException} caught while login.
             Toast.makeText(getActivity(), "FacebookException: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
     /**
+     * Method to get new social user email and navigate to NewUserRegister Fragment with data.
+     *
      * @param email social user email id to be registered.
-     * @method registerNewSocialUser
-     * @desc Method to get new social user email and navigate to NewUserRegister Fragment with data.
      */
     private void registerNewSocialUser(String email) {
 

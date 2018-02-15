@@ -23,7 +23,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * @class MealPreferenceActivity
@@ -113,10 +112,8 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
                 break;
         }
 
-        Iterator<Cuisine> iterator = mList.iterator();
-        while (iterator.hasNext()) {
+        for (Cuisine cuisine : mList) {
 
-            Cuisine cuisine = iterator.next();
             if (cuisine.isChecked) {
 
                 mStrCategoriesId.append("" + cuisine.getCuisineId() + ",");
@@ -179,10 +176,8 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
 
         mList = (ArrayList<Cuisine>) response.getCuisine();
 
-        Iterator<Cuisine> cuisineIterator = mList.iterator();
-        while (cuisineIterator.hasNext()) {
+        for (Cuisine c : mList) {
 
-            Cuisine c = cuisineIterator.next();
             String strMatch = "," + c.getCuisineId().trim() + ",";
             if (cuisine_ids.contains(strMatch.trim())) {
 

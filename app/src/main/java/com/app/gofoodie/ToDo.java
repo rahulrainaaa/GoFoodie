@@ -3,7 +3,7 @@ package com.app.gofoodie;
 
 class ToDo {
 
-    /**
+    /*
      *
      *
      * Java Docs.

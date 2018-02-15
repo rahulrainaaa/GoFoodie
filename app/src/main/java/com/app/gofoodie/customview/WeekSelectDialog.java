@@ -1,7 +1,6 @@
 package com.app.gofoodie.customview;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -90,28 +89,22 @@ public class WeekSelectDialog implements View.OnClickListener {
         mAlertDialog.setCancelable(false);
         mAlertDialog.setTitle("Week Schedule");
 
-        mAlertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        mAlertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Save", (dialogInterface, i) -> {
 
-                if (mDialogListener != null) {
+            if (mDialogListener != null) {
 
-                    mDialogListener.weekDialogOkClicked(WeekSelectDialog.this);
-                }
-                dismiss();
-
+                mDialogListener.weekDialogOkClicked(WeekSelectDialog.this);
             }
+            dismiss();
+
         });
 
-        mAlertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        mAlertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", (dialogInterface, i) -> {
 
-                dismiss();
-                if (mDialogListener != null) {
+            dismiss();
+            if (mDialogListener != null) {
 
-                    mDialogListener.weekDialogCancelClicked(WeekSelectDialog.this);
-                }
+                mDialogListener.weekDialogCancelClicked(WeekSelectDialog.this);
             }
         });
         mAlertDialog.show();
@@ -366,33 +359,33 @@ public class WeekSelectDialog implements View.OnClickListener {
 
         String[] strArrWeekDays = str.split(",");
 
-        for (int i = 0; i < strArrWeekDays.length; i++) {
+        for (String day : strArrWeekDays) {
 
-            if (strArrWeekDays[i].trim().equals("Sun")) {
+            if (day.trim().equals("Sun")) {
 
                 sun = true;
 
-            } else if (strArrWeekDays[i].trim().equals("Mon")) {
+            } else if (day.trim().equals("Mon")) {
 
                 mon = true;
 
-            } else if (strArrWeekDays[i].trim().equals("Tue")) {
+            } else if (day.trim().equals("Tue")) {
 
                 tue = true;
 
-            } else if (strArrWeekDays[i].trim().equals("Wed")) {
+            } else if (day.trim().equals("Wed")) {
 
                 wed = true;
 
-            } else if (strArrWeekDays[i].trim().equals("Thu")) {
+            } else if (day.trim().equals("Thu")) {
 
                 thu = true;
 
-            } else if (strArrWeekDays[i].trim().equals("Fri")) {
+            } else if (day.trim().equals("Fri")) {
 
                 fri = true;
 
-            } else if (strArrWeekDays[i].trim().equals("Sat")) {
+            } else if (day.trim().equals("Sat")) {
 
                 sat = true;
             }

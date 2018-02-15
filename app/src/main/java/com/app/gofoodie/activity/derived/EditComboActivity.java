@@ -23,7 +23,6 @@ import com.app.gofoodie.model.cartOrder.CartOrder;
 import com.app.gofoodie.model.cartOrder.Description;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Activity to edit/customize your combo meal items (based on plan).
@@ -81,11 +80,12 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
         builderSingle.setCancelable(true);
         String match = mList.get(position).value;
         ArrayList<String> choices = new ArrayList<>();
-        Iterator<String> iterator = mList.get(position).options.iterator();
-        while (iterator.hasNext()) {
 
-            choices.add(iterator.next().trim());
+        for (String item : mList.get(position).options) {
+
+            choices.add(item);
         }
+
         final ItemAdapter arrayAdapter = new ItemAdapter(this, choices, match);
 
         builderSingle.setAdapter(arrayAdapter, (dialog, which) -> {

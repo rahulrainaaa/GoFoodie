@@ -9,8 +9,6 @@ import com.app.gofoodie.customview.WeekSelectDialog;
 import com.app.gofoodie.customview.WeekSelectDialogInterface;
 import com.app.gofoodie.global.constants.Network;
 import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
-import com.app.gofoodie.handler.profileDataHandler.ProfileUpdateListener;
-import com.app.gofoodie.model.customer.Customer;
 import com.app.gofoodie.network.callback.NetworkCallbackListener;
 import com.app.gofoodie.network.handler.NetworkHandler;
 import com.app.gofoodie.utility.SessionUtils;
@@ -52,19 +50,16 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
         } else {
 
             CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
-            customerProfileHandler.refresh(this, new ProfileUpdateListener() {
-                @Override
-                public void profileUpdatedCallback(Customer customer) {
+            customerProfileHandler.refresh(this, customer -> {
 
-                    if (customer != null) {
+                if (customer != null) {
 
-                        showWeekDialog();
+                    showWeekDialog();
 
-                    } else {
+                } else {
 
-                        finish();
-                        // Unable to fetch profile because of no internet connection.
-                    }
+                    finish();
+                    // Unable to fetch profile because of no internet connection.
                 }
             });
         }
@@ -170,12 +165,9 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
                 return;
             }
             CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(this);
-            customerProfileHandler.refresh(this, new ProfileUpdateListener() {
-                @Override
-                public void profileUpdatedCallback(Customer customer) {
-                    finish();
-                    Toast.makeText(WeekPreferenceActivity.this, "Week Preference Updated", Toast.LENGTH_SHORT).show();
-                }
+            customerProfileHandler.refresh(this, customer -> {
+                finish();
+                Toast.makeText(WeekPreferenceActivity.this, "Week Preference Updated", Toast.LENGTH_SHORT).show();
             });
 
         } catch (Exception exc) {

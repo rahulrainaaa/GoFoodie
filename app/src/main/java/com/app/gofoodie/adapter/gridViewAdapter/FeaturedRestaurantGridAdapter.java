@@ -75,9 +75,7 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
         }
         holder.txtComboName.setText(mFeaturedRestaurant.branchName);
 
-        /**
-         * Check the type of restaurant branch.
-         */
+        // Check the type of restaurant branch.
         if (mFeaturedRestaurant.type.contains("1")) {        // veg = 1.
 
             holder.imgVeg.setVisibility(View.VISIBLE);

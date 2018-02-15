@@ -137,9 +137,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
 
         boolean isValid = false;
 
-        /**
-         * Name Field validation.
-         */
+        // Name Field validation.
         if (strFirstName.isEmpty()) {
 
             isValid = false;
@@ -171,9 +169,8 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             mEtLastName.setError(null);
         }
 
-        /**
-         * Email field validation.
-         */
+
+        // Email field validation.
         if (strEmail.isEmpty()) {
 
             isValid = false;
@@ -203,9 +200,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             mEtAltEmail.setError(null);
         }
 
-        /**
-         * Mobile number validation.
-         */
+        // Mobile number validation.
         if (strMobile.isEmpty()) {
 
             isValid = false;
@@ -235,10 +230,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             mEtAltMobile.setError(null);
         }
 
-        /**
-         * Address field validation.
-         */
-
+        // Address field validation.
         if (strCompanyName.isEmpty()) {
 
             isValid = false;
@@ -267,9 +259,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             mEtLocationName.setError(null);
         }
 
-        /**
-         * Check if terms accepted.
-         */
+        // Check if terms accepted.
         if (!mChkAcceptTerms.isChecked()) {
 
             isValid = false;
@@ -277,9 +267,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
             return;
         }
 
-        /**
-         * Decide and proceed after validation check.
-         */
+        // Decide and proceed after validation check.
         if (!isValid) {
 
             return;

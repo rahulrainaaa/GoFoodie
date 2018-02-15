@@ -76,9 +76,7 @@ public class OrderCancellationHandler {
         this.myOrder = order;
         this.mCancellationListener = cancellationListener;
 
-        /**
-         * Check if (1) means single order cancellation.
-         */
+        // Check if (1) means single order cancellation.
         if (mode == 1) {
 
             cancelSingleOrder();
@@ -87,11 +85,8 @@ public class OrderCancellationHandler {
 //            btnShortTerm.setVisibility(View.GONE);
         }
 
-        /**
-         * proceed for else case.
-         * Inflate view and show in Bottom Action Sheet.
-         */
-
+        // proceed for else case.
+        // Inflate view and show in Bottom Action Sheet.
         View bottomView = mActivity.getLayoutInflater().inflate(R.layout.layout_bottom_sheet_my_orders, null);
         mBottomSheetDialog = new BottomSheetDialog(mActivity);
 

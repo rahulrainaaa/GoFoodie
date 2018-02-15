@@ -24,10 +24,7 @@ public class AssistantActivity extends FragmentActivity {
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-
-        /**
-         * The {@link ViewPager} that will host the section contents.
-         */
+        // The {@link ViewPager} that will host the section contents.
         ViewPager mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(sectionsPagerAdapter);
 
@@ -47,7 +44,7 @@ public class AssistantActivity extends FragmentActivity {
     /**
      * Callback method for skip button on click listener.
      *
-     * @param view
+     * @param view reference
      */
     public void btnSkipClicked(View view) {
 

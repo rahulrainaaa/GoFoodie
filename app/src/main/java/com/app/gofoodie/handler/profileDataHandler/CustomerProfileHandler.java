@@ -72,9 +72,7 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
      */
     public void refresh(BaseAppCompatActivity activity, ProfileUpdateListener listener) {
 
-        /**
-         * If already in progress to refresh customer profile.
-         */
+        // If already in progress to refresh customer profile.
         if (inProgress) {
 
             return;
@@ -130,10 +128,8 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
             Customer customer = (Customer) parser.getModel(rawObject.toString(), Customer.class, null);
             CUSTOMER = customer;
 
-            /**
-             * Check of location preference is empty.
-             * Then set customer profile location into preference.
-             */
+            // Check of location preference is empty.
+            // Then set customer profile location into preference.
             String location_name = LocationUtils.getInstance().getLocationName(mContext, "").trim();
             String location_id = LocationUtils.getInstance().getLocationId(mContext, "").trim();
 

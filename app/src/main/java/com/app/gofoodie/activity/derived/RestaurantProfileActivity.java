@@ -192,9 +192,7 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         mEtAboutUs.setText(restaurant.aboutUs);
         mRatingBar.setRating(Float.parseFloat(restaurant.avgRating.trim()));
 
-        /**
-         * Check the type of restaurant branch.
-         */
+        // Check the type of restaurant branch.
         if (restaurant.type.trim().toLowerCase().equals("1")) {     // veg = 1.
 
             mImgVeg.setVisibility(View.VISIBLE);

@@ -31,7 +31,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * @method ComboPlanActivity
@@ -172,7 +171,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
                     .setTitleText("Oops...")
                     .setContentText(comboPlanResponse.getStatusMessage())
                     .setConfirmClickListener(sweetAlertDialog -> {
-                        // finish();
+
                         sweetAlertDialog.dismissWithAnimation();
                     })
                     .show();
@@ -255,11 +254,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
 
             JSONArray jsonArrayItems = new JSONArray();
 
-            Iterator<ComboOption> comboplanIterator = comboplan.getComboOptions().iterator();
-
-            while (comboplanIterator.hasNext()) {
-
-                ComboOption item = comboplanIterator.next();
+            for (ComboOption item : comboplan.getComboOptions()) {
 
                 JSONArray jsonArrOptionList = new JSONArray(item.getOptions());
 

@@ -162,18 +162,14 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
      */
     private void showItems(ComboPlanResponse comboPlanResponse) {
 
-        /**
-         * Create a bottom sheet dialog.
-         */
+        // Create a bottom sheet dialog.
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
         View view = getLayoutInflater().inflate(R.layout.layout_combo_attributes, null);
         LinearLayout containerLayout = view.findViewById(R.id.container_layout);
 
         try {
 
-            /**
-             * Populate combo list items (contents) into bottom action sheet.
-             */
+            // Populate combo list items (contents) into bottom action sheet.
             int attrLength = comboPlanResponse.getComboplans().get(0).getComboOptions().size();
             List<ComboOption> items = comboPlanResponse.getComboplans().get(0).getComboOptions();
             for (int i = 0; i < attrLength; i++) {

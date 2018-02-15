@@ -67,9 +67,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             mButton = findViewById(R.id.btn_update_profile);
             mButton.setOnClickListener(this);
 
-            /**
-             * Check if there is not order present.
-             */
+            // Check if there is not order present.
             if (CustomerProfileHandler.CUSTOMER.getOrderCount() == 0) {
 
                 mEtLocation.setOnClickListener(this);
@@ -95,10 +93,8 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
     protected void onResume() {
         super.onResume();
 
-        /**
-         * Check for the customer order count.
-         * Check if there is not order present.
-         */
+        // Check for the customer order count.
+        // Check if there is not order present.
         if (CustomerProfileHandler.CUSTOMER.getOrderCount() == 0) {
 
             mLocationId = LocationUtils.getInstance().getLocationId(this, "");
@@ -113,9 +109,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
         mEtLocation.setText("" + mLocationName.trim());
 
-        /**
-         * Get from location preference of not present.
-         */
+        // Get from location preference of not present.
         if (mLocationName.trim().isEmpty() || mLocationId.trim().isEmpty()) {
 
             startActivity(new Intent(this, LocationActivity.class));
@@ -262,9 +256,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
         boolean flagValidation = false;
 
-        /**
-         * Name field validation.
-         */
+        // Name field validation.
         if (mEtName.getText().toString().trim().isEmpty()) {
 
             flagValidation = false;
@@ -281,9 +273,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             mEtName.setError(null);
         }
 
-        /**
-         * Email field validations.
-         */
+        // Email field validations.
         String strAltEmail = mEtAltEmail.getText().toString().trim();
         if (strAltEmail.trim().isEmpty()) {
 
@@ -299,9 +289,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             mEtAltEmail.setError(null);
         }
 
-        /**
-         * Mobile field validation.
-         */
+        // Mobile field validation.
         String strMobile = mEtMobile.getText().toString().trim();
         if (strMobile.isEmpty()) {
 
@@ -333,9 +321,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
             mEtAltMobile.setError(null);
         }
 
-        /**
-         * Address field validation check.
-         */
+        // Address field validation check.
         if (mEtLocation.getText().toString().trim().isEmpty()) {
 
             flagValidation = false;

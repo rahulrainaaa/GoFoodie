@@ -124,16 +124,13 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
         Calendar now = Calendar.getInstance();
         DatePickerDialog dpd = com.borax12.materialdaterangepicker.date.DatePickerDialog.newInstance(
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePickerDialog view, int year1, int month1, int day1, int year2, int month2, int day2) {
+                (view, year1, month1, day1, year2, month2, day2) -> {
 
-                        month1++;
-                        month2++;
-                        String fromDate = year1 + "-" + month1 + "-" + day1;
-                        String toDate = year2 + "-" + month2 + "-" + day2;
-                        fetchMyOrders(fromDate, toDate);
-                    }
+                    month1++;
+                    month2++;
+                    String fromDate = year1 + "-" + month1 + "-" + day1;
+                    String toDate = year2 + "-" + month2 + "-" + day2;
+                    fetchMyOrders(fromDate, toDate);
                 },
                 now.get(Calendar.YEAR),
                 now.get(Calendar.MONTH),
@@ -221,19 +218,15 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
         final MyOrder order = (MyOrder) v.getTag();
 
-        /**
-         * Check if order is not completed, then return.
-         * If status is completed, then continue for review alert.
-         */
+        // Check if order is not completed, then return.
+        // If status is completed, then continue for review alert.
         if (!order.getStatus().toLowerCase().contains("completed")) {
 
             Toast.makeText(this, "You can only rate completed orders", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        /**
-         * Proceed for rating.
-         */
+        // Proceed for rating.
         View view = getLayoutInflater().inflate(R.layout.rating_bar_layout, null);
         final RatingBar ratingBar = view.findViewById(R.id.rating_bar);
 
@@ -342,9 +335,8 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
         MyOrder myOrder = (MyOrder) v.getTag();
 
         String status = "Order status is already " + myOrder.getStatus();
-        /**
-         * check if the order is accepted then only proceed.
-         */
+
+        // check if the order is accepted then only proceed.
         if (!myOrder.getStatus().toLowerCase().trim().equals("accepted")) {
 
             Toast.makeText(this, status.trim(), Toast.LENGTH_SHORT).show();
@@ -386,9 +378,8 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
         MyOrder order = (MyOrder) view.getTag();
 
         String status = "Status is already " + order.getStatus();
-        /**
-         * Check if the order already cancelled.
-         */
+
+        // Check if the order already cancelled.
         if (!order.getStatus().toLowerCase().trim().equals("accepted")) {
 
             Toast.makeText(this, status.trim(), Toast.LENGTH_SHORT).show();

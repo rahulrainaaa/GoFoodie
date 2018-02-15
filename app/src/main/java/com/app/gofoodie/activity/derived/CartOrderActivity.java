@@ -174,9 +174,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
         pDialog.setConfirmText("Place Order");
         pDialog.setConfirmClickListener(sweetAlertDialog -> {
 
-            /**
-             * Create a request packet and proceed to place and order.
-             */
+            // Create a request packet and proceed to place and order.
             JSONObject jsonRequest = getOrderRequestPacket();
             if (jsonRequest == null) {
 

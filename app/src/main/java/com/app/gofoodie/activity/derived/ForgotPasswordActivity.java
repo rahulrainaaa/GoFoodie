@@ -68,9 +68,7 @@ public class ForgotPasswordActivity extends BaseAppCompatActivity implements Vie
 
         String strEmail = mEtEmail.getText().toString().trim();
 
-        /**
-         * Check for the email field validation.
-         */
+        // Check for the email field validation.
         if (strEmail.isEmpty()) {
 
             mEtEmail.setError("Enter Email");
@@ -86,9 +84,7 @@ public class ForgotPasswordActivity extends BaseAppCompatActivity implements Vie
             mEtEmail.setError(null);
         }
 
-        /**
-         * Send http forgot password request.
-         */
+        // Send http forgot password request.
         JSONObject jsonRequest = new JSONObject();
         jsonRequest.put("email", strEmail.trim());
         NetworkHandler handler = new NetworkHandler();

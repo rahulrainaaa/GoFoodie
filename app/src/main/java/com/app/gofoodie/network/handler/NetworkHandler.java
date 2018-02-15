@@ -48,6 +48,7 @@ public class NetworkHandler implements Response.ErrorListener {
     private BaseAppCompatActivity mBaseAppCompatActivity = null;
     private NetworkCallbackListener mNetworkCallbackListener = null;
     private RESPONSE_TYPE mResponseType = RESPONSE_TYPE.JSON_OBJECT;    // default response type = JSONObject
+
     /**
      * @constructor NetworkHandler
      * @desc default Constructor for Network Handler.
@@ -64,10 +65,8 @@ public class NetworkHandler implements Response.ErrorListener {
      */
     public static boolean initRequestQueue(Context context) {
 
-        /**
-         * Init RequestQueue only if it is null and return true.
-         * Else return false.
-         */
+        // Init RequestQueue only if it is null and return true.
+        // Else return false.
         if (VolleyRequestQueue == null) {
             VolleyRequestQueue = Volley.newRequestQueue(context);
             return true;
@@ -81,9 +80,7 @@ public class NetworkHandler implements Response.ErrorListener {
      */
     public static void clearRequestQueue() {
 
-        /**
-         * If {@link RequestQueue} is not null, then clear the queue.
-         */
+        // If {@link RequestQueue} is not null, then clear the queue.
         if (VolleyRequestQueue == null) {
             VolleyRequestQueue.stop();
         }

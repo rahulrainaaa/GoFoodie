@@ -133,9 +133,8 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
 
         boolean isValid = false;
 
-        /**
-         * Name field validation.
-         */
+
+        // Name field validation.
         if (strFirstName.isEmpty()) {
 
             isValid = false;
@@ -167,9 +166,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             mEtLastName.setError(null);
         }
 
-        /**
-         * Email field validation.
-         */
+        // Email field validation.
         if (strEmail.isEmpty()) {
 
             isValid = false;
@@ -199,9 +196,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             mEtAltEmail.setError(null);
         }
 
-        /**
-         * Mobile number validation.
-         */
+        // Mobile number validation.
         if (strMobile.isEmpty()) {
 
             isValid = false;
@@ -229,10 +224,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             mEtAltMobile.setError(null);
         }
 
-        /**
-         * Address field validation.
-         */
-
+        // Address field validation.
         if (strCompanyName.isEmpty()) {
 
             isValid = false;
@@ -263,9 +255,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             mEtLocation.setError(null);
         }
 
-        /**
-         * Password field validations.
-         */
+        // Password field validations.
         if (strPassword.isEmpty()) {
 
             isValid = false;
@@ -285,9 +275,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             mEtCfmPassword.setError(null);
         }
 
-        /**
-         * Check for terms accepted.
-         */
+        // Check for terms accepted.
         if (!mChkAcceptTerms.isChecked()) {
 
             isValid = false;
@@ -295,9 +283,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
             return;
         }
 
-        /**
-         * Proceed after validation.
-         */
+        // Proceed after validation.
         if (!isValid) {
 
             return;

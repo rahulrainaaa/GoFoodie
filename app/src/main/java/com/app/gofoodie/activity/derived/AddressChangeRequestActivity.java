@@ -74,7 +74,7 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
     /**
      * Method to publish fetched Location(s) in spinner from json response.
      *
-     * @param json
+     * @param json reference
      */
     private void publishLocations(JSONObject json) {
 
@@ -145,9 +145,7 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
     @Override
     public void networkFailResponse(int requestCode, String message) {
 
-        /**
-         * Get main thread to show UI response.
-         */
+        // Get main thread to show UI response.
         new Handler(getMainLooper()).post(() -> new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.ERROR_TYPE)
                 .setTitleText("Error")
                 .setContentText(message)
@@ -162,10 +160,7 @@ public class AddressChangeRequestActivity extends BaseAppCompatActivity implemen
 
         if (!validateFields()) {
 
-            /**
-             * Validation failed.
-             * Return from method.
-             */
+            // if validation failed, return.
             return;
         }
 

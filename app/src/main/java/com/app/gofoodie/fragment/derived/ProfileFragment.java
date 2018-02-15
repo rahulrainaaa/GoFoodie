@@ -60,9 +60,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         view.findViewById(R.id.btn_about_us).setOnClickListener(this);
         view.findViewById(R.id.btn_logout).setOnClickListener(this);
 
-        /**
-         * If customer = social user then hide change password option.
-         */
+        // If customer = social user then hide change password option.
         if (getSession().getData().getSocial().toLowerCase().contains("yes")) {
 
             view.findViewById(R.id.btn_change_password).setVisibility(View.GONE);
@@ -80,9 +78,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
         try {
 
-            /**
-             * Include 0s to make customer Id 7 characters in length.
-             */
+            // Include 0s to make customer Id 7 characters in length.
             int len = CustomerProfileHandler.CUSTOMER.getProfile().getCustomerId().trim().length();
 
             String cid = "";
@@ -155,12 +151,12 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     /**
      * Button(s) onClick Logic method(s).
+     *
+     * @param view reference
      */
     private void btnMyProfileClicked(View view) {
 
-        /**
-         * refresh the customer profile first and then proceed for profile update.
-         */
+        // refresh the customer profile first and then proceed for profile update.
         CustomerProfileHandler customerProfileHandler = new CustomerProfileHandler(getActivity());
         customerProfileHandler.refresh(getDashboardActivity(), customer -> startActivity(new Intent(getActivity(), UpdateProfileActivity.class)));
 
