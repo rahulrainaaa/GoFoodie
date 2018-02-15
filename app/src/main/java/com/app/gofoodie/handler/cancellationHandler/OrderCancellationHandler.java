@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Handler class to handle order cancellation.
@@ -184,7 +185,7 @@ public class OrderCancellationHandler {
             JSONObject jsonRequest = new JSONObject();
             try {
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
                 jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
                 jsonRequest.put("customer_id", mActivity.getSession().getData().getCustomerId());
@@ -264,7 +265,7 @@ public class OrderCancellationHandler {
             JSONObject jsonRequest = new JSONObject();
             try {
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
                 jsonRequest.put("login_id", mActivity.getSession().getData().getLoginId());
                 jsonRequest.put("customer_id", mActivity.getSession().getData().getCustomerId());

@@ -49,7 +49,7 @@ public class SessionUtils {
      */
     public void removeSession(Context context) {
 
-        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).edit().remove(CacheUtils.PREF_KEY).commit();
+        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).edit().remove(CacheUtils.PREF_KEY).apply();
         LOGIN = null;
         isSession = false;
         CustomerProfileHandler.CUSTOMER = null;
@@ -64,7 +64,7 @@ public class SessionUtils {
      */
     public void saveSession(Context context, JSONObject login) {
 
-        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).edit().putString(CacheUtils.PREF_KEY, login.toString()).commit();
+        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_LOGIN).edit().putString(CacheUtils.PREF_KEY, login.toString()).apply();
         loadSession(context);
     }
 

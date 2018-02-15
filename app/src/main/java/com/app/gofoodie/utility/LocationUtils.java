@@ -30,8 +30,8 @@ public class LocationUtils {
      */
     public void saveLocation(Context context, String locationId, String locationName) {
 
-        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().putString(KEY_LOCATION_NAME, locationName).commit();
-        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().putString(KEY_LOCATION_ID, locationId).commit();
+        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().putString(KEY_LOCATION_NAME, locationName).apply();
+        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().putString(KEY_LOCATION_ID, locationId).apply();
     }
 
     /**
@@ -64,8 +64,8 @@ public class LocationUtils {
      */
     public void resetLocationPref(Context context) {
 
-        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().remove(KEY_LOCATION_ID).commit();
-        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().remove(KEY_LOCATION_NAME).commit();
+        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().remove(KEY_LOCATION_ID).apply();
+        CacheUtils.getInstance().getPref(context, CacheUtils.PREF_NAME.PREF_AREA_LOCATION).edit().remove(KEY_LOCATION_NAME).apply();
     }
 
 }

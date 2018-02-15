@@ -34,6 +34,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * @class WalletFragment
@@ -66,7 +67,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
 
         if (CustomerProfileHandler.profileExist) {
 
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
             try {
                 Date expDate = format.parse(CustomerProfileHandler.CUSTOMER.getProfile().getValidUpto());
                 Date curDate = new Date();

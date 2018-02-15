@@ -20,6 +20,6 @@
 
     <color name="black_overlay">#66000000</color>
     <color name="test_color">#A5DC86</color>
-    <color name="background_material_dark">#d82222</color>
+    <color name="background_material_dark_color">#d82222</color>
 
 </resources>

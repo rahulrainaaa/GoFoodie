@@ -66,7 +66,7 @@
                     android:paddingStart="1dp"
                     android:text="  Combo Plan"
                     android:textColor="@color/colorTextName"
-                    android:textSize="13dp" />
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
@@ -80,7 +80,7 @@
                 android:orientation="horizontal"
                 android:paddingStart="20dp"
                 android:text="AED 200"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

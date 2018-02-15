@@ -59,7 +59,7 @@
                     android:paddingStart="3dp"
                     android:text="Combo Plan Name"
                     android:textColor="@color/colorTextName"
-                    android:textSize="13dp" />
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
@@ -88,7 +88,7 @@
                         android:gravity="start|center"
                         android:paddingStart="2dp"
                         android:text="Starter"
-                        android:textSize="11dp" />
+                        android:textSize="11sp" />
 
                     <TextView
                         android:id="@+id/txt_price"
@@ -97,7 +97,7 @@
                         android:gravity="start"
                         android:text="AED 20"
                         android:textColor="@android:color/black"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
 
 
                 </LinearLayout>

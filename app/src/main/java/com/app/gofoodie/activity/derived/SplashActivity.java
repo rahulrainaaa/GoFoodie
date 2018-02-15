@@ -3,7 +3,6 @@ package com.app.gofoodie.activity.derived;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.app.gofoodie.R;
@@ -29,7 +28,6 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
      * Class private data objects.
      */
     private Handler mHandler = null;
-    private ImageView mImgSplashLogo = null;
 
     /**
      * {@link BaseAppCompatActivity} callback method.
@@ -39,6 +37,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
         // Facebook SDK initialize.
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
@@ -61,7 +60,6 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
         super.onResume();
 
         showFullScreen();
-        mImgSplashLogo = findViewById(R.id.img_splash_logo);
         mHandler = new Handler();
         if (!SessionUtils.getInstance().isSessionExist()) {
             mHandler.postDelayed(this, 3000);

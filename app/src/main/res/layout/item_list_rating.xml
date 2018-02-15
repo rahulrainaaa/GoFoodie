@@ -29,7 +29,7 @@
         android:layout_marginTop="3dp"
         android:gravity="start|center"
         android:text="Some Text Here"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/name"
@@ -40,6 +40,6 @@
         android:gravity="start|center"
         android:text="By: Some User Name"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
 
 </LinearLayout>

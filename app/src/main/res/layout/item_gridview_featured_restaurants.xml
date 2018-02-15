@@ -54,7 +54,7 @@
                 android:paddingStart="3dp"
                 android:text="Restaurant Name"
                 android:textColor="@color/colorTextName"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
 
         </LinearLayout>

@@ -48,7 +48,7 @@ public class AssistantActivity extends FragmentActivity {
      */
     public void btnSkipClicked(View view) {
 
-        getSharedPreferences("welcome", 0).edit().putBoolean("welcome", false).commit();
+        getSharedPreferences("welcome", 0).edit().putBoolean("welcome", false).apply();
         finish();
     }
 

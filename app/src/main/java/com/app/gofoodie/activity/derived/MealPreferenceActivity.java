@@ -128,8 +128,8 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
         }
 
         // Save the preference into the cache (offline).
-        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_CUISINE_KEY, mStrCategoriesId.toString()).commit();
-        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_TYPE_KEY, mStrMealType).commit();
+        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_CUISINE_KEY, mStrCategoriesId.toString()).apply();
+        CacheUtils.getInstance().getPref(this, CacheUtils.PREF_NAME.PREF_MEAL).edit().putString(CacheUtils.PREF_MEAL_TYPE_KEY, mStrMealType).apply();
 
         Toast.makeText(this, "Meal Preferences saved.", Toast.LENGTH_SHORT).show();
         finish();

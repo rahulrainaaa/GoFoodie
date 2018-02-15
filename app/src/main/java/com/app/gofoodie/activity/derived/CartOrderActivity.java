@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Activity class to handle the CartOrders, date assigning and combo item option selection.
@@ -364,7 +365,7 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             if (checkForWeekDay(dayOfWeek)) {
 
                 Date newDate = cal.getTime();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
                 mList.get(pos++).date = sdf.format(newDate) + " (" + dayOfWeek + ")";
 
             }

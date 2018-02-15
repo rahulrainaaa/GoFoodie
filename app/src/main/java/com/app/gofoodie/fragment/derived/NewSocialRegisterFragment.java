@@ -308,7 +308,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
         } catch (JSONException excJson) {
 
             excJson.printStackTrace();
-            Toast.makeText(getActivity(), "EXCEPTION: " + excJson.getMessage(), Toast.LENGTH_SHORT);
+            Toast.makeText(getActivity(), "EXCEPTION: " + excJson.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

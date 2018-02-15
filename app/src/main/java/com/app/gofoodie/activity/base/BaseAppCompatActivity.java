@@ -1,5 +1,6 @@
 package com.app.gofoodie.activity.base;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.internal.BottomNavigationItemView;
@@ -25,6 +26,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
     private GoFoodieProgressDialog mGoFoodieProgressDialog = null;
 
+    @SuppressLint("RestrictedApi")
     protected void disableShiftMode(BottomNavigationView view) {
 
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);

@@ -325,7 +325,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         } catch (JSONException excJson) {
 
             excJson.printStackTrace();
-            Toast.makeText(getActivity(), "EXCEPTION: " + excJson.getMessage(), Toast.LENGTH_SHORT);
+            Toast.makeText(getActivity(), "EXCEPTION: " + excJson.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

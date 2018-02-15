@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="Restaurant"
                 android:textColor="#565656"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="italic" />
 
         </LinearLayout>
