@@ -27,7 +27,7 @@ public class CheckedListViewAdapter extends ArrayAdapter<Cuisine> implements Vie
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        CheckedTextView mCheckTextView = null;
+        CheckedTextView mCheckTextView;
         if (convertView == null) {
             mCheckTextView = (CheckedTextView) mActivity.getLayoutInflater().inflate(android.R.layout.simple_list_item_checked, null);
             mCheckTextView.setOnClickListener(this);

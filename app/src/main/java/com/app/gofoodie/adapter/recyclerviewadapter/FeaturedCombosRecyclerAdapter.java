@@ -25,7 +25,7 @@ import java.util.List;
  * @class FeaturedCombosRecyclerAdapter
  * @desc {@link RecyclerView.Adapter} adapter class for shortlisted restaurants - recycler view on home dashboard fragment.
  */
-@SuppressWarnings("SameParameterValue")
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<FeaturedCombosRecyclerAdapter.ItemHolder> implements View.OnClickListener {
 
     private static final String TAG = "FeaturedCombosRecyclerAdapter";
@@ -44,7 +44,6 @@ public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<Featured
     public FeaturedCombosRecyclerAdapter(Activity activity, int layoutResourceId, View.OnClickListener onClickListener, List<FeaturedCombo> categories) {
         this.mActivity = activity;
         this.mList = categories;
-        View.OnClickListener onClickListener1 = onClickListener;
         this.mLayoutResourceId = layoutResourceId;
     }
 

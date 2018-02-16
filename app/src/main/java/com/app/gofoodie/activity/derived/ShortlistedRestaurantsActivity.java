@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * @class ShortlistedRestaurantsActivity
  * @desc Activity class for showing the shortlisted restaurants (branch) to see and remove.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ConstantConditions"})
 public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implements NetworkCallbackListener, View.OnClickListener {
 
     public static final String TAG = "ShortlistedRestaurantsActivity";

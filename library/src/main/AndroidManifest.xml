@@ -1,9 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="com.ontbee.legacyforks.cn.pedant.SweetAlert"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ontbee.legacyforks.cn.pedant.SweetAlert"
 android:versionCode="2"
 android:versionName="1.1">
 
-<uses-sdk android:minSdkVersion="20" android:targetSdkVersion="27"/>
+<uses-sdk android:minSdkVersion="20" android:targetSdkVersion="27"
+    tools:ignore="GradleOverrides" />
 
 <application />
 

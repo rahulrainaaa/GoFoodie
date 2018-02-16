@@ -231,13 +231,10 @@ public class OrderCancellationHandler {
 
                 networkHandler.executePost();
 
-            } catch (JSONException jsonE) {
+            } catch (JSONException | ParseException jsonE) {
 
                 jsonE.printStackTrace();
 
-            } catch (ParseException e) {
-
-                e.printStackTrace();
             }
 
             dialogInterface.dismiss();
@@ -310,13 +307,10 @@ public class OrderCancellationHandler {
 
                 networkHandler.executePost();
 
-            } catch (JSONException jsonE) {
+            } catch (JSONException | ParseException jsonE) {
 
                 jsonE.printStackTrace();
 
-            } catch (ParseException e) {
-
-                e.printStackTrace();
             }
 
             dialogInterface.dismiss();

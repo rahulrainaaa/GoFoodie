@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * @class SubscriptionActivity
  * @desc Activity class to show Subscription/Recharge plan list.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ConstantConditions"})
 public class SubscriptionActivity extends BaseAppCompatActivity implements NetworkCallbackListener, AdapterView.OnItemClickListener {
 
     public static final String TAG = "SubscriptionActivity";

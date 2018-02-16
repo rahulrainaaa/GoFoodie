@@ -1,5 +1,6 @@
 package com.app.gofoodie.fragment.derived;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
  * @class HomeFragment
  * @desc {@link BaseFragment} Fragment class to handle Home UI screen.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ConstantConditions"})
 public class HomeFragment extends BaseFragment implements View.OnTouchListener, NetworkCallbackListener {
 
     public static final String TAG = "";
@@ -96,6 +97,7 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         switch (motionEvent.getAction()) {

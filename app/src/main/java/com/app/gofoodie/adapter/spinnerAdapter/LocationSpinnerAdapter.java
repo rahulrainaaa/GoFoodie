@@ -33,7 +33,6 @@ public class LocationSpinnerAdapter extends ArrayAdapter<Locaton> {
         super(activity, resource, arrayList);
 
         this.mActivity = activity;
-        int mResourceId = resource;
         this.mLocationList = arrayList;
     }
 

@@ -27,7 +27,7 @@ import org.json.JSONObject;
 /**
  * Activity class for handling failed payment.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ConstantConditions"})
 public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
     public static final String TAG = "PaymentGatewayFailActivity";

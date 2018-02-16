@@ -13,6 +13,7 @@ import com.app.gofoodie.R;
  * @class GoFoodieProgressDialog
  * @desc ProgressBar dialog box to show the processing icon on foreground and freeze UI.
  */
+@SuppressWarnings("ConstantConditions")
 public class GoFoodieProgressDialog {
 
     /**
@@ -57,9 +58,9 @@ public class GoFoodieProgressDialog {
      */
     public void setMessage(String text) {
 
-        String mText = "";
+        String mText;
         if (text == null) {
-            mText = "";
+            return;
         }
         mText = text.trim();
         mTextView.setText("" + mText.trim());
@@ -93,7 +94,7 @@ public class GoFoodieProgressDialog {
     }
 
     /**
-     *  Method to dismiss and release the memory.
+     * Method to dismiss and release the memory.
      */
     public void dismiss() {
 

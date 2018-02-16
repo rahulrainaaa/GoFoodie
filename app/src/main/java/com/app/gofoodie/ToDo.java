@@ -1,6 +1,7 @@
 package com.app.gofoodie;
 
 
+@SuppressWarnings("unused")
 class ToDo {
 
     /*

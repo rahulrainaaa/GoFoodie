@@ -23,7 +23,7 @@ import java.util.ArrayList;
 /**
  * Activity class to show the rating of given restaurant branch (branch_id).
  */
-@SuppressWarnings({"SameParameterValue", "unused"})
+@SuppressWarnings({"SameParameterValue", "unused", "ConstantConditions"})
 public class RatingActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
     public static final String TAG = "RatingActivity";

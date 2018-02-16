@@ -1,5 +1,6 @@
 package com.app.gofoodie.utility;
 
+@SuppressWarnings("unused")
 class View {
 }
 

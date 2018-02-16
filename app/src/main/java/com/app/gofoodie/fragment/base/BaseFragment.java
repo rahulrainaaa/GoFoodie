@@ -13,7 +13,7 @@ import java.util.Stack;
 /**
  * Base class for all the Fragment classes for application customization.
  */
-@SuppressWarnings({"unused", "FieldCanBeLocal"})
+@SuppressWarnings({"unused", "FieldCanBeLocal", "MismatchedQueryAndUpdateOfCollection"})
 public abstract class BaseFragment extends Fragment implements FragmentQuitHandler {
 
     public static final String TAG = "BaseFragment";
@@ -96,6 +96,7 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
 
         // Forward flowing process will be pushed into stack.
         // Backward flow will be popped. It will never be pushed into stack.
+        //noinspection ConstantConditions
         if (flagPushIntoStack) {
             FRAG_STACK.push(CURRENT_FRAG);
         }

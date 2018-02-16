@@ -34,7 +34,7 @@ import java.util.ArrayList;
  * @class ShortlistedRestaurantListFragment
  * @desc {@link BaseFragment} Fragment to show list of shortlisted restaurant(s) to view profile and see combo plan(s).
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ConstantConditions"})
 public class ShortlistedRestaurantListFragment extends BaseFragment implements NetworkCallbackListener, View.OnClickListener {
 
     public static final String TAG = "ShortlistedRestaurantListFragment";
