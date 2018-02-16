@@ -32,6 +32,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
     /**
      * {@link BaseAppCompatActivity} callback method.
      */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -40,6 +41,7 @@ public class SplashActivity extends BaseAppCompatActivity implements Runnable, P
 
         // Facebook SDK initialize.
         FacebookSdk.sdkInitialize(getApplicationContext());
+        //noinspection deprecation
         AppEventsLogger.activateApp(this);
 
         // Init Network Handler for Application.

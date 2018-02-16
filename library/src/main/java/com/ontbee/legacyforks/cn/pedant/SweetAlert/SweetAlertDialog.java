@@ -1,6 +1,7 @@
 package com.ontbee.legacyforks.cn.pedant.SweetAlert;
 
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -66,6 +67,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         this(context, NORMAL_TYPE);
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     public SweetAlertDialog(Context context, int alertType) {
         super(context, R.style.alert_dialog);
         setCancelable(true);

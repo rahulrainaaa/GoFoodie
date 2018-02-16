@@ -4,8 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * @interface NetworkCallbackListener
- * @desc Interface to callback from {@link com.app.gofoodie.network.handler.NetworkHandler}.
+ * Interface to callback from {@link com.app.gofoodie.network.handler.NetworkHandler}.
  */
 public interface NetworkCallbackListener {
 

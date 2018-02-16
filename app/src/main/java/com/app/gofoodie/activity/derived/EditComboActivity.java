@@ -117,7 +117,16 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-            CheckedTextView view = (CheckedTextView) getLayoutInflater().inflate(R.layout.item_combo_item, null);
+            CheckedTextView view;
+            if (convertView == null) {
+
+                view = (CheckedTextView) getLayoutInflater().inflate(R.layout.item_combo_item, null);
+
+            } else {
+
+                view = (CheckedTextView) convertView;
+            }
+
             view.setText(choices.get(position));
             view.setChecked(choices.get(position).trim().contains(match.trim()));
             return view;

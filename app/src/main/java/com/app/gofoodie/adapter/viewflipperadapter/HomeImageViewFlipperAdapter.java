@@ -47,30 +47,19 @@ public class HomeImageViewFlipperAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        Holder holder;
-        View v = convertView;
-        ImageView view = null;
+        ImageView imageView;
 
-        if (v == null) {
+        if (convertView == null) {
 
-            v = mInflater.inflate(mResourceId, null);
-            view = (ImageView) v;
-            holder = new Holder();
-            holder.img = view;
-            view.setTag(holder);
+            imageView = (ImageView) mInflater.inflate(mResourceId, null);
 
         } else {
 
-            assert view != null;
-            holder = (Holder) view.getTag();
-            view = holder.img;
-
-            Picasso.with(mActivity).load(mList[position]).into(view);
-            view.setTag(holder);
+            imageView = (ImageView) convertView;
         }
 
-        Picasso.with(mActivity).load(mList[position]).into(view);
-        return view;
+        Picasso.with(mActivity).load(mList[position]).into(imageView);
+        return imageView;
     }
 
     /**

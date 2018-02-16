@@ -59,7 +59,6 @@ public class NetworkHandler implements Response.ErrorListener {
      * Static Method to init the Volley {@link RequestQueue} for application.
      *
      * @param context Application context.
-     * @return boolean
      */
     public static void initRequestQueue(Context context) {
 
@@ -77,10 +76,8 @@ public class NetworkHandler implements Response.ErrorListener {
     public static void clearRequestQueue() {
 
         // If {@link RequestQueue} is not null, then clear the queue.
-        if (VolleyRequestQueue == null) {
-            assert VolleyRequestQueue != null;
-            VolleyRequestQueue.stop();
-        }
+        assert VolleyRequestQueue != null;
+        VolleyRequestQueue.stop();
     }
 
     /**

@@ -62,6 +62,7 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
         mListView = view.findViewById(R.id.list_view);
         mTxtWalletAmount = view.findViewById(R.id.wallet_amount);
         mTxtValidUpto = view.findViewById(R.id.valid_upto);
+        //noinspection deprecation
         mTabLayout.setOnTabSelectedListener(this);
         imgBtnSubscribe.setOnClickListener(this);
 

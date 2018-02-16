@@ -21,7 +21,7 @@ public class DashboardFragmentHandler {
     /**
      * Method to get the decide and get the fragment class.
      *
-     * @param fragmentType
+     * @param fragmentType Enum
      * @return FragmentClass
      */
     public BaseFragment getFragmentClass(DashboardInterruptListener.FRAGMENT_TYPE fragmentType) {

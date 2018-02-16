@@ -60,7 +60,6 @@ public class SessionUtils {
      *
      * @param context reference
      * @param login   reference
-     * @return int 0 = failed to save, 1 = session saved successfully, 2 = session saved and override existing session.
      */
     public void saveSession(Context context, JSONObject login) {
 

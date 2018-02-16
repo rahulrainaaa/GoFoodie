@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
@@ -23,7 +24,8 @@
         android:layout_marginTop="10dp"
         android:text="Country"
         android:textColor="@color/colorAccent"
-        android:textSize="11sp" />
+        android:textSize="11sp"
+        tools:ignore="SmallSp" />
 
     <Spinner
         android:id="@+id/sp_locpref_country"
@@ -46,7 +48,8 @@
         android:layout_marginTop="10dp"
         android:text="City"
         android:textColor="@color/colorAccent"
-        android:textSize="11sp" />
+        android:textSize="11sp"
+        tools:ignore="SmallSp" />
 
     <Spinner
         android:id="@+id/sp_locpref_city"
@@ -69,7 +72,8 @@
         android:layout_marginTop="10dp"
         android:text="Area"
         android:textColor="@color/colorAccent"
-        android:textSize="11sp" />
+        android:textSize="11sp"
+        tools:ignore="SmallSp" />
 
     <Spinner
         android:id="@+id/sp_locpref_area"
