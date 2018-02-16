@@ -140,7 +140,7 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
      * @method showShortlistedRestaurantProfile
      * @desc Method to show the Restaurant Branch profile of a Shortlisted Restaurant.
      */
-    public void showShortlistedRestaurantProfile() {
+    private void showShortlistedRestaurantProfile() {
         Shortlisted shortlisted = getIntent().getParcelableExtra("data");
 
         mEtName.setText(shortlisted.branchName);
@@ -180,7 +180,7 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
      * @method showRestaurantBranchProfile
      * @desc Method to show the Restaurant Branch profile of selected Restaurant (which is not shortlisted restaurant).
      */
-    public void showRestaurantBranchProfile() {
+    private void showRestaurantBranchProfile() {
         Restaurant restaurant = getIntent().getParcelableExtra("data");
 
         mEtName.setText(restaurant.branchName);

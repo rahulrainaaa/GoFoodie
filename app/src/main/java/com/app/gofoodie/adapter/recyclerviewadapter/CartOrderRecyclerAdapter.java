@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * Activity to show all the orders to be placed with delivery date assigned.
  */
+@SuppressWarnings("unused")
 public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecyclerAdapter.ItemHolder> {
 
     public static final String TAG = "CartOrderRecyclerAdapter";
@@ -77,6 +78,7 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
      * @class ItemHolder
      * @desc {@link RecyclerView.ViewHolder} holder static class for Recycler View items.
      */
+    @SuppressWarnings("unused")
     public static class ItemHolder extends RecyclerView.ViewHolder {
 
         public final CardView cv;

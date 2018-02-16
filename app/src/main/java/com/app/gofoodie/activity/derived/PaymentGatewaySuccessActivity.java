@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@SuppressWarnings("unused")
 public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
     public static final String TAG = "PaymentGatewaySuccessActivity";

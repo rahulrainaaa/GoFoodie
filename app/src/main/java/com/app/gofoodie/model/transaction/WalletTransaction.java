@@ -45,7 +45,7 @@ public class WalletTransaction implements Parcelable {
     @Expose
     private String type;
 
-    protected WalletTransaction(Parcel in) {
+    WalletTransaction(Parcel in) {
         this.walletId = ((String) in.readValue((String.class.getClassLoader())));
         this.walletTransactionId = ((String) in.readValue((String.class.getClassLoader())));
         this.invoiceId = ((String) in.readValue((String.class.getClassLoader())));

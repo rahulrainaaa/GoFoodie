@@ -14,7 +14,7 @@ public class ShortlistedRestaurants extends BaseModel implements Parcelable {
 
     @SerializedName("shortlisted")
     @Expose
-    public List<Shortlisted> shortlisted = null;
+    public final List<Shortlisted> shortlisted = null;
     @SerializedName("statusCode")
     @Expose
     public Integer statusCode;

@@ -20,6 +20,7 @@ import org.json.JSONObject;
 /**
  * Activity class to change signed in customer password.
  */
+@SuppressWarnings("unused")
 public class ChangePasswordActivity extends BaseAppCompatActivity implements View.OnClickListener, NetworkCallbackListener {
 
     public static final String TAG = "ChangePasswordActivity";

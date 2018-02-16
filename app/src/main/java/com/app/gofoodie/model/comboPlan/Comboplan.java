@@ -8,6 +8,7 @@ import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class Comboplan implements Parcelable
 {
 
@@ -73,7 +74,7 @@ public class Comboplan implements Parcelable
     }
     ;
 
-    protected Comboplan(Parcel in) {
+    Comboplan(Parcel in) {
         this.comboId = ((String) in.readValue((String.class.getClassLoader())));
         this.branchId = ((String) in.readValue((String.class.getClassLoader())));
         this.comboName = ((String) in.readValue((String.class.getClassLoader())));

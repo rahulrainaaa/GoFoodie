@@ -23,6 +23,7 @@ import java.util.ArrayList;
  * @class ComboPlanGridAdapter
  * @desc Adapter class for handling Restaurant Grid View.
  */
+@SuppressWarnings("unused")
 public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
 
     public static final String TAG = "ComboPlanGridAdapter";
@@ -107,6 +108,7 @@ public class ComboPlanGridAdapter extends ArrayAdapter<Comboplan> {
      * @class Holder
      * @desc Public static holder class for holding the xml view reference.
      */
+    @SuppressWarnings("unused")
     public static class Holder {
 
         public ImageView imgCombo = null;

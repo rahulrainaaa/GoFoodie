@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
  */
 public class NewRegisterFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener {
 
-    public static final String TAG = "NewRegisterFragment";
+    private static final String TAG = "NewRegisterFragment";
 
     /**
      * class private data member(s).

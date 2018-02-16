@@ -4,6 +4,7 @@ package com.app.gofoodie.customview;
 /**
  * Interface for dialog buttoon ok callback.
  */
+@SuppressWarnings("ALL")
 public interface WeekSelectDialogInterface {
 
 

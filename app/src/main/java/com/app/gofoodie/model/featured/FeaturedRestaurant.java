@@ -60,7 +60,7 @@ public class FeaturedRestaurant implements Parcelable
     }
     ;
 
-    protected FeaturedRestaurant(Parcel in) {
+    FeaturedRestaurant(Parcel in) {
         this.branchId = ((String) in.readValue((String.class.getClassLoader())));
         this.branchName = ((String) in.readValue((String.class.getClassLoader())));
         this.description = ((String) in.readValue((String.class.getClassLoader())));

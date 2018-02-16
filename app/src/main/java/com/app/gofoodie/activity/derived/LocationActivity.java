@@ -37,17 +37,17 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     /**
      * Class public data member(s).
      */
-    public CountryResponse mCountryListResponse = null;
-    public CityResponse mCityResponse = null;
-    public AreaResponse mAreaResponse = null;
+    private CountryResponse mCountryListResponse = null;
+    private CityResponse mCityResponse = null;
+    private AreaResponse mAreaResponse = null;
     /**
      * Class private data member(s).
      */
     private Spinner mSpCountry, mSpCity, mSpArea;
     private ArrayAdapter<String> mCountryAdapter, mCityAdapter, mAreaAdapter;
-    private ArrayList<String> mCountryList = new ArrayList<>();
-    private ArrayList<String> mCityList = new ArrayList<>();
-    private ArrayList<String> mAreaList = new ArrayList<>();
+    private final ArrayList<String> mCountryList = new ArrayList<>();
+    private final ArrayList<String> mCityList = new ArrayList<>();
+    private final ArrayList<String> mAreaList = new ArrayList<>();
     private com.app.gofoodie.model.areaResponse.Datum mAreaLocationDatum = null;
 
     /**

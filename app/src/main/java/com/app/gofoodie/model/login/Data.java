@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class Data implements Parcelable
 {
 
@@ -45,7 +46,7 @@ public class Data implements Parcelable
     }
     ;
 
-    protected Data(Parcel in) {
+    Data(Parcel in) {
         this.loginId = ((String) in.readValue((String.class.getClassLoader())));
         this.customerId = ((String) in.readValue((String.class.getClassLoader())));
         this.email = ((String) in.readValue((String.class.getClassLoader())));

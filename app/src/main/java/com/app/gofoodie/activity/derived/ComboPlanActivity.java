@@ -36,6 +36,7 @@ import java.util.ArrayList;
  * @method ComboPlanActivity
  * @desc {@link BaseAppCompatActivity} Activity class to show the Restaurant's ComboPlan(s) with filtering applied.
  */
+@SuppressWarnings("unused")
 public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkCallbackListener, View.OnClickListener {
 
     public static final String TAG = "ComboPlanActivity";

@@ -39,7 +39,7 @@ public class MealPreferenceActivity extends BaseAppCompatActivity implements Net
 
     private RadioGroup mRgpMealType = null;
     private String mStrMealType = "both";
-    private StringBuilder mStrCategoriesId = new StringBuilder();
+    private final StringBuilder mStrCategoriesId = new StringBuilder();
 
     /**
      * {@link BaseAppCompatActivity} activity callback method(s).

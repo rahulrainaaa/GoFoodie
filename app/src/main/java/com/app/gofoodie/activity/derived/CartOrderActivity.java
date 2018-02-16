@@ -52,8 +52,8 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
      */
     private RecyclerView mRecyclerView = null;
     private CartOrderRecyclerAdapter mCartOrderRecyclerAdapter = null;
-    private ArrayList<CartOrder> mList = new ArrayList<>();
-    private ArrayList<Cart> cartArrayList = GlobalData.cartArrayList;
+    private final ArrayList<CartOrder> mList = new ArrayList<>();
+    private final ArrayList<Cart> cartArrayList = GlobalData.cartArrayList;
     private Date mStartDate = null;
 
     // Price data fields.

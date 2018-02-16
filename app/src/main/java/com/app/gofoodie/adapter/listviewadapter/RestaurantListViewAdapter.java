@@ -31,7 +31,7 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
      */
     private Activity mActivity = null;
     private ArrayList<Restaurant> mList = null;
-    private int mLayoutResourceId;
+    private final int mLayoutResourceId;
     private View.OnClickListener mClickListener = null;
 
     /**

@@ -56,7 +56,7 @@ import java.util.regex.Pattern;
  */
 public class LoginFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener, FacebookLoginListener, GoogleApiClient.OnConnectionFailedListener {
 
-    public final String TAG = "LoginFragment";
+    private final String TAG = "LoginFragment";
     /**
      * class private constant(s).
      */
@@ -231,7 +231,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
      * @method SignIn
      * @desc Method to signIn with the entered credentials.
      */
-    public void SignIn() {
+    private void SignIn() {
 
         String strEmailMobile = mEtMobileEmail.getText().toString().trim();
         String strPassword = mEtPassword.getText().toString().trim();

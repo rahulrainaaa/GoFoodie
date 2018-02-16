@@ -8,6 +8,7 @@ import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class ComboOption implements Parcelable
 {
 
@@ -40,7 +41,7 @@ public class ComboOption implements Parcelable
     }
     ;
 
-    protected ComboOption(Parcel in) {
+    ComboOption(Parcel in) {
         this.comboItemId = ((String) in.readValue((String.class.getClassLoader())));
         this.comboId = ((String) in.readValue((String.class.getClassLoader())));
         this.name = ((String) in.readValue((String.class.getClassLoader())));

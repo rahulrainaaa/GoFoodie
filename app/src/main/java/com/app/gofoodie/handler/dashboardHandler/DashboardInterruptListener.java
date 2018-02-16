@@ -4,6 +4,7 @@ package com.app.gofoodie.handler.dashboardHandler;
 /**
  * Interface to implement to listen the interrupts for fragment loading.
  */
+@SuppressWarnings("SameReturnValue")
 public interface DashboardInterruptListener {
 
     /**

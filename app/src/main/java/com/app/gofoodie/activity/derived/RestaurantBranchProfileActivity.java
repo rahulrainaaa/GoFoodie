@@ -148,7 +148,7 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
      * @method showRestaurantBranchProfile
      * @desc Method to show the Restaurant Branch profile of selected Restaurant (which is not shortlisted restaurant).
      */
-    public void showRestaurantBranchProfile(JSONObject json) {
+    private void showRestaurantBranchProfile(JSONObject json) {
 
         ModelParser parser = new ModelParser();
         RestaurantBranchResponse restaurantBranchResponse = (RestaurantBranchResponse) parser.getModel(json.toString(), RestaurantBranchResponse.class, null);

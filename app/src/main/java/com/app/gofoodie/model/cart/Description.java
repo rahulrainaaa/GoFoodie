@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class Description implements Parcelable {
 
     public final static Creator<Description> CREATOR = new Creator<Description>() {
@@ -38,7 +39,7 @@ public class Description implements Parcelable {
     @Expose
     private List<String> options = null;
 
-    protected Description(Parcel in) {
+    Description(Parcel in) {
         this.itemId = ((String) in.readValue((String.class.getClassLoader())));
         this.name = ((String) in.readValue((String.class.getClassLoader())));
         this.value = ((String) in.readValue((String.class.getClassLoader())));

@@ -8,5 +8,6 @@ public interface FragmentQuitHandler {
     /**
      * Method for Fragment quit callback.
      */
+    @SuppressWarnings("EmptyMethod")
     void fragQuitCallback();
 }

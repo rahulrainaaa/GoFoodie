@@ -22,13 +22,13 @@ INJECTED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/Androi
 		INJECTED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml
 		INJECTED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml
 uses-sdk
-ADDED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml:6:1-68
-INJECTED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml:6:1-68
-INJECTED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml:6:1-68
+ADDED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml:6:1-69
+INJECTED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml:6:1-69
+INJECTED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml:6:1-69
 	android:targetSdkVersion
-		ADDED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml:6:37-66
+		ADDED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml:6:38-67
 	android:minSdkVersion
-		ADDED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml:6:11-36
+		ADDED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml:6:11-37
 		INJECTED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml
 		INJECTED from /Users/user/AndroidStudioProjects/GoFoodie/library/src/main/AndroidManifest.xml
 application

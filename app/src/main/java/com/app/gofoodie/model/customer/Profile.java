@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class Profile implements Parcelable {
 
     public final static Creator<Profile> CREATOR = new Creator<Profile>() {

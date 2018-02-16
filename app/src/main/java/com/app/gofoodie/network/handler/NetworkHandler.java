@@ -22,9 +22,10 @@ import org.json.JSONObject;
 /**
  * Network Handler Class (using Volley library) for the project.
  */
+@SuppressWarnings("unused")
 public class NetworkHandler implements Response.ErrorListener {
 
-    public static final String TAG = "NetworkHandler";
+    private static final String TAG = "NetworkHandler";
     /**
      * Volley {@link RequestQueue} for this application.
      */

@@ -32,7 +32,7 @@ public class CartListViewAdapter extends ArrayAdapter<Cart> {
      */
     private Activity mActivity = null;
     private ArrayList<Cart> mListData = null;
-    private int mLayoutResourceId;
+    private final int mLayoutResourceId;
     private CartFragment.CartItemClickListener mClickListener = null;
 
     public CartListViewAdapter(@NonNull Activity activity, CartFragment.CartItemClickListener clickListener, @LayoutRes int resource, ArrayList<Cart> list) {

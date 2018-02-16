@@ -11,8 +11,8 @@ public class LocationUtils {
     /**
      * Location preferences key fields.
      */
-    public final String KEY_LOCATION_NAME = "KL_NAME";
-    public final String KEY_LOCATION_ID = "KL_ID";
+    private final String KEY_LOCATION_NAME = "KL_NAME";
+    private final String KEY_LOCATION_ID = "KL_ID";
 
     private LocationUtils() {
     }

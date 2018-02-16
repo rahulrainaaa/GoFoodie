@@ -48,7 +48,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
 
     private String mStrFromDate = null;
     private String mStrToDate = null;
-    private OrderCancellationListener mOrderCancellationListener = (responseCode, operationCode, jsonResponse, message) -> {
+    private final OrderCancellationListener mOrderCancellationListener = (responseCode, operationCode, jsonResponse, message) -> {
 
         if (responseCode != OrderCancellationHandler.RESP_CODE.RESP_SUCCESS) {
 

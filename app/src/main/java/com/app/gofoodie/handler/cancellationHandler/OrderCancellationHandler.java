@@ -43,7 +43,7 @@ public class OrderCancellationHandler {
     private BaseAppCompatActivity mActivity = null;
     private BottomSheetDialog mBottomSheetDialog = null;
     private OrderCancellationListener mCancellationListener = null;
-    private View.OnClickListener mOnClickListener = view -> {
+    private final View.OnClickListener mOnClickListener = view -> {
 
         mBottomSheetDialog.hide();
 

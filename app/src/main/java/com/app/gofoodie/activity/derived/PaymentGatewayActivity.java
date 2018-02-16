@@ -25,6 +25,7 @@ import java.util.Random;
  * @class PaymentGatewayActivity
  * @desc Activity Class for confirming and starting payment transaction via gateway.
  */
+@SuppressWarnings("unused")
 public class PaymentGatewayActivity extends AppCompatActivity {
 
     public static final String TAG = "PaymentGatewayActivity";

@@ -37,7 +37,7 @@ public class Review implements Parcelable {
 
     };
 
-    protected Review(Parcel in) {
+    Review(Parcel in) {
         this.rating = ((String) in.readValue((String.class.getClassLoader())));
         this.comment = ((String) in.readValue((String.class.getClassLoader())));
         this.createdDate = ((String) in.readValue((String.class.getClassLoader())));

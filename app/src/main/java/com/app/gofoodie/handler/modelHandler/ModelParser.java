@@ -12,7 +12,7 @@ import com.google.gson.Gson;
  */
 public class ModelParser {
 
-    public final String TAG = "ModelParser";
+    private final String TAG = "ModelParser";
 
     /**
      * Class private data members.

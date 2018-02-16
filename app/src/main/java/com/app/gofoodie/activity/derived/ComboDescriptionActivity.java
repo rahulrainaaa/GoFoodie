@@ -28,6 +28,7 @@ import org.json.JSONObject;
 /**
  * Activity class to show full info/details of a single combo plan.
  */
+@SuppressWarnings("unused")
 public class ComboDescriptionActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
     public static final String TAG = "ComboDescriptionActivity";

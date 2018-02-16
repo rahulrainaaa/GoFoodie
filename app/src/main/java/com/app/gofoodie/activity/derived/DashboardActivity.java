@@ -22,6 +22,7 @@ import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
  * @class DashboardActivity
  * @desc {@link BaseAppCompatActivity} Activity class to handle the main navigating screen (Dashboard Screen).
  */
+@SuppressWarnings("unused")
 public class DashboardActivity extends BaseAppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, DashboardInterruptListener {
 
     public final String TAG = "DashboardActivity";

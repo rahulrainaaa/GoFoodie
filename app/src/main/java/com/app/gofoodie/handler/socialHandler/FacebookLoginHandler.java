@@ -17,9 +17,10 @@ import org.json.JSONObject;
  * @class FacebookLoginHandler
  * @desc Class for handling the Facebook login for the application.
  */
+@SuppressWarnings("unused")
 public class FacebookLoginHandler implements FacebookCallback<LoginResult>, GraphRequest.GraphJSONObjectCallback {
 
-    public final String TAG = "FacebookLoginHandler";
+    private final String TAG = "FacebookLoginHandler";
 
     /**
      * Class private data members.

@@ -26,14 +26,14 @@ import java.util.ArrayList;
  */
 public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaurant> implements View.OnClickListener {
 
-    public static final String TAG = "ComboPlanGridAdapter";
+    private static final String TAG = "ComboPlanGridAdapter";
 
     /**
      * Adapter Class private data members.
      */
     private Activity mActivity = null;
     private ArrayList<FeaturedRestaurant> mComboList = null;
-    private int mLayoutResource;
+    private final int mLayoutResource;
     private LayoutInflater mInflater = null;
     private FeaturedRestaurant mFeaturedRestaurant = null;
 

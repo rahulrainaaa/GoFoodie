@@ -15,6 +15,7 @@ import org.json.JSONArray;
  * @class WeekSelectDialog
  * @desc Class to handle the dialog box to select the week day(s) preference(s).
  */
+@SuppressWarnings("unused")
 public class WeekSelectDialog implements View.OnClickListener {
 
     public static final String TAG = "WeekSelectDialog";

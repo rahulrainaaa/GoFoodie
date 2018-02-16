@@ -111,9 +111,9 @@ public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<Featured
      */
     public static class ItemHolder extends RecyclerView.ViewHolder {
 
-        public CardView cv;
-        public TextView txtRestaurantName;
-        public RoundedImageView imgRestaurant;
+        public final CardView cv;
+        public final TextView txtRestaurantName;
+        public final RoundedImageView imgRestaurant;
 
         ItemHolder(View itemView, View.OnClickListener onClickListener) {
             super(itemView);

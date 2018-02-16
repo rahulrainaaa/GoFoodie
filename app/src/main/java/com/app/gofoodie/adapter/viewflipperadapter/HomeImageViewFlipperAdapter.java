@@ -23,7 +23,7 @@ public class HomeImageViewFlipperAdapter extends ArrayAdapter<String> {
     private String[] mList = null;
     private Activity mActivity = null;
     private LayoutInflater mInflater = null;
-    private int mResourceId;
+    private final int mResourceId;
 
     /**
      * Constructor method to initialize the class data members.

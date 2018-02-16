@@ -27,7 +27,7 @@ public class MyOrdersListViewAdapter extends ArrayAdapter<MyOrder> {
      */
     private Activity mActivity = null;
     private ArrayList<MyOrder> mList = null;
-    private int mLayoutResourceId;
+    private final int mLayoutResourceId;
     private View.OnClickListener mClickListener = null;
 
     public MyOrdersListViewAdapter(@NonNull Activity activity, View.OnClickListener listener, @LayoutRes int resource, ArrayList<MyOrder> list) {

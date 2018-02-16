@@ -75,7 +75,7 @@ public class RestaurantBranch implements Parcelable
     }
     ;
 
-    protected RestaurantBranch(Parcel in) {
+    RestaurantBranch(Parcel in) {
         this.branchId = ((String) in.readValue((String.class.getClassLoader())));
         this.restaurantId = ((String) in.readValue((String.class.getClassLoader())));
         this.avgRating = ((String) in.readValue((String.class.getClassLoader())));

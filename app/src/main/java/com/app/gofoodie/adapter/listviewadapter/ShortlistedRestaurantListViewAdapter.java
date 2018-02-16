@@ -32,7 +32,7 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
      */
     private Activity mActivity = null;
     private ArrayList<Shortlisted> mList = null;
-    private int mLayoutResourceId;
+    private final int mLayoutResourceId;
     private View.OnClickListener mClickListener = null;
 
     /**

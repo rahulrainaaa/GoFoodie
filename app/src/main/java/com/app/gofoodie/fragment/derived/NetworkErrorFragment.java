@@ -14,6 +14,7 @@ import com.app.gofoodie.fragment.base.BaseFragment;
  * @class NetworkErrorFragment
  * @desc {@link BaseFragment} Fragment class to handle Network-Error UI screen.
  */
+@SuppressWarnings("unused")
 public class NetworkErrorFragment extends BaseFragment {
 
     @Nullable

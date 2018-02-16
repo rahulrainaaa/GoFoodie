@@ -76,7 +76,7 @@ public class Restaurant implements Parcelable {
     @Expose
     public String aboutUs;
 
-    protected Restaurant(Parcel in) {
+    Restaurant(Parcel in) {
         this.branchId = ((String) in.readValue((String.class.getClassLoader())));
         this.restaurantId = ((String) in.readValue((String.class.getClassLoader())));
         this.avgRating = ((String) in.readValue((String.class.getClassLoader())));

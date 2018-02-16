@@ -23,9 +23,10 @@ import java.util.Date;
  * @class CustomerProfileHandler
  * @desc Handler class to handle the customer full profile based on the application login session.
  */
+@SuppressWarnings("unused")
 public class CustomerProfileHandler implements NetworkCallbackListener {
 
-    public static final String TAG = "CustomerProfileHandler";
+    private static final String TAG = "CustomerProfileHandler";
     /**
      * Class public static data member(s) to share.
      */

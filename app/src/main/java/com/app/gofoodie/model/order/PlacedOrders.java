@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class PlacedOrders implements Parcelable {
 
     public final static Creator<PlacedOrders> CREATOR = new Creator<PlacedOrders>() {

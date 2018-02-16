@@ -30,7 +30,7 @@ public class Locaton implements Parcelable {
     @Expose
     private String areaName;
 
-    protected Locaton(Parcel in) {
+    Locaton(Parcel in) {
         this.areaId = ((String) in.readValue((String.class.getClassLoader())));
         this.areaName = ((String) in.readValue((String.class.getClassLoader())));
     }

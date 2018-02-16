@@ -58,7 +58,7 @@ public class FeaturedCombo implements Parcelable
     }
     ;
 
-    protected FeaturedCombo(Parcel in) {
+    FeaturedCombo(Parcel in) {
         this.comboId = ((String) in.readValue((String.class.getClassLoader())));
         this.cbId = ((String) in.readValue((String.class.getClassLoader())));
         this.restaurantId = ((String) in.readValue((String.class.getClassLoader())));

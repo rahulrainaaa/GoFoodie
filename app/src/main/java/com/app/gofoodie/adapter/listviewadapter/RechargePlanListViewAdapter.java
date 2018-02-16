@@ -28,7 +28,7 @@ public class RechargePlanListViewAdapter extends ArrayAdapter<Subscriptionplan> 
      */
     private Activity mActivity = null;
     private ArrayList<Subscriptionplan> mListData = null;
-    private int mLayoutResourceId;
+    private final int mLayoutResourceId;
 
 
     public RechargePlanListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Subscriptionplan> list) {

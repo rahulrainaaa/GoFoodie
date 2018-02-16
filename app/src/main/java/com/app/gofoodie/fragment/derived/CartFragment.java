@@ -43,7 +43,7 @@ import java.util.ArrayList;
  */
 public class CartFragment extends BaseFragment implements NetworkCallbackListener {
 
-    public final String TAG = "CartFragment";
+    private final String TAG = "CartFragment";
 
     private TextView mTxtLabel = null;
     private CartItemClickListener mCartItemClickListener = null;

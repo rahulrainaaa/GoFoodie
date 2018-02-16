@@ -5,7 +5,7 @@ import com.app.gofoodie.model.base.BaseModel;
 /**
  * Interface for json to model class parsing callback.
  */
-public interface ModelParsingListener {
+interface ModelParsingListener {
 
     /**
      * Callback method to get status of model parsing.

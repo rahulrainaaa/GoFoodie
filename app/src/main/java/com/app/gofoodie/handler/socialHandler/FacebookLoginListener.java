@@ -9,6 +9,7 @@ import org.json.JSONObject;
 /**
  * Interface for sending response callback from {@link FacebookLoginHandler} to the UI Activity.
  */
+@SuppressWarnings("unused")
 public interface FacebookLoginListener {
 
     /**

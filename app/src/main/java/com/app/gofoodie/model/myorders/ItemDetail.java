@@ -38,7 +38,7 @@ public class ItemDetail implements Parcelable {
     @Expose
     private String itemId;
 
-    protected ItemDetail(Parcel in) {
+    ItemDetail(Parcel in) {
         in.readList(this.options, (String.class.getClassLoader()));
         this.name = ((String) in.readValue((String.class.getClassLoader())));
         this.value = ((String) in.readValue((String.class.getClassLoader())));

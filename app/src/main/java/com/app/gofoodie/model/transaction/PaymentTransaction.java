@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class PaymentTransaction implements Parcelable {
 
     public final static Creator<PaymentTransaction> CREATOR = new Creator<PaymentTransaction>() {

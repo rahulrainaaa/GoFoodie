@@ -17,7 +17,7 @@ import com.app.gofoodie.model.order.PlacedOrders;
  */
 public class InvoiceActivity extends BaseAppCompatActivity {
 
-    public static final String TAG = "InvoiceActivity";
+    private static final String TAG = "InvoiceActivity";
 
     /**
      * Class private data member(s).

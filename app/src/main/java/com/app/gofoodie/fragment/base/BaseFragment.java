@@ -25,8 +25,8 @@ public abstract class BaseFragment extends Fragment implements FragmentQuitHandl
     /**
      * Class private data member(s).
      */
-    private static Stack<DashboardInterruptListener.FRAGMENT_TYPE> FRAG_STACK = new Stack<>();
-    private boolean flagPushIntoStack = true;       // If this has to push into stack (Forward flow).
+    private static final Stack<DashboardInterruptListener.FRAGMENT_TYPE> FRAG_STACK = new Stack<>();
+    private final boolean flagPushIntoStack = true;       // If this has to push into stack (Forward flow).
     private boolean mFlagSaveBeforeExit = false;        //false = nothing; true = something to save (Do not exit).
 
     /**

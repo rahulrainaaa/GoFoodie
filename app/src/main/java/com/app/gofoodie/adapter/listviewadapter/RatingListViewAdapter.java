@@ -28,7 +28,7 @@ public class RatingListViewAdapter extends ArrayAdapter<Review> {
      */
     private Activity mActivity = null;
     private ArrayList<Review> mListData = null;
-    private int mLayoutResourceId;
+    private final int mLayoutResourceId;
 
     public RatingListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Review> list) {
 

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 /**
  * Adapter class for handling the Edit combo spinner.
  */
+@SuppressWarnings("unused")
 public class EditComboListViewAdapter extends ArrayAdapter<Description> {
 
     public static final String TAG = "RestaurantListViewAdapter";
@@ -65,6 +66,7 @@ public class EditComboListViewAdapter extends ArrayAdapter<Description> {
     /**
      * Holder class to hold the reference of view.
      */
+    @SuppressWarnings("unused")
     private static class Holder {
 
         public TextView txtName = null;

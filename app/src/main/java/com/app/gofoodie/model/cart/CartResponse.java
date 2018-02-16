@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class CartResponse extends BaseModel implements Parcelable {
 
     public final static Creator<CartResponse> CREATOR = new Creator<CartResponse>() {
