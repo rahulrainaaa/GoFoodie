@@ -25,7 +25,10 @@ import java.util.List;
  * @class FeaturedCombosRecyclerAdapter
  * @desc {@link RecyclerView.Adapter} adapter class for shortlisted restaurants - recycler view on home dashboard fragment.
  */
+@SuppressWarnings("SameParameterValue")
 public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<FeaturedCombosRecyclerAdapter.ItemHolder> implements View.OnClickListener {
+
+    private static final String TAG = "FeaturedCombosRecyclerAdapter";
 
     /**
      * private class Data members.
@@ -33,7 +36,6 @@ public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<Featured
     private List<FeaturedCombo> mList = null;
     private Activity mActivity = null;
     private int lastPosition;
-    private View.OnClickListener onClickListener = null;
     private int mLayoutResourceId = -1;
 
     /**
@@ -42,7 +44,7 @@ public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<Featured
     public FeaturedCombosRecyclerAdapter(Activity activity, int layoutResourceId, View.OnClickListener onClickListener, List<FeaturedCombo> categories) {
         this.mActivity = activity;
         this.mList = categories;
-        this.onClickListener = onClickListener;
+        View.OnClickListener onClickListener1 = onClickListener;
         this.mLayoutResourceId = layoutResourceId;
     }
 
@@ -109,6 +111,7 @@ public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<Featured
      * @class ItemHolder
      * @desc {@link RecyclerView.ViewHolder} holder static class for Recycler View items.
      */
+    @SuppressWarnings("unused")
     public static class ItemHolder extends RecyclerView.ViewHolder {
 
         public final CardView cv;

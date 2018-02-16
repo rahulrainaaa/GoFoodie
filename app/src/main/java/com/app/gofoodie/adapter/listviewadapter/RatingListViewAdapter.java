@@ -19,6 +19,7 @@ import java.util.ArrayList;
  * @class RatingListViewAdapter
  * @desc Activity class to handle and show the reviews of restaurant branch_id.
  */
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class RatingListViewAdapter extends ArrayAdapter<Review> {
 
     public static final String TAG = "RatingListViewAdapter";
@@ -71,6 +72,7 @@ public class RatingListViewAdapter extends ArrayAdapter<Review> {
     /**
      * Holder class to hold the List View Cell reference.
      */
+    @SuppressWarnings("unused")
     private static class Holder {
 
 

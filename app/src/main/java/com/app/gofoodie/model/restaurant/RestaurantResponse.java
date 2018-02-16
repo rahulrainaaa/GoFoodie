@@ -13,6 +13,7 @@ import java.util.List;
  * Response model class to hold the information of branche(s) in array list.
  * Holds multiple branch information in array.
  */
+@SuppressWarnings("unused")
 public class RestaurantResponse extends BaseModel implements Parcelable {
 
     public final static Creator<RestaurantResponse> CREATOR = new Creator<RestaurantResponse>() {
@@ -32,7 +33,7 @@ public class RestaurantResponse extends BaseModel implements Parcelable {
     };
     @SerializedName("restaurant")
     @Expose
-    public List<Restaurant> restaurant = null;
+    public final List<Restaurant> restaurant = null;
     @SerializedName("statusCode")
     @Expose
     public Integer statusCode;

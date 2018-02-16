@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 /**
  * Utility class to get and save values to cache.
  */
+@SuppressWarnings("unused")
 public class CacheUtils {
 
     /**

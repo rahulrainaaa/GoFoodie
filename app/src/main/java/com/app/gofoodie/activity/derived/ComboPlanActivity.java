@@ -48,7 +48,6 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     private ComboPlanGridAdapter mAdapter = null;
     private ArrayList<Comboplan> mComboPlanList = null;
     private boolean flagRefreshed = false;
-    private Button btnViewCart = null;
     private TextView txtCartItems = null;
 
     /**
@@ -60,7 +59,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
         setContentView(R.layout.activity_combo_plan);
         mComboGridView = findViewById(R.id.combo_plan_grid_layout);
 
-        btnViewCart = findViewById(R.id.btn_view_cart);
+        Button btnViewCart = findViewById(R.id.btn_view_cart);
         btnViewCart.setOnClickListener(this);
         txtCartItems = findViewById(R.id.txt_cart_items);
         txtCartItems.setText("Cart Items: " + CustomerProfileHandler.CUSTOMER.getCartCount());

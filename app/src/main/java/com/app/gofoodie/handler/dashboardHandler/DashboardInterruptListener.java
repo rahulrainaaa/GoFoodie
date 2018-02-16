@@ -4,7 +4,7 @@ package com.app.gofoodie.handler.dashboardHandler;
 /**
  * Interface to implement to listen the interrupts for fragment loading.
  */
-@SuppressWarnings("SameReturnValue")
+@SuppressWarnings({"SameReturnValue", "unused"})
 public interface DashboardInterruptListener {
 
     /**
@@ -32,6 +32,7 @@ public interface DashboardInterruptListener {
     /**
      * Fragment Enumeration
      */
+    @SuppressWarnings("unused")
     enum FRAGMENT_TYPE {
         DASHBOARD, WALLET, CART, PROFILE, LOGIN,
         NETWORK_ERROR, CHANGE_PASSWORD, FORGOT_PASSWORD,

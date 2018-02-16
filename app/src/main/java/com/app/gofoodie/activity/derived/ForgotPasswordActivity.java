@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 /**
  * Activity to handle the forgot password.
  */
+@SuppressWarnings("unused")
 public class ForgotPasswordActivity extends BaseAppCompatActivity implements View.OnClickListener, NetworkCallbackListener {
 
     public static final String TAG = "ForgotPasswordActivity";
@@ -31,7 +32,6 @@ public class ForgotPasswordActivity extends BaseAppCompatActivity implements Vie
      * Class private data member(s).
      */
     private MaterialEditText mEtEmail = null;
-    private Button mBtnForgot = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class ForgotPasswordActivity extends BaseAppCompatActivity implements Vie
         setContentView(R.layout.activity_forgot_password);
 
         mEtEmail = findViewById(R.id.et_forgot_email);
-        mBtnForgot = findViewById(R.id.btn_forgot_password);
+        Button mBtnForgot = findViewById(R.id.btn_forgot_password);
         mBtnForgot.setOnClickListener(this);
 
     }

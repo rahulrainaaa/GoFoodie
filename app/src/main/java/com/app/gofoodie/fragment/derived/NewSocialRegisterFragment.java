@@ -37,6 +37,7 @@ import java.util.regex.Pattern;
  * @class NewRegisterFragment
  * @desc {@link BaseFragment} Fragment class to handle New Social (Google/Facebook) Customer - Registration Fragment UI screen.
  */
+@SuppressWarnings("unused")
 public class NewSocialRegisterFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener {
 
     public static final String TAG = "NewSocialRegisterFragment";
@@ -45,7 +46,6 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
      * Class private data member(s).
      */
     private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mEtAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtLocationName, mEtCompanyName;
-    private Button mBtnRegister = null;
     private CheckBox mChkAcceptTerms = null;
     private String mLocationId = "";
     private String mLocationName = "";
@@ -68,7 +68,7 @@ public class NewSocialRegisterFragment extends BaseFragment implements View.OnCl
         mEtAddress = view.findViewById(R.id.et_address);
         mEtLocationName = view.findViewById(R.id.et_location_pref);
         mChkAcceptTerms = view.findViewById(R.id.chk_agree_terms);
-        mBtnRegister = view.findViewById(R.id.btn_register_new);
+        Button mBtnRegister = view.findViewById(R.id.btn_register_new);
 
         mEtEmail.setText(GlobalData.newSocialEmail.trim());
 

@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * Model to hold Location (id, name).
  */
+@SuppressWarnings("unused")
 public class LocationResponse extends BaseModel implements Parcelable {
 
     public final static Creator<LocationResponse> CREATOR = new Creator<LocationResponse>() {

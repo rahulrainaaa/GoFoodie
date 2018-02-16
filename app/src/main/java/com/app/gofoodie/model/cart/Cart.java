@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class Cart implements Parcelable {
 
     public final static Creator<Cart> CREATOR = new Creator<Cart>() {

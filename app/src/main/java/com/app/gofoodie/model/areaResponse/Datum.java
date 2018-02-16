@@ -4,6 +4,7 @@ package com.app.gofoodie.model.areaResponse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class Datum {
 
     @SerializedName("area_id")

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 /**
  * Adapter class for showing Bank payments in List View on {@link com.app.gofoodie.fragment.derived.WalletFragment}.
  */
+@SuppressWarnings("unused")
 public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTransaction> {
 
     public static final String TAG = "PaymentTransactionListViewAdapter";
@@ -66,6 +67,7 @@ public class PaymentTransactionListViewAdapter extends ArrayAdapter<PaymentTrans
         return cell;
     }
 
+    @SuppressWarnings("unused")
     private static class Holder {
 
         public TextView txtTransactionId = null;

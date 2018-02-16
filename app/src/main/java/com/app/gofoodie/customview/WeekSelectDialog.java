@@ -35,14 +35,6 @@ public class WeekSelectDialog implements View.OnClickListener {
     private boolean fri = true;
     private boolean sat = true;
 
-    private ToggleButton tglBtnSun = null;
-    private ToggleButton tglBtnMon = null;
-    private ToggleButton tglBtnTue = null;
-    private ToggleButton tglBtnWed = null;
-    private ToggleButton tglBtnThu = null;
-    private ToggleButton tglBtnFri = null;
-    private ToggleButton tglBtnSat = null;
-
     /**
      * @param activity reference
      */
@@ -59,13 +51,13 @@ public class WeekSelectDialog implements View.OnClickListener {
 
         View view = mActivity.getLayoutInflater().inflate(R.layout.dialog_week, null);
 
-        tglBtnSun = view.findViewById(R.id.tglBtn_sunday);
-        tglBtnMon = view.findViewById(R.id.tglBtn_monday);
-        tglBtnTue = view.findViewById(R.id.tglBtn_tuesday);
-        tglBtnWed = view.findViewById(R.id.tglBtn_wednesday);
-        tglBtnThu = view.findViewById(R.id.tglBtn_thursday);
-        tglBtnFri = view.findViewById(R.id.tglBtn_friday);
-        tglBtnSat = view.findViewById(R.id.tglBtn_saturday);
+        ToggleButton tglBtnSun = view.findViewById(R.id.tglBtn_sunday);
+        ToggleButton tglBtnMon = view.findViewById(R.id.tglBtn_monday);
+        ToggleButton tglBtnTue = view.findViewById(R.id.tglBtn_tuesday);
+        ToggleButton tglBtnWed = view.findViewById(R.id.tglBtn_wednesday);
+        ToggleButton tglBtnThu = view.findViewById(R.id.tglBtn_thursday);
+        ToggleButton tglBtnFri = view.findViewById(R.id.tglBtn_friday);
+        ToggleButton tglBtnSat = view.findViewById(R.id.tglBtn_saturday);
 
         tglBtnSun.setChecked(sun);
         tglBtnMon.setChecked(mon);

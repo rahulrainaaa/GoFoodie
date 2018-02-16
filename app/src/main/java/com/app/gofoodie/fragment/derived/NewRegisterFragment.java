@@ -45,7 +45,6 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
      * class private data member(s).
      */
     private MaterialEditText mEtFirstName, mEtLastName, mEtEmail, mEtAltEmail, mEtMobile, mEtAltMobile, mEtAddress, mEtLocation, mEtPassword, mEtCfmPassword, mEtCompanyName;
-    private Button mBtnRegister = null;
     private CheckBox mChkAcceptTerms = null;
     private String locationId = "";
     private String locationName = "";
@@ -70,7 +69,7 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
         mEtPassword = view.findViewById(R.id.et_password);
         mEtCfmPassword = view.findViewById(R.id.et_conform_password);
         mChkAcceptTerms = view.findViewById(R.id.chk_agree_terms);
-        mBtnRegister = view.findViewById(R.id.btn_register_new);
+        Button mBtnRegister = view.findViewById(R.id.btn_register_new);
 
         mBtnRegister.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);

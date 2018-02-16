@@ -27,6 +27,7 @@ import com.app.gofoodie.utility.SessionUtils;
  * @class ProfileFragment
  * @desc {@link BaseFragment} Fragment class to handle Profile UI screen.
  */
+@SuppressWarnings("unused")
 public class ProfileFragment extends BaseFragment implements View.OnClickListener {
 
     public static final String TAG = "ProfileFragment";

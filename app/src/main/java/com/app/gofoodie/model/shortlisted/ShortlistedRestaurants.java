@@ -10,6 +10,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class ShortlistedRestaurants extends BaseModel implements Parcelable {
 
     @SerializedName("shortlisted")

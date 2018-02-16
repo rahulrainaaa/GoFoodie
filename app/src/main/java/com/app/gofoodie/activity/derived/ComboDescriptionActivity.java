@@ -42,7 +42,6 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
     private TextView mTxtRestaurantName = null;
     private TextView mTxtRestaurantAddress = null;
     private TextView mTxtDescription = null;
-    private TextView AboutUs = null;
     private RatingBar mRatingBar = null;
     private ImageView Veg = null;
     private ImageView NonVeg = null;
@@ -60,7 +59,7 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
         mTxtRestaurantName = findViewById(R.id.txt_address);
         mTxtRestaurantAddress = findViewById(R.id.txt_postal_code);
         mTxtDescription = findViewById(R.id.txt_description);
-        AboutUs = findViewById(R.id.txt_about_us);
+        TextView aboutUs = findViewById(R.id.txt_about_us);
         mBtnCartItems = findViewById(R.id.btn_combo_items);
 
         mRatingBar = findViewById(R.id.rating_bar);

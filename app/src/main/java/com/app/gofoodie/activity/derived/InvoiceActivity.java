@@ -20,15 +20,6 @@ public class InvoiceActivity extends BaseAppCompatActivity {
     private static final String TAG = "InvoiceActivity";
 
     /**
-     * Class private data member(s).
-     */
-    private TextView txtOrderId = null;
-    private TextView txtPaidPrice = null;
-    private TextView txtDate = null;
-    private TextView txtTotalOrders = null;
-    private Button btnDone = null;
-
-    /**
      * {@link BaseAppCompatActivity} activity lifecycle callback method(s).
      */
     @Override
@@ -46,11 +37,14 @@ public class InvoiceActivity extends BaseAppCompatActivity {
 
         PlacedOrders order = orderResponse.getPlacedOrders();
 
-        txtOrderId = findViewById(R.id.txt_order_id);
-        txtPaidPrice = findViewById(R.id.price_paid);
-        txtDate = findViewById(R.id.date);
-        txtTotalOrders = findViewById(R.id.total_orders);
-        btnDone = findViewById(R.id.btn_done);
+        /*
+      Class private data member(s).
+     */
+        TextView txtOrderId = findViewById(R.id.txt_order_id);
+        TextView txtPaidPrice = findViewById(R.id.price_paid);
+        TextView txtDate = findViewById(R.id.date);
+        TextView txtTotalOrders = findViewById(R.id.total_orders);
+        Button btnDone = findViewById(R.id.btn_done);
 
         txtOrderId.setText("OrderID: " + order.getOrderSetId());
         txtPaidPrice.setText("Paid " + order.getPricePaid() + " AED");

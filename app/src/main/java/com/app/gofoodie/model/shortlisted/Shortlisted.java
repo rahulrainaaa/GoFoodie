@@ -7,6 +7,7 @@ import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Shortlisted implements Parcelable
 {
 

@@ -43,14 +43,11 @@ import java.util.Locale;
 /**
  * Activity class to handle the CartOrders, date assigning and combo item option selection.
  */
+@SuppressWarnings("unused")
 public class CartOrderActivity extends BaseAppCompatActivity implements View.OnClickListener, NetworkCallbackListener {
 
     public static final String TAG = "CartOrderActivity";
 
-    /**
-     * Class private data members.
-     */
-    private RecyclerView mRecyclerView = null;
     private CartOrderRecyclerAdapter mCartOrderRecyclerAdapter = null;
     private final ArrayList<CartOrder> mList = new ArrayList<>();
     private final ArrayList<Cart> cartArrayList = GlobalData.cartArrayList;
@@ -66,7 +63,10 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_order);
-        mRecyclerView = findViewById(R.id.recycler_view);
+        /*
+      Class private data members.
+     */
+        RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
 
         // Price analysis for pay price and tax payments.
         for (Cart cart : cartArrayList) {

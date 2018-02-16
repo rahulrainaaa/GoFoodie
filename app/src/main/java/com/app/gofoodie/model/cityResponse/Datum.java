@@ -4,6 +4,7 @@ package com.app.gofoodie.model.cityResponse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class Datum {
 
     @SerializedName("city_id")

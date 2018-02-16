@@ -11,7 +11,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-public class OptAnimationLoader {
+class OptAnimationLoader {
 
     public static Animation loadAnimation(Context context, int id)
             throws Resources.NotFoundException {
@@ -21,13 +21,11 @@ public class OptAnimationLoader {
             parser = context.getResources().getAnimation(id);
             return createAnimationFromXml(context, parser);
         } catch (XmlPullParserException ex) {
-            Resources.NotFoundException rnf = new Resources.NotFoundException("Can't load animation resource ID #0x" +
+            throw new Resources.NotFoundException("Can't load animation resource ID #0x" +
                     Integer.toHexString(id), ex);
-            throw rnf;
         } catch (IOException ex) {
-            Resources.NotFoundException rnf = new Resources.NotFoundException("Can't load animation resource ID #0x" +
+            throw new Resources.NotFoundException("Can't load animation resource ID #0x" +
                     Integer.toHexString(id), ex);
-            throw rnf;
         } finally {
             if (parser != null) parser.close();
         }

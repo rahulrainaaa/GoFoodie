@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Description {
 
-    public String itemId;
+    public final String itemId;
 
-    public String name;
+    public final String name;
 
     public String value;
 

@@ -36,6 +36,7 @@ import java.util.ArrayList;
 /**
  * Activity class to show near by restaurant branches and adding them as shortlisted restaurants.
  */
+@SuppressWarnings("unused")
 public class AddShortlistedRestaurants extends BaseAppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener, NetworkCallbackListener {
 
     public static final String TAG = "AddShortlistedRestaurants";

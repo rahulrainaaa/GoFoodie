@@ -8,6 +8,7 @@ import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class FeaturedCombo implements Parcelable
 {
 
@@ -40,7 +41,7 @@ public class FeaturedCombo implements Parcelable
     public String price;
     @SerializedName("comboItems")
     @Expose
-    public List<ComboItem> comboItems = null;
+    public final List<ComboItem> comboItems = null;
     public final static Creator<FeaturedCombo> CREATOR = new Creator<FeaturedCombo>() {
 
 

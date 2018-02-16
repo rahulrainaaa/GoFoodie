@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Featured extends BaseModel implements Parcelable {
 
     public final static Creator<Featured> CREATOR = new Creator<Featured>() {
@@ -28,10 +29,10 @@ public class Featured extends BaseModel implements Parcelable {
     };
     @SerializedName("featured_restaurants")
     @Expose
-    public List<FeaturedRestaurant> featuredRestaurants = null;
+    public final List<FeaturedRestaurant> featuredRestaurants = null;
     @SerializedName("featured_combos")
     @Expose
-    public List<FeaturedCombo> featuredCombos = null;
+    public final List<FeaturedCombo> featuredCombos = null;
     @SerializedName("statusCode")
     @Expose
     public Integer statusCode;

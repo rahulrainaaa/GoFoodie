@@ -27,6 +27,7 @@ import java.util.ArrayList;
  * Filters are also applied.
  * No add to cart is applied in this case.
  */
+@SuppressWarnings("unused")
 public class RestaurantComboActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
     public static final String TAG = "RestaurantComboActivity";

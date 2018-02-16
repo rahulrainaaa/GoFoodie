@@ -10,6 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Restaurant branch information.
  * Inner class of {@link RestaurantResponse}.
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Restaurant implements Parcelable {
 
     public final static Creator<Restaurant> CREATOR = new Creator<Restaurant>() {

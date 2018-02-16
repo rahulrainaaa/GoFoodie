@@ -22,7 +22,7 @@ import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.List;
 
-@SuppressWarnings("UnusedReturnValue")
+@SuppressWarnings({"UnusedReturnValue", "SameParameterValue", "WeakerAccess", "CanBeFinal", "unused"})
 public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     public static final int NORMAL_TYPE = 0;
     public static final int ERROR_TYPE = 1;

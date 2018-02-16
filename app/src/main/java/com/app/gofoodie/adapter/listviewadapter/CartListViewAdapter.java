@@ -23,6 +23,7 @@ import java.util.ArrayList;
  * @class CartListViewAdapter
  * @desc Class to handle the Adapter.ListView for Cart.
  */
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class CartListViewAdapter extends ArrayAdapter<Cart> {
 
     public static final String TAG = "RestaurantListViewAdapter";
@@ -109,6 +110,7 @@ public class CartListViewAdapter extends ArrayAdapter<Cart> {
      * @class Holder
      * @desc Class to hold the reference/id of list view items component(s).
      */
+    @SuppressWarnings("unused")
     private static class Holder {
 
         public ImageView imgCombo = null;

@@ -11,6 +11,7 @@ import android.view.animation.Transformation;
 
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.R;
 
+@SuppressWarnings({"WeakerAccess", "CanBeFinal"})
 public class Rotate3dAnimation extends Animation {
     private int mPivotXType = ABSOLUTE;
     private int mPivotYType = ABSOLUTE;

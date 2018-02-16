@@ -34,6 +34,7 @@ import java.util.ArrayList;
  * @class ShortlistedRestaurantListFragment
  * @desc {@link BaseFragment} Fragment to show list of shortlisted restaurant(s) to view profile and see combo plan(s).
  */
+@SuppressWarnings("unused")
 public class ShortlistedRestaurantListFragment extends BaseFragment implements NetworkCallbackListener, View.OnClickListener {
 
     public static final String TAG = "ShortlistedRestaurantListFragment";
@@ -42,8 +43,6 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
      * Class private data member(s).
      */
     private ListView mListView = null;
-    private ArrayList<Shortlisted> mList = null;
-    private ShortlistedRestaurantListViewAdapter mAdapter = null;
 
     /**
      * {@link BaseFragment} fragment callback method(s).
@@ -112,8 +111,8 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
         ModelParser parser = new ModelParser();
         ShortlistedRestaurants shortlistedRestaurants = (ShortlistedRestaurants) parser.getModel(json.toString(), ShortlistedRestaurants.class, null);
         if (shortlistedRestaurants.statusCode == 200) {
-            mList = (ArrayList<Shortlisted>) shortlistedRestaurants.shortlisted;
-            mAdapter = new ShortlistedRestaurantListViewAdapter(getDashboardActivity(), R.layout.item_see_shortlisted_restaurant, mList, this);
+            ArrayList<Shortlisted> mList = (ArrayList<Shortlisted>) shortlistedRestaurants.shortlisted;
+            ShortlistedRestaurantListViewAdapter mAdapter = new ShortlistedRestaurantListViewAdapter(getDashboardActivity(), R.layout.item_see_shortlisted_restaurant, mList, this);
             mListView.setAdapter(mAdapter);
         } else if (shortlistedRestaurants.statusCode == 204) {
 

@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
  * @class UpdateProfileActivity
  * @desc Activity class to update the profile details of a customer wrt customer_id.
  */
+@SuppressWarnings("unused")
 public class UpdateProfileActivity extends BaseAppCompatActivity implements View.OnClickListener, NetworkCallbackListener {
 
     public static final String TAG = "UpdateProfileActivity";
@@ -36,7 +37,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
      */
     private MaterialEditText mEtName, mEtMobile, mEtAltMobile, mEtAltEmail, mEtAddress, mEtLocation, mEtCompanyName;
     private Button mButton = null;
-    private String mLocationName, mLocationId;
+    private String mLocationId;
 
     /**
      * {@link com.app.gofoodie.activity.base.BaseAppCompatActivity} callback method(s).
@@ -95,6 +96,7 @@ public class UpdateProfileActivity extends BaseAppCompatActivity implements View
 
         // Check for the customer order count.
         // Check if there is not order present.
+        String mLocationName;
         if (CustomerProfileHandler.CUSTOMER.getOrderCount() == 0) {
 
             mLocationId = LocationUtils.getInstance().getLocationId(this, "");

@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Subscriptionplan implements Parcelable {
 
     public final static Creator<Subscriptionplan> CREATOR = new Creator<Subscriptionplan>() {

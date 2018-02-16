@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +23,7 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
  * @class RestaurantProfileActivity
  * @desc Activity class to simply show restaurant profile details given in the model class.
  */
+@SuppressWarnings("unused")
 public class RestaurantProfileActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "RestaurantProfileActivity";
@@ -42,10 +42,6 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     private ImageView mImgVeg = null;
     private ImageView mImgNonVeg = null;
     private ImageView mImgProfile = null;
-    private ImageButton mIBtnCall = null;
-    private ImageButton mIBtnEmail = null;
-    private ImageButton mIBtnMap = null;
-    private ImageButton mIBtnReview = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,16 +64,10 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
         mImgNonVeg = findViewById(R.id.img_nonveg);
         mImgProfile = findViewById(R.id.img_profile);
 
-        mIBtnCall = findViewById(R.id.btn_call);
-        mIBtnEmail = findViewById(R.id.btn_email);
-        mIBtnMap = findViewById(R.id.btn_map);
-        mIBtnReview = findViewById(R.id.btn_rate);
-
-        mIBtnCall.setOnClickListener(this);
-        mIBtnEmail.setOnClickListener(this);
-        mIBtnMap.setOnClickListener(this);
-        mIBtnReview.setOnClickListener(this);
-
+        findViewById(R.id.btn_call).setOnClickListener(this);
+        findViewById(R.id.btn_email).setOnClickListener(this);
+        findViewById(R.id.btn_map).setOnClickListener(this);
+        findViewById(R.id.btn_rate).setOnClickListener(this);
 
         MODE mode = (MODE) getIntent().getSerializableExtra("mode");
         if (mode == MODE.SHORTLISTED) {

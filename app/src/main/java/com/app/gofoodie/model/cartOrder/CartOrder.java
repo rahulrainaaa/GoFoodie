@@ -8,20 +8,21 @@ import java.util.List;
 /**
  * Model class to hold from cart item, in order to proceed for the payment.
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class CartOrder {
 
     public String date = "";
-    public String cartItemId;
-    public String restaurantName;
-    public String restaurantId;
-    public String branchId;
-    public String comboId;
-    public String comboName;
-    public String image;
-    public String type;
+    public final String cartItemId;
+    public final String restaurantName;
+    public final String restaurantId;
+    public final String branchId;
+    public final String comboId;
+    public final String comboName;
+    public final String image;
+    public final String type;
     public String comboPrice = "0.0";
-    public String quantity;
-    public List<Description> description = new ArrayList<>();
+    public final String quantity;
+    public final List<Description> description = new ArrayList<>();
     public String zoneShippingCharge = "0.0";
     public String payPrice = "0.0";
 

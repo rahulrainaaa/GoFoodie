@@ -37,7 +37,6 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
      */
     private static Date sPrevTime = null;   // Last data refreshed DateTime.
     private static boolean inProgress = false;      // Http request in progress or not.
-    private static boolean isProgressdDialogVisible = false;
     /**
      * Class Private data members.
      */
@@ -99,7 +98,7 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
 
                 activity.getProgressDialog().show();
                 this.mActivity = activity;
-                isProgressdDialogVisible = true;
+                boolean isProgressdDialogVisible = true;
             }
 
         } catch (JSONException jsonExc) {

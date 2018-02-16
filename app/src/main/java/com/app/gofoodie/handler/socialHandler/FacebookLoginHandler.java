@@ -22,12 +22,7 @@ public class FacebookLoginHandler implements FacebookCallback<LoginResult>, Grap
 
     private final String TAG = "FacebookLoginHandler";
 
-    /**
-     * Class private data members.
-     */
-    private Activity mActivity = null;
     private FacebookLoginListener mListener = null;
-    private LoginResult mLoginResult = null;
 
     /**
      * @param activity reference
@@ -35,7 +30,9 @@ public class FacebookLoginHandler implements FacebookCallback<LoginResult>, Grap
      */
     public FacebookLoginHandler(Activity activity, FacebookLoginListener listener) {
 
-        this.mActivity = activity;
+        /*
+      Class private data members.
+     */
         this.mListener = listener;
     }
 
@@ -45,7 +42,6 @@ public class FacebookLoginHandler implements FacebookCallback<LoginResult>, Grap
     @Override
     public void onSuccess(LoginResult loginResult) {
 
-        this.mLoginResult = loginResult;
         Log.d(TAG, "Facebook Login Success: " + loginResult.toString());
         triggerGraphAPI();
     }

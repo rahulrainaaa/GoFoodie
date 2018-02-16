@@ -10,11 +10,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Ratings extends BaseModel implements Parcelable {
 
     @SerializedName("review")
     @Expose
-    public List<Review> review = null;
+    public final List<Review> review = null;
     @SerializedName("statusCode")
     @Expose
     public Integer statusCode;

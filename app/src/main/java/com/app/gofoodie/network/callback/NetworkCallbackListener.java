@@ -6,6 +6,7 @@ import org.json.JSONObject;
 /**
  * Interface to callback from {@link com.app.gofoodie.network.handler.NetworkHandler}.
  */
+@SuppressWarnings("unused")
 public interface NetworkCallbackListener {
 
     /**

@@ -43,15 +43,6 @@ public class PaymentGatewayActivity extends AppCompatActivity {
     private String amount;
 
     /**
-     * Activity UI view object(s).
-     */
-    private TextView txtPlanName = null;
-    private TextView txtPlanDetail = null;
-    private TextView txtGetPrice = null;
-    private TextView txtDays = null;
-    private Button btnConform = null;
-
-    /**
      * {@link AppCompatActivity} callback method(s).
      */
     @Override
@@ -59,11 +50,14 @@ public class PaymentGatewayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_gateway);
 
-        txtPlanName = findViewById(R.id.txt_plan_name);
-        txtPlanDetail = findViewById(R.id.txt_details);
-        txtGetPrice = findViewById(R.id.txt_get_price);
-        txtDays = findViewById(R.id.txt_days);
-        btnConform = findViewById(R.id.btn_confirm);
+        /*
+      Activity UI view object(s).
+     */
+        TextView txtPlanName = findViewById(R.id.txt_plan_name);
+        TextView txtPlanDetail = findViewById(R.id.txt_details);
+        TextView txtGetPrice = findViewById(R.id.txt_get_price);
+        TextView txtDays = findViewById(R.id.txt_days);
+        Button btnConform = findViewById(R.id.btn_confirm);
 
         Subscriptionplan subscriptionplan = GlobalData.subscriptionplan;
 

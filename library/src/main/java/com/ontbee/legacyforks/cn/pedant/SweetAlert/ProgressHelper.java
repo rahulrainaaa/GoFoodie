@@ -5,6 +5,7 @@ import android.content.Context;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.R;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
+@SuppressWarnings("unused")
 public class ProgressHelper {
     private ProgressWheel mProgressWheel;
     private boolean mToSpin;

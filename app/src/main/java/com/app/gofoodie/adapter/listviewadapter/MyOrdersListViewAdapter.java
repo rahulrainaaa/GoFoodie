@@ -18,6 +18,7 @@ import java.util.ArrayList;
 /**
  * Adapter class to bind with list view.
  */
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class MyOrdersListViewAdapter extends ArrayAdapter<MyOrder> {
 
     public static final String TAG = "MyOrdersListViewAdapter";
@@ -87,6 +88,7 @@ public class MyOrdersListViewAdapter extends ArrayAdapter<MyOrder> {
     /**
      * Holder class for the ListView items.
      */
+    @SuppressWarnings("unused")
     private static class Holder {
 
         public TextView ComboName = null;

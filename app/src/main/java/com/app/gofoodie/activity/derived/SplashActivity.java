@@ -20,6 +20,7 @@ import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
  * @class SplashActivity
  * @desc Activity Class to show Splash screen on the application start.
  */
+@SuppressWarnings("unused")
 public class SplashActivity extends BaseAppCompatActivity implements Runnable, ProfileUpdateListener {
 
     public static final String TAG = "SplashActivity";

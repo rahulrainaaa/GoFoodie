@@ -30,6 +30,7 @@ import java.util.Iterator;
  * @class LocationActivity
  * @desc {@link BaseAppCompatActivity} class for handling Location preferences.
  */
+@SuppressWarnings("unused")
 public class LocationActivity extends BaseAppCompatActivity implements AdapterView.OnItemSelectedListener, NetworkCallbackListener {
 
     public final String TAG = "LocationActivity";
@@ -40,10 +41,6 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     private CountryResponse mCountryListResponse = null;
     private CityResponse mCityResponse = null;
     private AreaResponse mAreaResponse = null;
-    /**
-     * Class private data member(s).
-     */
-    private Spinner mSpCountry, mSpCity, mSpArea;
     private ArrayAdapter<String> mCountryAdapter, mCityAdapter, mAreaAdapter;
     private final ArrayList<String> mCountryList = new ArrayList<>();
     private final ArrayList<String> mCityList = new ArrayList<>();
@@ -62,9 +59,12 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
         mCityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, mCityList);
         mAreaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, mAreaList);
 
-        mSpCountry = findViewById(R.id.sp_locpref_country);
-        mSpCity = findViewById(R.id.sp_locpref_city);
-        mSpArea = findViewById(R.id.sp_locpref_area);
+        /*
+      Class private data member(s).
+     */
+        Spinner mSpCountry = findViewById(R.id.sp_locpref_country);
+        Spinner mSpCity = findViewById(R.id.sp_locpref_city);
+        Spinner mSpArea = findViewById(R.id.sp_locpref_area);
 
         mSpCountry.setAdapter(mCountryAdapter);
         mSpCity.setAdapter(mCityAdapter);

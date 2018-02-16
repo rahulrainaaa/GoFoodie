@@ -10,11 +10,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class RechargePlan extends BaseModel implements Parcelable {
 
     @SerializedName("subscriptionplan")
     @Expose
-    public List<Subscriptionplan> subscriptionplan = null;
+    public final List<Subscriptionplan> subscriptionplan = null;
     @SerializedName("statusCode")
     @Expose
     public Integer statusCode;

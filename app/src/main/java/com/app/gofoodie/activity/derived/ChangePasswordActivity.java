@@ -31,7 +31,6 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
     private PasswordEditText mEtOldPassword = null;
     private PasswordEditText mEtNewPassword = null;
     private PasswordEditText mEtCfmNewPassword = null;
-    private Button mBtnChangePassword = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class ChangePasswordActivity extends BaseAppCompatActivity implements Vie
         mEtOldPassword = findViewById(R.id.et_old_password);
         mEtNewPassword = findViewById(R.id.et_new_password);
         mEtCfmNewPassword = findViewById(R.id.et_cfm_new_password);
-        mBtnChangePassword = findViewById(R.id.btn_change_password);
+        Button mBtnChangePassword = findViewById(R.id.btn_change_password);
         mBtnChangePassword.setOnClickListener(this);
 
     }

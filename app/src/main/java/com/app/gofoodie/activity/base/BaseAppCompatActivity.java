@@ -20,6 +20,7 @@ import java.lang.reflect.Field;
 /**
  * {@link AppCompatActivity} Base class for application customization.
  */
+@SuppressWarnings("unused")
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
     public final String TAG = "BaseAppCompatActivity";

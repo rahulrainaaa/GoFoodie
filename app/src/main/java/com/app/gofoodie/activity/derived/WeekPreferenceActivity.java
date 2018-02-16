@@ -21,14 +21,10 @@ import org.json.JSONObject;
  * @class WeekPreferenceActivity
  * @desc Activity class to handle the week day preference (Set and Get).
  */
+@SuppressWarnings("unused")
 public class WeekPreferenceActivity extends BaseAppCompatActivity implements NetworkCallbackListener, WeekSelectDialogInterface {
 
     public static final String TAG = "WeekPreferenceActivity";
-
-    /**
-     * Class private data member(s).
-     */
-    private WeekSelectDialog mWeekDialog = null;
 
     /**
      * {@link BaseAppCompatActivity} activity callback method(s).
@@ -70,7 +66,10 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
      * @desc Method to show the Week Dialog over activity.
      */
     private void showWeekDialog() {
-        mWeekDialog = new WeekSelectDialog(this, this);
+        /*
+      Class private data member(s).
+     */
+        WeekSelectDialog mWeekDialog = new WeekSelectDialog(this, this);
         mWeekDialog.parseWeekPreference(CustomerProfileHandler.CUSTOMER.getProfile().getDaysYouWantTheCombo());
         mWeekDialog.show();
     }

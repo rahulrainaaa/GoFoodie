@@ -10,6 +10,7 @@ import android.widget.Toast;
 /**
  * Utility class for handling some user action.
  */
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class ProfileUtils {
 
     public static final String TAG = "ProfileUtils";

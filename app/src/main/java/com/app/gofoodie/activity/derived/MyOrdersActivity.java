@@ -35,6 +35,7 @@ import java.util.Calendar;
  * Activity class to show all signed in customer order(s) with date range applied.
  * Order cancellation and order Rating also handled.
  */
+@SuppressWarnings("unused")
 public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCallbackListener, View.OnClickListener {
 
     public static final String TAG = "MyOrdersActivity";
@@ -43,8 +44,6 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
      * Class private data member(s).
      */
     private ListView mListViewOrders = null;
-    private ArrayList<MyOrder> mList = null;
-    private MyOrdersListViewAdapter mAdapter = null;
 
     private String mStrFromDate = null;
     private String mStrToDate = null;
@@ -179,8 +178,8 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
             return;
         }
 
-        mList = (ArrayList<MyOrder>) myOrdersResponse.getMyOrders();
-        mAdapter = new MyOrdersListViewAdapter(this, this, R.layout.item_listview_my_orders, mList);
+        ArrayList<MyOrder> mList = (ArrayList<MyOrder>) myOrdersResponse.getMyOrders();
+        MyOrdersListViewAdapter mAdapter = new MyOrdersListViewAdapter(this, this, R.layout.item_listview_my_orders, mList);
         mListViewOrders.setAdapter(mAdapter);
 
     }

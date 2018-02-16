@@ -32,6 +32,7 @@ import java.util.Locale;
 /**
  * Handler class to handle order cancellation.
  */
+@SuppressWarnings("unused")
 public class OrderCancellationHandler {
 
     public static final String TAG = "OrderCancellationHandler";
@@ -410,6 +411,7 @@ public class OrderCancellationHandler {
 
     public enum OP_CODE {CANCEL, LONGTERM, SHORTTERM, EMERGENCY}
 
+    @SuppressWarnings("unused")
     public enum RESP_CODE {RESP_SUCCESS, RESP_FAIL, RESP_EXCEPTION}
 
 }

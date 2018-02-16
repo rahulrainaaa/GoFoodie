@@ -24,6 +24,7 @@ import java.util.ArrayList;
  * @class FeaturedRestaurantGridAdapter
  * @desc Adapter class for showing Featured Restaurant Grid View on Dashboard Home Fragment UI.
  */
+@SuppressWarnings("SameParameterValue")
 public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaurant> implements View.OnClickListener {
 
     private static final String TAG = "ComboPlanGridAdapter";
@@ -35,7 +36,6 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
     private ArrayList<FeaturedRestaurant> mComboList = null;
     private final int mLayoutResource;
     private LayoutInflater mInflater = null;
-    private FeaturedRestaurant mFeaturedRestaurant = null;
 
     public FeaturedRestaurantGridAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<FeaturedRestaurant> list) {
         super(activity, resource, list);
@@ -49,7 +49,7 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        mFeaturedRestaurant = mComboList.get(position);
+        FeaturedRestaurant mFeaturedRestaurant = mComboList.get(position);
         View view = convertView;
         Holder holder;
 
@@ -111,6 +111,7 @@ public class FeaturedRestaurantGridAdapter extends ArrayAdapter<FeaturedRestaura
      * @class Holder
      * @desc Public static holder class for holding the xml view reference.
      */
+    @SuppressWarnings("unused")
     public static class Holder {
 
         public TextView txtComboName = null;

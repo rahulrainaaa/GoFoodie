@@ -28,6 +28,7 @@ import java.util.ArrayList;
  * @class SubscriptionActivity
  * @desc Activity class to show Subscription/Recharge plan list.
  */
+@SuppressWarnings("unused")
 public class SubscriptionActivity extends BaseAppCompatActivity implements NetworkCallbackListener, AdapterView.OnItemClickListener {
 
     public static final String TAG = "SubscriptionActivity";
@@ -36,7 +37,6 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
      * Class private data member(s).
      */
     private ListView mListView = null;
-    private RechargePlanListViewAdapter mAdapter = null;
     private ArrayList<String> mList = new ArrayList<>();
     private RechargePlan mRechargePlan = null;
 
@@ -91,7 +91,7 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
         ModelParser modelParser = new ModelParser();
         RechargePlan rechargePlan = (RechargePlan) modelParser.getModel(json.toString(), RechargePlan.class, null);
         mRechargePlan = rechargePlan;
-        mAdapter = new RechargePlanListViewAdapter(this, R.layout.item_list_recharge_plan, (ArrayList<Subscriptionplan>) rechargePlan.subscriptionplan);
+        RechargePlanListViewAdapter mAdapter = new RechargePlanListViewAdapter(this, R.layout.item_list_recharge_plan, (ArrayList<Subscriptionplan>) rechargePlan.subscriptionplan);
         mListView.setAdapter(mAdapter);
     }
 

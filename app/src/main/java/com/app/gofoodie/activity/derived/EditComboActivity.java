@@ -27,18 +27,13 @@ import java.util.ArrayList;
 /**
  * Activity to edit/customize your combo meal items (based on plan).
  */
+@SuppressWarnings("unused")
 public class EditComboActivity extends BaseAppCompatActivity implements AdapterView.OnItemClickListener {
 
     public static final String TAG = "EditComboActivity";
 
-    /**
-     * Class private data member(s).
-     */
-    private ListView mListView = null;
     private ArrayList<Description> mList = new ArrayList<>();
     private EditComboListViewAdapter mAdapter = null;
-    private CartOrder mCartOrder = null;
-    private TextView mTxtComboName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +49,13 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
             Toast.makeText(this, "'position' not passed with Intent.", Toast.LENGTH_SHORT).show();
             return;
         }
-        mCartOrder = GlobalData.cartOrderArrayList.get(position);
+        CartOrder mCartOrder = GlobalData.cartOrderArrayList.get(position);
         mList = (ArrayList<Description>) mCartOrder.description;
-        mListView = findViewById(R.id.list_view);
-        mTxtComboName = findViewById(R.id.txt_combo_name);
+        /*
+      Class private data member(s).
+     */
+        ListView mListView = findViewById(R.id.list_view);
+        TextView mTxtComboName = findViewById(R.id.txt_combo_name);
         mAdapter = new EditComboListViewAdapter(this, R.layout.item_listview_edit_combo, mList);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);

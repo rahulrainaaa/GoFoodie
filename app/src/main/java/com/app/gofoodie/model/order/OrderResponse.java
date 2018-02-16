@@ -7,6 +7,7 @@ import com.app.gofoodie.model.base.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class OrderResponse extends BaseModel implements Parcelable {
 
     public final static Creator<OrderResponse> CREATOR = new Creator<OrderResponse>() {

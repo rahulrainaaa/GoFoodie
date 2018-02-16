@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import com.app.gofoodie.R;
 import com.app.gofoodie.global.constants.Constants;
 
+@SuppressWarnings("unused")
 public class AssistantActivity extends FragmentActivity {
 
     @Override

@@ -37,31 +37,26 @@ import java.util.ArrayList;
  * @class HomeFragment
  * @desc {@link BaseFragment} Fragment class to handle Home UI screen.
  */
+@SuppressWarnings("unused")
 public class HomeFragment extends BaseFragment implements View.OnTouchListener, NetworkCallbackListener {
 
     public static final String TAG = "";
-    private Featured mFeatured = null;
 
     /**
      * Data members for Banner slide show {@link android.widget.AdapterViewFlipper}.
      */
     private AdapterViewFlipper mFlipperBanner = null;
-    private HomeImageViewFlipperAdapter mFlipperAdapter = null;
     private ScrollView mScrollView = null;
 
     /**
      * Data members for Shortlisted Restaurants {@link RecyclerView}.
      */
     private RecyclerView mRVShortlistRestaurant = null;
-    private FeaturedCombosRecyclerAdapter mShortlistRestaurantRVAdapter = null;
-    private ArrayList<FeaturedCombo> mListFeaturedCombos = new ArrayList<>();
 
     /**
      * Data members for Features restaurants {@link android.widget.GridView}.
      */
     private GridView mFeaturedRestaurantsGrid = null;
-    private FeaturedRestaurantGridAdapter mFeaturedRestaurantAdapter = null;
-    private ArrayList<FeaturedRestaurant> mListFeaturedRestaurant = new ArrayList<>();
 
     @Nullable
     @Override
@@ -79,7 +74,7 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
 
         // AdapterViewFlipper - Banner slide show Handling Code.
         mFlipperBanner = view.findViewById(R.id.banner_adapterviewflipper);
-        mFlipperAdapter = new HomeImageViewFlipperAdapter(getActivity(), R.layout.image_banner_layout, Constants.BANNER_IMAGES);
+        HomeImageViewFlipperAdapter mFlipperAdapter = new HomeImageViewFlipperAdapter(getActivity(), R.layout.image_banner_layout, Constants.BANNER_IMAGES);
         mFlipperBanner.setAdapter(mFlipperAdapter);
         mFlipperBanner.setFlipInterval(4000);
         mFlipperBanner.startFlipping();
@@ -142,20 +137,20 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
 
         //Parse the json response into model.
         ModelParser modelParser = new ModelParser();
-        mFeatured = (Featured) modelParser.getModel(json.toString(), Featured.class, null);
+        Featured mFeatured = (Featured) modelParser.getModel(json.toString(), Featured.class, null);
 
         // populate Featured Combos.
-        mListFeaturedCombos = (ArrayList<FeaturedCombo>) mFeatured.featuredCombos;
+        ArrayList<FeaturedCombo> mListFeaturedCombos = (ArrayList<FeaturedCombo>) mFeatured.featuredCombos;
         LinearLayoutManager categoryLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRVShortlistRestaurant.setHasFixedSize(true);
         mRVShortlistRestaurant.setLayoutManager(categoryLayoutManager);
-        mShortlistRestaurantRVAdapter = new FeaturedCombosRecyclerAdapter(getActivity(), R.layout.item_rv_shortlist_restaurant, null, mListFeaturedCombos);
+        FeaturedCombosRecyclerAdapter mShortlistRestaurantRVAdapter = new FeaturedCombosRecyclerAdapter(getActivity(), R.layout.item_rv_shortlist_restaurant, null, mListFeaturedCombos);
         mRVShortlistRestaurant.setAdapter(mShortlistRestaurantRVAdapter);
         mShortlistRestaurantRVAdapter.notifyDataSetChanged();
 
         // populate Featured Restaurants.
-        mListFeaturedRestaurant = (ArrayList<FeaturedRestaurant>) mFeatured.featuredRestaurants;
-        mFeaturedRestaurantAdapter = new FeaturedRestaurantGridAdapter(getDashboardActivity(), R.layout.item_gridview_featured_restaurants, mListFeaturedRestaurant);
+        ArrayList<FeaturedRestaurant> mListFeaturedRestaurant = (ArrayList<FeaturedRestaurant>) mFeatured.featuredRestaurants;
+        FeaturedRestaurantGridAdapter mFeaturedRestaurantAdapter = new FeaturedRestaurantGridAdapter(getDashboardActivity(), R.layout.item_gridview_featured_restaurants, mListFeaturedRestaurant);
         mFeaturedRestaurantsGrid.setAdapter(mFeaturedRestaurantAdapter);
         ListViewUtils.setGridViewHeightBasedOnChildren(mFeaturedRestaurantsGrid);
 

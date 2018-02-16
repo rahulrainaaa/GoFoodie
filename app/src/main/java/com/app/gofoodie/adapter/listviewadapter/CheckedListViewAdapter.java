@@ -16,7 +16,6 @@ public class CheckedListViewAdapter extends ArrayAdapter<Cuisine> implements Vie
 
     private Activity mActivity = null;
     private ArrayList<Cuisine> mList = null;
-    private CheckedTextView mCheckTextView = null;
 
     public CheckedListViewAdapter(@NonNull Activity activity, ArrayList<Cuisine> list) {
         super(activity, android.R.layout.simple_list_item_checked, list);
@@ -28,18 +27,19 @@ public class CheckedListViewAdapter extends ArrayAdapter<Cuisine> implements Vie
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
+        CheckedTextView mCheckTextView = null;
         if (convertView == null) {
-            this.mCheckTextView = (CheckedTextView) mActivity.getLayoutInflater().inflate(android.R.layout.simple_list_item_checked, null);
-            this.mCheckTextView.setOnClickListener(this);
+            mCheckTextView = (CheckedTextView) mActivity.getLayoutInflater().inflate(android.R.layout.simple_list_item_checked, null);
+            mCheckTextView.setOnClickListener(this);
         } else {
-            this.mCheckTextView = (CheckedTextView) convertView;
+            mCheckTextView = (CheckedTextView) convertView;
         }
 
-        this.mCheckTextView.setTag(position);
-        this.mCheckTextView.setText(mList.get(position).getCuisineName());
-        this.mCheckTextView.setChecked(mList.get(position).isChecked);
+        mCheckTextView.setTag(position);
+        mCheckTextView.setText(mList.get(position).getCuisineName());
+        mCheckTextView.setChecked(mList.get(position).isChecked);
 
-        return this.mCheckTextView;
+        return mCheckTextView;
     }
 
     @Override

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 /**
  * Adapter class for handing data in spinner for picking location on {@link com.app.gofoodie.activity.derived.AddressChangeRequestActivity}.
  */
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class LocationSpinnerAdapter extends ArrayAdapter<Locaton> {
 
     public static final String TAG = "LocationSpinnerAdapter";
@@ -27,13 +28,12 @@ public class LocationSpinnerAdapter extends ArrayAdapter<Locaton> {
      */
     private ArrayList<Locaton> mLocationList = null;
     private Activity mActivity = null;
-    private int mResourceId = -1;
 
     public LocationSpinnerAdapter(@NonNull Activity activity, int resource, ArrayList<Locaton> arrayList) {
         super(activity, resource, arrayList);
 
         this.mActivity = activity;
-        this.mResourceId = resource;
+        int mResourceId = resource;
         this.mLocationList = arrayList;
     }
 

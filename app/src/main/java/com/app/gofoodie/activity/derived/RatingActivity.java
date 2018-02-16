@@ -23,6 +23,7 @@ import java.util.ArrayList;
 /**
  * Activity class to show the rating of given restaurant branch (branch_id).
  */
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class RatingActivity extends BaseAppCompatActivity implements NetworkCallbackListener {
 
     public static final String TAG = "RatingActivity";
@@ -32,7 +33,6 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
      */
     private ListView mListView = null;
     private ArrayList<Review> mList = new ArrayList<>();
-    private RatingListViewAdapter mAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class RatingActivity extends BaseAppCompatActivity implements NetworkCall
         setContentView(R.layout.activity_rating);
 
         mListView = findViewById(R.id.list_view);
-        mAdapter = new RatingListViewAdapter(this, R.layout.item_list_rating, mList);
+        RatingListViewAdapter mAdapter = new RatingListViewAdapter(this, R.layout.item_list_rating, mList);
         mListView.setAdapter(mAdapter);
 
         String url = Network.URL_GET_BRANCH_REV + getIntent().getStringExtra("branch_id").trim();

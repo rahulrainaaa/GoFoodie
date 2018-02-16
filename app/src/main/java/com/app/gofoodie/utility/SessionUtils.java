@@ -12,6 +12,7 @@ import org.json.JSONObject;
  * @class SessionUtils
  * @desc Singleton Class to handle the session, get session, save session, update session, load session amd remove session.
  */
+@SuppressWarnings("unused")
 public class SessionUtils {
 
     public static final String TAG = "SessionUtils";

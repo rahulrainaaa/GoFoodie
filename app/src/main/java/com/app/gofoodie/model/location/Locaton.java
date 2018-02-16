@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class Locaton implements Parcelable {
 
     public final static Creator<Locaton> CREATOR = new Creator<Locaton>() {

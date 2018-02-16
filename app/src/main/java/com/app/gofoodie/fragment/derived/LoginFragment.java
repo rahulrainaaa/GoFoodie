@@ -54,6 +54,7 @@ import java.util.regex.Pattern;
  * @class LoginFragment
  * @desc {@link BaseFragment} Fragment class to handle Login UI screen.
  */
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class LoginFragment extends BaseFragment implements View.OnClickListener, NetworkCallbackListener, FacebookLoginListener, GoogleApiClient.OnConnectionFailedListener {
 
     private final String TAG = "LoginFragment";
@@ -67,11 +68,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
      */
     private MaterialEditText mEtMobileEmail = null;
     private MaterialEditText mEtPassword = null;
-    private Button mBtnSignin, mBtnForgot, mBtnSignup;
-    private LoginButton mLoginButton = null;
     private SignInButton mSignInButton = null;
     private CallbackManager callbackManager = null;
-    private FacebookLoginHandler mFacebookLoginHandler = null;
 
     private String mNewSocialEmail = "";             // to share with email.
     private String mSocialType = "";      // empty = manual, google = google signin & facebook = facebook Login (Lowercase String).
@@ -88,8 +86,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         // Facebook button and login code.
         callbackManager = CallbackManager.Factory.create();
-        mFacebookLoginHandler = new FacebookLoginHandler(getActivity(), this);
-        mLoginButton = view.findViewById(R.id.facebook_login_button);
+        FacebookLoginHandler mFacebookLoginHandler = new FacebookLoginHandler(getActivity(), this);
+        LoginButton mLoginButton = view.findViewById(R.id.facebook_login_button);
         mLoginButton.setReadPermissions("email");
         mLoginButton.registerCallback(callbackManager, mFacebookLoginHandler);
 
@@ -182,9 +180,9 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
         mEtMobileEmail = view.findViewById(R.id.et_mobile_email);
         mEtPassword = view.findViewById(R.id.et_password);
-        mBtnSignin = view.findViewById(R.id.btn_sign_in);
-        mBtnForgot = view.findViewById(R.id.btn_forgot_password);
-        mBtnSignup = view.findViewById(R.id.btn_sign_up);
+        Button mBtnSignin = view.findViewById(R.id.btn_sign_in);
+        Button mBtnForgot = view.findViewById(R.id.btn_forgot_password);
+        Button mBtnSignup = view.findViewById(R.id.btn_sign_up);
 
         mBtnSignin.setOnClickListener(this);
         mBtnForgot.setOnClickListener(this);

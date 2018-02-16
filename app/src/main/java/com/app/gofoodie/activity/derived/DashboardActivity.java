@@ -31,8 +31,6 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
      * Class private data members
      */
     private BaseFragment mFragment = null;
-    private LinearLayout mFragmentLayout = null;
-    private FragmentTransaction mFragmentTransaction = null;
     private FragmentManager mFragmentManager = null;
     private BottomNavigationView mNavigationPanel = null;
     private DashboardFragmentHandler mDashboardFragmentHandler = null;
@@ -111,7 +109,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     private void doViewMapping() {
 
         mNavigationPanel = findViewById(R.id.navigation_panel);
-        mFragmentLayout = findViewById(R.id.dashboard_fragment);
+        LinearLayout mFragmentLayout = findViewById(R.id.dashboard_fragment);
     }
 
     /**
@@ -187,7 +185,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         }
 
         // Now begin the fragment transaction.
-        mFragmentTransaction = mFragmentManager.beginTransaction();                 // Begin with fragment transaction.
+        FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
         if (!mFragmentTransaction.isEmpty()) {                                      // Remove older fragment if any.
             mFragmentTransaction.remove(mFragment);
         }

@@ -41,6 +41,7 @@ import java.util.ArrayList;
 /**
  * {@link BaseFragment} Fragment class to handle Cart UI screen.
  */
+@SuppressWarnings("unused")
 public class CartFragment extends BaseFragment implements NetworkCallbackListener {
 
     private final String TAG = "CartFragment";
@@ -51,10 +52,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
      * Class private data member(s).
      */
     private ListView mListView = null;
-    private CartListViewAdapter mAdapter = null;
     private ArrayList<Cart> mCartList = null;
-    private Button btnProceed = null;
-    private float totalPayablePrice = 0f;
     private float taxPercent = 0f;
 
     /**
@@ -71,7 +69,7 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
         mCartItemClickListener = new CartItemClickListener();
         mListView = view.findViewById(R.id.list_view_cart_items);
         mTxtLabel = view.findViewById(R.id.txt_label);
-        btnProceed = view.findViewById(R.id.btn_proceed);
+        Button btnProceed = view.findViewById(R.id.btn_proceed);
 //        btnProceed.setCompoundDrawables(null, null, getResources().getDrawable(R.drawable.icon_cart_proceed), null);
         btnProceed.setOnClickListener(view1 -> {
 
@@ -163,11 +161,11 @@ public class CartFragment extends BaseFragment implements NetworkCallbackListene
             // Parse the response on success and also parse the taxPercent and
             taxPercent = cartResponse.getTaxPerc();
             CustomerProfileHandler.CUSTOMER.setCartCount(cartResponse.getCart().size());
-            totalPayablePrice = cartResponse.getTotalPrice();
+            float totalPayablePrice = cartResponse.getTotalPrice();
             mTxtLabel.setText("Total Price: " + cartResponse.getTotalPrice() + " AED");// + ",  Price: AED " + cartResponse.totalPrice.toString());
         }
         mCartList = (ArrayList<Cart>) cartResponse.getCart();
-        mAdapter = new CartListViewAdapter(getActivity(), mCartItemClickListener, R.layout.item_listview_cart, mCartList);
+        CartListViewAdapter mAdapter = new CartListViewAdapter(getActivity(), mCartItemClickListener, R.layout.item_listview_cart, mCartList);
         mListView.setAdapter(mAdapter);
     }
 

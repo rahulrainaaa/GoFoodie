@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class ItemDetail implements Parcelable {
 
     public final static Creator<ItemDetail> CREATOR = new Creator<ItemDetail>() {

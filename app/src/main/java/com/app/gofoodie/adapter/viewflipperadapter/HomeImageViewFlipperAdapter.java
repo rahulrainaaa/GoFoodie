@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 /**
  * Home Page Banner {@link android.widget.AdapterViewFlipper} adapter class.
  */
+@SuppressWarnings("SameParameterValue")
 public class HomeImageViewFlipperAdapter extends ArrayAdapter<String> {
 
     /**
@@ -65,6 +66,7 @@ public class HomeImageViewFlipperAdapter extends ArrayAdapter<String> {
     /**
      * Static child class to hold the view id for cell reusability.
      */
+    @SuppressWarnings("unused")
     private static class Holder {
         ImageView img = null;
 

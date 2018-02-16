@@ -13,6 +13,7 @@ import java.util.Stack;
 /**
  * Base class for all the Fragment classes for application customization.
  */
+@SuppressWarnings({"unused", "FieldCanBeLocal"})
 public abstract class BaseFragment extends Fragment implements FragmentQuitHandler {
 
     public static final String TAG = "BaseFragment";

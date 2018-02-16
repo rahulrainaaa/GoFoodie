@@ -22,6 +22,7 @@ import java.util.ArrayList;
 /**
  * @class ArrayAdapter class to show the list of nearby restaurants to add as shortlisted restaurant(s).
  */
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
 
     public static final String TAG = "RestaurantListViewAdapter";
@@ -121,6 +122,7 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
      * @class Holder
      * @desc Holder class to hold the reference of list view cell.
      */
+    @SuppressWarnings("unused")
     private static class Holder {
 
         public ImageView imgIcon = null;

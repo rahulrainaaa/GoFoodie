@@ -30,6 +30,7 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 /**
  * Activity class to show the description info of a single restaurant branch with given branch_id.
  */
+@SuppressWarnings("unused")
 public class RestaurantBranchProfileActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "RestaurantBranchProfileActivity";

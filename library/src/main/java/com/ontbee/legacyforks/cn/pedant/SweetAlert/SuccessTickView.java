@@ -11,6 +11,7 @@ import android.view.animation.Transformation;
 
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.R;
 
+@SuppressWarnings("WeakerAccess")
 public class SuccessTickView extends View {
     private float mDensity = -1;
     private Paint mPaint;

@@ -28,6 +28,7 @@ import java.util.ArrayList;
 /**
  * Activity class for handling the address change request.
  */
+@SuppressWarnings("unused")
 public class AddressChangeRequestActivity extends BaseAppCompatActivity implements View.OnClickListener, NetworkCallbackListener {
 
     public static final String TAG = "AddressChangeRequestActivity";

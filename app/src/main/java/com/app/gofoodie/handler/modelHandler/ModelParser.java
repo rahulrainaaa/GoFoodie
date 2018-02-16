@@ -10,9 +10,10 @@ import com.google.gson.Gson;
  * @class ModelParser
  * @desc Class to map JSON to Schema and vice-versa.
  */
+@SuppressWarnings("SameParameterValue")
 public class ModelParser {
 
-    private final String TAG = "ModelParser";
+    private static final String TAG = "ModelParser";
 
     /**
      * Class private data members.

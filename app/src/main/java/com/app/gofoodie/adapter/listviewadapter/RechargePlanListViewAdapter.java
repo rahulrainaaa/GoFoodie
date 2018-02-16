@@ -19,6 +19,7 @@ import java.util.ArrayList;
 /**
  * Adapter class to handle the list view for showing recharge plan(s).
  */
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class RechargePlanListViewAdapter extends ArrayAdapter<Subscriptionplan> {
 
     public static final String TAG = "RechargePlanListViewAdapter";
@@ -82,6 +83,7 @@ public class RechargePlanListViewAdapter extends ArrayAdapter<Subscriptionplan> 
     /**
      * Holder class to retain the response of view.
      */
+    @SuppressWarnings("unused")
     private static class Holder {
 
         public TextView txtRechargePlan = null;

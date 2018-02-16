@@ -23,6 +23,7 @@ import java.util.ArrayList;
  * @class ShortlistedRestaurantListViewAdapter
  * @desc {@link ArrayAdapter<Shortlisted>} class to populate list of shortlisted restaurant(s) to view and remove single.
  */
+@SuppressWarnings("unused")
 public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlisted> {
 
     public static final String TAG = "ShortlistedRestaurantListViewAdapter";
@@ -122,6 +123,7 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
     /**
      * Holder class to hold the reference of list view cell.
      */
+    @SuppressWarnings("unused")
     private static class Holder {
 
         public ImageView imgIcon = null;
