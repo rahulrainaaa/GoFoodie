@@ -3,15 +3,14 @@ package com.app.gofoodie.handler.profileDataHandler;
 import com.app.gofoodie.model.customer.Customer;
 
 /**
- * @interface ProfileUpdateListener
- * @desc Interface for {@link com.app.gofoodie.model.customer.Customer} profile update callback.
+ * Interface for {@link com.app.gofoodie.model.customer.Customer} profile update callback.
  */
 public interface ProfileUpdateListener {
 
     /**
-     * @param customer
-     * @method profileUpdatedCallback
-     * @desc Callback method for {@link Customer} profile update listener.
+     * Callback method for {@link Customer} profile update listener.
+     *
+     * @param customer reference
      */
     void profileUpdatedCallback(Customer customer);
 

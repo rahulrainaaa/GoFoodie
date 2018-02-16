@@ -27,10 +27,6 @@ public class CartOrderRecyclerAdapter extends RecyclerView.Adapter<CartOrderRecy
     private List<CartOrder> mList = null;
     private View.OnClickListener onClickListener = null;
 
-    /**
-     * @constructor CategoryRecyclerAdapter
-     * @desc Constructor method for this class.
-     */
     public CartOrderRecyclerAdapter(View.OnClickListener onClickListener, List<CartOrder> categories) {
 
         this.mList = categories;

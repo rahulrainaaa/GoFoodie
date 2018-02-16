@@ -134,9 +134,9 @@ public class HomeFragment extends BaseFragment implements View.OnTouchListener, 
     }
 
     /**
-     * @param json
-     * @desc Method to handle the dashboard response got from http.
-     * @method handleDashboardResponse
+     * Method to handle the dashboard response got from http.
+     *
+     * @param json reference of Json http response from API.
      */
     private void handleDashboardResponse(JSONObject json) {
 

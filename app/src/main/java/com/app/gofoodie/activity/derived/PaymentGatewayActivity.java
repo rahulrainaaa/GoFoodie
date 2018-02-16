@@ -9,11 +9,7 @@ import android.widget.TextView;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.global.data.GlobalData;
-import com.app.gofoodie.handler.profileDataHandler.CustomerProfileHandler;
-import com.app.gofoodie.model.customer.Customer;
-import com.app.gofoodie.model.login.Login;
 import com.app.gofoodie.model.rechargePlan.Subscriptionplan;
-import com.app.gofoodie.utility.SessionUtils;
 import com.telr.mobile.sdk.activty.WebviewActivity;
 import com.telr.mobile.sdk.entity.request.payment.Address;
 import com.telr.mobile.sdk.entity.request.payment.App;
@@ -68,8 +64,6 @@ public class PaymentGatewayActivity extends AppCompatActivity {
         txtDays = findViewById(R.id.txt_days);
         btnConform = findViewById(R.id.btn_confirm);
 
-        Login login = SessionUtils.getInstance().getSession();
-        Customer customer = CustomerProfileHandler.CUSTOMER;
         Subscriptionplan subscriptionplan = GlobalData.subscriptionplan;
 
         amount = subscriptionplan.payAmount;
@@ -85,9 +79,9 @@ public class PaymentGatewayActivity extends AppCompatActivity {
     }
 
     /**
-     * @param view
-     * @method sendMessage
-     * @desc Button Click event: Method to start the payment transaction via gateway.
+     * Button Click event: Method to start the payment transaction via gateway.
+     *
+     * @param view reference
      */
     public void sendMessage(View view) {
         Intent intent = new Intent(this, WebviewActivity.class);

@@ -37,8 +37,7 @@ public class FeaturedCombosRecyclerAdapter extends RecyclerView.Adapter<Featured
     private int mLayoutResourceId = -1;
 
     /**
-     * @constructor CategoryRecyclerAdapter
-     * @desc Constructor method for this class.
+     * Constructor method for this class.
      */
     public FeaturedCombosRecyclerAdapter(Activity activity, int layoutResourceId, View.OnClickListener onClickListener, List<FeaturedCombo> categories) {
         this.mActivity = activity;

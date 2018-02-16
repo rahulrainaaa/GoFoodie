@@ -19,9 +19,7 @@ public class ModelParser {
      */
     private Gson mGson = null;
 
-    /**
-     * @constructor ModelParser
-     */
+
     public ModelParser() {
         mGson = new Gson();
     }

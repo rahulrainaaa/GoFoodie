@@ -7,30 +7,29 @@ import com.facebook.login.LoginResult;
 import org.json.JSONObject;
 
 /**
- * @interface FacebookLoginListener
- * @desc Interface for sending response callback from {@link FacebookLoginHandler} to the UI Activity.
+ * Interface for sending response callback from {@link FacebookLoginHandler} to the UI Activity.
  */
 public interface FacebookLoginListener {
 
     /**
+     * Callback, when application facebook successfully login happens.
+     *
      * @param loginResult Facebook login result.
-     * @method onFacebookLogin
-     * @desc Callback, when application facebook successfully login happens.
      */
     void onFacebookLogin(LoginResult loginResult);
 
     /**
+     * Callback, when the facebook user detail is fetched completely.
+     *
      * @param object   {@link org.json.JSONArray} parameters asked from Graph API.
      * @param response Facebook Graph API response.
-     * @method onFacebookGraphAPIInformation
-     * @desc Callback, when the facebook user detail is fetched completely.
      */
     void onFacebookGraphAPIInformation(JSONObject object, GraphResponse response);
 
     /**
+     * Callback, when there is error/failure/exception in facebook login, within this application.
+     *
      * @param e {@link FacebookException}
-     * @method onFacebookError
-     * @desc Callback, when there is error/failure/exception in facebook login, within this application.
      */
     void onFacebookError(FacebookException e);
 }

@@ -45,9 +45,9 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
     private ProfileUpdateListener mListener = null;
 
     /**
-     * @param context
-     * @constructor CustomerProfileHandler
-     * @desc Constructor to init the class data member(s) [object].
+     * Constructor to init the class data member(s) [object].
+     *
+     * @param context reference
      */
     public CustomerProfileHandler(Context context) {
 
@@ -55,9 +55,9 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
     }
 
     /**
-     * @return BaseModel object with reference to CustomerFullProfile.
-     * @method getFullProfile
-     * @desc Method to provide customer full profile detail OR get simply refresh in case if needed (refresh after 2 min).
+     * Method to provide customer full profile detail.
+     *
+     * @return CustomerFullProfile.
      */
     public final Customer getFullProfile() {
 
@@ -65,10 +65,10 @@ public class CustomerProfileHandler implements NetworkCallbackListener {
     }
 
     /**
+     * Method to fetch the customer full profile from web API.
+     *
      * @param activity instance to run progress dialog on Http request while refreshing from Web API. (can be null)
      * @param listener Profile updated on http response listener. (can be null).
-     * @method refresh
-     * @desc Method to fetch the customer full profile from web API.
      */
     public void refresh(BaseAppCompatActivity activity, ProfileUpdateListener listener) {
 

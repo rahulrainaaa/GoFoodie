@@ -201,9 +201,9 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
     }
 
     /**
-     * @param view
-     * @desc Method to handle the call.
-     * @method callClicked
+     * Method to handle the call.
+     *
+     * @param view reference
      */
     private void callClicked(View view) {
 
@@ -211,9 +211,9 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
     }
 
     /**
-     * @param view
-     * @desc Method to handle logic on email click.
-     * @method emailClicked
+     * Method to handle logic on email click.
+     *
+     * @param view reference
      */
     private void emailClicked(View view) {
 
@@ -235,9 +235,9 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
     }
 
     /**
-     * @param view
-     * @method mapClicked
-     * @desc Method to handle logic on map clicked.
+     * Method to handle logic on map clicked.
+     *
+     * @param view reference
      */
     private void mapClicked(View view) {
 
@@ -266,9 +266,9 @@ public class RestaurantBranchProfileActivity extends BaseAppCompatActivity imple
     }
 
     /**
-     * @param view
-     * @method reviewClicked
-     * @desc Method to handle login on reviews click.
+     * Method to handle login on reviews click.
+     *
+     * @param view reference
      */
     private void reviewClicked(View view) {
 

@@ -136,9 +136,9 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     }
 
     /**
-     * @param result
-     * @method handleGoogleSignInResult
-     * @desc Method to handle the result after GOOGLE Sign In.
+     * Method to handle the result after GOOGLE Sign In.
+     *
+     * @param result reference
      */
     private void handleGoogleSignInResult(GoogleSignInResult result) {
 
@@ -148,6 +148,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
 
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
+            assert acct != null;
             Toast.makeText(getActivity(), "" + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
             mNewSocialEmail = acct.getEmail();
             loginRequest(acct.getEmail(), "yes", "");
@@ -173,8 +174,9 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     }
 
     /**
-     * @method doViewMapping
-     * @desc Method to do mapping of all xml view to class objects.
+     * Method to do mapping of all xml view to class objects.
+     *
+     * @param view reference
      */
     private void doViewMapping(View view) {
 
@@ -242,11 +244,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     }
 
     /**
-     * @param email
-     * @param social_login
-     * @param password
-     * @method loginRequest
-     * @desc Method to create Login request packet and send it over http for response.
+     * Method to create Login request packet and send it over http for response.
+     *
+     * @param email        String
+     * @param social_login String
+     * @param password     String
      */
 
     private void loginRequest(String email, String social_login, String password) {
@@ -278,11 +280,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     }
 
     /**
-     * @param strPassword
-     * @param strEmailMobile
+     * Method to check for credential validations and raise the error message appropriately.
+     *
+     * @param strPassword    String
+     * @param strEmailMobile String
      * @return boolean true = validation success/ false = validation failed.
-     * @method validateCredentials
-     * @desc Method to check for credential validations and raise the error message appropriately.
      */
     private boolean validateCredentials(String strEmailMobile, String strPassword) {
 
@@ -343,8 +345,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     }
 
     /**
-     * @method loginResponseHandling
-     * @desc Method to handle the http login response.
+     * Method to handle the http login response.
      */
     private void loginResponseHandling(JSONObject raw) {
 
@@ -379,10 +380,10 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     }
 
     /**
+     * Get Customer Profile data as per loginId and token.
+     *
      * @param loginId String
      * @param token   String
-     * @method getCustomerProfile
-     * @desc Get Customer Profile data as per loginId and token.
      */
     private void getCustomerProfile(String loginId, String token, String customer_id) {
 
@@ -403,9 +404,9 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener,
     }
 
     /**
-     * @param raw
-     * @method userProfileResponse
-     * @desc Method to process user profile data response and finally proceed to profile activity.
+     * Method to process user profile data response and finally proceed to profile activity.
+     *
+     * @param raw http response json object reference
      */
     private void userProfileResponse(JSONObject raw) {
 

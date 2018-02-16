@@ -115,7 +115,7 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
     /**
      * Method to publish the combo info in the fields.
      *
-     * @param comboplan
+     * @param comboplan reference
      */
     private void showComboInfo(Comboplan comboplan) {
 
@@ -158,7 +158,7 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
     /**
      * Method to show combo items in bottom action sheet.
      *
-     * @param comboPlanResponse
+     * @param comboPlanResponse reference
      */
     private void showItems(ComboPlanResponse comboPlanResponse) {
 

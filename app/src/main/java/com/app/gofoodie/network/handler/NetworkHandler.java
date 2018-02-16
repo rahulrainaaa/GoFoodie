@@ -20,8 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * @class NetworkHandler
- * @desc Network Handler Class (using Volley library) for the project.
+ * Network Handler Class (using Volley library) for the project.
  */
 public class NetworkHandler implements Response.ErrorListener {
 
@@ -50,18 +49,17 @@ public class NetworkHandler implements Response.ErrorListener {
     private RESPONSE_TYPE mResponseType = RESPONSE_TYPE.JSON_OBJECT;    // default response type = JSONObject
 
     /**
-     * @constructor NetworkHandler
-     * @desc default Constructor for Network Handler.
+     * default Constructor for Network Handler.
      */
     public NetworkHandler() {
         OBJECTS_CREATED++;
     }
 
     /**
+     * Static Method to init the Volley {@link RequestQueue} for application.
+     *
      * @param context Application context.
      * @return boolean
-     * @desc Static Method to init the Volley {@link RequestQueue} for application.
-     * @method initRequestQueue
      */
     public static void initRequestQueue(Context context) {
 
@@ -74,26 +72,26 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
-     * @desc Static Method to clear the Volley {@link RequestQueue} requests, in Application.
-     * @method clearRequestQueue
+     * Static Method to clear the Volley {@link RequestQueue} requests, in Application.
      */
     public static void clearRequestQueue() {
 
         // If {@link RequestQueue} is not null, then clear the queue.
         if (VolleyRequestQueue == null) {
+            assert VolleyRequestQueue != null;
             VolleyRequestQueue.stop();
         }
     }
 
     /**
+     * Method to initialize the class data members and create network handler.
+     *
      * @param requestCode             user specific code to determine the request among multiple.
      * @param appCompatActivity       {@link BaseAppCompatActivity} reference.
      * @param networkCallbackListener instance for network response callback using {@link NetworkCallbackListener}.
      * @param jsonRequestBody         API request packet.
      * @param url                     API url.
      * @param responseType            JSONObject or JSONArray.
-     * @method httpCreate
-     * @desc Method to initialize the class data members and create network handler.
      */
     public void httpCreate(int requestCode, BaseAppCompatActivity appCompatActivity, NetworkCallbackListener networkCallbackListener, JSONObject jsonRequestBody, String url, RESPONSE_TYPE responseType) {
 
@@ -106,8 +104,7 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
-     * @method executeGet
-     * @desc Method to execute POST request with the available JSON data.
+     * Method to execute POST request with the available JSON data.
      */
     public void executePost() {
 
@@ -115,8 +112,7 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
-     * @method executeGet
-     * @desc Method to execute network API call with GET Method via Volley.
+     * Method to execute network API call with GET Method via Volley.
      */
     public void executeGet() {
 
@@ -124,9 +120,9 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
+     * Method to call REST API with given Http Method.
+     *
      * @param method {@link Request.Method} GET/POST.
-     * @method execute
-     * @desc Method to call REST API with given Http Method.
      */
     private void execute(int method) {
 
@@ -198,8 +194,7 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
-     * @method cancel
-     * @desc Method to cancel the HTTP request. But don't destroy the object. Also send the callback about cancelled.
+     * Method to cancel the HTTP request. But don't destroy the object. Also send the callback about cancelled.
      */
     public void cancel() {
 
@@ -213,8 +208,7 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
-     * @throws Throwable
-     * @destructor
+     * @throws Throwable throws exception in case of any exception.
      */
     @Override
     protected void finalize() throws Throwable {
@@ -227,9 +221,9 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
-     * @param status
-     * @method setProcessingDialogVisibility
-     * @desc Method to set the visibility {@link com.app.gofoodie.customview.GoFoodieProgressDialog}.
+     * Method to set the visibility of {@link com.app.gofoodie.customview.GoFoodieProgressDialog} as param.
+     *
+     * @param status boolean
      */
     private void setProcessingDialogVisibility(boolean status) {
 
@@ -254,8 +248,7 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
-     * @class JsonObjectResponse
-     * @desc Class to handle the success response in case of JSONObject response.
+     * Class to handle the success response in case of JSONObject response.
      */
     private class JsonObjectResponse implements Response.Listener<JSONObject> {
 
@@ -275,8 +268,7 @@ public class NetworkHandler implements Response.ErrorListener {
     }
 
     /**
-     * @class JSONArrayResponse
-     * @desc Class to handle the success response in case of JSONArray response.
+     * Class to handle the success response in case of JSONArray response.
      */
     private class JsonArrayResponse implements Response.Listener<JSONArray> {
 
@@ -298,5 +290,4 @@ public class NetworkHandler implements Response.ErrorListener {
             }
         }
     }
-
 }

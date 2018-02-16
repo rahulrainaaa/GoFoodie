@@ -113,9 +113,9 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
     }
 
     /**
-     * @param dialog
-     * @method handleWeekDialogSelected
-     * @desc Method to handle the Week Dialog OK button click.
+     * Method to handle the Week Dialog OK button click.
+     *
+     * @param dialog reference
      */
     private void handleWeekDialogSelected(WeekSelectDialog dialog) {
 
@@ -147,9 +147,9 @@ public class WeekPreferenceActivity extends BaseAppCompatActivity implements Net
     }
 
     /**
-     * @param json
-     * @method handleWeekPrefUpdatedResponse
-     * @desc Method handle week days updated http response.
+     * Method handle week days updated http response.
+     *
+     * @param json reference
      */
     private void handleWeekPrefUpdatedResponse(JSONObject json) {
 

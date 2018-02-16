@@ -18,7 +18,6 @@ public class GoFoodieJsonArrayRequest extends JsonArrayRequest {
      * @param requestBody   this JSONObject String format http API request packet.
      * @param listener      instance for success response handler callback, in case of {@link org.json.JSONObject} or {@link JSONArray}.
      * @param errorListener instance for error response handler callback.
-     * @constructor GoFoodieJsonArrayRequest
      */
     public GoFoodieJsonArrayRequest(int method, String url, String requestBody, Response.Listener<JSONArray> listener, Response.ErrorListener errorListener) {
 

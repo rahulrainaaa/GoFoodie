@@ -3,8 +3,7 @@ package com.app.gofoodie.handler.modelHandler;
 import com.app.gofoodie.model.base.BaseModel;
 
 /**
- * @interface ModelParsingListener
- * @desc Listener to model
+ * Interface for json to model class parsing callback.
  */
 public interface ModelParsingListener {
 

@@ -82,9 +82,9 @@ public class SubscriptionActivity extends BaseAppCompatActivity implements Netwo
     }
 
     /**
-     * @param json
-     * @method fetchedPlans
-     * @desc Method to fetch the recharge plans from web API.
+     * Method to fetch the recharge plans from web API.
+     *
+     * @param json reference
      */
     private void fetchedPlans(JSONObject json) {
 

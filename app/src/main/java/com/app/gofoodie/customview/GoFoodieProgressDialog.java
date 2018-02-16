@@ -27,9 +27,9 @@ public class GoFoodieProgressDialog {
     private boolean isCreated = false;
 
     /**
-     * @param activity
-     * @constructor GoFoodieProgressDialog
-     * @desc Initialize the data members.
+     * Initialize the data members.
+     *
+     * @param activity reference
      */
     public GoFoodieProgressDialog(Activity activity) {
 
@@ -37,9 +37,9 @@ public class GoFoodieProgressDialog {
     }
 
     /**
-     * @method createFirstTime
-     * @desc Method to create the ProgressDialog only first time (if called) in an Activity.
+     * Method to create the ProgressDialog only first time (if called) in an Activity.
      */
+    @SuppressWarnings("ConstantConditions")
     private void createFirstTime() {
 
         mView = mActivity.getLayoutInflater().inflate(R.layout.process_dialog, null);
@@ -53,9 +53,9 @@ public class GoFoodieProgressDialog {
     }
 
     /**
-     * @param text
-     * @method setMessage
-     * @desc Method to setText in progress dialog.
+     * Method to setText in progress dialog.
+     *
+     * @param text String object reference
      */
     public void setMessage(String text) {
 
@@ -67,8 +67,7 @@ public class GoFoodieProgressDialog {
     }
 
     /**
-     * @method show
-     * @desc Method to show the {@link GoFoodieProgressDialog} over activity.
+     * Method to show the {@link GoFoodieProgressDialog} over activity.
      */
     public void show() {
 
@@ -84,8 +83,7 @@ public class GoFoodieProgressDialog {
     }
 
     /**
-     * @method hide
-     * @desc Method to hide the progress dialog from the activity, but keep it for next use.
+     * Method to hide the progress dialog from the activity, but keep it for next use.
      */
     public void hide() {
         setMessage("");
@@ -96,8 +94,7 @@ public class GoFoodieProgressDialog {
     }
 
     /**
-     * @method dismiss
-     * @desc Method to dismiss and release the memory.
+     *  Method to dismiss and release the memory.
      */
     public void dismiss() {
 

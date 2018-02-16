@@ -206,9 +206,9 @@ public class WalletFragment extends BaseFragment implements View.OnClickListener
     }
 
     /**
-     * @param json
-     * @method parseModel
-     * @desc Method to parse the response into model class.
+     * Method to parse the response into model class.
+     *
+     * @param json reference
      */
     private void parseModel(JSONObject json) {
 

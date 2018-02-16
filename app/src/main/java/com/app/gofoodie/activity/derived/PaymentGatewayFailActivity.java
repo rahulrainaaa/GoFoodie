@@ -158,9 +158,9 @@ public class PaymentGatewayFailActivity extends BaseAppCompatActivity implements
     }
 
     /**
-     * @param json
-     * @method handleResponse
-     * @desc Method to handle the transaction response.
+     * Method to handle the transaction response.
+     *
+     * @param json reference
      */
     private void handleResponse(JSONObject json) {
 

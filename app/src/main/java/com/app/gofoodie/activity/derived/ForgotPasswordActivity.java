@@ -62,7 +62,7 @@ public class ForgotPasswordActivity extends BaseAppCompatActivity implements Vie
     /**
      * Method to initiate for forgot password.
      *
-     * @throws JSONException
+     * @throws JSONException exception in case of json insertion operation.
      */
     private void sendForgotPassword() throws JSONException {
 

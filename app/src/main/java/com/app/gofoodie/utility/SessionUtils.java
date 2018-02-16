@@ -43,9 +43,9 @@ public class SessionUtils {
     }
 
     /**
-     * @param context
-     * @method removeSession
-     * @desc Method to remover the existing session (Login and user profile details).
+     * Method to remover the existing session (Login and user profile details).
+     *
+     * @param context reference
      */
     public void removeSession(Context context) {
 
@@ -69,9 +69,9 @@ public class SessionUtils {
     }
 
     /**
-     * @param context
-     * @method loadSession
-     * @desc Method to load the session from Preference to the globally accessible model class.
+     * Method to load the session from Preference to the globally accessible model class.
+     *
+     * @param context reference
      */
     public void loadSession(Context context) {
 
@@ -98,9 +98,9 @@ public class SessionUtils {
     }
 
     /**
-     * @return
-     * @method getSession
-     * @desc Method to get the current session object {@link Login}
+     * Method to get the current session object {@link Login}.
+     *
+     * @return reference to {@link Login} object.
      */
     public Login getSession() {
 

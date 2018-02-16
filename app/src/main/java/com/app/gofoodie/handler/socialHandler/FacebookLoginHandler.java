@@ -29,9 +29,8 @@ public class FacebookLoginHandler implements FacebookCallback<LoginResult>, Grap
     private LoginResult mLoginResult = null;
 
     /**
-     * @param activity
+     * @param activity reference
      * @param listener instance for sending the callback to main class, related to facebook login activity.
-     * @constructor FacebookLoginHandler
      */
     public FacebookLoginHandler(Activity activity, FacebookLoginListener listener) {
 

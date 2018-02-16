@@ -82,7 +82,7 @@ public class AssistantActivity extends FragmentActivity {
 
             View rootView = inflater.inflate(R.layout.fragment_assistant, container, false);
             ImageView imgWelcome = rootView.findViewById(R.id.img_welcome);
-            int number = getArguments().getInt(ARG_SECTION_NUMBER);
+            @SuppressWarnings("ConstantConditions") int number = getArguments().getInt(ARG_SECTION_NUMBER);
             imgWelcome.setImageResource(Constants.WELCOME_SCREEN_IMAGES[number]);
             return rootView;
         }

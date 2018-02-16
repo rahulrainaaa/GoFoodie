@@ -61,6 +61,7 @@ public class HomeImageViewFlipperAdapter extends ArrayAdapter<String> {
 
         } else {
 
+            assert view != null;
             holder = (Holder) view.getTag();
             view = holder.img;
 

@@ -73,7 +73,7 @@ public class EditComboActivity extends BaseAppCompatActivity implements AdapterV
     /**
      * Method to show the list view dialog for customization.
      *
-     * @param position
+     * @param position int
      */
     private void showListViewDialog(final int position) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);

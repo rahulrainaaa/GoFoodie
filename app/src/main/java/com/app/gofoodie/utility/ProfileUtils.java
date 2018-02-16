@@ -17,8 +17,8 @@ public class ProfileUtils {
     /**
      * Method to start network call on given mobile number.
      *
-     * @param activity
-     * @param mobile
+     * @param activity reference
+     * @param mobile   String
      */
     public static void call(Activity activity, String mobile) {
 
@@ -38,8 +38,8 @@ public class ProfileUtils {
     /**
      * Method to send mail to given email.
      *
-     * @param context
-     * @param email
+     * @param context reference
+     * @param email   String
      */
     public static void email(Context context, String email) {
 
@@ -54,8 +54,8 @@ public class ProfileUtils {
     /**
      * Method to send SMS to given phone number.
      *
-     * @param context
-     * @param phone
+     * @param context reference
+     * @param phone   String
      */
     public static void sendMessage(Context context, String phone) {
 
@@ -68,7 +68,7 @@ public class ProfileUtils {
     /**
      * Method to share application url with other friends via other installed application(s).
      *
-     * @param context
+     * @param context reference
      */
     public static void shareWith(Context context) {
 

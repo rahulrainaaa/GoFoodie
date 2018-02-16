@@ -43,8 +43,7 @@ public class WeekSelectDialog implements View.OnClickListener {
     private ToggleButton tglBtnSat = null;
 
     /**
-     * @param activity
-     * @constructor WeekSelectDialog
+     * @param activity reference
      */
     public WeekSelectDialog(Activity activity, WeekSelectDialogInterface listener) {
 
@@ -53,8 +52,7 @@ public class WeekSelectDialog implements View.OnClickListener {
     }
 
     /**
-     * @method show
-     * @desc Method to show Dialog and show UI for selecting week days.
+     * Method to show Dialog and show UI for selecting week days.
      */
     public void show() {
 

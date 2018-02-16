@@ -112,9 +112,9 @@ public class ShortlistedRestaurantsActivity extends BaseAppCompatActivity implem
     }
 
     /**
-     * @param json
-     * @method handleShortlistRestaurantResponse
-     * @desc Method to handle the shortlisted restaurants response from API.
+     * Method to handle the shortlisted restaurants response from API.
+     *
+     * @param json reference
      */
     private void handleShortlistRestaurantResponse(JSONObject json) {
 

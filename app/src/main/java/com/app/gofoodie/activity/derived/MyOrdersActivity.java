@@ -97,8 +97,8 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
      * Method to fetch all my orders within the selected date range.
      * Use default value for today's date.
      *
-     * @param fromDate
-     * @param toDate
+     * @param fromDate String
+     * @param toDate   String
      */
     private void fetchMyOrders(String fromDate, String toDate) {
 
@@ -159,9 +159,9 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
     }
 
     /**
-     * @param json
-     * @method handleMyOrdersResponse
-     * @desc Method to handle the MyOrder response from web api.
+     * Method to handle the MyOrder response from web api.
+     *
+     * @param json reference
      */
     private void handleMyOrdersResponse(JSONObject json) {
 
@@ -211,7 +211,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
     /**
      * Method show ratingBar alert to input form user and add rating to the order placed.
      *
-     * @param v
+     * @param v reference of View
      */
     private void addRating(View v) {
 
@@ -320,7 +320,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
     /**
      * Method to show the order description click.
      *
-     * @param v
+     * @param v reference of View
      */
     private void showDescription(View v) {
 
@@ -363,7 +363,7 @@ public class MyOrdersActivity extends BaseAppCompatActivity implements NetworkCa
     /**
      * Method to edit: cancel the combo order.
      *
-     * @param view
+     * @param view reference
      */
     private void editCancelOrder(View view) {
 

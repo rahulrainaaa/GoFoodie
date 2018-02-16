@@ -422,9 +422,9 @@ public class NewRegisterFragment extends BaseFragment implements View.OnClickLis
     }
 
     /**
-     * @param json
-     * @method userProfileResponse
-     * @desc Method to handle the user/customer full profile details.
+     * Method to handle the user/customer full profile details.
+     *
+     * @param json reference
      */
     private void userProfileResponse(JSONObject json) {
 

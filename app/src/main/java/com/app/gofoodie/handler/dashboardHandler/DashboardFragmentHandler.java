@@ -19,10 +19,10 @@ import com.app.gofoodie.utility.SessionUtils;
 public class DashboardFragmentHandler {
 
     /**
+     * Method to get the decide and get the fragment class.
+     *
      * @param fragmentType
      * @return FragmentClass
-     * @method getFragment
-     * @desc Method to get the decide and get the fragment class.
      */
     public BaseFragment getFragmentClass(DashboardInterruptListener.FRAGMENT_TYPE fragmentType) {
 

@@ -71,10 +71,10 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     }
 
     /**
-     * @param item
+     * {@link BottomNavigationView.OnNavigationItemSelectedListener} event callback method.
+     *
+     * @param item reference
      * @return boolean
-     * @method onNavigationItemSelected
-     * @desc {@link BottomNavigationView.OnNavigationItemSelectedListener} event callback method.
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -105,8 +105,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     }
 
     /**
-     * @method doViewMapping
-     * @desc Method to handle all the mapping from xml-view-id to corresponding object.
+     * Method to handle all the mapping from xml-view-id to corresponding object.
      */
     private void doViewMapping() {
 
@@ -115,8 +114,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     }
 
     /**
-     * @method navigationDashboard
-     * @desc Method call on click on Profile in Dashboard/Home navigation panel.
+     * Method call on click on Profile in Dashboard/Home navigation panel.
      */
     private void navigationDashboard() {
 
@@ -125,8 +123,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     }
 
     /**
-     * @method navigationCombos
-     * @desc Method call on click on Profile in Combos navigation panel.
+     * Method call on click on Profile in Combos navigation panel.
      */
     private void navigationCombos() {
 
@@ -135,8 +132,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     }
 
     /**
-     * @method navigationWallet
-     * @desc Method call on click on Profile in Wallet navigation panel.
+     * Method call on click on Profile in Wallet navigation panel.
      */
     private void navigationWallet() {
 
@@ -145,8 +141,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     }
 
     /**
-     * @method navigationCart
-     * @desc Method call on click on Profile in Cart navigation panel.
+     * Method call on click on Profile in Cart navigation panel.
      */
     private void navigationCart() {
 
@@ -155,8 +150,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     }
 
     /**
-     * @method navigationProfile
-     * @desc Method call on click on Profile in Dashboard navigation panel.
+     * Method call on click on Profile in Dashboard navigation panel.
      */
     private void navigationProfile() {
 
@@ -172,8 +166,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     }
 
     /**
-     * @method loadFragmentOnStart
-     * @desc Method will decide and load fragment on start.
+     * Method will decide and load fragment on start.
      */
     private void loadFragmentOnStart() {
 
@@ -181,8 +174,7 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
     }
 
     /**
-     * @method loadFragment
-     * @desc Method to load the set marked Fragment in mFragmentType ENUM.
+     * Method to load the set marked Fragment in mFragmentType ENUM.
      */
     private void loadFragment() {
 

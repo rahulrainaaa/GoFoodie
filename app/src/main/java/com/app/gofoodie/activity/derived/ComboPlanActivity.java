@@ -151,9 +151,9 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
 
 
     /**
-     * @param json
-     * @desc Method to handle the combo plan response from http web API.
-     * @method handleComboPlanResponse
+     * Method to handle the combo plan response from http web API.
+     *
+     * @param json reference
      */
     private void handleComboPlanResponse(JSONObject json) {
 
@@ -182,7 +182,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     }
 
     /**
-     * @param json
+     * @param json reference
      * @desc Method to do handle the add cart http response.
      * @method handleAddToCart
      */
@@ -239,9 +239,9 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     }
 
     /**
-     * @param view
-     * @method addToCartClicked
-     * @desc Method handling logic on add to cart button clicked on a cell.
+     * Method handling logic on add to cart button clicked on a cell.
+     *
+     * @param view reference
      */
     private void addToCartClicked(View view) {
 
@@ -289,7 +289,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     /**
      * Method to close this activity and start cart fragment activity.
      *
-     * @param view
+     * @param view reference
      */
     private void btnViewCartClicked(View view) {
 
@@ -300,7 +300,7 @@ public class ComboPlanActivity extends BaseAppCompatActivity implements NetworkC
     /**
      * Method to show the combo description.
      *
-     * @param view
+     * @param view reference
      */
     private void showComboDescription(View view) {
 

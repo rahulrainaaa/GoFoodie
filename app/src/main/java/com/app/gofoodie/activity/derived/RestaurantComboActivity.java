@@ -96,9 +96,9 @@ public class RestaurantComboActivity extends BaseAppCompatActivity implements Ne
     }
 
     /**
-     * @param json
-     * @desc Method to handle the combo plan response from http web API.
-     * @method handleComboPlanResponse
+     * Method to handle the combo plan response from http web API.
+     *
+     * @param json reference
      */
     private void handleComboPlanResponse(JSONObject json) {
 

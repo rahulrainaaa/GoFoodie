@@ -217,9 +217,9 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     }
 
     /**
-     * @param view
-     * @desc Method to handle the call.
-     * @method callClicked
+     * Method to handle the call.
+     *
+     * @param view reference
      */
     private void callClicked(View view) {
 
@@ -227,10 +227,10 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     }
 
     /**
-     * @param view
-     * @param email
-     * @desc Method to handle logic on email click.
-     * @method emailClicked
+     * Method to handle logic on email click.
+     *
+     * @param view  reference
+     * @param email String
      */
     private void emailClicked(View view, String email) {
 
@@ -251,10 +251,10 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     }
 
     /**
-     * @param view
-     * @param branch_id
-     * @method mapClicked
-     * @desc Method to show all branch combos.
+     * Method to show all branch combos.
+     *
+     * @param view      reference
+     * @param branch_id String
      */
     private void comboClicked(View view, String branch_id) {
 
@@ -291,10 +291,10 @@ public class RestaurantProfileActivity extends BaseAppCompatActivity implements 
     }
 
     /**
-     * @param view
-     * @param branchId
-     * @method reviewClicked
-     * @desc Method to handle login on reviews click.
+     * Method to handle login on reviews click.
+     *
+     * @param view     reference
+     * @param branchId String
      */
     private void reviewClicked(View view, String branchId) {
 

@@ -22,11 +22,11 @@ public class LocationUtils {
     }
 
     /**
-     * @param context
-     * @param locationId
-     * @param locationName
-     * @method saveLocation
-     * @desc Method to save the location_id and location_name into the preferences.
+     * Method to save the location_id and location_name into the preferences.
+     *
+     * @param context      reference
+     * @param locationId   reference
+     * @param locationName reference
      */
     public void saveLocation(Context context, String locationId, String locationName) {
 
@@ -35,10 +35,10 @@ public class LocationUtils {
     }
 
     /**
-     * @param context
+     * Method to get the location name saved in the preferences.
+     *
+     * @param context reference
      * @return Location/Area id saved in the preferences.
-     * @method getLocationId
-     * @desc Method to get the location name saved in the preferences.
      */
     public String getLocationId(Context context, String defVal) {
 
@@ -47,10 +47,10 @@ public class LocationUtils {
 
 
     /**
-     * @param context
+     * Method to get the location name from the cache preferences.
+     *
+     * @param context reference
      * @return Location/Area name saved in the preferences.
-     * @method getLocationName
-     * @desc Method to get the location name from the cache preferences.
      */
     public String getLocationName(Context context, String defVal) {
 
@@ -60,7 +60,7 @@ public class LocationUtils {
     /**
      * Method to remove and reset the Location preference cache data.
      *
-     * @param context
+     * @param context reference
      */
     public void resetLocationPref(Context context) {
 

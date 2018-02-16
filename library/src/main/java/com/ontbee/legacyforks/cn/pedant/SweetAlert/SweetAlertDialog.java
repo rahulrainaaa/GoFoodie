@@ -122,7 +122,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         mOverlayOutAnim = new Animation() {
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t) {
-                WindowManager.LayoutParams wlp = getWindow().getAttributes();
+                @SuppressWarnings("ConstantConditions") WindowManager.LayoutParams wlp = getWindow().getAttributes();
                 wlp.alpha = 1 - interpolatedTime;
                 getWindow().setAttributes(wlp);
             }

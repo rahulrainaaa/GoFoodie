@@ -36,11 +36,10 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
     private View.OnClickListener mClickListener = null;
 
     /**
-     * @param activity
-     * @param resource
-     * @param list
-     * @param listener
-     * @constructor ShortlistedRestaurantListViewAdapter
+     * @param activity reference
+     * @param resource reference
+     * @param list     reference
+     * @param listener reference
      */
     public ShortlistedRestaurantListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Shortlisted> list, View.OnClickListener listener) {
 
@@ -121,8 +120,7 @@ public class ShortlistedRestaurantListViewAdapter extends ArrayAdapter<Shortlist
     }
 
     /**
-     * @class Holder
-     * @desc Holder class to hold the reference of list view cell.
+     * Holder class to hold the reference of list view cell.
      */
     private static class Holder {
 

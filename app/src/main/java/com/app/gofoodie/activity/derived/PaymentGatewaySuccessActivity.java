@@ -116,9 +116,9 @@ public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity impleme
 
 
     /**
-     * @param view
-     * @method closeWindow
-     * @desc Method to handle on close window.
+     * Method to handle on close window.
+     *
+     * @param view reference
      */
     public void closeWindow(View view) {
         this.finish();
@@ -142,9 +142,9 @@ public class PaymentGatewaySuccessActivity extends BaseAppCompatActivity impleme
     }
 
     /**
-     * @param json
-     * @method handleResponse
-     * @desc Method to handle the transaction response.
+     * Method to handle the transaction response.
+     *
+     * @param json reference
      */
     private void handleResponse(JSONObject json) {
 

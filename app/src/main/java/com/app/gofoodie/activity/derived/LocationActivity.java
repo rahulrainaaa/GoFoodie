@@ -130,9 +130,9 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     }
 
     /**
-     * @param position
-     * @method countrySelected
-     * @desc Method to be called on country select in spinner.
+     * Method to be called on country select in spinner.
+     *
+     * @param position int
      */
     private void countrySelected(int position) {
 
@@ -150,9 +150,9 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     }
 
     /**
-     * @param position
-     * @method citySelected
-     * @desc Method to be called on city selected.
+     * Method to be called on city selected.
+     *
+     * @param position int
      */
     private void citySelected(int position) {
 
@@ -170,9 +170,9 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     }
 
     /**
-     * @param position
-     * @method areaSelected
-     * @desc Method to be called in case of area selected.
+     * Method to be called in case of area selected.
+     *
+     * @param position int
      */
     private void areaSelected(int position) {
 
@@ -232,8 +232,9 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     }
 
     /**
-     * @param countryList
-     * @method showCountry
+     * Method to show the list of countries.
+     *
+     * @param countryList reference
      */
     private void showCountry(CountryResponse countryList) {
 
@@ -256,8 +257,9 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     }
 
     /**
-     * @param cityResponse
-     * @method showCity
+     * Method to show the list of Cities.
+     *
+     * @param cityResponse reference
      */
     private void showCity(CityResponse cityResponse) {
 
@@ -281,8 +283,9 @@ public class LocationActivity extends BaseAppCompatActivity implements AdapterVi
     }
 
     /**
-     * @param areaResponse
-     * @method showArea
+     * Method to show the list of all the areas.
+     *
+     * @param areaResponse reference
      */
     private void showArea(AreaResponse areaResponse) {
 

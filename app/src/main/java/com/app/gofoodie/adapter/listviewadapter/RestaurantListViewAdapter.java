@@ -35,11 +35,10 @@ public class RestaurantListViewAdapter extends ArrayAdapter<Restaurant> {
     private View.OnClickListener mClickListener = null;
 
     /**
-     * @param activity
-     * @param resource
-     * @param list
-     * @param listener
-     * @constructor ShortlistedRestaurantListViewAdapter
+     * @param activity reference
+     * @param resource reference
+     * @param list     reference
+     * @param listener reference
      */
     public RestaurantListViewAdapter(@NonNull Activity activity, @LayoutRes int resource, ArrayList<Restaurant> list, View.OnClickListener listener) {
 

@@ -74,8 +74,7 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
     }
 
     /**
-     * @nethod refreshList
-     * @desc Method to refresh the list of shortlisted restaurant(s).
+     * Method to refresh the list of shortlisted restaurant(s).
      */
     private void refreshList() {
 
@@ -104,9 +103,9 @@ public class ShortlistedRestaurantListFragment extends BaseFragment implements N
     }
 
     /**
-     * @param json
-     * @method handleShortlistRestaurantResponse
-     * @desc Method to handle the shortlisted restaurants response from API.
+     * Method to handle the shortlisted restaurants response from API.
+     *
+     * @param json reference
      */
     private void handleShortlistRestaurantResponse(JSONObject json) {
 
