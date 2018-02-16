@@ -25,8 +25,6 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.List;
-
 /**
  * Activity class to show full info/details of a single combo plan.
  */
@@ -170,15 +168,22 @@ public class ComboDescriptionActivity extends BaseAppCompatActivity implements N
         try {
 
             // Populate combo list items (contents) into bottom action sheet.
-            int attrLength = comboPlanResponse.getComboplans().get(0).getComboOptions().size();
-            List<ComboOption> items = comboPlanResponse.getComboplans().get(0).getComboOptions();
-            for (int i = 0; i < attrLength; i++) {
+
+            for (ComboOption items : comboPlanResponse.getComboplans().get(0).getComboOptions()) {
 
                 View attrCell = getLayoutInflater().inflate(R.layout.layout_combo_items, null);
                 TextView txtAttributeKey = attrCell.findViewById(R.id.txt_key);
                 TextView txtAttributeValue = attrCell.findViewById(R.id.txt_key_value);
-                txtAttributeKey.setText("" + items.get(i).getName().trim());
-                txtAttributeValue.setText("" + items.get(i).getOptions().get(0).trim());
+                txtAttributeKey.setText("" + items.getName().trim());
+
+                StringBuilder strOpts = new StringBuilder();
+                for (String opts : items.getOptions()) {
+
+                    strOpts.append(opts);
+                    strOpts.append("\n");
+                }
+
+                txtAttributeValue.setText(strOpts.toString());
                 containerLayout.addView(attrCell);
             }
 

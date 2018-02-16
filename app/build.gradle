@@ -77,7 +77,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.facebook.android:facebook-android-sdk:4.17.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation 'com.google.code.gson:gson:2.2.4'
+    implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'com.google.android.gms:play-services-auth:9.0.0'
     implementation 'com.mcxiaoke.volley:library:1.0.19'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
