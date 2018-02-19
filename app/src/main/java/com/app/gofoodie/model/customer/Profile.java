@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@SuppressWarnings("unused")
 public class Profile implements Parcelable {
 
     public final static Creator<Profile> CREATOR = new Creator<Profile>() {
@@ -29,7 +28,7 @@ public class Profile implements Parcelable {
     private String loginId;
     @SerializedName("username")
     @Expose
-    private Object username;
+    private String username;
     @SerializedName("email")
     @Expose
     private String email;
@@ -38,7 +37,7 @@ public class Profile implements Parcelable {
     private String phone;
     @SerializedName("salt_key")
     @Expose
-    private Object saltKey;
+    private String saltKey;
     @SerializedName("status")
     @Expose
     private String status;
@@ -115,12 +114,12 @@ public class Profile implements Parcelable {
     @Expose
     private String areaName;
 
-    private Profile(Parcel in) {
+    protected Profile(Parcel in) {
         this.loginId = ((String) in.readValue((String.class.getClassLoader())));
-        this.username = in.readValue((Object.class.getClassLoader()));
+        this.username = ((String) in.readValue((String.class.getClassLoader())));
         this.email = ((String) in.readValue((String.class.getClassLoader())));
         this.phone = ((String) in.readValue((String.class.getClassLoader())));
-        this.saltKey = in.readValue((Object.class.getClassLoader()));
+        this.saltKey = ((String) in.readValue((String.class.getClassLoader())));
         this.status = ((String) in.readValue((String.class.getClassLoader())));
         this.registerDate = ((String) in.readValue((String.class.getClassLoader())));
         this.modifyDate = ((String) in.readValue((String.class.getClassLoader())));
@@ -159,11 +158,11 @@ public class Profile implements Parcelable {
         this.loginId = loginId;
     }
 
-    public Object getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(Object username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -183,11 +182,11 @@ public class Profile implements Parcelable {
         this.phone = phone;
     }
 
-    public Object getSaltKey() {
+    public String getSaltKey() {
         return saltKey;
     }
 
-    public void setSaltKey(Object saltKey) {
+    public void setSaltKey(String saltKey) {
         this.saltKey = saltKey;
     }
 

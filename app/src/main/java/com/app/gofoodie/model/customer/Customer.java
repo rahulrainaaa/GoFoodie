@@ -7,7 +7,6 @@ import com.app.gofoodie.model.base.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@SuppressWarnings("unused")
 public class Customer extends BaseModel implements Parcelable {
 
     public final static Creator<Customer> CREATOR = new Creator<Customer>() {
@@ -34,6 +33,9 @@ public class Customer extends BaseModel implements Parcelable {
     @SerializedName("order_count")
     @Expose
     private Integer orderCount;
+    @SerializedName("min_combo_order")
+    @Expose
+    private Integer minComboOrder;
     @SerializedName("statusCode")
     @Expose
     private Integer statusCode;
@@ -45,6 +47,7 @@ public class Customer extends BaseModel implements Parcelable {
         this.profile = ((Profile) in.readValue((Profile.class.getClassLoader())));
         this.cartCount = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.orderCount = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.minComboOrder = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.statusMessage = ((String) in.readValue((String.class.getClassLoader())));
     }
@@ -76,6 +79,14 @@ public class Customer extends BaseModel implements Parcelable {
         this.orderCount = orderCount;
     }
 
+    public Integer getMinComboOrder() {
+        return minComboOrder;
+    }
+
+    public void setMinComboOrder(Integer minComboOrder) {
+        this.minComboOrder = minComboOrder;
+    }
+
     public Integer getStatusCode() {
         return statusCode;
     }
@@ -96,6 +107,7 @@ public class Customer extends BaseModel implements Parcelable {
         dest.writeValue(profile);
         dest.writeValue(cartCount);
         dest.writeValue(orderCount);
+        dest.writeValue(minComboOrder);
         dest.writeValue(statusCode);
         dest.writeValue(statusMessage);
     }
