@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class Profile implements Parcelable {
 
     public final static Creator<Profile> CREATOR = new Creator<Profile>() {
@@ -114,7 +115,7 @@ public class Profile implements Parcelable {
     @Expose
     private String areaName;
 
-    protected Profile(Parcel in) {
+    Profile(Parcel in) {
         this.loginId = ((String) in.readValue((String.class.getClassLoader())));
         this.username = ((String) in.readValue((String.class.getClassLoader())));
         this.email = ((String) in.readValue((String.class.getClassLoader())));
