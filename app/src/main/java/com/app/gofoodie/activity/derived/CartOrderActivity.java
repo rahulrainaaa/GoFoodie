@@ -47,10 +47,9 @@ import java.util.Locale;
 public class CartOrderActivity extends BaseAppCompatActivity implements View.OnClickListener, NetworkCallbackListener {
 
     public static final String TAG = "CartOrderActivity";
-
-    private CartOrderRecyclerAdapter mCartOrderRecyclerAdapter = null;
     private final ArrayList<CartOrder> mList = new ArrayList<>();
     private final ArrayList<Cart> cartArrayList = GlobalData.cartArrayList;
+    private CartOrderRecyclerAdapter mCartOrderRecyclerAdapter = null;
     private Date mStartDate = null;
 
     // Price data fields.
@@ -157,6 +156,16 @@ public class CartOrderActivity extends BaseAppCompatActivity implements View.OnC
             return;
         }
 
+        // Check minimum order quantity limit.
+        int minOrderLimit = CustomerProfileHandler.CUSTOMER.getMinComboOrder();
+        if (mList.size() < minOrderLimit) {
+
+            new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Not Allowed")
+                    .setContentText("Minimum quantity for placing an order is " + minOrderLimit + ".")
+                    .show();
+            return;
+        }
 
         //Prompt to place an order.
         //Show the price and tax payment.
