@@ -15,7 +15,11 @@ import android.widget.ImageView;
 
 import com.app.gofoodie.R;
 import com.app.gofoodie.global.constants.Constants;
+import com.squareup.picasso.Picasso;
 
+/**
+ * Activity class to handle the welcome pages for first time application user.
+ */
 @SuppressWarnings("unused")
 public class AssistantActivity extends FragmentActivity {
 
@@ -26,6 +30,8 @@ public class AssistantActivity extends FragmentActivity {
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+        ImageView imageView = findViewById(R.id.img_bg);
+        Picasso.with(this).load(R.drawable.welcome_bg).into(imageView);
         // The {@link ViewPager} that will host the section contents.
         ViewPager mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(sectionsPagerAdapter);
@@ -71,6 +77,7 @@ public class AssistantActivity extends FragmentActivity {
          * number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
+
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -84,7 +91,8 @@ public class AssistantActivity extends FragmentActivity {
             View rootView = inflater.inflate(R.layout.fragment_assistant, container, false);
             ImageView imgWelcome = rootView.findViewById(R.id.img_welcome);
             @SuppressWarnings("ConstantConditions") int number = getArguments().getInt(ARG_SECTION_NUMBER);
-            imgWelcome.setImageResource(Constants.WELCOME_SCREEN_IMAGES[number]);
+            Picasso.with(getActivity()).load(Constants.WELCOME_SCREEN_IMAGES[number]).into(imgWelcome);
+            //imgWelcome.setImageResource(Constants.WELCOME_SCREEN_IMAGES[number]);
             return rootView;
         }
     }

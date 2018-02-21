@@ -54,6 +54,10 @@ public class DashboardActivity extends BaseAppCompatActivity implements BottomNa
         disableShiftMode(mNavigationPanel);
         loadFragmentOnStart();
 
+//        if (getSharedPreferences("welcome", 0).getBoolean("welcome", true)) {
+//            startActivity(new Intent(this, AssistantActivity.class));
+//        }
+
     }
 
     @Override
