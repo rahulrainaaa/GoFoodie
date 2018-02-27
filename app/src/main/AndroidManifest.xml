@@ -23,6 +23,7 @@
             android:name=".activity.derived.DashboardActivity"
             android:icon="@drawable/launncher_icon"
             android:label="@string/app_name"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
@@ -30,6 +31,7 @@
             android:name=".activity.derived.SplashActivity"
             android:icon="@drawable/launncher_icon"
             android:label="@string/welcome"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,29 +43,35 @@
             android:name=".activity.derived.LocationActivity"
             android:icon="@drawable/launncher_icon"
             android:label="@string/location_preference"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.SubscriptionActivity"
             android:icon="@drawable/launncher_icon"
             android:label="@string/recharge_plans"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.EditComboActivity"
             android:label="@string/title_activity_edit_combo"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.derived.RestaurantProfileActivity"
             android:label="@string/title_activity_restaurant_profile"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.derived.MealPreferenceActivity"
             android:label="@string/meal_preference"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.ShortlistedRestaurantsActivity"
             android:label="@string/title_activity_shortlisted_restaurants"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.derived.RatingActivity"

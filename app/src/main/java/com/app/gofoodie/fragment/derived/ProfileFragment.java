@@ -205,6 +205,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
             SessionUtils.getInstance().removeSession(ProfileFragment.this.getActivity());
             startActivity(new Intent(ProfileFragment.this.getActivity(), SplashActivity.class));
+            getActivity().finish();
         }).show();
     }
 
